@@ -1,0 +1,27 @@
+﻿@inject LadowanieGracza ladowanieGracza
+@page "/"
+@using System.Text.Json
+@if (!wystartowano)
+{
+    <div class="powitanie">
+        <h1>Witaj!</h1>
+        <div class="nazwaGraczaMiejsce"><label for="nazwaGracza">Podaj swoją nazwę:</label><input id="playerName" type="text" @bind="nazwaGracza" @bind:event="oninput" /></div>
+        <div class="guzikStart"><button class="btnStart" @onclick="StartGry" disabled="@string.IsNullOrWhiteSpace(nazwaGracza)">Zaczynamy!</button></div>
+    </div>
+}
+else
+{
+    <h2>@gracz!.Nazwa - Punkty: @gracz.Punkty</h2>
+}
+@code {
+    private bool wystartowano = false;
+    private string nazwaGracza = "";
+    private Gracz? gracz => ladowanieGracza.AktualnyGracz;
+    private async Task StartGry()
+    {
+        if (string.IsNullOrWhiteSpace(nazwaGracza))
+            return;
+        await ladowanieGracza.ZaladujLubUtworzGracza(nazwaGracza);
+        wystartowano = true;
+    }
+}

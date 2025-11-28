@@ -1,0 +1,22 @@
+h1:focus {
+    outline: none;
+}
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid green;
+}
+.invalid {
+    outline: 1px solid red;
+}
+.validation-message {
+    color: red;
+}
+#blazor-error-ui {
+    background: red;
+    bottom: 0;
+    display: none;
+    left: 0;
+    height: 4px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
