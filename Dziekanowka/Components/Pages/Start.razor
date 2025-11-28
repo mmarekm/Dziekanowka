@@ -1,0 +1,16 @@
+﻿<div class="powitanie">
+    <div class="guzikStartMama"><button class="btnStart" @onclick='() => StartGry("Mama")'>Mama</button></div>
+    <div class="guzikStartTata"><button class="btnStart" @onclick='() => StartGry("Tata")'>Tata</button></div>
+    <div class="guzikStartTata"><button class="btnStart" @onclick='() => StartGry("Ula")'>Ula</button></div>
+    <div class="guzikStartTata"><button class="btnStart" @onclick='() => StartGry("Basia")'>Basia</button></div>
+    <div class="guzikStartTata"><button class="btnStart" @onclick='() => StartGry("Ania")'>Ania</button></div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<string> NaStartGry { get; set; }
+    private async Task StartGry(string nazwaGracza)
+    {
+        await NaStartGry.InvokeAsync(nazwaGracza);
+    }
+}
