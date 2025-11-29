@@ -1,23 +1,29 @@
 ﻿@inject LadowanieGracza ladowanieGracza
 @page "/"
+@using Dziekanowka.Mechanizm
 @using System.Text.Json
-@if (!wystartowano)
+
+@switch (aktualnyEkran)
 {
-    <Start NaStartGry="WywolajStartGry"></Start>
-}
-else
-{
-    <h2>@gracz!.Nazwa - Punkty: @gracz.Punkty</h2>
+    case EkranGry.Start:
+        <Start NaStartGry="WywolajStartGry" />
+        break;
+
+    case EkranGry.Gospodarstwo:
+        <h2>@gracz!.Nazwa - Punkty: @gracz.Punkty</h2>
+        break;
 }
 
 @code {
-    private bool wystartowano = false;
+    private EkranGry aktualnyEkran = EkranGry.Start;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
+
     private async Task WywolajStartGry(string nazwaGracza)
     {
         if (string.IsNullOrWhiteSpace(nazwaGracza))
             return;
+
         await ladowanieGracza.ZaladujLubUtworzGracza(nazwaGracza);
-        wystartowano = true;
+        aktualnyEkran = EkranGry.Gospodarstwo;
     }
 }

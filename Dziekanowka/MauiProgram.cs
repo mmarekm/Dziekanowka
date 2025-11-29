@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Dziekanowka.Mechanizm;
+using Microsoft.Extensions.Logging;
 namespace Dziekanowka
 {
     public static class MauiProgram

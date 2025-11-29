@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-namespace Dziekanowka
+namespace Dziekanowka.Mechanizm
 {
     public class LadowanieGracza
     {
