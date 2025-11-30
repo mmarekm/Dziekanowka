@@ -14,16 +14,25 @@ namespace Dziekanowka.WinUI
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             base.OnLaunched(args);
+
+            if (Application.Windows.Count == 0)
+                return;
+
             var mauiWindow = Application.Windows[0];
-            var nativeWindow = mauiWindow.Handler.PlatformView as Microsoft.UI.Xaml.Window;
+
+            if (mauiWindow?.Handler?.PlatformView is not Microsoft.UI.Xaml.Window nativeWindow)
+                return;
+
             var hwnd = WindowNative.GetWindowHandle(nativeWindow);
             var windowId = Win32Interop.GetWindowIdFromWindow(hwnd);
             var appWindow = AppWindow.GetFromWindowId(windowId);
             var displayArea = DisplayArea.GetFromWindowId(windowId, DisplayAreaFallback.Primary);
             var workArea = displayArea.WorkArea;
+
             int width = 1900;
             int height = 1000;
             appWindow.Resize(new SizeInt32(width, height));
+
             int left = workArea.X + 5;
             int top = workArea.Y + 5;
             appWindow.Move(new PointInt32(left, top));

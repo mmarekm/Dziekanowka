@@ -3,6 +3,7 @@
     public enum EkranGry
     {
         Start,
-        Gospodarstwo
+        Gospodarstwo,
+        Studnia
     }
 }

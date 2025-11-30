@@ -26,6 +26,20 @@ h1:focus {
 .abs {
     position: absolute;
 }
+.wyroznionyGuzik {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+    .wyroznionyGuzik img {
+        transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    }
+    .wyroznionyGuzik:hover img {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 5px gold, 0 0 20px rgba(255, 215, 0, 0.5);
+        filter: brightness(1.1);
+    }
 .widok {
     width: 1900px;
     height: 1000px;

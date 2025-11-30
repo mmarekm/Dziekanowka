@@ -4,9 +4,9 @@ namespace Dziekanowka
     public class Gracz(string nazwa)
     {
         public string Nazwa { get; set;  } = nazwa;
-        public int Punkty { get; set; } = 0;
-        public int Monety { get; set; } = 10;
+        public int Doswiadczenie { get; set; } = 0;
+        public int Monety { get; set; } = 0;
         public bool MoznaRozszerzycGospodarstwo { get; set; } = false;
-        public List<Zwierze> Zwierzaki = [];
+        public List<Budynek> Budynki = [new("studnia", 2)];
     }
 }

@@ -8,18 +8,25 @@
         <Start NaStartGry="WywolajStartGry" />
         break;
     case EkranGry.Gospodarstwo:
-        <h2>@gracz!.Nazwa - Punkty: @gracz.Punkty</h2>
+        <Gospodarstwo Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+        break;
+    case EkranGry.Studnia:
+        <p>studnia</p>
         break;
 }
 
 @code {
     private EkranGry aktualnyEkran = EkranGry.Start;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
+    private void ZmienEkran(EkranGry ekran)
+    {
+        aktualnyEkran = ekran;
+    }
     private async Task WywolajStartGry(string nazwaGracza)
     {
         if (string.IsNullOrWhiteSpace(nazwaGracza))
             return;
         await ladowanieGracza.ZaladujLubUtworzGracza(nazwaGracza);
-        aktualnyEkran = EkranGry.Gospodarstwo;
+        ZmienEkran(EkranGry.Gospodarstwo);
     }
 }

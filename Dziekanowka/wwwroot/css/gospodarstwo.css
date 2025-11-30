@@ -1,1 +1,10 @@
-﻿
+﻿.gospodarstwoWidok {
+    background-image: url('../img/gospodarstwo.png');
+}
+.studniaGuzik {
+    top: 710px;
+    left: 1762px;
+    width: 138px;
+    height: 251px;
+    z-index: 2;
+}
