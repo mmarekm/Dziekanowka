@@ -29,12 +29,12 @@ namespace Dziekanowka.WinUI
             var displayArea = DisplayArea.GetFromWindowId(windowId, DisplayAreaFallback.Primary);
             var workArea = displayArea.WorkArea;
 
-            int width = 1900;
-            int height = 1000;
+            int width = 1932;
+            int height = 1045;
             appWindow.Resize(new SizeInt32(width, height));
 
-            int left = workArea.X + 5;
-            int top = workArea.Y + 5;
+            int left = workArea.X;
+            int top = workArea.Y + 1;
             appWindow.Move(new PointInt32(left, top));
         }
     }
