@@ -1,3 +1,41 @@
-﻿.test {
-    color: red;
+﻿.powitanie {
+    background-image: url('../img/powitanie.png');
+}
+.btnStart {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+    .btnStart img {
+        display: block;
+        width: 120px;
+        height: auto;
+        transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+        border-radius: 15px;
+    }
+    .btnStart:hover img {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 5px gold, 0 0 20px rgba(255, 215, 0, 0.5);
+        filter: brightness(1.1);
+    }
+.guzikStartMama {
+    top: 160px;
+    left: 160px;
+}
+.guzikStartTata {
+    top: 210px;
+    left: 500px;
+}
+.guzikStartUla {
+    top: 600px;
+    left: 1500px;
+}
+.guzikStartBasia {
+    top: 625px;
+    left: 1680px;
+}
+.guzikStartAnia {
+    top: 700px;
+    left: 790px;
 }

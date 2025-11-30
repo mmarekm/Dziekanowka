@@ -20,3 +20,13 @@ h1:focus {
     width: 100%;
     z-index: 100;
 }
+.rel {
+    position: relative;
+}
+.abs {
+    position: absolute;
+}
+.widok {
+    width: 1900px;
+    height: 1000px;
+}
