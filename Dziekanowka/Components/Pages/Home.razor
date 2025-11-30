@@ -2,13 +2,11 @@
 @page "/"
 @using Dziekanowka.Mechanizm
 @using System.Text.Json
-
 @switch (aktualnyEkran)
 {
     case EkranGry.Start:
         <Start NaStartGry="WywolajStartGry" />
         break;
-
     case EkranGry.Gospodarstwo:
         <h2>@gracz!.Nazwa - Punkty: @gracz.Punkty</h2>
         break;
@@ -17,12 +15,10 @@
 @code {
     private EkranGry aktualnyEkran = EkranGry.Start;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
-
     private async Task WywolajStartGry(string nazwaGracza)
     {
         if (string.IsNullOrWhiteSpace(nazwaGracza))
             return;
-
         await ladowanieGracza.ZaladujLubUtworzGracza(nazwaGracza);
         aktualnyEkran = EkranGry.Gospodarstwo;
     }
