@@ -1,5 +1,7 @@
 ﻿.studniaWidok {
     background-image: url('../img/budynki/studniaWidok.png');
+    font-size: 100px;
+    font-weight: bold;
 }
 .guzikWyjsciaZeStudni {
     top: 101px;
@@ -7,4 +9,74 @@
     width: 327px;
     height: 325px;
     z-index: 2;
+}
+.butelkaStudnia {
+    width: 55px;
+    height: 132px;
+}
+.calaSzafaStudniarza {
+    top: 180px;
+    left: 1080px;
+    width: 800px;
+    height: 820px;
+    z-index: 3;
+}
+.pierwszyRzadButelekStudnia {
+    top: 290px;
+    left: 1145px;
+    width: 660px;
+    height: 132px;
+    display: flex;
+    z-index: 2;
+}
+.drugiRzadButelekStudnia {
+    top: 510px;
+    left: 1145px;
+    width: 660px;
+    height: 132px;
+    display: flex;
+    z-index: 2;
+}
+.trzeciRzadButelekStudnia {
+    top: 720px;
+    left: 1145px;
+    width: 660px;
+    height: 132px;
+    display: flex;
+    z-index: 2;
+}
+.czwartyRzadButelekStudnia {
+    top: 910px;
+    left: 1145px;
+    width: 660px;
+    height: 132px;
+    display: flex;
+    z-index: 2;
+}
+.liczbaMonetStudnia {
+    top: 20px;
+    left: 1400px;
+    width: 400px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.ulepszanieStudni {
+    top: 30px;
+    left: 20px;
+    width: 200px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    z-index: 2;
+}
+.piktogramUpgradeStudnia {
+    height: 150px;
+}
+.cenaUpgradeStudnia {
+    height: 150px;
 }

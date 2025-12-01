@@ -1,6 +1,29 @@
 ﻿@using Dziekanowka.Mechanizm
+@inject LadowanieGracza ladowanieGracza
 <div class="studniaWidok widok rel">
-    <div class="abs guzikWyjsciaZeStudni"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik guzikBlokowy"><img src="img/budynki/confirmStudzienny.png"/></button></div>
+    <div class="abs liczbaMonetStudnia">@Gracz.Monety</div>
+    <div class="abs guzikWyjsciaZeStudni"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny.png"/></button></div>
+    <div class="abs calaSzafaStudniarza wyroznionyDiv wyroznionyZielonoDiv" @onclick='async () => await NalejDoButelki(Gracz, Gracz.PoziomBudynku("studnia"))'></div>
+    <div class="abs pierwszyRzadButelekStudnia">
+        
+    </div>
+    <div class="abs drugiRzadButelekStudnia">
+       
+    </div>
+    <div class="abs trzeciRzadButelekStudnia">
+       
+    </div>
+    <div class="abs czwartyRzadButelekStudnia">
+       
+    </div>
+    <div class="abs ulepszanieStudni">
+        <div class="piktogramUpgradeStudnia">
+            <img src="img/budynki/upgradeStudzienny.png"/>
+        </div>
+        <div class="cenaUpgradeStudnia">
+            @Gracz.KosztUlepszeniaBudynku("studnia")
+        </div>
+    </div>
 </div>
 
 @code {
@@ -11,5 +34,28 @@
     public async Task DoGospodarstwa()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo);
+    }
+    private async Task NalejDoButelki(Gracz gracz, int poziomStudni)
+    {
+        if (poziomStudni == 1)
+        {
+            if (gracz.IloscPrzedmiotow("pustaButelka") == 0 || gracz.Monety == 0)
+                return;
+            gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka").Ilosc--;
+            gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc++;
+            gracz.Monety--;
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+        }
+    }
+    private (int, int, int, int, int, int, int, int) ButelkiNaPolkach(Gracz gracz, int poziomStudni)
+    {
+        if (poziomStudni == 1)
+        {
+            return (0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        else
+        {
+            return (0, 0, 0, 0, 0, 0, 0, 0);
+        }
     }
 }

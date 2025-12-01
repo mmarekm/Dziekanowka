@@ -1,6 +1,6 @@
 ﻿@using Dziekanowka.Mechanizm
 <div class="gospodarstwoWidok widok rel">
-    <div class="abs studniaGuzik"><button @onclick="DoStudni" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.Budynki.First(b => b.Nazwa == "studnia").Poziom).png' /></button></div>
+    <div class="abs studniaGuzik"><button @onclick="DoStudni" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>
 </div>
 
 @code {
