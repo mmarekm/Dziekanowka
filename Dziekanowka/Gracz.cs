@@ -10,6 +10,7 @@ namespace Dziekanowka
         public bool MoznaRozszerzycGospodarstwo { get; set; } = false;
         public List<BudynekGracza> Budynki { get; set; } = [new("studnia", 2)];
         public int PoziomBudynku(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom;
+        public void UlepszBudynek(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom++;
         public int KosztUlepszeniaBudynku(string nazwaBudynku) => nazwaBudynku switch { "studnia" => PoziomBudynku("studnia") * 1000, _ => 0 };
         public int IloscPrzedmiotow(string nazwaPrzedmiotu) => Przedmioty.First(p => p.Nazwa == nazwaPrzedmiotu).Ilosc;
     }

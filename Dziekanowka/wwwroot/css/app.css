@@ -24,11 +24,31 @@ h1:focus {
     width: 100%;
     z-index: 100;
 }
+.cPoint {
+    cursor: pointer;
+}
+    .cPoint::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        transition: background 0.3s ease;
+        pointer-events: none;
+    }
+    .cPoint.wyroznionyZielonoDiv:hover::before {
+        background: rgba(0, 255, 0, 0.2);
+    }
 .rel {
     position: relative;
 }
 .abs {
     position: absolute;
+}
+.nieMoznaKliknac:hover {
+    cursor: not-allowed;
 }
 .wyroznionyGuzik {
     padding: 0;
