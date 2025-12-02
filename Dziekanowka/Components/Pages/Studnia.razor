@@ -1,24 +1,25 @@
 ﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="studniaWidok widok rel">
     <div class="abs liczbaMonetStudnia">@Gracz.Monety</div>
-    <div class="abs guzikWyjsciaZeStudni"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny.png"/></button></div>
-    <div class="abs calaSzafaStudniarza wyroznionyDiv wyroznionyZielonoDiv" @onclick='async () => await NalejDoButelki(Gracz, Gracz.PoziomBudynku("studnia"))'></div>
+    <div class="abs guzikWyjsciaZeStudni"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny.png" /></button></div>
+    <div class="abs calaSzafaStudniarza wyroznionyDiv wyroznionyZielonoDiv" @onclick='async () => await NalejDoButelki(Gracz.PoziomBudynku("studnia"))'></div>
     <div class="abs pierwszyRzadButelekStudnia">
-        
+        @RenderujPolke(0)
     </div>
     <div class="abs drugiRzadButelekStudnia">
-       
+        @RenderujPolke(1)
     </div>
     <div class="abs trzeciRzadButelekStudnia">
-       
+        @RenderujPolke(2)
     </div>
     <div class="abs czwartyRzadButelekStudnia">
-       
+        @RenderujPolke(3)
     </div>
     <div class="abs ulepszanieStudni">
         <div class="piktogramUpgradeStudnia">
-            <img src="img/budynki/upgradeStudzienny.png"/>
+            <img src="img/budynki/upgradeStudzienny.png" />
         </div>
         <div class="cenaUpgradeStudnia">
             @Gracz.KosztUlepszeniaBudynku("studnia")
@@ -31,31 +32,58 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int PojemnoscPolki(int poziomStudni) => 6 * poziomStudni + 6;
+    private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
+    private PrzedmiotGracza pelnaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka");
+    private bool NieBedzieNalewane() => pustaButelka.Ilosc == 0 || Gracz.Monety == 0;
     public async Task DoGospodarstwa()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo);
     }
-    private async Task NalejDoButelki(Gracz gracz, int poziomStudni)
+    private async Task NalejDoButelki(int poziomStudni)
     {
-        if (poziomStudni == 1)
-        {
-            if (gracz.IloscPrzedmiotow("pustaButelka") == 0 || gracz.Monety == 0)
-                return;
-            gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka").Ilosc--;
-            gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc++;
-            gracz.Monety--;
-            await ladowanieGracza.ZapiszAktualnegoGracza();
-        }
+        if (NieBedzieNalewane()) return;
+        var iloscDoNalewania = Math.Min(poziomStudni, pustaButelka.Ilosc);
+        pustaButelka.Ilosc -= iloscDoNalewania;
+        pelnaButelka.Ilosc += iloscDoNalewania;
+        Gracz.Monety--;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
-    private (int, int, int, int, int, int, int, int) ButelkiNaPolkach(Gracz gracz, int poziomStudni)
+    private (int pelne, int puste) ButelkiNaPolce(int nrPolki)
     {
-        if (poziomStudni == 1)
-        {
-            return (0, 0, 0, 0, 0, 0, 0, 0);
-        }
-        else
-        {
-            return (0, 0, 0, 0, 0, 0, 0, 0);
-        }
+        var pojemnoscPolki = PojemnoscPolki(Gracz.PoziomBudynku("studnia"));
+        var indexPoczatkowy = nrPolki * pojemnoscPolki;
+        var pelneNaPolce = 0;
+        if (pelnaButelka.Ilosc > indexPoczatkowy)
+            pelneNaPolce = Math.Min(pojemnoscPolki, pelnaButelka.Ilosc - indexPoczatkowy);
+        var wolneMiejsce = pojemnoscPolki - pelneNaPolce;
+        var pelneOgolem = pelnaButelka.Ilosc;
+        var pustychZuzytych = Math.Max(0, indexPoczatkowy - pelneOgolem);
+        var pusteNaPolce = 0;
+        if (pustaButelka.Ilosc > pustychZuzytych)
+            pusteNaPolce = Math.Min(wolneMiejsce, pustaButelka.Ilosc - pustychZuzytych);
+        return (pelneNaPolce, pusteNaPolce);
     }
+    private RenderFragment RenderujPolke(int nrPolki) => builder =>
+    {
+        var (pelne, puste) = ButelkiNaPolce(nrPolki);
+        for (int i = 0; i < pelne; i++)
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "butelkaStudnia");
+            builder.OpenElement(2, "img");
+            builder.AddAttribute(3, "src", "img/przedmioty/butelkaPelnaStudnia.png");
+            builder.CloseElement();
+            builder.CloseElement();
+        }
+        for (int i = 0; i < puste; i++)
+        {
+            builder.OpenElement(4, "div");
+            builder.AddAttribute(5, "class", "butelkaStudnia");
+            builder.OpenElement(6, "img");
+            builder.AddAttribute(7, "src", "img/przedmioty/butelkaPustaStudnia.png");
+            builder.CloseElement();
+            builder.CloseElement();
+        }
+    };
 }
