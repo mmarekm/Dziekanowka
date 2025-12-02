@@ -35,7 +35,7 @@
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private int CenaUlepszeniaStudni() => Gracz.KosztUlepszeniaBudynku("studnia");
     private bool MoznaUlepszycStudnie() => Gracz.Monety >= CenaUlepszeniaStudni();
-    private int PojemnoscPolki(int poziomStudni) => 6 * poziomStudni + 6;
+    private int PojemnoscPolki(int poziomStudni) => 5 * poziomStudni + 6;
     private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
     private PrzedmiotGracza pelnaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka");
     private bool NieBedzieNalewane() => pustaButelka.Ilosc == 0 || Gracz.Monety == 0;

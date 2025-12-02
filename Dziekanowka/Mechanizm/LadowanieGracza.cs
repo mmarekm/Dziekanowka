@@ -5,8 +5,7 @@ namespace Dziekanowka.Mechanizm
     {
         private readonly string _sciezkaDoPliku;
         public Gracz? AktualnyGracz { get; private set; }
-        private bool CzyNowyDzien(Gracz gracz) => gracz.DzienLogowania != DateTime.Now.Day && gracz.MiesiacLogowania != DateTime.Now.Month;
-        //private void DodajPremie(Gracz gracz) => CzyNowyDzien(gracz) ? gracz.Monety += 500 : gracz.Monety +=0 ;
+        private bool CzyNowyDzien(Gracz gracz) => gracz.DzienLogowania != DateTime.Now.Day || gracz.MiesiacLogowania != DateTime.Now.Month;
         public LadowanieGracza()
         {
             _sciezkaDoPliku = Path.Combine(AppContext.BaseDirectory, "gracze.json");
@@ -18,12 +17,24 @@ namespace Dziekanowka.Mechanizm
             if (gracze.ContainsKey(nazwaLower))
             {
                 AktualnyGracz = gracze[nazwaLower];
-               // DodajPremie(AktualnyGracz);
+                if (CzyNowyDzien(AktualnyGracz))
+                {
+                    AktualnyGracz.DzienLogowania = DateTime.Now.Day;
+                    AktualnyGracz.MiesiacLogowania = DateTime.Now.Month;
+                    AktualnyGracz.Monety += 100;
+                    await ZapiszWszystkichGraczy(gracze);
+                }
                 return AktualnyGracz;
             }
             AktualnyGracz = new Gracz(nazwa.Trim());
             gracze[nazwaLower] = AktualnyGracz;
-           // DodajPremie(AktualnyGracz);
+            if (CzyNowyDzien(AktualnyGracz))
+            {
+                AktualnyGracz.DzienLogowania = DateTime.Now.Day;
+                AktualnyGracz.MiesiacLogowania = DateTime.Now.Month;
+                AktualnyGracz.Monety += 100;
+                await ZapiszWszystkichGraczy(gracze);
+            }
             await ZapiszWszystkichGraczy(gracze);
             return AktualnyGracz;
         }
