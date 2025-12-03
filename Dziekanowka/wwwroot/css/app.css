@@ -27,6 +27,9 @@ h1:focus {
 .naCzerwono {
     color: red;
 }
+.naNiebiesko {
+    color: blue;
+}
 .cPoint {
     cursor: pointer;
 }

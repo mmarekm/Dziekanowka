@@ -27,19 +27,12 @@
     border-radius: 10px;
     z-index: 2;
 }
-.butelkaSklepikRysunek {
-    top: 150px;
-    left: 252px;
+.towarSklepik {
     width: 100px;
     height: 140px;
     z-index: 2;
 }
-    .butelkaSklepikRysunek.klikalneDivZielone {
-        position: absolute;
-    }
-.butelkaSklepikCena {
-    top: 339px;
-    left: 252px;
+.towarCenaSklepik {
     width: 85px;
     height: 28px;
     display: flex;
@@ -49,9 +42,7 @@
     align-items: center;
     z-index: 2;
 }
-.butelkaSklepikStan {
-    top: 65px;
-    left: 252px;
+.towarStanSklepik {
     width: 100px;
     height: 42px;
     display: flex;
@@ -61,4 +52,32 @@
     z-index: 2;
     background-color: antiquewhite;
     border-radius: 5px;
+}
+.butelkaSklepikRysunek {
+    top: 150px;
+    left: 252px;
+    z-index: 2;
+}
+    .butelkaSklepikRysunek.klikalneDivZielone {
+        position: absolute;
+    }
+.butelkaSklepikCena {
+    top: 339px;
+    left: 252px;
+}
+.butelkaSklepikStan {
+    top: 65px;
+    left: 252px;
+}
+.motykaSklepikRysunek {
+    top: 150px;
+    left: 465px;
+}
+.motykaSklepikCena {
+    top: 339px;
+    left: 465px;
+}
+.motykaSklepikStan {
+    top: 65px;
+    left: 465px;
 }

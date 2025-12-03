@@ -4,9 +4,12 @@
 <div class="sklepikWidok widok rel">
     <div class="abs wyjscieSklepikGuzik"><button @onclick="SklepikWyjscie" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikowy.png' /></button></div>
     <div class="abs sklepikMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
-    <div class="abs butelkaSklepikRysunek @(posiadaMaxButelek ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupButelke"><img class="obrazekWypelnia" src="img/przedmioty/butelkaSklepik.png" /></div>
-    <div class="abs butelkaSklepikCena" >1<img src="img/przedmioty/monetaCenaSklepik.png"/></div>
-    <div class="abs butelkaSklepikStan @(posiadaMaxButelek ? "naCzerwono" : "")">@liczbaButelekGracza / @maxIloscButelek</div>
+    <div class="abs butelkaSklepikRysunek towarSklepik @(posiadaMaxButelek || Gracz.Monety < 1 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupButelke"><img class="obrazekWypelnia" src="img/przedmioty/butelkaSklepik.png" /></div>
+    <div class="abs butelkaSklepikCena towarCenaSklepik">1<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs butelkaSklepikStan towarStanSklepik @(posiadaMaxButelek ? "naCzerwono" : "")">@liczbaButelekGracza / @maxIloscButelek</div>
+    <div class="abs motykaSklepikRysunek towarSklepik @(maMotyke || Gracz.Monety < 35 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupMotyke"><img class="obrazekWypelnia" src="img/przedmioty/motyka.png" /></div>
+    <div class="abs motykaSklepikCena towarCenaSklepik">35<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs motykaSklepikStan towarStanSklepik @(maMotyke ? "naCzerwono" : "naNiebiesko")">@(maMotyke ? masz : nieMasz)</div>
 </div>
 
 
@@ -15,6 +18,8 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string masz = "masz";
+    private string nieMasz = "nie masz";
     private int maxIloscButelek => (Gracz.PoziomBudynku("studnia") * 5 + 6) * 4;
     private int liczbaButelekGracza => Gracz.IloscPrzedmiotow("pustaButelka") + Gracz.IloscPrzedmiotow("pelnaButelka");
     private bool posiadaMaxButelek => liczbaButelekGracza >= maxIloscButelek;
@@ -25,6 +30,15 @@
             return;
         Gracz.Monety --;
         pustaButelka.Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private bool maMotyke => Gracz.Przedmioty.Any(p => p.Nazwa == "motyka");
+    public async Task KupMotyke()
+    {
+        if (Gracz.Monety < 35 || maMotyke)
+            return;
+        Gracz.Monety-=35;
+        Gracz.Przedmioty.Add(new PrzedmiotGracza("motyka", 1));
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     public async Task SklepikWyjscie()
