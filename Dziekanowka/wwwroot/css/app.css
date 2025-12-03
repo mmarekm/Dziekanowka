@@ -50,6 +50,9 @@ h1:focus {
 .nieMoznaKliknac:hover {
     cursor: not-allowed;
 }
+.ukryty {
+    display: none;
+}
 .wyroznionyGuzik {
     padding: 0;
     border: none;

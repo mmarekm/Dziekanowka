@@ -1,6 +1,7 @@
-﻿@inject LadowanieGracza ladowanieGracza
-@page "/"
+﻿@page "/"
 @using Dziekanowka.Mechanizm
+@inject LadowanieGracza ladowanieGracza
+@implements IDisposable
 @using System.Text.Json
 @switch (aktualnyEkran)
 {
@@ -8,7 +9,7 @@
         <Start NaStartGry="WywolajStartGry" />
         break;
     case EkranGry.Gospodarstwo:
-        <Gospodarstwo Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+        <Gospodarstwo @ref="gospodarstwoRef" Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
         break;
     case EkranGry.Studnia:
         <Studnia Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
@@ -18,6 +19,31 @@
 @code {
     private EkranGry aktualnyEkran = EkranGry.Start;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
+    private Gospodarstwo? gospodarstwoRef;
+    private bool czekaNaPowitanie = false;
+    protected override void OnInitialized()
+    {
+        ladowanieGracza.NowyDzienEvent += OnNowyDzien;
+    }
+    private void OnNowyDzien()
+    {
+        if (gospodarstwoRef != null)
+            _ = gospodarstwoRef.PowitanieDnia();
+        else
+            czekaNaPowitanie = true;
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (czekaNaPowitanie && gospodarstwoRef != null)
+        {
+            czekaNaPowitanie = false;
+            await gospodarstwoRef.PowitanieDnia();
+        }
+    }
+    public void Dispose()
+    {
+        ladowanieGracza.NowyDzienEvent -= OnNowyDzien;
+    }
     private void ZmienEkran(EkranGry ekran)
     {
         aktualnyEkran = ekran;

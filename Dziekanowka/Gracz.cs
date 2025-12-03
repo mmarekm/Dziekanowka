@@ -6,6 +6,7 @@ namespace Dziekanowka
         public string Nazwa { get; set;  } = nazwa;
         public int DzienLogowania { get; set; } = 0;
         public int MiesiacLogowania { get; set; } = 0;
+        public int BonusDzienny { get; set; } = 50;
         public int Doswiadczenie { get; set; } = 0;
         public int Monety { get; set; } = 0;
         public List<PrzedmiotGracza> Przedmioty { get; set; } = PrzedmiotGracza.StartowePrzedmioty();
