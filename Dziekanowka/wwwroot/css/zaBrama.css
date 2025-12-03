@@ -1,3 +1,17 @@
 ﻿.zaBramaWidok {
     background-image: url('../img/zaBrama.png');
 }
+.powrotDoDomuGuzik {
+    top: 1px;
+    left: 1569px;
+    width: 330px;
+    height: 294px;
+    z-index: 2;
+}
+.doSklepikuGuzik {
+    top: 150px;
+    left: 1066px;
+    width: 369px;
+    height: 317px;
+    z-index: 2;
+}

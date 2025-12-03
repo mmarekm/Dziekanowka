@@ -1,0 +1,64 @@
+﻿.sklepikWidok {
+    background-image: url('../img/budynki/sklepikWidok.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 25px;
+}
+.wyjscieSklepikGuzik {
+    top: 913px;
+    left: 594px;
+    width: 374px;
+    height: 86px;
+    z-index: 2;
+}
+.sklepikMonetyGracza {
+    top: 913px;
+    left: 1000px;
+    width: 300px;
+    height: 80px;
+    font-size: 55px;
+    font-weight: bold;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    z-index: 2;
+}
+.butelkaSklepikRysunek {
+    top: 150px;
+    left: 252px;
+    width: 100px;
+    height: 140px;
+    z-index: 2;
+}
+    .butelkaSklepikRysunek.klikalneDivZielone {
+        position: absolute;
+    }
+.butelkaSklepikCena {
+    top: 339px;
+    left: 252px;
+    width: 85px;
+    height: 28px;
+    display: flex;
+    font-weight: bold;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.butelkaSklepikStan {
+    top: 65px;
+    left: 252px;
+    width: 100px;
+    height: 42px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: antiquewhite;
+    border-radius: 5px;
+}

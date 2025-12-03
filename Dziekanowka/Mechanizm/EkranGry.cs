@@ -5,6 +5,7 @@
         Start,
         Gospodarstwo,
         ZaBrama,
-        Studnia
+        Studnia,
+        Sklepik
     }
 }

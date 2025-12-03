@@ -1,0 +1,34 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="sklepikWidok widok rel">
+    <div class="abs wyjscieSklepikGuzik"><button @onclick="SklepikWyjscie" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikowy.png' /></button></div>
+    <div class="abs sklepikMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
+    <div class="abs butelkaSklepikRysunek @(posiadaMaxButelek ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupButelke"><img class="obrazekWypelnia" src="img/przedmioty/butelkaSklepik.png" /></div>
+    <div class="abs butelkaSklepikCena" >1<img src="img/przedmioty/monetaCenaSklepik.png"/></div>
+    <div class="abs butelkaSklepikStan @(posiadaMaxButelek ? "naCzerwono" : "")">@liczbaButelekGracza / @maxIloscButelek</div>
+</div>
+
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int maxIloscButelek => (Gracz.PoziomBudynku("studnia") * 5 + 6) * 4;
+    private int liczbaButelekGracza => Gracz.IloscPrzedmiotow("pustaButelka") + Gracz.IloscPrzedmiotow("pelnaButelka");
+    private bool posiadaMaxButelek => liczbaButelekGracza >= maxIloscButelek;
+    private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
+    public async Task KupButelke()
+    {
+        if (Gracz.Monety < 1 || posiadaMaxButelek)
+            return;
+        Gracz.Monety --;
+        pustaButelka.Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task SklepikWyjscie()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
+    }
+}
