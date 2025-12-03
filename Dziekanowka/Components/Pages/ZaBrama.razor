@@ -1,0 +1,9 @@
+﻿@using Dziekanowka.Mechanizm
+<div class="zaBramaWidok widok rel"></div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+}

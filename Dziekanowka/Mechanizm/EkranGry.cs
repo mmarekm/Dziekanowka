@@ -4,6 +4,7 @@
     {
         Start,
         Gospodarstwo,
+        ZaBrama,
         Studnia
     }
 }

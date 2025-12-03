@@ -2,6 +2,7 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="gospodarstwoWidok widok rel">
     <div class="abs studniaGuzik"><button @onclick="DoStudni" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>
+    <div class="abs zaBrameGuzik"><button @onclick="ZaBrame" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>
     <div class="abs @KlasaPowitania">Witaj! +++ @Gracz.BonusDzienny +++</div>
 </div>
 
@@ -25,6 +26,10 @@
         Powitaj = false;
         Znikanie = false;
         StateHasChanged();
+    }
+    public async Task ZaBrame()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
     }
     public async Task DoStudni()
     {
