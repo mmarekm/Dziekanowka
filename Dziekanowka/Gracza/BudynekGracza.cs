@@ -1,9 +1,9 @@
 ﻿namespace Dziekanowka.Gracza
 {
-    public class BudynekGracza(string nazwa, int limitPoziomow)
+    public class BudynekGracza(string nazwa)
     {
         public string Nazwa { get; set; } = nazwa;
         public int Poziom { get; set; } = 1;
-        public int LimitPoziomow { get; set; } = limitPoziomow;
+        public static List<BudynekGracza> StartoweBudynki() => [new("studnia"), new("garazGospodarczy")];
     }
 }

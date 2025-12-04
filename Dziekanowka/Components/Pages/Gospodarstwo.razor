@@ -1,6 +1,7 @@
 ﻿@using Dziekanowka.Mechanizm
 @inject LadowanieGracza ladowanieGracza
 <div class="gospodarstwoWidok widok rel">
+    <div class="abs garazGospodarczyGuzik"><button @onclick="DoGarazuGospodarczego" class="wyroznionyGuzik"><img src='img/Budynki/garazGospodarczy@(Gracz.PoziomBudynku("garazGospodarczy")).png' /></button></div>
     <div class="abs studniaGuzik"><button @onclick="DoStudni" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>
     <div class="abs zaBrameGuzik"><button @onclick="ZaBrame" class="wyroznionyGuzik"><img src='img/zaBrameKlik.png' /></button></div>
     <div class="abs @KlasaPowitania">Witaj! +++ @Gracz.BonusDzienny +++</div>
@@ -30,6 +31,10 @@
     public async Task ZaBrame()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
+    }
+    public async Task DoGarazuGospodarczego()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy);
     }
     public async Task DoStudni()
     {

@@ -1,0 +1,20 @@
+﻿@using Dziekanowka.Mechanizm
+<div class="garazGospodarczyWidok widok rel">
+    <div class="abs guzikWyjsciaZGarazuGospodarczego"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmGarazGospodarczy.png" /></button></div>
+    <div class="abs guzikNaPoleIntroZGarazu"><button @onclick="NaPole" class="wyroznionyGuzik"><img src="img/budynki/wyjazdZGarazuNaPole.png" /></button></div>
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task DoGospodarstwa()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo);
+    }
+    public async Task NaPole()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
+    }
+}

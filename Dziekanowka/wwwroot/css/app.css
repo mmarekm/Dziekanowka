@@ -1,6 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
+    background-color: yellowgreen;
 }
 h1:focus {
     outline: none;
@@ -59,6 +60,15 @@ h1:focus {
 .ukryty {
     display: none;
 }
+.kontener {
+    transition: opacity 0.3s ease-in-out;
+}
+    .kontener.fade-in {
+        opacity: 1;
+    }
+    .kontener.fade-out {
+        opacity: 0;
+    }
 .wyroznionyGuzik {
     padding: 0;
     border: none;

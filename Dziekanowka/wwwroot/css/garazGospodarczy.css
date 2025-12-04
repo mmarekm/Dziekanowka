@@ -1,0 +1,17 @@
+﻿.garazGospodarczyWidok {
+    background-image: url('../img/budynki/garazGospodarczyWidok.png');
+}
+.guzikWyjsciaZGarazuGospodarczego {
+    top: 0;
+    left: 110.9px;
+    width: 875px;
+    height: 258px;
+    z-index: 2;
+}
+.guzikNaPoleIntroZGarazu {
+    top: 200px;
+    left: 1001px;
+    width: 839px;
+    height: 785px;
+    z-index: 2;
+}

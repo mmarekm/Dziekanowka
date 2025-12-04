@@ -3,27 +3,37 @@
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
 @using System.Text.Json
-@switch (aktualnyEkran)
-{
-    case EkranGry.Start:
-        <Start NaStartGry="WywolajStartGry" />
-        break;
-    case EkranGry.Gospodarstwo:
-        <Gospodarstwo @ref="gospodarstwoRef" Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
-        break;
-    case EkranGry.ZaBrama:
-        <ZaBrama Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
-        break;
-    case EkranGry.Studnia:
-        <Studnia Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
-        break;
-    case EkranGry.Sklepik:
-        <Sklepik Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
-        break;
-}
+<div class="kontener @(czyAnimacjaWyjscia ? "fade-out" : "fade-in")">
+    @switch (aktualnyEkran)
+    {
+        case EkranGry.Start:
+            <Start NaStartGry="WywolajStartGry" />
+            break;
+        case EkranGry.Gospodarstwo:
+            <Gospodarstwo @ref="gospodarstwoRef" Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            break;
+        case EkranGry.ZaBrama:
+            <ZaBrama Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            break;
+        case EkranGry.GarazGospodarczy:
+            <GarazGospodarczy Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            break;
+        case EkranGry.Studnia:
+            <Studnia Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            break;
+        case EkranGry.Sklepik:
+            <Sklepik Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            break;
+        case EkranGry.PoleIntro:
+            <PoleIntro Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            break;
+    }
+</div>
 
 @code {
     private EkranGry aktualnyEkran = EkranGry.Start;
+    private bool czyAnimacjaWyjscia = false;
+    private EkranGry nastepnyEkran;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
     private Gospodarstwo? gospodarstwoRef;
     private bool czekaNaPowitanie = false;
@@ -50,9 +60,16 @@
     {
         ladowanieGracza.NowyDzienEvent -= OnNowyDzien;
     }
-    private void ZmienEkran(EkranGry ekran)
+    private async void ZmienEkran(EkranGry ekran)
     {
-        aktualnyEkran = ekran;
+        nastepnyEkran = ekran;
+        czyAnimacjaWyjscia = true;
+        StateHasChanged();
+        await Task.Delay(300);
+        aktualnyEkran = nastepnyEkran;
+        czyAnimacjaWyjscia = false;
+        StateHasChanged();
+        await Task.Delay(10);
     }
     private async Task WywolajStartGry(string nazwaGracza)
     {

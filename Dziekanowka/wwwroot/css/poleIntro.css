@@ -1,0 +1,10 @@
+﻿.poleIntroWidok {
+    background-image: url('../img/poleIntro.png');
+}
+.guzikPowrotuZPolaDoGarazuGospodarczego {
+    top: 657px;
+    left: 1448px;
+    width: 398px;
+    height: 294px;
+    z-index: 2;
+}

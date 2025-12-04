@@ -5,7 +5,9 @@
         Start,
         Gospodarstwo,
         ZaBrama,
+        GarazGospodarczy,
         Studnia,
-        Sklepik
+        Sklepik,
+        PoleIntro
     }
 }

@@ -11,7 +11,7 @@ namespace Dziekanowka
         public int Monety { get; set; } = 0;
         public List<PrzedmiotGracza> Przedmioty { get; set; } = PrzedmiotGracza.StartowePrzedmioty();
         public bool MoznaRozszerzycGospodarstwo { get; set; } = false;
-        public List<BudynekGracza> Budynki { get; set; } = [new("studnia", 2)];
+        public List<BudynekGracza> Budynki { get; set; } = BudynekGracza.StartoweBudynki();
         public int PoziomBudynku(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom;
         public void UlepszBudynek(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom++;
         public int KosztUlepszeniaBudynku(string nazwaBudynku) => nazwaBudynku switch { "studnia" => PoziomBudynku("studnia") * 1000, _ => 0 };
