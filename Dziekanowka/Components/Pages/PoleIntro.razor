@@ -10,6 +10,8 @@
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     public async Task DoGospodarstwa()
     {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.AnimacjaTraktoraPowrot);
+        await Task.Delay(5000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy);
     }
 }

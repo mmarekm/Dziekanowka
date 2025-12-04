@@ -9,6 +9,7 @@
         Studnia,
         Sklepik,
         PoleIntro,
-        AnimacjaTraktora
+        AnimacjaTraktora,
+        AnimacjaTraktoraPowrot
     }
 }
