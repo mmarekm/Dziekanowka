@@ -1,0 +1,13 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="pole1Widok widok rel">
+    <h3>Pole1</h3>
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+}
