@@ -8,6 +8,7 @@
         GarazGospodarczy,
         Studnia,
         Sklepik,
-        PoleIntro
+        PoleIntro,
+        AnimacjaTraktora
     }
 }
