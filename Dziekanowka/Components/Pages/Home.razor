@@ -28,7 +28,7 @@
             <PoleIntro Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
             break;
         case EkranGry.Pole1:
-            <PoleIntro Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            <Pole1 Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
             break;
         case EkranGry.AnimacjaTraktora:
             <AnimacjaTraktora />
@@ -69,8 +69,10 @@
     {
         ladowanieGracza.NowyDzienEvent -= OnNowyDzien;
     }
-    private async void ZmienEkran(EkranGry ekran)
+    private async Task ZmienEkran(EkranGry ekran)
     {
+        gracz!.Statystyki.Ekran = ekran;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
         nastepnyEkran = ekran;
         czyAnimacjaWyjscia = true;
         StateHasChanged();
@@ -85,6 +87,9 @@
         if (string.IsNullOrWhiteSpace(nazwaGracza))
             return;
         await ladowanieGracza.ZaladujLubUtworzGracza(nazwaGracza);
-        ZmienEkran(EkranGry.Gospodarstwo);
+        EkranGry startowyEkran = gracz!.Statystyki.Ekran;
+        if (startowyEkran == EkranGry.AnimacjaTraktora || startowyEkran == EkranGry.AnimacjaTraktoraPowrot)
+            startowyEkran = EkranGry.Gospodarstwo;
+        await ZmienEkran(startowyEkran);
     }
 }

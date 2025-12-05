@@ -6,7 +6,7 @@ namespace Dziekanowka.Mechanizm
         private readonly string _sciezkaDoPliku;
         public Gracz? AktualnyGracz { get; private set; }
         public event Action? NowyDzienEvent;
-        private bool CzyNowyDzien() => AktualnyGracz!.DzienLogowania != DateTime.Now.Day || AktualnyGracz.MiesiacLogowania != DateTime.Now.Month;
+        private bool CzyNowyDzien() => AktualnyGracz!.Statystyki.DzienLogowania != DateTime.Now.Day || AktualnyGracz.Statystyki.MiesiacLogowania != DateTime.Now.Month;
         public LadowanieGracza()
         {
             _sciezkaDoPliku = Path.Combine(AppContext.BaseDirectory, "gracze.json");
@@ -15,9 +15,9 @@ namespace Dziekanowka.Mechanizm
         {
             if (CzyNowyDzien())
             {
-                AktualnyGracz!.DzienLogowania = DateTime.Now.Day;
-                AktualnyGracz.MiesiacLogowania = DateTime.Now.Month;
-                AktualnyGracz.Monety += AktualnyGracz.BonusDzienny;
+                AktualnyGracz!.Statystyki.DzienLogowania = DateTime.Now.Day;
+                AktualnyGracz.Statystyki.MiesiacLogowania = DateTime.Now.Month;
+                AktualnyGracz.Monety += AktualnyGracz.Statystyki.BonusDzienny;
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
             }

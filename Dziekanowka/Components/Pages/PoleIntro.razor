@@ -1,7 +1,7 @@
 ﻿@using Dziekanowka.Mechanizm
 <div class="poleIntroWidok widok rel">
     <div class="abs guzikPowrotuZPolaDoGarazuGospodarczego"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/doGospodarstwaZPola.png" /></button></div>
-    <div class="abs guzikNaPole1ZIntro"></div>
+    <div class="abs guzikNaPole1ZIntro"><button @onclick="NaPole1" class="wyroznionyGuzik"><img src="img/pole1ZIntro.png" /></button></div>
 </div>
 
 @code {
@@ -14,5 +14,9 @@
         await NaZmianeEkranu.InvokeAsync(EkranGry.AnimacjaTraktoraPowrot);
         await Task.Delay(5000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy);
+    }
+    public async Task NaPole1()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1);
     }
 }
