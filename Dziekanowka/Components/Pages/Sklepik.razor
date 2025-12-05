@@ -10,9 +10,9 @@
     <div class="abs motykaSklepikRysunek towarSklepik @(maMotyke || Gracz.Monety < 35 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupMotyke"><img class="obrazekWypelnia" src="img/przedmioty/motyka.png" /></div>
     <div class="abs motykaSklepikCena towarCenaSklepik">35<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
     <div class="abs motykaSklepikStan towarStanSklepik @(maMotyke ? "naCzerwono" : "naNiebiesko")">@(maMotyke ? masz : nieMasz)</div>
-    <div class="abs upgrKanisterRysunek towarSklepik"></div>
+    <div class="abs upgrKanisterRysunek towarSklepik @(nieStacNaLepszyKanister ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="UpgradeKanistra"><img class="obrazekWypelnia" src="img/przedmioty/kanisterUpgr.png" /></div>
     <div class="abs upgrKanisterCena towarCenaSklepik">@Gracz.Paliwo.KosztUpgrade<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
-    <div class="abs upgrKanisterStan towarStanSklepik"></div>
+    <div class="abs upgrKanisterStan towarStanSklepik naZielono">poj. @(6 * Gracz.Paliwo.PoziomKanistera + 5)</div>
 </div>
 
 
@@ -26,11 +26,11 @@
     private int maxIloscButelek => (Gracz.PoziomBudynku("studnia") * 5 + 6) * 4;
     private int liczbaButelekGracza => Gracz.IloscPrzedmiotow("pustaButelka") + Gracz.IloscPrzedmiotow("pelnaButelka");
     private bool posiadaMaxButelek => liczbaButelekGracza >= maxIloscButelek;
+    private bool nieStacNaLepszyKanister => Gracz.Monety < Gracz.Paliwo.KosztUpgrade;
     private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
     public async Task KupButelke()
     {
-        if (Gracz.Monety < 1 || posiadaMaxButelek)
-            return;
+        if (Gracz.Monety < 1 || posiadaMaxButelek) return;
         Gracz.Monety --;
         pustaButelka.Ilosc++;
         await ladowanieGracza.ZapiszAktualnegoGracza();
@@ -38,10 +38,17 @@
     private bool maMotyke => Gracz.Przedmioty.Any(p => p.Nazwa == "motyka");
     public async Task KupMotyke()
     {
-        if (Gracz.Monety < 35 || maMotyke)
-            return;
+        if (Gracz.Monety < 35 || maMotyke) return;
         Gracz.Monety-=35;
         Gracz.Przedmioty.Add(new PrzedmiotGracza("motyka", 1));
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task UpgradeKanistra()
+    {
+        if (nieStacNaLepszyKanister) return;
+        Gracz.Monety -= Gracz.Paliwo.KosztUpgrade;
+        Gracz.Paliwo.PoziomKanistera++;
+        Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     public async Task SklepikWyjscie()

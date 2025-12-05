@@ -40,6 +40,9 @@ h1:focus {
 .naNiebiesko {
     color: blue;
 }
+.naZielono {
+    color: limegreen;
+}
 .cPoint {
     cursor: pointer;
 }
@@ -112,7 +115,7 @@ h1:focus {
     }
 .klikalneDivZielone {
     cursor: pointer;
-    position: relative;
+    position: absolute;
 }
     .klikalneDivZielone::before {
         content: '';
