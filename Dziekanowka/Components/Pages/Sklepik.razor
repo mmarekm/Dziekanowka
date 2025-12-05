@@ -13,8 +13,16 @@
     <div class="abs upgrKanisterRysunek towarSklepik @(nieStacNaLepszyKanister ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="UpgradeKanistra"><img class="obrazekWypelnia" src="img/przedmioty/kanisterUpgr.png" /></div>
     <div class="abs upgrKanisterCena towarCenaSklepik">@Gracz.Paliwo.KosztUpgrade<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
     <div class="abs upgrKanisterStan towarStanSklepik naZielono">poj. @(6 * Gracz.Paliwo.PoziomKanistera + 5)</div>
+    <div class="abs kanisterDoPelnaRysunek towarSklepik @(posiadaMaxPaliwo || nieStacNaPelnePaliwo ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupPelnePaliwo"><img class="obrazekWypelnia" src="img/przedmioty/kanisterPelny.png" /></div>
+    <div class="abs kanisterDoPelnaCena towarCenaSklepik">@Gracz.Paliwo.CenaPelnegoPaliwa<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs kanisterDoPelnaStan towarStanSklepik @(posiadaMaxPaliwo ? "naCzerwono" : "naNiebiesko")">@Gracz.Paliwo.IloscPaliwa / @Gracz.Paliwo.MaksymalnaIloscPaliwa</div>
+    <div class="abs kanisterDoPolowyRysunek towarSklepik @(posiadaMaxPaliwo || nieStacNaPolowePaliwa ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupPolowePaliwa"><img class="obrazekWypelnia" src="img/przedmioty/kanisterPolPelny.png" /></div>
+    <div class="abs kanisterDoPolowyCena towarCenaSklepik">@Gracz.Paliwo.CenaPolowyPaliwa<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs kanisterDoPolowyStan towarStanSklepik @(posiadaMaxPaliwo ? "naCzerwono" : "naNiebiesko")">+ @Gracz.Paliwo.PolowaPaliwa</div>
+    <div class="abs kanisterDoCwierciRysunek towarSklepik @(posiadaMaxPaliwo || nieStacNaCwiercPaliwa ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupCwiercPaliwa"><img class="obrazekWypelnia" src="img/przedmioty/kanisterCwiercPelny.png" /></div>
+    <div class="abs kanisterDoCwierciCena towarCenaSklepik">@Gracz.Paliwo.CenaCwierciPaliwa<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs kanisterDoCwierciStan towarStanSklepik @(posiadaMaxPaliwo ? "naCzerwono" : "naNiebiesko")">+ @Gracz.Paliwo.CwiercPaliwa</div>
 </div>
-
 
 @code {
     [Parameter]
@@ -27,6 +35,10 @@
     private int liczbaButelekGracza => Gracz.IloscPrzedmiotow("pustaButelka") + Gracz.IloscPrzedmiotow("pelnaButelka");
     private bool posiadaMaxButelek => liczbaButelekGracza >= maxIloscButelek;
     private bool nieStacNaLepszyKanister => Gracz.Monety < Gracz.Paliwo.KosztUpgrade;
+    private bool posiadaMaxPaliwo => Gracz.Paliwo.IloscPaliwa >= Gracz.Paliwo.MaksymalnaIloscPaliwa;
+    private bool nieStacNaPelnePaliwo => Gracz.Monety < Gracz.Paliwo.CenaPelnegoPaliwa;
+    private bool nieStacNaPolowePaliwa => Gracz.Monety < Gracz.Paliwo.CenaPolowyPaliwa;
+    private bool nieStacNaCwiercPaliwa => Gracz.Monety < Gracz.Paliwo.CenaCwierciPaliwa;
     private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
     public async Task KupButelke()
     {
@@ -49,6 +61,31 @@
         Gracz.Monety -= Gracz.Paliwo.KosztUpgrade;
         Gracz.Paliwo.PoziomKanistera++;
         Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupPelnePaliwo()
+    {
+        if (nieStacNaPelnePaliwo || posiadaMaxPaliwo) return;
+        Gracz.Monety -= Gracz.Paliwo.CenaPelnegoPaliwa;
+        Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupPolowePaliwa()
+    {
+        if (nieStacNaPolowePaliwa || posiadaMaxPaliwo) return;
+        Gracz.Monety -= Gracz.Paliwo.CenaPolowyPaliwa;
+        Gracz.Paliwo.IloscPaliwa += Gracz.Paliwo.PolowaPaliwa;
+        if (Gracz.Paliwo.IloscPaliwa > Gracz.Paliwo.MaksymalnaIloscPaliwa)
+            Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupCwiercPaliwa()
+    {
+        if (nieStacNaCwiercPaliwa || posiadaMaxPaliwo) return;
+        Gracz.Monety -= Gracz.Paliwo.CenaCwierciPaliwa;
+        Gracz.Paliwo.IloscPaliwa += Gracz.Paliwo.CwiercPaliwa;
+        if (Gracz.Paliwo.IloscPaliwa > Gracz.Paliwo.MaksymalnaIloscPaliwa)
+            Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     public async Task SklepikWyjscie()

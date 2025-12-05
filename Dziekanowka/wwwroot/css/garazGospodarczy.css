@@ -4,11 +4,11 @@
 .stanPaliwaGarazGospodarczy {
     top: 480px;
     left: 530px;
-    width: 300px;
+    width: 400px;
     height: 100px;
     z-index: 2;
     display: flex;
-    gap: 20px;
+    gap: 15px;
 }
 .kanisterGarazGospodarczy {
     width: 100px;

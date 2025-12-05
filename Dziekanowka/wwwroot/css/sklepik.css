@@ -93,3 +93,39 @@
     top: 65px;
     left: 680px;
 }
+.kanisterDoPelnaRysunek {
+    top: 150px;
+    left: 897px;
+}
+.kanisterDoPelnaCena {
+    top: 340px;
+    left: 897px;
+}
+.kanisterDoPelnaStan {
+    top: 65px;
+    left: 897px;
+}
+.kanisterDoPolowyRysunek {
+    top: 150px;
+    left: 1110px;
+}
+.kanisterDoPolowyCena {
+    top: 340px;
+    left: 1110px;
+}
+.kanisterDoPolowyStan {
+    top: 65px;
+    left: 1110px;
+}
+.kanisterDoCwierciRysunek {
+    top: 150px;
+    left: 1329px;
+}
+.kanisterDoCwierciCena {
+    top: 340px;
+    left: 1329px;
+}
+.kanisterDoCwierciStan {
+    top: 65px;
+    left: 1329px;
+}
