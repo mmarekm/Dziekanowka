@@ -11,7 +11,7 @@ namespace Dziekanowka
         public Paliwo Paliwo { get; set; } = new Paliwo();
         public int PoziomBudynku(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom;
         public void UlepszBudynek(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom++;
-        public int KosztUlepszeniaBudynku(string nazwaBudynku) => nazwaBudynku switch { "studnia" => PoziomBudynku("studnia") * 1000, _ => 0 };
+        public int KosztUlepszeniaBudynku(string nazwaBudynku) => nazwaBudynku switch { "studnia" => (int)Math.Pow(PoziomBudynku("studnia"), 2) * 200, _ => 0 };
         public int IloscPrzedmiotow(string nazwaPrzedmiotu) => Przedmioty.First(p => p.Nazwa == nazwaPrzedmiotu).Ilosc;
     }
 }
