@@ -1,5 +1,60 @@
 ﻿.poleIntroWidok {
     background-image: url('../img/poleIntro.png');
+    color: white;
+}
+.sprzedawaniePoleIntro {
+    top: 680px;
+    left: 920px;
+    z-index: 2;
+    display: flex;
+    gap: 20px;
+    width: 300px;
+}
+.sprzedawcaPoleIntro {
+    width: 150px;
+}
+.cenaDrogaPoleIntro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tylko1PoleIntro {
+    height: 75px;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.cenaPoleIntro {
+    height: 75px;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.stanPaliwaPoleIntro {
+    top: 930px;
+    left: 1720px;
+    width: 150px;
+    height: 50px;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+}
+.kanisterPoleIntro {
+    width: 50px;
+}
+.infoKanisterPoleIntro {
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
 }
 .guzikPowrotuZPolaDoGarazuGospodarczego {
     top: 657px;

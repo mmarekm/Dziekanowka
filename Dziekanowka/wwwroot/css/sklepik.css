@@ -62,7 +62,7 @@
         position: absolute;
     }
 .butelkaSklepikCena {
-    top: 339px;
+    top: 340px;
     left: 252px;
 }
 .butelkaSklepikStan {
@@ -74,10 +74,22 @@
     left: 465px;
 }
 .motykaSklepikCena {
-    top: 339px;
+    top: 340px;
     left: 465px;
 }
 .motykaSklepikStan {
     top: 65px;
     left: 465px;
+}
+.upgrKanisterRysunek {
+    top: 150px;
+    left: 680px;
+}
+.upgrKanisterCena {
+    top: 340px;
+    left: 680px;
+}
+.upgrKanisterStan {
+    top: 65px;
+    left: 680px;
 }

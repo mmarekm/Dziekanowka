@@ -10,6 +10,9 @@
     <div class="abs motykaSklepikRysunek towarSklepik @(maMotyke || Gracz.Monety < 35 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupMotyke"><img class="obrazekWypelnia" src="img/przedmioty/motyka.png" /></div>
     <div class="abs motykaSklepikCena towarCenaSklepik">35<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
     <div class="abs motykaSklepikStan towarStanSklepik @(maMotyke ? "naCzerwono" : "naNiebiesko")">@(maMotyke ? masz : nieMasz)</div>
+    <div class="abs upgrKanisterRysunek towarSklepik"></div>
+    <div class="abs upgrKanisterCena towarCenaSklepik">@Gracz.Paliwo.KosztUpgrade<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs upgrKanisterStan towarStanSklepik"></div>
 </div>
 
 

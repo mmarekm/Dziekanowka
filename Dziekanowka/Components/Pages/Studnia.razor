@@ -4,7 +4,7 @@
 <div class="studniaWidok widok rel">
     <div class="abs liczbaMonetStudnia">@Gracz.Monety</div>
     <div class="abs guzikWyjsciaZeStudni"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny.png" /></button></div>
-    <div class="abs calaSzafaStudniarza @(NieBedzieNalewane() ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick='async () => await NalejDoButelki(Gracz.PoziomBudynku("studnia"))'></div>
+    <div class="abs calaSzafaStudniarza @(NieBedzieNalewane ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick='async () => await NalejDoButelki(Gracz.PoziomBudynku("studnia"))'></div>
     <div class="abs pierwszyRzadButelekStudnia">
         @RenderujPolke(0)
     </div>
@@ -17,7 +17,7 @@
     <div class="abs czwartyRzadButelekStudnia">
         @RenderujPolke(3)
     </div>
-    <div class="abs klikDoUlepszeniaStudni @(MoznaUlepszycStudnie() ? "cPoint wyroznionyZielonoDiv" : "nieMoznaKliknac")" @onclick="UlepszStudnie"></div>
+    <div class="abs klikDoUlepszeniaStudni @(MoznaUlepszycStudnie ? "cPoint wyroznionyZielonoDiv" : "nieMoznaKliknac")" @onclick="UlepszStudnie"></div>
     <div class="abs ulepszanieStudni">
         <div class="piktogramUpgradeStudnia">
             <img src="img/budynki/upgradeStudzienny.png" />
@@ -34,24 +34,24 @@
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private int CenaUlepszeniaStudni() => Gracz.KosztUlepszeniaBudynku("studnia");
-    private bool MoznaUlepszycStudnie() => Gracz.Monety >= CenaUlepszeniaStudni();
+    private bool MoznaUlepszycStudnie => Gracz.Monety >= CenaUlepszeniaStudni();
     private int PojemnoscPolki(int poziomStudni) => 5 * poziomStudni + 6;
     private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
     private PrzedmiotGracza pelnaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka");
-    private bool NieBedzieNalewane() => pustaButelka.Ilosc == 0 || Gracz.Monety == 0;
+    private bool NieBedzieNalewane => pustaButelka.Ilosc == 0 || Gracz.Monety == 0;
     public async Task DoGospodarstwa()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo);
     }
     private void UlepszStudnie()
     {
-        if (!MoznaUlepszycStudnie()) return;
+        if (!MoznaUlepszycStudnie) return;
         Gracz.Monety -= CenaUlepszeniaStudni();
         Gracz.UlepszBudynek("studnia");
     }
     private async Task NalejDoButelki(int poziomStudni)
     {
-        if (NieBedzieNalewane()) return;
+        if (NieBedzieNalewane) return;
         var iloscDoNalewania = Math.Min(poziomStudni, pustaButelka.Ilosc);
         pustaButelka.Ilosc -= iloscDoNalewania;
         pelnaButelka.Ilosc += iloscDoNalewania;

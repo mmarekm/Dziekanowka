@@ -1,7 +1,11 @@
 ﻿@using Dziekanowka.Mechanizm
 <div class="garazGospodarczyWidok widok rel">
     <div class="abs guzikWyjsciaZGarazuGospodarczego"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmGarazGospodarczy.png" /></button></div>
-    <div class="abs guzikNaPoleIntroZGarazu"><button @onclick="NaPole" class="wyroznionyGuzik"><img src="img/budynki/wyjazdZGarazuNaPole.png" /></button></div>
+    <div class="abs guzikNaPoleIntroZGarazu @(pustyKanister ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="NaPole"><img src="img/budynki/wyjazdZGarazuNaPole.png" /></div>
+    <div class="abs stanPaliwaGarazGospodarczy">
+        <div class="kanisterGarazGospodarczy"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
+        <div class="infoKanisterGarazGospodarczy @(pustyKanister ? "naCzerwono" : "")">@Gracz.Paliwo.IloscPaliwa / @Gracz.Paliwo.MaksymalnaIloscPaliwa</div>
+    </div>
 </div>
 
 @code {
@@ -9,12 +13,15 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool pustyKanister => Gracz.Paliwo.IloscPaliwa < 1;
     public async Task DoGospodarstwa()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo);
     }
     public async Task NaPole()
     {
+        if (pustyKanister) return;
+        Gracz.Paliwo.IloscPaliwa--;
         await NaZmianeEkranu.InvokeAsync(EkranGry.AnimacjaTraktora);
         await Task.Delay(5000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);

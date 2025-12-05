@@ -3,6 +3,12 @@ html, body {
     padding: 0;
     background-color: yellowgreen;
 }
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 h1:focus {
     outline: none;
 }
@@ -24,6 +30,9 @@ h1:focus {
     position: fixed;
     width: 100%;
     z-index: 100;
+}
+.naCzerwonoNaZielonym {
+    color: darkred;
 }
 .naCzerwono {
     color: red;
@@ -58,7 +67,7 @@ h1:focus {
     cursor: not-allowed;
 }
 .ukryty {
-    display: none;
+    display: none !important;
 }
 .kontener {
     transition: opacity 0.3s ease-in-out;
