@@ -1,1 +1,11 @@
-﻿
+﻿.pole1Widok {
+    background-image: url('../img/pole1.png');
+}
+.naPoleIntroZPole1 {
+    top: 400px;
+    left: 0;
+    width: 300px;
+    height: 200px;
+    z-index: 2;
+    border: 1px solid black;
+}

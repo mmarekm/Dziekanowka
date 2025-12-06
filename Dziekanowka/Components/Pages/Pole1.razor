@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="pole1Widok widok rel">
-    <h3>Pole1</h3>
+    <div class="abs naPoleIntroZPole1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZPole1.png" /></button></div>
 </div>
 
 @code {
@@ -10,4 +10,8 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task NaPoleIntro()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
+    }
 }

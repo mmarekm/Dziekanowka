@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="poleIntroWidok widok rel">
-    <div class="abs guzikPowrotuZPolaDoGarazuGospodarczego @(pustyKanister ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="DoGospodarstwa"><img src="img/doGospodarstwaZPola.png" /></div>
+    <div class="abs guzikPowrotuZPolaDoGarazuGospodarczego"><button class="wyroznionyGuzik @(pustyKanister ? "nieMoznaKliknac" : "")" @onclick="DoGospodarstwa"><img src="img/doGospodarstwaZPola.png" /></button></div>
     <div class="abs guzikNaPole1ZIntro"><button @onclick="NaPole1" class="wyroznionyGuzik"><img src="img/pole1ZIntro.png" /></button></div>
     <div class="abs sprzedawaniePoleIntro @(Gracz.Monety < 8 ? "nieMoznaKliknac" : "cPoint") @(pustyKanister ? "" : "ukryty")" @onclick="SprzedazJednego">
         <div class="sprzedawcaPoleIntro"><img class="obrazekWypelnia" src="img/sprzedawcaPoleIntro.png"/></div>
