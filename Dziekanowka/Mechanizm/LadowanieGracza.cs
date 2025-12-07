@@ -18,6 +18,7 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz!.Statystyki.DzienLogowania = DateTime.Now.Day;
                 AktualnyGracz.Statystyki.MiesiacLogowania = DateTime.Now.Month;
                 AktualnyGracz.Monety += AktualnyGracz.Statystyki.BonusDzienny;
+                AktualnyGracz.Warzywa.ForEach(w => w.Ilosc = w.Ilosc > 0 ? w.Ilosc - (w.Ilosc / 5 + 1) : w.Ilosc);
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
             }
