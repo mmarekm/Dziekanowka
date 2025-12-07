@@ -1,4 +1,4 @@
-﻿.studniaWidok {
+﻿.studniaWidok1 {
     background-image: url('../img/budynki/studniaWidok.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -6,25 +6,40 @@
     font-size: 100px;
     font-weight: bold;
 }
-.guzikWyjsciaZeStudni {
+.studniaWidok2 {
+    background-image: url('../img/budynki/studniaWidok2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 90px;
+    font-weight: bold;
+}
+.guzikWyjsciaZeStudni1 {
     top: 101px;
     left: 705px;
     width: 327px;
     height: 325px;
     z-index: 2;
 }
+.guzikWyjsciaZeStudni2 {
+    bottom: 34px;
+    left: 22px;
+    width: 160px;
+    height: 160px;
+    z-index: 2;
+}
 .butelkaStudnia {
     width: 55px;
     height: 132px;
 }
-.calaSzafaStudniarza {
+.calaSzafaStudniarza1 {
     top: 180px;
     left: 1080px;
     width: 800px;
     height: 820px;
     z-index: 3;
 }
-.pierwszyRzadButelekStudnia {
+.pierwszyRzadButelekStudnia1 {
     top: 250px;
     left: 1120px;
     width: 600px;
@@ -32,7 +47,7 @@
     display: flex;
     z-index: 2;
 }
-.drugiRzadButelekStudnia {
+.drugiRzadButelekStudnia1 {
     top: 460px;
     left: 1120px;
     width: 600px;
@@ -40,7 +55,7 @@
     display: flex;
     z-index: 2;
 }
-.trzeciRzadButelekStudnia {
+.trzeciRzadButelekStudnia1 {
     top: 660px;
     left: 1120px;
     width: 600px;
@@ -48,7 +63,7 @@
     display: flex;
     z-index: 2;
 }
-.czwartyRzadButelekStudnia {
+.czwartyRzadButelekStudnia1 {
     top: 840px;
     left: 1120px;
     width: 600px;
@@ -56,9 +71,58 @@
     display: flex;
     z-index: 2;
 }
-.liczbaMonetStudnia {
+.calaSzafaStudniarza2 {
+    top: 82px;
+    left: 770px;
+    width: 1095px;
+    height: 770px;
+    z-index: 3;
+}
+.pierwszyRzadButelekStudnia2 {
+    top: 152px;
+    left: 850px;
+    width: 970px;
+    height: 132px;
+    display: flex;
+    z-index: 2;
+}
+.drugiRzadButelekStudnia2 {
+    top: 344px;
+    left: 850px;
+    width: 970px;
+    height: 132px;
+    display: flex;
+    z-index: 2;
+}
+.trzeciRzadButelekStudnia2 {
+    top: 536px;
+    left: 850px;
+    width: 970px;
+    height: 132px;
+    display: flex;
+    z-index: 2;
+}
+.czwartyRzadButelekStudnia2 {
+    top: 725px;
+    left: 850px;
+    width: 970px;
+    height: 132px;
+    display: flex;
+    z-index: 2;
+}
+.liczbaMonetStudnia1 {
     top: 20px;
     left: 1400px;
+    width: 400px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.liczbaMonetStudnia2 {
+    bottom: 0;
+    left: 1200px;
     width: 400px;
     height: 120px;
     display: flex;

@@ -1,27 +1,6 @@
 ﻿.gospodarstwoWidok {
     background-image: url('../img/gospodarstwo.png');
 }
-.powitanieDzienne {
-    opacity: 1;
-    border-radius: 10px;
-    transition: none;
-    top: 150px;
-    left: 600px;
-    width: 800px;
-    height: 200px;
-    font-size: 60px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    background-color: forestgreen;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-}
-    .powitanieDzienne.znikaj {
-        opacity: 0;
-        transition: opacity 3s ease-out;
-    }
 .samTraktorWidok {
     width: 100px;
     height: 76px;

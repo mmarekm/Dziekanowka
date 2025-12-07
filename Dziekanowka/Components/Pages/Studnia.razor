@@ -1,31 +1,30 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="studniaWidok widok rel">
-    <div class="abs liczbaMonetStudnia">@Gracz.Monety</div>
-    <div class="abs guzikWyjsciaZeStudni"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny.png" /></button></div>
-    <div class="abs calaSzafaStudniarza @(NieBedzieNalewane ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick='async () => await NalejDoButelki(Gracz.PoziomBudynku("studnia"))'></div>
-    <div class="abs pierwszyRzadButelekStudnia">
+<div class="studniaWidok@(Gracz.PoziomBudynku("studnia")) widok rel">
+    <div class="abs liczbaMonetStudnia@(Gracz.PoziomBudynku("studnia"))">@Gracz.Monety</div>
+    <div class="abs guzikWyjsciaZeStudni@(Gracz.PoziomBudynku("studnia"))"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny@(Gracz.PoziomBudynku("studnia")).png" /></button></div>
+    <div class="abs calaSzafaStudniarza@(Gracz.PoziomBudynku("studnia")) @(NieBedzieNalewane ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick='async () => await NalejDoButelki(Gracz.PoziomBudynku("studnia"))'></div>
+    <div class="abs pierwszyRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">
         @RenderujPolke(0)
     </div>
-    <div class="abs drugiRzadButelekStudnia">
+    <div class="abs drugiRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">
         @RenderujPolke(1)
     </div>
-    <div class="abs trzeciRzadButelekStudnia">
+    <div class="abs trzeciRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">
         @RenderujPolke(2)
     </div>
-    <div class="abs czwartyRzadButelekStudnia">
+    <div class="abs czwartyRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">
         @RenderujPolke(3)
     </div>
-    <div class="abs klikDoUlepszeniaStudni @(MoznaUlepszycStudnie ? "cPoint wyroznionyZielonoDiv" : "nieMoznaKliknac")" @onclick="UlepszStudnie"></div>
-    <div class="abs ulepszanieStudni">
-        <div class="piktogramUpgradeStudnia">
-            <img src="img/budynki/upgradeStudzienny.png" />
+    @if (Gracz.PoziomBudynku("studnia") == 1)
+    {
+        <div class="abs klikDoUlepszeniaStudni @(MoznaUlepszycStudnie ? "cPoint wyroznionyZielonoDiv" : "nieMoznaKliknac")" @onclick="UlepszStudnie"></div>
+        <div class="abs ulepszanieStudni">
+            <div class="piktogramUpgradeStudnia"><img src="img/budynki/upgradeStudzienny.png" /></div>
+            <div class="cenaUpgradeStudnia">@Gracz.KosztUlepszeniaBudynku("studnia")</div>
         </div>
-        <div class="cenaUpgradeStudnia">
-            @Gracz.KosztUlepszeniaBudynku("studnia")
-        </div>
-    </div>
+    }
 </div>
 
 @code {
@@ -35,7 +34,7 @@
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private int CenaUlepszeniaStudni() => Gracz.KosztUlepszeniaBudynku("studnia");
     private bool MoznaUlepszycStudnie => Gracz.Monety >= CenaUlepszeniaStudni();
-    private int PojemnoscPolki(int poziomStudni) => 5 * poziomStudni + 6;
+    private int PojemnoscPolki(int poziomStudni) => 6 * poziomStudni + 5;
     private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
     private PrzedmiotGracza pelnaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka");
     private bool NieBedzieNalewane => pustaButelka.Ilosc == 0 || Gracz.Monety == 0;
