@@ -10,7 +10,7 @@
             <Start NaStartGry="WywolajStartGry" />
             break;
         case EkranGry.Gospodarstwo:
-            <Gospodarstwo @ref="gospodarstwoRef" Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            <Gospodarstwo Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
             break;
         case EkranGry.ZaBrama:
             <ZaBrama Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
@@ -37,6 +37,10 @@
             <AnimacjaTraktoraPowrot />
             break;
     }
+    @if (aktualnyEkran != EkranGry.Start)
+    {
+        <div class="abs @KlasaPowitania">Witaj! +++ @gracz!.Statystyki.BonusDzienny +++</div>
+    }
 </div>
 
 @code {
@@ -44,26 +48,38 @@
     private bool czyAnimacjaWyjscia = false;
     private EkranGry nastepnyEkran;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
-    private Gospodarstwo? gospodarstwoRef;
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
     private bool czekaNaPowitanie = false;
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne znikaj" : "powitanieDzienne") : "ukryty";
     protected override void OnInitialized()
     {
         ladowanieGracza.NowyDzienEvent += OnNowyDzien;
     }
-    private void OnNowyDzien()
-    {
-        if (gospodarstwoRef != null)
-            _ = gospodarstwoRef.PowitanieDnia();
-        else
-            czekaNaPowitanie = true;
-    }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (czekaNaPowitanie && gospodarstwoRef != null)
+        if (czekaNaPowitanie && aktualnyEkran != EkranGry.Start)
         {
             czekaNaPowitanie = false;
-            await gospodarstwoRef.PowitanieDnia();
+            await PowitanieDnia();
         }
+    }
+    private void OnNowyDzien()
+    {
+        czekaNaPowitanie = true;
+    }
+    private async Task PowitanieDnia()
+    {
+        Powitaj = true;
+        Znikanie = false;
+        StateHasChanged();
+        await Task.Delay(100);
+        Znikanie = true;
+        StateHasChanged();
+        await Task.Delay(3000);
+        Powitaj = false;
+        Znikanie = false;
+        StateHasChanged();
     }
     public void Dispose()
     {

@@ -3,8 +3,7 @@
 <div class="gospodarstwoWidok widok rel">
     <div class="abs garazGospodarczyGuzik"><button @onclick="DoGarazuGospodarczego" class="wyroznionyGuzik"><img src='img/Budynki/garazGospodarczy@(Gracz.PoziomBudynku("garazGospodarczy")).png' /></button></div>
     <div class="abs studniaGuzik"><button @onclick="DoStudni" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>
-    <div class="abs zaBrameGuzik"><button @onclick="ZaBrame" class="wyroznionyGuzik"><img src='img/zaBrameKlik.png' /></button></div>
-    <div class="abs @KlasaPowitania">Witaj! +++ @Gracz.Statystyki.BonusDzienny +++</div>
+    <div class="abs zaBrameGuzik"><button @onclick="ZaBreme" class="wyroznionyGuzik"><img src='img/zaBrameKlik.png' /></button></div>
 </div>
 
 @code {
@@ -12,23 +11,7 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private bool Powitaj { get; set; } = false;
-    private bool Znikanie { get; set; } = false;
-    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne znikaj" : "powitanieDzienne") : "ukryty";
-    public async Task PowitanieDnia()
-    {
-        Powitaj = true;
-        Znikanie = false;
-        StateHasChanged();
-        await Task.Delay(100);
-        Znikanie = true;
-        StateHasChanged();
-        await Task.Delay(3000);
-        Powitaj = false;
-        Znikanie = false;
-        StateHasChanged();
-    }
-    public async Task ZaBrame()
+    public async Task ZaBreme()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
     }
