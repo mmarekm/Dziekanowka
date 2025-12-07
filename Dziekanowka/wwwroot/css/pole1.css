@@ -8,3 +8,95 @@
     height: 200px;
     z-index: 2;
 }
+.warzywoNaPolu {
+    width: 90px;
+    height: 90px;
+    top: 33px;
+    left: 45px;
+    position: absolute;
+    z-index: 3;
+}
+.pojedynczePole1 {
+    width: 179px;
+    height: 156px;
+}
+.pole111 {
+    top: 180px;
+    left: 480px;
+}
+.pole121 {
+    top: 180px;
+    left: 673px;
+}
+.pole131 {
+    top: 180px;
+    left: 866px;
+}
+.pole141 {
+    top: 180px;
+    left: 1059px;
+}
+.pole151 {
+    top: 180px;
+    left: 1252px;
+}
+.pole112 {
+    top: 344px;
+    left: 480px;
+}
+.pole122 {
+    top: 344px;
+    left: 673px;
+}
+.pole132 {
+    top: 344px;
+    left: 866px;
+}
+.pole142 {
+    top: 344px;
+    left: 1059px;
+}
+.pole152 {
+    top: 344px;
+    left: 1252px;
+}
+.pole113 {
+    top: 502px;
+    left: 480px;
+}
+.pole123 {
+    top: 502px;
+    left: 673px;
+}
+.pole133 {
+    top: 502px;
+    left: 866px;
+}
+.pole143 {
+    top: 502px;
+    left: 1059px;
+}
+.pole153 {
+    top: 502px;
+    left: 1252px;
+}
+.pole114 {
+    top: 663px;
+    left: 480px;
+}
+.pole124 {
+    top: 663px;
+    left: 673px;
+}
+.pole134 {
+    top: 663px;
+    left: 866px;
+}
+.pole144 {
+    top: 663px;
+    left: 1059px;
+}
+.pole154 {
+    top: 663px;
+    left: 1252px;
+}
