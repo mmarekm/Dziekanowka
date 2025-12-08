@@ -6,6 +6,7 @@ namespace Dziekanowka.Mechanizm
         private readonly string _sciezkaDoPliku;
         public Gracz? AktualnyGracz { get; private set; }
         public event Action? NowyDzienEvent;
+        public Dzwieki? Dzwieki;
         private bool CzyNowyDzien() => AktualnyGracz!.Statystyki.DzienLogowania != DateTime.Now.Day || AktualnyGracz.Statystyki.MiesiacLogowania != DateTime.Now.Month;
         public LadowanieGracza()
         {
@@ -19,6 +20,7 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Statystyki.MiesiacLogowania = DateTime.Now.Month;
                 AktualnyGracz.Monety += AktualnyGracz.Statystyki.BonusDzienny;
                 AktualnyGracz.Warzywa.ForEach(w => w.Ilosc = w.Ilosc > 0 ? w.Ilosc - (w.Ilosc / 5 + 1) : w.Ilosc);
+                await Dzwieki.Dzwiek!.GraDzwiek("mp3/Dzwieki/witaj.mp3");
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
             }

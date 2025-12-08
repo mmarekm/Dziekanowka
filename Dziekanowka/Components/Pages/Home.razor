@@ -55,6 +55,7 @@
     private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne znikaj" : "powitanieDzienne") : "ukryty";
     protected override void OnInitialized()
     {
+        Dzwieki.Dzwiek = dzwieki;
         ladowanieGracza.NowyDzienEvent += OnNowyDzien;
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -88,20 +89,17 @@
     }
     private async Task GraTlo(EkranGry ekran)
     {
-        switch (ekran)
+        await (ekran switch
         {
-            case EkranGry.Gospodarstwo:
-                await dzwieki.GraTlo("mp3/Tla/gospodarstwo.mp3");
-                break;
-            case EkranGry.GarazGospodarczy:
-                await dzwieki.GraTlo("mp3/Tla/garazGospodarczy.mp3");
-                break;
-            case EkranGry.Sklepik:
-                await dzwieki.GraTlo("mp3/Tla/sklepik.mp3");
-                break;
-            default:
-                break;
-        }
+            EkranGry.Gospodarstwo => dzwieki.GraTlo("mp3/Tla/gospodarstwo.mp3"),
+            EkranGry.ZaBrama => dzwieki.GraTlo("mp3/Tla/zaBrama.mp3"),
+            EkranGry.GarazGospodarczy => dzwieki.GraTlo("mp3/Tla/garazGospodarczy.mp3"),
+            EkranGry.Studnia => dzwieki.GraTlo("mp3/Tla/studnia.mp3"),
+            EkranGry.Sklepik => dzwieki.GraTlo("mp3/Tla/sklepik.mp3"),
+            EkranGry.PoleIntro => dzwieki.GraTlo("mp3/Tla/poleIntro.mp3"),
+            EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => dzwieki.GraTlo("mp3/Tla/traktorJazda.mp3"),
+            _ => Task.CompletedTask
+        });
     }
     private async Task ZmienEkran(EkranGry ekran)
     {
