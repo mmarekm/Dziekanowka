@@ -416,6 +416,9 @@ Thumbs.db
 **/wwwroot/img
 Dziekanowka/wwwroot/img
 
+# Pliki audio MP3
+*.mp3
+
 gracze.json
 **/gracze.json
 

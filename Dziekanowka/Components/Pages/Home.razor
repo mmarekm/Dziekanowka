@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using Dziekanowka.Mechanizm
 @inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
 @implements IDisposable
 @using System.Text.Json
 <div class="kontener @(czyAnimacjaWyjscia ? "fade-out" : "fade-in")">
@@ -85,6 +86,23 @@
     {
         ladowanieGracza.NowyDzienEvent -= OnNowyDzien;
     }
+    private async Task GraTlo(EkranGry ekran)
+    {
+        switch (ekran)
+        {
+            case EkranGry.Gospodarstwo:
+                await dzwieki.GraTlo("mp3/Tla/gospodarstwo.mp3");
+                break;
+            case EkranGry.GarazGospodarczy:
+                await dzwieki.GraTlo("mp3/Tla/garazGospodarczy.mp3");
+                break;
+            case EkranGry.Sklepik:
+                await dzwieki.GraTlo("mp3/Tla/sklepik.mp3");
+                break;
+            default:
+                break;
+        }
+    }
     private async Task ZmienEkran(EkranGry ekran)
     {
         gracz!.Statystyki.Ekran = ekran;
@@ -96,6 +114,7 @@
         aktualnyEkran = nastepnyEkran;
         czyAnimacjaWyjscia = false;
         StateHasChanged();
+        await GraTlo(ekran);
         await Task.Delay(10);
     }
     private async Task WywolajStartGry(string nazwaGracza)
