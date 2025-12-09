@@ -417,7 +417,7 @@ Thumbs.db
 Dziekanowka/wwwroot/img
 
 # Ignoruj cały folder Raw
-Resources/Raw/
+Dziekanowka/Resources/Raw/
 
 # Pliki audio MP3
 *.mp3
