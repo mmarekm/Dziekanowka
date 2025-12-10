@@ -60,6 +60,8 @@
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (firstRender)
+            await GraTlo(EkranGry.Start);
         if (czekaNaPowitanie && aktualnyEkran != EkranGry.Start)
         {
             czekaNaPowitanie = false;
@@ -91,6 +93,7 @@
     {
         await (ekran switch
         {
+            EkranGry.Start => dzwieki.GraTlo("mp3/Tla/start.mp3"),
             EkranGry.Gospodarstwo => dzwieki.GraTlo("mp3/Tla/gospodarstwo.mp3"),
             EkranGry.ZaBrama => dzwieki.GraTlo("mp3/Tla/zaBrama.mp3"),
             EkranGry.GarazGospodarczy => dzwieki.GraTlo("mp3/Tla/garazGospodarczy.mp3"),
