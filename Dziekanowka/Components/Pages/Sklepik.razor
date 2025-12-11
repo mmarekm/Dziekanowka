@@ -22,6 +22,9 @@
     <div class="abs kanisterDoCwierciRysunek towarSklepik @(posiadaMaxPaliwo || nieStacNaCwiercPaliwa ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupCwiercPaliwa"><img class="obrazekWypelnia" src="img/przedmioty/kanisterCwiercPelny.png" /></div>
     <div class="abs kanisterDoCwierciCena towarCenaSklepik">@Gracz.Paliwo.CenaCwierciPaliwa<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
     <div class="abs kanisterDoCwierciStan towarStanSklepik @(posiadaMaxPaliwo ? "naCzerwono" : "naNiebiesko")">+ @Gracz.Paliwo.CwiercPaliwa</div>
+    <div class="abs sekatorSklepikRysunek towarSklepik @(maSekator || Gracz.Monety < 40 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupSekator"><img class="obrazekWypelnia" src="img/przedmioty/sekator.png" /></div>
+    <div class="abs sekatorSklepikCena towarCenaSklepik">40<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs sekatorSklepikStan towarStanSklepik @(maSekator ? "naCzerwono" : "naNiebiesko")">@(maSekator? masz : nieMasz)</div>
 </div>
 
 @code {
@@ -53,6 +56,14 @@
         if (Gracz.Monety < 35 || maMotyke) return;
         Gracz.Monety-=35;
         Gracz.Przedmioty.Add(new PrzedmiotGracza("motyka", 1));
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private bool maSekator => Gracz.Przedmioty.Any(p => p.Nazwa == "sekator");
+    public async Task KupSekator()
+    {
+       if (Gracz.Monety < 40 || maSekator) return;
+        Gracz.Monety-=40;
+        Gracz.Przedmioty.Add(new PrzedmiotGracza("sekator", 1));
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     public async Task UpgradeKanistra()
