@@ -120,9 +120,7 @@
     }
     private async Task WywolajStartGry(string nazwaGracza)
     {
-        if (string.IsNullOrWhiteSpace(nazwaGracza))
-            return;
-        await ladowanieGracza.ZaladujLubUtworzGracza(nazwaGracza);
+        await ladowanieGracza.ZaladujGracza(nazwaGracza);
         EkranGry startowyEkran = gracz!.Statystyki.Ekran;
         if (startowyEkran == EkranGry.AnimacjaTraktora || startowyEkran == EkranGry.AnimacjaTraktoraPowrot)
             startowyEkran = EkranGry.Gospodarstwo;

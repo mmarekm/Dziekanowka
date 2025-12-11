@@ -5,7 +5,7 @@
         public int Id { get; set; } = id;
         public int X { get; set; } = x;
         public int Y { get; set; } = y;
-        public int Poziom { get; set; } = 0;
+        public int Poziom { get; set; } = -1;
         public string Warzywo { get; set; } = warzywo;
         public static List<PoleUprawne> StartowePola()
         {
