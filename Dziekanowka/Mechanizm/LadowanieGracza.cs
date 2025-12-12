@@ -7,14 +7,11 @@ namespace Dziekanowka.Mechanizm
         public Gracz? AktualnyGracz { get; private set; }
         public event Action? NowyDzienEvent;
         public Dzwieki? Dzwieki;
-
         private bool CzyNowyDzien() => AktualnyGracz!.Statystyki.DzienLogowania != DateTime.Now.Day || AktualnyGracz.Statystyki.MiesiacLogowania != DateTime.Now.Month;
-
         public LadowanieGracza()
         {
             _sciezkaDoPliku = Path.Combine(AppContext.BaseDirectory, "gracze.json");
         }
-
         private async Task SprawdzenieCzyPierwszyRazWDniu()
         {
             if (CzyNowyDzien())
@@ -29,7 +26,6 @@ namespace Dziekanowka.Mechanizm
                 await ZapiszAktualnegoGracza();
             }
         }
-
         public async Task<Gracz> ZaladujGracza(string nazwa)
         {
             var gracze = await WczytajWszystkichGraczy();
@@ -37,33 +33,23 @@ namespace Dziekanowka.Mechanizm
             await SprawdzenieCzyPierwszyRazWDniu();
             return AktualnyGracz;
         }
-
         public async Task ZapiszAktualnegoGracza()
         {
             var gracze = await WczytajWszystkichGraczy();
             gracze[AktualnyGracz!.Nazwa.ToLower()] = AktualnyGracz;
             await ZapiszWszystkichGraczy(gracze);
         }
-
         private async Task<Dictionary<string, Gracz>> WczytajWszystkichGraczy()
         {
             if (!File.Exists(_sciezkaDoPliku))
             {
-                var startowiGracze = new Dictionary<string, Gracz>
-                {
-                    ["mama"] = new Gracz("Mama"),
-                    ["tata"] = new Gracz("Tata"),
-                    ["ula"] = new Gracz("Ula"),
-                    ["basia"] = new Gracz("Basia"),
-                    ["ania"] = new Gracz("Ania")
-                };
+                var startowiGracze = new Dictionary<string, Gracz> { ["mama"] = new Gracz("Mama"), ["tata"] = new Gracz("Tata"), ["ula"] = new Gracz("Ula"), ["basia"] = new Gracz("Basia"), ["ania"] = new Gracz("Ania") };
                 await ZapiszWszystkichGraczy(startowiGracze);
                 return startowiGracze;
             }
             var json = await File.ReadAllTextAsync(_sciezkaDoPliku);
             return JsonSerializer.Deserialize<Dictionary<string, Gracz>>(json) ?? new Dictionary<string, Gracz>();
         }
-
         private async Task ZapiszWszystkichGraczy(Dictionary<string, Gracz> gracze)
         {
             var opcje = new JsonSerializerOptions { WriteIndented = true };
