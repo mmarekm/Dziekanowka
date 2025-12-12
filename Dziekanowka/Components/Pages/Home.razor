@@ -31,6 +31,9 @@
         case EkranGry.Pole1:
             <Pole1 Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
             break;
+        case EkranGry.Pole2:
+            <Pole2 Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            break;
         case EkranGry.AnimacjaTraktora:
             <AnimacjaTraktora />
             break;
@@ -99,7 +102,7 @@
             EkranGry.GarazGospodarczy => dzwieki.GraTlo("mp3/Tla/garazGospodarczy.mp3"),
             EkranGry.Studnia => dzwieki.GraTlo("mp3/Tla/studnia.mp3"),
             EkranGry.Sklepik => dzwieki.GraTlo("mp3/Tla/sklepik.mp3"),
-            EkranGry.PoleIntro => dzwieki.GraTlo("mp3/Tla/poleIntro.mp3"),
+            EkranGry.PoleIntro or EkranGry.Pole1 or EkranGry.Pole2 => dzwieki.GraTlo("mp3/Tla/poleIntro.mp3"),
             EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => dzwieki.GraTlo("mp3/Tla/traktorJazda.mp3"),
             _ => Task.CompletedTask
         });

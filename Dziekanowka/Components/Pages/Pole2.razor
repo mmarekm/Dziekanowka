@@ -1,15 +1,16 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="pole1Widok widok rel">
-    <div class="abs naPoleIntroZPole1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZPole1.png" /></button></div>
+<div class="pole2Widok widok rel">
+    <div class="abs naPoleIntroZPole2"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZPole2.png" /></button></div>
+    <div class="abs naPole1ZPole2"><button class="wyroznionyGuzik" @onclick="NaPole1"><img src="img/naPole1ZPole2.png" /></button></div>
     @for (int x = 1; x <= 5; x++)
     {
         var localX = x;
         @for (int y = 1; y <= 4; y++)
         {
             var localY = y;
-            var pole = Gracz.PolaUprawne.First(p => p.Id == 1 && p.X == localX && p.Y == localY);
+            var pole = Gracz.PolaUprawne.First(p => p.Id == 2 && p.X == localX && p.Y == localY);
             <div class="@($"abs pojedynczePole1 pole1{localX}{localY}")">
                 <img class="obrazekWypelnia" src="@($"img/pole{(pole.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
                 <div class="abs warzywoNaPolu">
@@ -28,5 +29,9 @@
     public async Task NaPoleIntro()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
+    }
+    public async Task NaPole1()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1);
     }
 }

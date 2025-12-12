@@ -1,11 +1,28 @@
 ﻿.pole1Widok {
     background-image: url('../img/pole1.png');
 }
+.pole2Widok {
+    background-image: url('../img/pole2.png');
+}
 .naPoleIntroZPole1 {
     top: 351px;
     left: 0;
     width: 300px;
     height: 200px;
+    z-index: 2;
+}
+.naPoleIntroZPole2 {
+    top: 379px;
+    right: 0;
+    width: 257px;
+    height: 272px;
+    z-index: 2;
+}
+.naPole1ZPole2 {
+    top: 341px;
+    left: 0;
+    width: 240px;
+    height: 349px;
     z-index: 2;
 }
 .warzywoNaPolu {

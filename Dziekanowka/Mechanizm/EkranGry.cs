@@ -10,6 +10,7 @@
         Sklepik,
         PoleIntro,
         Pole1,
+        Pole2,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot
     }
