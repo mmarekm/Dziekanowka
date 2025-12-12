@@ -13,6 +13,10 @@
             var pole = Gracz.PolaUprawne.First(p => p.Id == 2 && p.X == localX && p.Y == localY);
             <div class="@($"abs pojedynczePole1 pole1{localX}{localY}")">
                 <img class="obrazekWypelnia" src="@($"img/pole{(pole.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
+                @if (pole.Poziom < 0)
+                {
+                    <div class="abs ramkaMotyka @(maMotyke ? "motykaTrue" : "motykaFalse")"></div>
+                }
                 <div class="abs warzywoNaPolu">
                     <img class="obrazekWypelnia" src="@($"img/przedmioty/warzywa/{pole.Warzywo}.png")" />
                 </div>
@@ -26,6 +30,7 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool maMotyke => Gracz.Przedmioty.Any(p => p.Nazwa == "motyka");
     public async Task NaPoleIntro()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);

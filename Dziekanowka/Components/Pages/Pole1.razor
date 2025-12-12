@@ -2,7 +2,11 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="pole1Widok widok rel">
+    <div class="abs stanButelekPole">
+        @pelneButelki<img src="img/przedmioty/butelkaPelna.png" />
+    </div>
     <div class="abs naPoleIntroZPole1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZPole1.png" /></button></div>
+    <div class="abs naPole2ZPole1"><button class="wyroznionyGuzik" @onclick="NaPole2"><img src="img/naPole2ZPole1.png" /></button></div>
     @for (int x = 1; x <= 5; x++)
     {
         var localX = x;
@@ -12,6 +16,10 @@
             var pole = Gracz.PolaUprawne.First(p => p.Id == 1 && p.X == localX && p.Y == localY);
             <div class="@($"abs pojedynczePole1 pole1{localX}{localY}")">
                 <img class="obrazekWypelnia" src="@($"img/pole{(pole.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
+                @if (pole.Poziom < 0)
+                {
+                    <div class="abs ramkaMotyka @(maMotyke ? "motykaTrue" : "motykaFalse")"></div>
+                }
                 <div class="abs warzywoNaPolu">
                     <img class="obrazekWypelnia" src="@($"img/przedmioty/warzywa/{pole.Warzywo}.png")" />
                 </div>
@@ -25,8 +33,14 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
+    private bool maMotyke => Gracz.Przedmioty.Any(p => p.Nazwa == "motyka");
     public async Task NaPoleIntro()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
+    }
+    public async Task NaPole2()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2);
     }
 }
