@@ -2,9 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="pole1Widok widok rel">
-    <div class="abs stanButelekPole">
-        @pelneButelki<img src="img/przedmioty/butelkaPelna.png" />
-    </div>
+    <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPoleIntroZPole1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZPole1.png" /></button></div>
     <div class="abs naPole2ZPole1"><button class="wyroznionyGuzik" @onclick="NaPole2"><img src="img/naPole2ZPole1.png" /></button></div>
     @for (int x = 1; x <= 5; x++)
@@ -20,8 +18,10 @@
                 {
                     <div class="abs ramkaMotyka @(maMotyke ? "motykaTrue" : "motykaFalse")"></div>
                 }
-                <div class="abs warzywoNaPolu">
-                    <img class="obrazekWypelnia" src="@($"img/przedmioty/warzywa/{pole.Warzywo}.png")" />
+                <div class="abs warzywoNaPolu"><img class="obrazekWypelnia" src="@($"img/przedmioty/warzywa/{pole.Warzywo}.png")" /></div>
+                <div class="abs ileWarzywPole">
+                    <img class="obrazekWypelnia" src="img/przedmioty/worekPole.png" />
+                    <div class="abs liczbaWarzywPole">@pole.LiczbaPosiadanych(Gracz)</div>
                 </div>
             </div>
         }

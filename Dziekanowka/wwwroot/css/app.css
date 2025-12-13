@@ -146,6 +146,10 @@ h1:focus {
     height: 100%;
     object-fit: fill;
 }
+.obrazekSieMiesci {
+    width: auto;
+    max-height: 100%;
+}
 .powitanieDzienne {
     opacity: 1;
     border-radius: 10px;

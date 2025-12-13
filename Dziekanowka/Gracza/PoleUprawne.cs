@@ -7,6 +7,7 @@
         public int Y { get; set; } = y;
         public int Poziom { get; set; } = -1;
         public string Warzywo { get; set; } = warzywo;
+        public int LiczbaPosiadanych(Gracz gracz) => gracz.Warzywa.First(w => w.Nazwa == Warzywo).Ilosc;
         public static List<PoleUprawne> StartowePola()
         {
             List<string> w1 = [ "kukurydza", "groch", "jarmuż", "pasternak", "pietruszka", "burak", "brukselka", "sorgo", "rzepaPastewna", "koniczyna", "sałata", "marchew", "ziemniak",
