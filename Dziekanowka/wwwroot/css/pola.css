@@ -84,6 +84,15 @@
     right: 8px;
     z-index: 4;
 }
+.ileZyskuZPola {
+    width: 40px;
+    height: 30px;
+    bottom: 10px;
+    right: 8px;
+    z-index: 4;
+    color: lime;
+    font-size: 22px;
+}
 .motykaTrue {
     border: dashed 2px lime;
 }

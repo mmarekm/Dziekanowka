@@ -18,6 +18,10 @@
                 {
                     <div class="abs ramkaMotyka @(maMotyke ? "motykaTrue" : "motykaFalse")"></div>
                 }
+                else
+                {
+                    <div class="abs ileZyskuZPola">+ @pole.Poziom</div>
+                }
                 <div class="abs warzywoNaPolu"><img class="obrazekWypelnia" src="@($"img/przedmioty/warzywa/{pole.Warzywo}.png")" /></div>
                 <div class="abs ileWarzywPole">
                     <img class="obrazekWypelnia" src="img/przedmioty/worekPole.png" />
