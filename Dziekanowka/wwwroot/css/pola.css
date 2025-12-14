@@ -6,6 +6,7 @@
 }
 .czyszczeniePolaWidok {
     background-image: url('../img/czyszczeniePola.png');
+    pointer-events: none;
 }
 .stanButelekPole {
     width: 200px;
@@ -110,6 +111,19 @@
 .motykaFalse {
     border: dashed 2px red;
 }
+.motykaDziala {
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    transform-origin: center bottom;
+}
+.motyka {
+    width: 120px;
+    height: auto;
+    z-index: 2;
+    transform-origin: bottom center;
+    animation: dziabanie 0.8s ease-in-out infinite;
+}
 .pole111 {
     top: 180px;
     left: 480px;
@@ -189,4 +203,21 @@
 .pole154 {
     top: 663px;
     left: 1252px;
+}
+@keyframes dziabanie {
+    0% {
+        transform: rotate(-10deg) translateY(0);
+    }
+    25% {
+        transform: rotate(45deg) translateY(-30px);
+    }
+    50% {
+        transform: rotate(45deg) translateY(-30px);
+    }
+    75% {
+        transform: rotate(-10deg) translateY(0);
+    }
+    100% {
+        transform: rotate(-10deg) translateY(0);
+    }
 }

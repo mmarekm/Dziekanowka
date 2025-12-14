@@ -57,6 +57,9 @@
         {
             pole.Poziom = 0;
             Gracz.Przedmioty.RemoveAll(p => p.Nazwa == "motyka");
+            await NaZmianeEkranu.InvokeAsync(EkranGry.CzyszczeniePola);
+            await Task.Delay(5000);
+            await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2);
         }
         else
         {
