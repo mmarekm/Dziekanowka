@@ -4,6 +4,9 @@
 .pole2Widok {
     background-image: url('../img/pole2.png');
 }
+.czyszczeniePolaWidok {
+    background-image: url('../img/czyszczeniePola.png');
+}
 .stanButelekPole {
     width: 200px;
     height: 80px;
@@ -45,6 +48,14 @@
     width: 263px;
     height: 272px;
     z-index: 2;
+}
+.obrysPola {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: dashed 3px yellow;
+    z-index: 5;
 }
 .warzywoNaPolu {
     width: 90px;

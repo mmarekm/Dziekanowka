@@ -13,6 +13,7 @@
             var localY = y;
             var pole = Gracz.PolaUprawne.First(p => p.Id == 2 && p.X == localX && p.Y == localY);
             <div class="@($"abs pojedynczePole1 pole1{localX}{localY}")">
+                <div class="abs obrysPola @(!MoznaUprawiac(pole) ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick="async () => await UprawiajPole(pole)">
                 <img class="obrazekWypelnia" src="@($"img/pole{(pole.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
                 @if (pole.Poziom < 0)
                 {
@@ -27,6 +28,7 @@
                     <img class="obrazekWypelnia" src="img/przedmioty/worekPole.png" />
                     <div class="abs liczbaWarzywPole">@pole.LiczbaPosiadanych(Gracz)</div>
                 </div>
+                </div>
             </div>
         }
     }
@@ -39,6 +41,7 @@
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
     private bool maMotyke => Gracz.Przedmioty.Any(p => p.Nazwa == "motyka");
+    private bool MoznaUprawiac(PoleUprawne pole) => (pole.Poziom < 0 && maMotyke) || (pole.Poziom > 0 && Gracz.IloscPrzedmiotow("pelnaButelka") > 0);
     public async Task NaPoleIntro()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
@@ -46,5 +49,20 @@
     public async Task NaPole1()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1);
+    }
+    public async Task UprawiajPole(PoleUprawne pole)
+    {
+        if (!MoznaUprawiac(pole)) return;
+        if (pole.Poziom < 0 && maMotyke)
+        {
+            pole.Poziom = 0;
+            Gracz.Przedmioty.RemoveAll(p => p.Nazwa == "motyka");
+        }
+        else
+        {
+            Gracz.Warzywa.First(w => w.Nazwa == pole.Warzywo).Ilosc += pole.Poziom;
+            Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }

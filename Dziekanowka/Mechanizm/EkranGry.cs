@@ -12,6 +12,7 @@
         Pole1,
         Pole2,
         AnimacjaTraktora,
-        AnimacjaTraktoraPowrot
+        AnimacjaTraktoraPowrot,
+        CzyszczeniePola
     }
 }

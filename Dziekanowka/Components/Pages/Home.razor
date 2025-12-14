@@ -40,6 +40,9 @@
         case EkranGry.AnimacjaTraktoraPowrot:
             <AnimacjaTraktoraPowrot />
             break;
+        case EkranGry.CzyszczeniePola:
+            <CzyszczeniePola />
+            break;
     }
     @if (aktualnyEkran != EkranGry.Start)
     {
@@ -125,8 +128,12 @@
     {
         await ladowanieGracza.ZaladujGracza(nazwaGracza);
         EkranGry startowyEkran = gracz!.Statystyki.Ekran;
-        if (startowyEkran == EkranGry.AnimacjaTraktora || startowyEkran == EkranGry.AnimacjaTraktoraPowrot)
-            startowyEkran = EkranGry.Gospodarstwo;
+        startowyEkran = startowyEkran switch
+        {
+            EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => EkranGry.Gospodarstwo,
+            EkranGry.CzyszczeniePola => EkranGry.PoleIntro,
+            _ => startowyEkran
+        };
         await ZmienEkran(startowyEkran);
     }
 }
