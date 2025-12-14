@@ -8,6 +8,7 @@
         GarazGospodarczy,
         Studnia,
         Sklepik,
+        SklepikWarzywa,
         PoleIntro,
         Pole1,
         Pole2,

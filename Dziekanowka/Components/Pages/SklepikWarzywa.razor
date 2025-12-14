@@ -1,0 +1,47 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="sklepikWarzywaWidok widok rel">
+    <div class="abs wyjscieSklepikWarzywaGuzik"><button @onclick="SklepikWyjscie" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikWarzywa.png' /></button></div>
+    <div class="abs guzikSklepikWarzywaDoGlownego"><button class="wyroznionyGuzik" @onclick="SklepikDoGlownego"><img src="img/budynki/sklepikWarzywaDoGlownego.png" /></button></div>
+    <div class="abs sklepikMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
+    <div class="abs warzywaGrid">
+        @foreach (var pole in Gracz.PolaUprawne)
+        {
+            <div class="polkaItem @(NieKupi(pole) ? "szaryCien nieMoznaKliknac" : "cPoint zielonyCienHover")" @onclick="async () => await KupPoziom(pole)">
+                <div class="polkaItem-gora">@KupnoPoziomu(pole)</div>
+                <div class="polkaItem-obrazek">
+                    <img src="img/przedmioty/warzywa/@(pole.Warzywo).png" alt="@pole.Warzywo" />
+                </div>
+                <div class="polkaItem-cena">
+                    @CenaPoziomu(pole)<img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string KupnoPoziomu(PoleUprawne pole) => pole.Poziom >= 0 ? $"+ {pole.Poziom + 1}" : "";
+    private int CenaPoziomu(PoleUprawne pole) => (int)Math.Pow(pole.Poziom + 1, 2) * 4;
+    private bool NieKupi(PoleUprawne pole) => pole.Poziom < 0 || Gracz.Monety < CenaPoziomu(pole);
+    public async Task KupPoziom(PoleUprawne pole)
+    {
+        if (NieKupi(pole)) return;
+        Gracz.Monety -= CenaPoziomu(pole);
+        pole.Poziom++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task SklepikWyjscie()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
+    }
+    public async Task SklepikDoGlownego()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepik);
+    }
+}
