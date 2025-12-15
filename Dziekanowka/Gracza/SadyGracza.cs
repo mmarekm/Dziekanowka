@@ -7,6 +7,7 @@
         public int Y { get; set; } = y;
         public int Poziom { get; set; } = -1;
         public string Owoc { get; set; } = owoc;
+        public int LiczbaPosiadanych(Gracz gracz) => gracz.Owoce.First(w => w.Nazwa == Owoc).Ilosc;
         public static List<SadyGracza> StartoweSady()
         {
             List<string> o1 = ["brzoskwinia", "nektarynka", "morela", "śliwka", "wiśnia", "czereśnia", "jabłko", "gruszka", "pomarańcza",

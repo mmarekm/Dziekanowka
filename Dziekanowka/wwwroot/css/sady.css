@@ -8,3 +8,85 @@
     height: 169px;
     z-index: 2;
 }
+.pojedynczeDrzewo1 {
+    width: 230px;
+    height: 170px;
+}
+.ramkaSekator {
+    width: 40px;
+    height: 65px;
+    bottom: 2px;
+    right: 4px;
+    z-index: 4;
+}
+.owocNaPolu {
+    width: 80px;
+    height: 80px;
+    top: 73px;
+    left: 55px;
+    z-index: 3;
+}
+.drzewo111 {
+    top: 130px;
+    left: 60px;
+}
+.drzewo121 {
+    top: 130px;
+    left: 330px;
+}
+.drzewo131 {
+    top: 330px;
+    left: 60px;
+}
+.drzewo141 {
+    top: 330px;
+    left: 330px;
+}
+.drzewo112 {
+    top: 530px;
+    left: 60px;
+}
+.drzewo122 {
+    top: 530px;
+    left: 330px;
+}
+.drzewo132 {
+    top: 730px;
+    left: 60px;
+}
+.drzewo142 {
+    top: 730px;
+    left: 330px;
+}
+.drzewo113 {
+    top: 130px;
+    right: 65px;
+}
+.drzewo123 {
+    top: 130px;
+    right: 330px;
+}
+.drzewo133 {
+    top: 330px;
+    right: 65px;
+}
+.drzewo143 {
+    top: 330px;
+    right: 330px;
+}
+.drzewo114 {
+    top: 525px;
+    right: 65px;
+}
+.drzewo124 {
+    top: 525px;
+    right: 330px;
+}
+.drzewo134 {
+    top: 710px;
+    right: 65px;
+}
+.drzewo144 {
+    top: 710px;
+    right: 330px;
+}
