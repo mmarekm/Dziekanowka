@@ -5,6 +5,7 @@
     <div class="abs guzikPowrotuZPolaDoGarazuGospodarczego"><button class="wyroznionyGuzik @(pustyKanister ? "nieMoznaKliknac" : "")" @onclick="DoGospodarstwa"><img src="img/doGospodarstwaZPola.png" /></button></div>
     <div class="abs guzikNaPole1ZIntro"><button @onclick="NaPole1" class="wyroznionyGuzik"><img src="img/pole1ZIntro.png" /></button></div>
     <div class="abs guzikNaPole2ZIntro"><button @onclick="NaPole2" class="wyroznionyGuzik"><img src="img/pole2ZIntro.png" /></button></div>
+    <div class="abs guzikDoSadu1ZIntro"><button @onclick="DoSadu1" class="wyroznionyGuzik"><img src="img/sad1ZIntro.png" /></button></div>
     <div class="abs sprzedawaniePoleIntro @(Gracz.Monety < 8 ? "nieMoznaKliknac" : "cPoint") @(pustyKanister ? "" : "ukryty")" @onclick="SprzedazJednego">
         <div class="sprzedawcaPoleIntro"><img class="obrazekWypelnia" src="img/sprzedawcaPoleIntro.png"/></div>
         <div class="cenaDrogaPoleIntro">
@@ -46,5 +47,9 @@
     public async Task NaPole2()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2);
+    }
+    public async Task DoSadu1()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Sad1);
     }
 }

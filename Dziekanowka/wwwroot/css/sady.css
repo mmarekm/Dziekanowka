@@ -1,0 +1,10 @@
+﻿.sad1Widok {
+    background-image: url('../img/sad1.png');
+}
+.naPoleIntroZSad1 {
+    bottom: 0;
+    left: 755px;
+    width: 449px;
+    height: 169px;
+    z-index: 2;
+}

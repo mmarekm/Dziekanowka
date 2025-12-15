@@ -12,6 +12,7 @@
         PoleIntro,
         Pole1,
         Pole2,
+        Sad1,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         CzyszczeniePola
