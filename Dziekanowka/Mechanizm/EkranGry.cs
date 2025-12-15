@@ -15,6 +15,7 @@
         Sad1,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
-        CzyszczeniePola
+        CzyszczeniePola,
+        CzyszczenieDrzewa
     }
 }

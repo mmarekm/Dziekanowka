@@ -1,6 +1,10 @@
 ﻿.sad1Widok {
     background-image: url('../img/sad1.png');
 }
+.czyszczenieDrzewaWidok {
+    background-image: url('../img/czyszczenieDrzewa.png');
+    pointer-events: none;
+}
 .naPoleIntroZSad1 {
     bottom: 0;
     left: 755px;
@@ -26,6 +30,47 @@
     left: 55px;
     z-index: 3;
 }
+.sekatorDziala {
+    top: 20%;
+    left: 10%;
+    animation: ruchSekatora 4s ease-in-out forwards;
+}
+.sekator {
+    width: 150px;
+    height: 150px;
+    z-index: 10;
+    background-image: url('/img/przedmioty/sekator.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    animation: obrotSekatoraRoboczego 0.3s ease-in-out infinite, ukryj 0s 4s forwards;
+}
+.sekator-gora, .sekator-dol {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 75px;
+    background-image: url('/img/przedmioty/sekator.png');
+    background-size: 100% 200%;
+    background-repeat: no-repeat;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    z-index: 20;
+}
+.sekator-gora {
+    background-position: top;
+    animation: gornaPolowa 1s 4s forwards;
+    transform-origin: bottom center;
+    bottom: 50%;
+}
+.sekator-dol {
+    background-position: bottom;
+    animation: dolnaPolowa 1s 4s forwards;
+    transform-origin: top center;
+    top: 50%;
+}
 .drzewo111 {
     top: 130px;
     left: 60px;
@@ -43,19 +88,19 @@
     left: 330px;
 }
 .drzewo112 {
-    top: 530px;
+    top: 525px;
     left: 60px;
 }
 .drzewo122 {
-    top: 530px;
+    top: 525px;
     left: 330px;
 }
 .drzewo132 {
-    top: 730px;
+    top: 710px;
     left: 60px;
 }
 .drzewo142 {
-    top: 730px;
+    top: 710px;
     left: 330px;
 }
 .drzewo113 {
@@ -89,4 +134,34 @@
 .drzewo144 {
     top: 710px;
     right: 330px;
+}
+@keyframes ruchSekatora {
+    0% {
+        top: 20%;
+        left: 10%;
+    }
+    25% {
+        top: 40%;
+        left: 30%;
+    }
+    50% {
+        top: 25%;
+        left: 60%;
+    }
+    75% {
+        top: 50%;
+        left: 40%;
+    }
+    100% {
+        top: 35%;
+        left: 70%;
+    }
+}
+@keyframes obrotSekatoraRoboczego {
+    0%, 100% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
 }
