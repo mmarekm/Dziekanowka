@@ -1,8 +1,10 @@
 ﻿.sad1Widok {
     background-image: url('../img/sad1.png');
 }
+.sad2Widok {
+    background-image: url('../img/sad2.png');
+}
 .czyszczenieDrzewaWidok {
-    background-image: url('../img/czyszczenieDrzewa.png');
     pointer-events: none;
 }
 .naPoleIntroZSad1 {
@@ -12,9 +14,32 @@
     height: 169px;
     z-index: 2;
 }
+.naPoleIntroZSad2 {
+    bottom: 0;
+    left: 754px;
+    width: 416px;
+    height: 109px;
+    z-index: 2;
+}
 .pojedynczeDrzewo1 {
     width: 230px;
     height: 170px;
+}
+.pojedynczaPalma {
+    width: 170px;
+    height: 170px;
+}
+.pojedynczyKrzew {
+    width: 160px;
+    height: 170px;
+}
+.pojedynczePnacze {
+    width: 150px;
+    height: 150px;
+}
+.pojedynczeZiemne {
+    width: 140px;
+    height: 140px;
 }
 .ramkaSekator {
     width: 40px;
@@ -28,6 +53,34 @@
     height: 80px;
     top: 73px;
     left: 55px;
+    z-index: 3;
+}
+.owocNaPalmie {
+    width: 75px;
+    height: 75px;
+    bottom: 3px;
+    left: 15px;
+    z-index: 3;
+}
+.owocNaKrzewie {
+    width: 70px;
+    height: 70px;
+    top: 73px;
+    left: 15px;
+    z-index: 3;
+}
+.owocNaPnaczu {
+    width: 55px;
+    height: 55px;
+    bottom: 3px;
+    left: 25px;
+    z-index: 3;
+}
+.owocNaZiemnym {
+    width: 80px;
+    height: 80px;
+    top: 43px;
+    left: 15px;
     z-index: 3;
 }
 .sekatorDziala {
@@ -134,6 +187,66 @@
 .drzewo144 {
     top: 710px;
     right: 330px;
+}
+.drzewo211 {
+    bottom: 90px;
+    left: 750px;
+}
+.drzewo212 {
+    top: 100px;
+    left: 1100px;
+}
+.drzewo213 {
+    top: 100px;
+    left: 1400px;
+}
+.drzewo214 {
+    top: 150px;
+    left: 1700px;
+}
+.drzewo221 {
+    top: 300px;
+    left: 1200px;
+}
+.drzewo222 {
+    top: 400px;
+    left: 1500px;
+}
+.drzewo223 {
+    top: 600px;
+    left: 1160px;
+}
+.drzewo224 {
+    top: 80px;
+    left: 60px;
+}
+.drzewo231 {
+    bottom: 90px;
+    left: 600px;
+}
+.drzewo232 {
+    top: 200px;
+    left: 300px;
+}
+.drzewo233 {
+    bottom: 90px;
+    left: 450px;
+}
+.drzewo234 {
+    bottom: 90px;
+    left: 300px;
+}
+.drzewo241 {
+    top: 100px;
+    left: 500px;
+}
+.drzewo242 {
+    top: 350px;
+    left: 550px;
+}
+.drzewo243 {
+    top: 500px;
+    left: 100px;
 }
 @keyframes ruchSekatora {
     0% {

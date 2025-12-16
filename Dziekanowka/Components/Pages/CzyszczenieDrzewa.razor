@@ -1,4 +1,4 @@
-﻿<div class="czyszczenieDrzewaWidok widok rel">
+﻿<div class="czyszczenieDrzewaWidok widok rel" style="background-image: url('../img/czyszczenie@(tlo).png');">
     <div class="abs sekatorDziala">
         <div class="sekator"></div>
         <div class="sekator-gora"></div>
@@ -7,5 +7,5 @@
 </div>
 
 @code {
-
+    private string tlo = Sad2.Palma ? "Palmy" : Sad2.Krzew ? "Krzewu" : Sad2.Pnacze ? "Pnacza" : Sad2.Ziemne ? "Ziemnych" : "Drzewa";
 }

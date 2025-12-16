@@ -1,19 +1,19 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="sad1Widok widok rel">
+<div class="sad2Widok widok rel">
     <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
-    <div class="abs naPoleIntroZSad1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZSad1.png" /></button></div>
+    <div class="abs naPoleIntroZSad2"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZSad2.png" /></button></div>
     @for (int x = 1; x <= 4; x++)
     {
         var localX = x;
         @for (int y = 1; y <= 4; y++)
         {
             var localY = y;
-            var drzewo = Gracz.Sady.First(p => p.Id == 1 && p.X == localX && p.Y == localY);
-            <div class="@($"abs pojedynczeDrzewo1 drzewo1{localX}{localY}")">
+            var drzewo = Gracz.Sady.First(p => p.Id == 2 && p.X == localX && p.Y == localY);
+            <div class="@($"abs drzewo2{localX}{localY} {PojedynczaRoslina(drzewo)}")">
                 <div class="abs obrysPola @(!MoznaUprawiac(drzewo) ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick="async () => await UprawiajDrzewo(drzewo)">
-                    <img class="obrazekWypelnia" src="@($"img/drzewo{(drzewo.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
+                    <img class="obrazekWypelnia" src="@($"img/{Roslina(drzewo)}{(drzewo.Poziom > -1 ? $"Zadban{Sufiks(drzewo)}" : $"Zaniedban{Sufiks(drzewo)}")}.png")" />
                     @if (drzewo.Poziom < 0)
                     {
                         <div class="abs ramkaSekator @(maSekator ? "motykaTrue" : "motykaFalse")"></div>
@@ -22,7 +22,7 @@
                     {
                         <div class="abs ileZyskuZPola">+ @drzewo.Poziom</div>
                     }
-                    <div class="abs owocNaPolu"><img class="obrazekWypelnia" src="@($"img/przedmioty/owoce/{drzewo.Owoc}.png")" /></div>
+                    <div class="abs @OwocNaPolu(drzewo)"><img class="obrazekWypelnia" src="@($"img/przedmioty/owoce/{drzewo.Owoc}.png")" /></div>
                     <div class="abs ileWarzywPole">
                         <img class="obrazekWypelnia" src="img/przedmioty/worekPole.png" />
                         <div class="abs liczbaWarzywPole">@drzewo.LiczbaPosiadanych(Gracz)</div>
@@ -32,11 +32,23 @@
         }
     }
 </div>
+
 @code {
     [Parameter]
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public static bool Palma = false;
+    public static bool Krzew = false;
+    public static bool Pnacze = false;
+    public static bool Ziemne = false;
+    private List<string> krzewowe = ["malina", "jeżyna", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "żurawina"];
+    private List<string> pnące = ["winogronoJasne", "winogronoRóżowe", "winogronoCiemne", "kiwi", "marakuja"];
+    private List<string> ziemne = ["truskawka", "ananas", "arbuz", "melon"];
+    private string PojedynczaRoslina(SadyGracza drzewo) => drzewo.Owoc == "banan" ? "pojedynczaPalma" : krzewowe.Contains(drzewo.Owoc) ? "pojedynczyKrzew" : pnące.Contains(drzewo.Owoc) ? "pojedynczePnacze" : "pojedynczeZiemne";
+    private string Roslina(SadyGracza drzewo) => drzewo.Owoc == "banan" ? "palma" : krzewowe.Contains(drzewo.Owoc) ? "krzew" : pnące.Contains(drzewo.Owoc) ? "pnacze" : "ziemne";
+    private string Sufiks(SadyGracza drzewo) => Roslina(drzewo) == "palma" ? "a" : Roslina(drzewo) == "krzew" ? "y" : "e";
+    private string OwocNaPolu(SadyGracza drzewo) => drzewo.Owoc == "banan" ? "owocNaPalmie" : krzewowe.Contains(drzewo.Owoc) ? "owocNaKrzewie" : pnące.Contains(drzewo.Owoc) ? "owocNaPnaczu" : "owocNaZiemnym";
     private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
     private bool maSekator => Gracz.Przedmioty.Any(p => p.Nazwa == "sekator");
     private bool MoznaUprawiac(SadyGracza drzewo) => (drzewo.Poziom < 0 && maSekator) || (drzewo.Poziom > 0 && Gracz.IloscPrzedmiotow("pelnaButelka") > 0);
@@ -49,10 +61,14 @@
         if (!MoznaUprawiac(drzewo)) return;
         if (drzewo.Poziom < 0 && maSekator)
         {
-            Sad2.Palma = false;
-            Sad2.Krzew = false;
-            Sad2.Pnacze = false;
-            Sad2.Ziemne = false;
+            Palma = false;
+            Krzew = false;
+            Pnacze = false;
+            Ziemne = false;
+            if (drzewo.Owoc == "banan") Palma = true;
+            if (krzewowe.Contains(drzewo.Owoc)) Krzew = true;
+            if (pnące.Contains(drzewo.Owoc)) Pnacze = true;
+            if (ziemne.Contains(drzewo.Owoc)) Ziemne = true;
             drzewo.Poziom = 0;
             Gracz.Przedmioty.RemoveAll(p => p.Nazwa == "sekator");
             await NaZmianeEkranu.InvokeAsync(EkranGry.CzyszczenieDrzewa);
