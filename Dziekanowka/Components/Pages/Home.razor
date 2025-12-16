@@ -141,7 +141,7 @@
         startowyEkran = startowyEkran switch
         {
             EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => EkranGry.Gospodarstwo,
-            EkranGry.CzyszczeniePola => EkranGry.PoleIntro,
+            EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa => EkranGry.PoleIntro,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);
