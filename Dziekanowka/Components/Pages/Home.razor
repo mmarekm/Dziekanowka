@@ -25,6 +25,9 @@
         case EkranGry.Sklepik:
             <Sklepik Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
             break;
+        case EkranGry.SklepikOwoce:
+            <SklepikOwoce Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
+            break;
         case EkranGry.SklepikWarzywa:
             <SklepikWarzywa Gracz="gracz!" NaZmianeEkranu="ZmienEkran" />
             break;
@@ -117,6 +120,7 @@
             EkranGry.GarazGospodarczy => dzwieki.GraTlo("mp3/Tla/garazGospodarczy.mp3"),
             EkranGry.Studnia => dzwieki.GraTlo("mp3/Tla/studnia.mp3"),
             EkranGry.Sklepik => dzwieki.GraTlo("mp3/Tla/sklepik.mp3"),
+            EkranGry.SklepikOwoce => dzwieki.GraTlo("mp3/Tla/sklepikOwoce.mp3"),
             EkranGry.SklepikWarzywa => dzwieki.GraTlo("mp3/Tla/sklepikWarzywa.mp3"),
             EkranGry.PoleIntro or EkranGry.Pole1 or EkranGry.Pole2 or EkranGry.Sad1 or EkranGry.Sad2 => dzwieki.GraTlo("mp3/Tla/poleIntro.mp3"),
             EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => dzwieki.GraTlo("mp3/Tla/traktorJazda.mp3"),

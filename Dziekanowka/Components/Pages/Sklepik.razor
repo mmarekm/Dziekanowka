@@ -4,6 +4,7 @@
 <div class="sklepikWidok widok rel">
     <div class="abs wyjscieSklepikGuzik"><button @onclick="SklepikWyjscie" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikowy.png' /></button></div>
     <div class="abs przejscieDoWarzywZGlownego"><button @onclick="SklepikDoWarzyw" class="wyroznionyGuzik"><img src="img/budynki/sklepikGlownyDoWarzyw.png" /></button></div>
+    <div class="abs przejscieDoOwocowZGlownego"><button @onclick="SklepikDoOwocow" class="wyroznionyGuzik"><img src="img/budynki/sklepikGlownyDoOwocow.png" /></button></div>
     <div class="abs sklepikMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
     <div class="abs butelkaSklepikRysunek towarSklepik @(posiadaMaxButelek || Gracz.Monety < 1 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupButelke"><img class="obrazekWypelnia" src="img/przedmioty/butelkaSklepik.png" /></div>
     <div class="abs butelkaSklepikCena towarCenaSklepik">1<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
@@ -107,5 +108,9 @@
     public async Task SklepikDoWarzyw()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.SklepikWarzywa);
+    }
+    public async Task SklepikDoOwocow()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.SklepikOwoce);
     }
 }

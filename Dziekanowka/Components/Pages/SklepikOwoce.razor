@@ -1,0 +1,22 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="sklepikOwoceWidok widok rel">
+    <div class="abs wyjscieSklepikOwoceGuzik"><button @onclick="SklepikWyjscie" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikOwoce.png' /></button></div>
+    <div class="abs guzikSklepikOwoceDoGlownego"><button class="wyroznionyGuzik" @onclick="SklepikDoGlownego"><img src="img/budynki/sklepikOwoceDoGlownego.png" /></button></div>
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task SklepikWyjscie()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
+    }
+    public async Task SklepikDoGlownego()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepik);
+    }
+}

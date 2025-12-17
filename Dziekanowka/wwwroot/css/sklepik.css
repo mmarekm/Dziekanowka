@@ -5,6 +5,13 @@
     background-position: center;
     font-size: 25px;
 }
+.sklepikOwoceWidok {
+    background-image: url('../img/budynki/sklepikOwoce.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 25px;
+}
 .sklepikWarzywaWidok {
     background-image: url('../img/budynki/sklepikWarzywa.png');
     background-size: contain;
@@ -19,6 +26,13 @@
     height: 86px;
     z-index: 2;
 }
+.wyjscieSklepikOwoceGuzik {
+    bottom: 0;
+    left: 555px;
+    width: 313px;
+    height: 140px;
+    z-index: 2;
+}
 .wyjscieSklepikWarzywaGuzik {
     bottom: 0;
     left: 0;
@@ -26,11 +40,25 @@
     height: 123px;
     z-index: 2;
 }
+.przejscieDoOwocowZGlownego {
+    top: 0;
+    right: 0;
+    width: 144px;
+    height: 882px;
+    z-index: 2;
+}
 .przejscieDoWarzywZGlownego {
     top: 0;
     left: 0;
     width: 172px;
     height: 894px;
+    z-index: 2;
+}
+.guzikSklepikOwoceDoGlownego {
+    top: 0;
+    left: 0;
+    width: 192px;
+    height: 1000px;
     z-index: 2;
 }
 .guzikSklepikWarzywaDoGlownego {
