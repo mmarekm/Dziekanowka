@@ -3,7 +3,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    font-size: 25px;
+    font-size: 22px;
 }
 .sklepikOwoceWidok {
     background-image: url('../img/budynki/sklepikOwoce.png');
@@ -83,6 +83,21 @@
     border-radius: 10px;
     z-index: 2;
 }
+.sklepikOwoceMonetyGracza {
+    top: 60px;
+    right: 90px;
+    width: 300px;
+    height: 80px;
+    font-size: 55px;
+    font-weight: bold;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    z-index: 2;
+}
 .towarSklepik {
     width: 100px;
     height: 140px;
@@ -108,6 +123,169 @@
     z-index: 2;
     background-color: antiquewhite;
     border-radius: 5px;
+}
+.towarOwoc {
+    width: 110px;
+    height: 190px;
+    z-index: 2;
+}
+.owocKtoryPoziom {
+    border-radius: 10px;
+    background-color: antiquewhite;
+    margin: 5px auto;
+    width: 80px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.owocObrazek {
+    width: 80px;
+    height: 102px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 13px;
+}
+.owocCena {
+    width: 100px;
+    height: 22px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+.owoc0 {
+    top: 70px;
+    left: 320px;
+}
+.owoc1 {
+    top: 70px;
+    left: 434px;
+}
+.owoc2 {
+    top: 70px;
+    left: 553px;
+}
+.owoc3 {
+    top: 70px;
+    left: 672px;
+}
+.owoc4 {
+    top: 70px;
+    left: 795px;
+}
+.owoc5 {
+    top: 70px;
+    left: 914px;
+}
+.owoc6 {
+    top: 70px;
+    left: 1041px;
+}
+.owoc7 {
+    top: 70px;
+    left: 1160px;
+}
+.owoc8 {
+    top: 265px;
+    left: 320px;
+}
+.owoc9 {
+    top: 265px;
+    left: 434px;
+}
+.owoc10 {
+    top: 265px;
+    left: 553px;
+}
+.owoc11 {
+    top: 265px;
+    left: 672px;
+}
+.owoc12 {
+    top: 265px;
+    left: 795px;
+}
+.owoc13 {
+    top: 265px;
+    left: 914px;
+}
+.owoc14 {
+    top: 265px;
+    left: 1041px;
+}
+.owoc15 {
+    top: 265px;
+    left: 1160px;
+}
+.owoc16 {
+    top: 457px;
+    left: 320px;
+}
+.owoc17 {
+    top: 457px;
+    left: 434px;
+}
+.owoc18 {
+    top: 457px;
+    left: 553px;
+}
+.owoc19 {
+    top: 457px;
+    left: 672px;
+}
+.owoc20 {
+    top: 457px;
+    left: 795px;
+}
+.owoc21 {
+    top: 457px;
+    left: 914px;
+}
+.owoc22 {
+    top: 457px;
+    left: 1041px;
+}
+.owoc23 {
+    top: 457px;
+    left: 1160px;
+}
+.owoc24 {
+    top: 655px;
+    left: 320px;
+}
+.owoc25 {
+    top: 655px;
+    left: 434px;
+}
+.owoc26 {
+    top: 655px;
+    left: 553px;
+}
+.owoc27 {
+    top: 655px;
+    left: 672px;
+}
+.owoc28 {
+    top: 655px;
+    left: 795px;
+}
+.owoc29 {
+    top: 655px;
+    left: 914px;
+}
+.owoc30 {
+    top: 655px;
+    left: 1041px;
+}
+.owoc31 {
+    top: 655px;
+    left: 1160px;
 }
 .butelkaSklepikRysunek {
     top: 150px;

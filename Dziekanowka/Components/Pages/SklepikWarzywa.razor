@@ -10,12 +10,8 @@
         {
             <div class="polkaItem @(NieKupi(pole) ? "szaryCien nieMoznaKliknac" : "cPoint zielonyCienHover")" @onclick="async () => await KupPoziom(pole)">
                 <div class="polkaItem-gora">@KupnoPoziomu(pole)</div>
-                <div class="polkaItem-obrazek">
-                    <img src="img/przedmioty/warzywa/@(pole.Warzywo).png" alt="@pole.Warzywo" />
-                </div>
-                <div class="polkaItem-cena">
-                    @CenaPoziomu(pole)<img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" />
-                </div>
+                <div class="polkaItem-obrazek"><img src="img/przedmioty/warzywa/@(pole.Warzywo).png" /></div>
+                <div class="polkaItem-cena">@CenaPoziomu(pole)<img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
             </div>
         }
     </div>
