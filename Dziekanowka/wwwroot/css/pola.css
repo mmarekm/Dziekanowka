@@ -1,11 +1,11 @@
 ﻿.pole1Widok {
-    background-image: url('../img/pole1.png');
+    background-image: url('../img/pole/pole1.png');
 }
 .pole2Widok {
-    background-image: url('../img/pole2.png');
+    background-image: url('../img/pole/pole2.png');
 }
 .czyszczeniePolaWidok {
-    background-image: url('../img/czyszczeniePola.png');
+    background-image: url('../img/pole/czyszczeniePola.png');
     pointer-events: none;
 }
 .stanButelekPole {

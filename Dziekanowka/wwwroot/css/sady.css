@@ -1,8 +1,8 @@
 ﻿.sad1Widok {
-    background-image: url('../img/sad1.png');
+    background-image: url('../img/pole/sad1.png');
 }
 .sad2Widok {
-    background-image: url('../img/sad2.png');
+    background-image: url('../img/pole/sad2.png');
 }
 .czyszczenieDrzewaWidok {
     pointer-events: none;
@@ -193,24 +193,24 @@
     left: 750px;
 }
 .drzewo212 {
-    top: 100px;
-    left: 1100px;
+    top: 200px;
+    left: 1250px;
 }
 .drzewo213 {
-    top: 100px;
-    left: 1400px;
+    top: 300px;
+    left: 1450px;
 }
 .drzewo214 {
-    top: 150px;
-    left: 1700px;
+    top: 600px;
+    left: 1400px;
 }
 .drzewo221 {
-    top: 300px;
-    left: 1200px;
+    top: 400px;
+    left: 1250px;
 }
 .drzewo222 {
-    top: 400px;
-    left: 1500px;
+    top: 500px;
+    left: 1600px;
 }
 .drzewo223 {
     top: 600px;
@@ -225,7 +225,7 @@
     left: 600px;
 }
 .drzewo232 {
-    top: 200px;
+    top: 400px;
     left: 300px;
 }
 .drzewo233 {
@@ -237,16 +237,20 @@
     left: 300px;
 }
 .drzewo241 {
-    top: 100px;
-    left: 500px;
+    top: 230px;
+    left: 350px;
 }
 .drzewo242 {
     top: 350px;
     left: 550px;
 }
 .drzewo243 {
-    top: 500px;
-    left: 100px;
+    top: 480px;
+    left: 120px;
+}
+.drzewo244 {
+    top: 580px;
+    left: 400px;
 }
 @keyframes ruchSekatora {
     0% {

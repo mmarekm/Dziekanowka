@@ -2,13 +2,13 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="poleIntroWidok widok rel">
-    <div class="abs guzikPowrotuZPolaDoGarazuGospodarczego"><button class="wyroznionyGuzik @(pustyKanister ? "nieMoznaKliknac" : "")" @onclick="DoGospodarstwa"><img src="img/doGospodarstwaZPola.png" /></button></div>
-    <div class="abs guzikNaPole1ZIntro"><button @onclick="NaPole1" class="wyroznionyGuzik"><img src="img/pole1ZIntro.png" /></button></div>
-    <div class="abs guzikNaPole2ZIntro"><button @onclick="NaPole2" class="wyroznionyGuzik"><img src="img/pole2ZIntro.png" /></button></div>
-    <div class="abs guzikDoSadu1ZIntro"><button @onclick="DoSadu1" class="wyroznionyGuzik"><img src="img/sad1ZIntro.png" /></button></div>
-    <div class="abs guzikDoSadu2ZIntro"><button @onclick="DoSadu2" class="wyroznionyGuzik"><img src="img/sad2ZIntro.png" /></button></div>
+    <div class="abs guzikPowrotuZPolaDoGarazuGospodarczego"><button class="wyroznionyGuzik @(pustyKanister ? "nieMoznaKliknac" : "")" @onclick="DoGospodarstwa"><img src="img/pole/doGospodarstwaZPola.png" /></button></div>
+    <div class="abs guzikNaPole1ZIntro"><button @onclick="NaPole1" class="wyroznionyGuzik"><img src="img/pole/pole1ZIntro.png" /></button></div>
+    <div class="abs guzikNaPole2ZIntro"><button @onclick="NaPole2" class="wyroznionyGuzik"><img src="img/pole/pole2ZIntro.png" /></button></div>
+    <div class="abs guzikDoSadu1ZIntro"><button @onclick="DoSadu1" class="wyroznionyGuzik"><img src="img/pole/sad1ZIntro.png" /></button></div>
+    <div class="abs guzikDoSadu2ZIntro"><button @onclick="DoSadu2" class="wyroznionyGuzik"><img src="img/pole/sad2ZIntro.png" /></button></div>
     <div class="abs sprzedawaniePoleIntro @(Gracz.Monety < 8 ? "nieMoznaKliknac" : "cPoint") @(pustyKanister ? "" : "ukryty")" @onclick="SprzedazJednego">
-        <div class="sprzedawcaPoleIntro"><img class="obrazekWypelnia" src="img/sprzedawcaPoleIntro.png"/></div>
+        <div class="sprzedawcaPoleIntro"><img class="obrazekWypelnia" src="img/pole/sprzedawcaPoleIntro.png"/></div>
         <div class="cenaDrogaPoleIntro">
             <div class="tylko1PoleIntro">1 <img class="obrazekWypelnia" src="img/przedmioty/kanister.png"/></div>
             <div class="cenaPoleIntro">8 <img class="obrazekWypelnia" src="img/przedmioty/moneta.png"/></div>

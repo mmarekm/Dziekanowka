@@ -3,8 +3,8 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="pole1Widok widok rel">
     <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
-    <div class="abs naPoleIntroZPole1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZPole1.png" /></button></div>
-    <div class="abs naPole2ZPole1"><button class="wyroznionyGuzik" @onclick="NaPole2"><img src="img/naPole2ZPole1.png" /></button></div>
+    <div class="abs naPoleIntroZPole1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/pole/naPoleIntroZPole1.png" /></button></div>
+    <div class="abs naPole2ZPole1"><button class="wyroznionyGuzik" @onclick="NaPole2"><img src="img/pole/naPole2ZPole1.png" /></button></div>
     @for (int x = 1; x <= 5; x++)
     {
         var localX = x;
@@ -14,7 +14,7 @@
             var pole = Gracz.PolaUprawne.First(p => p.Id == 1 && p.X == localX && p.Y == localY);
             <div class="@($"abs pojedynczePole1 pole1{localX}{localY}")">
                 <div class="abs obrysPola @(!MoznaUprawiac(pole) ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick="async () => await UprawiajPole(pole)">
-                <img class="obrazekWypelnia" src="@($"img/pole{(pole.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
+                <img class="obrazekWypelnia" src="@($"img/pole/pole{(pole.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
                 @if (pole.Poziom < 0)
                 {
                     <div class="abs ramkaMotyka @(maMotyke ? "motykaTrue" : "motykaFalse")"></div>

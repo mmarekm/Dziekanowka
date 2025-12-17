@@ -3,7 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="sad1Widok widok rel">
     <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
-    <div class="abs naPoleIntroZSad1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/naPoleIntroZSad1.png" /></button></div>
+    <div class="abs naPoleIntroZSad1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/pole/naPoleIntroZSad1.png" /></button></div>
     @for (int x = 1; x <= 4; x++)
     {
         var localX = x;
@@ -13,7 +13,7 @@
             var drzewo = Gracz.Sady.First(p => p.Id == 1 && p.X == localX && p.Y == localY);
             <div class="@($"abs pojedynczeDrzewo1 drzewo1{localX}{localY}")">
                 <div class="abs obrysPola @(!MoznaUprawiac(drzewo) ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick="async () => await UprawiajDrzewo(drzewo)">
-                    <img class="obrazekWypelnia" src="@($"img/drzewo{(drzewo.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
+                    <img class="obrazekWypelnia" src="@($"img/pole/drzewo{(drzewo.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
                     @if (drzewo.Poziom < 0)
                     {
                         <div class="abs ramkaSekator @(maSekator ? "motykaTrue" : "motykaFalse")"></div>
