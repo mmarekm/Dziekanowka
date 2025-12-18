@@ -123,6 +123,8 @@
     z-index: 2;
     background-color: antiquewhite;
     border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .towarOwoc {
     width: 110px;
@@ -158,6 +160,24 @@
     align-items: center;
     background-color: antiquewhite;
     border-radius: 10px;
+}
+.towarZboze {
+    width: 150px;
+    height: 315px;
+    z-index: 2;
+}
+.zbozeObrazek {
+    top: 100px;
+    left: 27px;
+    width: 95px;
+    height: 133px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.zbozeCena {
+    bottom: 0;
+    left: 30px;
 }
 .owoc0 {
     top: 70px;
@@ -286,6 +306,34 @@
 .owoc31 {
     top: 655px;
     left: 1160px;
+}
+.zboze0 {
+    top: 430px;
+    left: 225px;
+}
+.zboze1 {
+    top: 430px;
+    left: 443px;
+}
+.zboze2 {
+    top: 430px;
+    left: 661px;
+}
+.zboze3 {
+    top: 430px;
+    left: 879px;
+}
+.zboze4 {
+    top: 430px;
+    left: 1094px;
+}
+.zboze5 {
+    top: 430px;
+    left: 1312px;
+}
+.zboze6 {
+    top: 430px;
+    left: 1530px;
 }
 .butelkaSklepikRysunek {
     top: 150px;

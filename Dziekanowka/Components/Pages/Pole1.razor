@@ -5,6 +5,7 @@
     <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPoleIntroZPole1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/pole/naPoleIntroZPole1.png" /></button></div>
     <div class="abs naPole2ZPole1"><button class="wyroznionyGuzik" @onclick="NaPole2"><img src="img/pole/naPole2ZPole1.png" /></button></div>
+    <div class="abs doZbozaZPole1"><button class="wyroznionyGuzik" @onclick="DoZboza"><img src="img/pole/pole1DoZboza.png" /></button></div>
     @for (int x = 1; x <= 5; x++)
     {
         var localX = x;
@@ -49,6 +50,10 @@
     public async Task NaPole2()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2);
+    }
+    public async Task DoZboza()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze);
     }
     public async Task UprawiajPole(PoleUprawne pole)
     {

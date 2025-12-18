@@ -4,6 +4,7 @@
 <div class="sad1Widok widok rel">
     <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPoleIntroZSad1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/pole/naPoleIntroZSad1.png" /></button></div>
+    <div class="abs doZbozaZSad1"><button class="wyroznionyGuzik" @onclick="DoZboza"><img src="img/pole/sad1DoZboza.png" /></button></div>
     @for (int x = 1; x <= 4; x++)
     {
         var localX = x;
@@ -40,10 +41,6 @@
     private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
     private bool maSekator => Gracz.Przedmioty.Any(p => p.Nazwa == "sekator");
     private bool MoznaUprawiac(SadyGracza drzewo) => (drzewo.Poziom < 0 && maSekator) || (drzewo.Poziom > 0 && Gracz.IloscPrzedmiotow("pelnaButelka") > 0);
-    public async Task NaPoleIntro()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
-    }
     public async Task UprawiajDrzewo(SadyGracza drzewo)
     {
         if (!MoznaUprawiac(drzewo)) return;
@@ -65,5 +62,13 @@
             Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task NaPoleIntro()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
+    }
+    public async Task DoZboza()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze);
     }
 }

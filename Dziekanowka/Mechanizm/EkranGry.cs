@@ -15,6 +15,7 @@
         Pole2,
         Sad1,
         Sad2,
+        Zboze,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         CzyszczeniePola,

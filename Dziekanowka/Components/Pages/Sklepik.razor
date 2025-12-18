@@ -27,6 +27,16 @@
     <div class="abs sekatorSklepikRysunek towarSklepik @(maSekator || Gracz.Monety < 40 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupSekator"><img class="obrazekWypelnia" src="img/przedmioty/sekator.png" /></div>
     <div class="abs sekatorSklepikCena towarCenaSklepik">40<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
     <div class="abs sekatorSklepikStan towarStanSklepik @(maSekator ? "naCzerwono" : "naNiebiesko")">@(maSekator? masz : nieMasz)</div>
+    @for (int i = 0; i < Gracz.UprawyZboza.Count; i++)
+    {
+        var zboze = Gracz.UprawyZboza[i];
+        var index = i;
+        <div class="abs towarZboze zboze@(i)">
+            <div class="towarStanSklepik">@KupnoPoziomu(zboze)</div>
+            <div class="abs zbozeObrazek @(NieKupi(zboze) ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="async () => await KupPoziom(zboze)"><img class="obrazekSieMiesciBlok" src="img/przedmioty/zboza/@(zboze.Zboze).png" /></div>
+            <div class="abs towarCenaSklepik zbozeCena">@CenaPoziomu(zboze)<img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+        </div>
+    }
 </div>
 
 @code {
@@ -45,6 +55,16 @@
     private bool nieStacNaPolowePaliwa => Gracz.Monety < Gracz.Paliwo.CenaPolowyPaliwa;
     private bool nieStacNaCwiercPaliwa => Gracz.Monety < Gracz.Paliwo.CenaCwierciPaliwa;
     private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
+    private string KupnoPoziomu(UprawaZboza zboze) => zboze.Poziom >= 0 ? $"+ {zboze.Poziom + 1}" : "";
+    private int CenaPoziomu(UprawaZboza zboze) => (int)Math.Pow(zboze.Poziom + 1, 2) * 4;
+    private bool NieKupi(UprawaZboza zboze) => Gracz.Monety < CenaPoziomu(zboze);
+    public async Task KupPoziom(UprawaZboza zboze)
+    {
+        if (NieKupi(zboze)) return;
+        Gracz.Monety -= CenaPoziomu(zboze);
+        zboze.Poziom++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
     public async Task KupButelke()
     {
         if (Gracz.Monety < 1 || posiadaMaxButelek) return;

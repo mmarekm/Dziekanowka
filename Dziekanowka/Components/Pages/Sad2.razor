@@ -4,6 +4,7 @@
 <div class="sad2Widok widok rel">
     <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPoleIntroZSad2"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/pole/naPoleIntroZSad2.png" /></button></div>
+    <div class="abs doZbozaZSad2"><button class="wyroznionyGuzik" @onclick="DoZboza"><img src="img/pole/sad2DoZboza.png" /></button></div>
     @for (int x = 1; x <= 4; x++)
     {
         var localX = x;
@@ -55,6 +56,10 @@
     public async Task NaPoleIntro()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
+    }
+    public async Task DoZboza()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze);
     }
     public async Task UprawiajDrzewo(SadyGracza drzewo)
     {
