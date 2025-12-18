@@ -2,8 +2,8 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="sklepikOwoceWidok widok rel">
-    <div class="abs wyjscieSklepikOwoceGuzik"><button @onclick="SklepikWyjscie" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikOwoce.png' /></button></div>
-    <div class="abs guzikSklepikOwoceDoGlownego"><button class="wyroznionyGuzik" @onclick="SklepikDoGlownego"><img src="img/budynki/sklepikOwoceDoGlownego.png" /></button></div>
+    <div class="abs wyjscieSklepikOwoceGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama)" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikOwoce.png' /></button></div>
+    <div class="abs guzikSklepikOwoceDoGlownego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepik)"><img src="img/budynki/sklepikOwoceDoGlownego.png" /></button></div>
     <div class="abs sklepikOwoceMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
     @for (int i = 0; i < Gracz.Sady.Count; i++)
     {
@@ -31,13 +31,5 @@
         Gracz.Monety -= CenaPoziomu(drzewo);
         drzewo.Poziom++;
         await ladowanieGracza.ZapiszAktualnegoGracza();
-    }
-    public async Task SklepikWyjscie()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
-    }
-    public async Task SklepikDoGlownego()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepik);
     }
 }

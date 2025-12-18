@@ -2,10 +2,10 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="zbozeWidok widok rel">
-    <div class="abs naPole1ZeZboza"><button class="wyroznionyGuzik" @onclick="NaPole1"><img src="img/pole/zbozeNaPole1.png" /></button></div>
-    <div class="abs naPole2ZeZboza"><button class="wyroznionyGuzik" @onclick="NaPole2"><img src="img/pole/zbozeNaPole2.png" /></button></div>
-    <div class="abs doSadu1ZeZboza"><button class="wyroznionyGuzik" @onclick="DoSadu1"><img src="img/pole/zbozeNaSad1.png" /></button></div>
-    <div class="abs doSadu2ZeZboza"><button class="wyroznionyGuzik" @onclick="DoSadu2"><img src="img/pole/zbozeNaSad2.png" /></button></div>
+    <div class="abs naPole1ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1)"><img src="img/pole/zbozeNaPole1.png" /></button></div>
+    <div class="abs naPole2ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2)"><img src="img/pole/zbozeNaPole2.png" /></button></div>
+    <div class="abs doSadu1ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sad1)"><img src="img/pole/zbozeNaSad1.png" /></button></div>
+    <div class="abs doSadu2ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sad2)"><img src="img/pole/zbozeNaSad2.png" /></button></div>
 </div>
 
 @code {
@@ -14,20 +14,4 @@
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
-    public async Task NaPole1()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1);
-    }
-    public async Task NaPole2()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2);
-    }
-    public async Task DoSadu1()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Sad1);
-    }
-    public async Task DoSadu2()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Sad2);
-    }
 }

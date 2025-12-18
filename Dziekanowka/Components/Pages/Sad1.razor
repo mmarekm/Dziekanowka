@@ -3,8 +3,8 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="sad1Widok widok rel">
     <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
-    <div class="abs naPoleIntroZSad1"><button class="wyroznionyGuzik" @onclick="NaPoleIntro"><img src="img/pole/naPoleIntroZSad1.png" /></button></div>
-    <div class="abs doZbozaZSad1"><button class="wyroznionyGuzik" @onclick="DoZboza"><img src="img/pole/sad1DoZboza.png" /></button></div>
+    <div class="abs naPoleIntroZSad1"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro)"><img src="img/pole/naPoleIntroZSad1.png" /></button></div>
+    <div class="abs doZbozaZSad1"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze)"><img src="img/pole/sad1DoZboza.png" /></button></div>
     @for (int x = 1; x <= 4; x++)
     {
         var localX = x;
@@ -62,13 +62,5 @@
             Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
-    }
-    public async Task NaPoleIntro()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
-    }
-    public async Task DoZboza()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze);
     }
 }

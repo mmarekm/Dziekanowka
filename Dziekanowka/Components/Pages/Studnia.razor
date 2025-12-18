@@ -3,7 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="studniaWidok@(Gracz.PoziomBudynku("studnia")) widok rel">
     <div class="abs liczbaMonetStudnia@(Gracz.PoziomBudynku("studnia"))">@Gracz.Monety</div>
-    <div class="abs guzikWyjsciaZeStudni@(Gracz.PoziomBudynku("studnia"))"><button @onclick="DoGospodarstwa" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny@(Gracz.PoziomBudynku("studnia")).png" /></button></div>
+    <div class="abs guzikWyjsciaZeStudni@(Gracz.PoziomBudynku("studnia"))"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny@(Gracz.PoziomBudynku("studnia")).png" /></button></div>
     <div class="abs calaSzafaStudniarza@(Gracz.PoziomBudynku("studnia")) @(NieBedzieNalewane ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick='async () => await NalejDoButelki(Gracz.PoziomBudynku("studnia"))'></div>
     <div class="abs pierwszyRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">
         @RenderujPolke(0)
@@ -38,10 +38,6 @@
     private PrzedmiotGracza pustaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka");
     private PrzedmiotGracza pelnaButelka => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka");
     private bool NieBedzieNalewane => pustaButelka.Ilosc == 0 || Gracz.Monety == 0;
-    public async Task DoGospodarstwa()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo);
-    }
     private void UlepszStudnie()
     {
         if (!MoznaUlepszycStudnie) return;

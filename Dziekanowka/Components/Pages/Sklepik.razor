@@ -2,9 +2,9 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="sklepikWidok widok rel">
-    <div class="abs wyjscieSklepikGuzik"><button @onclick="SklepikWyjscie" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikowy.png' /></button></div>
-    <div class="abs przejscieDoWarzywZGlownego"><button @onclick="SklepikDoWarzyw" class="wyroznionyGuzik"><img src="img/budynki/sklepikGlownyDoWarzyw.png" /></button></div>
-    <div class="abs przejscieDoOwocowZGlownego"><button @onclick="SklepikDoOwocow" class="wyroznionyGuzik"><img src="img/budynki/sklepikGlownyDoOwocow.png" /></button></div>
+    <div class="abs wyjscieSklepikGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama)" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikowy.png' /></button></div>
+    <div class="abs przejscieDoWarzywZGlownego"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepikWarzywa)" class="wyroznionyGuzik"><img src="img/budynki/sklepikGlownyDoWarzyw.png" /></button></div>
+    <div class="abs przejscieDoOwocowZGlownego"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepikOwoce)" class="wyroznionyGuzik"><img src="img/budynki/sklepikGlownyDoOwocow.png" /></button></div>
     <div class="abs sklepikMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
     <div class="abs butelkaSklepikRysunek towarSklepik @(posiadaMaxButelek || Gracz.Monety < 1 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupButelke"><img class="obrazekWypelnia" src="img/przedmioty/butelkaSklepik.png" /></div>
     <div class="abs butelkaSklepikCena towarCenaSklepik">1<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
@@ -120,17 +120,5 @@
         if (Gracz.Paliwo.IloscPaliwa > Gracz.Paliwo.MaksymalnaIloscPaliwa)
             Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
         await ladowanieGracza.ZapiszAktualnegoGracza();
-    }
-    public async Task SklepikWyjscie()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
-    }
-    public async Task SklepikDoWarzyw()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.SklepikWarzywa);
-    }
-    public async Task SklepikDoOwocow()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.SklepikOwoce);
     }
 }
