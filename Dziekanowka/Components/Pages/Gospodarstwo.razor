@@ -1,9 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @inject LadowanieGracza ladowanieGracza
 <div class="gospodarstwoWidok widok rel">
-    <div class="abs garazGospodarczyGuzik"><button @onclick="DoGarazuGospodarczego" class="wyroznionyGuzik"><img src='img/Budynki/garazGospodarczy@(Gracz.PoziomBudynku("garazGospodarczy")).png' /></button></div>
-    <div class="abs studniaGuzik"><button @onclick="DoStudni" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>
-    <div class="abs zaBrameGuzik"><button @onclick="ZaBreme" class="wyroznionyGuzik"><img src='img/teren/zaBrameKlik.png' /></button></div>
+    <div class="abs garazGospodarczyGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy)" class="wyroznionyGuzik"><img src='img/Budynki/garazGospodarczy@(Gracz.PoziomBudynku("garazGospodarczy")).png' /></button></div>
+    <div class="abs studniaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Studnia)" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>
+    <div class="abs zaBrameGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama)" class="wyroznionyGuzik"><img src='img/teren/zaBrameKlik.png' /></button></div>
 </div>
 
 @code {
@@ -11,16 +11,4 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    public async Task ZaBreme()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
-    }
-    public async Task DoGarazuGospodarczego()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy);
-    }
-    public async Task DoStudni()
-    {
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Studnia);
-    }
 }
