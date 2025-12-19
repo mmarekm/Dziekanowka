@@ -4,6 +4,7 @@
 
 .podworkoSasiadaWidok {
     background-image: url('../img/teren/podworkoSasiada.png');
+    pointer-events: none;
 }
 
 .powrotDoDomuGuzik {

@@ -32,3 +32,58 @@
     height: 785px;
     z-index: 2;
 }
+.koszenieTrawy {
+    bottom: 0;
+    left: 0;
+    width: 607px;
+    height: 316px;
+    z-index: 2;
+}
+.kosiarkaKosi {
+    pointer-events: none;
+    background-image: url('../img/teren/trawnik.png');
+}
+.kosiarka {
+    position: absolute;
+    width: 780px;
+    height: 516px;
+    background-image: url('../img/przedmioty/kosiarka.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: koszenie 5s linear forwards;
+}
+
+@keyframes koszenie {
+    /* START – prawa → lewa */
+    0% {
+        right: -800px;
+        transform: translateY(-50%) scaleX(1);
+    }
+    /* po 1,5 s – dojeżdża do lewej */
+    30% {
+        right: calc(100% + 800px);
+        transform: translateY(-50%) scaleX(1);
+    }
+    /* ZMIANA KIERUNKU – bez animacji obrotu */
+    30.01% {
+        transform: translateY(-50%) scaleX(-1);
+    }
+    /* lewa → prawa */
+    60% {
+        right: -800px;
+        transform: translateY(-50%) scaleX(-1);
+    }
+    /* ZMIANA KIERUNKU */
+    60.01% {
+        transform: translateY(-50%) scaleX(1);
+    }
+    /* prawa → lewa (ostatnie 2 s) */
+    100% {
+        right: calc(100% + 800px);
+        transform: translateY(-50%) scaleX(1);
+    }
+}
+

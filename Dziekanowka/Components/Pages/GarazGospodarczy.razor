@@ -2,6 +2,7 @@
 <div class="garazGospodarczyWidok widok rel">
     <div class="abs guzikWyjsciaZGarazuGospodarczego"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)" class="wyroznionyGuzik"><img src="img/budynki/confirmGarazGospodarczy.png" /></button></div>
     <div class="abs guzikNaPoleIntroZGarazu"><button class="wyroznionyGuzik @(pustyKanister ? "nieMoznaKliknac" : "")" @onclick="NaPole"><img src="img/budynki/wyjazdZGarazuNaPole.png" /></button></div>
+    <div class="abs koszenieTrawy"><button class="wyroznionyGuzik @(pustyKanister ? "nieMoznaKliknac" : "")" @onclick="Koszenie"><img src="img/budynki/garazKosiarka.png" /></button></div>
     <div class="abs stanPaliwaGarazGospodarczy">
         <div class="kanisterGarazGospodarczy"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
         <div class="infoKanisterGarazGospodarczy @(pustyKanister ? "naCzerwono" : "")">@Gracz.Paliwo.IloscPaliwa / @Gracz.Paliwo.MaksymalnaIloscPaliwa</div>
@@ -21,5 +22,11 @@
         await NaZmianeEkranu.InvokeAsync(EkranGry.AnimacjaTraktora);
         await Task.Delay(5000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
+    }
+    public async Task Koszenie()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KoszenieTrawy);
+        await Task.Delay(5000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy);
     }
 }

@@ -20,6 +20,7 @@
         AnimacjaTraktoraPowrot,
         CzyszczeniePola,
         CzyszczenieDrzewa,
+        KoszenieTrawy,
         PsySasiadaSzczekaja
     }
 }
