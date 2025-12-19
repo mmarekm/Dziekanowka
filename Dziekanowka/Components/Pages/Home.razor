@@ -17,15 +17,9 @@
     private bool czyAnimacjaWyjscia = false;
     private EkranGry nastepnyEkran;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
-    private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa];
-    private Type GetComponentType()
-    {
-        var nazwaTypu = aktualnyEkran.ToString();
-        var typ = Type.GetType(nazwaTypu)
-               ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == nazwaTypu);
-
-        return typ ?? throw new ArgumentException($"Nie znaleziono komponentu dla ekranu: {aktualnyEkran}");
-    }
+    private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa,
+        EkranGry.PsySasiadaSzczekaja ];
+    private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
     private bool Znikanie { get; set; } = false;
@@ -100,6 +94,7 @@
         {
             EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => EkranGry.Gospodarstwo,
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa => EkranGry.PoleIntro,
+            EkranGry.PsySasiadaSzczekaja => EkranGry.ZaBrama,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);
