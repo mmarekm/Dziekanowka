@@ -58,6 +58,7 @@
         {
             Gracz.Warzywa.First(w => w.Nazwa == pole.Warzywo).Ilosc += pole.Poziom;
             Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
+            Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka").Ilosc++;
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }

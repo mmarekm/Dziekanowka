@@ -2,10 +2,25 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="zbozeWidok widok rel">
+    <div class="abs stanButelekZboze">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPole1ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1)"><img src="img/pole/zbozeNaPole1.png" /></button></div>
     <div class="abs naPole2ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2)"><img src="img/pole/zbozeNaPole2.png" /></button></div>
     <div class="abs doSadu1ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sad1)"><img src="img/pole/zbozeNaSad1.png" /></button></div>
     <div class="abs doSadu2ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sad2)"><img src="img/pole/zbozeNaSad2.png" /></button></div>
+    @for (int x = 0; x < 7; x++)
+    {
+        var localX = x;
+        var zboze = Gracz.UprawyZboza.First(z => z.X == localX);
+        <div class="@($"abs zbozePole{localX} pojedynczeZboze")">
+            <div class="abs obrysPola @(!MoznaUprawiac(zboze) ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick="async () => await UprawiajZboze(zboze)">
+                <div class="abs ileZyskuZboza">+ @zboze.Poziom</div>
+                <div class="abs ileZbozaPole">
+                    <img class="obrazekWypelnia" src="img/przedmioty/worekPole.png" />
+                    <div class="abs liczbaZbozaPole">@zboze.LiczbaPosiadanych(Gracz)</div>
+                </div>
+            </div>
+        </div>        
+    }
 </div>
 
 @code {
@@ -14,4 +29,13 @@
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
+    private bool MoznaUprawiac(UprawaZboza zboze) => Gracz.IloscPrzedmiotow("pelnaButelka") > 0 && zboze.Poziom > 0;
+    public async Task UprawiajZboze(UprawaZboza zboze)
+    {
+        if (!MoznaUprawiac(zboze)) return;
+        Gracz.Zboza.First(o => o.Nazwa == zboze.Zboze).Ilosc += zboze.Poziom;
+        Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
+        Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
 }

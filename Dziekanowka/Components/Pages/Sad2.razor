@@ -76,6 +76,7 @@
         {
             Gracz.Owoce.First(o => o.Nazwa == drzewo.Owoc).Ilosc += drzewo.Poziom;
             Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
+            Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka").Ilosc++;
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }

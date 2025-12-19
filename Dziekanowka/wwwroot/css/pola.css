@@ -25,6 +25,19 @@
     font-size: 70px;
     font-weight: bold;
 }
+.stanButelekZboze {
+    width: 200px;
+    height: 80px;
+    bottom: 40px;
+    left: 900px;
+    z-index: 3;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    font-weight: bold;
+}
 .naPoleIntroZPole1 {
     top: 351px;
     left: 0;
@@ -197,6 +210,40 @@
     animation: dolnaPolowa 1s 4s forwards;
     transform-origin: top center;
 }
+.pojedynczeZboze {
+    top: 0;
+    width: 250px;
+    height: 680px;
+}
+.ileZyskuZboza {
+    width: 80px;
+    height: 60px;
+    bottom: 10px;
+    right: 8px;
+    z-index: 4;
+    color: orange;
+    font-size: 50px;
+}
+.ileZbozaPole {
+    width: 160px;
+    height: 160px;
+    top: 30px;
+    left: 45px;
+    z-index: 4;
+}
+.liczbaZbozaPole {
+    width: 60px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 65px;
+    left: 50px;
+    z-index: 5;
+    font-size: 40px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
 .pole111 {
     top: 180px;
     left: 480px;
@@ -276,6 +323,27 @@
 .pole154 {
     top: 663px;
     left: 1252px;
+}
+.zbozePole0 {
+    left: 0;
+}
+.zbozePole1 {
+    left: 285px;
+}
+.zbozePole2 {
+    left: 560px;
+}
+.zbozePole3 {
+    left: 835px;
+}
+.zbozePole4 {
+    left: 1105px;
+}
+.zbozePole5 {
+    left: 1375px;
+}
+.zbozePole6 {
+    left: 1650px;
 }
 @keyframes dziabanie {
     0% {
