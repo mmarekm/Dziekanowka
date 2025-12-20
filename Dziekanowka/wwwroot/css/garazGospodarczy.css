@@ -13,11 +13,31 @@
 .kanisterGarazGospodarczy {
     width: 100px;
 }
-.infoKanisterGarazGospodarczy {
-    font-size: 56px;
-    font-weight: bold;
-    padding: 20px;
+.pasekPaliwa {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
 }
+    .pasekPaliwa::-webkit-progress-bar {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 20px;
+    }
+    .pasekPaliwa::-webkit-progress-value {
+        border-radius: 20px;
+        background: lime;
+    }
+    .pasekPaliwa[style*="--procent: 3"]::-webkit-progress-value,
+    .pasekPaliwa[style*="--procent: 4"]::-webkit-progress-value,
+    .pasekPaliwa[style*="--procent: 5"]::-webkit-progress-value,
+    .pasekPaliwa[style*="--procent: 6"]::-webkit-progress-value,
+    .pasekPaliwa[style*="--procent: 7"]::-webkit-progress-value {
+        background: yellow;
+    }
+    .pasekPaliwa[style*="--procent: 0"]::-webkit-progress-value,
+    .pasekPaliwa[style*="--procent: 1"]::-webkit-progress-value,
+    .pasekPaliwa[style*="--procent: 2"]::-webkit-progress-value {
+        background: red;
+    }
 .guzikWyjsciaZGarazuGospodarczego {
     top: 0;
     left: 110.9px;
@@ -55,35 +75,27 @@
     transform: translateY(-50%);
     animation: koszenie 5s linear forwards;
 }
-
 @keyframes koszenie {
-    /* START – prawa → lewa */
     0% {
         right: -800px;
         transform: translateY(-50%) scaleX(1);
     }
-    /* po 1,5 s – dojeżdża do lewej */
     30% {
-        right: calc(100% + 800px);
+        right: 1900px;
         transform: translateY(-50%) scaleX(1);
     }
-    /* ZMIANA KIERUNKU – bez animacji obrotu */
     30.01% {
         transform: translateY(-50%) scaleX(-1);
     }
-    /* lewa → prawa */
     60% {
         right: -800px;
         transform: translateY(-50%) scaleX(-1);
     }
-    /* ZMIANA KIERUNKU */
     60.01% {
         transform: translateY(-50%) scaleX(1);
     }
-    /* prawa → lewa (ostatnie 2 s) */
     100% {
-        right: calc(100% + 800px);
+        right: 1900px;
         transform: translateY(-50%) scaleX(1);
     }
 }
-

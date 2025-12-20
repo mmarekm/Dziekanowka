@@ -15,8 +15,8 @@
         </div>
     </div>
     <div class="abs stanPaliwaPoleIntro">
-        <div class="kanisterPoleIntro"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png"/></div>
-        <div class="infoKanisterPoleIntro @(pustyKanister ? "naCzerwonoNaZielonym" : "")">@Gracz.Paliwo.IloscPaliwa / @Gracz.Paliwo.MaksymalnaIloscPaliwa</div>
+        <div class="kanisterPoleIntro"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
+        <progress class="pasekPaliwa" value="@Gracz.Paliwo.IloscPaliwa" max="@Gracz.Paliwo.MaksymalnaIloscPaliwa" style="--procent: @((double)Gracz.Paliwo.IloscPaliwa / Gracz.Paliwo.MaksymalnaIloscPaliwa * 100)"></progress>
     </div>
 </div>
 
