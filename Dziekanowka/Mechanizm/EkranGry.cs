@@ -5,6 +5,7 @@
         Start,
         Gospodarstwo,
         Zwierzyniec,
+        Kurnik,
         ZaBrama,
         GarazGospodarczy,
         Studnia,

@@ -1,9 +1,12 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
 @implements IDisposable
 <div class="zwierzyniecWidok widok rel">
-    @if (Gracz.Zwierzeta.First(z => z.Nazwa == "kura").Ilosc > 0)
+    <div class="abs doGospodarstwaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)" class="wyroznionyGuzik"><img src="img/zwierzyniec/doGospodarstwa.png" /></button></div>
+    <div class="abs doKurnikaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Kurnik)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoKurnik.png" /></button></div>
+    @if (SaKury)
     {
         <div class="abs terenKuryPrzedKurnikiem"><img class="abs kuraPrzedKurnikiem obrazekSieMiesci" src="img/zwierzyniec/kura.png" style="@StylKury()" /></div>
     }
@@ -12,22 +15,23 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool SaKury => Gracz.Zwierzeta.FirstOrDefault(z => z.Nazwa == "kura") is { Ilosc: > 0 };
     private double pozycjaXKury = 20;
     private double pozycjaYKury = 10;
     private double czasPrzejsciaKury = 2;
     private bool kuraPatrzyWLewo = false;
+    private System.Threading.Timer? timerDzwiekKury;
     private Random random = new Random();
     private System.Threading.Timer? timer;
     protected override void OnInitialized()
     {
         SpacerowanieKury();
+        if (SaKury)
+            GdakanieKury();
     }
+    private void GdakanieKury() =>  timerDzwiekKury = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/kuraGdacze.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
     private string StylKury() => $"left: {pozycjaXKury}px; top: {pozycjaYKury}px; transform: scaleX({(kuraPatrzyWLewo ? -1 : 1)}); transition: left {czasPrzejsciaKury}s ease-in-out, top {czasPrzejsciaKury}s ease-in-out;";
-    private void SpacerowanieKury() => timer = new System.Threading.Timer(async _ =>
-        {
-            await ZmienPozycjeKury();
-            SpacerowanieKury();
-        }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
+    private void SpacerowanieKury() => timer = new System.Threading.Timer(async _ => { await ZmienPozycjeKury(); SpacerowanieKury(); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
     private async Task ZmienPozycjeKury()
     {
         var nowaX = random.Next(0, 160);
@@ -37,5 +41,9 @@
         czasPrzejsciaKury = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
     }
-    public void Dispose() => timer?.Dispose();
+    public void Dispose()
+    {
+        timer?.Dispose();
+        timerDzwiekKury?.Dispose();
+    }
 }
