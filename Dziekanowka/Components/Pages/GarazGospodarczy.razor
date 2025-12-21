@@ -5,7 +5,7 @@
     <div class="abs koszenieTrawy"><button class="wyroznionyGuzik @(pustyKanister ? "nieMoznaKliknac" : "")" @onclick="Koszenie"><img src="img/budynki/garazKosiarka.png" /></button></div>
     <div class="abs stanPaliwaGarazGospodarczy">
         <div class="kanisterGarazGospodarczy"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
-        <progress class="pasekPaliwa" value="@Gracz.Paliwo.IloscPaliwa" max="@Gracz.Paliwo.MaksymalnaIloscPaliwa" style="--procent: @((double)Gracz.Paliwo.IloscPaliwa / Gracz.Paliwo.MaksymalnaIloscPaliwa * 100)"></progress>
+        <progress class="pasekPaliwa" value="@Gracz.Paliwo.IloscPaliwa" max="@Gracz.Paliwo.MaksymalnaIloscPaliwa" style="--procent: @((int)((double)Gracz.Paliwo.IloscPaliwa / Gracz.Paliwo.MaksymalnaIloscPaliwa * 100) / 10) "></progress>
     </div>
 </div>
 
@@ -27,6 +27,7 @@
     {
         if (pustyKanister) return;
         Gracz.Paliwo.IloscPaliwa--;
+        Gracz.Przedmioty.First(p => p.Nazwa == "siano").Ilosc++;
         await NaZmianeEkranu.InvokeAsync(EkranGry.KoszenieTrawy);
         await Task.Delay(5000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy);
