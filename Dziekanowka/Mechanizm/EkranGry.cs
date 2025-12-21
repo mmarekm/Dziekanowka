@@ -4,6 +4,7 @@
     {
         Start,
         Gospodarstwo,
+        Zwierzyniec,
         ZaBrama,
         GarazGospodarczy,
         Studnia,

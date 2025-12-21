@@ -59,6 +59,13 @@
     height: 114px;
     z-index: 2;
 }
+.doZwierzyncaGuzik {
+    top: 0;
+    left: 775px;
+    width: 322px;
+    height: 121px;
+    z-index: 2;
+}
 .garazGospodarczyGuzik {
     top: 50px;
     left: 1353px;

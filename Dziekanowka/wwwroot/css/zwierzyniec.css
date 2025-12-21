@@ -1,0 +1,13 @@
+﻿.zwierzyniecWidok {
+    background-image: url('../img/zwierzyniec/zwierzyniecWidok.png');
+}
+.terenKuryPrzedKurnikiem {
+    top: 200px;
+    left: 250px;
+    width: 200px;
+    height: 120px;
+    z-index: 2;
+}
+.kuraPrzedKurnikiem {
+    width: 40px;
+}

@@ -1,0 +1,41 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@implements IDisposable
+<div class="zwierzyniecWidok widok rel">
+    @if (Gracz.Zwierzeta.First(z => z.Nazwa == "kura").Ilosc > 0)
+    {
+        <div class="abs terenKuryPrzedKurnikiem"><img class="abs kuraPrzedKurnikiem obrazekSieMiesci" src="img/zwierzyniec/kura.png" style="@StylKury()" /></div>
+    }
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private double pozycjaXKury = 20;
+    private double pozycjaYKury = 10;
+    private double czasPrzejsciaKury = 2;
+    private bool kuraPatrzyWLewo = false;
+    private Random random = new Random();
+    private System.Threading.Timer? timer;
+    protected override void OnInitialized()
+    {
+        SpacerowanieKury();
+    }
+    private string StylKury() => $"left: {pozycjaXKury}px; top: {pozycjaYKury}px; transform: scaleX({(kuraPatrzyWLewo ? -1 : 1)}); transition: left {czasPrzejsciaKury}s ease-in-out, top {czasPrzejsciaKury}s ease-in-out;";
+    private void SpacerowanieKury() => timer = new System.Threading.Timer(async _ =>
+        {
+            await ZmienPozycjeKury();
+            SpacerowanieKury();
+        }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
+    private async Task ZmienPozycjeKury()
+    {
+        var nowaX = random.Next(0, 160);
+        kuraPatrzyWLewo = nowaX < pozycjaXKury;
+        pozycjaXKury = nowaX;
+        pozycjaYKury = random.Next(0, 80);
+        czasPrzejsciaKury = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    public void Dispose() => timer?.Dispose();
+}
