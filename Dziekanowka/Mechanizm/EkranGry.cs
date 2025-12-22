@@ -6,6 +6,7 @@
         Gospodarstwo,
         Zwierzyniec,
         Kurnik,
+        Gesiarnia,
         ZaBrama,
         GarazGospodarczy,
         Studnia,

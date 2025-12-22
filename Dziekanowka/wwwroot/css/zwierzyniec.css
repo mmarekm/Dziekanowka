@@ -4,6 +4,9 @@
 .kurnikWidok {
     background-image: url('../img/zwierzyniec/kurnikWidok.png');
 }
+.gesiarniaWidok {
+    background-image: url('../img/zwierzyniec/gesiarniaWidok.png');
+}
 .doGospodarstwaGuzik {
     bottom: 0;
     left: 737px;
@@ -16,6 +19,13 @@
     left: 14px;
     width: 241px;
     height: 162px;
+    z-index: 3;
+}
+.doGesiarniGuzik {
+    top: 566px;
+    left: 0;
+    width: 234px;
+    height: 234px;
     z-index: 3;
 }
 .calyKurnik {
@@ -35,6 +45,13 @@
     height: 258px;
     z-index: 3;
 }
+.gesiarniaDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 565px;
+    height: 242px;
+    z-index: 3;
+}
 .terenKuryPrzedKurnikiem {
     top: 200px;
     left: 250px;
@@ -44,6 +61,18 @@
 }
 .kuraPrzedKurnikiem {
     width: 40px;
+    z-index: 5;
+}
+.terenGesiPrzedGesiarnia {
+    top: 590px;
+    left: 230px;
+    width: 150px;
+    height: 90px;
+    z-index: 2;
+}
+.gesPrzedGesiarnia {
+    width: 50px;
+    z-index: 5;
 }
 .liczbaKurKurnik {
     top: 95px;
