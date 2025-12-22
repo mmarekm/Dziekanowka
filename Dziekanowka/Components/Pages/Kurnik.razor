@@ -4,7 +4,7 @@
 @inject Dzwieki dzwieki
 @implements IDisposable
 
-<div class="kurnikWidok widok rel @(animujJajoKury ? "jajoKuryAnimacja" : "")">
+<div class="kurnikWidok widok rel">
     <div class="abs calyKurnik">
         @if (saKury)
         {
@@ -21,8 +21,8 @@
         @{ var kura = Gracz.Zwierzeta.First(z => z.Nazwa == "kura"); }
         <progress class="pasekPaliwa" value="@kura.Nakarmione" max="@kura.DajeProdukt()" style="--procent: @((int)((double)kura.Nakarmione / kura.DajeProdukt() * 100) / 10) "></progress>
     </div>
-    <div class="abs liczbaJajKurnik">@(Gracz.ProduktyZwierzece.FirstOrDefault(z => z.Nazwa == "jajoKurze")?.Ilosc ?? 0)</div>
-    <div class="abs nadJajemKurnik @(animujJajoKury ? "jajoKuryAnimacja" : "")"></div>
+    <div class="abs liczbaJajKurnik">@(Gracz.ProduktyZwierzece.First(z => z.Nazwa == "jajoKurze").Ilosc)</div>
+    <div class="abs nadJajemKurnik @(animujJajoKury ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajoKurnik.png"/></div>
     <div class="abs ramkaWarzywKurnik liczbaKukurydzyKurnik">@(Gracz.Warzywa.First(w => w.Nazwa == "kukurydza").Ilosc)</div>
     <div class="abs guzikWarzywoKurnik guzikKukurydzaKurnik @(saKury && jestKukurydza ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKureWarzywem("kukurydza")'></div>
     <div class="abs ramkaWarzywKurnik liczbaJeczmieniaKurnik">@(Gracz.Zboza.First(w => w.Nazwa == "jeczmien").Ilosc)</div>
@@ -114,15 +114,10 @@
     {
         var kura = Gracz.Zwierzeta.First(z => z.Nazwa == "kura");
         kura.Nakarmione++;
-
         if (kura.Nakarmione >= kura.DajeProdukt())
         {
             kura.Nakarmione = 0;
-            var jajo = Gracz.ProduktyZwierzece.FirstOrDefault(p => p.Nazwa == "jajoKurze");
-            if (jajo != null)
-                jajo.Ilosc++;
-            else
-                Gracz.ProduktyZwierzece.Add(new ProduktZwierzecy("jajoKurze", 1));
+            Gracz.ProduktyZwierzece.First(p => p.Nazwa == "jajoKurze").Ilosc++;
             animujJajoKury = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);

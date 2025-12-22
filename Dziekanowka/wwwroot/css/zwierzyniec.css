@@ -120,19 +120,17 @@
     pointer-events: none;
     transform-origin: center center;
 }
-
 .jajoKuryAnimacja {
-    animation: blyskJaja 0.4s ease-in-out 3;
+    animation: kolysanieJajka 1s ease-in-out;
 }
-
-@keyframes blyskJaja {
+@keyframes kolysanieJajka {
     0%, 100% {
-        background-color: transparent;
-        box-shadow: none;
+        transform: rotate(0deg);
     }
-
-    50% {
-        background-color: rgba(255, 255, 150, 0.5);
-        box-shadow: 0 0 30px rgba(255, 255, 150, 0.8);
+    10%, 30%, 50%, 70%, 90% {
+        transform: rotate(-15deg);
+    }
+    20%, 40%, 60%, 80% {
+        transform: rotate(15deg);
     }
 }

@@ -7,7 +7,7 @@ namespace Dziekanowka
         public int Monety { get; set; } = 100;
         public Statystyki Statystyki { get; set; } = new Statystyki();
         public List<ZwierzeGracza> Zwierzeta { get; set; } = ZwierzeGracza.StartoweZwierzaki();
-        public List<ProduktZwierzecy> ProduktyZwierzece { get; set; } = [];
+        public List<ProduktZwierzecy> ProduktyZwierzece { get; set; } = ProduktZwierzecy.StartoweProdukty();
         public List<BudynekGracza> Budynki { get; set; } = BudynekGracza.StartoweBudynki();
         public List<PoleUprawne> PolaUprawne { get; set; } = PoleUprawne.StartowePola();
         public List<WarzywoGracza> Warzywa { get; set; } = WarzywoGracza.StartoweWarzywa();
