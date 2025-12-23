@@ -6,8 +6,9 @@ namespace Dziekanowka.Mechanizm
         public static Dzwieki? Dzwiek { get; set; }
         private readonly IAudioManager audioManager;
         private IAudioPlayer? tloPlayer;
-        private IAudioPlayer? dzwiekPlayer;
         private string? aktualnieGraneTlo;
+        private int aktualnieGrajaceDzwieki = 0;
+        private readonly object blokada = new object();
         public Dzwieki(IAudioManager audioManager)
         {
             this.audioManager = audioManager;
@@ -25,11 +26,27 @@ namespace Dziekanowka.Mechanizm
         }
         public async Task GraDzwiek(string sciezka)
         {
-            dzwiekPlayer?.Stop();
-            dzwiekPlayer?.Dispose();
-            var stream = await FileSystem.OpenAppPackageFileAsync(sciezka);
-            dzwiekPlayer = audioManager.CreatePlayer(stream);
-            dzwiekPlayer.Play();
+            lock (blokada)
+            {
+                if (aktualnieGrajaceDzwieki >= 3) return;
+                aktualnieGrajaceDzwieki++;
+            }
+            try
+            {
+                var stream = await FileSystem.OpenAppPackageFileAsync(sciezka);
+                var player = audioManager.CreatePlayer(stream);
+                player.Play();
+                await Task.Delay(2000);
+                player.Dispose();
+            }
+            catch { }
+            finally
+            {
+                lock (blokada)
+                {
+                    aktualnieGrajaceDzwieki--;
+                }
+            }
         }
     }
 }
