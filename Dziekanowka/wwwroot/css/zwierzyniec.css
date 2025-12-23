@@ -35,8 +35,18 @@
     height: 600px;
     z-index: 2;
 }
+.calaGesiarnia {
+    top: 380px;
+    left: 330px;
+    width: 750px;
+    height: 450px;
+    z-index: 2;
+}
 .kuraWKurniku {
     width: 80px;
+}
+.gesWGesiarni {
+    width: 120px;
 }
 .kurnikDoZwierzyncaGuzik {
     bottom: 0;
@@ -84,7 +94,18 @@
     text-align: center;
     z-index: 2;
 }
+.liczbaGesiGesiarnia {
+    top: 75px;
+    right: 70px;
+    width: 240px;
+    height: 100px;
+    font-size: 74px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+}
 .ramkaWarzywKurnik {
+    top: 310px;
     width: 90px;
     height: 36px;
     z-index: 2;
@@ -95,37 +116,57 @@
     opacity: 0.7;
 }
 .guzikWarzywoKurnik {
+    top: 290px;
     width: 150px;
     height: 150px;
     z-index: 3;
 }
 .liczbaKukurydzyKurnik {
-    top: 310px;
     right: 465px;
 }
 .guzikKukurydzaKurnik {
-    top: 290px;
     right: 440px;
 }
 .liczbaJeczmieniaKurnik {
-    top: 310px;
     right: 270px;
 }
 .guzikJeczmienKurnik {
-    top: 290px;
     right: 240px;
 }
 .liczbaKapustyKurnik {
-    top: 310px;
     right: 75px;
 }
 .guzikKapustaKurnik {
-    top: 290px;
     right: 50px;
+}
+.liczbaGrochGesiarnia {
+    right: 445px;
+}
+.guzikGrochGesiarnia {
+    right: 420px;
+}
+.liczbaCukiniaGesiarnia {
+    right: 250px;
+}
+.guzikCukiniaGesiarnia {
+    right: 220px;
+}
+.liczbaBatatGesiarnia {
+    right: 55px;
+}
+.guzikBatatGesiarnia {
+    right: 30px;
 }
 .progresNakarmieniaKury {
     top: 508px;
     right: 103px;
+    width: 430px;
+    height: 40px;
+    z-index: 2;
+}
+.progresNakarmieniaGesi {
+    top: 511px;
+    right: 75px;
     width: 430px;
     height: 40px;
     z-index: 2;
@@ -140,12 +181,31 @@
     text-align: center;
     z-index: 2;
 }
+.liczbaJajGesiarnia {
+    top: 613px;
+    right: 425px;
+    width: 100px;
+    height: 100px;
+    font-size: 74px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+}
 .nadJajemKurnik {
     top: 609px;
     right: 455px;
     width: 75px;
     height: 100px;
     z-index: 5; 
+    pointer-events: none;
+    transform-origin: center center;
+}
+.nadJajemGesiarnia {
+    top: 600px;
+    right: 70px;
+    width: 254px;
+    height: 112px;
+    z-index: 5;
     pointer-events: none;
     transform-origin: center center;
 }

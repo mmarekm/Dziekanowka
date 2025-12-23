@@ -4,14 +4,119 @@
 @inject Dzwieki dzwieki
 @implements IDisposable
 <div class="gesiarniaWidok widok rel">
+    <div class="abs calaGesiarnia">
+        @if (saGesi)
+        {
+            @for (int i = 0; i < Gracz.Zwierzeta.First(z => z.Nazwa == "ges").Ilosc; i++)
+            {
+                int index = i;
+                <img class="abs gesWGesiarni obrazekSieMiesci" src="img/zwierzyniec/ges.png" style="@StylGesiWGesiarni(index)" />
+            }
+        }
+    </div>
     <div class="abs gesiarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/gesiarniaDoZwierzyniec.png" /></button></div>
+    <div class="abs liczbaGesiGesiarnia">@(Gracz.Zwierzeta.First(z => z.Nazwa == "ges").Ilosc)</div>
+    <div class="abs progresNakarmieniaGesi">
+        @{ var ges = Gracz.Zwierzeta.First(z => z.Nazwa == "ges"); }
+        <progress class="pasekPaliwa" value="@ges.Nakarmione" max="@ges.DajeProdukt()" style="--procent: @((int)((double)ges.Nakarmione / ges.DajeProdukt() * 100) / 10) "></progress>
+    </div>
+    <div class="abs liczbaJajGesiarnia">@(Gracz.ProduktyZwierzece.First(z => z.Nazwa == "jajoGesie").Ilosc)</div>
+    <div class="abs nadJajemGesiarnia @(animujJajoGesi ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaGesiarnia.png" /></div>
+    <div class="abs ramkaWarzywKurnik liczbaGrochGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "groch").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikGrochGesiarnia @(saGesi && JestWarzywo("groch") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGesWarzywem("groch")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaCukiniaGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "cukinia").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikCukiniaGesiarnia @(saGesi && JestWarzywo("cukinia") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick=' async () => await KarmGesWarzywem("cukinia")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaBatatGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "batat").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikBatatGesiarnia @(saGesi && JestWarzywo("batat") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGesWarzywem("batat")'></div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool saGesi => Gracz.Zwierzeta.Any(z => z.Nazwa == "ges" && z.Ilosc > 0);
+    private bool animujJajoGesi = false;
+    private bool JestWarzywo(string warzywo) => Gracz.Warzywa.Any(w => w.Nazwa == warzywo && w.Ilosc > 0);
+    private List<PozycjaGesi> pozycjeGesi = new();
+    private System.Threading.Timer? timerDzwiekGesi;
+    private List<System.Threading.Timer?> timeryGesi = new();
+    private Random random = new Random();
+    private class PozycjaGesi
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (saGesi)
+        {
+            InicjalizujGesi();
+            GeganieGesi();
+        }
+    }
+    private void InicjalizujGesi()
+    {
+        int iloscGesi = Gracz.Zwierzeta.First(z => z.Nazwa == "ges").Ilosc;
+        pozycjeGesi.Clear();
+        foreach (var timer in timeryGesi)
+            timer?.Dispose();
+        timeryGesi.Clear();
+        for (int i = 0; i < iloscGesi; i++)
+        {
+            pozycjeGesi.Add(new PozycjaGesi { X = random.Next(0, 630), Y = random.Next(0, 330), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(2, 5) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeGesi(index); SpacerowanieGesi(index); }, null, TimeSpan.FromSeconds(random.Next(1, 5)), Timeout.InfiniteTimeSpan);
+            timeryGesi.Add(timer);
+        }
+    }
+    private void GeganieGesi() => timerDzwiekGesi = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/geganieGesi.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieGesi(int index)
+    {
+        if (index >= timeryGesi.Count) return;
+        timeryGesi[index]?.Dispose();
+        timeryGesi[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeGesi(index); SpacerowanieGesi(index); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeGesi(int index)
+    {
+        if (index >= pozycjeGesi.Count) return;
+        var kura = pozycjeGesi[index];
+        var nowaX = random.Next(0, 630);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 330);
+        kura.CzasPrzejscia = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmGesWarzywem(string karma)
+    {
+        bool jestWarzywo = Gracz.Warzywa.Any(w => w.Nazwa == karma && w.Ilosc > 0);
+        if (!saGesi || !jestWarzywo) return;
+        Gracz.Warzywa.First(w => w.Nazwa == karma).Ilosc--;
+        var ges = Gracz.Zwierzeta.First(z => z.Nazwa == "ges");
+        ges.Nakarmione++;
+        if (ges.Nakarmione >= ges.DajeProdukt())
+        {
+            ges.Nakarmione = 0;
+            Gracz.ProduktyZwierzece.First(p => p.Nazwa == "jajoGesie").Ilosc++;
+            animujJajoGesi = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajoGesi = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private string StylGesiWGesiarni(int index)
+    {
+        if (index >= pozycjeGesi.Count) return "";
+        var ges = pozycjeGesi[index];
+        return $"left: {ges.X}px; top: {ges.Y}px; transform: scaleX({(ges.PatrzyWLewo ? 1 : -1)}); transition: left {ges.CzasPrzejscia}s ease-in-out, top {ges.CzasPrzejscia}s ease-in-out;";
+    }
     public void Dispose()
     {
-        
+        foreach (var timer in timeryGesi)
+            timer?.Dispose();
+        timerDzwiekGesi?.Dispose();
     }
 }
