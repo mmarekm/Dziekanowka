@@ -22,12 +22,12 @@
     </div>
     <div class="abs liczbaJajGesiarnia">@(Gracz.ProduktyZwierzece.First(z => z.Nazwa == "jajoGesie").Ilosc)</div>
     <div class="abs nadJajemGesiarnia @(animujJajoGesi ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaGesiarnia.png" /></div>
-    <div class="abs ramkaWarzywKurnik liczbaGrochGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "groch").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikGrochGesiarnia @(saGesi && JestWarzywo("groch") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGesWarzywem("groch")'></div>
-    <div class="abs ramkaWarzywKurnik liczbaCukiniaGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "cukinia").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikCukiniaGesiarnia @(saGesi && JestWarzywo("cukinia") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick=' async () => await KarmGesWarzywem("cukinia")'></div>
-    <div class="abs ramkaWarzywKurnik liczbaBatatGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "batat").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikBatatGesiarnia @(saGesi && JestWarzywo("batat") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGesWarzywem("batat")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaJarmuzGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "jarmuż").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikJarmuzGesiarnia @(saGesi && JestWarzywo("jarmuż") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGesWarzywem("jarmuż")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaOwiesGesiarnia">@(Gracz.Zboza.First(w => w.Nazwa == "owies").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikOwiesGesiarnia @(saGesi && jestOwies ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KarmGesOwsem"></div>
+    <div class="abs ramkaWarzywKurnik liczbaOgorekGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "ogórek").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikOgorekGesiarnia @(saGesi && JestWarzywo("ogórek") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGesWarzywem("ogórek")'></div>
 </div>
 
 @code {
@@ -35,6 +35,7 @@
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool saGesi => Gracz.Zwierzeta.Any(z => z.Nazwa == "ges" && z.Ilosc > 0);
     private bool animujJajoGesi = false;
+    private bool jestOwies => Gracz.Zboza.Any(z => z.Nazwa == "owies" && z.Ilosc > 0);
     private bool JestWarzywo(string warzywo) => Gracz.Warzywa.Any(w => w.Nazwa == warzywo && w.Ilosc > 0);
     private List<PozycjaGesi> pozycjeGesi = new();
     private System.Threading.Timer? timerDzwiekGesi;
@@ -93,6 +94,10 @@
         bool jestWarzywo = Gracz.Warzywa.Any(w => w.Nazwa == karma && w.Ilosc > 0);
         if (!saGesi || !jestWarzywo) return;
         Gracz.Warzywa.First(w => w.Nazwa == karma).Ilosc--;
+        await CzyNasycone();
+    }
+    private async Task CzyNasycone()
+    {
         var ges = Gracz.Zwierzeta.First(z => z.Nazwa == "ges");
         ges.Nakarmione++;
         if (ges.Nakarmione >= ges.DajeProdukt())
@@ -106,6 +111,12 @@
             await InvokeAsync(StateHasChanged);
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task KarmGesOwsem()
+    {
+        if (!saGesi || !jestOwies) return;
+        Gracz.Zboza.First(z => z.Nazwa == "owies").Ilosc--;
+        await CzyNasycone();
     }
     private string StylGesiWGesiarni(int index)
     {
