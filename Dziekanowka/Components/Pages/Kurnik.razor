@@ -5,7 +5,7 @@
 @implements IDisposable
 <div class="kurnikWidok widok rel">
     <div class="abs calyKurnik">
-        @if (saKury)
+        @if (Gracz.JestZwierze("kura"))
         {
             @for (int i = 0; i < Gracz.Zwierzeta.First(z => z.Nazwa == "kura").Ilosc; i++)
             {

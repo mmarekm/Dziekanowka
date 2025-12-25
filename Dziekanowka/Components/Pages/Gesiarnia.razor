@@ -5,9 +5,9 @@
 @implements IDisposable
 <div class="gesiarniaWidok widok rel">
     <div class="abs calaGesiarnia">
-        @if (Gra.JestZwierze(Gracz, "ges"))
+        @if (Gracz.JestZwierze("ges"))
         {
-            @for (int i = 0; i < Gracz.Zwierzeta.First(z => z.Nazwa == "ges").Ilosc; i++)
+            @for (int i = 0; i < Gracz.Zwierze("ges").Ilosc; i++)
             {
                 int index = i;
                 <img class="abs gesWGesiarni obrazekSieMiesci" src="img/zwierzyniec/ges.png" style="@StylGesiWGesiarni(index)" />
@@ -15,28 +15,24 @@
         }
     </div>
     <div class="abs gesiarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/gesiarniaDoZwierzyniec.png" /></button></div>
-    <div class="abs liczbaGesiGesiarnia">@(Gracz.Zwierzeta.First(z => z.Nazwa == "ges").Ilosc)</div>
+    <div class="abs liczbaGesiGesiarnia">@(Gracz.Zwierze("ges").Ilosc)</div>
     <div class="abs progresNakarmieniaGesi">
-        @{ var ges = Gracz.Zwierzeta.First(z => z.Nazwa == "ges"); }
-        <progress class="pasekPaliwa" value="@ges.Nakarmione" max="@ges.DajeProdukt()" style="--procent: @((int)((double)ges.Nakarmione / ges.DajeProdukt() * 100) / 10) "></progress>
+        <progress class="pasekPaliwa" value="@Gracz.Zwierze("ges").Nakarmione" max="@Gracz.Zwierze("ges").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("ges").Nakarmione / Gracz.Zwierze("ges").DajeProdukt() * 100) / 10) "></progress>
     </div>
-    <div class="abs liczbaJajGesiarnia">@(Gracz.ProduktyZwierzece.First(z => z.Nazwa == "jajoGesie").Ilosc)</div>
+    <div class="abs liczbaJajGesiarnia">@(Gracz.ProduktZ("jajoGesie").Ilosc)</div>
     <div class="abs nadJajemGesiarnia @(animujJajoGesi ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaGesiarnia.png" /></div>
-    <div class="abs ramkaWarzywKurnik liczbaJarmuzGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "jarmuż").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikJarmuzGesiarnia @(saGesi && JestWarzywo("jarmuż") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGesWarzywem("jarmuż")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaJarmuzGesiarnia">@(Gracz.Warzywo("jarmuż").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikJarmuzGesiarnia @(Gracz.JestZwierze("ges") && Gracz.JestWarzywo("jarmuż") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGes("jarmuż")'></div>
     <div class="abs ramkaWarzywKurnik liczbaOwiesGesiarnia">@(Gracz.Zboza.First(w => w.Nazwa == "owies").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikOwiesGesiarnia @(saGesi && jestOwies ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KarmGesOwsem"></div>
+    <div class="abs guzikWarzywoKurnik guzikOwiesGesiarnia @(Gracz.JestZwierze("ges") && Gracz.JestZboze("owies") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGes("owies")'></div>
     <div class="abs ramkaWarzywKurnik liczbaOgorekGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "ogórek").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikOgorekGesiarnia @(saGesi && JestWarzywo("ogórek") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGesWarzywem("ogórek")'></div>
+    <div class="abs guzikWarzywoKurnik guzikOgorekGesiarnia @(Gracz.JestZwierze("ges") && Gracz.JestWarzywo("ogórek") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGes("ogórek")'></div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private bool saGesi => Gracz.Zwierzeta.Any(z => z.Nazwa == "ges" && z.Ilosc > 0);
     private bool animujJajoGesi = false;
-    private bool jestOwies => Gracz.Zboza.Any(z => z.Nazwa == "owies" && z.Ilosc > 0);
-    private bool JestWarzywo(string warzywo) => Gracz.Warzywa.Any(w => w.Nazwa == warzywo && w.Ilosc > 0);
     private List<PozycjaGesi> pozycjeGesi = new();
     private System.Threading.Timer? timerDzwiekGesi;
     private List<System.Threading.Timer?> timeryGesi = new();
@@ -50,7 +46,7 @@
     }
     protected override void OnInitialized()
     {
-        if (saGesi)
+        if (Gracz.JestZwierze("ges"))
         {
             InicjalizujGesi();
             GeganieGesi();
@@ -58,12 +54,11 @@
     }
     private void InicjalizujGesi()
     {
-        int iloscGesi = Gracz.Zwierzeta.First(z => z.Nazwa == "ges").Ilosc;
         pozycjeGesi.Clear();
         foreach (var timer in timeryGesi)
             timer?.Dispose();
         timeryGesi.Clear();
-        for (int i = 0; i < iloscGesi; i++)
+        for (int i = 0; i < Gracz.Zwierze("ges").Ilosc; i++)
         {
             pozycjeGesi.Add(new PozycjaGesi { X = random.Next(0, 630), Y = random.Next(0, 330), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(2, 5) });
             int index = i;
@@ -89,21 +84,15 @@
         kura.CzasPrzejscia = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
     }
-    private async Task KarmGesWarzywem(string karma)
+    private async Task KarmGes(string karma)
     {
-        bool jestWarzywo = Gracz.Warzywa.Any(w => w.Nazwa == karma && w.Ilosc > 0);
-        if (!saGesi || !jestWarzywo) return;
-        Gracz.Warzywa.First(w => w.Nazwa == karma).Ilosc--;
-        await CzyNasycone();
-    }
-    private async Task CzyNasycone()
-    {
-        var ges = Gracz.Zwierzeta.First(z => z.Nazwa == "ges");
-        ges.Nakarmione++;
-        if (ges.Nakarmione >= ges.DajeProdukt())
+        if (!Gracz.JestZwierze("ges") || !(karma != "owies" ? Gracz.JestWarzywo(karma) : Gracz.JestZboze(karma))) return;
+        (karma != "owies" ? Gracz.Warzywo(karma) : Gracz.Zboze(karma)).Ilosc--;
+        Gracz.Zwierze("ges").Nakarmione++;
+        if (Gracz.Zwierze("ges").Nakarmione >= Gracz.Zwierze("ges").DajeProdukt())
         {
-            ges.Nakarmione = 0;
-            Gracz.ProduktyZwierzece.First(p => p.Nazwa == "jajoGesie").Ilosc++;
+            Gracz.Zwierze("ges").Nakarmione = 0;
+            Gracz.ProduktZ("jajoGesie").Ilosc++;
             animujJajoGesi = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);
@@ -111,12 +100,6 @@
             await InvokeAsync(StateHasChanged);
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
-    }
-    private async Task KarmGesOwsem()
-    {
-        if (!saGesi || !jestOwies) return;
-        Gracz.Zboza.First(z => z.Nazwa == "owies").Ilosc--;
-        await CzyNasycone();
     }
     private string StylGesiWGesiarni(int index)
     {

@@ -1,6 +1,6 @@
 ﻿namespace Dziekanowka.Gracza
 {
-    public class OwocGracza(string nazwa)
+    public class OwocGracza(string nazwa) : IDar
     {
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = 0;
