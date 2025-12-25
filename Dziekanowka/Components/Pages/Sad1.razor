@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="sad1Widok widok rel">
-    <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
+    <div class="abs stanButelekPole">@Gracz.Przedmiot("pelnaButelka") <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPoleIntroZSad1"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro)"><img src="img/pole/naPoleIntroZSad1.png" /></button></div>
     <div class="abs doZbozaZSad1"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze)"><img src="img/pole/sad1DoZboza.png" /></button></div>
     @for (int x = 1; x <= 4; x++)
@@ -17,7 +17,7 @@
                     <img class="obrazekWypelnia" src="@($"img/pole/drzewo{(drzewo.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
                     @if (drzewo.Poziom < 0)
                     {
-                        <div class="abs ramkaSekator @(maSekator ? "motykaTrue" : "motykaFalse")"></div>
+                        <div class="abs ramkaSekator @(Gracz.JestPrzedmiot("sekator") ? "motykaTrue" : "motykaFalse")"></div>
                     }
                     else
                     {
@@ -38,13 +38,11 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
-    private bool maSekator => Gracz.Przedmioty.Any(p => p.Nazwa == "sekator");
-    private bool MoznaUprawiac(SadyGracza drzewo) => (drzewo.Poziom < 0 && maSekator) || (drzewo.Poziom > 0 && Gracz.IloscPrzedmiotow("pelnaButelka") > 0);
+    private bool MoznaUprawiac(SadyGracza drzewo) => (drzewo.Poziom < 0 && Gracz.JestPrzedmiot("sekator")) || (drzewo.Poziom > 0 && Gracz.IloscPrzedmiotow("pelnaButelka") > 0);
     public async Task UprawiajDrzewo(SadyGracza drzewo)
     {
         if (!MoznaUprawiac(drzewo)) return;
-        if (drzewo.Poziom < 0 && maSekator)
+        if (drzewo.Poziom < 0 && Gracz.JestPrzedmiot("sekator"))
         {
             Sad2.Palma = false;
             Sad2.Krzew = false;
@@ -59,8 +57,8 @@
         else
         {
             Gracz.Owoce.First(o => o.Nazwa == drzewo.Owoc).Ilosc += drzewo.Poziom;
-            Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
-            Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka").Ilosc++;
+            Gracz.Przedmiot("pelnaButelka").Ilosc--;
+            Gracz.Przedmiot("pustaButelka").Ilosc++;
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }

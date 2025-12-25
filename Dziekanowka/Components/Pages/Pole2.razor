@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="pole2Widok widok rel">
-    <div class="abs stanButelekPole">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
+    <div class="abs stanButelekPole">@Gracz.Przedmiot("pelnaButelka").Ilosc <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPoleIntroZPole2"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro)"><img src="img/pole/naPoleIntroZPole2.png" /></button></div>
     <div class="abs naPole1ZPole2"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1)"><img src="img/pole/naPole1ZPole2.png" /></button></div>
     <div class="abs doZbozaZPole2"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze)"><img src="img/pole/pole2DoZboza.png" /></button></div>
@@ -18,7 +18,7 @@
                 <img class="obrazekWypelnia" src="@($"img/pole/pole{(pole.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
                 @if (pole.Poziom < 0)
                 {
-                    <div class="abs ramkaMotyka @(maMotyke ? "motykaTrue" : "motykaFalse")"></div>
+                    <div class="abs ramkaMotyka @(Gracz.JestPrzedmiot("motyka") ? "motykaTrue" : "motykaFalse")"></div>
                 }
                 else
                 {
@@ -40,13 +40,11 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
-    private bool maMotyke => Gracz.Przedmioty.Any(p => p.Nazwa == "motyka");
-    private bool MoznaUprawiac(PoleUprawne pole) => (pole.Poziom < 0 && maMotyke) || (pole.Poziom > 0 && Gracz.IloscPrzedmiotow("pelnaButelka") > 0);
+    private bool MoznaUprawiac(PoleUprawne pole) => (pole.Poziom < 0 && Gracz.JestPrzedmiot("motyka")) || (pole.Poziom > 0 && Gracz.IloscPrzedmiotow("pelnaButelka") > 0);
     public async Task UprawiajPole(PoleUprawne pole)
     {
         if (!MoznaUprawiac(pole)) return;
-        if (pole.Poziom < 0 && maMotyke)
+        if (pole.Poziom < 0 && Gracz.JestPrzedmiot("motyka"))
         {
             pole.Poziom = 0;
             Gracz.Przedmioty.RemoveAll(p => p.Nazwa == "motyka");
@@ -57,8 +55,8 @@
         else
         {
             Gracz.Warzywa.First(w => w.Nazwa == pole.Warzywo).Ilosc += pole.Poziom;
-            Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
-            Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka").Ilosc++;
+            Gracz.Przedmiot("pelnaButelka").Ilosc--;
+            Gracz.Przedmiot("pustaButelka").Ilosc++;
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }

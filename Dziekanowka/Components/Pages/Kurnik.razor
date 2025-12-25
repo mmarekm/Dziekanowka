@@ -18,7 +18,7 @@
     <div class="abs liczbaKurKurnik">@(Gracz.Zwierze("kura").Ilosc)</div>
     <div class="abs progresNakarmieniaKury"><progress class="pasekPaliwa" value="@Gracz.Zwierze("kura").Nakarmione" max="@Gracz.Zwierze("kura").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("kura").Nakarmione / Gracz.Zwierze("kura").DajeProdukt() * 100) / 10) "></progress></div>
     <div class="abs liczbaJajKurnik">@(Gracz.ProduktZ("jajoKurze").Ilosc)</div>
-    <div class="abs nadJajemKurnik @(animujJajoKury ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajoKurnik.png"/></div>
+    <div class="abs nadJajemKurnik @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajoKurnik.png"/></div>
     <div class="abs ramkaWarzywKurnik liczbaKukurydzyKurnik">@(Gracz.Warzywo("kukurydza").Ilosc)</div>
     <div class="abs guzikWarzywoKurnik guzikKukurydzaKurnik @(Gracz.JestZwierze("kura") && Gracz.JestWarzywo("kukurydza") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("kukurydza")'></div>
     <div class="abs ramkaWarzywKurnik liczbaJeczmieniaKurnik">@(Gracz.Zboze("jeczmien").Ilosc)</div>
@@ -34,7 +34,7 @@
     private System.Threading.Timer? timerDzwiekKury;
     private List<System.Threading.Timer?> timeryKur = new();
     private Random random = new Random();
-    private bool animujJajoKury = false;
+    private bool animujJajo = false;
     private class PozycjaKury
     {
         public double X { get; set; }
@@ -97,10 +97,10 @@
         {
             Gracz.Zwierze("kura").Nakarmione = 0;
             Gracz.ProduktZ("jajoKurze").Ilosc++;
-            animujJajoKury = true;
+            animujJajo = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);
-            animujJajoKury = false;
+            animujJajo = false;
             await InvokeAsync(StateHasChanged);
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();

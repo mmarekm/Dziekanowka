@@ -18,7 +18,7 @@
     <div class="abs liczbaGesiGesiarnia">@(Gracz.Zwierze("ges").Ilosc)</div>
     <div class="abs progresNakarmieniaGesi"><progress class="pasekPaliwa" value="@Gracz.Zwierze("ges").Nakarmione" max="@Gracz.Zwierze("ges").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("ges").Nakarmione / Gracz.Zwierze("ges").DajeProdukt() * 100) / 10) "></progress></div>
     <div class="abs liczbaJajGesiarnia">@(Gracz.ProduktZ("jajoGesie").Ilosc)</div>
-    <div class="abs nadJajemGesiarnia @(animujJajoGesi ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaGesiarnia.png" /></div>
+    <div class="abs nadJajemGesiarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaGesiarnia.png" /></div>
     <div class="abs ramkaWarzywKurnik liczbaJarmuzGesiarnia">@(Gracz.Warzywo("jarmuż").Ilosc)</div>
     <div class="abs guzikWarzywoKurnik guzikJarmuzGesiarnia @(Gracz.JestZwierze("ges") && Gracz.JestWarzywo("jarmuż") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGes("jarmuż")'></div>
     <div class="abs ramkaWarzywKurnik liczbaOwiesGesiarnia">@(Gracz.Zboza.First(w => w.Nazwa == "owies").Ilosc)</div>
@@ -30,7 +30,7 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private bool animujJajoGesi = false;
+    private bool animujJajo = false;
     private List<PozycjaGesi> pozycjeGesi = new();
     private System.Threading.Timer? timerDzwiekGesi;
     private List<System.Threading.Timer?> timeryGesi = new();
@@ -91,10 +91,10 @@
         {
             Gracz.Zwierze("ges").Nakarmione = 0;
             Gracz.ProduktZ("jajoGesie").Ilosc++;
-            animujJajoGesi = true;
+            animujJajo = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);
-            animujJajoGesi = false;
+            animujJajo = false;
             await InvokeAsync(StateHasChanged);
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
