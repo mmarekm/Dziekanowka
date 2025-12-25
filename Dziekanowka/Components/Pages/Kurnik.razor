@@ -16,26 +16,20 @@
     </div>
     <div class="abs kurnikDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/KurnikDoZwierzyniec.png" /></button></div>
     <div class="abs liczbaKurKurnik">@(Gracz.Zwierze("kura").Ilosc)</div>
-    <div class="abs progresNakarmieniaKury">
-        <progress class="pasekPaliwa" value="@Gracz.Zwierze("kura").Nakarmione" max="@Gracz.Zwierze("kura").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("kura").Nakarmione / Gracz.Zwierze("kura").DajeProdukt() * 100) / 10) "></progress>
-    </div>
-    <div class="abs liczbaJajKurnik">@(Gracz.ProduktyZwierzece.First(z => z.Nazwa == "jajoKurze").Ilosc)</div>
+    <div class="abs progresNakarmieniaKury"><progress class="pasekPaliwa" value="@Gracz.Zwierze("kura").Nakarmione" max="@Gracz.Zwierze("kura").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("kura").Nakarmione / Gracz.Zwierze("kura").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs liczbaJajKurnik">@(Gracz.ProduktZ("jajoKurze").Ilosc)</div>
     <div class="abs nadJajemKurnik @(animujJajoKury ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajoKurnik.png"/></div>
-    <div class="abs ramkaWarzywKurnik liczbaKukurydzyKurnik">@(Gracz.Warzywa.First(w => w.Nazwa == "kukurydza").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikKukurydzaKurnik @(saKury && jestKukurydza ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKureWarzywem("kukurydza")'></div>
-    <div class="abs ramkaWarzywKurnik liczbaJeczmieniaKurnik">@(Gracz.Zboza.First(w => w.Nazwa == "jeczmien").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikJeczmienKurnik @(saKury && jestJeczmien ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KarmKureJeczmieniem"></div>
-    <div class="abs ramkaWarzywKurnik liczbaKapustyKurnik">@(Gracz.Warzywa.First(w => w.Nazwa == "kapustaWłoska").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikKapustaKurnik @(saKury && jestKapustaWloska ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKureWarzywem("kapustaWłoska")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaKukurydzyKurnik">@(Gracz.Warzywo("kukurydza").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikKukurydzaKurnik @(Gracz.JestZwierze("kura") && Gracz.JestWarzywo("kukurydza") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("kukurydza")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaJeczmieniaKurnik">@(Gracz.Zboze("jeczmien").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikJeczmienKurnik @(Gracz.JestZwierze("kura") && Gracz.JestZboze("jeczmien") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("jeczmien")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaKapustyKurnik">@(Gracz.Warzywo("kapustaWłoska").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikKapustaKurnik @(Gracz.JestZwierze("kura") && Gracz.JestWarzywo("kapustaWłoska") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("kapustaWłoska")'></div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private bool saKury => Gracz.Zwierzeta.Any(z => z.Nazwa == "kura" && z.Ilosc > 0);
-    private bool jestKukurydza => Gracz.Warzywa.Any(w => w.Nazwa == "kukurydza" && w.Ilosc > 0);
-    private bool jestJeczmien => Gracz.Zboza.Any(z => z.Nazwa == "jeczmien" && z.Ilosc > 0);
-    private bool jestKapustaWloska => Gracz.Warzywa.Any(w => w.Nazwa == "kapustaWłoska" && w.Ilosc > 0);
     private List<PozycjaKury> pozycjeKur = new();
     private System.Threading.Timer? timerDzwiekKury;
     private List<System.Threading.Timer?> timeryKur = new();
@@ -50,7 +44,7 @@
     }
     protected override void OnInitialized()
     {
-        if (saKury)
+        if (Gracz.JestZwierze("kura"))
         {
             InicjalizujKury();
             GdakanieKury();
@@ -58,12 +52,11 @@
     }
     private void InicjalizujKury()
     {
-        int iloscKur = Gracz.Zwierzeta.First(z => z.Nazwa == "kura").Ilosc;
         pozycjeKur.Clear();
         foreach (var timer in timeryKur)
             timer?.Dispose();
         timeryKur.Clear();
-        for (int i = 0; i < iloscKur; i++)
+        for (int i = 0; i < Gracz.Zwierze("kura").Ilosc; i++)
         {
             pozycjeKur.Add(new PozycjaKury { X = random.Next(0, 520), Y = random.Next(0, 520), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(2, 5)});
             int index = i;
@@ -95,27 +88,15 @@
         kura.CzasPrzejscia = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
     }
-    private async Task KarmKureWarzywem(string karma)
+    private async Task KarmKure(string karma)
     {
-        bool jestWarzywo = Gracz.Warzywa.Any(w => w.Nazwa == karma && w.Ilosc > 0);
-        if (!saKury || !jestWarzywo) return;
-        Gracz.Warzywa.First(w => w.Nazwa == karma).Ilosc--;
-        await CzyNasycone();
-    }
-    private async Task KarmKureJeczmieniem()
-    {
-        if (!saKury || !jestJeczmien) return;
-        Gracz.Zboza.First(z => z.Nazwa == "jeczmien").Ilosc--;
-        await CzyNasycone();
-    }
-    private async Task CzyNasycone()
-    {
-        var kura = Gracz.Zwierzeta.First(z => z.Nazwa == "kura");
-        kura.Nakarmione++;
-        if (kura.Nakarmione >= kura.DajeProdukt())
+        if (!Gracz.JestZwierze("kura") || !(karma != "jeczmien" ? Gracz.JestWarzywo(karma) : Gracz.JestZboze(karma))) return;
+        (karma != "jeczmien" ? Gracz.Warzywo(karma) : Gracz.Zboze(karma)).Ilosc--;
+        Gracz.Zwierze("kura").Nakarmione++;
+        if (Gracz.Zwierze("kura").Nakarmione >= Gracz.Zwierze("kura").DajeProdukt())
         {
-            kura.Nakarmione = 0;
-            Gracz.ProduktyZwierzece.First(p => p.Nazwa == "jajoKurze").Ilosc++;
+            Gracz.Zwierze("kura").Nakarmione = 0;
+            Gracz.ProduktZ("jajoKurze").Ilosc++;
             animujJajoKury = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);
