@@ -1,0 +1,480 @@
+﻿.sklepikWidok {
+    background-image: url('../img/budynki/sklepikWidok.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 22px;
+}
+.sklepikOwoceWidok {
+    background-image: url('../img/budynki/sklepikOwoce.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 25px;
+}
+.sklepikWarzywaWidok {
+    background-image: url('../img/budynki/sklepikWarzywa.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 25px;
+}
+.wyjscieSklepikGuzik {
+    top: 913px;
+    left: 594px;
+    width: 374px;
+    height: 86px;
+    z-index: 2;
+}
+.wyjscieSklepikOwoceGuzik {
+    bottom: 0;
+    left: 555px;
+    width: 313px;
+    height: 140px;
+    z-index: 2;
+}
+.wyjscieSklepikWarzywaGuzik {
+    bottom: 0;
+    left: 0;
+    width: 319px;
+    height: 123px;
+    z-index: 2;
+}
+.przejscieDoOwocowZGlownego {
+    top: 0;
+    right: 0;
+    width: 144px;
+    height: 882px;
+    z-index: 2;
+}
+.przejscieDoWarzywZGlownego {
+    top: 0;
+    left: 0;
+    width: 172px;
+    height: 894px;
+    z-index: 2;
+}
+.guzikSklepikOwoceDoGlownego {
+    top: 0;
+    left: 0;
+    width: 192px;
+    height: 1000px;
+    z-index: 2;
+}
+.guzikSklepikWarzywaDoGlownego {
+    top: 0;
+    right: 0;
+    width: 189px;
+    height: 888px;
+    z-index: 2;
+}
+.sklepikMonetyGracza {
+    top: 913px;
+    left: 1000px;
+    width: 300px;
+    height: 80px;
+    font-size: 55px;
+    font-weight: bold;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    z-index: 2;
+}
+.sklepikOwoceMonetyGracza {
+    top: 60px;
+    right: 90px;
+    width: 300px;
+    height: 80px;
+    font-size: 55px;
+    font-weight: bold;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    z-index: 2;
+}
+.towarSklepik {
+    width: 100px;
+    height: 140px;
+    z-index: 2;
+}
+.towarCenaSklepik {
+    width: 85px;
+    height: 28px;
+    display: flex;
+    font-weight: bold;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.towarStanSklepik {
+    width: 100px;
+    height: 42px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: antiquewhite;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.towarOwoc {
+    width: 110px;
+    height: 190px;
+    z-index: 2;
+}
+.owocKtoryPoziom {
+    border-radius: 10px;
+    background-color: antiquewhite;
+    margin: 5px auto;
+    width: 80px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.owocObrazek {
+    width: 80px;
+    height: 102px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 13px;
+}
+.owocCena {
+    width: 100px;
+    height: 22px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    border-radius: 10px;
+}
+.towarZboze {
+    width: 150px;
+    height: 315px;
+    z-index: 2;
+}
+.zbozeObrazek {
+    top: 100px;
+    left: 27px;
+    width: 95px;
+    height: 133px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.zbozeCena {
+    bottom: 0;
+    left: 30px;
+}
+.owoc0 {
+    top: 70px;
+    left: 320px;
+}
+.owoc1 {
+    top: 70px;
+    left: 434px;
+}
+.owoc2 {
+    top: 70px;
+    left: 553px;
+}
+.owoc3 {
+    top: 70px;
+    left: 672px;
+}
+.owoc4 {
+    top: 70px;
+    left: 795px;
+}
+.owoc5 {
+    top: 70px;
+    left: 914px;
+}
+.owoc6 {
+    top: 70px;
+    left: 1041px;
+}
+.owoc7 {
+    top: 70px;
+    left: 1160px;
+}
+.owoc8 {
+    top: 265px;
+    left: 320px;
+}
+.owoc9 {
+    top: 265px;
+    left: 434px;
+}
+.owoc10 {
+    top: 265px;
+    left: 553px;
+}
+.owoc11 {
+    top: 265px;
+    left: 672px;
+}
+.owoc12 {
+    top: 265px;
+    left: 795px;
+}
+.owoc13 {
+    top: 265px;
+    left: 914px;
+}
+.owoc14 {
+    top: 265px;
+    left: 1041px;
+}
+.owoc15 {
+    top: 265px;
+    left: 1160px;
+}
+.owoc16 {
+    top: 457px;
+    left: 320px;
+}
+.owoc17 {
+    top: 457px;
+    left: 434px;
+}
+.owoc18 {
+    top: 457px;
+    left: 553px;
+}
+.owoc19 {
+    top: 457px;
+    left: 672px;
+}
+.owoc20 {
+    top: 457px;
+    left: 795px;
+}
+.owoc21 {
+    top: 457px;
+    left: 914px;
+}
+.owoc22 {
+    top: 457px;
+    left: 1041px;
+}
+.owoc23 {
+    top: 457px;
+    left: 1160px;
+}
+.owoc24 {
+    top: 655px;
+    left: 320px;
+}
+.owoc25 {
+    top: 655px;
+    left: 434px;
+}
+.owoc26 {
+    top: 655px;
+    left: 553px;
+}
+.owoc27 {
+    top: 655px;
+    left: 672px;
+}
+.owoc28 {
+    top: 655px;
+    left: 795px;
+}
+.owoc29 {
+    top: 655px;
+    left: 914px;
+}
+.owoc30 {
+    top: 655px;
+    left: 1041px;
+}
+.owoc31 {
+    top: 655px;
+    left: 1160px;
+}
+.zboze0 {
+    top: 430px;
+    left: 225px;
+}
+.zboze1 {
+    top: 430px;
+    left: 443px;
+}
+.zboze2 {
+    top: 430px;
+    left: 661px;
+}
+.zboze3 {
+    top: 430px;
+    left: 879px;
+}
+.zboze4 {
+    top: 430px;
+    left: 1094px;
+}
+.zboze5 {
+    top: 430px;
+    left: 1312px;
+}
+.zboze6 {
+    top: 430px;
+    left: 1530px;
+}
+.butelkaSklepikRysunek {
+    top: 150px;
+    left: 252px;
+    z-index: 2;
+}
+    .butelkaSklepikRysunek.klikalneDivZielone {
+        position: absolute;
+    }
+.butelkaSklepikCena {
+    top: 340px;
+    left: 252px;
+}
+.butelkaSklepikStan {
+    top: 65px;
+    left: 252px;
+}
+.motykaSklepikRysunek {
+    top: 150px;
+    left: 465px;
+}
+.motykaSklepikCena {
+    top: 340px;
+    left: 465px;
+}
+.motykaSklepikStan {
+    top: 65px;
+    left: 465px;
+}
+.upgrKanisterRysunek {
+    top: 150px;
+    left: 680px;
+}
+.upgrKanisterCena {
+    top: 340px;
+    left: 680px;
+}
+.upgrKanisterStan {
+    top: 65px;
+    left: 680px;
+}
+.kanisterDoPelnaRysunek {
+    top: 150px;
+    left: 897px;
+}
+.kanisterDoPelnaCena {
+    top: 340px;
+    left: 897px;
+}
+.kanisterDoPelnaStan {
+    top: 65px;
+    left: 897px;
+}
+.kanisterDoPolowyRysunek {
+    top: 150px;
+    left: 1110px;
+}
+.kanisterDoPolowyCena {
+    top: 340px;
+    left: 1110px;
+}
+.kanisterDoPolowyStan {
+    top: 65px;
+    left: 1110px;
+}
+.kanisterDoCwierciRysunek {
+    top: 150px;
+    left: 1329px;
+}
+.kanisterDoCwierciCena {
+    top: 340px;
+    left: 1329px;
+}
+.kanisterDoCwierciStan {
+    top: 65px;
+    left: 1329px;
+}
+.sekatorSklepikRysunek {
+    top: 150px;
+    left: 1548px;
+}
+.sekatorSklepikCena {
+    top: 340px;
+    left: 1548px;
+}
+.sekatorSklepikStan {
+    top: 65px;
+    left: 1548px;
+}
+.warzywaGrid {
+    top: 45px;
+    left: 280px;
+    width: 1310px;
+    height: 785px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 15px;
+}
+.polkaItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px;
+}
+.polkaItem-gora {
+    width: 70%;
+    height: 25px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border-radius: 15px;
+    background-color: antiquewhite;
+    margin-bottom: 10px;
+}
+.polkaItem-obrazek {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    .polkaItem-obrazek img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+.polkaItem-cena {
+    width: 80%;
+    height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: 15%;
+    margin-right: 5%;
+}

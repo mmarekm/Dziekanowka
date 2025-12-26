@@ -1,0 +1,121 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="sklepikWidok widok rel">
+    <div class="abs wyjscieSklepikGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama)" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikowy.png' /></button></div>
+    <div class="abs przejscieDoWarzywZGlownego"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepikWarzywa)" class="wyroznionyGuzik"><img src="img/budynki/sklepikGlownyDoWarzyw.png" /></button></div>
+    <div class="abs przejscieDoOwocowZGlownego"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepikOwoce)" class="wyroznionyGuzik"><img src="img/budynki/sklepikGlownyDoOwocow.png" /></button></div>
+    <div class="abs sklepikMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
+    <div class="abs butelkaSklepikRysunek towarSklepik @(posiadaMaxButelek || Gracz.Monety < 1 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupButelke"><img class="obrazekWypelnia" src="img/przedmioty/butelkaSklepik.png" /></div>
+    <div class="abs butelkaSklepikCena towarCenaSklepik">1<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs butelkaSklepikStan towarStanSklepik @(posiadaMaxButelek ? "naCzerwono" : "")">@liczbaButelekGracza / @maxIloscButelek</div>
+    <div class="abs motykaSklepikRysunek towarSklepik @(Gracz.JestPrzedmiot("motyka") || Gracz.Monety < 35 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupMotyke"><img class="obrazekWypelnia" src="img/przedmioty/motyka.png" /></div>
+    <div class="abs motykaSklepikCena towarCenaSklepik">35<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs motykaSklepikStan towarStanSklepik @(Gracz.JestPrzedmiot("motyka") ? "naCzerwono" : "naNiebiesko")">@(Gracz.JestPrzedmiot("motyka") ? masz : nieMasz)</div>
+    <div class="abs upgrKanisterRysunek towarSklepik @(nieStacNaLepszyKanister ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="UpgradeKanistra"><img class="obrazekWypelnia" src="img/przedmioty/kanisterUpgr.png" /></div>
+    <div class="abs upgrKanisterCena towarCenaSklepik">@Gracz.Paliwo.KosztUpgrade<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs upgrKanisterStan towarStanSklepik naZielono">poj. @(6 * Gracz.Paliwo.PoziomKanistera + 5)</div>
+    <div class="abs kanisterDoPelnaRysunek towarSklepik @(posiadaMaxPaliwo || nieStacNaPelnePaliwo ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupPelnePaliwo"><img class="obrazekWypelnia" src="img/przedmioty/kanisterPelny.png" /></div>
+    <div class="abs kanisterDoPelnaCena towarCenaSklepik">@Gracz.Paliwo.CenaPelnegoPaliwa<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs kanisterDoPelnaStan towarStanSklepik @(posiadaMaxPaliwo ? "naCzerwono" : "naNiebiesko")">@Gracz.Paliwo.IloscPaliwa / @Gracz.Paliwo.MaksymalnaIloscPaliwa</div>
+    <div class="abs kanisterDoPolowyRysunek towarSklepik @(posiadaMaxPaliwo || nieStacNaPolowePaliwa ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupPolowePaliwa"><img class="obrazekWypelnia" src="img/przedmioty/kanisterPolPelny.png" /></div>
+    <div class="abs kanisterDoPolowyCena towarCenaSklepik">@Gracz.Paliwo.CenaPolowyPaliwa<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs kanisterDoPolowyStan towarStanSklepik @(posiadaMaxPaliwo ? "naCzerwono" : "naNiebiesko")">+ @Gracz.Paliwo.PolowaPaliwa</div>
+    <div class="abs kanisterDoCwierciRysunek towarSklepik @(posiadaMaxPaliwo || nieStacNaCwiercPaliwa ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupCwiercPaliwa"><img class="obrazekWypelnia" src="img/przedmioty/kanisterCwiercPelny.png" /></div>
+    <div class="abs kanisterDoCwierciCena towarCenaSklepik">@Gracz.Paliwo.CenaCwierciPaliwa<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs kanisterDoCwierciStan towarStanSklepik @(posiadaMaxPaliwo ? "naCzerwono" : "naNiebiesko")">+ @Gracz.Paliwo.CwiercPaliwa</div>
+    <div class="abs sekatorSklepikRysunek towarSklepik @(Gracz.JestPrzedmiot("sekator") || Gracz.Monety < 40 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupSekator"><img class="obrazekWypelnia" src="img/przedmioty/sekator.png" /></div>
+    <div class="abs sekatorSklepikCena towarCenaSklepik">40<img src="img/przedmioty/monetaCenaSklepik.png" /></div>
+    <div class="abs sekatorSklepikStan towarStanSklepik @(Gracz.JestPrzedmiot("sekator") ? "naCzerwono" : "naNiebiesko")">@(Gracz.JestPrzedmiot("sekator") ? masz : nieMasz)</div>
+    @for (int i = 0; i < Gracz.UprawyZboza.Count; i++)
+    {
+        var zboze = Gracz.UprawyZboza[i];
+        var index = i;
+        <div class="abs towarZboze zboze@(i)">
+            <div class="towarStanSklepik">@KupnoPoziomu(zboze)</div>
+            <div class="abs zbozeObrazek @(NieKupi(zboze) ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="async () => await KupPoziom(zboze)"><img class="obrazekSieMiesciBlok" src="img/przedmioty/zboza/@(zboze.Zboze).png" /></div>
+            <div class="abs towarCenaSklepik zbozeCena">@CenaPoziomu(zboze)<img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string masz = "masz";
+    private string nieMasz = "nie masz";
+    private int maxIloscButelek => (Gracz.PoziomBudynku("studnia") * 6 + 5) * 4;
+    private int liczbaButelekGracza => Gracz.IloscPrzedmiotow("pustaButelka") + Gracz.IloscPrzedmiotow("pelnaButelka");
+    private bool posiadaMaxButelek => liczbaButelekGracza >= maxIloscButelek;
+    private bool nieStacNaLepszyKanister => Gracz.Monety < Gracz.Paliwo.KosztUpgrade;
+    private bool posiadaMaxPaliwo => Gracz.Paliwo.IloscPaliwa >= Gracz.Paliwo.MaksymalnaIloscPaliwa;
+    private bool nieStacNaPelnePaliwo => Gracz.Monety < Gracz.Paliwo.CenaPelnegoPaliwa;
+    private bool nieStacNaPolowePaliwa => Gracz.Monety < Gracz.Paliwo.CenaPolowyPaliwa;
+    private bool nieStacNaCwiercPaliwa => Gracz.Monety < Gracz.Paliwo.CenaCwierciPaliwa;
+    private string KupnoPoziomu(UprawaZboza zboze) => zboze.Poziom >= 0 ? $"+ {zboze.Poziom + 1}" : "";
+    private int CenaPoziomu(UprawaZboza zboze) => (int)Math.Pow(zboze.Poziom + 1, 2) * 4;
+    private bool NieKupi(UprawaZboza zboze) => Gracz.Monety < CenaPoziomu(zboze);
+    public async Task KupPoziom(UprawaZboza zboze)
+    {
+        if (NieKupi(zboze)) return;
+        Gracz.Monety -= CenaPoziomu(zboze);
+        zboze.Poziom++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupButelke()
+    {
+        if (Gracz.Monety < 1 || posiadaMaxButelek) return;
+        Gracz.Monety --;
+        Gracz.Przedmiot("pustaButelka").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupMotyke()
+    {
+        if (Gracz.Monety < 35 || Gracz.JestPrzedmiot("motyka")) return;
+        Gracz.Monety-=35;
+        Gracz.Przedmioty.Add(new PrzedmiotGracza("motyka", 1));
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupSekator()
+    {
+       if (Gracz.Monety < 40 || Gracz.JestPrzedmiot("sekator")) return;
+        Gracz.Monety-=40;
+        Gracz.Przedmioty.Add(new PrzedmiotGracza("sekator", 1));
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task UpgradeKanistra()
+    {
+        if (nieStacNaLepszyKanister) return;
+        Gracz.Monety -= Gracz.Paliwo.KosztUpgrade;
+        Gracz.Paliwo.PoziomKanistera++;
+        Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupPelnePaliwo()
+    {
+        if (nieStacNaPelnePaliwo || posiadaMaxPaliwo) return;
+        Gracz.Monety -= Gracz.Paliwo.CenaPelnegoPaliwa;
+        Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupPolowePaliwa()
+    {
+        if (nieStacNaPolowePaliwa || posiadaMaxPaliwo) return;
+        Gracz.Monety -= Gracz.Paliwo.CenaPolowyPaliwa;
+        Gracz.Paliwo.IloscPaliwa += Gracz.Paliwo.PolowaPaliwa;
+        if (Gracz.Paliwo.IloscPaliwa > Gracz.Paliwo.MaksymalnaIloscPaliwa)
+            Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task KupCwiercPaliwa()
+    {
+        if (nieStacNaCwiercPaliwa || posiadaMaxPaliwo) return;
+        Gracz.Monety -= Gracz.Paliwo.CenaCwierciPaliwa;
+        Gracz.Paliwo.IloscPaliwa += Gracz.Paliwo.CwiercPaliwa;
+        if (Gracz.Paliwo.IloscPaliwa > Gracz.Paliwo.MaksymalnaIloscPaliwa)
+            Gracz.Paliwo.IloscPaliwa = Gracz.Paliwo.MaksymalnaIloscPaliwa;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

@@ -1,0 +1,225 @@
+﻿.zwierzyniecWidok {
+    background-image: url('../img/zwierzyniec/zwierzyniecWidok.png');
+}
+.kurnikWidok {
+    background-image: url('../img/zwierzyniec/kurnikWidok.png');
+}
+.gesiarniaWidok {
+    background-image: url('../img/zwierzyniec/gesiarniaWidok.png');
+}
+.doGospodarstwaGuzik {
+    bottom: 0;
+    left: 737px;
+    width: 388px;
+    height: 129px;
+    z-index: 3;
+}
+.doKurnikaGuzik {
+    top: 167px;
+    left: 14px;
+    width: 241px;
+    height: 162px;
+    z-index: 3;
+}
+.doGesiarniGuzik {
+    top: 566px;
+    left: 0;
+    width: 234px;
+    height: 234px;
+    z-index: 3;
+}
+.calyKurnik {
+    top: 400px;
+    left: 350px;
+    width: 600px;
+    height: 600px;
+    z-index: 2;
+}
+.calaGesiarnia {
+    top: 380px;
+    left: 330px;
+    width: 750px;
+    height: 450px;
+    z-index: 2;
+}
+.kuraWKurniku {
+    width: 80px;
+}
+.gesWGesiarni {
+    width: 120px;
+}
+.kurnikDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 45px;
+    width: 556px;
+    height: 258px;
+    z-index: 3;
+}
+.gesiarniaDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 565px;
+    height: 242px;
+    z-index: 3;
+}
+.terenKuryPrzedKurnikiem {
+    top: 200px;
+    left: 250px;
+    width: 200px;
+    height: 120px;
+    z-index: 2;
+}
+.kuraPrzedKurnikiem {
+    width: 40px;
+    z-index: 5;
+}
+.terenGesiPrzedGesiarnia {
+    top: 590px;
+    left: 230px;
+    width: 150px;
+    height: 90px;
+    z-index: 2;
+}
+.gesPrzedGesiarnia {
+    width: 50px;
+    z-index: 5;
+}
+.liczbaKurKurnik {
+    top: 95px;
+    right: 95px;
+    width: 230px;
+    height: 80px;
+    font-size: 74px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+}
+.liczbaGesiGesiarnia {
+    top: 75px;
+    right: 70px;
+    width: 240px;
+    height: 100px;
+    font-size: 74px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+}
+.ramkaWarzywKurnik {
+    top: 310px;
+    width: 90px;
+    height: 36px;
+    z-index: 2;
+    border-radius: 10px;
+    background-color: yellow;
+    font-size: 36px;
+    text-align: center;
+    opacity: 0.7;
+}
+.guzikWarzywoKurnik {
+    top: 290px;
+    width: 150px;
+    height: 150px;
+    z-index: 3;
+}
+.liczbaKukurydzyKurnik {
+    right: 465px;
+}
+.guzikKukurydzaKurnik {
+    right: 440px;
+}
+.liczbaJeczmieniaKurnik {
+    right: 270px;
+}
+.guzikJeczmienKurnik {
+    right: 240px;
+}
+.liczbaKapustyKurnik {
+    right: 75px;
+}
+.guzikKapustaKurnik {
+    right: 50px;
+}
+.liczbaJarmuzGesiarnia {
+    right: 445px;
+}
+.guzikJarmuzGesiarnia {
+    right: 420px;
+}
+.liczbaOwiesGesiarnia {
+    right: 250px;
+}
+.guzikOwiesGesiarnia {
+    right: 220px;
+}
+.liczbaOgorekGesiarnia {
+    right: 55px;
+}
+.guzikOgorekGesiarnia {
+    right: 30px;
+}
+.progresNakarmieniaKury {
+    top: 508px;
+    right: 103px;
+    width: 430px;
+    height: 40px;
+    z-index: 2;
+}
+.progresNakarmieniaGesi {
+    top: 511px;
+    right: 75px;
+    width: 430px;
+    height: 40px;
+    z-index: 2;
+}
+.liczbaJajKurnik {
+    top: 619px;
+    right: 115px;
+    width: 250px;
+    height: 80px;
+    font-size: 74px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+}
+.liczbaJajGesiarnia {
+    top: 613px;
+    right: 425px;
+    width: 100px;
+    height: 100px;
+    font-size: 74px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+}
+.nadJajemKurnik {
+    top: 609px;
+    right: 455px;
+    width: 75px;
+    height: 100px;
+    z-index: 5; 
+    pointer-events: none;
+    transform-origin: center center;
+}
+.nadJajemGesiarnia {
+    top: 600px;
+    right: 70px;
+    width: 254px;
+    height: 112px;
+    z-index: 5;
+    pointer-events: none;
+    transform-origin: center center;
+}
+.jajoKuryAnimacja {
+    animation: kolysanieJajka 1s ease-in-out;
+}
+@keyframes kolysanieJajka {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: rotate(-15deg);
+    }
+    20%, 40%, 60%, 80% {
+        transform: rotate(15deg);
+    }
+}

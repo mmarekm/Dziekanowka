@@ -1,0 +1,168 @@
+﻿.zaBramaWidok {
+    background-image: url('../img/teren/zaBrama.png');
+}
+
+.podworkoSasiadaWidok {
+    background-image: url('../img/teren/podworkoSasiada.png');
+    pointer-events: none;
+}
+
+.powrotDoDomuGuzik {
+    top: 1px;
+    left: 1569px;
+    width: 330px;
+    height: 294px;
+    z-index: 2;
+}
+
+.doSklepikuGuzik {
+    top: 150px;
+    left: 1066px;
+    width: 369px;
+    height: 317px;
+    z-index: 2;
+}
+
+.doSasiadaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 458px;
+    height: 583px;
+    z-index: 2;
+}
+.pies-straznik {
+    position: absolute;
+    width: 330px;
+    height: 330px;
+    background-image: url('../img/teren/piesObronny.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+}
+.pies-lewy {
+    right: 30%;
+    bottom: 40%;
+    animation: agresywne-szczekanie-lewy 5s ease-out forwards;
+}
+.pies-prawy {
+    right: 10%;
+    bottom: 15%;
+    animation: agresywne-szczekanie-prawy 5s ease-out forwards;
+}
+@keyframes agresywne-szczekanie-lewy {
+    0% {
+        transform: translateX(300px) translateY(100px) scale(0.5);
+        opacity: 0;
+    }
+    15% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 1;
+    }
+    20% {
+        transform: translateX(-30px) translateY(-20px) scale(1.15);
+    }
+    25% {
+        transform: translateX(20px) translateY(-10px) scale(0.95);
+    }
+    30% {
+        transform: translateX(-25px) translateY(-25px) scale(1.2);
+    }
+    35% {
+        transform: translateX(15px) translateY(-5px) scale(0.9);
+    }
+    40% {
+        transform: translateX(-20px) translateY(-20px) scale(1.15);
+    }
+    45% {
+        transform: translateX(10px) translateY(-8px) scale(0.95);
+    }
+    50% {
+        transform: translateX(-15px) translateY(-15px) scale(1.1);
+    }
+    55% {
+        transform: translateX(8px) translateY(-5px) scale(0.95);
+    }
+    60% {
+        transform: translateX(-10px) translateY(-12px) scale(1.08);
+    }
+    65% {
+        transform: translateX(5px) translateY(-3px) scale(0.97);
+    }
+    70% {
+        transform: translateX(-8px) translateY(-10px) scale(1.05);
+    }
+    75% {
+        transform: translateX(3px) translateY(-2px) scale(0.98);
+    }
+    80% {
+        transform: translateX(-5px) translateY(-8px) scale(1.03);
+    }
+    85% {
+        transform: translateX(2px) translateY(-1px) scale(0.99);
+    }
+    90% {
+        transform: translateX(-3px) translateY(-5px) scale(1.02);
+    }
+    95%, 100% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+@keyframes agresywne-szczekanie-prawy {
+    0% {
+        transform: translateX(300px) translateY(100px) scale(0.5);
+        opacity: 0;
+    }
+    8% {
+        transform: translateX(300px) translateY(100px) scale(0.5);
+        opacity: 0;
+    }
+    25% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 1;
+    }
+    30% {
+        transform: translateX(30px) translateY(-20px) scale(1.15);
+    }
+    35% {
+        transform: translateX(-20px) translateY(-10px) scale(0.95);
+    }
+    40% {
+        transform: translateX(25px) translateY(-25px) scale(1.2);
+    }
+    45% {
+        transform: translateX(-15px) translateY(-5px) scale(0.9);
+    }
+    50% {
+        transform: translateX(20px) translateY(-20px) scale(1.15);
+    }
+    55% {
+        transform: translateX(-10px) translateY(-8px) scale(0.95);
+    }
+    60% {
+        transform: translateX(15px) translateY(-15px) scale(1.1);
+    }
+    65% {
+        transform: translateX(-8px) translateY(-5px) scale(0.95);
+    }
+    70% {
+        transform: translateX(10px) translateY(-12px) scale(1.08);
+    }
+    75% {
+        transform: translateX(-5px) translateY(-3px) scale(0.97);
+    }
+    80% {
+        transform: translateX(8px) translateY(-10px) scale(1.05);
+    }
+    85% {
+        transform: translateX(-3px) translateY(-2px) scale(0.98);
+    }
+    90% {
+        transform: translateX(5px) translateY(-8px) scale(1.03);
+    }
+    95%, 100% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 1;
+    }
+}

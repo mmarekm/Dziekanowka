@@ -1,0 +1,35 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="sklepikOwoceWidok widok rel">
+    <div class="abs wyjscieSklepikOwoceGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama)" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikOwoce.png' /></button></div>
+    <div class="abs guzikSklepikOwoceDoGlownego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepik)"><img src="img/budynki/sklepikOwoceDoGlownego.png" /></button></div>
+    <div class="abs sklepikOwoceMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
+    @for (int i = 0; i < Gracz.Sady.Count; i++)
+    {
+        var drzewo = Gracz.Sady[i];
+        var index = i;
+        <div class="abs towarOwoc owoc@(i) @(NieKupi(drzewo) ? "szaryCien nieMoznaKliknac" : "cPoint zielonyCienHover")" @onclick="async () => await KupPoziom(drzewo)">
+            <div class="owocKtoryPoziom">@KupnoPoziomu(drzewo)</div>
+            <div class="owocObrazek"><img class="obrazekSieMiesciBlok" src="img/przedmioty/owoce/@(drzewo.Owoc).png" /></div>
+            <div class="owocCena">@CenaPoziomu(drzewo)<img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string KupnoPoziomu(SadyGracza drzewo) => drzewo.Poziom >= 0 ? $"+ {drzewo.Poziom + 1}" : "";
+    private int CenaPoziomu(SadyGracza drzewo) => (int)Math.Pow(drzewo.Poziom + 1, 2) * 4;
+    private bool NieKupi(SadyGracza drzewo) => drzewo.Poziom < 0 || Gracz.Monety < CenaPoziomu(drzewo);
+    public async Task KupPoziom(SadyGracza drzewo)
+    {
+        if (NieKupi(drzewo)) return;
+        Gracz.Monety -= CenaPoziomu(drzewo);
+        drzewo.Poziom++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

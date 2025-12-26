@@ -1,0 +1,19 @@
+﻿@using Dziekanowka.Mechanizm
+<div class="zaBramaWidok widok rel">
+    <div class="abs powrotDoDomuGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)" class="wyroznionyGuzik"><img src='img/teren/doDomuZZaBramyKlik.png' /></button></div>
+    <div class="abs doSklepikuGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepik)" class="wyroznionyGuzik"><img src='img/budynki/sklepik.png' /></button></div>
+    <div class="abs doSasiadaGuzik"><button @onclick="DoSasiada" class="wyroznionyGuzik"><img src="img/teren/zaBramaDoSasiada.png" /></button></div>
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task DoSasiada()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PsySasiadaSzczekaja);
+        await Task.Delay(5000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama);
+    }
+}

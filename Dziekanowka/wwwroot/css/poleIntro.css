@@ -1,0 +1,88 @@
+﻿.poleIntroWidok {
+    background-image: url('../img/pole/poleIntro.png');
+    color: white;
+}
+.sprzedawaniePoleIntro {
+    top: 680px;
+    left: 920px;
+    z-index: 2;
+    display: flex;
+    gap: 20px;
+    width: 300px;
+}
+.sprzedawcaPoleIntro {
+    width: 150px;
+}
+.cenaDrogaPoleIntro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tylko1PoleIntro {
+    height: 75px;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.cenaPoleIntro {
+    height: 75px;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.stanPaliwaPoleIntro {
+    top: 930px;
+    left: 1720px;
+    width: 180px;
+    height: 50px;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+}
+.kanisterPoleIntro {
+    width: 50px;
+}
+.guzikPowrotuZPolaDoGarazuGospodarczego {
+    top: 657px;
+    left: 1448px;
+    width: 398px;
+    height: 294px;
+    z-index: 2;
+}
+.guzikNaPole1ZIntro {
+    top: 0;
+    left: 0;
+    width: 557px;
+    height: 410px;
+    z-index: 2;
+}
+.guzikNaPole2ZIntro {
+    top: 0;
+    left: 572px;
+    width: 596px;
+    height: 378px;
+    z-index: 2;
+}
+.guzikDoSadu1ZIntro {
+    top: 0;
+    left: 1196px;
+    width: 367px;
+    height: 406px;
+    z-index: 2;
+}
+.guzikDoSadu2ZIntro {
+    top: 0;
+    right: 0;
+    width: 322px;
+    height: 416px;
+    z-index: 2;
+}

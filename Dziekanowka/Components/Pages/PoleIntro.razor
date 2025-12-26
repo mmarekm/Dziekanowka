@@ -1,0 +1,43 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="poleIntroWidok widok rel">
+    <div class="abs guzikPowrotuZPolaDoGarazuGospodarczego"><button class="wyroznionyGuzik @(Gracz.Paliwo.IloscPaliwa < 1 ? "nieMoznaKliknac" : "")" @onclick="DoGospodarstwa"><img src="img/pole/doGospodarstwaZPola.png" /></button></div>
+    <div class="abs guzikNaPole1ZIntro"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1)" class="wyroznionyGuzik"><img src="img/pole/pole1ZIntro.png" /></button></div>
+    <div class="abs guzikNaPole2ZIntro"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2)" class="wyroznionyGuzik"><img src="img/pole/pole2ZIntro.png" /></button></div>
+    <div class="abs guzikDoSadu1ZIntro"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sad1)" class="wyroznionyGuzik"><img src="img/pole/sad1ZIntro.png" /></button></div>
+    <div class="abs guzikDoSadu2ZIntro"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sad2)" class="wyroznionyGuzik"><img src="img/pole/sad2ZIntro.png" /></button></div>
+    <div class="abs sprzedawaniePoleIntro @(Gracz.Monety < 8 ? "nieMoznaKliknac" : "cPoint") @(Gracz.Paliwo.IloscPaliwa < 1 ? "" : "ukryty")" @onclick="SprzedazJednego">
+        <div class="sprzedawcaPoleIntro"><img class="obrazekWypelnia" src="img/pole/sprzedawcaPoleIntro.png"/></div>
+        <div class="cenaDrogaPoleIntro">
+            <div class="tylko1PoleIntro">1 <img class="obrazekWypelnia" src="img/przedmioty/kanister.png"/></div>
+            <div class="cenaPoleIntro">8 <img class="obrazekWypelnia" src="img/przedmioty/moneta.png"/></div>
+        </div>
+    </div>
+    <div class="abs stanPaliwaPoleIntro">
+        <div class="kanisterPoleIntro"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
+        <progress class="pasekPaliwa" value="@Gracz.Paliwo.IloscPaliwa" max="@Gracz.Paliwo.MaksymalnaIloscPaliwa" style="--procent: @((int)((double)Gracz.Paliwo.IloscPaliwa / Gracz.Paliwo.MaksymalnaIloscPaliwa * 100) / 10) "></progress>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task SprzedazJednego()
+    {
+        if (Gracz.Monety < 8) return;
+        Gracz.Monety -= 8;
+        Gracz.Paliwo.IloscPaliwa++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task DoGospodarstwa()
+    {
+        if (Gracz.Paliwo.IloscPaliwa < 1) return;
+        Gracz.Paliwo.IloscPaliwa--;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.AnimacjaTraktoraPowrot);
+        await Task.Delay(5000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy);
+    }
+}

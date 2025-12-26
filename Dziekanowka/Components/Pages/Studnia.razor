@@ -1,0 +1,83 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="studniaWidok@(Gracz.PoziomBudynku("studnia")) widok rel">
+    <div class="abs liczbaMonetStudnia@(Gracz.PoziomBudynku("studnia"))">@Gracz.Monety</div>
+    <div class="abs guzikWyjsciaZeStudni@(Gracz.PoziomBudynku("studnia"))"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)" class="wyroznionyGuzik"><img src="img/budynki/confirmStudzienny@(Gracz.PoziomBudynku("studnia")).png" /></button></div>
+    <div class="abs calaSzafaStudniarza@(Gracz.PoziomBudynku("studnia")) @(NieBedzieNalewane ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick='async () => await NalejDoButelki(Gracz.PoziomBudynku("studnia"))'></div>
+    <div class="abs pierwszyRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">@RenderujPolke(0)</div>
+    <div class="abs drugiRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">@RenderujPolke(1)</div>
+    <div class="abs trzeciRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">@RenderujPolke(2)</div>
+    <div class="abs czwartyRzadButelekStudnia@(Gracz.PoziomBudynku("studnia"))">@RenderujPolke(3)</div>
+    @if (Gracz.PoziomBudynku("studnia") == 1)
+    {
+        <div class="abs klikDoUlepszeniaStudni @(MoznaUlepszycStudnie ? "cPoint wyroznionyZielonoDiv" : "nieMoznaKliknac")" @onclick="UlepszStudnie"></div>
+        <div class="abs ulepszanieStudni">
+            <div class="piktogramUpgradeStudnia"><img src="img/budynki/upgradeStudzienny.png" /></div>
+            <div class="cenaUpgradeStudnia">@Gracz.KosztUlepszeniaBudynku("studnia")</div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int CenaUlepszeniaStudni() => Gracz.KosztUlepszeniaBudynku("studnia");
+    private bool MoznaUlepszycStudnie => Gracz.Monety >= CenaUlepszeniaStudni();
+    private int PojemnoscPolki(int poziomStudni) => 6 * poziomStudni + 5;
+    private bool NieBedzieNalewane => Gracz.Przedmiot("pustaButelka").Ilosc == 0 || Gracz.Monety == 0;
+    private void UlepszStudnie()
+    {
+        if (!MoznaUlepszycStudnie) return;
+        Gracz.Monety -= CenaUlepszeniaStudni();
+        Gracz.UlepszBudynek("studnia");
+    }
+    private async Task NalejDoButelki(int poziomStudni)
+    {
+        if (NieBedzieNalewane) return;
+        var iloscDoNalewania = Math.Min(poziomStudni, Gracz.Przedmiot("pustaButelka").Ilosc);
+        Gracz.Przedmiot("pustaButelka").Ilosc -= iloscDoNalewania;
+        Gracz.Przedmiot("pelnaButelka").Ilosc += iloscDoNalewania;
+        Gracz.Monety--;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private (int pelne, int puste) ButelkiNaPolce(int nrPolki)
+    {
+        var pojemnoscPolki = PojemnoscPolki(Gracz.PoziomBudynku("studnia"));
+        var indexPoczatkowy = nrPolki * pojemnoscPolki;
+        var pelneNaPolce = 0;
+        if (Gracz.Przedmiot("pelnaButelka").Ilosc > indexPoczatkowy)
+            pelneNaPolce = Math.Min(pojemnoscPolki, Gracz.Przedmiot("pelnaButelka").Ilosc - indexPoczatkowy);
+        var wolneMiejsce = pojemnoscPolki - pelneNaPolce;
+        var pelneOgolem = Gracz.Przedmiot("pelnaButelka").Ilosc;
+        var pustychZuzytych = Math.Max(0, indexPoczatkowy - pelneOgolem);
+        var pusteNaPolce = 0;
+        if (Gracz.Przedmiot("pustaButelka").Ilosc > pustychZuzytych)
+            pusteNaPolce = Math.Min(wolneMiejsce, Gracz.Przedmiot("pustaButelka").Ilosc - pustychZuzytych);
+        return (pelneNaPolce, pusteNaPolce);
+    }
+    private RenderFragment RenderujPolke(int nrPolki) => builder =>
+    {
+        var (pelne, puste) = ButelkiNaPolce(nrPolki);
+        for (int i = 0; i < pelne; i++)
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "butelkaStudnia");
+            builder.OpenElement(2, "img");
+            builder.AddAttribute(3, "src", "img/przedmioty/butelkaPelnaStudnia.png");
+            builder.CloseElement();
+            builder.CloseElement();
+        }
+        for (int i = 0; i < puste; i++)
+        {
+            builder.OpenElement(4, "div");
+            builder.AddAttribute(5, "class", "butelkaStudnia");
+            builder.OpenElement(6, "img");
+            builder.AddAttribute(7, "src", "img/przedmioty/butelkaPustaStudnia.png");
+            builder.CloseElement();
+            builder.CloseElement();
+        }
+    };
+}

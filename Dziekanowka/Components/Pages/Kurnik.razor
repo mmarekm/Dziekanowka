@@ -1,0 +1,114 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
+<div class="kurnikWidok widok rel">
+    <div class="abs calyKurnik">
+        @if (Gracz.JestZwierze("kura"))
+        {
+            @for (int i = 0; i < Gracz.Zwierze("kura").Ilosc; i++)
+            {
+                int index = i;
+                <img class="abs kuraWKurniku obrazekSieMiesci" src="img/zwierzyniec/kura.png" style="@StylKuryWKurniku(index)" />
+            }
+        }
+    </div>
+    <div class="abs kurnikDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/KurnikDoZwierzyniec.png" /></button></div>
+    <div class="abs liczbaKurKurnik">@(Gracz.Zwierze("kura").Ilosc)</div>
+    <div class="abs progresNakarmieniaKury"><progress class="pasekPaliwa" value="@Gracz.Zwierze("kura").Nakarmione" max="@Gracz.Zwierze("kura").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("kura").Nakarmione / Gracz.Zwierze("kura").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs liczbaJajKurnik">@(Gracz.ProduktZ("jajoKurze").Ilosc)</div>
+    <div class="abs nadJajemKurnik @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajoKurnik.png"/></div>
+    <div class="abs ramkaWarzywKurnik liczbaKukurydzyKurnik">@(Gracz.Warzywo("kukurydza").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikKukurydzaKurnik @(Gracz.JestZwierze("kura") && Gracz.JestWarzywo("kukurydza") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("kukurydza")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaJeczmieniaKurnik">@(Gracz.Zboze("jeczmien").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikJeczmienKurnik @(Gracz.JestZwierze("kura") && Gracz.JestZboze("jeczmien") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("jeczmien")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaKapustyKurnik">@(Gracz.Warzywo("kapustaWłoska").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikKapustaKurnik @(Gracz.JestZwierze("kura") && Gracz.JestWarzywo("kapustaWłoska") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("kapustaWłoska")'></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private List<PozycjaKury> pozycjeKur = new();
+    private System.Threading.Timer? timerDzwiekKury;
+    private List<System.Threading.Timer?> timeryKur = new();
+    private Random random = new Random();
+    private bool animujJajo = false;
+    private class PozycjaKury
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("kura"))
+        {
+            InicjalizujKury();
+            GdakanieKury();
+        }
+    }
+    private void InicjalizujKury()
+    {
+        pozycjeKur.Clear();
+        foreach (var timer in timeryKur)
+            timer?.Dispose();
+        timeryKur.Clear();
+        for (int i = 0; i < Gracz.Zwierze("kura").Ilosc; i++)
+        {
+            pozycjeKur.Add(new PozycjaKury { X = random.Next(0, 520), Y = random.Next(0, 520), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(2, 5)});
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeKury(index); SpacerowanieKury(index); }, null, TimeSpan.FromSeconds(random.Next(1, 5)), Timeout.InfiniteTimeSpan);
+            timeryKur.Add(timer);
+        }
+    }
+    private void GdakanieKury() => timerDzwiekKury = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/kuraGdacze.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private string StylKuryWKurniku(int index)
+    {
+        if (index >= pozycjeKur.Count) return "";
+        var kura = pozycjeKur[index];
+        return $"left: {kura.X}px; top: {kura.Y}px; transform: scaleX({(kura.PatrzyWLewo ? -1 : 1)}); transition: left {kura.CzasPrzejscia}s ease-in-out, top {kura.CzasPrzejscia}s ease-in-out;";
+    }
+    private void SpacerowanieKury(int index)
+    {
+        if (index >= timeryKur.Count) return;
+        timeryKur[index]?.Dispose();
+        timeryKur[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeKury(index); SpacerowanieKury(index); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeKury(int index)
+    {
+        if (index >= pozycjeKur.Count) return;
+        var kura = pozycjeKur[index];
+        var nowaX = random.Next(0, 520);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 520);
+        kura.CzasPrzejscia = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmKure(string karma)
+    {
+        if (!Gracz.JestZwierze("kura") || !(karma != "jeczmien" ? Gracz.JestWarzywo(karma) : Gracz.JestZboze(karma))) return;
+        (karma != "jeczmien" ? Gracz.Warzywo(karma) : Gracz.Zboze(karma)).Ilosc--;
+        Gracz.Zwierze("kura").Nakarmione++;
+        if (Gracz.Zwierze("kura").Nakarmione >= Gracz.Zwierze("kura").DajeProdukt())
+        {
+            Gracz.Zwierze("kura").Nakarmione = 0;
+            Gracz.ProduktZ("jajoKurze").Ilosc++;
+            animujJajo = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajo = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public void Dispose()
+    {
+        foreach (var timer in timeryKur)
+            timer?.Dispose();
+        timerDzwiekKury?.Dispose();
+    }
+}

@@ -1,0 +1,63 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="pole2Widok widok rel">
+    <div class="abs stanButelekPole">@Gracz.Przedmiot("pelnaButelka").Ilosc <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
+    <div class="abs naPoleIntroZPole2"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro)"><img src="img/pole/naPoleIntroZPole2.png" /></button></div>
+    <div class="abs naPole1ZPole2"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1)"><img src="img/pole/naPole1ZPole2.png" /></button></div>
+    <div class="abs doZbozaZPole2"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze)"><img src="img/pole/pole2DoZboza.png" /></button></div>
+    @for (int x = 1; x <= 5; x++)
+    {
+        var localX = x;
+        @for (int y = 1; y <= 4; y++)
+        {
+            var localY = y;
+            var pole = Gracz.PolaUprawne.First(p => p.Id == 2 && p.X == localX && p.Y == localY);
+            <div class="@($"abs pojedynczePole1 pole1{localX}{localY}")">
+                <div class="abs obrysPola @(!MoznaUprawiac(pole) ? "nieMoznaKliknac" : "wyroznionyDiv wyroznionyZielonoDiv")" @onclick="async () => await UprawiajPole(pole)">
+                <img class="obrazekWypelnia" src="@($"img/pole/pole{(pole.Poziom > -1 ? "Zadbane" : "Zaniedbane")}.png")" />
+                @if (pole.Poziom < 0)
+                {
+                    <div class="abs ramkaMotyka @(Gracz.JestPrzedmiot("motyka") ? "motykaTrue" : "motykaFalse")"></div>
+                }
+                else
+                {
+                    <div class="abs ileZyskuZPola">+ @pole.Poziom</div>
+                }
+                <div class="abs warzywoNaPolu"><img class="obrazekWypelnia" src="@($"img/przedmioty/warzywa/{pole.Warzywo}.png")" /></div>
+                <div class="abs ileWarzywPole">
+                    <img class="obrazekWypelnia" src="img/przedmioty/worekPole.png" />
+                    <div class="abs liczbaWarzywPole">@pole.LiczbaPosiadanych(Gracz)</div>
+                </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool MoznaUprawiac(PoleUprawne pole) => (pole.Poziom < 0 && Gracz.JestPrzedmiot("motyka")) || (pole.Poziom > 0 && Gracz.IloscPrzedmiotow("pelnaButelka") > 0);
+    public async Task UprawiajPole(PoleUprawne pole)
+    {
+        if (!MoznaUprawiac(pole)) return;
+        if (pole.Poziom < 0 && Gracz.JestPrzedmiot("motyka"))
+        {
+            pole.Poziom = 0;
+            Gracz.Przedmioty.RemoveAll(p => p.Nazwa == "motyka");
+            await NaZmianeEkranu.InvokeAsync(EkranGry.CzyszczeniePola);
+            await Task.Delay(5000);
+            await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2);
+        }
+        else
+        {
+            Gracz.Warzywa.First(w => w.Nazwa == pole.Warzywo).Ilosc += pole.Poziom;
+            Gracz.Przedmiot("pelnaButelka").Ilosc--;
+            Gracz.Przedmiot("pustaButelka").Ilosc++;
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

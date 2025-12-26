@@ -1,0 +1,29 @@
+﻿.powitanie {
+    background-image: url('../img/powitanie.png');
+}
+.btnStart img {
+    display: block;
+    width: 120px;
+    height: auto;
+    border-radius: 15px;
+}
+.guzikStartMama {
+    top: 160px;
+    left: 160px;
+}
+.guzikStartTata {
+    top: 210px;
+    left: 500px;
+}
+.guzikStartUla {
+    top: 600px;
+    left: 1500px;
+}
+.guzikStartBasia {
+    top: 625px;
+    left: 1680px;
+}
+.guzikStartAnia {
+    top: 700px;
+    left: 790px;
+}

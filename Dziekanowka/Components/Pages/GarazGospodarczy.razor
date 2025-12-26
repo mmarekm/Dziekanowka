@@ -1,0 +1,34 @@
+﻿@using Dziekanowka.Mechanizm
+<div class="garazGospodarczyWidok widok rel">
+    <div class="abs guzikWyjsciaZGarazuGospodarczego"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)" class="wyroznionyGuzik"><img src="img/budynki/confirmGarazGospodarczy.png" /></button></div>
+    <div class="abs guzikNaPoleIntroZGarazu"><button class="wyroznionyGuzik @(Gracz.Paliwo.IloscPaliwa < 1 ? "nieMoznaKliknac" : "")" @onclick="NaPole"><img src="img/budynki/wyjazdZGarazuNaPole.png" /></button></div>
+    <div class="abs koszenieTrawy"><button class="wyroznionyGuzik @(Gracz.Paliwo.IloscPaliwa < 1 ? "nieMoznaKliknac" : "")" @onclick="Koszenie"><img src="img/budynki/garazKosiarka.png" /></button></div>
+    <div class="abs stanPaliwaGarazGospodarczy">
+        <div class="kanisterGarazGospodarczy"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
+        <progress class="pasekPaliwa" value="@Gracz.Paliwo.IloscPaliwa" max="@Gracz.Paliwo.MaksymalnaIloscPaliwa" style="--procent: @((int)((double)Gracz.Paliwo.IloscPaliwa / Gracz.Paliwo.MaksymalnaIloscPaliwa * 100) / 10) "></progress>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Gracz Gracz { get; set; } = null!;
+    [Parameter]
+    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task NaPole()
+    {
+        if (Gracz.Paliwo.IloscPaliwa < 1) return;
+        Gracz.Paliwo.IloscPaliwa--;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.AnimacjaTraktora);
+        await Task.Delay(5000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro);
+    }
+    public async Task Koszenie()
+    {
+        if (Gracz.Paliwo.IloscPaliwa < 1) return;
+        Gracz.Paliwo.IloscPaliwa--;
+        Gracz.Przedmioty.First(p => p.Nazwa == "siano").Ilosc++;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KoszenieTrawy);
+        await Task.Delay(5000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy);
+    }
+}

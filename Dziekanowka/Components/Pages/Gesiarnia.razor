@@ -1,0 +1,114 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
+<div class="gesiarniaWidok widok rel">
+    <div class="abs calaGesiarnia">
+        @if (Gracz.JestZwierze("ges"))
+        {
+            @for (int i = 0; i < Gracz.Zwierze("ges").Ilosc; i++)
+            {
+                int index = i;
+                <img class="abs gesWGesiarni obrazekSieMiesci" src="img/zwierzyniec/ges.png" style="@StylGesiWGesiarni(index)" />
+            }
+        }
+    </div>
+    <div class="abs gesiarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/gesiarniaDoZwierzyniec.png" /></button></div>
+    <div class="abs liczbaGesiGesiarnia">@(Gracz.Zwierze("ges").Ilosc)</div>
+    <div class="abs progresNakarmieniaGesi"><progress class="pasekPaliwa" value="@Gracz.Zwierze("ges").Nakarmione" max="@Gracz.Zwierze("ges").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("ges").Nakarmione / Gracz.Zwierze("ges").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs liczbaJajGesiarnia">@(Gracz.ProduktZ("jajoGesie").Ilosc)</div>
+    <div class="abs nadJajemGesiarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaGesiarnia.png" /></div>
+    <div class="abs ramkaWarzywKurnik liczbaJarmuzGesiarnia">@(Gracz.Warzywo("jarmuż").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikJarmuzGesiarnia @(Gracz.JestZwierze("ges") && Gracz.JestWarzywo("jarmuż") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGes("jarmuż")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaOwiesGesiarnia">@(Gracz.Zboza.First(w => w.Nazwa == "owies").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikOwiesGesiarnia @(Gracz.JestZwierze("ges") && Gracz.JestZboze("owies") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGes("owies")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaOgorekGesiarnia">@(Gracz.Warzywa.First(w => w.Nazwa == "ogórek").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikOgorekGesiarnia @(Gracz.JestZwierze("ges") && Gracz.JestWarzywo("ogórek") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGes("ogórek")'></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool animujJajo = false;
+    private List<PozycjaGesi> pozycjeGesi = new();
+    private System.Threading.Timer? timerDzwiekGesi;
+    private List<System.Threading.Timer?> timeryGesi = new();
+    private Random random = new Random();
+    private class PozycjaGesi
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("ges"))
+        {
+            InicjalizujGesi();
+            GeganieGesi();
+        }
+    }
+    private void InicjalizujGesi()
+    {
+        pozycjeGesi.Clear();
+        foreach (var timer in timeryGesi)
+            timer?.Dispose();
+        timeryGesi.Clear();
+        for (int i = 0; i < Gracz.Zwierze("ges").Ilosc; i++)
+        {
+            pozycjeGesi.Add(new PozycjaGesi { X = random.Next(0, 630), Y = random.Next(0, 330), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(2, 5) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeGesi(index); SpacerowanieGesi(index); }, null, TimeSpan.FromSeconds(random.Next(1, 5)), Timeout.InfiniteTimeSpan);
+            timeryGesi.Add(timer);
+        }
+    }
+    private void GeganieGesi() => timerDzwiekGesi = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/geganieGesi.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieGesi(int index)
+    {
+        if (index >= timeryGesi.Count) return;
+        timeryGesi[index]?.Dispose();
+        timeryGesi[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeGesi(index); SpacerowanieGesi(index); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeGesi(int index)
+    {
+        if (index >= pozycjeGesi.Count) return;
+        var kura = pozycjeGesi[index];
+        var nowaX = random.Next(0, 630);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 330);
+        kura.CzasPrzejscia = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmGes(string karma)
+    {
+        if (!Gracz.JestZwierze("ges") || !(karma != "owies" ? Gracz.JestWarzywo(karma) : Gracz.JestZboze(karma))) return;
+        (karma != "owies" ? Gracz.Warzywo(karma) : Gracz.Zboze(karma)).Ilosc--;
+        Gracz.Zwierze("ges").Nakarmione++;
+        if (Gracz.Zwierze("ges").Nakarmione >= Gracz.Zwierze("ges").DajeProdukt())
+        {
+            Gracz.Zwierze("ges").Nakarmione = 0;
+            Gracz.ProduktZ("jajoGesie").Ilosc++;
+            animujJajo = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajo = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private string StylGesiWGesiarni(int index)
+    {
+        if (index >= pozycjeGesi.Count) return "";
+        var ges = pozycjeGesi[index];
+        return $"left: {ges.X}px; top: {ges.Y}px; transform: scaleX({(ges.PatrzyWLewo ? 1 : -1)}); transition: left {ges.CzasPrzejscia}s ease-in-out, top {ges.CzasPrzejscia}s ease-in-out;";
+    }
+    public void Dispose()
+    {
+        foreach (var timer in timeryGesi)
+            timer?.Dispose();
+        timerDzwiekGesi?.Dispose();
+    }
+}

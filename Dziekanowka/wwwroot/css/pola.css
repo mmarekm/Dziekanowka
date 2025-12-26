@@ -1,0 +1,391 @@
+﻿.pole1Widok {
+    background-image: url('../img/pole/pole1.png');
+}
+.pole2Widok {
+    background-image: url('../img/pole/pole2.png');
+}
+.zbozeWidok {
+    background-image: url('../img/pole/zboza.png');
+}
+.czyszczeniePolaWidok {
+    background-image: url('../img/pole/czyszczeniePola.png');
+    pointer-events: none;
+}
+.stanButelekPole {
+    width: 200px;
+    height: 80px;
+    top: 60px;
+    left: 950px;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    font-weight: bold;
+}
+.stanButelekZboze {
+    width: 200px;
+    height: 80px;
+    bottom: 40px;
+    left: 900px;
+    z-index: 3;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    font-weight: bold;
+}
+.naPoleIntroZPole1 {
+    top: 351px;
+    left: 0;
+    width: 300px;
+    height: 200px;
+    z-index: 2;
+}
+.naPoleIntroZPole2 {
+    top: 379px;
+    right: 0;
+    width: 257px;
+    height: 272px;
+    z-index: 2;
+}
+.naPole1ZPole2 {
+    top: 341px;
+    left: 0;
+    width: 240px;
+    height: 349px;
+    z-index: 2;
+}
+.naPole2ZPole1 {
+    top: 346px;
+    right: 0;
+    width: 263px;
+    height: 272px;
+    z-index: 2;
+}
+.naPole1ZeZboza {
+    bottom: 0;
+    left: 0;
+    width: 324px;
+    height: 85px;
+    z-index: 2;
+}
+.naPole2ZeZboza {
+    bottom: 0;
+    left: 440px;
+    width: 375px;
+    height: 97px;
+    z-index: 2;
+}
+.doZbozaZPole1 {
+    top: 0;
+    left: 680px;
+    width: 297px;
+    height: 153px;
+    z-index: 2;
+}
+.doZbozaZPole2 {
+    top: 0;
+    left: 650px;
+    width: 263px;
+    height: 147px;
+    z-index: 2;
+}
+.doSadu1ZeZboza {
+    bottom: 0;
+    left: 1098px;
+    width: 351px;
+    height: 114px;
+    z-index: 2;
+}
+.doSadu2ZeZboza {
+    bottom: 0;
+    right: 0;
+    width: 384px;
+    height: 118px;
+    z-index: 2;
+}
+.obrysPola {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+.warzywoNaPolu {
+    width: 90px;
+    height: 90px;
+    top: 33px;
+    left: 45px;
+    z-index: 3;
+}
+.pojedynczePole1 {
+    width: 179px;
+    height: 156px;
+}
+.ileWarzywPole {
+    width: 55px;
+    height: 55px;
+    top: 10px;
+    left: 10px;
+    z-index: 4;
+}
+.liczbaWarzywPole {
+    width: 23px;
+    height: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 22px;
+    left: 15px;
+    z-index: 5;
+    font-size: 20px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+.ramkaMotyka {
+    width: 40px;
+    height: 70px;
+    bottom: 10px;
+    right: 8px;
+    z-index: 4;
+}
+.ileZyskuZPola {
+    width: 40px;
+    height: 30px;
+    bottom: 10px;
+    right: 8px;
+    z-index: 4;
+    color: lime;
+    font-size: 22px;
+}
+.motykaTrue {
+    border: dashed 2px lime;
+}
+.motykaFalse {
+    border: dashed 2px red;
+}
+.motykaDziala {
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    transform-origin: center bottom;
+}
+.motyka {
+    width: 120px;
+    height: 120px;
+    z-index: 10;
+    transform-origin: bottom center;
+    animation: dziabanie 0.8s ease-in-out 5 forwards, ukryj 0s 4s forwards;
+    background-image: url('/img/przedmioty/motyka1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+.motyka-gorna, .motyka-dolna {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 60px;
+    background-image: url('/img/przedmioty/motyka1.png');
+    background-size: 100% 200%;
+    background-repeat: no-repeat;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    z-index: 20;
+    bottom: 50%;
+}
+.motyka-gorna {
+    background-position: top;
+    animation: gornaPolowa 1s 4s forwards;
+    transform-origin: bottom center;
+}
+.motyka-dolna {
+    background-position: bottom;
+    animation: dolnaPolowa 1s 4s forwards;
+    transform-origin: top center;
+}
+.pojedynczeZboze {
+    top: 0;
+    width: 250px;
+    height: 680px;
+}
+.ileZyskuZboza {
+    width: 80px;
+    height: 60px;
+    bottom: 10px;
+    right: 8px;
+    z-index: 4;
+    color: orange;
+    font-size: 50px;
+}
+.ileZbozaPole {
+    width: 160px;
+    height: 160px;
+    top: 30px;
+    left: 45px;
+    z-index: 4;
+}
+.liczbaZbozaPole {
+    width: 60px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 65px;
+    left: 50px;
+    z-index: 5;
+    font-size: 40px;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+}
+.pole111 {
+    top: 180px;
+    left: 480px;
+}
+.pole121 {
+    top: 180px;
+    left: 673px;
+}
+.pole131 {
+    top: 180px;
+    left: 866px;
+}
+.pole141 {
+    top: 180px;
+    left: 1059px;
+}
+.pole151 {
+    top: 180px;
+    left: 1252px;
+}
+.pole112 {
+    top: 344px;
+    left: 480px;
+}
+.pole122 {
+    top: 344px;
+    left: 673px;
+}
+.pole132 {
+    top: 344px;
+    left: 866px;
+}
+.pole142 {
+    top: 344px;
+    left: 1059px;
+}
+.pole152 {
+    top: 344px;
+    left: 1252px;
+}
+.pole113 {
+    top: 502px;
+    left: 480px;
+}
+.pole123 {
+    top: 502px;
+    left: 673px;
+}
+.pole133 {
+    top: 502px;
+    left: 866px;
+}
+.pole143 {
+    top: 502px;
+    left: 1059px;
+}
+.pole153 {
+    top: 502px;
+    left: 1252px;
+}
+.pole114 {
+    top: 663px;
+    left: 480px;
+}
+.pole124 {
+    top: 663px;
+    left: 673px;
+}
+.pole134 {
+    top: 663px;
+    left: 866px;
+}
+.pole144 {
+    top: 663px;
+    left: 1059px;
+}
+.pole154 {
+    top: 663px;
+    left: 1252px;
+}
+.zbozePole0 {
+    left: 0;
+}
+.zbozePole1 {
+    left: 285px;
+}
+.zbozePole2 {
+    left: 560px;
+}
+.zbozePole3 {
+    left: 835px;
+}
+.zbozePole4 {
+    left: 1105px;
+}
+.zbozePole5 {
+    left: 1375px;
+}
+.zbozePole6 {
+    left: 1650px;
+}
+@keyframes dziabanie {
+    0% {
+        transform: rotate(-10deg) translateY(0);
+    }
+    25% {
+        transform: rotate(45deg) translateY(-30px);
+    }
+    50% {
+        transform: rotate(45deg) translateY(-30px);
+    }
+    75% {
+        transform: rotate(-10deg) translateY(0);
+    }
+    100% {
+        transform: rotate(-10deg) translateY(0);
+    }
+}
+@keyframes ukryj {
+    to {
+        opacity: 0;
+    }
+}
+@keyframes gornaPolowa {
+    0% {
+        opacity: 1;
+        transform: rotate(0deg) translateX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(25deg) translateX(40px) translateY(-20px);
+    }
+}
+@keyframes dolnaPolowa {
+    0% {
+        opacity: 1;
+        transform: rotate(0deg) translateX(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: rotate(-15deg) translateX(-30px) translateY(10px);
+    }
+}

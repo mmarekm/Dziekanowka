@@ -1,0 +1,298 @@
+﻿.sad1Widok {
+    background-image: url('../img/pole/sad1.png');
+}
+.sad2Widok {
+    background-image: url('../img/pole/sad2.png');
+}
+.czyszczenieDrzewaWidok {
+    pointer-events: none;
+}
+.naPoleIntroZSad1 {
+    bottom: 0;
+    left: 755px;
+    width: 449px;
+    height: 169px;
+    z-index: 2;
+}
+.naPoleIntroZSad2 {
+    bottom: 0;
+    left: 754px;
+    width: 416px;
+    height: 109px;
+    z-index: 2;
+}
+.doZbozaZSad1 {
+    top: 0;
+    left: 832px;
+    width: 158px;
+    height: 78px;
+    z-index: 2;
+}
+.doZbozaZSad2 {
+    top: 0;
+    left: 861px;
+    width: 124px;
+    height: 95px;
+    z-index: 2;
+}
+.pojedynczeDrzewo1 {
+    width: 230px;
+    height: 170px;
+}
+.pojedynczaPalma {
+    width: 170px;
+    height: 170px;
+}
+.pojedynczyKrzew {
+    width: 160px;
+    height: 170px;
+}
+.pojedynczePnacze {
+    width: 150px;
+    height: 150px;
+}
+.pojedynczeZiemne {
+    width: 140px;
+    height: 140px;
+}
+.ramkaSekator {
+    width: 40px;
+    height: 65px;
+    bottom: 2px;
+    right: 4px;
+    z-index: 4;
+}
+.owocNaPolu {
+    width: 80px;
+    height: 80px;
+    top: 73px;
+    left: 55px;
+    z-index: 3;
+}
+.owocNaPalmie {
+    width: 75px;
+    height: 75px;
+    bottom: 3px;
+    left: 15px;
+    z-index: 3;
+}
+.owocNaKrzewie {
+    width: 70px;
+    height: 70px;
+    top: 73px;
+    left: 15px;
+    z-index: 3;
+}
+.owocNaPnaczu {
+    width: 55px;
+    height: 55px;
+    bottom: 3px;
+    left: 25px;
+    z-index: 3;
+}
+.owocNaZiemnym {
+    width: 80px;
+    height: 80px;
+    top: 43px;
+    left: 15px;
+    z-index: 3;
+}
+.sekatorDziala {
+    top: 20%;
+    left: 10%;
+    animation: ruchSekatora 4s ease-in-out forwards;
+}
+.sekator {
+    width: 150px;
+    height: 150px;
+    z-index: 10;
+    background-image: url('/img/przedmioty/sekator.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    animation: obrotSekatoraRoboczego 0.3s ease-in-out infinite, ukryj 0s 4s forwards;
+}
+.sekator-gora, .sekator-dol {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 75px;
+    background-image: url('/img/przedmioty/sekator.png');
+    background-size: 100% 200%;
+    background-repeat: no-repeat;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    z-index: 20;
+}
+.sekator-gora {
+    background-position: top;
+    animation: gornaPolowa 1s 4s forwards;
+    transform-origin: bottom center;
+    bottom: 50%;
+}
+.sekator-dol {
+    background-position: bottom;
+    animation: dolnaPolowa 1s 4s forwards;
+    transform-origin: top center;
+    top: 50%;
+}
+.drzewo111 {
+    top: 130px;
+    left: 60px;
+}
+.drzewo121 {
+    top: 130px;
+    left: 330px;
+}
+.drzewo131 {
+    top: 330px;
+    left: 60px;
+}
+.drzewo141 {
+    top: 330px;
+    left: 330px;
+}
+.drzewo112 {
+    top: 525px;
+    left: 60px;
+}
+.drzewo122 {
+    top: 525px;
+    left: 330px;
+}
+.drzewo132 {
+    top: 710px;
+    left: 60px;
+}
+.drzewo142 {
+    top: 710px;
+    left: 330px;
+}
+.drzewo113 {
+    top: 130px;
+    right: 65px;
+}
+.drzewo123 {
+    top: 130px;
+    right: 330px;
+}
+.drzewo133 {
+    top: 330px;
+    right: 65px;
+}
+.drzewo143 {
+    top: 330px;
+    right: 330px;
+}
+.drzewo114 {
+    top: 525px;
+    right: 65px;
+}
+.drzewo124 {
+    top: 525px;
+    right: 330px;
+}
+.drzewo134 {
+    top: 710px;
+    right: 65px;
+}
+.drzewo144 {
+    top: 710px;
+    right: 330px;
+}
+.drzewo211 {
+    bottom: 90px;
+    left: 750px;
+}
+.drzewo212 {
+    top: 200px;
+    left: 1250px;
+}
+.drzewo213 {
+    top: 300px;
+    left: 1450px;
+}
+.drzewo214 {
+    top: 600px;
+    left: 1400px;
+}
+.drzewo221 {
+    top: 400px;
+    left: 1250px;
+}
+.drzewo222 {
+    top: 500px;
+    left: 1600px;
+}
+.drzewo223 {
+    top: 600px;
+    left: 1160px;
+}
+.drzewo224 {
+    top: 80px;
+    left: 60px;
+}
+.drzewo231 {
+    bottom: 90px;
+    left: 600px;
+}
+.drzewo232 {
+    top: 400px;
+    left: 300px;
+}
+.drzewo233 {
+    bottom: 90px;
+    left: 450px;
+}
+.drzewo234 {
+    bottom: 90px;
+    left: 300px;
+}
+.drzewo241 {
+    top: 230px;
+    left: 350px;
+}
+.drzewo242 {
+    top: 350px;
+    left: 550px;
+}
+.drzewo243 {
+    top: 480px;
+    left: 120px;
+}
+.drzewo244 {
+    top: 580px;
+    left: 400px;
+}
+@keyframes ruchSekatora {
+    0% {
+        top: 20%;
+        left: 10%;
+    }
+    25% {
+        top: 40%;
+        left: 30%;
+    }
+    50% {
+        top: 25%;
+        left: 60%;
+    }
+    75% {
+        top: 50%;
+        left: 40%;
+    }
+    100% {
+        top: 35%;
+        left: 70%;
+    }
+}
+@keyframes obrotSekatoraRoboczego {
+    0%, 100% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+}
