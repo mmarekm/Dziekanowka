@@ -31,6 +31,23 @@
     bottom: 1px;
     left: 3px;
 }
+.koloKosiarki {
+    border-radius: 50%;
+    background: conic-gradient(black 0deg 270deg, gray 270deg 360deg);
+    animation: krecenieKosiarka 5s linear forwards;
+}
+.koloKosiarkiPrzod {
+    width: 100px;
+    height: 100px;
+    bottom: 15px;
+    left: 30px;
+}
+.koloKosiarkiTyl {
+    width: 130px;
+    height: 130px;
+    bottom: 15px;
+    left: 320px;
+}
 .samTraktorWidokPowrot {
     width: 100px;
     height: 76px;
@@ -81,4 +98,9 @@
 }
 @keyframes krecenie {
     to { transform: rotate(3600deg); }
+}
+@keyframes krecenieKosiarka {
+    to {
+        transform: rotate(-7200deg);
+    }
 }
