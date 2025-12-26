@@ -52,10 +52,20 @@
     height: 450px;
     z-index: 2;
 }
+.calaIndyczarnia {
+    top: 480px;
+    left: 250px;
+    width: 800px;
+    height: 500px;
+    z-index: 2;
+}
 .kuraWKurniku {
     width: 80px;
 }
 .gesWGesiarni {
+    width: 120px;
+}
+.indykWIndyczarni {
     width: 120px;
 }
 .kurnikDoZwierzyncaGuzik {

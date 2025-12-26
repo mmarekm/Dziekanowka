@@ -5,7 +5,7 @@
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
         public static List<ProduktZwierzecy> StartoweProdukty() => [
-            new("jajoKurze"), new("kuraJedzenie"), new("piora"), new("jajoGesie"), new("gesJedzenie"), new("smalecGesi")
+            new("jajoKurze"), new("kuraJedzenie"), new("piora"), new("jajoGesie"), new("gesJedzenie"), new("smalecGesi"), new("jajoIndycze"), new("indykJedzenie")
         ];
     }
 }

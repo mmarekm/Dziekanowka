@@ -5,13 +5,100 @@
 @implements IDisposable
 <div class="indyczarniaWidok widok rel">
     <div class="abs indyczarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/indyczarniaDoZwierzyniec.png" /></button></div>
+    <div class="abs calaIndyczarnia">
+        @if (Gracz.JestZwierze("indyk"))
+        {
+            @for (int i = 0; i < Gracz.Zwierze("indyk").Ilosc; i++)
+            {
+                int index = i;
+                <img class="abs indykWIndyczarni obrazekSieMiesci" src="img/zwierzyniec/indyk.png" style="@StylIndykaWIndyczarni(index)" />
+            }
+        }
+    </div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool animujJajo = false;
+    private List<PozycjaIndyka> pozycjeIndyka = new();
+    private System.Threading.Timer? timerDzwiekIndyka;
+    private List<System.Threading.Timer?> timeryIndyka = new();
+    private Random random = new Random();
+    private class PozycjaIndyka
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("indyk"))
+        {
+            InicjalizujIndyki();
+            GulgotanieIndyka();
+        }
+    }
+    private void InicjalizujIndyki()
+    {
+        pozycjeIndyka.Clear();
+        foreach (var timer in timeryIndyka)
+            timer?.Dispose();
+        timeryIndyka.Clear();
+        for (int i = 0; i < Gracz.Zwierze("indyk").Ilosc; i++)
+        {
+            pozycjeIndyka.Add(new PozycjaIndyka { X = random.Next(0, 680), Y = random.Next(0, 380), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(2, 5) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeIndyka(index); SpacerowanieIndyka(index); }, null, TimeSpan.FromSeconds(random.Next(1, 5)), Timeout.InfiniteTimeSpan);
+            timeryIndyka.Add(timer);
+        }
+    }
+    private void GulgotanieIndyka() => timerDzwiekIndyka = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/indykGulgocze.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieIndyka(int index)
+    {
+        if (index >= timeryIndyka.Count) return;
+        timeryIndyka[index]?.Dispose();
+        timeryIndyka[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeIndyka(index); SpacerowanieIndyka(index); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeIndyka(int index)
+    {
+        if (index >= pozycjeIndyka.Count) return;
+        var kura = pozycjeIndyka[index];
+        var nowaX = random.Next(0, 680);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 380);
+        kura.CzasPrzejscia = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmIndyka(string karma)
+    {
+        if (!Gracz.JestZwierze("indyk") || !(karma != "pszenica" ? Gracz.JestWarzywo(karma) : Gracz.JestZboze(karma))) return;
+        (karma != "pszenica" ? Gracz.Warzywo(karma) : Gracz.Zboze(karma)).Ilosc--;
+        Gracz.Zwierze("indyk").Nakarmione++;
+        if (Gracz.Zwierze("indyk").Nakarmione >= Gracz.Zwierze("indyk").DajeProdukt())
+        {
+            Gracz.Zwierze("indyk").Nakarmione = 0;
+            Gracz.ProduktZ("jajoIndycze").Ilosc++;
+            animujJajo = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajo = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private string StylIndykaWIndyczarni(int index)
+    {
+        if (index >= pozycjeIndyka.Count) return "";
+        var indyk = pozycjeIndyka[index];
+        return $"left: {indyk.X}px; top: {indyk.Y}px; transform: scaleX({(indyk.PatrzyWLewo ? -1 : 1)}); transition: left {indyk.CzasPrzejscia}s ease-in-out, top {indyk.CzasPrzejscia}s ease-in-out;";
+    }
     public void Dispose()
     {
-        
+        foreach (var timer in timeryIndyka)
+            timer?.Dispose();
+        timerDzwiekIndyka?.Dispose();
     }
 }
