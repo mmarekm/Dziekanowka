@@ -7,38 +7,46 @@
     <div class="abs doGospodarstwaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)" class="wyroznionyGuzik"><img src="img/zwierzyniec/doGospodarstwa.png" /></button></div>
     <div class="abs doKurnikaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Kurnik)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoKurnik.png" /></button></div>
     <div class="abs doGesiarniGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gesiarnia)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoGesiarnia.png" /></button></div>
-    @if (SaKury)
+    <div class="abs doIndyczarniGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Indyczarnia)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoIndyczarnia.png" /></button></div>
+    @if (Gracz.JestZwierze("kura"))
     {
         <div class="abs terenKuryPrzedKurnikiem"><img class="abs kuraPrzedKurnikiem obrazekSieMiesci" src="img/zwierzyniec/kura.png" style="@StylKury()" /></div>
     }
-    @if (SaGesi)
+    @if (Gracz.JestZwierze("ges"))
     {
         <div class="abs terenGesiPrzedGesiarnia"><img class="abs gesPrzedGesiarnia obrazekSieMiesci" src="img/zwierzyniec/ges.png" style="@StylGesi()" /></div>
+    }
+    @if (Gracz.JestZwierze("indyk"))
+    {
+        <div class="abs terenIndykaPrzedIndyczarnia"><img class="abs indykPrzedIndyczarnia obrazekSieMiesci" src="img/zwierzyniec/indyk.png" style="@StylIndyka()" /></div>
     }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private bool SaKury => Gracz.Zwierzeta.First(z => z.Nazwa == "kura") is { Ilosc: > 0 };
-    private bool SaGesi => Gracz.Zwierzeta.First(z => z.Nazwa == "ges") is { Ilosc: > 0 };
-    private double pozycjaXKury = 20, pozycjaXGesi = 20;
-    private double pozycjaYKury = 20, pozycjaYGesi = 10;
-    private double czasPrzejsciaKury = 2, czasPrzejsciaGesi = 2;
-    private bool kuraPatrzyWLewo = false, gesPatrzyWLewo = false;
+    private double pozycjaXKury = 20, pozycjaXGesi = 20, pozycjaXIndyka = 20;
+    private double pozycjaYKury = 20, pozycjaYGesi = 10, pozycjaYIndyka = 10;
+    private double czasPrzejsciaKury = 2, czasPrzejsciaGesi = 2, czasPrzejsciaIndyka = 2;
+    private bool kuraPatrzyWLewo = false, gesPatrzyWLewo = false, indykPatrzyWLewo = false;
     private System.Threading.Timer? timerDzwiekKury;
     private System.Threading.Timer? timerDzwiekGesi;
+    private System.Threading.Timer? timerDzwiekIndyka;
     private Random random = new Random();
     private System.Threading.Timer? timer;
     private System.Threading.Timer? timerGesi;
+    private System.Threading.Timer? timerIndyka;
     protected override void OnInitialized()
     {
         SpacerowanieKury();
         SpacerowanieGesi();
-        if (SaKury)
+        SpacerowanieIndyka();
+        if (Gracz.JestZwierze("kura"))
             GdakanieKury();
-        if (SaGesi)
+        if (Gracz.JestZwierze("ges"))
             GeganieGesi();
+        if (Gracz.JestZwierze("indyk"))
+            GulgotanieIndyka();
     }
     private void GdakanieKury() => timerDzwiekKury = new System.Threading.Timer(async _ =>
     {
@@ -48,10 +56,16 @@
     {
         try { await dzwieki.GraDzwiek("mp3/Dzwieki/geganieGesi.mp3"); } catch {}
     }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(9));
+    private void GulgotanieIndyka() => timerDzwiekIndyka = new System.Threading.Timer(async _ =>
+    {
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/indykGulgocze.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(11));
     private string StylKury() => $"left: {pozycjaXKury}px; top: {pozycjaYKury}px; transform: scaleX({(kuraPatrzyWLewo ? -1 : 1)}); transition: left {czasPrzejsciaKury}s ease-in-out, top {czasPrzejsciaKury}s ease-in-out;";
     private string StylGesi() => $"left: {pozycjaXGesi}px; top: {pozycjaYGesi}px; transform: scaleX({(gesPatrzyWLewo ? 1 : -1)}); transition: left {czasPrzejsciaGesi}s ease-in-out, top {czasPrzejsciaGesi}s ease-in-out;";
+    private string StylIndyka() => $"left: {pozycjaXIndyka}px; top: {pozycjaYIndyka}px; transform: scaleX({(indykPatrzyWLewo ? -1 : 1)}); transition: left {czasPrzejsciaIndyka}s ease-in-out, top {czasPrzejsciaIndyka}s ease-in-out;";
     private void SpacerowanieKury() => timer = new System.Threading.Timer(async _ => { await ZmienPozycjeKury(); SpacerowanieKury(); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
     private void SpacerowanieGesi() => timerGesi = new System.Threading.Timer(async _ => { await ZmienPozycjeGesi(); SpacerowanieGesi(); }, null, TimeSpan.FromSeconds(random.Next(4, 9)), Timeout.InfiniteTimeSpan);
+    private void SpacerowanieIndyka() => timerIndyka = new System.Threading.Timer(async _ => { await ZmienPozycjeIndyka(); SpacerowanieIndyka(); }, null, TimeSpan.FromSeconds(random.Next(5, 11)), Timeout.InfiniteTimeSpan);
     private async Task ZmienPozycjeKury()
     {
         var nowaX = random.Next(0, 160);
@@ -70,11 +84,22 @@
         czasPrzejsciaGesi = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
     }
+    private async Task ZmienPozycjeIndyka()
+    {
+        var nowaX = random.Next(0, 150);
+        indykPatrzyWLewo = nowaX < pozycjaXIndyka;
+        pozycjaXIndyka = nowaX;
+        pozycjaYIndyka = random.Next(0, 90);
+        czasPrzejsciaIndyka = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
     public void Dispose()
     {
         timer?.Dispose();
         timerGesi?.Dispose();
+        timerIndyka?.Dispose();
         timerDzwiekKury?.Dispose();
         timerDzwiekGesi?.Dispose();
+        timerDzwiekIndyka?.Dispose();
     }
 }

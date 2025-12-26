@@ -7,6 +7,7 @@
         Zwierzyniec,
         Kurnik,
         Gesiarnia,
+        Indyczarnia,
         ZaBrama,
         GarazGospodarczy,
         Studnia,

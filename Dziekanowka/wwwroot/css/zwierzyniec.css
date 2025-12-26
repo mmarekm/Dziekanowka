@@ -7,6 +7,9 @@
 .gesiarniaWidok {
     background-image: url('../img/zwierzyniec/gesiarniaWidok.png');
 }
+.indyczarniaWidok {
+    background-image: url('../img/zwierzyniec/indyczarniaWidok.png');
+}
 .doGospodarstwaGuzik {
     bottom: 0;
     left: 737px;
@@ -26,6 +29,13 @@
     left: 0;
     width: 234px;
     height: 234px;
+    z-index: 3;
+}
+.doIndyczarniGuzik {
+    top: 366px;
+    left: 0;
+    width: 286px;
+    height: 125px;
     z-index: 3;
 }
 .calyKurnik {
@@ -62,27 +72,42 @@
     height: 242px;
     z-index: 3;
 }
+.indyczarniaDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 564px;
+    height: 220px;
+    z-index: 3;
+}
 .terenKuryPrzedKurnikiem {
     top: 200px;
     left: 250px;
     width: 200px;
     height: 120px;
-    z-index: 2;
+    z-index: 5;
 }
 .kuraPrzedKurnikiem {
     width: 40px;
-    z-index: 5;
 }
 .terenGesiPrzedGesiarnia {
     top: 590px;
     left: 230px;
     width: 150px;
     height: 90px;
-    z-index: 2;
+    z-index: 5;
 }
 .gesPrzedGesiarnia {
     width: 50px;
+}
+.terenIndykaPrzedIndyczarnia {
+    top: 450px;
+    left: 200px;
+    width: 280px;
+    height: 100px;
     z-index: 5;
+}
+.indykPrzedIndyczarnia {
+    width: 50px;
 }
 .liczbaKurKurnik {
     top: 95px;
