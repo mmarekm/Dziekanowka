@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="zbozeWidok widok rel">
-    <div class="abs stanButelekZboze">@pelneButelki <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
+    <div class="abs stanButelekZboze">@Gracz.Przedmiot("pelnaButelka").Ilosc <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPole1ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole1)"><img src="img/pole/zbozeNaPole1.png" /></button></div>
     <div class="abs naPole2ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Pole2)"><img src="img/pole/zbozeNaPole2.png" /></button></div>
     <div class="abs doSadu1ZeZboza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sad1)"><img src="img/pole/zbozeNaSad1.png" /></button></div>
@@ -28,14 +28,13 @@
     public Gracz Gracz { get; set; } = null!;
     [Parameter]
     public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private int pelneButelki => Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc;
     private bool MoznaUprawiac(UprawaZboza zboze) => Gracz.IloscPrzedmiotow("pelnaButelka") > 0 && zboze.Poziom > 0;
     public async Task UprawiajZboze(UprawaZboza zboze)
     {
         if (!MoznaUprawiac(zboze)) return;
-        Gracz.Zboza.First(o => o.Nazwa == zboze.Zboze).Ilosc += zboze.Poziom;
-        Gracz.Przedmioty.First(p => p.Nazwa == "pelnaButelka").Ilosc--;
-        Gracz.Przedmioty.First(p => p.Nazwa == "pustaButelka").Ilosc++;
+        Gracz.Zboze(zboze.Zboze).Ilosc += zboze.Poziom;
+        Gracz.Przedmiot("pelnaButelka").Ilosc--;
+        Gracz.Przedmiot("pustaButelka").Ilosc++;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }
