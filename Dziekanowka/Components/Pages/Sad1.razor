@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="sad1Widok widok rel">
-    <div class="abs stanButelekPole">@Gracz.Przedmiot("pelnaButelka") <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
+    <div class="abs stanButelekPole">@Gracz.Przedmiot("pelnaButelka").Ilosc <img class="obrazekSieMiesci" src="img/przedmioty/butelkaPelna.png" /></div>
     <div class="abs naPoleIntroZSad1"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.PoleIntro)"><img src="img/pole/naPoleIntroZSad1.png" /></button></div>
     <div class="abs doZbozaZSad1"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zboze)"><img src="img/pole/sad1DoZboza.png" /></button></div>
     @for (int x = 1; x <= 4; x++)

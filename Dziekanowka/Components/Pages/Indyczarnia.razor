@@ -15,6 +15,16 @@
             }
         }
     </div>
+    <div class="abs liczbaPtakDomek liczbaIndykowIndyczarnia">@(Gracz.Zwierze("indyk").Ilosc)</div>
+    <div class="abs progresNakarmieniaIndykow"><progress class="pasekPaliwa" value="@Gracz.Zwierze("indyk").Nakarmione" max="@Gracz.Zwierze("indyk").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("indyk").Nakarmione / Gracz.Zwierze("indyk").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs liczbaJajIndyczarnia">@(Gracz.ProduktZ("jajoIndycze").Ilosc)</div>
+    <div class="abs nadJajemIndyczarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaIndyczarnia.png" /></div>
+    <div class="abs ramkaWarzywKurnik liczbaPszenicyIndyczarnia">@(Gracz.Zboze("pszenica").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikPszenicyIndyczarnia @(Gracz.JestZwierze("indyk") && Gracz.JestZboze("pszenica") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmIndyka("pszenica")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaFasolaIndyczarnia">@(Gracz.Warzywo("fasola").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikFasolaIndyczarnia @(Gracz.JestZwierze("indyk") && Gracz.JestWarzywo("fasola") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmIndyka("fasola")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaSoczewicaIndyczarnia">@(Gracz.Warzywo("soczewica").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikSoczewicaIndyczarnia @(Gracz.JestZwierze("indyk") && Gracz.JestWarzywo("soczewica") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmIndyka("soczewica")'></div>
 </div>
 
 @code {
