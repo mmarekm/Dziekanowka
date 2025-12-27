@@ -1,0 +1,26 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
+<h3>Kacznik</h3>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool animujJajo = false;
+    private List<PozycjaKaczki> pozycjeKaczki = new();
+    private System.Threading.Timer? timerDzwiekKaczki;
+    private List<System.Threading.Timer?> timeryKaczki = new();
+    private Random random = new Random();
+    private class PozycjaKaczki
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    public void Dispose()
+    {
+    }
+}

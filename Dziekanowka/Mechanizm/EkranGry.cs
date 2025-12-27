@@ -8,6 +8,7 @@
         Kurnik,
         Gesiarnia,
         Indyczarnia,
+        Kacznik,
         ZaBrama,
         GarazGospodarczy,
         Studnia,

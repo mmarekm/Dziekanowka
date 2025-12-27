@@ -235,35 +235,29 @@
     height: 40px;
     z-index: 2;
 }
+.lJajBud {
+    font-size: 74px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 2;
+}
 .liczbaJajKurnik {
     top: 619px;
     right: 115px;
     width: 250px;
     height: 80px;
-    font-size: 74px;
-    font-weight: bold;
-    text-align: center;
-    z-index: 2;
 }
 .liczbaJajGesiarnia {
     top: 613px;
     right: 425px;
     width: 100px;
     height: 100px;
-    font-size: 74px;
-    font-weight: bold;
-    text-align: center;
-    z-index: 2;
 }
 .liczbaJajIndyczarnia {
     top: 622px;
     right: 435px;
     width: 100px;
     height: 100px;
-    font-size: 74px;
-    font-weight: bold;
-    text-align: center;
-    z-index: 2;
 }
 .nadJajemKurnik {
     top: 609px;
