@@ -4,6 +4,15 @@
 @implements IDisposable
 <div class="krolikarniaWidok widok rel">
     <div class="abs krolikarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/krolikarniaDoZwierzyniec.png" /></button></div>
+    <div class="abs calaKrolikarnia">
+        @for (int i = 0; i < Gracz.Zwierze("krolik").Ilosc; i++)
+        {
+            int index = i;
+            <img class="abs krolikWKrolikarni obrazekSieMiesci" src="img/zwierzyniec/krolik.png" style="@StylKrolikaWKrolikarni(index)" />
+        }
+    </div>
+    <div class="abs liczbaPtakDomek liczbaKrolikowKrolikarnia">@(Gracz.Zwierze("krolik").Ilosc)</div>
+    <div class="abs progresNakarmieniaKrolika"><progress class="pasekPaliwa" value="@Gracz.Zwierze("krolik").Nakarmione" max="@Gracz.Zwierze("krolik").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("krolik").Nakarmione / Gracz.Zwierze("krolik").DajeProdukt() * 100) / 10) "></progress></div>
 </div>
 
 @code {
@@ -19,8 +28,53 @@
         public double CzasPrzejscia { get; set; } = 2;
         public bool PatrzyWLewo { get; set; }
     }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("krolik"))
+        {
+            InicjalizujKrolika();
+        }
+    }
+    private void InicjalizujKrolika()
+    {
+        pozycjeKrolika.Clear();
+        foreach (var timer in timeryKrolika)
+            timer?.Dispose();
+        timeryKrolika.Clear();
+        for (int i = 0; i < Gracz.Zwierze("krolik").Ilosc; i++)
+        {
+            pozycjeKrolika.Add(new PozycjaKrolika { X = random.Next(0, 700), Y = random.Next(0, 350), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(2, 5) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeKrolika(index); SpacerowanieKrolika(index); }, null, TimeSpan.FromSeconds(random.Next(1, 5)), Timeout.InfiniteTimeSpan);
+            timeryKrolika.Add(timer);
+        }
+    }
+    private void SpacerowanieKrolika(int index)
+    {
+        if (index >= timeryKrolika.Count) return;
+        timeryKrolika[index]?.Dispose();
+        timeryKrolika[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeKrolika(index); SpacerowanieKrolika(index); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeKrolika(int index)
+    {
+        if (index >= pozycjeKrolika.Count) return;
+        var kura = pozycjeKrolika[index];
+        var nowaX = random.Next(0, 700);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 350);
+        kura.CzasPrzejscia = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    private string StylKrolikaWKrolikarni(int index)
+    {
+        if (index >= pozycjeKrolika.Count) return "";
+        var krolik = pozycjeKrolika[index];
+        return $"left: {krolik.X}px; top: {krolik.Y}px; transform: scaleX({(krolik.PatrzyWLewo ? -1 : 1)}); transition: left {krolik.CzasPrzejscia}s ease-in-out, top {krolik.CzasPrzejscia}s ease-in-out;";
+    }
     public void Dispose()
     {
-        
+        foreach (var timer in timeryKrolika)
+            timer?.Dispose();
     }
 }
