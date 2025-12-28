@@ -3,7 +3,9 @@
 @inject LadowanieGracza ladowanieGracza
 @inject Dzwieki dzwieki
 @implements IDisposable
-<h3>Kacznik</h3>
+<div class="kacznikWidok widok rel">
+    <div class="abs kacznikDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/kacznikDoZwierzyniec.png" /></button></div>
+</div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
