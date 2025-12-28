@@ -6,13 +6,10 @@
 <div class="indyczarniaWidok widok rel">
     <div class="abs indyczarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/indyczarniaDoZwierzyniec.png" /></button></div>
     <div class="abs calaIndyczarnia">
-        @if (Gracz.JestZwierze("indyk"))
+        @for (int i = 0; i < Gracz.Zwierze("indyk").Ilosc; i++)
         {
-            @for (int i = 0; i < Gracz.Zwierze("indyk").Ilosc; i++)
-            {
-                int index = i;
-                <img class="abs indykWIndyczarni obrazekSieMiesci" src="img/zwierzyniec/indyk.png" style="@StylIndykaWIndyczarni(index)" />
-            }
+            int index = i;
+            <img class="abs indykWIndyczarni obrazekSieMiesci" src="img/zwierzyniec/indyk.png" style="@StylIndykaWIndyczarni(index)" />
         }
     </div>
     <div class="abs liczbaPtakDomek liczbaIndykowIndyczarnia">@(Gracz.Zwierze("indyk").Ilosc)</div>

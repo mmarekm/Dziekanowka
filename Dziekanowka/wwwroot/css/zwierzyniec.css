@@ -69,6 +69,13 @@
     height: 500px;
     z-index: 2;
 }
+.calyKacznik {
+    top: 730px;
+    left: 355px;
+    width: 850px;
+    height: 250px;
+    z-index: 2;
+}
 .kuraWKurniku {
     width: 80px;
 }
@@ -77,6 +84,9 @@
 }
 .indykWIndyczarni {
     width: 120px;
+}
+.kaczkaWKaczniku {
+    width: 80px;
 }
 .kurnikDoZwierzyncaGuzik {
     bottom: 0;
@@ -170,6 +180,12 @@
     width: 240px;
     height: 100px;
 }
+.liczbaKaczekKacznik {
+    top: 80px;
+    right: 70px;
+    width: 240px;
+    height: 100px;
+}
 .ramkaWarzywKurnik {
     top: 310px;
     width: 90px;
@@ -241,10 +257,28 @@
 .guzikSoczewicaIndyczarnia {
     right: 30px;
 }
+.liczbaGrochKacznik {
+    right: 440px;
+}
+.guzikGrochKacznik {
+    right: 410px;
+}
+.liczbaCukiniaKacznik {
+    right: 245px;
+}
+.guzikCukiniaKacznik {
+    right: 210px;
+}
+.liczbaBatatKacznik {
+    right: 50px;
+}
+.guzikBatatKacznik {
+    right: 20px;
+}
 .progresNakarmieniaKury {
     top: 508px;
     right: 103px;
-    width: 460px;
+    width: 435px;
     height: 40px;
     z-index: 2;
 }
@@ -258,6 +292,13 @@
 .progresNakarmieniaIndykow {
     top: 511px;
     right: 85px;
+    width: 448px;
+    height: 40px;
+    z-index: 2;
+}
+.progresNakarmieniaKaczek {
+    top: 511px;
+    right: 67px;
     width: 448px;
     height: 40px;
     z-index: 2;
@@ -286,6 +327,12 @@
     width: 100px;
     height: 100px;
 }
+.liczbaJajKacznik {
+    top: 615px;
+    right: 410px;
+    width: 120px;
+    height: 90px;
+}
 .nadJajemKurnik {
     top: 609px;
     right: 455px;
@@ -309,6 +356,15 @@
     right: 69px;
     width: 328px;
     height: 103px;
+    z-index: 5;
+    pointer-events: none;
+    transform-origin: center center
+}
+.nadJajemKacznik {
+    top: 596px;
+    right: 69px;
+    width: 305px;
+    height: 129px;
     z-index: 5;
     pointer-events: none;
     transform-origin: center center

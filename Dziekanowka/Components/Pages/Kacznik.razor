@@ -5,6 +5,23 @@
 @implements IDisposable
 <div class="kacznikWidok widok rel">
     <div class="abs kacznikDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/kacznikDoZwierzyniec.png" /></button></div>
+    <div class="abs calyKacznik">
+        @for (int i = 0; i < Gracz.Zwierze("kaczka").Ilosc; i++)
+        {
+            int index = i;
+            <img class="abs kaczkaWKaczniku obrazekSieMiesci" src="img/zwierzyniec/kaczkaIdzie.png" style="@StylKaczkiWKaczniku(index)" />
+        }
+    </div>
+    <div class="abs liczbaPtakDomek liczbaKaczekKacznik">@(Gracz.Zwierze("kaczka").Ilosc)</div>
+    <div class="abs progresNakarmieniaKaczek"><progress class="pasekPaliwa" value="@Gracz.Zwierze("kaczka").Nakarmione" max="@Gracz.Zwierze("kaczka").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("kaczka").Nakarmione / Gracz.Zwierze("kaczka").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs lJajBud liczbaJajKacznik">@(Gracz.ProduktZ("jajoKacze").Ilosc)</div>
+    <div class="abs nadJajemKacznik @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaKacznik.png" /></div>
+    <div class="abs ramkaWarzywKurnik liczbaGrochKacznik">@(Gracz.Warzywo("groch").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikGrochKacznik @(Gracz.JestZwierze("kaczka") && Gracz.JestWarzywo("groch") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKaczke("groch")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaCukiniaKacznik">@(Gracz.Warzywo("cukinia").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikCukiniaKacznik @(Gracz.JestZwierze("kaczka") && Gracz.JestWarzywo("cukinia") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKaczke("cukinia")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaBatatKacznik">@(Gracz.Warzywo("batat").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikBatatKacznik @(Gracz.JestZwierze("kaczka") && Gracz.JestWarzywo("batat") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKaczke("batat")'></div>
 </div>
 
 @code {
@@ -22,7 +39,73 @@
         public double CzasPrzejscia { get; set; } = 2;
         public bool PatrzyWLewo { get; set; }
     }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("kaczka"))
+        {
+            InicjalizujKaczki();
+            KwakanieKaczki();
+        }
+    }
+    private void InicjalizujKaczki()
+    {
+        pozycjeKaczki.Clear();
+        foreach (var timer in timeryKaczki)
+            timer?.Dispose();
+        timeryKaczki.Clear();
+        for (int i = 0; i < Gracz.Zwierze("kaczka").Ilosc; i++)
+        {
+            pozycjeKaczki.Add(new PozycjaKaczki { X = random.Next(0, 770), Y = random.Next(0, 170), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(2, 5) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeKaczki(index); SpacerowanieKaczki(index); }, null, TimeSpan.FromSeconds(random.Next(1, 5)), Timeout.InfiniteTimeSpan);
+            timeryKaczki.Add(timer);
+        }
+    }
+    private void KwakanieKaczki() => timerDzwiekKaczki = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/kaczkaKwacze.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieKaczki(int index)
+    {
+        if (index >= timeryKaczki.Count) return;
+        timeryKaczki[index]?.Dispose();
+        timeryKaczki[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeKaczki(index); SpacerowanieKaczki(index); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeKaczki(int index)
+    {
+        if (index >= pozycjeKaczki.Count) return;
+        var kura = pozycjeKaczki[index];
+        var nowaX = random.Next(0, 770);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 170);
+        kura.CzasPrzejscia = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmKaczke(string karma)
+    {
+        if (!Gracz.JestZwierze("kaczka") || !Gracz.JestWarzywo(karma)) return;
+        Gracz.Warzywo(karma).Ilosc--;
+        Gracz.Zwierze("kaczka").Nakarmione++;
+        if (Gracz.Zwierze("kaczka").Nakarmione >= Gracz.Zwierze("kaczka").DajeProdukt())
+        {
+            Gracz.Zwierze("kaczka").Nakarmione = 0;
+            Gracz.ProduktZ("jajoKacze").Ilosc++;
+            animujJajo = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajo = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private string StylKaczkiWKaczniku(int index)
+    {
+        if (index >= pozycjeKaczki.Count) return "";
+        var kaczka = pozycjeKaczki[index];
+        return $"left: {kaczka.X}px; top: {kaczka.Y}px; transform: scaleX({(kaczka.PatrzyWLewo ? -1 : 1)}); transition: left {kaczka.CzasPrzejscia}s ease-in-out, top {kaczka.CzasPrzejscia}s ease-in-out;";
+    }
     public void Dispose()
     {
+        foreach (var timer in timeryKaczki)
+            timer?.Dispose();
+        timerDzwiekKaczki?.Dispose();
     }
 }

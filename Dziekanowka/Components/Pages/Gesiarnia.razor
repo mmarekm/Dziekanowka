@@ -5,13 +5,10 @@
 @implements IDisposable
 <div class="gesiarniaWidok widok rel">
     <div class="abs calaGesiarnia">
-        @if (Gracz.JestZwierze("ges"))
+        @for (int i = 0; i < Gracz.Zwierze("ges").Ilosc; i++)
         {
-            @for (int i = 0; i < Gracz.Zwierze("ges").Ilosc; i++)
-            {
-                int index = i;
-                <img class="abs gesWGesiarni obrazekSieMiesci" src="img/zwierzyniec/ges.png" style="@StylGesiWGesiarni(index)" />
-            }
+            int index = i;
+            <img class="abs gesWGesiarni obrazekSieMiesci" src="img/zwierzyniec/ges.png" style="@StylGesiWGesiarni(index)" />
         }
     </div>
     <div class="abs gesiarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/gesiarniaDoZwierzyniec.png" /></button></div>
