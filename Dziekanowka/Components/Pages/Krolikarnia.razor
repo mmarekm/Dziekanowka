@@ -1,0 +1,26 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@implements IDisposable
+<div class="krolikarniaWidok widok rel">
+    <div class="abs krolikarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/krolikarniaDoZwierzyniec.png" /></button></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private List<PozycjaKrolika> pozycjeKrolika = new();
+    private List<System.Threading.Timer?> timeryKrolika = new();
+    private Random random = new Random();
+    private class PozycjaKrolika
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    public void Dispose()
+    {
+        
+    }
+}

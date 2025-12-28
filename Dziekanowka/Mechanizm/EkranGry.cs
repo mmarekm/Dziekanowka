@@ -9,6 +9,7 @@
         Gesiarnia,
         Indyczarnia,
         Kacznik,
+        Krolikarnia,
         ZaBrama,
         GarazGospodarczy,
         Studnia,

@@ -13,6 +13,9 @@
 .kacznikWidok {
     background-image: url('../img/zwierzyniec/kacznikWidok.png');
 }
+.krolikarniaWidok {
+    background-image: url('../img/zwierzyniec/krolikarniaWidok.png');
+}
 .doGospodarstwaGuzik {
     bottom: 0;
     left: 737px;
@@ -46,6 +49,13 @@
     left: 600px;
     width: 320px;
     height: 151px;
+    z-index: 3;
+}
+.doKrolikarniaGuzik {
+    top: 89px;
+    right: 120px;
+    width: 256px;
+    height: 166px;
     z-index: 3;
 }
 .calyKurnik {
@@ -116,6 +126,13 @@
     height: 259px;
     z-index: 3;
 }
+.krolikarniaDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 359px;
+    height: 244px;
+    z-index: 3;
+}
 .terenKuryPrzedKurnikiem {
     top: 200px;
     left: 250px;
@@ -155,6 +172,13 @@
 }
 .kaczkaPrzedKacznikiem {
     width: 50px;
+}
+.swiatloKrolikarni {
+    top: 185px;
+    right: 218px;
+    width: 29px;
+    height: 18px;
+    z-index: 4;
 }
 .liczbaPtakDomek {
     font-size: 74px;

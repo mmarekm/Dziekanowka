@@ -6,7 +6,7 @@
         public int Ilosc { get; set; } = ilosc;
         public static List<ProduktZwierzecy> StartoweProdukty() => [
             new("jajoKurze"), new("kuraJedzenie"), new("pioroGesi"), new("jajoGesie"), new("gesJedzenie"), new("smalecGesi"), new("jajoIndycze"), new("indykJedzenie"),
-            new("pioroKaczki"), new("jajoKacze"), new("kaczkaJedzenie"), new("smalecKaczy")
+            new("pioroKaczki"), new("jajoKacze"), new("kaczkaJedzenie"), new("smalecKaczy"), new("futroKrolik"), new("krolikJedzenie")
         ];
     }
 }

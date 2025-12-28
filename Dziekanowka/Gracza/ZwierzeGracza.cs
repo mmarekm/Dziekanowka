@@ -21,6 +21,6 @@
             "kaczka" => Ilosc < 1 ? 23 : Ilosc * 11 + 30,
             _ => 0
         };
-        public static List<ZwierzeGracza> StartoweZwierzaki() => [ new("kura", 1), new("ges"), new("indyk"), new("kaczka") ];
+        public static List<ZwierzeGracza> StartoweZwierzaki() => [ new("kura", 1), new("ges"), new("indyk"), new("kaczka"), new("krolik") ];
     }
 }
