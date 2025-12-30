@@ -21,7 +21,8 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Monety += AktualnyGracz.Statystyki.BonusDzienny;
                 AktualnyGracz.Warzywa.ForEach(w => w.Ilosc = w.Ilosc > 0 ? w.Ilosc - (w.Ilosc / 5 + 1) : w.Ilosc);
                 AktualnyGracz.Owoce.ForEach(o => o.Ilosc = o.Ilosc > 0 ? o.Ilosc - (o.Ilosc / 5 + 1) : o.Ilosc);
-                AktualnyGracz.Zboza.ForEach(o => o.Ilosc = o.Ilosc > 0 ? o.Ilosc - (o.Ilosc / 5 + 1) : o.Ilosc);
+                AktualnyGracz.Zboza.ForEach(z => z.Ilosc = z.Ilosc > 0 ? z.Ilosc - (z.Ilosc / 5 + 1) : z.Ilosc);
+                AktualnyGracz.ProduktyZwierzece.ForEach(p => p.Ilosc = p.Ilosc > 0 ? p.Ilosc-- : p.Ilosc);
                 await Dzwieki.Dzwiek!.GraDzwiek("mp3/Dzwieki/witaj.mp3");
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();

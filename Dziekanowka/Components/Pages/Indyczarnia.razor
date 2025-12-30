@@ -13,7 +13,7 @@
         }
     </div>
     <div class="abs liczbaPtakDomek liczbaIndykowIndyczarnia">@(Gracz.Zwierze("indyk").Ilosc)</div>
-    <div class="abs progresNakarmieniaIndykow"><progress class="pasekPaliwa" value="@Gracz.Zwierze("indyk").Nakarmione" max="@Gracz.Zwierze("indyk").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("indyk").Nakarmione / Gracz.Zwierze("indyk").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs progresNakarmieniaIndykow"><progress class="pasekPaliwa" value="@Gracz.Zwierze("indyk").Nakarmione" max="@Gracz.Zwierze("indyk").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("indyk").Nakarmione / Gracz.Zwierze("indyk").DajeProdukt * 100) / 10) "></progress></div>
     <div class="abs lJajBud liczbaJajIndyczarnia">@(Gracz.ProduktZ("jajoIndycze").Ilosc)</div>
     <div class="abs nadJajemIndyczarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaIndyczarnia.png" /></div>
     <div class="abs ramkaWarzywKurnik liczbaPszenicyIndyczarnia">@(Gracz.Zboze("pszenica").Ilosc)</div>
@@ -84,7 +84,7 @@
         if (!Gracz.JestZwierze("indyk") || !(karma != "pszenica" ? Gracz.JestWarzywo(karma) : Gracz.JestZboze(karma))) return;
         (karma != "pszenica" ? Gracz.Warzywo(karma) : Gracz.Zboze(karma)).Ilosc--;
         Gracz.Zwierze("indyk").Nakarmione++;
-        if (Gracz.Zwierze("indyk").Nakarmione >= Gracz.Zwierze("indyk").DajeProdukt())
+        if (Gracz.Zwierze("indyk").Nakarmione >= Gracz.Zwierze("indyk").DajeProdukt)
         {
             Gracz.Zwierze("indyk").Nakarmione = 0;
             Gracz.ProduktZ("jajoIndycze").Ilosc++;

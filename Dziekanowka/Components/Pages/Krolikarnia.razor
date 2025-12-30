@@ -12,7 +12,13 @@
         }
     </div>
     <div class="abs liczbaPtakDomek liczbaKrolikowKrolikarnia">@(Gracz.Zwierze("krolik").Ilosc)</div>
-    <div class="abs progresNakarmieniaKrolika"><progress class="pasekPaliwa" value="@Gracz.Zwierze("krolik").Nakarmione" max="@Gracz.Zwierze("krolik").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("krolik").Nakarmione / Gracz.Zwierze("krolik").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs progresNakarmieniaKrolika"><progress class="pasekPaliwa" value="@Gracz.Zwierze("krolik").Nakarmione" max="@Gracz.Zwierze("krolik").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("krolik").Nakarmione / Gracz.Zwierze("krolik").DajeProdukt * 100) / 10) "></progress></div>
+    <div class="abs ramkaWarzywoKrolikarnia liczbaPietruszkaKrolikarnia">@(Gracz.Warzywo("pietruszka").Ilosc)</div>
+    <div class="abs guzikWarzywoKrolikarnia guzikPietruszkaKrolikarnia @(!Gracz.Zwierze("krolik").WszyscyObsluzeni && Gracz.JestWarzywo("pietruszka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrolika("pietruszka")'></div>
+    <div class="abs ramkaWarzywoKrolikarnia liczbaMarchewKrolikarnia">@(Gracz.Warzywo("marchew").Ilosc)</div>
+    <div class="abs guzikWarzywoKrolikarnia guzikMarchewKrolikarnia @(!Gracz.Zwierze("krolik").WszyscyObsluzeni && Gracz.JestWarzywo("marchew") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrolika("marchew")'></div>
+    <div class="abs ramkaWarzywoKrolikarnia liczbaSalataKrolikarnia">@(Gracz.Warzywo("sałata").Ilosc)</div>
+    <div class="abs guzikWarzywoKrolikarnia guzikSalataKrolikarnia @(!Gracz.Zwierze("krolik").WszyscyObsluzeni && Gracz.JestWarzywo("sałata") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrolika("sałata")'></div>
 </div>
 
 @code {
@@ -65,6 +71,18 @@
         kura.Y = random.Next(0, 350);
         kura.CzasPrzejscia = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmKrolika(string karma)
+    {
+        if (Gracz.Zwierze("krolik").WszyscyObsluzeni || !Gracz.JestWarzywo(karma)) return;
+        Gracz.Warzywo(karma).Ilosc--;
+        Gracz.Zwierze("krolik").Nakarmione++;
+        if (Gracz.Zwierze("krolik").Nakarmione >= Gracz.Zwierze("krolik").DajeProdukt)
+        {
+            Gracz.Zwierze("krolik").Nakarmione = 0;
+            Gracz.Zwierze("krolik").Gotowe++;
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private string StylKrolikaWKrolikarni(int index)
     {

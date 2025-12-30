@@ -13,7 +13,7 @@
         }
     </div>
     <div class="abs liczbaPtakDomek liczbaKaczekKacznik">@(Gracz.Zwierze("kaczka").Ilosc)</div>
-    <div class="abs progresNakarmieniaKaczek"><progress class="pasekPaliwa" value="@Gracz.Zwierze("kaczka").Nakarmione" max="@Gracz.Zwierze("kaczka").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("kaczka").Nakarmione / Gracz.Zwierze("kaczka").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs progresNakarmieniaKaczek"><progress class="pasekPaliwa" value="@Gracz.Zwierze("kaczka").Nakarmione" max="@Gracz.Zwierze("kaczka").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("kaczka").Nakarmione / Gracz.Zwierze("kaczka").DajeProdukt * 100) / 10) "></progress></div>
     <div class="abs lJajBud liczbaJajKacznik">@(Gracz.ProduktZ("jajoKacze").Ilosc)</div>
     <div class="abs nadJajemKacznik @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaKacznik.png" /></div>
     <div class="abs ramkaWarzywKurnik liczbaGrochKacznik">@(Gracz.Warzywo("groch").Ilosc)</div>
@@ -84,7 +84,7 @@
         if (!Gracz.JestZwierze("kaczka") || !Gracz.JestWarzywo(karma)) return;
         Gracz.Warzywo(karma).Ilosc--;
         Gracz.Zwierze("kaczka").Nakarmione++;
-        if (Gracz.Zwierze("kaczka").Nakarmione >= Gracz.Zwierze("kaczka").DajeProdukt())
+        if (Gracz.Zwierze("kaczka").Nakarmione >= Gracz.Zwierze("kaczka").DajeProdukt)
         {
             Gracz.Zwierze("kaczka").Nakarmione = 0;
             Gracz.ProduktZ("jajoKacze").Ilosc++;

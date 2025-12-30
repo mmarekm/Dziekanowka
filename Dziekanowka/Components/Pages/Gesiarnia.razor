@@ -13,7 +13,7 @@
     </div>
     <div class="abs gesiarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/gesiarniaDoZwierzyniec.png" /></button></div>
     <div class="abs liczbaPtakDomek liczbaGesiGesiarnia">@(Gracz.Zwierze("ges").Ilosc)</div>
-    <div class="abs progresNakarmieniaGesi"><progress class="pasekPaliwa" value="@Gracz.Zwierze("ges").Nakarmione" max="@Gracz.Zwierze("ges").DajeProdukt()" style="--procent: @((int)((double)Gracz.Zwierze("ges").Nakarmione / Gracz.Zwierze("ges").DajeProdukt() * 100) / 10) "></progress></div>
+    <div class="abs progresNakarmieniaGesi"><progress class="pasekPaliwa" value="@Gracz.Zwierze("ges").Nakarmione" max="@Gracz.Zwierze("ges").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("ges").Nakarmione / Gracz.Zwierze("ges").DajeProdukt * 100) / 10) "></progress></div>
     <div class="abs lJajBud liczbaJajGesiarnia">@(Gracz.ProduktZ("jajoGesie").Ilosc)</div>
     <div class="abs nadJajemGesiarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaGesiarnia.png" /></div>
     <div class="abs ramkaWarzywKurnik liczbaJarmuzGesiarnia">@(Gracz.Warzywo("jarmuż").Ilosc)</div>
@@ -84,7 +84,7 @@
         if (!Gracz.JestZwierze("ges") || !(karma != "owies" ? Gracz.JestWarzywo(karma) : Gracz.JestZboze(karma))) return;
         (karma != "owies" ? Gracz.Warzywo(karma) : Gracz.Zboze(karma)).Ilosc--;
         Gracz.Zwierze("ges").Nakarmione++;
-        if (Gracz.Zwierze("ges").Nakarmione >= Gracz.Zwierze("ges").DajeProdukt())
+        if (Gracz.Zwierze("ges").Nakarmione >= Gracz.Zwierze("ges").DajeProdukt)
         {
             Gracz.Zwierze("ges").Nakarmione = 0;
             Gracz.ProduktZ("jajoGesie").Ilosc++;
