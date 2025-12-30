@@ -10,6 +10,7 @@
     <div class="abs doIndyczarniGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Indyczarnia)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoIndyczarnia.png" /></button></div>
     <div class="abs doKacznikGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Kacznik)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoKacznik.png" /></button></div>
     <div class="abs doKrolikarniaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Krolikarnia)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoKrolikarnia.png" /></button></div>
+    <div class="abs doChlewGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Chlew)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoChlew.png" /></button></div>
     @if (Gracz.JestZwierze("kura"))
     {
         <div class="abs terenKuryPrzedKurnikiem"><img class="abs kuraPrzedKurnikiem obrazekSieMiesci" src="img/zwierzyniec/kura.png" style="@StylKury()" /></div>
@@ -32,7 +33,7 @@
     }
     @if (Gracz.JestZwierze("swinia"))
     {
-        <div class="abs terenSwiniPrzedChlewem"><img class="abs swiniaPrzedChlewem obrazekSieMiesci" src="img/zwierzyniec/swinia.png" style="@StylKaczki()" /></div>
+        <div class="abs terenSwiniPrzedChlewem"><img class="abs swiniaPrzedChlewem obrazekSieMiesci" src="img/zwierzyniec/swinia.png" style="@StylSwini()" /></div>
     }
 </div>
 

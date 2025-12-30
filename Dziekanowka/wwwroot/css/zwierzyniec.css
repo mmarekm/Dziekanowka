@@ -16,6 +16,9 @@
 .krolikarniaWidok {
     background-image: url('../img/zwierzyniec/krolikarniaWidok.png');
 }
+.chlewWidok {
+    background-image: url('../img/zwierzyniec/chlewWidok.png');
+}
 .doGospodarstwaGuzik {
     bottom: 0;
     left: 737px;
@@ -56,6 +59,13 @@
     right: 120px;
     width: 256px;
     height: 166px;
+    z-index: 3;
+}
+.doChlewGuzik {
+    bottom: 130px;
+    left: 272px;
+    width: 295px;
+    height: 180px;
     z-index: 3;
 }
 .calyKurnik {
@@ -143,6 +153,13 @@
     height: 244px;
     z-index: 3;
 }
+.chlewDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 334px;
+    height: 226px;
+    z-index: 3;
+}
 .terenKuryPrzedKurnikiem {
     top: 200px;
     left: 250px;
@@ -182,6 +199,16 @@
 }
 .kaczkaPrzedKacznikiem {
     width: 50px;
+}
+.terenSwiniPrzedChlewem {
+    bottom: 140px;
+    left: 500px;
+    width: 180px;
+    height: 80px;
+    z-index: 5;
+}
+.swiniaPrzedChlewem {
+    width: 70px;
 }
 .swiatloKrolikarni {
     top: 185px;
