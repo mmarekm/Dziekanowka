@@ -244,20 +244,20 @@
     z-index: 3;
 }
 .ramkaWarzywoKrolikarnia {
-    top: 310px;
+    top: 490px;
     width: 90px;
     height: 36px;
     z-index: 2;
     border-radius: 10px;
-    background-color: yellow;
+    background-color: darkorange;
     font-size: 36px;
     text-align: center;
     opacity: 0.7;
 }
 .guzikWarzywoKrolikarnia {
-    top: 290px;
-    width: 150px;
-    height: 150px;
+    top: 465px;
+    width: 170px;
+    height: 220px;
     z-index: 3;
 }
 .liczbaKukurydzyKurnik {
@@ -333,22 +333,22 @@
     right: 20px;
 }
 .liczbaPietruszkaKrolikarnia {
-    right: 440px;
+    right: 470px;
 }
 .guzikPietruszkaKrolikarnia {
-    right: 410px;
+    right: 430px;
 }
 .liczbaMarchewKrolikarnia {
-    right: 245px;
+    right: 275px;
 }
 .guzikMarchewKrolikarnia {
-    right: 10px;
+    right: 232px;
 }
 .liczbaSalataKrolikarnia {
-    right: 50px;
+    right: 80px;
 }
 .guzikSalataKrolikarnia {
-    right: 20px;
+    right: 36px;
 }
 .progresNakarmieniaKury {
     top: 508px;
@@ -379,11 +379,19 @@
     z-index: 2;
 }
 .progresNakarmieniaKrolika {
-    top: 290px;
+    bottom: 210px;
     right: 35px;
     width: 548px;
     height: 80px;
     z-index: 2;
+}
+.liczbaGotowychKrolikowKrolikarnia {
+    font-size: 50px;
+    top: 310px;
+    right: 335px;
+    height: 52px;
+    width: 140px;
+    text-align: center;
 }
 .lJajBud {
     font-size: 74px;

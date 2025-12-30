@@ -13,6 +13,7 @@
     </div>
     <div class="abs liczbaPtakDomek liczbaKrolikowKrolikarnia">@(Gracz.Zwierze("krolik").Ilosc)</div>
     <div class="abs progresNakarmieniaKrolika"><progress class="pasekPaliwa" value="@Gracz.Zwierze("krolik").Nakarmione" max="@Gracz.Zwierze("krolik").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("krolik").Nakarmione / Gracz.Zwierze("krolik").DajeProdukt * 100) / 10) "></progress></div>
+    <div class="abs liczbaGotowychKrolikowKrolikarnia">@Gracz.Zwierze("krolik").Gotowe</div>
     <div class="abs ramkaWarzywoKrolikarnia liczbaPietruszkaKrolikarnia">@(Gracz.Warzywo("pietruszka").Ilosc)</div>
     <div class="abs guzikWarzywoKrolikarnia guzikPietruszkaKrolikarnia @(!Gracz.Zwierze("krolik").WszyscyObsluzeni && Gracz.JestWarzywo("pietruszka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrolika("pietruszka")'></div>
     <div class="abs ramkaWarzywoKrolikarnia liczbaMarchewKrolikarnia">@(Gracz.Warzywo("marchew").Ilosc)</div>

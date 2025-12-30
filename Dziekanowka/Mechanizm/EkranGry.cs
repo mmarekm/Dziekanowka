@@ -10,6 +10,7 @@
         Indyczarnia,
         Kacznik,
         Krolikarnia,
+        Chlew,
         ZaBrama,
         GarazGospodarczy,
         Studnia,

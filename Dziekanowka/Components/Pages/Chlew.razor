@@ -1,0 +1,27 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
+<div class="chlewWidok widok rel">
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private List<PozycjaSwini> pozycjeSwini = new();
+    private System.Threading.Timer? timerDzwiekSwini;
+    private List<System.Threading.Timer?> timerySwini = new();
+    private Random random = new Random();
+    private class PozycjaSwini
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    public void Dispose()
+    {
+        
+    }
+}
