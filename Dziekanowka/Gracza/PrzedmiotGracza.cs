@@ -1,9 +1,11 @@
 ﻿namespace Dziekanowka.Gracza
 {
-    public class PrzedmiotGracza(string nazwa, int ilosc)
+    public class PrzedmiotGracza(string nazwa, int ilosc = 0, int poziom = 0)
     {
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
-        public static List<PrzedmiotGracza> StartowePrzedmioty() => [ new("pustaButelka", 2), new("pelnaButelka", 0), new("siano", 2) ];
+        public int Poziom { get; set; } = poziom;
+        public static List<PrzedmiotGracza> StartowePrzedmioty() => [ new("pustaButelka", 2), new("pelnaButelka"), new("siano", 2),
+        new("siekiera")];
     }
 }
