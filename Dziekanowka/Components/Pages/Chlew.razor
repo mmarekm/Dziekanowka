@@ -5,6 +5,13 @@
 @implements IDisposable
 <div class="chlewWidok widok rel">
     <div class="abs chlewDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/chlewDoZwierzyniec.png" /></button></div>
+    <div class="abs calyChlew">
+        @for (int i = 0; i < Gracz.Zwierze("swinia").Ilosc; i++)
+        {
+            int index = i;
+            <img class="abs swiniaWChlewie obrazekSieMiesci" src="img/zwierzyniec/swinia.png" style="@StylSwiniWChlewie(index)" />
+        }
+    </div>
 </div>
 
 @code {
@@ -21,8 +28,16 @@
         public double CzasPrzejscia { get; set; } = 2;
         public bool PatrzyWLewo { get; set; }
     }
+    private string StylSwiniWChlewie(int index)
+    {
+        if (index >= pozycjeSwini.Count) return "";
+        var swinia = pozycjeSwini[index];
+        return $"left: {swinia.X}px; top: {swinia.Y}px; transform: scaleX({(swinia.PatrzyWLewo ? -1 : 1)}); transition: left {swinia.CzasPrzejscia}s ease-in-out, top {swinia.CzasPrzejscia}s ease-in-out;";
+    }
     public void Dispose()
     {
-        
+        foreach (var timer in timerySwini)
+            timer?.Dispose();
+        timerDzwiekSwini?.Dispose();
     }
 }
