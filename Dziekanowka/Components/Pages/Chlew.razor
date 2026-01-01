@@ -12,6 +12,15 @@
             <img class="abs swiniaWChlewie obrazekSieMiesci" src="img/zwierzyniec/swinia.png" style="@StylSwiniWChlewie(index)" />
         }
     </div>
+    <div class="abs liczbaPtakDomek liczbaSwinChlew">@(Gracz.Zwierze("swinia").Ilosc)</div>
+    <div class="abs progresNakarmieniaKrolika"><progress class="pasekPaliwa" value="@Gracz.Zwierze("swinia").Nakarmione" max="@Gracz.Zwierze("swinia").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("swinia").Nakarmione / Gracz.Zwierze("swinia").DajeProdukt * 100) / 10) "></progress></div>
+    <div class="abs liczbaGotowychSwinChlew">@Gracz.Zwierze("swinia").Gotowe</div>
+    <div class="abs ramkaWarzywoKrolikarnia liczbaPasternakChlew">@(Gracz.Warzywo("pasternak").Ilosc)</div>
+    <div class="abs guzikWarzywoKrolikarnia guzikPasternakChlew @(!Gracz.Zwierze("swinia").WszyscyObsluzeni && Gracz.JestWarzywo("pasternak") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmSwinie("pasternak")'></div>
+    <div class="abs ramkaWarzywoKrolikarnia liczbaZiemniakChlew">@(Gracz.Warzywo("ziemniak").Ilosc)</div>
+    <div class="abs guzikWarzywoKrolikarnia guzikZiemniakChlew @(!Gracz.Zwierze("swinia").WszyscyObsluzeni && Gracz.JestWarzywo("ziemniak") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmSwinie("ziemniak")'></div>
+    <div class="abs ramkaWarzywoKrolikarnia liczbaJablkoChlew">@(Gracz.Owoc("jabłko").Ilosc)</div>
+    <div class="abs guzikWarzywoKrolikarnia guzikJablkoChlew @(!Gracz.Zwierze("swinia").WszyscyObsluzeni && Gracz.JestOwoc("jabłko") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmSwinie("jabłko")'></div>
 </div>
 
 @code {
@@ -27,6 +36,58 @@
         public double Y { get; set; }
         public double CzasPrzejscia { get; set; } = 2;
         public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("swinia"))
+        {
+            InicjalizujSwinie();
+            KwikSwini();
+        }
+    }
+    private void InicjalizujSwinie()
+    {
+        pozycjeSwini.Clear();
+        foreach (var timer in timerySwini)
+            timer?.Dispose();
+        timerySwini.Clear();
+        for (int i = 0; i < Gracz.Zwierze("swinia").Ilosc; i++)
+        {
+            pozycjeSwini.Add(new PozycjaSwini { X = random.Next(0, 480), Y = random.Next(0, 217), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(4, 7) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeSwini(index); SpacerowanieSwini(index); }, null, TimeSpan.FromSeconds(random.Next(2, 6)), Timeout.InfiniteTimeSpan);
+            timerySwini.Add(timer);
+        }
+    }
+    private void KwikSwini() => timerDzwiekSwini = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/kwikSwini.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieSwini(int index)
+    {
+        if (index >= timerySwini.Count) return;
+        timerySwini[index]?.Dispose();
+        timerySwini[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeSwini(index); SpacerowanieSwini(index); }, null, TimeSpan.FromSeconds(random.Next(5, 12)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeSwini(int index)
+    {
+        if (index >= pozycjeSwini.Count) return;
+        var kura = pozycjeSwini[index];
+        var nowaX = random.Next(0, 480);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 217);
+        kura.CzasPrzejscia = random.Next(4, 7);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmSwinie(string karma)
+    {
+        if (Gracz.Zwierze("swinia").WszyscyObsluzeni || !(karma != "jabłko" ? Gracz.JestWarzywo(karma) : Gracz.JestOwoc(karma))) return;
+        (karma != "jabłko" ? Gracz.Warzywo(karma) : Gracz.Owoc(karma)).Ilosc--;
+        Gracz.Zwierze("swinia").Nakarmione++;
+        if (Gracz.Zwierze("swinia").Nakarmione >= Gracz.Zwierze("swinia").DajeProdukt)
+        {
+            Gracz.Zwierze("swinia").Nakarmione = 0;
+            Gracz.Zwierze("swinia").Gotowe++;
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private string StylSwiniWChlewie(int index)
     {
