@@ -1,0 +1,13 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+<div class="stajniaWidok widok rel">
+    <div class="abs stajniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/stajniaDoZwierzyniec.png" /></button></div>
+    <div class="abs liczbaSianoStajnia">@Gracz.Przedmiot("siano").Ilosc</div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+}

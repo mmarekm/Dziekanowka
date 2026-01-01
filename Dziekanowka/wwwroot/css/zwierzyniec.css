@@ -19,6 +19,9 @@
 .chlewWidok {
     background-image: url('../img/zwierzyniec/chlewWidok.png');
 }
+.stajniaWidok {
+    background-image: url('../img/zwierzyniec/stajniaWidok.png');
+}
 .doGospodarstwaGuzik {
     bottom: 0;
     left: 737px;
@@ -66,6 +69,13 @@
     left: 272px;
     width: 295px;
     height: 180px;
+    z-index: 3;
+}
+.doStajniaGuzik {
+    top: 0;
+    left: 956px;
+    width: 449px;
+    height: 189px;
     z-index: 3;
 }
 .calyKurnik {
@@ -168,6 +178,13 @@
     right: 0;
     width: 334px;
     height: 226px;
+    z-index: 3;
+}
+.stajniaDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 329px;
+    height: 179px;
     z-index: 3;
 }
 .terenKuryPrzedKurnikiem {
@@ -471,6 +488,18 @@
     height: 52px;
     width: 120px;
     text-align: center;
+}
+.liczbaSianoStajnia {
+    font-size: 100px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 0px sienna, 4px 4px 5px black;
+    color: gold;
+    top: 400px;
+    left: 80px;
+    width: 200px;
+    height: 102px;
+    z-index: 2;
 }
 .lJajBud {
     font-size: 74px;
