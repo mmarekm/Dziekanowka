@@ -130,6 +130,13 @@
     height: 490px;
     z-index: 2;
 }
+.calaObora {
+    top: 350px;
+    left: 300px;
+    width: 700px;
+    height: 640px;
+    z-index: 2;
+}
 .kuraWKurniku {
     width: 80px;
 }
@@ -146,6 +153,9 @@
     width: 100px;
 }
 .swiniaWChlewie {
+    width: 500px;
+}
+.krowaWOborze {
     width: 500px;
 }
 .kurnikDoZwierzyncaGuzik {

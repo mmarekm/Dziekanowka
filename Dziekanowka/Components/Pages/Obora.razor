@@ -5,6 +5,13 @@
 @implements IDisposable
 <div class="oboraWidok widok rel">
     <div class="abs oboraDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/oboraDoZwierzyniec.png" /></button></div>
+    <div class="abs calaObora">
+        @for (int i = 0; i < Gracz.Zwierze("krowa").Ilosc; i++)
+        {
+            int index = i;
+            <img class="abs krowaWOborze obrazekSieMiesci" src="img/zwierzyniec/ges.png" style="@StylKrowyWOborze(index)" />
+        }
+    </div>
 </div>
 
 @code {
@@ -21,6 +28,69 @@
         public double Y { get; set; }
         public double CzasPrzejscia { get; set; } = 2;
         public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("krowa"))
+        {
+            InicjalizujKrowy();
+            RykKrowy();
+        }
+    }
+    private void InicjalizujKrowy()
+    {
+        pozycjeKrowy.Clear();
+        foreach (var timer in timeryKrowy)
+            timer?.Dispose();
+        timeryKrowy.Clear();
+        for (int i = 0; i < Gracz.Zwierze("krowa").Ilosc; i++)
+        {
+            pozycjeKrowy.Add(new PozycjaKrowy { X = random.Next(0, 200), Y = random.Next(0, 140), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(4, 6) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeKrowy(index); SpacerowanieKrowy(index); }, null, TimeSpan.FromSeconds(random.Next(5, 8)), Timeout.InfiniteTimeSpan);
+            timeryKrowy.Add(timer);
+        }
+    }
+    private void RykKrowy() => timerDzwiekKrowy = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/rykKrowy.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieKrowy(int index)
+    {
+        if (index >= timeryKrowy.Count) return;
+        timeryKrowy[index]?.Dispose();
+        timeryKrowy[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeKrowy(index); SpacerowanieKrowy(index); }, null, TimeSpan.FromSeconds(random.Next(5, 8)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeKrowy(int index)
+    {
+        if (index >= pozycjeKrowy.Count) return;
+        var kura = pozycjeKrowy[index];
+        var nowaX = random.Next(0, 200);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 140);
+        kura.CzasPrzejscia = random.Next(2, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmKrowe(string karma)
+    {
+        if (!Gracz.JestZwierze("krowa") || !(karma != "gryka" ? Gracz.JestWarzywo(karma) : Gracz.JestZboze(karma))) return;
+        (karma != "gryka" ? Gracz.Warzywo(karma) : Gracz.Zboze(karma)).Ilosc--;
+        Gracz.Zwierze("krowa").Nakarmione++;
+        if (Gracz.Zwierze("krowa").Nakarmione >= Gracz.Zwierze("krowa").DajeProdukt)
+        {
+            Gracz.Zwierze("krowa").Nakarmione = 0;
+            Gracz.ProduktZ("mlekoKrowie").Ilosc++;
+            animujJajo = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajo = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private string StylKrowyWOborze(int index)
+    {
+        if (index >= pozycjeKrowy.Count) return "";
+        var krowa = pozycjeKrowy[index];
+        return $"left: {krowa.X}px; top: {krowa.Y}px; transform: scaleX({(krowa.PatrzyWLewo ? 1 : -1)}); transition: left {krowa.CzasPrzejscia}s ease-in-out, top {krowa.CzasPrzejscia}s ease-in-out;";
     }
     public void Dispose()
     {
