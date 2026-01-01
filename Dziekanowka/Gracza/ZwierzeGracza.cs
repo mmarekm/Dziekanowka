@@ -9,7 +9,7 @@
         public bool WszyscyObsluzeni => Ilosc == Gotowe;
         public int DajeProdukt => Ilosc == 0 ? 1 : Nazwa switch
         {
-            "kura" => Ilosc == 1 ? 8 : Ilosc < 4 ? 7 * (Ilosc - 1) + 8 : Ilosc < 7 ? 6 * (Ilosc - 3) + 22 : 5 * (Ilosc - 6) + 40,
+            "kura" or "krowa" => Ilosc == 1 ? 8 : Ilosc < 4 ? 7 * (Ilosc - 1) + 8 : Ilosc < 7 ? 6 * (Ilosc - 3) + 22 : 5 * (Ilosc - 6) + 40,
             "ges" => Ilosc == 1 ? 20 : Ilosc < 4 ? 18 * (Ilosc - 1) + 20 : Ilosc < 7 ? 16 * (Ilosc - 3) + 56 : 13 * (Ilosc - 6) + 104,
             "indyk" => Ilosc * 30,
             "kaczka" => Ilosc == 1 ? 9 : Ilosc < 4 ? 8 * (Ilosc - 1) + 9 : Ilosc < 7 ? 6 * (Ilosc - 3) + 25 : 5 * (Ilosc - 6) + 43,
@@ -25,8 +25,9 @@
             "kaczka" => Ilosc < 1 ? 23 : Ilosc * 11 + 30,
             "krolik" => 40,
             "swinia" => 70,
+            "krowa" => Ilosc < 1 ? 55 : Ilosc * 40 + 60,
             _ => 0
         };
-        public static List<ZwierzeGracza> StartoweZwierzaki() => [ new("kura", 1), new("ges"), new("indyk"), new("kaczka"), new("krolik"), new("swinia") ];
+        public static List<ZwierzeGracza> StartoweZwierzaki() => [ new("kura", 1), new("ges"), new("indyk"), new("kaczka"), new("krolik"), new("swinia"), new("krowa") ];
     }
 }

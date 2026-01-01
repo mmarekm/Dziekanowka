@@ -19,6 +19,9 @@
 .chlewWidok {
     background-image: url('../img/zwierzyniec/chlewWidok.png');
 }
+.oboraWidok {
+    background-image: url('../img/zwierzyniec/oboraWidok.png');
+}
 .stajniaWidok {
     background-image: url('../img/zwierzyniec/stajniaWidok.png');
 }
@@ -69,6 +72,13 @@
     left: 272px;
     width: 295px;
     height: 180px;
+    z-index: 3;
+}
+.doOboraGuzik {
+    top: 0;
+    left: 505px;
+    width: 294px;
+    height: 172px;
     z-index: 3;
 }
 .doStajniaGuzik {
@@ -180,6 +190,13 @@
     height: 226px;
     z-index: 3;
 }
+.oboraDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 405px;
+    height: 165px;
+    z-index: 3;
+}
 .stajniaDoZwierzyncaGuzik {
     bottom: 0;
     right: 0;
@@ -236,6 +253,16 @@
 }
 .swiniaPrzedChlewem {
     width: 70px;
+}
+.terenKrowyPrzedObora {
+    top: 140px;
+    left: 600px;
+    width: 200px;
+    height: 120px;
+    z-index: 5;
+}
+.krowaPrzedObora {
+    width: 90px;
 }
 .terenKoniaPrzedStajnia {
     top: 140px;

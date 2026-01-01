@@ -11,6 +11,7 @@
     <div class="abs doKacznikGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Kacznik)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoKacznik.png" /></button></div>
     <div class="abs doKrolikarniaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Krolikarnia)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoKrolikarnia.png" /></button></div>
     <div class="abs doChlewGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Chlew)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoChlew.png" /></button></div>
+    <div class="abs doOboraGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Obora)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoObora.png" /></button></div>
     <div class="abs doStajniaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Stajnia)" class="wyroznionyGuzik"><img src="img/zwierzyniec/zwierzyniecDoStajnia.png" /></button></div>
     <div class="abs terenKoniaPrzedStajnia"><img class="abs konPrzedStajnia obrazekSieMiesci" src="img/zwierzyniec/kon.png" style="@StylKonia()" /></div>
     @if (Gracz.JestZwierze("kura"))
@@ -37,16 +38,20 @@
     {
         <div class="abs terenSwiniPrzedChlewem"><img class="abs swiniaPrzedChlewem obrazekSieMiesci" src="img/zwierzyniec/swinia.png" style="@StylSwini()" /></div>
     }
+    @if (Gracz.JestZwierze("krowa"))
+    {
+        <div class="abs terenKrowyPrzedObora"><img class="abs krowaPrzedObora obrazekSieMiesci" src="img/zwierzyniec/krowa.png" style="@StylKrowy()" /></div>
+    }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private double pozycjaXKury = 20, pozycjaXGesi = 20, pozycjaXIndyka = 20, pozycjaXKaczki = 20, pozycjaXSwini = 20, pozycjaXKonia = 20;
-    private double pozycjaYKury = 20, pozycjaYGesi = 10, pozycjaYIndyka = 10, pozycjaYKaczki = 10, pozycjaYSwini = 10, pozycjaYKonia = 10;
-    private double czasPrzejsciaKury = 2, czasPrzejsciaGesi = 2, czasPrzejsciaIndyka = 2, czasPrzejsciaKaczki = 2, czasPrzejsciaSwini = 3, czasPrzejsciaKonia = 4;
-    private bool kuraPatrzyWLewo = false, gesPatrzyWLewo = false, indykPatrzyWLewo = false, kaczkaPatrzyWLewo = false, swiniaPatrzyWLewo = false, konPatrzyWLewo = false;
-    private System.Threading.Timer? timerDzwiekKury, timerDzwiekGesi, timerDzwiekIndyka, timerDzwiekKaczki, timerDzwiekSwini, timerDzwiekKonia, timer, timerGesi, timerIndyka, timerKaczki, timerSwini, timerKonia;
+    private double xKury = 20, xGesi = 20, xIndyka = 20, xKaczki = 20, xSwini = 20, xKrowy = 20, xKonia = 20;
+    private double yKury = 20, yGesi = 10, yIndyka = 10, yKaczki = 0, ySwini = 10, yKrowy = 10, yKonia = 10;
+    private double czasKury = 2, czasGesi = 2, czasIndyka = 2, czasKaczki = 2, czasSwini = 3, czasKrowy = 4, czasKonia = 4;
+    private bool kuraWLewo = false, gesWLewo = false, indykWLewo = false, kaczkaWLewo = false, swiniaWLewo = false, krowaWLewo = false, konWLewo = false;
+    private System.Threading.Timer? timerDzwiekKury, timerDzwiekGesi, timerDzwiekIndyka, timerDzwiekKaczki, timerDzwiekSwini, timerDzwiekKrowy, timerDzwiekKonia, timer, timerGesi, timerIndyka, timerKaczki, timerSwini, timerKrowy, timerKonia;
     private Random random = new Random();
     protected override void OnInitialized()
     {
@@ -55,6 +60,7 @@
         SpacerowanieIndyka();
         SpacerowanieKaczki();
         SpacerowanieSwini();
+        SpacerowanieKrowy();
         SpacerowanieKonia();
         DzwiekKonia();
         if (Gracz.JestZwierze("kura"))
@@ -67,6 +73,8 @@
             KwakanieKaczki();
         if (Gracz.JestZwierze("swinia"))
             KwikSwini();
+        if (Gracz.JestZwierze("krowa"))
+            RykKrowy();
     }
     private void GdakanieKury() => timerDzwiekKury = new System.Threading.Timer(async _ =>
     {
@@ -88,74 +96,88 @@
     {
         try { await dzwieki.GraDzwiek("mp3/Dzwieki/kwikSwini.mp3"); } catch { }
     }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10));
+    private void RykKrowy() => timerDzwiekKrowy = new System.Threading.Timer(async _ =>
+    {
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/rykKrowy.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(12));
     private void DzwiekKonia() => timerDzwiekKonia = new System.Threading.Timer(async _ =>
     {
         try { await dzwieki.GraDzwiek("mp3/Dzwieki/kon.mp3"); } catch { }
-    }, null, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(12));
-    private string StylKury() => $"left: {pozycjaXKury}px; top: {pozycjaYKury}px; transform: scaleX({(kuraPatrzyWLewo ? -1 : 1)}); transition: left {czasPrzejsciaKury}s ease-in-out, top {czasPrzejsciaKury}s ease-in-out;";
-    private string StylGesi() => $"left: {pozycjaXGesi}px; top: {pozycjaYGesi}px; transform: scaleX({(gesPatrzyWLewo ? 1 : -1)}); transition: left {czasPrzejsciaGesi}s ease-in-out, top {czasPrzejsciaGesi}s ease-in-out;";
-    private string StylIndyka() => $"left: {pozycjaXIndyka}px; top: {pozycjaYIndyka}px; transform: scaleX({(indykPatrzyWLewo ? -1 : 1)}); transition: left {czasPrzejsciaIndyka}s ease-in-out, top {czasPrzejsciaIndyka}s ease-in-out;";
-    private string StylKaczki() => $"left: {pozycjaXKaczki}px; top: {pozycjaYKaczki}px; transform: scaleX({(kaczkaPatrzyWLewo ? -1 : 1)}); transition: left {czasPrzejsciaKaczki}s ease-in-out, top {czasPrzejsciaKaczki}s ease-in-out;";
-    private string StylSwini() => $"left: {pozycjaXSwini}px; top: {pozycjaYSwini}px; transform: scaleX({(swiniaPatrzyWLewo ? -1 : 1)}); transition: left {czasPrzejsciaSwini}s ease-in-out, top {czasPrzejsciaSwini}s ease-in-out;";
-    private string StylKonia() => $"left: {pozycjaXKonia}px; top: {pozycjaYKonia}px; transform: scaleX({(konPatrzyWLewo ? 1 : -1)}); transition: left {czasPrzejsciaKonia}s ease-in-out, top {czasPrzejsciaKonia}s ease-in-out;";
+    }, null, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(13));
+    private string StylKury() => $"left: {xKury}px; top: {yKury}px; transform: scaleX({(kuraWLewo ? -1 : 1)}); transition: left {czasKury}s ease-in-out, top {czasKury}s ease-in-out;";
+    private string StylGesi() => $"left: {xGesi}px; top: {yGesi}px; transform: scaleX({(gesWLewo ? 1 : -1)}); transition: left {czasGesi}s ease-in-out, top {czasGesi}s ease-in-out;";
+    private string StylIndyka() => $"left: {xIndyka}px; top: {yIndyka}px; transform: scaleX({(indykWLewo ? -1 : 1)}); transition: left {czasIndyka}s ease-in-out, top {czasIndyka}s ease-in-out;";
+    private string StylKaczki() => $"left: {xKaczki}px; top: {yKaczki}px; transform: scaleX({(kaczkaWLewo ? -1 : 1)}); transition: left {czasKaczki}s ease-in-out, top {czasKaczki}s ease-in-out;";
+    private string StylSwini() => $"left: {xSwini}px; top: {ySwini}px; transform: scaleX({(swiniaWLewo ? -1 : 1)}); transition: left {czasSwini}s ease-in-out, top {czasSwini}s ease-in-out;";
+    private string StylKrowy() => $"left: {xKrowy}px; top: {yKrowy}px; transform: scaleX({(krowaWLewo ? 1 : -1)}); transition: left {czasKrowy}s ease-in-out, top {czasKrowy}s ease-in-out;";
+    private string StylKonia() => $"left: {xKonia}px; top: {yKonia}px; transform: scaleX({(konWLewo ? 1 : -1)}); transition: left {czasKonia}s ease-in-out, top {czasKonia}s ease-in-out;";
     private void SpacerowanieKury() => timer = new System.Threading.Timer(async _ => { await ZmienPozycjeKury(); SpacerowanieKury(); }, null, TimeSpan.FromSeconds(random.Next(3, 8)), Timeout.InfiniteTimeSpan);
     private void SpacerowanieGesi() => timerGesi = new System.Threading.Timer(async _ => { await ZmienPozycjeGesi(); SpacerowanieGesi(); }, null, TimeSpan.FromSeconds(random.Next(4, 9)), Timeout.InfiniteTimeSpan);
     private void SpacerowanieIndyka() => timerIndyka = new System.Threading.Timer(async _ => { await ZmienPozycjeIndyka(); SpacerowanieIndyka(); }, null, TimeSpan.FromSeconds(random.Next(5, 11)), Timeout.InfiniteTimeSpan);
     private void SpacerowanieKaczki() => timerKaczki = new System.Threading.Timer(async _ => { await ZmienPozycjeKaczki(); SpacerowanieKaczki(); }, null, TimeSpan.FromSeconds(random.Next(4, 7)), Timeout.InfiniteTimeSpan);
     private void SpacerowanieSwini() => timerSwini = new System.Threading.Timer(async _ => { await ZmienPozycjeSwini(); SpacerowanieSwini(); }, null, TimeSpan.FromSeconds(random.Next(6, 12)), Timeout.InfiniteTimeSpan);
+    private void SpacerowanieKrowy() => timerKrowy = new System.Threading.Timer(async _ => { await ZmienPozycjeKrowy(); SpacerowanieKrowy(); }, null, TimeSpan.FromSeconds(random.Next(7, 12)), Timeout.InfiniteTimeSpan);
     private void SpacerowanieKonia() => timerKonia = new System.Threading.Timer(async _ => { await ZmienPozycjeKonia(); SpacerowanieKonia(); }, null, TimeSpan.FromSeconds(random.Next(6, 13)), Timeout.InfiniteTimeSpan);
     private async Task ZmienPozycjeKury()
     {
         var nowaX = random.Next(0, 160);
-        kuraPatrzyWLewo = nowaX < pozycjaXKury;
-        pozycjaXKury = nowaX;
-        pozycjaYKury = random.Next(0, 80);
-        czasPrzejsciaKury = random.Next(2, 5);
+        kuraWLewo = nowaX < xKury;
+        xKury = nowaX;
+        yKury = random.Next(0, 80);
+        czasKury = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
     }
     private async Task ZmienPozycjeGesi()
     {
-        var nowaX = random.Next(0, 150);
-        gesPatrzyWLewo = nowaX < pozycjaXGesi;
-        pozycjaXGesi = nowaX;
-        pozycjaYGesi = random.Next(0, 90);
-        czasPrzejsciaGesi = random.Next(2, 5);
+        var nowaX = random.Next(0, 100);
+        gesWLewo = nowaX < xGesi;
+        xGesi = nowaX;
+        yGesi = random.Next(0, 40);
+        czasGesi = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
     }
     private async Task ZmienPozycjeIndyka()
     {
-        var nowaX = random.Next(0, 150);
-        indykPatrzyWLewo = nowaX < pozycjaXIndyka;
-        pozycjaXIndyka = nowaX;
-        pozycjaYIndyka = random.Next(0, 90);
-        czasPrzejsciaIndyka = random.Next(2, 5);
+        var nowaX = random.Next(0, 230);
+        indykWLewo = nowaX < xIndyka;
+        xIndyka = nowaX;
+        yIndyka = random.Next(0, 50);
+        czasIndyka = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
     }
     private async Task ZmienPozycjeKaczki()
     {
-        var nowaX = random.Next(0, 110);
-        kaczkaPatrzyWLewo = nowaX < pozycjaXKaczki;
-        pozycjaXKaczki = nowaX;
-        pozycjaYKaczki = random.Next(0, 50);
-        czasPrzejsciaKaczki = random.Next(2, 5);
+        var nowaX = random.Next(0, 60);
+        kaczkaWLewo = nowaX < xKaczki;
+        xKaczki = nowaX;
+        czasKaczki = random.Next(2, 5);
         await InvokeAsync(StateHasChanged);
     }
     private async Task ZmienPozycjeSwini()
     {
         var nowaX = random.Next(0, 110);
-        swiniaPatrzyWLewo = nowaX < pozycjaXSwini;
-        pozycjaXSwini = nowaX;
-        pozycjaYSwini = random.Next(0, 50);
-        czasPrzejsciaSwini = random.Next(3, 5);
+        swiniaWLewo = nowaX < xSwini;
+        xSwini = nowaX;
+        ySwini = random.Next(0, 10);
+        czasSwini = random.Next(3, 5);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task ZmienPozycjeKrowy()
+    {
+        var nowaX = random.Next(0, 110);
+        krowaWLewo = nowaX < xKrowy;
+        xKrowy = nowaX;
+        yKrowy = random.Next(0, 30);
+        czasKrowy = random.Next(4, 6);
         await InvokeAsync(StateHasChanged);
     }
     private async Task ZmienPozycjeKonia()
     {
-        var nowaX = random.Next(0, 110);
-        konPatrzyWLewo = nowaX < pozycjaXKonia;
-        pozycjaXKonia = nowaX;
-        pozycjaYKonia = random.Next(0, 50);
-        czasPrzejsciaKonia = random.Next(4, 6);
+        var nowaX = random.Next(0, 200);
+        konWLewo = nowaX < xKonia;
+        xKonia = nowaX;
+        yKonia = random.Next(0, 20);
+        czasKonia = random.Next(4, 6);
         await InvokeAsync(StateHasChanged);
     }
     public void Dispose()
@@ -165,12 +187,14 @@
         timerIndyka?.Dispose();
         timerKaczki?.Dispose();
         timerSwini?.Dispose();
+        timerKrowy?.Dispose();
         timerKonia?.Dispose();
         timerDzwiekKury?.Dispose();
         timerDzwiekGesi?.Dispose();
         timerDzwiekIndyka?.Dispose();
         timerDzwiekKaczki?.Dispose();
         timerDzwiekSwini?.Dispose();
+        timerDzwiekKrowy?.Dispose();
         timerDzwiekKonia?.Dispose();
     }
 }
