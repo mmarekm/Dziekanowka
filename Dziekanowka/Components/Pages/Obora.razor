@@ -9,9 +9,19 @@
         @for (int i = 0; i < Gracz.Zwierze("krowa").Ilosc; i++)
         {
             int index = i;
-            <img class="abs krowaWOborze obrazekSieMiesci" src="img/zwierzyniec/ges.png" style="@StylKrowyWOborze(index)" />
+            <img class="abs krowaWOborze obrazekSieMiesci" src="img/zwierzyniec/krowa.png" style="@StylKrowyWOborze(index)" />
         }
     </div>
+    <div class="abs liczbaPtakDomek liczbaKrowObora">@(Gracz.Zwierze("krowa").Ilosc)</div>
+    <div class="abs progresNakarmieniaKrowy"><progress class="pasekPaliwa" value="@Gracz.Zwierze("krowa").Nakarmione" max="@Gracz.Zwierze("krowa").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("krowa").Nakarmione / Gracz.Zwierze("krowa").DajeProdukt * 100) / 10) "></progress></div>
+    <div class="abs lJajBud liczbaMlekaObora">@(Gracz.ProduktZ("mlekoKrowie").Ilosc)</div>
+    <div class="abs nadMlekiemObora @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/krowieMlekoBanka.png" /></div>
+    <div class="abs ramkaWarzywKurnik liczbaGrykaObora">@(Gracz.Zboze("gryka").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikGrykaObora @(!Gracz.JestZwierze("krowa") && Gracz.JestZboze("gryka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("gryka")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaBrokulObora">@(Gracz.Warzywo("brokuł").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikBrokulObora @(!Gracz.JestZwierze("krowa") && Gracz.JestWarzywo("brokuł") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("brokuł")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaPorObora">@(Gracz.Warzywo("por").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikPorObora @(!Gracz.JestZwierze("krowa") && Gracz.JestWarzywo("por") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("por")'></div>
 </div>
 
 @code {
