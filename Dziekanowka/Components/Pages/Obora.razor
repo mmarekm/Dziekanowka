@@ -17,11 +17,11 @@
     <div class="abs lJajBud liczbaMlekaObora">@(Gracz.ProduktZ("mlekoKrowie").Ilosc)</div>
     <div class="abs nadMlekiemObora @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/krowieMlekoBanka.png" /></div>
     <div class="abs ramkaWarzywKurnik liczbaGrykaObora">@(Gracz.Zboze("gryka").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikGrykaObora @(!Gracz.JestZwierze("krowa") && Gracz.JestZboze("gryka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("gryka")'></div>
+    <div class="abs guzikWarzywoKurnik guzikGrykaObora @(Gracz.JestZwierze("krowa") && Gracz.JestZboze("gryka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("gryka")'></div>
     <div class="abs ramkaWarzywKurnik liczbaBrokulObora">@(Gracz.Warzywo("brokuł").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikBrokulObora @(!Gracz.JestZwierze("krowa") && Gracz.JestWarzywo("brokuł") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("brokuł")'></div>
+    <div class="abs guzikWarzywoKurnik guzikBrokulObora @(Gracz.JestZwierze("krowa") && Gracz.JestWarzywo("brokuł") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("brokuł")'></div>
     <div class="abs ramkaWarzywKurnik liczbaPorObora">@(Gracz.Warzywo("por").Ilosc)</div>
-    <div class="abs guzikWarzywoKurnik guzikPorObora @(!Gracz.JestZwierze("krowa") && Gracz.JestWarzywo("por") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("por")'></div>
+    <div class="abs guzikWarzywoKurnik guzikPorObora @(Gracz.JestZwierze("krowa") && Gracz.JestWarzywo("por") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKrowe("por")'></div>
 </div>
 
 @code {
