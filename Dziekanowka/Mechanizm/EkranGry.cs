@@ -11,6 +11,7 @@
         Kacznik,
         Krolikarnia,
         Chlew,
+        Koziarnia,
         Obora,
         Stajnia,
         ZaBrama,

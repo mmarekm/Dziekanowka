@@ -15,6 +15,7 @@
             "kaczka" => Ilosc == 1 ? 9 : Ilosc < 4 ? 8 * (Ilosc - 1) + 9 : Ilosc < 7 ? 6 * (Ilosc - 3) + 25 : 5 * (Ilosc - 6) + 43,
             "krolik" => 35,
             "swinia" => 60,
+            "koza" => Ilosc == 1 ? 15 : Ilosc < 4 ? 13 * (Ilosc - 1) + 15 : Ilosc < 7 ? 11 * (Ilosc - 3) + 41 : 9 * (Ilosc - 6) + 74,
             _ => 1
         };
         public int Cena => Nazwa switch
@@ -25,9 +26,10 @@
             "kaczka" => Ilosc < 1 ? 23 : Ilosc * 11 + 30,
             "krolik" => 40,
             "swinia" => 70,
+            "koza" => Ilosc < 1 ? 35 : Ilosc * 15 + 50,
             "krowa" => Ilosc < 1 ? 55 : Ilosc * 40 + 60,
             _ => 0
         };
-        public static List<ZwierzeGracza> StartoweZwierzaki() => [ new("kura", 1), new("ges"), new("indyk"), new("kaczka"), new("krolik"), new("swinia"), new("krowa") ];
+        public static List<ZwierzeGracza> StartoweZwierzaki() => [ new("kura", 1), new("ges"), new("indyk"), new("kaczka"), new("krolik"), new("swinia"), new("koza"), new("krowa") ];
     }
 }

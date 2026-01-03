@@ -87,7 +87,7 @@
         if (Gracz.Zwierze("kaczka").Nakarmione >= Gracz.Zwierze("kaczka").DajeProdukt)
         {
             Gracz.Zwierze("kaczka").Nakarmione = 0;
-            Gracz.ProduktZ("jajoKacze").Ilosc++;
+            Gracz.ProduktZ("jajoKacze").Ilosc += Gracz.Zwierze("kaczka").Ilosc;
             animujJajo = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);
