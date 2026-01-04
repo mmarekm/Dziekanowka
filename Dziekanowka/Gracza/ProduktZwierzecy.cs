@@ -7,8 +7,8 @@
         public static List<ProduktZwierzecy> StartoweProdukty() => [
             new("jajoKurze"), new("kuraJedzenie"), new("pioroGesi"), new("jajoGesie"), new("gesJedzenie"), new("smalecGesi"), new("jajoIndycze"), new("indykJedzenie"),
             new("pioroKaczki"), new("jajoKacze"), new("kaczkaJedzenie"), new("smalecKaczy"), new("futroKrolik"), new("krolikJedzenie"), new("swiniaSzynka"), new("swiniaSchab"),
-            new("swiniaBoczek"), new("smalecSwinski"), new("mlekoKozie"), new("kozaJedzenie"), new("kozaSkora"), new("mlekoKrowie"), new("krowaRostbef"), new("krowaAntrykot"),
-            new("krowaLopatka"), new("krowaPoledwica"), new("krowaSkora")
+            new("swiniaBoczek"), new("smalecSwinski"), new("mlekoOwcze"), new("owcaJedzenie"), new("owcaSkora"), new("owcaWelna"), new("mlekoKozie"), new("kozaJedzenie"),
+            new("kozaSkora"), new("mlekoKrowie"), new("krowaRostbef"), new("krowaAntrykot"), new("krowaLopatka"), new("krowaPoledwica"), new("krowaSkora")
         ];
     }
 }

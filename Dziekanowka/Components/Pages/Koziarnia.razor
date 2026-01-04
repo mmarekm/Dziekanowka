@@ -5,6 +5,23 @@
 @implements IDisposable
 <div class="koziarniaWidok widok rel">
     <div class="abs koziarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/koziarniaDoZwierzyniec.png" /></button></div>
+    <div class="abs calaKoziarnia">
+        @for (int i = 0; i < Gracz.Zwierze("koza").Ilosc; i++)
+        {
+            int index = i;
+            <img class="abs kozaWKoziarni obrazekSieMiesci" src="img/zwierzyniec/koza.png" style="@StylKozyWKoziarni(index)" />
+        }
+    </div>
+    <div class="abs liczbaPtakDomek liczbaKozKoziarnia">@(Gracz.Zwierze("koza").Ilosc)</div>
+    <div class="abs progresNakarmieniaKozy"><progress class="pasekPaliwa" value="@Gracz.Zwierze("koza").Nakarmione" max="@Gracz.Zwierze("koza").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("koza").Nakarmione / Gracz.Zwierze("koza").DajeProdukt * 100) / 10) "></progress></div>
+    <div class="abs lJajBud liczbaMlekaKoziarnia">@(Gracz.ProduktZ("mlekoKozie").Ilosc)</div>
+    <div class="abs nadMlekiemKoziarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/kozieMlekoKoziarnia.png" /></div>
+    <div class="abs ramkaWarzywKurnik liczbaBurakKoziarnia">@(Gracz.Warzywo("burak").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikBurakKoziarnia @(Gracz.JestZwierze("koza") && Gracz.JestWarzywo("burak") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKoze("burak")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaKapustaKoziarnia">@(Gracz.Warzywo("kapustaPekińska").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikKapustaKoziarnia @(Gracz.JestZwierze("koza") && Gracz.JestWarzywo("kapustaPekińska") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKoze("kapustaPekińska")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaDyniaKoziarnia">@(Gracz.Warzywo("dynia").Ilosc)</div>
+    <div class="abs guzikWarzywoKurnik guzikDyniaKoziarnia @(Gracz.JestZwierze("koza") && Gracz.JestWarzywo("dynia") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKoze("dynia")'></div>
 </div>
 
 @code {
@@ -21,6 +38,69 @@
         public double Y { get; set; }
         public double CzasPrzejscia { get; set; } = 2;
         public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("koza"))
+        {
+            InicjalizujKozy();
+            BekKozy();
+        }
+    }
+    private void InicjalizujKozy()
+    {
+        pozycjeKozy.Clear();
+        foreach (var timer in timeryKozy)
+            timer?.Dispose();
+        timeryKozy.Clear();
+        for (int i = 0; i < Gracz.Zwierze("koza").Ilosc; i++)
+        {
+            pozycjeKozy.Add(new PozycjaKozy { X = random.Next(0, 350), Y = random.Next(0, 390), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(1, 3) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeKozy(index); SpacerowanieKozy(index); }, null, TimeSpan.FromSeconds(random.Next(2, 5)), Timeout.InfiniteTimeSpan);
+            timeryKozy.Add(timer);
+        }
+    }
+    private void BekKozy() => timerDzwiekKozy = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/bekKozy.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieKozy(int index)
+    {
+        if (index >= timeryKozy.Count) return;
+        timeryKozy[index]?.Dispose();
+        timeryKozy[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeKozy(index); SpacerowanieKozy(index); }, null, TimeSpan.FromSeconds(random.Next(2, 5)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeKozy(int index)
+    {
+        if (index >= pozycjeKozy.Count) return;
+        var kura = pozycjeKozy[index];
+        var nowaX = random.Next(0, 350);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 390);
+        kura.CzasPrzejscia = random.Next(1, 3);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmKoze(string karma)
+    {
+        if (!Gracz.JestZwierze("koza") || !Gracz.JestWarzywo(karma)) return;
+        Gracz.Warzywo(karma).Ilosc--;
+        Gracz.Zwierze("koza").Nakarmione++;
+        if (Gracz.Zwierze("koza").Nakarmione >= Gracz.Zwierze("koza").DajeProdukt)
+        {
+            Gracz.Zwierze("koza").Nakarmione = 0;
+            Gracz.ProduktZ("mlekoKozie").Ilosc += Gracz.Zwierze("koza").Ilosc;
+            animujJajo = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajo = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private string StylKozyWKoziarni(int index)
+    {
+        if (index >= pozycjeKozy.Count) return "";
+        var koza = pozycjeKozy[index];
+        return $"left: {koza.X}px; top: {koza.Y}px; transform: scaleX({(koza.PatrzyWLewo ? -1 : 1)}); transition: left {koza.CzasPrzejscia}s ease-in-out, top {koza.CzasPrzejscia}s ease-in-out;";
     }
     public void Dispose()
     {
