@@ -19,6 +19,9 @@
 .chlewWidok {
     background-image: url('../img/zwierzyniec/chlewWidok.png');
 }
+.owczarniaWidok {
+    background-image: url('../img/zwierzyniec/owczarniaWidok.png');
+}
 .koziarniaWidok {
     background-image: url('../img/zwierzyniec/koziarniaWidok.png');
 }
@@ -75,6 +78,13 @@
     left: 272px;
     width: 295px;
     height: 180px;
+    z-index: 3;
+}
+.doOwczarniaGuzik {
+    top: 615px;
+    right: 0;
+    width: 435px;
+    height: 182px;
     z-index: 3;
 }
 .doKoziarniaGuzik {
@@ -220,6 +230,13 @@
     height: 226px;
     z-index: 3;
 }
+.owczarniaDoZwierzyncaGuzik {
+    bottom: 0;
+    right: 0;
+    width: 217px;
+    height: 137px;
+    z-index: 3;
+}
 .koziarniaDoZwierzyncaGuzik {
     bottom: 0;
     right: 0;
@@ -290,6 +307,16 @@
 }
 .swiniaPrzedChlewem {
     width: 70px;
+}
+.terenOwcyPrzedOwczarnia {
+    bottom: 150px;
+    right: 120px;
+    width: 400px;
+    height: 120px;
+    z-index: 5;
+}
+.owcaPrzedOwczarnia {
+    width: 80px;
 }
 .terenKozyPrzedKoziarnia {
     top: 340px;

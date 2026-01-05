@@ -10,13 +10,13 @@
         public int DajeProdukt => Ilosc == 0 ? 1 : Nazwa switch
         {
             "kura" or "krowa" => Ilosc == 1 ? 8 : Ilosc < 4 ? 7 * (Ilosc - 1) + 8 : Ilosc < 7 ? 6 * (Ilosc - 3) + 22 : 5 * (Ilosc - 6) + 40,
-            "ges" => Ilosc == 1 ? 20 : Ilosc < 4 ? 18 * (Ilosc - 1) + 20 : Ilosc < 7 ? 16 * (Ilosc - 3) + 56 : 13 * (Ilosc - 6) + 104,
-            "indyk" => Ilosc * 30,
+            "ges" => Ilosc == 1 ? 10 : 9 * (Ilosc - 1) + 10,
+            "indyk" => Ilosc * 13,
             "kaczka" => Ilosc == 1 ? 9 : Ilosc < 4 ? 8 * (Ilosc - 1) + 9 : Ilosc < 7 ? 6 * (Ilosc - 3) + 25 : 5 * (Ilosc - 6) + 43,
-            "krolik" => 35,
-            "swinia" => 60,
-            "owca" => Ilosc * 13,
-            "koza" => Ilosc == 1 ? 15 : Ilosc < 4 ? 13 * (Ilosc - 1) + 15 : Ilosc < 7 ? 11 * (Ilosc - 3) + 41 : 9 * (Ilosc - 6) + 74,
+            "krolik" => 15,
+            "swinia" => 20,
+            "owca" => Ilosc * 10,
+            "koza" => Ilosc == 1 ? 11 : Ilosc < 4 ? 10 * (Ilosc - 1) + 11 : Ilosc < 7 ? 9 * (Ilosc - 3) + 31 : 8 * (Ilosc - 6) + 58,
             _ => 1
         };
         public int Cena => Nazwa switch
@@ -26,7 +26,7 @@
             "indyk" => Ilosc < 1 ? 28 : Ilosc * 5 + 37,
             "kaczka" => Ilosc < 1 ? 23 : Ilosc * 11 + 30,
             "krolik" => 40,
-            "swinia" => 70,
+            "swinia" => 60,
             "owca" => Ilosc < 1 ? 40 : Ilosc * 20 + 45,
             "koza" => Ilosc < 1 ? 35 : Ilosc * 15 + 50,
             "krowa" => Ilosc < 1 ? 55 : Ilosc * 40 + 60,

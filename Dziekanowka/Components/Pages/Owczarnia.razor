@@ -1,5 +1,31 @@
-﻿<h3>Owczarnia</h3>
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
+<div class="owczarniaWidok widok rel">
+    <div class="abs owczarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/owczarniaDoZwierzyniec.png" /></button></div>
+</div>
 
 @code {
-
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool animujJajo = false;
+    private List<PozycjaOwcy> pozycjeOwcy = new();
+    private System.Threading.Timer? timerDzwiekOwcy;
+    private List<System.Threading.Timer?> timeryOwcy = new();
+    private Random random = new Random();
+    private class PozycjaOwcy
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    public void Dispose()
+    {
+        foreach (var timer in timeryOwcy)
+            timer?.Dispose();
+        timerDzwiekOwcy?.Dispose();
+    }
 }
