@@ -57,11 +57,11 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private double xKury = 20, xGesi = 20, xIndyka = 20, xKaczki = 20, xSwini = 20, xOwcy = 20, xKozy = 20, xKrowy = 20, xKonia = 20;
-    private double yKury = 20, yGesi = 10, yIndyka = 10, yKaczki = 0, ySwini = 10, yOwcy = 10, yKozy = 10, yKrowy = 10, yKonia = 10;
-    private double czasKury = 2, czasGesi = 2, czasIndyka = 2, czasKaczki = 2, czasSwini = 3, czasOwcy = 3, czasKozy = 3, czasKrowy = 4, czasKonia = 4;
-    private bool kuraWLewo = false, gesWLewo = false, indykWLewo = false, kaczkaWLewo = false, swiniaWLewo = false, owcaWLewo = false, kozaWLewo = false, krowaWLewo = false, konWLewo = false;
-    private System.Threading.Timer? timerDzwiekKury, timerDzwiekGesi, timerDzwiekIndyka, timerDzwiekKaczki, timerDzwiekSwini, timerDzwiekOwcy, timerDzwiekKozy, timerDzwiekKrowy, timerDzwiekKonia, timer, timerGesi, timerIndyka, timerKaczki, timerSwini, timerOwcy, timerKozy, timerKrowy, timerKonia;
+    private double xKury = 20, xGesi = 20, xIndyka = 20, xKaczki = 20, xSwini = 20, xOwcy = 20, xAlpaki = 20, xKozy = 20, xKrowy = 20, xKonia = 20;
+    private double yKury = 20, yGesi = 10, yIndyka = 10, yKaczki = 0, ySwini = 10, yOwcy = 10, yAlpaki = 20, yKozy = 10, yKrowy = 10, yKonia = 10;
+    private double czasKury = 2, czasGesi = 2, czasIndyka = 2, czasKaczki = 2, czasSwini = 3, czasOwcy = 3, czasAlpaki = 3, czasKozy = 3, czasKrowy = 4, czasKonia = 4;
+    private bool kuraWLewo = false, gesWLewo = false, indykWLewo = false, kaczkaWLewo = false, swiniaWLewo = false, owcaWLewo = false, alpakaWLewo = false, kozaWLewo = false, krowaWLewo = false, konWLewo = false;
+    private System.Threading.Timer? timerDzwiekKury, timerDzwiekGesi, timerDzwiekIndyka, timerDzwiekKaczki, timerDzwiekSwini, timerDzwiekOwcy, timerDzwiekAlpaki, timerDzwiekKozy, timerDzwiekKrowy, timerDzwiekKonia, timer, timerGesi, timerIndyka, timerKaczki, timerSwini, timerOwcy, timerAlpaki, timerKozy, timerKrowy, timerKonia;
     private Random random = new Random();
     protected override void OnInitialized()
     {
@@ -94,40 +94,44 @@
     }
     private void GdakanieKury() => timerDzwiekKury = new System.Threading.Timer(async _ =>
     {
-        try { await dzwieki.GraDzwiek("mp3/Dzwieki/kuraGdacze.mp3"); } catch {}
-    }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(7));
-    private void GeganieGesi() => timerDzwiekGesi = new System.Threading.Timer(async _ =>
-    {
-        try { await dzwieki.GraDzwiek("mp3/Dzwieki/geganieGesi.mp3"); } catch {}
-    }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(9));
-    private void GulgotanieIndyka() => timerDzwiekIndyka = new System.Threading.Timer(async _ =>
-    {
-        try { await dzwieki.GraDzwiek("mp3/Dzwieki/indykGulgocze.mp3"); } catch { }
-    }, null, TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(11));
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/kuraGdacze.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(7));
     private void KwakanieKaczki() => timerDzwiekKaczki = new System.Threading.Timer(async _ =>
     {
         try { await dzwieki.GraDzwiek("mp3/Dzwieki/kaczkaKwacze.mp3"); } catch { }
-    }, null, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(8));
-    private void KwikSwini() => timerDzwiekSwini = new System.Threading.Timer(async _ =>
-    {
-        try { await dzwieki.GraDzwiek("mp3/Dzwieki/kwikSwini.mp3"); } catch { }
-    }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(10));
-    private void MekOwcy() => timerDzwiekOwcy = new System.Threading.Timer(async _ =>
-    {
-        try { await dzwieki.GraDzwiek("mp3/Dzwieki/mekOwcy.mp3"); } catch { }
-    }, null, TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(7));
-    private void BekKozy() => timerDzwiekKozy = new System.Threading.Timer(async _ =>
-    {
-        try { await dzwieki.GraDzwiek("mp3/Dzwieki/bekKozy.mp3"); } catch { }
-    }, null, TimeSpan.FromSeconds(7), TimeSpan.FromSeconds(12));
+    }, null, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(8));
     private void RykKrowy() => timerDzwiekKrowy = new System.Threading.Timer(async _ =>
     {
         try { await dzwieki.GraDzwiek("mp3/Dzwieki/rykKrowy.mp3"); } catch { }
-    }, null, TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(12));
+    }, null, TimeSpan.FromSeconds(7), TimeSpan.FromSeconds(13));
+    private void GeganieGesi() => timerDzwiekGesi = new System.Threading.Timer(async _ =>
+    {
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/geganieGesi.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(9), TimeSpan.FromSeconds(11));
+    private void MekOwcy() => timerDzwiekOwcy = new System.Threading.Timer(async _ =>
+    {
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/mekOwcy.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(11), TimeSpan.FromSeconds(9));
+    private void MruczenieAlpaki() => timerDzwiekAlpaki = new System.Threading.Timer(async _ =>
+    {
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/mruczenieAlpaki.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(21), TimeSpan.FromSeconds(17));
+    private void GulgotanieIndyka() => timerDzwiekIndyka = new System.Threading.Timer(async _ =>
+    {
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/indykGulgocze.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(13), TimeSpan.FromSeconds(13));
+    private void KwikSwini() => timerDzwiekSwini = new System.Threading.Timer(async _ =>
+    {
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/kwikSwini.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(15), TimeSpan.FromSeconds(10));
+    private void BekKozy() => timerDzwiekKozy = new System.Threading.Timer(async _ =>
+    {
+        try { await dzwieki.GraDzwiek("mp3/Dzwieki/bekKozy.mp3"); } catch { }
+    }, null, TimeSpan.FromSeconds(17), TimeSpan.FromSeconds(11));
     private void DzwiekKonia() => timerDzwiekKonia = new System.Threading.Timer(async _ =>
     {
         try { await dzwieki.GraDzwiek("mp3/Dzwieki/kon.mp3"); } catch { }
-    }, null, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(13));
+    }, null, TimeSpan.FromSeconds(19), TimeSpan.FromSeconds(14));
     private string StylKury() => $"left: {xKury}px; top: {yKury}px; transform: scaleX({(kuraWLewo ? -1 : 1)}); transition: left {czasKury}s ease-in-out, top {czasKury}s ease-in-out;";
     private string StylGesi() => $"left: {xGesi}px; top: {yGesi}px; transform: scaleX({(gesWLewo ? 1 : -1)}); transition: left {czasGesi}s ease-in-out, top {czasGesi}s ease-in-out;";
     private string StylIndyka() => $"left: {xIndyka}px; top: {yIndyka}px; transform: scaleX({(indykWLewo ? -1 : 1)}); transition: left {czasIndyka}s ease-in-out, top {czasIndyka}s ease-in-out;";
@@ -233,6 +237,7 @@
         timerIndyka?.Dispose();
         timerKaczki?.Dispose();
         timerSwini?.Dispose();
+        timerAlpaki?.Dispose();
         timerOwcy?.Dispose();
         timerKozy?.Dispose();
         timerKrowy?.Dispose();
@@ -243,6 +248,7 @@
         timerDzwiekKaczki?.Dispose();
         timerDzwiekSwini?.Dispose();
         timerDzwiekOwcy?.Dispose();
+        timerDzwiekAlpaki?.Dispose();
         timerDzwiekKozy?.Dispose();
         timerDzwiekKrowy?.Dispose();
         timerDzwiekKonia?.Dispose();

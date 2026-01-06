@@ -12,6 +12,7 @@
         Krolikarnia,
         Chlew,
         Owczarnia,
+        Alpakarium,
         Koziarnia,
         Obora,
         Stajnia,

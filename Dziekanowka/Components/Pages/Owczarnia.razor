@@ -5,12 +5,33 @@
 @implements IDisposable
 <div class="owczarniaWidok widok rel">
     <div class="abs owczarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/owczarniaDoZwierzyniec.png" /></button></div>
+    <div class="abs calaOwczarnia">
+        @for (int i = 0; i < Gracz.Zwierze("owca").Ilosc; i++)
+        {
+            int index = i;
+            <img class="abs owcaWOwczarni obrazekSieMiesci" src="img/zwierzyniec/owca.png" style="@StylOwcyWOWczarni(index)" />
+        }
+    </div>
+    <div class="abs liczbaPtakDomek liczbaOwiecOwczarnia">@(Gracz.Zwierze("owca").Ilosc)</div>
+    <div class="abs progresNakarmieniaOwcy"><progress class="pasekPaliwa" value="@Gracz.Zwierze("owca").Nakarmione" max="@Gracz.Zwierze("owca").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("owca").Nakarmione / Gracz.Zwierze("owca").DajeProdukt * 100) / 10) "></progress></div>
+    <div class="abs progresWelnyOwcy"><progress class="pasekPaliwa" value="@Gracz.Zwierze("owca").Gotowe" max="10" style="--procent: @((int)(double)Gracz.Zwierze("owca").Gotowe / 100) "></progress></div>
+    <div class="abs lJajBud liczbaMlekaOwca">@(Gracz.ProduktZ("mlekoOwcze").Ilosc)</div>
+    <div class="abs nadMlekiemOwczarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/owczeMlekoOwczarnia.png" /></div>
+    <div class="abs lJajBud liczbaWelnaOwca">@(Gracz.ProduktZ("owcaWelna").Ilosc)</div>
+    <div class="abs nadWelnaOwczarnia @(animujWelna ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/owczaWelnaOwczarnia.png" /></div>
+    <div class="abs ramkaWarzywKurnik liczbaBrukselkaOwczarnia">@(Gracz.Warzywo("brukselka").Ilosc)</div>
+    <div class="abs guzikWarzywoOwczarnia guzikBrukselkaOwczarnia @(Gracz.JestZwierze("owca") && Gracz.JestWarzywo("brukselka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmOwce("brukselka")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaRzodkiewkaOwczarnia">@(Gracz.Warzywo("rzodkiewka").Ilosc)</div>
+    <div class="abs guzikWarzywoOwczarnia guzikRzodkiewkaOwczarnia @(Gracz.JestZwierze("owca") && Gracz.JestWarzywo("rzodkiewka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmOwce("rzodkiewka")'></div>
+    <div class="abs ramkaWarzywKurnik liczbaSzpinakOwczarnia">@(Gracz.Warzywo("szpinak").Ilosc)</div>
+    <div class="abs guzikWarzywoOwczarnia guzikSzpinakOwczarnia @(Gracz.JestZwierze("owca") && Gracz.JestWarzywo("szpinak") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmOwce("szpinak")'></div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool animujJajo = false;
+    private bool animujWelna = false;
     private List<PozycjaOwcy> pozycjeOwcy = new();
     private System.Threading.Timer? timerDzwiekOwcy;
     private List<System.Threading.Timer?> timeryOwcy = new();
@@ -21,6 +42,80 @@
         public double Y { get; set; }
         public double CzasPrzejscia { get; set; } = 2;
         public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("owca"))
+        {
+            InicjalizujOwce();
+            MekOwcy();
+        }
+    }
+    private void InicjalizujOwce()
+    {
+        pozycjeOwcy.Clear();
+        foreach (var timer in timeryOwcy)
+            timer?.Dispose();
+        timeryOwcy.Clear();
+        for (int i = 0; i < Gracz.Zwierze("owca").Ilosc; i++)
+        {
+            pozycjeOwcy.Add(new PozycjaOwcy { X = random.Next(0, 630), Y = random.Next(0, 330), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(4, 7) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeOwcy(index); SpacerowanieOwcy(index); }, null, TimeSpan.FromSeconds(random.Next(5, 13)), Timeout.InfiniteTimeSpan);
+            timeryOwcy.Add(timer);
+        }
+    }
+    private void MekOwcy() => timerDzwiekOwcy = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/mekOwcy.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieOwcy(int index)
+    {
+        if (index >= timeryOwcy.Count) return;
+        timeryOwcy[index]?.Dispose();
+        timeryOwcy[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeOwcy(index); SpacerowanieOwcy(index); }, null, TimeSpan.FromSeconds(random.Next(8, 16)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeOwcy(int index)
+    {
+        if (index >= pozycjeOwcy.Count) return;
+        var kura = pozycjeOwcy[index];
+        var nowaX = random.Next(0, 630);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 330);
+        kura.CzasPrzejscia = random.Next(4, 7);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmOwce(string karma)
+    {
+        if (!Gracz.JestZwierze("owca") || !Gracz.JestWarzywo(karma)) return;
+        Gracz.Warzywo(karma).Ilosc--;
+        Gracz.Zwierze("owca").Nakarmione++;
+        if (Gracz.Zwierze("owca").Nakarmione >= Gracz.Zwierze("owca").DajeProdukt)
+        {
+            Gracz.Zwierze("owca").Nakarmione = 0;
+            Gracz.Zwierze("owca").Gotowe += Gracz.Zwierze("owca").Ilosc;
+            if (Gracz.Zwierze("owca").Gotowe > 9)
+            {
+                Gracz.Zwierze("owca").Gotowe = 0;
+                Gracz.ProduktZ("owcaWelna").Ilosc ++;
+                animujWelna = true;
+                await InvokeAsync(StateHasChanged);
+                await Task.Delay(1000);
+                animujWelna = false;
+                await InvokeAsync(StateHasChanged);
+            }
+            Gracz.ProduktZ("mlekoOwcze").Ilosc += Gracz.Zwierze("owca").Ilosc;
+            animujJajo = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajo = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private string StylOwcyWOWczarni(int index)
+    {
+        if (index >= pozycjeOwcy.Count) return "";
+        var owca = pozycjeOwcy[index];
+        return $"left: {owca.X}px; top: {owca.Y}px; transform: scaleX({(owca.PatrzyWLewo ? -1 : 1)}); transition: left {owca.CzasPrzejscia}s ease-in-out, top {owca.CzasPrzejscia}s ease-in-out;";
     }
     public void Dispose()
     {

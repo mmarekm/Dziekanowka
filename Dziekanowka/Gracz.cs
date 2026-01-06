@@ -4,7 +4,7 @@ namespace Dziekanowka
     public class Gracz(string nazwa)
     {
         public string Nazwa { get; set;  } = nazwa;
-        public int Monety { get; set; } = 100;
+        public int Monety { get; set; } = 150;
         public Statystyki Statystyki { get; set; } = new Statystyki();
         public List<ZwierzeGracza> Zwierzeta { get; set; } = ZwierzeGracza.StartoweZwierzaki();
         public List<ProduktZwierzecy> ProduktyZwierzece { get; set; } = ProduktZwierzecy.StartoweProdukty();

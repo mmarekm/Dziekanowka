@@ -22,10 +22,11 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Warzywa.ForEach(w => w.Ilosc = w.Ilosc > 0 ? w.Ilosc - (w.Ilosc / 5 + 1) : w.Ilosc);
                 AktualnyGracz.Owoce.ForEach(o => o.Ilosc = o.Ilosc > 0 ? o.Ilosc - (o.Ilosc / 5 + 1) : o.Ilosc);
                 AktualnyGracz.Zboza.ForEach(z => z.Ilosc = z.Ilosc > 0 ? z.Ilosc - (z.Ilosc / 5 + 1) : z.Ilosc);
-                AktualnyGracz.ProduktyZwierzece.ForEach(p => p.Ilosc = p.Ilosc > 0 ? p.Ilosc-- : p.Ilosc);
-                await Dzwieki.Dzwiek!.GraDzwiek("mp3/Dzwieki/witaj.mp3");
+                var produktyTrwale = new HashSet<string> { "futroKrolik", "owcaSkora", "kozaSkora", "krowaSkora", "owcaWelna", "alpakaWelna" };
+                AktualnyGracz.ProduktyZwierzece.ForEach(p => { if (!produktyTrwale.Contains(p.Nazwa) && p.Ilosc > 0) p.Ilosc--; });
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
+                await Dzwieki.Dzwiek!.GraDzwiek("mp3/Dzwieki/witaj.mp3");
             }
         }
         public async Task<Gracz> ZaladujGracza(string nazwa)
