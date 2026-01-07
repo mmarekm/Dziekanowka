@@ -5,6 +5,23 @@
 @implements IDisposable
 <div class="alpakariumWidok widok rel">
     <div class="abs alpakariumDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/alpakariumDoZwierzyniec.png" /></button></div>
+    <div class="abs caleAlpakarium">
+        @for (int i = 0; i < Gracz.Zwierze("alpaka").Ilosc; i++)
+        {
+            int index = i;
+            <img class="abs alpakaWAlpakarium obrazekSieMiesci" src="img/zwierzyniec/alpaka.png" style="@StylAlpakiWAlpakarium(index)" />
+        }
+    </div>
+    <div class="abs liczbaPtakDomek liczbaAlpakAlpakarium">@(Gracz.Zwierze("alpaka").Ilosc)</div>
+    <div class="abs progresNakarmieniaAlpaki"><progress class="pasekPaliwa" value="@Gracz.Zwierze("alpaka").Nakarmione" max="@Gracz.Zwierze("alpaka").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("alpaka").Nakarmione / Gracz.Zwierze("alpaka").DajeProdukt * 100) / 10) "></progress></div>
+    <div class="abs lJajBud liczbaWelnyAlpakarnia">@(Gracz.ProduktZ("alpakaWelna").Ilosc)</div>
+    <div class="abs nadWelnaAlpakarium @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/alpakWelnaAlpakarium.png" /></div>
+    <div class="abs ramkaPokarmAlpakarium liczbaKoniczynaAlpakarium">@(Gracz.Warzywo("koniczyna").Ilosc)</div>
+    <div class="abs guzikPokarmAlpakarium guzikKoniczynaAlpakarium @(Gracz.JestZwierze("alpaka") && Gracz.JestWarzywo("koniczyna") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmAlpake("koniczyna")'></div>
+    <div class="abs ramkaPokarmAlpakarium liczbaZytoAlpakarium">@(Gracz.Zboze("zyto").Ilosc)</div>
+    <div class="abs guzikPokarmAlpakarium guzikZytoAlpakarium @(Gracz.JestZwierze("alpaka") && Gracz.JestZboze("zyto") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmAlpake("zyto")'></div>
+    <div class="abs ramkaPokarmAlpakarium liczbaGruszkaAlpakarium">@(Gracz.Owoc("gruszka").Ilosc)</div>
+    <div class="abs guzikPokarmAlpakarium guzikGruszkaAlpakarium @(Gracz.JestZwierze("alpaka") && Gracz.JestOwoc("gruszka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmAlpake("gruszka")'></div>
 </div>
 
 @code {
@@ -21,6 +38,70 @@
         public double Y { get; set; }
         public double CzasPrzejscia { get; set; } = 2;
         public bool PatrzyWLewo { get; set; }
+    }
+    protected override void OnInitialized()
+    {
+        if (Gracz.JestZwierze("alpaka"))
+        {
+            InicjalizujAlpaki();
+            MruczenieAlpaki();
+        }
+    }
+    private void InicjalizujAlpaki()
+    {
+        pozycjeAlpaki.Clear();
+        foreach (var timer in timeryAlpaki)
+            timer?.Dispose();
+        timeryAlpaki.Clear();
+        for (int i = 0; i < Gracz.Zwierze("alpaka").Ilosc; i++)
+        {
+            pozycjeAlpaki.Add(new PozycjaAlpaki { X = random.Next(0, 900), Y = random.Next(0, 100), PatrzyWLewo = random.Next(0, 2) == 0, CzasPrzejscia = random.Next(3, 6) });
+            int index = i;
+            var timer = new System.Threading.Timer(async _ => { await ZmienPozycjeAlpaki(index); SpacerowanieAlpaki(index); }, null, TimeSpan.FromSeconds(random.Next(6, 11)), Timeout.InfiniteTimeSpan);
+            timeryAlpaki.Add(timer);
+        }
+    }
+    private void MruczenieAlpaki() => timerDzwiekAlpaki = new System.Threading.Timer(async _ => { await dzwieki.GraDzwiek("mp3/Dzwieki/mruczenieAlpaki.mp3"); }, null, TimeSpan.FromSeconds(6), TimeSpan.FromSeconds(8));
+    private void SpacerowanieAlpaki(int index)
+    {
+        if (index >= timeryAlpaki.Count) return;
+        timeryAlpaki[index]?.Dispose();
+        timeryAlpaki[index] = new System.Threading.Timer(async _ => { await ZmienPozycjeAlpaki(index); SpacerowanieAlpaki(index); }, null, TimeSpan.FromSeconds(random.Next(6, 11)), Timeout.InfiniteTimeSpan);
+    }
+    private async Task ZmienPozycjeAlpaki(int index)
+    {
+        if (index >= pozycjeAlpaki.Count) return;
+        var kura = pozycjeAlpaki[index];
+        var nowaX = random.Next(0, 900);
+        kura.PatrzyWLewo = nowaX < kura.X;
+        kura.X = nowaX;
+        kura.Y = random.Next(0, 100);
+        kura.CzasPrzejscia = random.Next(3, 6);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task KarmAlpake(string karma)
+    {
+        bool jestPokarm = karma == "zyto" ? Gracz.JestZboze("zyto") : karma == "koniczyna" ? Gracz.JestWarzywo("koniczyna") : Gracz.JestOwoc(karma);
+        if (!Gracz.JestZwierze("alpaka") || !jestPokarm) return;
+        _ = karma == "zyto" ? Gracz.Zboze(karma).Ilosc-- : karma == "koniczyna" ? Gracz.Warzywo(karma).Ilosc-- : Gracz.Owoc(karma).Ilosc--;
+        Gracz.Zwierze("alpaka").Nakarmione++;
+        if (Gracz.Zwierze("alpaka").Nakarmione >= Gracz.Zwierze("alpaka").DajeProdukt)
+        {
+            Gracz.Zwierze("alpaka").Nakarmione = 0;
+            Gracz.ProduktZ("alpakaWelna").Ilosc += Gracz.Zwierze("alpaka").Ilosc;
+            animujJajo = true;
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(1000);
+            animujJajo = false;
+            await InvokeAsync(StateHasChanged);
+        }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private string StylAlpakiWAlpakarium(int index)
+    {
+        if (index >= pozycjeAlpaki.Count) return "";
+        var alpaka = pozycjeAlpaki[index];
+        return $"left: {alpaka.X}px; top: {alpaka.Y}px; transform: scaleX({(alpaka.PatrzyWLewo ? -1 : 1)}); transition: left {alpaka.CzasPrzejscia}s ease-in-out, top {alpaka.CzasPrzejscia}s ease-in-out;";
     }
     public void Dispose()
     {
