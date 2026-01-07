@@ -22,6 +22,9 @@
 .owczarniaWidok {
     background-image: url('../img/zwierzyniec/owczarniaWidok.png');
 }
+.alpakariumWidok {
+    background-image: url('../img/zwierzyniec/alpakariumWidok.png');
+}
 .koziarniaWidok {
     background-image: url('../img/zwierzyniec/koziarniaWidok.png');
 }
@@ -85,6 +88,13 @@
     right: 0;
     width: 435px;
     height: 182px;
+    z-index: 3;
+}
+.doAlpakariumGuzik {
+    bottom: 486px;
+    right: 176px;
+    width: 291px;
+    height: 176px;
     z-index: 3;
 }
 .doKoziarniaGuzik {
@@ -247,6 +257,13 @@
     height: 137px;
     z-index: 3;
 }
+.alpakariumDoZwierzyncaGuzik {
+    bottom: 0;
+    left: 0;
+    width: 216px;
+    height: 131px;
+    z-index: 3;
+}
 .koziarniaDoZwierzyncaGuzik {
     bottom: 0;
     right: 0;
@@ -326,6 +343,16 @@
     z-index: 5;
 }
 .owcaPrzedOwczarnia {
+    width: 80px;
+}
+.terenAlpakiPrzedAlpakarium {
+    bottom: 380px;
+    right: 100px;
+    width: 540px;
+    height: 135px;
+    z-index: 3;
+}
+.alpakaPrzedAlpakarium {
     width: 80px;
 }
 .terenKozyPrzedKoziarnia {

@@ -1,5 +1,31 @@
-﻿<h3>Alpakarium</h3>
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
+<div class="alpakariumWidok widok rel">
+    <div class="abs alpakariumDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/alpakariumDoZwierzyniec.png" /></button></div>
+</div>
 
 @code {
-
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool animujJajo = false;
+    private List<PozycjaAlpaki> pozycjeAlpaki = new();
+    private System.Threading.Timer? timerDzwiekAlpaki;
+    private List<System.Threading.Timer?> timeryAlpaki = new();
+    private Random random = new Random();
+    private class PozycjaAlpaki
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double CzasPrzejscia { get; set; } = 2;
+        public bool PatrzyWLewo { get; set; }
+    }
+    public void Dispose()
+    {
+        foreach (var timer in timeryAlpaki)
+            timer?.Dispose();
+        timerDzwiekAlpaki?.Dispose();
+    }
 }
