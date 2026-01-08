@@ -1,6 +1,29 @@
 ﻿@using Dziekanowka.Mechanizm
 <div class="rzezniaWidok widok rel">
     <div class="abs confirmRzeznia"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Rzeznia)" class="wyroznionyGuzik"><img src="img/budynki/confirmRzeznia.png" /></button></div>
+    <div class="abs lZwierzatRzaznia lKurRzeznia">@Gracz.Zwierze("kura").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lGesiRzeznia">@Gracz.Zwierze("ges").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lIndykowRzeznia">@Gracz.Zwierze("indyk").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lKaczekRzeznia">@Gracz.Zwierze("kaczka").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lKrolikowRzeznia">@Gracz.Zwierze("krolik").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lOwiecRzeznia">@Gracz.Zwierze("owca").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lKozRzeznia">@Gracz.Zwierze("koza").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lSwinRzeznia">@Gracz.Zwierze("swinia").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lKrowRzeznia">@Gracz.Zwierze("krowa").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lMiesoKura">@Gracz.ProduktZ("kuraJedzenie").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lMiesoGes">@Gracz.ProduktZ("gesJedzenie").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lSmalecGes">@Gracz.ProduktZ("smalecGesi").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lPioroGes">@Gracz.ProduktZ("pioroGesi").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lMiesoIndyk">@Gracz.ProduktZ("indykJedzenie").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lMiesoKaczka">@Gracz.ProduktZ("kaczkaJedzenie").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lSmalecKaczka">@Gracz.ProduktZ("smalecKaczy").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lPioroKaczka">@Gracz.ProduktZ("pioroKaczki").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lMiesoKrolik">@Gracz.ProduktZ("krolikJedzenie").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lFutroKrolik">@Gracz.ProduktZ("futroKrolik").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lMiesoOwca">@Gracz.ProduktZ("owcaJedzenie").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lSkoraOwca">@Gracz.ProduktZ("owcaSkora").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lMiesoKoza">@Gracz.ProduktZ("kozaJedzenie").Ilosc</div>
+    <div class="abs lDuzyProduktRzaznia lSkoraKoza">@Gracz.ProduktZ("kozaSkora").Ilosc</div>
 </div>
 
 @code {

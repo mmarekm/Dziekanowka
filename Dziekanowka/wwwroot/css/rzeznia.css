@@ -15,3 +15,101 @@
     height: 187px;
     z-index: 2;
 }
+.lZwierzatRzaznia {
+    width: 70px;
+    height: 52px;
+    font-size: 50px;
+    z-index: 2;
+    text-align: center;
+    right: 15px;
+}
+.lKurRzeznia {
+    top: 20px;
+}
+.lGesiRzeznia {
+    top: 110px;
+}
+.lIndykowRzeznia {
+    top: 190px;
+}
+.lKaczekRzeznia {
+    top: 280px;
+}
+.lKrolikowRzeznia {
+    top: 370px;
+}
+.lOwiecRzeznia {
+    top: 470px;
+}
+.lKozRzeznia {
+    top: 570px;
+}
+.lSwinRzeznia {
+    top: 680px;
+}
+.lKrowRzeznia {
+    top: 790px;
+}
+.lDuzyProduktRzaznia {
+    width: 40px;
+    height: 30px;
+    font-size: 29px;
+    z-index: 2;
+    text-align: center;
+}
+.lMiesoKura {
+    top: 38px;
+    right: 570px;
+}
+.lMiesoGes {
+    top: 124px;
+    right: 635px;
+}
+.lSmalecGes {
+    top: 124px;
+    right: 505px;
+}
+.lPioroGes {
+    top: 124px;
+    right: 350px;
+}
+.lMiesoIndyk {
+    top: 217px;
+    right: 570px;
+}
+.lMiesoKaczka {
+    top: 300px;
+    right: 635px;
+}
+.lSmalecKaczka {
+    top: 300px;
+    right: 505px;
+}
+.lPioroKaczka {
+    top: 300px;
+    right: 350px;
+}
+.lMiesoKrolik {
+    top: 385px;
+    right: 610px;
+}
+.lFutroKrolik {
+    top: 385px;
+    right: 425px;
+}
+.lMiesoOwca {
+    top: 485px;
+    right: 610px;
+}
+.lSkoraOwca {
+    top: 485px;
+    right: 400px;
+}
+.lMiesoKoza {
+    top: 585px;
+    right: 610px;
+}
+.lSkoraKoza {
+    top: 585px;
+    right: 400px;
+}
