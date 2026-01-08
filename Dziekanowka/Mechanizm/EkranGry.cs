@@ -4,6 +4,7 @@
     {
         Start,
         Gospodarstwo,
+        Rzeznia,
         Zwierzyniec,
         Kurnik,
         Gesiarnia,

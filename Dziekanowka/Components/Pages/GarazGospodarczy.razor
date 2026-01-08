@@ -10,10 +10,8 @@
 </div>
 
 @code {
-    [Parameter]
-    public Gracz Gracz { get; set; } = null!;
-    [Parameter]
-    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     public async Task NaPole()
     {
         if (Gracz.Paliwo.IloscPaliwa < 1) return;

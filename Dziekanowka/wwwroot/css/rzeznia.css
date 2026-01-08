@@ -1,0 +1,17 @@
+﻿.doRzezniGuzik {
+    top: 344px;
+    left: 447px;
+    width: 180px;
+    height: 163px;
+    z-index: 2;
+}
+.rzezniaWidok {
+    background-image: url('../img/budynki/rzezniaWidok.png');
+}
+.confirmRzeznia {
+    bottom: 0;
+    left: 0;
+    width: 261px;
+    height: 187px;
+    z-index: 2;
+}
