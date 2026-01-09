@@ -18,17 +18,14 @@
     height: 40px;
     border-radius: 20px;
 }
-
     .pasekPaliwa::-webkit-progress-bar {
         background: rgba(0, 0, 0, 0.3);
         border-radius: 20px;
     }
-
     .pasekPaliwa::-webkit-progress-value {
         border-radius: 20px;
         background: lime;
     }
-
     .pasekPaliwa[style*="--procent: 3 "]::-webkit-progress-value,
     .pasekPaliwa[style*="--procent: 4 "]::-webkit-progress-value,
     .pasekPaliwa[style*="--procent: 5 "]::-webkit-progress-value,
@@ -36,7 +33,6 @@
     .pasekPaliwa[style*="--procent: 7 "]::-webkit-progress-value {
         background: yellow;
     }
-
     .pasekPaliwa[style*="--procent: 0 "]::-webkit-progress-value,
     .pasekPaliwa[style*="--procent: 1 "]::-webkit-progress-value,
     .pasekPaliwa[style*="--procent: 2 "]::-webkit-progress-value {

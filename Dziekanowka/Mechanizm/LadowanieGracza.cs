@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Dziekanowka.Gracza;
+using System.Text.Json;
 namespace Dziekanowka.Mechanizm
 {
     public class LadowanieGracza
@@ -24,6 +25,7 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Zboza.ForEach(z => z.Ilosc = z.Ilosc > 0 ? z.Ilosc - (z.Ilosc / 5 + 1) : z.Ilosc);
                 var produktyTrwale = new HashSet<string> { "pioroGesi", "pioroKaczki", "futroKrolik", "owcaSkora", "kozaSkora", "krowaSkora", "owcaWelna", "alpakaWelna" };
                 AktualnyGracz.ProduktyZwierzece.ForEach(p => { if (!produktyTrwale.Contains(p.Nazwa) && p.Ilosc > 0) p.Ilosc--; });
+                AktualnyGracz.ProduktyPrzetworzone.ForEach(p => p.Ilosc = Math.Max(0, p.Ilosc - 1));
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
                 await Dzwieki.Dzwiek!.GraDzwiek("mp3/Dzwieki/witaj.mp3");

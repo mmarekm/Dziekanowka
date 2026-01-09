@@ -34,6 +34,8 @@
         CzyszczeniePola,
         CzyszczenieDrzewa,
         KoszenieTrawy,
-        PsySasiadaSzczekaja
+        PsySasiadaSzczekaja,
+        SamochodDoMiasta,
+        SamochodDoDomu
     }
 }
