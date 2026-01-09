@@ -15,6 +15,28 @@
     height: 187px;
     z-index: 2;
 }
+.siekieraRzeznia {
+    top: 350px;
+    left: 390px;
+    width: 400px;
+    height: 330px;
+    z-index: 2;
+}
+.siekieraTrue {
+    border: 3px dashed green;
+}
+.siekieraFalse {
+    border: 3px dashed red;
+}
+.lSiekierRzeznia {
+    width: 120px;
+    height: 100px;
+    font-size: 80px;
+    z-index: 2;
+    text-align: center;
+    right: 10px;
+    top: 140px;
+}
 .lZwierzatRzaznia {
     width: 70px;
     height: 52px;
@@ -112,4 +134,73 @@
 .lSkoraKoza {
     top: 585px;
     right: 400px;
+}
+.lSzynkaSwinia {
+    top: 670px;
+    right: 600px;
+}
+.lSchabSwinia {
+    top: 716px;
+    right: 600px;
+}
+.lBoczekSwinia {
+    top: 693px;
+    right: 460px;
+}
+.lSmalecSwinia {
+    top: 713px;
+    right: 336px;
+}
+.lRostbefKrowa {
+    top: 783px;
+    right: 615px;
+}
+.lAntrykotKrowa {
+    top: 823px;
+    right: 585px;
+}
+.lLopatkaKrowa {
+    top: 783px;
+    right: 465px;
+}
+.lPoledwicaKrowa {
+    top: 823px;
+    right: 463px;
+}
+.lSkoraKrowa {
+    top: 803px;
+    right: 320px;
+}
+.guzikRzaznia {
+    width: 120px;
+    height: 80px;
+    z-index: 3;
+    right: 65px;
+}
+.kuraRzeznia {
+    top: 12px;
+}
+.gesRzeznia {
+    top: 100px;
+}
+.indykRzeznia {
+    top: 188px;
+}
+.kaczkaRzeznia {
+    top: 276px;
+}
+.krolikRzeznia {
+    top: 360px;
+}
+.owcaRzeznia {
+    top: 457px;
+}
+.kozaRzeznia {
+    top: 562px;
+}
+.swiniaRzeznia {
+    top: 670px;
+}
+.krowaRzeznia {
+    top: 775px;
 }

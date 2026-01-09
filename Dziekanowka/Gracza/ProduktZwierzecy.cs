@@ -5,9 +5,9 @@
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
         public static List<ProduktZwierzecy> StartoweProdukty() => [
-            new("jajoKurze"), new("kuraJedzenie"), new("pioroGesi"), new("jajoGesie"), new("gesJedzenie"), new("smalecGesi"), new("jajoIndycze"), new("indykJedzenie"),
-            new("pioroKaczki"), new("jajoKacze"), new("kaczkaJedzenie"), new("smalecKaczy"), new("futroKrolik"), new("krolikJedzenie"), new("swiniaSzynka"), new("swiniaSchab"),
-            new("swiniaBoczek"), new("smalecSwinski"), new("mlekoOwcze"), new("owcaJedzenie"), new("owcaSkora"), new("owcaWelna"), new("alpakaWelna"), new("mlekoKozie"), new("kozaJedzenie"),
+            new("jajoKurze"), new("kuraJedzenie"), new("gesPioro"), new("jajoGesie"), new("gesJedzenie"), new("gesSmalec"), new("jajoIndycze"), new("indykJedzenie"),
+            new("kaczkaPioro"), new("jajoKacze"), new("kaczkaJedzenie"), new("kaczkaSmalec"), new("futroKrolik"), new("krolikJedzenie"), new("swiniaSzynka"), new("swiniaSchab"),
+            new("swiniaBoczek"), new("swiniaSmalec"), new("mlekoOwcze"), new("owcaJedzenie"), new("owcaSkora"), new("owcaWelna"), new("alpakaWelna"), new("mlekoKozie"), new("kozaJedzenie"),
             new("kozaSkora"), new("mlekoKrowie"), new("krowaRostbef"), new("krowaAntrykot"), new("krowaLopatka"), new("krowaPoledwica"), new("krowaSkora")
         ];
     }
