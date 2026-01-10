@@ -1,0 +1,26 @@
+﻿.garazWidok {
+    background-image: url('../img/budynki/garazWidok.png');
+}
+.garazDoGospodarstwo {
+    top: 276px;
+    left: 630px;
+    width: 646px;
+    height: 464px;
+    z-index: 2;
+}
+.garazDoMiasto {
+    bottom: 0;
+    left: 0;
+    width: 565px;
+    height: 537px;
+    z-index: 2;
+}
+.stanPaliwaGaraz {
+    bottom: 50px;
+    left: 600px;
+    width: 400px;
+    height: 100px;
+    z-index: 2;
+    display: flex;
+    gap: 15px;
+}

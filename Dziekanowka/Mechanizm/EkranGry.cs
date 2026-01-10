@@ -4,6 +4,7 @@
     {
         Start,
         Gospodarstwo,
+        Garaz,
         Rzeznia,
         Zwierzyniec,
         Kurnik,
@@ -29,6 +30,7 @@
         Sad1,
         Sad2,
         Zboze,
+        Miasto1,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         CzyszczeniePola,

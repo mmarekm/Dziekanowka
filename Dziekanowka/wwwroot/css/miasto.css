@@ -1,1 +1,31 @@
-﻿
+﻿.miasto1Widok {
+    background-image: url('../img/teren/miasto1.png');
+}
+.miasto1Powrot {
+    top: 223px;
+    right: 0;
+    width: 247px;
+    height: 188px;
+    z-index: 2;
+}
+.stanPaliwaMiasto {
+    top: 80px;
+    right: 30px;
+    width: 250px;
+    height: 70px;
+    z-index: 2;
+    display: flex;
+    gap: 5px;
+}
+.sprzedawanieMiasto1 {
+    top: 420px;
+    right: 250px;
+    z-index: 2;
+    display: flex;
+    gap: 20px;
+    width: 130px;
+    height: 100px;
+}
+.sprzedawcaMiasto1 {
+    width: 80px;
+}

@@ -1,0 +1,40 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@implements IDisposable
+<div class="miasto1Widok widok rel">
+    <div class="abs stanPaliwaMiasto">
+        <div class="kanisterGarazGospodarczy"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
+        <progress class="pasekPaliwa" value="@Gracz.Paliwo.IloscPaliwa" max="@Gracz.Paliwo.MaksymalnaIloscPaliwa" style="--procent: @((int)((double)Gracz.Paliwo.IloscPaliwa / Gracz.Paliwo.MaksymalnaIloscPaliwa * 100) / 10) "></progress>
+    </div>
+    <div class="abs sprzedawanieMiasto1 @(Gracz.Monety < 8 ? "nieMoznaKliknac" : "cPoint") @(Gracz.Paliwo.IloscPaliwa < 1 ? "" : "ukryty")" @onclick="SprzedazJednego">
+        <div class="sprzedawcaMiasto1"><img class="obrazekWypelnia" src="img/pole/sprzedawcaPoleIntro.png" /></div>
+        <div class="cenaDrogaPoleIntro">
+            <div class="tylko1PoleIntro">1 <img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
+            <div class="cenaPoleIntro">8 <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /></div>
+        </div>
+    </div>
+    <div class="abs miasto1Powrot"><button class="wyroznionyGuzik" @onclick="DoDomu"><img src="img/miasto/miasto1Powrot.png" /></button></div>
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task SprzedazJednego()
+    {
+        if (Gracz.Monety < 8) return;
+        Gracz.Monety -= 8;
+        Gracz.Paliwo.IloscPaliwa++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task DoDomu()
+    {
+        if (Gracz.Paliwo.IloscPaliwa < 1) return;
+        Gracz.Paliwo.IloscPaliwa--;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.SamochodDoDomu);
+        await Task.Delay(5000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Garaz);
+    }
+    public void Dispose()
+    {
+    }
+}
