@@ -32,6 +32,7 @@
         Sad2,
         Zboze,
         Miasto1,
+        SklepDrobiu,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         CzyszczeniePola,

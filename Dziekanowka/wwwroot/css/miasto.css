@@ -29,3 +29,43 @@
 .sprzedawcaMiasto1 {
     width: 80px;
 }
+.miasto1doSklepDrobiu {
+    top: 554px;
+    left: 661px;
+    width: 324px;
+    height: 259px;
+    z-index: 2;
+}
+.sklepDrobiuWidok {
+    background-image: url('../img/miasto/sklepDrobiuWidok.png');
+}
+.sklepDrobiuDoMiasto1 {
+    bottom: 0;
+    right: 0;
+    width: 305px;
+    height: 169px;
+    z-index: 2;
+}
+.zwierzeSklepDrobiu {
+    width: 188px;
+    height: 250px;
+}
+.kuraSklepDrobiu {
+    top: 250px;
+    left: 50px;
+}
+.infoIleZwierzaSklepDrobiu {
+    height: 50px;
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+}
+.rysunekZwierzaSklepDrobiu {
+    top: 50px;
+    left: 0;
+    width: 100px;
+    height: 150px;
+}

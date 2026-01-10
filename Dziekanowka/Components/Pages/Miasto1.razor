@@ -14,6 +14,7 @@
         </div>
     </div>
     <div class="abs miasto1Powrot"><button class="wyroznionyGuzik" @onclick="DoDomu"><img src="img/miasto/miasto1Powrot.png" /></button></div>
+    <div class="abs miasto1doSklepDrobiu"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepDrobiu)"><img src="img/miasto/miastoDoSklepDrobiu.png" /></button></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;

@@ -1,0 +1,16 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="sklepDrobiuWidok widok rel">
+    <div class="abs sklepDrobiuDoMiasto1"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1)" class="wyroznionyGuzik"><img src="img/miasto/confirmSklepDrobiu.png" /></button></div>
+    <div class="abs zwierzeSklepDrobiu kuraSklepDrobiu">
+        <div class="abs infoIleZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoKurnik.png" /><div>@Gracz.Zwierze("kura").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/kura.png" /></div>
+        <div class="abs cenaZwierzaSklepDrobiu"></div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+}
