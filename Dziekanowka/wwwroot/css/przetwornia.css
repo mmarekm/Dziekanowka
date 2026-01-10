@@ -1,0 +1,10 @@
+﻿.przetworniaWidok {
+    background-image: url('../img/budynki/przetworniaWidok.png');
+}
+.przetworniaPowrot {
+    bottom: 0;
+    left: 0;
+    width: 310px;
+    height: 156px;
+    z-index: 2;
+}

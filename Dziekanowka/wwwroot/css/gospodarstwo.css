@@ -8,6 +8,13 @@
     height: 270px;
     z-index: 2;
 }
+.doPrzetworniGuzik {
+    bottom: 0;
+    left: 849px;
+    width: 592px;
+    height: 399px;
+    z-index: 2;
+}
 .samTraktorWidok {
     width: 100px;
     height: 76px;

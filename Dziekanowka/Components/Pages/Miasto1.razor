@@ -1,7 +1,6 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-@implements IDisposable
 <div class="miasto1Widok widok rel">
     <div class="abs stanPaliwaMiasto">
         <div class="kanisterGarazGospodarczy"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
@@ -33,8 +32,5 @@
         await NaZmianeEkranu.InvokeAsync(EkranGry.SamochodDoDomu);
         await Task.Delay(5000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.Garaz);
-    }
-    public void Dispose()
-    {
     }
 }

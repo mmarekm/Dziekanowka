@@ -5,6 +5,7 @@
         Start,
         Gospodarstwo,
         Garaz,
+        Przetwornia,
         Rzeznia,
         Zwierzyniec,
         Kurnik,
