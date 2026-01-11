@@ -1,16 +1,108 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
 <div class="sklepDrobiuWidok widok rel">
+    <div class="abs lMonetSklepDrobiu">@Gracz.Monety</div>
     <div class="abs sklepDrobiuDoMiasto1"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1)" class="wyroznionyGuzik"><img src="img/miasto/confirmSklepDrobiu.png" /></button></div>
-    <div class="abs zwierzeSklepDrobiu kuraSklepDrobiu">
-        <div class="abs infoIleZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoKurnik.png" /><div>@Gracz.Zwierze("kura").Ilosc</div></div>
+    <div class="abs zwierzeSklepDrobiu kuraSklepDrobiu @(Gracz.Zwierze("kura").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("kura")'>
+        <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoKurnik.png" /><div>@Gracz.Zwierze("kura").Ilosc</div></div>
         <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/kura.png" /></div>
-        <div class="abs cenaZwierzaSklepDrobiu"></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("kura").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+    <div class="abs zwierzeSklepDrobiu gesSklepDrobiu @(Gracz.Zwierze("ges").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("ges")'>
+        <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoGesiarnia.png" /><div>@Gracz.Zwierze("ges").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/ges.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("ges").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+    <div class="abs zwierzeSklepDrobiu indykSklepDrobiu @(Gracz.Zwierze("indyk").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("indyk")'>
+        <div class="abs infoZwierzaSklepDrobiu" style="gap: 10px;"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoIndyczarnia.png" /><div>@Gracz.Zwierze("indyk").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/indyk.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("indyk").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+    <div class="abs zwierzeSklepDrobiu kaczkaSklepDrobiu @(Gracz.Zwierze("kaczka").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("kaczka")'>
+        <div class="abs infoZwierzaSklepDrobiu" style="gap: 10px;"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoKacznik.png" /><div>@Gracz.Zwierze("kaczka").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/kaczkaIdzie.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("kaczka").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
     </div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private System.Threading.Timer? timerKury, timerGesi, timerIndyka, timerKaczki;
+    private Random random = new Random();
+    protected override void OnInitialized()
+    {
+        GdakanieKury();
+        KwakanieKaczki();
+        GeganieGesi();
+        GulgotanieIndyka();
+    }
+    private void GdakanieKury() => timerKury = new System.Threading.Timer(async _ =>
+    {
+        try
+        {
+            await dzwieki.GraDzwiek("mp3/Dzwieki/kuraGdacze.mp3");
+            timerKury?.Change(TimeSpan.FromSeconds(random.Next(4, 6)), Timeout.InfiniteTimeSpan);
+        }
+        catch { }
+    }, null, TimeSpan.FromSeconds(3), Timeout.InfiniteTimeSpan);
+    private void KwakanieKaczki() => timerKaczki = new System.Threading.Timer(async _ =>
+    {
+        try
+        {
+            await dzwieki.GraDzwiek("mp3/Dzwieki/kaczkaKwacze.mp3");
+            timerKaczki?.Change(TimeSpan.FromSeconds(random.Next(5, 8)), Timeout.InfiniteTimeSpan);
+        }
+        catch { }
+    }, null, TimeSpan.FromSeconds(5), Timeout.InfiniteTimeSpan);
+    private void GeganieGesi() => timerGesi = new System.Threading.Timer(async _ =>
+    {
+        try
+        {
+            await dzwieki.GraDzwiek("mp3/Dzwieki/geganieGesi.mp3");
+            timerGesi?.Change(TimeSpan.FromSeconds(random.Next(5, 8)), Timeout.InfiniteTimeSpan);
+        }
+        catch { }
+    }, null, TimeSpan.FromSeconds(7), Timeout.InfiniteTimeSpan);
+    private void GulgotanieIndyka() => timerIndyka = new System.Threading.Timer(async _ =>
+    {
+        try
+        {
+            await dzwieki.GraDzwiek("mp3/Dzwieki/indykGulgocze.mp3");
+            timerIndyka?.Change(TimeSpan.FromSeconds(random.Next(8, 11)), Timeout.InfiniteTimeSpan);
+        }
+        catch { }
+    }, null, TimeSpan.FromSeconds(9), Timeout.InfiniteTimeSpan);
+    private async Task Kup(string zwierz)
+    {
+        var zwierze = Gracz.Zwierze(zwierz);
+        if (Gracz.Monety >= zwierze.Cena)
+        {
+            Gracz.Monety -= zwierze.Cena;
+            zwierze.Ilosc += 1;
+            zwierze.Nakarmione = 0;
+            Gracz.ProduktZ($"{zwierz}Jajo").Ilosc++;
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+            string dzwiek = zwierz switch
+            {
+                "kura" => "mp3/Dzwieki/kuraGdacze.mp3",
+                "ges" => "mp3/Dzwieki/geganieGesi.mp3",
+                "indyk" => "mp3/Dzwieki/indykGulgocze.mp3",
+                "kaczka" => "mp3/Dzwieki/kaczkaKwacze.mp3",
+                _ => ""
+            };
+            try { await dzwieki.GraDzwiek(dzwiek); }
+            catch { }
+        }
+    }
+    public void Dispose()
+    {
+        timerKury?.Dispose();
+        timerGesi?.Dispose();
+        timerIndyka?.Dispose();
+        timerKaczki?.Dispose();
+    }
 }

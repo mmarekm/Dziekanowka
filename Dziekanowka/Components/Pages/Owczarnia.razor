@@ -15,7 +15,7 @@
     <div class="abs liczbaPtakDomek liczbaOwiecOwczarnia">@(Gracz.Zwierze("owca").Ilosc)</div>
     <div class="abs progresNakarmieniaOwcy"><progress class="pasekPaliwa" value="@Gracz.Zwierze("owca").Nakarmione" max="@Gracz.Zwierze("owca").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("owca").Nakarmione / Gracz.Zwierze("owca").DajeProdukt * 100) / 10) "></progress></div>
     <div class="abs progresWelnyOwcy"><progress class="pasekPaliwa" value="@Gracz.Zwierze("owca").Gotowe" max="10" style="--procent: @((int)(double)Gracz.Zwierze("owca").Gotowe / 100) "></progress></div>
-    <div class="abs lJajBud liczbaMlekaOwca">@(Gracz.ProduktZ("mlekoOwcze").Ilosc)</div>
+    <div class="abs lJajBud liczbaMlekaOwca">@(Gracz.ProduktZ("owcaMleko").Ilosc)</div>
     <div class="abs nadMlekiemOwczarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/owczeMlekoOwczarnia.png" /></div>
     <div class="abs lJajBud liczbaWelnaOwca">@(Gracz.ProduktZ("owcaWelna").Ilosc)</div>
     <div class="abs nadWelnaOwczarnia @(animujWelna ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/owczaWelnaOwczarnia.png" /></div>
@@ -102,7 +102,7 @@
                 animujWelna = false;
                 await InvokeAsync(StateHasChanged);
             }
-            Gracz.ProduktZ("mlekoOwcze").Ilosc += Gracz.Zwierze("owca").Ilosc;
+            Gracz.ProduktZ("owcaMleko").Ilosc += Gracz.Zwierze("owca").Ilosc;
             animujJajo = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);

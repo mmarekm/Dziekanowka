@@ -14,7 +14,7 @@
     <div class="abs gesiarniaDoZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/zwierzyniec/gesiarniaDoZwierzyniec.png" /></button></div>
     <div class="abs liczbaPtakDomek liczbaGesiGesiarnia">@(Gracz.Zwierze("ges").Ilosc)</div>
     <div class="abs progresNakarmieniaGesi"><progress class="pasekPaliwa" value="@Gracz.Zwierze("ges").Nakarmione" max="@Gracz.Zwierze("ges").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("ges").Nakarmione / Gracz.Zwierze("ges").DajeProdukt * 100) / 10) "></progress></div>
-    <div class="abs lJajBud liczbaJajGesiarnia">@(Gracz.ProduktZ("jajoGesie").Ilosc)</div>
+    <div class="abs lJajBud liczbaJajGesiarnia">@(Gracz.ProduktZ("gesJajo").Ilosc)</div>
     <div class="abs nadJajemGesiarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajaGesiarnia.png" /></div>
     <div class="abs ramkaWarzywKurnik liczbaJarmuzGesiarnia">@(Gracz.Warzywo("jarmuż").Ilosc)</div>
     <div class="abs guzikWarzywoKurnik guzikJarmuzGesiarnia @(Gracz.JestZwierze("ges") && Gracz.JestWarzywo("jarmuż") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmGes("jarmuż")'></div>
@@ -87,7 +87,7 @@
         if (Gracz.Zwierze("ges").Nakarmione >= Gracz.Zwierze("ges").DajeProdukt)
         {
             Gracz.Zwierze("ges").Nakarmione = 0;
-            Gracz.ProduktZ("jajoGesie").Ilosc += Gracz.Zwierze("ges").Ilosc;
+            Gracz.ProduktZ("gesJajo").Ilosc += Gracz.Zwierze("ges").Ilosc;
             animujJajo = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);

@@ -39,6 +39,15 @@
 .sklepDrobiuWidok {
     background-image: url('../img/miasto/sklepDrobiuWidok.png');
 }
+.lMonetSklepDrobiu {
+    bottom: 40px;
+    left: 140px;
+    width: 210px;
+    height: 50px;
+    text-align: center;
+    font-size: 46px;
+    font-weight: bold;
+}
 .sklepDrobiuDoMiasto1 {
     bottom: 0;
     right: 0;
@@ -54,10 +63,22 @@
     top: 250px;
     left: 50px;
 }
-.infoIleZwierzaSklepDrobiu {
+.gesSklepDrobiu {
+    top: 250px;
+    left: 303px;
+}
+.indykSklepDrobiu {
+    top: 560px;
+    left: 50px;
+}
+.kaczkaSklepDrobiu {
+    top: 560px;
+    left: 303px;
+}
+.infoZwierzaSklepDrobiu {
     height: 50px;
     width: 100%;
-    gap: 20px;
+    gap: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,7 +86,21 @@
 }
 .rysunekZwierzaSklepDrobiu {
     top: 50px;
-    left: 0;
-    width: 100px;
+    width: 100%;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cenaSklepDrobiu {
+    padding: 5px;
+    height: 50px;
+    width: 100%;
+    gap: 27px;
+    color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    top: 200px;
 }

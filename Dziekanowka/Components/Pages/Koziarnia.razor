@@ -14,7 +14,7 @@
     </div>
     <div class="abs liczbaPtakDomek liczbaKozKoziarnia">@(Gracz.Zwierze("koza").Ilosc)</div>
     <div class="abs progresNakarmieniaKozy"><progress class="pasekPaliwa" value="@Gracz.Zwierze("koza").Nakarmione" max="@Gracz.Zwierze("koza").DajeProdukt" style="--procent: @((int)((double)Gracz.Zwierze("koza").Nakarmione / Gracz.Zwierze("koza").DajeProdukt * 100) / 10) "></progress></div>
-    <div class="abs lJajBud liczbaMlekaKoziarnia">@(Gracz.ProduktZ("mlekoKozie").Ilosc)</div>
+    <div class="abs lJajBud liczbaMlekaKoziarnia">@(Gracz.ProduktZ("kozaMleko").Ilosc)</div>
     <div class="abs nadMlekiemKoziarnia @(animujJajo ? "jajoKuryAnimacja" : "")"><img class="obrazekSieMiesci" src="img/zwierzyniec/kozieMlekoKoziarnia.png" /></div>
     <div class="abs ramkaWarzywKurnik liczbaBurakKoziarnia">@(Gracz.Warzywo("burak").Ilosc)</div>
     <div class="abs guzikWarzywoKurnik guzikBurakKoziarnia @(Gracz.JestZwierze("koza") && Gracz.JestWarzywo("burak") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKoze("burak")'></div>
@@ -87,7 +87,7 @@
         if (Gracz.Zwierze("koza").Nakarmione >= Gracz.Zwierze("koza").DajeProdukt)
         {
             Gracz.Zwierze("koza").Nakarmione = 0;
-            Gracz.ProduktZ("mlekoKozie").Ilosc += Gracz.Zwierze("koza").Ilosc;
+            Gracz.ProduktZ("kozaMleko").Ilosc += Gracz.Zwierze("koza").Ilosc;
             animujJajo = true;
             await InvokeAsync(StateHasChanged);
             await Task.Delay(1000);
