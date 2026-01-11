@@ -1,6 +1,10 @@
 ﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject Dzwieki dzwieki
 @inject LadowanieGracza ladowanieGracza
 <div class="gospodarstwoWidok widok rel">
+    <div class="abs gospodarstwoUl @(Gracz.Statystyki.MoznaMiod ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Miod"><img class="obrazekSieMiesci" src="img/teren/ul.png" /></div>
+    <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/zwierzyniec/miod.png" /></div>
     <div class="abs doGarazuGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Garaz)" class="wyroznionyGuzik"><img src="img/budynki/garaz.png" /></button></div>
     <div class="abs garazGospodarczyGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy)" class="wyroznionyGuzik"><img src='img/Budynki/garazGospodarczy@(Gracz.PoziomBudynku("garazGospodarczy")).png' /></button></div>
     <div class="abs studniaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Studnia)" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>
@@ -13,4 +17,25 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
+    private async Task Miod()
+    {
+        if (!Gracz.Statystyki.MoznaMiod) return;
+        Gracz.ProduktZ("miod").Ilosc++;
+        Gracz.Statystyki.MoznaMiod = false;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Powitaj = true;
+        Znikanie = false;
+        StateHasChanged();
+        await Task.Delay(100);
+        Znikanie = true;
+        StateHasChanged();
+        await dzwieki.GraDzwiek("mp3/Dzwieki/fanfara.mp3");
+        await Task.Delay(9000);
+        Powitaj = false;
+        Znikanie = false;
+        StateHasChanged();
+    }
 }

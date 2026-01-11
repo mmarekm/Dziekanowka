@@ -8,7 +8,7 @@
     <DynamicComponent Type="@GetComponentType()" Parameters="@GetParameters()" />
     @if (aktualnyEkran != EkranGry.Start)
     {
-        <div class="abs @KlasaPowitania"><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /> Witaj! @gracz!.Statystyki.BonusDzienny <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /></div>
+        <div class="abs @KlasaPowitania"><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /> Witaj! @gracz!.Statystyki.BonusDzienny + @gracz.Przedmiot("siano").Ilosc <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /></div>
     }
 </div>
 

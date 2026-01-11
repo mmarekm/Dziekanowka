@@ -216,3 +216,7 @@ h1:focus {
         opacity: 0;
         transition: opacity 3s ease-out;
     }
+    .powitanieDzienne.zanikaj {
+        opacity: 0;
+        transition: opacity 9s ease-out;
+    }

@@ -31,17 +31,20 @@ namespace Dziekanowka.Mechanizm
                 if (aktualnieGrajaceDzwieki >= 3) return;
                 aktualnieGrajaceDzwieki++;
             }
+            IAudioPlayer? player = null;
             try
             {
                 var stream = await FileSystem.OpenAppPackageFileAsync(sciezka);
-                var player = audioManager.CreatePlayer(stream);
+                player = audioManager.CreatePlayer(stream);
+                var tcs = new TaskCompletionSource<bool>();
+                player.PlaybackEnded += (s, e) => { tcs.TrySetResult(true); };
                 player.Play();
-                await Task.Delay(2000);
-                player.Dispose();
+                await tcs.Task;
             }
             catch { }
             finally
             {
+                player?.Dispose();
                 lock (blokada)
                 {
                     aktualnieGrajaceDzwieki--;

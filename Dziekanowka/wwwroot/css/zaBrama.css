@@ -69,6 +69,20 @@
         height: 100%;
         object-fit: contain;
     }
+.koloSamochodu {
+    border-radius: 50%;
+    background: conic-gradient(black 0deg 270deg, gray 270deg 360deg);
+    animation: krecenieSamochodu 5s linear forwards;
+    width: 35px;
+    height: 35px;
+    bottom: 18px;
+}
+.koloSamochoduPrzod {
+    right: 30px;
+}
+.koloSamochoduTyl {
+    left: 15px;
+}
 .pies-straznik {
     position: absolute;
     width: 330px;
@@ -215,5 +229,10 @@
     to {
         left: 1500px;
         top: 240px;
+    }
+}
+@keyframes krecenieSamochodu {
+    to {
+        transform: rotate(5400deg);
     }
 }

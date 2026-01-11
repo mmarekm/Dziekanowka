@@ -8,7 +8,7 @@
             new("kuraJajo"), new("kuraJedzenie"), new("gesPioro"), new("gesJajo"), new("gesJedzenie"), new("gesSmalec"), new("indykJajo"), new("indykJedzenie"),
             new("kaczkaPioro"), new("kaczkaJajo"), new("kaczkaJedzenie"), new("kaczkaSmalec"), new("futroKrolik"), new("krolikJedzenie"), new("swiniaSzynka"), new("swiniaSchab"),
             new("swiniaBoczek"), new("swiniaSmalec"), new("owcaMleko"), new("owcaJedzenie"), new("owcaSkora"), new("owcaWelna"), new("alpakaWelna"), new("kozaMleko"), new("kozaJedzenie"),
-            new("kozaSkora"), new("krowaMleko"), new("krowaRostbef"), new("krowaAntrykot"), new("krowaLopatka"), new("krowaPoledwica"), new("krowaSkora")
+            new("kozaSkora"), new("krowaMleko"), new("krowaRostbef"), new("krowaAntrykot"), new("krowaLopatka"), new("krowaPoledwica"), new("krowaSkora"), new("miod")
         ];
     }
 }
