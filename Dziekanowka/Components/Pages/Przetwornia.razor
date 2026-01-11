@@ -9,10 +9,10 @@
     <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
     @if (maselnica)
     {
+        <div class="abs guzikMaselnicaProduktIn guzikMaselnicaJajoKurze"><div class="abs maselnicalProduktIn">@Gracz.ProduktZ("kuraJajo").Ilosc</div></div>
         <div class="abs maselnicaLCelow maselnicaLSmietany">@Gracz.ProduktP("smietana").Ilosc</div>
         <div class="abs maselnicaLCelow maselnicaLMasla">@Gracz.ProduktP("maslo").Ilosc</div>
         <div class="abs maselnicaLCelow maselnicaLMajonezu">@Gracz.ProduktP("majonez").Ilosc</div>
-        // 4 jaja 3 mleka 1 maslo 1 olej
         // smietana maslo majonez
     }
     else if (serowarnia)
