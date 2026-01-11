@@ -5,11 +5,15 @@
     <div class="abs przetworniaPowrot"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)"><img src="img/budynki/confirmPrzetwornia.png" /></button></div>
     <div class="abs doMaselnicy"><button class="wyroznionyGuzik" @onclick="() => maselnica = true"><img src="img/budynki/maselnica.png" /></button></div>
 </div>
-<div class="narzedziePrzetwornia @(widok ? "" : "aktywne")">
+<div class="abs narzedziePrzetwornia @(widok ? "" : "aktywne")">
     <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
     @if (maselnica)
     {
-        
+        <div class="abs maselnicaLCelow maselnicaLSmietany">@Gracz.ProduktP("smietana").Ilosc</div>
+        <div class="abs maselnicaLCelow maselnicaLMasla">@Gracz.ProduktP("maslo").Ilosc</div>
+        <div class="abs maselnicaLCelow maselnicaLMajonezu">@Gracz.ProduktP("majonez").Ilosc</div>
+        // 4 jaja 3 mleka 1 maslo 1 olej
+        // smietana maslo majonez
     }
     else if (serowarnia)
     {

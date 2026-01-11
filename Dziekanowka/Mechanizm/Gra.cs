@@ -10,6 +10,8 @@ namespace Dziekanowka.Mechanizm
         public static bool JestPrzedmiot(this Gracz g, string przedmiot) => g.Przedmioty.Any(p => p.Nazwa == przedmiot && p.Ilosc > 0);
         public static ZwierzeGracza Zwierze(this Gracz g, string zwierz) => g.Zwierzeta.First(z => z.Nazwa == zwierz);
         public static ProduktZwierzecy ProduktZ(this Gracz g, string produkt) => g.ProduktyZwierzece.First(p => p.Nazwa == produkt);
+        public static ProduktPrzetworzony ProduktP(this Gracz g, string produkt) => g.ProduktyPrzetworzone.First(p => p.Nazwa == produkt);
+        public static ZywnoscPozostale ZywnoscP(this Gracz g, string zywnosc) => g.ZywnoscPozostala.First(z => z.Nazwa == zywnosc);
         public static IDar Warzywo(this Gracz g, string warzywo) => g.Warzywa.First(w => w.Nazwa == warzywo);
         public static IDar Zboze(this Gracz g, string zboze) => g.Zboza.First(z => z.Nazwa == zboze);
         public static IDar Owoc(this Gracz g, string owoc) => g.Owoce.First(o => o.Nazwa == owoc);

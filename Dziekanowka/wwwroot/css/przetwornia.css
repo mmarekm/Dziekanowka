@@ -16,7 +16,6 @@
     z-index: 2;
 }
 .narzedziePrzetwornia {
-    position: absolute; /*FIXED !!!*/
     top: 100px;
     left: 100px;
     width: 1700px;
@@ -36,4 +35,20 @@
     left: 0;
     width: 200px;
     height: 130px;
+}
+.maselnicaLCelow {
+    right: 75px;
+    width: 55px;
+    height: 20px;
+    font-size: 19px;
+    text-align: center;
+}
+.maselnicaLSmietany {
+    top: 124px;
+}
+.maselnicaLMasla {
+    top: 276px;
+}
+.maselnicaLMajonezu {
+    top: 430px;
 }
