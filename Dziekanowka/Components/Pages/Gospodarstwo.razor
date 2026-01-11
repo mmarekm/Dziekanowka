@@ -23,7 +23,7 @@
     private async Task Miod()
     {
         if (!Gracz.Statystyki.MoznaMiod) return;
-        Gracz.ProduktZ("miod").Ilosc++;
+        Gracz.ProduktZ("miod").Ilosc += 5;
         Gracz.Statystyki.MoznaMiod = false;
         await ladowanieGracza.ZapiszAktualnegoGracza();
         Powitaj = true;

@@ -4,6 +4,8 @@
     {
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
-        public static List<ProduktPrzetworzony> StartoweProdukty() => [];
+        public static List<ProduktPrzetworzony> StartoweProdukty() => [
+        new("smietana"), new("maslo"), new("majonez")
+        ];
     }
 }

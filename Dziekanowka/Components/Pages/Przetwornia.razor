@@ -1,11 +1,57 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="przetworniaWidok widok rel">
+<div class="przetworniaWidok widok rel @(widok ? "" : "przygaszony")">
     <div class="abs przetworniaPowrot"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)"><img src="img/budynki/confirmPrzetwornia.png" /></button></div>
+    <div class="abs doMaselnicy"><button class="wyroznionyGuzik" @onclick="() => maselnica = true"><img src="img/budynki/maselnica.png" /></button></div>
 </div>
+<div class="narzedziePrzetwornia @(widok ? "" : "aktywne")">
+    <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
+    @if (maselnica)
+    {
+        
+    }
+    else if (serowarnia)
+    {
+        
+    }
+    else if (zarna)
+    {
+        
+    }
+    else if (platkarka)
+    {
+        
+    }
+    else if (beczka)
+    {
+        
+    }
+    else if (mlynek)
+    {
+        
+    }
+</div>
+
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool maselnica = false;
+    private bool serowarnia = false;
+    private bool zarna = false;
+    private bool platkarka = false;
+    private bool beczka = false;
+    private bool mlynek = false;
+    private bool widok => !maselnica && !serowarnia && !zarna && !platkarka && !beczka && !mlynek;
+    private void ZamknijNarzedzie()
+    {
+        maselnica = false;
+        serowarnia = false;
+        zarna = false;
+        platkarka = false;
+        beczka = false;
+        mlynek = false;
+    }
+
 }

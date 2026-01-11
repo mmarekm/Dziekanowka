@@ -8,3 +8,32 @@
     height: 156px;
     z-index: 2;
 }
+.doMaselnicy {
+    top: 318px;
+    left: 202px;
+    width: 203px;
+    height: 403px;
+    z-index: 2;
+}
+.narzedziePrzetwornia {
+    position: absolute; /*FIXED !!!*/
+    top: 100px;
+    left: 100px;
+    width: 1700px;
+    height: 800px;
+    z-index: 1000;
+    background-image: url('../img/budynki/maselnicaPrzetwornia.png');
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out;
+}
+    .narzedziePrzetwornia.aktywne {
+        opacity: 1;
+        pointer-events: all;
+    }
+.przetworniaNarzedzieConfirm {
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 130px;
+}

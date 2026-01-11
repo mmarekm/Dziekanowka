@@ -94,6 +94,10 @@ h1:focus {
 .ukryty {
     display: none !important;
 }
+.przygaszony {
+    opacity: 0.3;
+    pointer-events: none;
+}
 .kontener {
     transition: opacity 0.3s ease-in-out;
 }
@@ -181,6 +185,7 @@ h1:focus {
 .widok {
     width: 1900px;
     height: 1000px;
+    transition: opacity 0.4s ease-in-out;
 }
 .obrazekWypelnia {
     width: 100%;
