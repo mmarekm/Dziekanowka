@@ -1,6 +1,6 @@
 ﻿namespace Dziekanowka.Gracza
 {
-    public class ProduktPrzetworzony(string nazwa, int ilosc = 0)
+    public class ProduktPrzetworzony(string nazwa, int ilosc = 0) : IDar
     {
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
