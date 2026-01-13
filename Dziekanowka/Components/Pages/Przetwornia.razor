@@ -9,6 +9,7 @@
     <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
     @if (maselnica)
     {
+        <div class="abs guzikHandelMaselnica"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/budynki/maselnicaPracuj.png" /></button></div>
         <div class="abs guzikMaselnicaProduktIn guzikMaselnicaJajoKurze @(@WPortfelu("kuraJajo") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kuraJajo")'><div class="abs maselnicalProduktIn">@WPortfelu("kuraJajo")</div></div>
         <div class="abs guzikMaselnicaProduktIn guzikMaselnicaJajoGesie @(@WPortfelu("gesJajo") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("gesJajo")'><div class="abs maselnicalProduktIn">@WPortfelu("gesJajo")</div></div>
         <div class="abs guzikMaselnicaProduktIn guzikMaselnicaJajoKacze @(@WPortfelu("kaczkaJajo") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kaczkaJajo")'><div class="abs maselnicalProduktIn">@WPortfelu("kaczkaJajo")</div></div>
@@ -21,7 +22,39 @@
         <div class="abs maselnicaLCelow maselnicaLSmietany">@Gracz.ProduktP("smietana").Ilosc</div>
         <div class="abs maselnicaLCelow maselnicaLMasla">@Gracz.ProduktP("maslo").Ilosc</div>
         <div class="abs maselnicaLCelow maselnicaLMajonezu">@Gracz.ProduktP("majonez").Ilosc</div>
-        // smietana maslo majonez
+        <div class="abs tacaPodajnikMaselnica">
+            @foreach (var produkt in taca)
+            {
+                if (produkt.Ilosc < 1) continue;
+                <div class="rel produktTacaPodajnikMaselnica klikalneDivSzare" @onclick="() => ZTacy(produkt.Nazwa)">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/@(produkt.Nazwa).png"/>
+                    <div class="abs @(produkt.Nazwa != "smietana" ? "produkt" : "smietana")TacaIloscPodajnikMaselnica">@produkt.Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="abs tacaEfektMaselnica">
+            @if (uzyskanaSmietana > 0)
+            {
+                <div class="rel produktTacaEfektMaselnica">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/smietana.png" />
+                    <div class="abs smietanaTacaIloscPodajnikMaselnica">@uzyskanaSmietana</div>
+                </div>
+            }
+            @if (uzyskaneMaslo > 0)
+            {
+                <div class="rel produktTacaEfektMaselnica">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/maslo.png" />
+                    <div class="abs produktTacaIloscPodajnikMaselnica">@uzyskaneMaslo</div>
+                </div>
+            }
+            @if (uzyskanyMajonez > 0)
+            {
+                <div class="rel produktTacaEfektMaselnica">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/majonez.png" />
+                    <div class="abs produktTacaIloscPodajnikMaselnica">@uzyskanyMajonez</div>
+                </div>
+            }
+        </div>
     }
     else if (serowarnia)
     {
@@ -63,6 +96,7 @@
     }
     List<ProduktNaTace> tacaMaselnica = [ new("kuraJajo", 0), new("gesJajo", 0), new("kaczkaJajo", 0), new("indykJajo", 0), new("olej", 0), new("smietana", 0), new("krowaMleko", 0), new("kozaMleko", 0), new("owcaMleko", 0) ];
     List<ProduktNaTace> tacaSerowarnia = [];
+    List<ProduktNaTace> taca => maselnica ? tacaMaselnica : tacaSerowarnia;
     private int uzyskanaSmietana => 3 * tacaMaselnica.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc);
     private int uzyskaneMaslo => tacaMaselnica.First(t => t.Nazwa == "smietana").Ilosc;
     private int uzyskanyMajonez => Math.Min(tacaMaselnica.Where(t => t.Nazwa.EndsWith("Jajo")).Sum(t => t.Ilosc) / 2, tacaMaselnica.First(t => t.Nazwa == "olej").Ilosc);
@@ -77,7 +111,6 @@
     }
     private int WPortfelu(string nazwa)
     {
-        var taca = maselnica ? tacaMaselnica : tacaSerowarnia;
         var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
         IDar uGracza = Gracz.ProduktyZwierzece.Cast<IDar>().Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
         return uGracza.Ilosc - naTacy;
@@ -85,7 +118,30 @@
     private void NaTace(string nazwa)
     {
         if (WPortfelu(nazwa) < 1) return;
-        var taca = maselnica ? tacaMaselnica : tacaSerowarnia;
         taca.First(t => t.Nazwa == nazwa).Ilosc++;
+    }
+    private void ZTacy(string nazwa)
+    {
+        taca.First(t => t.Nazwa == nazwa).Ilosc--;
+    }
+    private async Task Handel()
+    {
+        foreach (var produkt in taca)
+        {
+            if (produkt.Ilosc > 0)
+            {
+                IDar uGracza = Gracz.ProduktyZwierzece.Cast<IDar>().Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
+                uGracza.Ilosc -= produkt.Ilosc;
+            }
+        }
+        if (uzyskanaSmietana > 0)
+            Gracz.ProduktP("smietana").Ilosc += uzyskanaSmietana;
+        if (uzyskaneMaslo > 0)
+            Gracz.ProduktP("maslo").Ilosc += uzyskaneMaslo;
+        if (uzyskanyMajonez > 0)
+            Gracz.ProduktP("majonez").Ilosc += uzyskanyMajonez;
+        foreach (var produkt in taca)
+            produkt.Ilosc = 0;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }

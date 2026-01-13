@@ -36,6 +36,13 @@
     width: 200px;
     height: 130px;
 }
+.guzikHandelMaselnica {
+    top: 343px;
+    left: 567px;
+    width: 214px;
+    height: 212px;
+    z-index: 2;
+}
 .maselnicaLCelow {
     right: 75px;
     width: 55px;
@@ -99,4 +106,48 @@
 .guzikMaselnicaMlekoOwcze {
     top: 460px;
     left: 398px;
+}
+.tacaPodajnikMaselnica {
+    top: 130px;
+    left: 820px;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 10px;
+}
+.produktTacaPodajnikMaselnica {
+    width: 85px;
+    height: 85px;
+    flex-shrink: 0;
+}
+.produktTacaIloscPodajnikMaselnica {
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+.smietanaTacaIloscPodajnikMaselnica {
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+.tacaEfektMaselnica {
+    top: 480px;
+    left: 815px;
+    width: 300px;
+    height: 90px;
+    display: flex;
+    gap: 25px;
+}
+.produktTacaEfektMaselnica {
+    width: 85px;
+    height: 85px;
+    flex-shrink: 0;
 }
