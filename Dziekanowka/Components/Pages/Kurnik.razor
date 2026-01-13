@@ -22,6 +22,7 @@
     <div class="abs guzikWarzywoKurnik guzikJeczmienKurnik @(Gracz.JestZwierze("kura") && Gracz.JestZboze("jeczmien") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("jeczmien")'></div>
     <div class="abs ramkaWarzywKurnik liczbaKapustyKurnik">@(Gracz.Warzywo("kapustaWłoska").Ilosc)</div>
     <div class="abs guzikWarzywoKurnik guzikKapustaKurnik @(Gracz.JestZwierze("kura") && Gracz.JestWarzywo("kapustaWłoska") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKure("kapustaWłoska")'></div>
+    <div class="abs jajoNaKure @(Gracz.JestZwierze("kura") && Gracz.JestProduktZ("kuraJajo") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Wyklucie"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajoNaKure.png" /></div>
 </div>
 
 @code {
@@ -100,6 +101,13 @@
             animujJajo = false;
             await InvokeAsync(StateHasChanged);
         }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task Wyklucie()
+    {
+        if (!Gracz.JestZwierze("kura") || !Gracz.JestProduktZ("kuraJajo")) return;
+        Gracz.ProduktZ("kuraJajo").Ilosc--;
+        Gracz.Zwierze("kura").Ilosc++;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     public void Dispose()

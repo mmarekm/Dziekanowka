@@ -966,3 +966,31 @@
         transform: rotate(15deg);
     }
 }
+.jajoNaKure {
+    top: 246px;
+    left: 649px;
+    width: 118px;
+    height: 81px;
+    z-index: 2;
+}
+.jajoNaKaczke {
+    top: 442px;
+    left: 813px;
+    width: 141px;
+    height: 72px;
+    z-index: 2;
+}
+.jajoNaGes {
+    top: 363px;
+    left: 695px;
+    width: 159px;
+    height: 77px;
+    z-index: 2;
+}
+.jajoNaIndyka {
+    top: 249px;
+    left: 655px;
+    width: 101px;
+    height: 63px;
+    z-index: 2;
+}

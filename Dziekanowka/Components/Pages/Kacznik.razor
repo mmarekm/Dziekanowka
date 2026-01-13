@@ -22,6 +22,7 @@
     <div class="abs guzikWarzywoKurnik guzikCukiniaKacznik @(Gracz.JestZwierze("kaczka") && Gracz.JestWarzywo("cukinia") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKaczke("cukinia")'></div>
     <div class="abs ramkaWarzywKurnik liczbaBatatKacznik">@(Gracz.Warzywo("batat").Ilosc)</div>
     <div class="abs guzikWarzywoKurnik guzikBatatKacznik @(Gracz.JestZwierze("kaczka") && Gracz.JestWarzywo("batat") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmKaczke("batat")'></div>
+    <div class="abs jajoNaKaczke @(Gracz.JestZwierze("kaczka") && Gracz.JestProduktZ("kaczkaJajo") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Wyklucie"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajoNaKaczke.png" /></div>
 </div>
 
 @code {
@@ -101,6 +102,13 @@
         if (index >= pozycjeKaczki.Count) return "";
         var kaczka = pozycjeKaczki[index];
         return $"left: {kaczka.X}px; top: {kaczka.Y}px; transform: scaleX({(kaczka.PatrzyWLewo ? -1 : 1)}); transition: left {kaczka.CzasPrzejscia}s ease-in-out, top {kaczka.CzasPrzejscia}s ease-in-out;";
+    }
+    private async Task Wyklucie()
+    {
+        if (!Gracz.JestZwierze("kaczka") || !Gracz.JestProduktZ("kaczkaJajo")) return;
+        Gracz.ProduktZ("kaczkaJajo").Ilosc--;
+        Gracz.Zwierze("kaczka").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     public void Dispose()
     {

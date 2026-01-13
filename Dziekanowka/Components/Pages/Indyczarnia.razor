@@ -22,6 +22,7 @@
     <div class="abs guzikWarzywoKurnik guzikFasolaIndyczarnia @(Gracz.JestZwierze("indyk") && Gracz.JestWarzywo("fasola") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmIndyka("fasola")'></div>
     <div class="abs ramkaWarzywKurnik liczbaSoczewicaIndyczarnia">@(Gracz.Warzywo("soczewica").Ilosc)</div>
     <div class="abs guzikWarzywoKurnik guzikSoczewicaIndyczarnia @(Gracz.JestZwierze("indyk") && Gracz.JestWarzywo("soczewica") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await KarmIndyka("soczewica")'></div>
+    <div class="abs jajoNaIndyka @(Gracz.JestZwierze("indyk") && Gracz.JestProduktZ("indykJajo") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Wyklucie"><img class="obrazekSieMiesci" src="img/zwierzyniec/jajoNaIndyka.png" /></div>
 </div>
 
 @code {
@@ -101,6 +102,13 @@
         if (index >= pozycjeIndyka.Count) return "";
         var indyk = pozycjeIndyka[index];
         return $"left: {indyk.X}px; top: {indyk.Y}px; transform: scaleX({(indyk.PatrzyWLewo ? -1 : 1)}); transition: left {indyk.CzasPrzejscia}s ease-in-out, top {indyk.CzasPrzejscia}s ease-in-out;";
+    }
+    private async Task Wyklucie()
+    {
+        if (!Gracz.JestZwierze("indyk") || !Gracz.JestProduktZ("indykJajo")) return;
+        Gracz.ProduktZ("indykJajo").Ilosc--;
+        Gracz.Zwierze("indyk").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     public void Dispose()
     {
