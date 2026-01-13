@@ -5,7 +5,7 @@
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
         public static List<ProduktPrzetworzony> StartoweProdukty() => [
-        new("smietana"), new("maslo"), new("majonez")
+        new("smietana"), new("maslo"), new("majonez"), new("krowaSer"), new("kozaSer"), new("owcaSer"), new("twarog")
         ];
     }
 }

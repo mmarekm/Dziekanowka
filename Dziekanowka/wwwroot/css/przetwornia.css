@@ -15,13 +15,19 @@
     height: 403px;
     z-index: 2;
 }
+.doSerowarni {
+    top: 406px;
+    left: 413px;
+    width: 250px;
+    height: 265px;
+    z-index: 2;
+}
 .narzedziePrzetwornia {
     top: 100px;
     left: 100px;
     width: 1700px;
     height: 800px;
     z-index: 1000;
-    background-image: url('../img/budynki/maselnicaPrzetwornia.png');
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease-in-out;
@@ -30,6 +36,12 @@
         opacity: 1;
         pointer-events: all;
     }
+.maselnicaWidok {
+    background-image: url('../img/budynki/maselnicaPrzetwornia.png');
+}
+.serowarniaWidok {
+    background-image: url('../img/budynki/serowarniaPrzetwornia.png');
+}
 .przetworniaNarzedzieConfirm {
     bottom: 0;
     left: 0;
@@ -58,6 +70,28 @@
 }
 .maselnicaLMajonezu {
     top: 430px;
+}
+.serowarniaLCelow {
+    width: 32px;
+    height: 16px;
+    font-size: 15px;
+    text-align: center;
+}
+.serowarniaLKrowiego {
+    right: 110px;
+    top: 143px;
+}
+.serowarniaLKoziego {
+    right: 107px;
+    top: 223px;
+}
+.serowarniaLOwczego {
+    right: 109px;
+    top: 317px;
+}
+.serowarniaLTwarogu {
+    right: 93px;
+    top: 464px;
 }
 .guzikMaselnicaProduktIn {
     width: 116px;
@@ -107,6 +141,30 @@
     top: 460px;
     left: 398px;
 }
+.guzikSerowarniaProduktIn {
+    width: 142px;
+    height: 109px;
+}
+.guzikSerowarniaMlekoKrowie {
+    top: 67px;
+    left: 53px;
+}
+.guzikSerowarniaMlekoKozie {
+    top: 65px;
+    left: 227px;
+}
+.guzikSerowarniaMlekoOwcze {
+    top: 64px;
+    left: 403px;
+}
+.serowarnialProduktIn {
+    bottom: 2px;
+    right: 2px;
+    width: 45px;
+    height: 30px;
+    font-size: 28px;
+    text-align: center;
+}
 .tacaPodajnikMaselnica {
     top: 130px;
     left: 820px;
@@ -137,6 +195,21 @@
     height: 20px;
     font-size: 18px;
     text-align: center;
+}
+.tacaPodajnikSerowarnia {
+    top: 300px;
+    left: 820px;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 10px;
+}
+.produktTacaPodajnikSerowarnia {
+    width: 85px;
+    height: 85px;
+    flex-shrink: 0;
 }
 .tacaEfektMaselnica {
     top: 480px;
