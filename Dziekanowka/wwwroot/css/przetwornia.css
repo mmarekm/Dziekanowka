@@ -182,6 +182,27 @@
     font-size: 28px;
     text-align: center;
 }
+.guzikZarnaProduktIn {
+    width: 94px;
+    height: 94px;
+    border: 1px solid black;
+}
+.guzikZarnaGryka {
+    top: 45px;
+    left: 65px;
+}
+.guzikZarnaJeczmien {
+    top: 43px;
+    left: 216px;
+}
+.zarnalProduktIn {
+    bottom: 2px;
+    right: 2px;
+    width: 39px;
+    height: 24px;
+    font-size: 23px;
+    text-align: center;
+}
 .tacaPodajnikMaselnica {
     top: 130px;
     left: 820px;

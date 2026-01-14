@@ -5,7 +5,7 @@
     <div class="abs przetworniaPowrot"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)"><img src="img/budynki/confirmPrzetwornia.png" /></button></div>
     <div class="abs doMaselnicy"><button class="wyroznionyGuzik" @onclick="() => maselnica = true"><img src="img/budynki/maselnica.png" /></button></div>
     <div class="abs doSerowarni"><button class="wyroznionyGuzik" @onclick="() => serowarnia = true"><img src="img/budynki/serowarnia.png" /></button></div>
-    <!--<div class="abs doZaren"><button class="wyroznionyGuzik" @onclick="() => zarna = true"><img src="img/budynki/zarna.png" /></button></div>-->
+    <div class="abs doZaren"><button class="wyroznionyGuzik" @onclick="() => zarna = true"><img src="img/budynki/zarna.png" /></button></div>
 </div>
 <div class="abs narzedziePrzetwornia @(maselnica ? "maselnica" : serowarnia ? "serowarnia" : zarna ? "zarna" : "")Widok @(widok ? "" : "aktywne")">
     <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
@@ -79,25 +79,25 @@
             }
         </div>
         <div class="abs tacaEfektSerowarnia">
-            @if (serowarniaModSer && uzyskanySerKrowi > 0)
+            @if (serowarniaModSer && UzyskanySer("krowaMleko") > 0)
             {
                 <div class="rel produktTacaEfektSerowarnia">
                     <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/krowaSer.png" />
-                    <div class="abs produktTacaIloscPodajnikMaselnica">@uzyskanySerKrowi</div>
+                    <div class="abs produktTacaIloscPodajnikMaselnica">@UzyskanySer("krowaMleko")</div>
                 </div>
             }
-            @if (serowarniaModSer && uzyskanySerKozi > 0)
+            @if (serowarniaModSer && UzyskanySer("kozaMleko") > 0)
             {
                 <div class="rel produktTacaEfektSerowarnia">
                     <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/kozaSer.png" />
-                    <div class="abs produktTacaIloscPodajnikSer">@uzyskanySerKozi</div>
+                    <div class="abs produktTacaIloscPodajnikSer">@UzyskanySer("kozaMleko")</div>
                 </div>
             }
-            @if (serowarniaModSer && uzyskanySerOwczy > 0)
+            @if (serowarniaModSer && UzyskanySer("owcaMleko") > 0)
             {
                 <div class="rel produktTacaEfektSerowarnia">
                     <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/owcaSer.png" />
-                    <div class="abs produktTacaIloscSerOwczy">@uzyskanySerOwczy</div>
+                    <div class="abs produktTacaIloscSerOwczy">@UzyskanySer("owcaMleko")</div>
                 </div>
             }
             @if (!serowarniaModSer && uzyskanyTwarog > 0)
@@ -113,7 +113,8 @@
     }
     else if (zarna)
     {
-        
+        <div class="abs guzikZarnaProduktIn guzikZarnaGryka @(@WPortfelu("gryka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("gryka")'><div class="abs zarnalProduktIn">@WPortfelu("gryka")</div></div>
+        <div class="abs guzikZarnaProduktIn guzikZarnaJeczmien @(@WPortfelu("jeczmien") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("jeczmien")'><div class="abs zarnalProduktIn">@WPortfelu("jeczmien")</div></div>
     }
     else if (platkarka)
     {
@@ -154,10 +155,16 @@
     private int uzyskaneMaslo => tacaMaselnica.First(t => t.Nazwa == "smietana").Ilosc;
     private int uzyskanyMajonez => Math.Min(tacaMaselnica.Where(t => t.Nazwa.EndsWith("Jajo")).Sum(t => t.Ilosc) / 2, tacaMaselnica.First(t => t.Nazwa == "olej").Ilosc);
     private bool serowarniaModSer = true;
-    private int uzyskanySerKrowi => serowarniaModSer ? tacaSerowarnia.First(t => t.Nazwa == "krowaMleko").Ilosc / 2 : 0;
-    private int uzyskanySerKozi => serowarniaModSer ? tacaSerowarnia.First(t => t.Nazwa == "kozaMleko").Ilosc / 2 : 0;
-    private int uzyskanySerOwczy => serowarniaModSer ? tacaSerowarnia.First(t => t.Nazwa == "owcaMleko").Ilosc / 2 : 0;
+    private int UzyskanySer(string mleko) => serowarniaModSer ? tacaSerowarnia.First(t => t.Nazwa == mleko).Ilosc / 2 : 0;
     private int uzyskanyTwarog => !serowarniaModSer ? tacaSerowarnia.Sum(t => t.Ilosc) : 0;
+    private int uzyskanaMakaZytnia => tacaZarna.First(t => t.Nazwa == "zyto").Ilosc / 3;
+    private int uzyskanaMakaJeczmienna => tacaZarna.First(t => t.Nazwa == "jeczmien").Ilosc / 3;
+    private int uzyskanaMakaPszenna => tacaZarna.First(t => t.Nazwa == "pszenica").Ilosc / 3;
+    private int uzyskanaMakaRyzowa => tacaZarna.First(t => t.Nazwa == "ryz").Ilosc / 3;
+    private int uzyskanaMakaOwsiana => tacaZarna.First(t => t.Nazwa == "owies").Ilosc / 3;
+    private int uzyskanaMakaGryczana => tacaZarna.First(t => t.Nazwa == "gryka").Ilosc / 3;
+    private int uzyskanaMakaOrkiszowa => tacaZarna.First(t => t.Nazwa == "orkisz").Ilosc / 3;
+    private int uzyskanyMakaron => Math.Min(tacaZarna.Where(t => t.Nazwa.EndsWith("Maka")).Sum(t => t.Ilosc) / 2, tacaZarna.First(t => t.Nazwa.EndsWith("Jajo")).Ilosc) * 3;
     private void ZamknijNarzedzie()
     {
         maselnica = false;
@@ -170,7 +177,7 @@
     private int WPortfelu(string nazwa)
     {
         var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
-        IDar uGracza = Gracz.ProduktyZwierzece.Cast<IDar>().Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
+        IDar uGracza = Gracz.Zboza.Cast<IDar>().Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
         return uGracza.Ilosc - naTacy;
     }
     private void NaTace(string nazwa)
@@ -188,7 +195,7 @@
         {
             if (produkt.Ilosc > 0)
             {
-                IDar uGracza = Gracz.ProduktyZwierzece.Cast<IDar>().Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
+                IDar uGracza = Gracz.Zboza.Cast<IDar>().Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
                 uGracza.Ilosc -= produkt.Ilosc;
             }
         }
@@ -205,12 +212,12 @@
         {
             if (serowarniaModSer)
             {
-                if (uzyskanySerKrowi > 0)
-                    Gracz.ProduktP("krowaSer").Ilosc += uzyskanySerKrowi;
-                if (uzyskanySerKozi > 0)
-                    Gracz.ProduktP("kozaSer").Ilosc += uzyskanySerKozi;
-                if (uzyskanySerOwczy > 0)
-                    Gracz.ProduktP("owcaSer").Ilosc += uzyskanySerOwczy;
+                if (UzyskanySer("krowaMleko") > 0)
+                    Gracz.ProduktP("krowaSer").Ilosc += UzyskanySer("krowaMleko");
+                if (UzyskanySer("kozaMleko") > 0)
+                    Gracz.ProduktP("kozaSer").Ilosc += UzyskanySer("kozaMleko");
+                if (UzyskanySer("owcaMleko") > 0)
+                    Gracz.ProduktP("owcaSer").Ilosc += UzyskanySer("owcaMleko");
             }
             else
             {
