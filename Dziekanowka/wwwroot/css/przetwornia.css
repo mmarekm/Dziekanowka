@@ -22,6 +22,13 @@
     height: 265px;
     z-index: 2;
 }
+.doZaren {
+    top: 492px;
+    left: 680px;
+    width: 234px;
+    height: 240px;
+    z-index: 2;
+}
 .narzedziePrzetwornia {
     top: 100px;
     left: 100px;
@@ -41,6 +48,9 @@
 }
 .serowarniaWidok {
     background-image: url('../img/budynki/serowarniaPrzetwornia.png');
+}
+.zarnaWidok {
+    background-image: url('../img/budynki/zarnaPrzetwornia.png');
 }
 .przetworniaNarzedzieConfirm {
     bottom: 0;
