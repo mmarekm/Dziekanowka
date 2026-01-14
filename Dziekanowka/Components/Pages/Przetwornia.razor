@@ -59,6 +59,7 @@
     }
     else if (serowarnia)
     {
+        <div class="abs guzikHandelSerowarnia"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/budynki/serowarniaPracuj.png" /></button></div>
         <div class="abs guzikSerowarniaProduktIn guzikSerowarniaMlekoKrowie @(@WPortfelu("krowaMleko") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("krowaMleko")'><div class="abs serowarnialProduktIn">@WPortfelu("krowaMleko")</div></div>
         <div class="abs guzikSerowarniaProduktIn guzikSerowarniaMlekoKozie @(@WPortfelu("kozaMleko") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kozaMleko")'><div class="abs serowarnialProduktIn">@WPortfelu("kozaMleko")</div></div>
         <div class="abs guzikSerowarniaProduktIn guzikSerowarniaMlekoOwcze @(@WPortfelu("owcaMleko") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("owcaMleko")'><div class="abs serowarnialProduktIn">@WPortfelu("owcaMleko")</div></div>
@@ -66,17 +67,48 @@
         <div class="abs serowarniaLCelow serowarniaLKoziego">@Gracz.ProduktP("kozaSer").Ilosc</div>
         <div class="abs serowarniaLCelow serowarniaLOwczego">@Gracz.ProduktP("owcaSer").Ilosc</div>
         <div class="abs serowarniaLCelow serowarniaLTwarogu">@Gracz.ProduktP("twarog").Ilosc</div>
-        <!--<div class="abs tacaPodajnikSerowarnia">
+        <div class="abs tacaPodajnikSerowarnia">
             @foreach (var produkt in taca)
             {
                 if (produkt.Ilosc < 1) continue;
                 <div class="rel produktTacaPodajnikSerowarnia klikalneDivSzare" @onclick="() => ZTacy(produkt.Nazwa)">
                     <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/@(produkt.Nazwa).png" />
-                    <div class="abs serowarnialProduktIn">@produkt.Ilosc</div>
+                    <div class="abs produktTacaIloscPodajnikMaselnica">@produkt.Ilosc</div>
                 </div>
             }
         </div>
-        <div class="abs tacaEfektSerowarnia"></div>-->
+        <div class="abs tacaEfektSerowarnia">
+            @if (serowarniaModSer && uzyskanySerKrowi > 0)
+            {
+                <div class="rel produktTacaEfektSerowarnia">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/krowaSer.png" />
+                    <div class="abs produktTacaIloscPodajnikMaselnica">@uzyskanySerKrowi</div>
+                </div>
+            }
+            @if (serowarniaModSer && uzyskanySerKozi > 0)
+            {
+                <div class="rel produktTacaEfektSerowarnia">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/kozaSer.png" />
+                    <div class="abs produktTacaIloscPodajnikSer">@uzyskanySerKozi</div>
+                </div>
+            }
+            @if (serowarniaModSer && uzyskanySerOwczy > 0)
+            {
+                <div class="rel produktTacaEfektSerowarnia">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/owcaSer.png" />
+                    <div class="abs produktTacaIloscSerOwczy">@uzyskanySerOwczy</div>
+                </div>
+            }
+            @if (!serowarniaModSer && uzyskanyTwarog > 0)
+            {
+                <div class="rel produktTacaEfektSerowarnia">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/twarog.png" />
+                    <div class="abs produktTacaIloscPodajnikSer">@uzyskanyTwarog</div>
+                </div>
+            }
+        </div>
+        <div class="abs serowarniaLampka serowarniaLampkaSer @(serowarniaModSer ? "swiec" : "zgas")" @onclick="() => serowarniaModSer = true"></div>
+        <div class="abs serowarniaLampka serowarniaLampkaTwarog @(!serowarniaModSer ? "swiec" : "zgas")" @onclick="() => serowarniaModSer = false"></div>
     }
     else if (zarna)
     {
@@ -158,12 +190,32 @@
                 uGracza.Ilosc -= produkt.Ilosc;
             }
         }
-        if (uzyskanaSmietana > 0)
-            Gracz.ProduktP("smietana").Ilosc += uzyskanaSmietana;
-        if (uzyskaneMaslo > 0)
-            Gracz.ProduktP("maslo").Ilosc += uzyskaneMaslo;
-        if (uzyskanyMajonez > 0)
-            Gracz.ProduktP("majonez").Ilosc += uzyskanyMajonez;
+        if (maselnica)
+        {
+            if (uzyskanaSmietana > 0)
+                Gracz.ProduktP("smietana").Ilosc += uzyskanaSmietana;
+            if (uzyskaneMaslo > 0)
+                Gracz.ProduktP("maslo").Ilosc += uzyskaneMaslo;
+            if (uzyskanyMajonez > 0)
+                Gracz.ProduktP("majonez").Ilosc += uzyskanyMajonez;
+        }
+        if (serowarnia)
+        {
+            if (serowarniaModSer)
+            {
+                if (uzyskanySerKrowi > 0)
+                    Gracz.ProduktP("krowaSer").Ilosc += uzyskanySerKrowi;
+                if (uzyskanySerKozi > 0)
+                    Gracz.ProduktP("kozaSer").Ilosc += uzyskanySerKozi;
+                if (uzyskanySerOwczy > 0)
+                    Gracz.ProduktP("owcaSer").Ilosc += uzyskanySerOwczy;
+            }
+            else
+            {
+                if (uzyskanyTwarog > 0)
+                    Gracz.ProduktP("twarog").Ilosc += uzyskanyTwarog;
+            }
+        }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
         await ladowanieGracza.ZapiszAktualnegoGracza();
