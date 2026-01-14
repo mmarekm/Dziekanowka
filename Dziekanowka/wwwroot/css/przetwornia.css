@@ -110,6 +110,44 @@
     right: 93px;
     top: 464px;
 }
+.zarnaLCelow {
+    width: 69px;
+    height: 24px;
+    font-size: 23px;
+    text-align: center;
+}
+.zarnaLGryczana {
+    left: 571px;
+    top:  265px;
+}
+.zarnaLJeczmienna {
+    left: 672px;
+    top:  265px;
+}
+.zarnaLOrkiszowa {
+    left: 771px;
+    top:  265px;
+}
+.zarnaLOwsiana {
+    left: 870px;
+    top:  265px;
+}
+.zarnaLPszenna {
+    left: 969px;
+    top:  263px;
+}
+.zarnaLRyzowa {
+    left: 1070px;
+    top: 264px;
+}
+.zarnaLZytnia {
+    left: 1163px;
+    top:  263px;
+}
+.zarnaLMakaron {
+    left: 1356px;
+    top:  263px;
+}
 .guzikMaselnicaProduktIn {
     width: 116px;
     height: 116px;
@@ -185,7 +223,6 @@
 .guzikZarnaProduktIn {
     width: 94px;
     height: 94px;
-    border: 1px solid black;
 }
 .guzikZarnaGryka {
     top: 45px;
@@ -194,6 +231,71 @@
 .guzikZarnaJeczmien {
     top: 43px;
     left: 216px;
+}
+.guzikZarnaOrkisz {
+    top: 42px;
+    left: 371px;
+}
+.guzikZarnaOwies {
+    top: 152px;
+    left: 67px;
+}
+.guzikZarnaPszenica {
+    top: 149px;
+    left: 217px;
+}
+.guzikZarnaRyz {
+    top: 150px;
+    left: 372px;
+}
+.guzikZarnaZyto {
+    top: 262px;
+    left: 67px;
+}
+.guzikZarnaKuraJajo {
+    top: 259px;
+    left: 217px;
+}
+.guzikZarnaGesJajo {
+    top: 260px;
+    left: 372px;
+}
+.guzikZarnaIndykJajo {
+    top: 372px;
+    left: 67px;
+}
+.guzikZarnaKaczkaJajo {
+    top: 371px;
+    left: 217px;
+}
+.guzikZarnaGrykaMaka {
+    top: 372px;
+    left: 373px;
+}
+.guzikZarnaJeczmienMaka {
+    top: 482px;
+    left: 67px;
+}
+.guzikZarnaOrkiszMaka {
+    top: 483px;
+    left: 217px;
+}
+.guzikZarnaOwiesMaka {
+    top: 484px;
+    left: 374px;
+}
+.guzikZarnaPszenicaMaka {
+    top: 594px;
+    left: 67px;
+    z-index: 3;
+}
+.guzikZarnaRyzMaka {
+    top: 594px;
+    left: 217px;
+}
+.guzikZarnaZytoMaka {
+    top: 594px;
+    left: 374px;
 }
 .zarnalProduktIn {
     bottom: 2px;
