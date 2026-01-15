@@ -113,6 +113,7 @@
     }
     else if (zarna)
     {
+        <div class="abs guzikHandelZarna"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/budynki/zarnaPracuj.png" /></button></div>
         <div class="abs guzikZarnaProduktIn guzikZarnaGryka @(@WPortfelu("gryka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("gryka")'><div class="abs zarnalProduktIn">@WPortfelu("gryka")</div></div>
         <div class="abs guzikZarnaProduktIn guzikZarnaJeczmien @(@WPortfelu("jeczmien") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("jeczmien")'><div class="abs zarnalProduktIn">@WPortfelu("jeczmien")</div></div>
         <div class="abs guzikZarnaProduktIn guzikZarnaOrkisz @(@WPortfelu("orkisz") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("orkisz")'><div class="abs zarnalProduktIn">@WPortfelu("orkisz")</div></div>
@@ -139,6 +140,74 @@
         <div class="abs zarnaLCelow zarnaLRyzowa">@Gracz.ProduktP("ryzMaka").Ilosc</div>
         <div class="abs zarnaLCelow zarnaLZytnia">@Gracz.ProduktP("zytoMaka").Ilosc</div>
         <div class="abs zarnaLCelow zarnaLMakaron">@Gracz.ProduktP("makaron").Ilosc</div>
+        <div class="abs tacaPodajnikZarna">
+            @foreach (var produkt in taca)
+            {
+                if (produkt.Ilosc < 1) continue;
+                <div class="rel produktTacaPodajnikZarna klikalneDivSzare" @onclick="() => ZTacy(produkt.Nazwa)">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/@(produkt.Nazwa).png" />
+                    <div class="abs produktTacaIloscPodajnikZarna">@produkt.Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="abs tacaEfektZarna">
+            @if (UzyskanaMaka("gryka") > 0)
+            {
+                <div class="rel produktTacaEfektZarna">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/grykaMaka.png" />
+                    <div class="abs produktTacaEfektZarnaIlosc">@UzyskanaMaka("gryka")</div>
+                </div>
+            }
+            @if (UzyskanaMaka("jeczmien") > 0)
+            {
+                <div class="rel produktTacaEfektZarna">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/jeczmienMaka.png" />
+                    <div class="abs produktTacaEfektZarnaIlosc">@UzyskanaMaka("jeczmien")</div>
+                </div>
+            }
+            @if (UzyskanaMaka("orkisz") > 0)
+            {
+                <div class="rel produktTacaEfektZarna">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/orkiszMaka.png" />
+                    <div class="abs produktTacaEfektZarnaIlosc">@UzyskanaMaka("orkisz")</div>
+                </div>
+            }
+            @if (UzyskanaMaka("owies") > 0)
+            {
+                <div class="rel produktTacaEfektZarna">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/owiesMaka.png" />
+                    <div class="abs produktTacaEfektZarnaIlosc">@UzyskanaMaka("owies")</div>
+                </div>
+            }
+            @if (UzyskanaMaka("pszenica") > 0)
+            {
+                <div class="rel produktTacaEfektZarna">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/pszenicaMaka.png" />
+                    <div class="abs produktTacaEfektZarnaIlosc">@UzyskanaMaka("pszenica")</div>
+                </div>
+            }
+            @if (UzyskanaMaka("ryz") > 0)
+            {
+                <div class="rel produktTacaEfektZarna">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/ryzMaka.png" />
+                    <div class="abs produktTacaEfektZarnaIlosc">@UzyskanaMaka("ryz")</div>
+                </div>
+            }
+            @if (UzyskanaMaka("zyto") > 0)
+            {
+                <div class="rel produktTacaEfektZarna">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/zytoMaka.png" />
+                    <div class="abs produktTacaEfektZarnaIlosc">@UzyskanaMaka("zyto")</div>
+                </div>
+            }
+            @if (uzyskanyMakaron > 0)
+            {
+                <div class="rel produktTacaEfektZarna">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/makaron.png" />
+                    <div class="abs produktTacaEfektZarnaIlosc">@uzyskanyMakaron</div>
+                </div>
+            }
+        </div>
     }
     else if (platkarka)
     {
@@ -153,7 +222,6 @@
         
     }
 </div>
-
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
@@ -242,6 +310,25 @@
                 if (uzyskanyTwarog > 0)
                     Gracz.ProduktP("twarog").Ilosc += uzyskanyTwarog;
             }
+        }
+        if (zarna)
+        {
+            if (UzyskanaMaka("gryka") > 0)
+                Gracz.ProduktP("grykaMaka").Ilosc += UzyskanaMaka("gryka");
+            if (UzyskanaMaka("jeczmien") > 0)
+                Gracz.ProduktP("jeczmienMaka").Ilosc += UzyskanaMaka("jeczmien");
+            if (UzyskanaMaka("orkisz") > 0)
+                Gracz.ProduktP("orkiszMaka").Ilosc += UzyskanaMaka("orkisz");
+            if (UzyskanaMaka("owies") > 0)
+                Gracz.ProduktP("owiesMaka").Ilosc += UzyskanaMaka("owies");
+            if (UzyskanaMaka("pszenica") > 0)
+                Gracz.ProduktP("pszenicaMaka").Ilosc += UzyskanaMaka("pszenica");
+            if (UzyskanaMaka("ryz") > 0)
+                Gracz.ProduktP("ryzMaka").Ilosc += UzyskanaMaka("ryz");
+            if (UzyskanaMaka("zyto") > 0)
+                Gracz.ProduktP("zytoMaka").Ilosc += UzyskanaMaka("zyto");
+            if (uzyskanyMakaron > 0)
+                Gracz.ProduktP("makaron").Ilosc += uzyskanyMakaron;
         }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;

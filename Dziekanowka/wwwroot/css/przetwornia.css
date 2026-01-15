@@ -72,6 +72,13 @@
     height: 166px;
     z-index: 2;
 }
+.guzikHandelZarna {
+    top: 572px;
+    left: 526px;
+    width: 164px;
+    height: 148px;
+    z-index: 2;
+}
 .maselnicaLCelow {
     right: 75px;
     width: 55px;
@@ -350,6 +357,29 @@
     height: 85px;
     flex-shrink: 0;
 }
+.tacaPodajnikZarna {
+    top: 525px;
+    left: 725px;
+    width: 600px;
+    height: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.produktTacaPodajnikZarna {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+.produktTacaIloscPodajnikZarna {
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 30px;
+    font-size: 28px;
+    color: red;
+    text-align: center;
+}
 .tacaEfektMaselnica {
     top: 480px;
     left: 815px;
@@ -371,6 +401,29 @@
     display: flex;
     gap: 40px;
     padding: 10px;
+}
+.tacaEfektZarna {
+    top: 525px;
+    left: 1365px;
+    width: 170px;
+    height: 240px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 40px;
+}
+.produktTacaEfektZarna {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+}
+.produktTacaEfektZarnaIlosc {
+    bottom: 0;
+    right: 0;
+    width: 39px;
+    height: 25px;
+    font-size: 24px;
+    color: blue;
+    text-align: center;
 }
 .produktTacaEfektSerowarnia {
     width: 85px;
