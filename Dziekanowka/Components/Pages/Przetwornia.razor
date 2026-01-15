@@ -263,7 +263,7 @@
     private int WPortfelu(string nazwa)
     {
         var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
-        IDar uGracza = Gracz.Zboza.Cast<IDar>().Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
+        IDar uGracza = Gracz.Warzywa.Cast<IDar>().Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
         return uGracza.Ilosc - naTacy;
     }
     private void NaTace(string nazwa)
@@ -281,7 +281,7 @@
         {
             if (produkt.Ilosc > 0)
             {
-                IDar uGracza = Gracz.Zboza.Cast<IDar>().Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
+                IDar uGracza = Gracz.Warzywa.Cast<IDar>().Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
                 uGracza.Ilosc -= produkt.Ilosc;
             }
         }
