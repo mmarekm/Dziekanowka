@@ -228,6 +228,16 @@
         <div class="abs platkarkaLCelow platkarkaLRyzowe">@Gracz.ProduktP("ryzPlatki").Ilosc</div>
         <div class="abs platkarkaLCelow platkarkaLZytnie">@Gracz.ProduktP("zytoPlatki").Ilosc</div>
         <div class="abs platkarkaLCelow platkarkaLKukurydziane">@Gracz.ProduktP("kukurydzaPlatki").Ilosc</div>
+        <div class="abs tacaPodajnikPlatkarka">
+            @foreach (var produkt in taca)
+            {
+                if (produkt.Ilosc < 1) continue;
+                <div class="rel produktTacaPodajnikPlatkarka klikalneDivSzare" @onclick="() => ZTacy(produkt.Nazwa)">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/@(produkt.Nazwa).png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@produkt.Ilosc</div>
+                </div>
+            }
+        </div>
     }
     else if (beczka)
     {

@@ -457,6 +457,28 @@
     color: red;
     text-align: center;
 }
+.tacaPodajnikPlatkarka {
+    top: 45px;
+    left: 673px;
+    width: 260px;
+    height: 160px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.produktTacaPodajnikPlatkarka {
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+}
+.produktTacaIloscPodajnikPlatkarka {
+    bottom: 0;
+    right: 0;
+    width: 23px;
+    height: 13px;
+    font-size: 12px;
+    text-align: center;
+}
 .tacaEfektMaselnica {
     top: 480px;
     left: 815px;
