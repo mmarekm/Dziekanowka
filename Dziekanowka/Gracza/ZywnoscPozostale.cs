@@ -5,7 +5,7 @@
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
         public static List<ZywnoscPozostale> StartowaZywnosc() => [
-            new("olej", 1)
+            new("olej", 2)
         ];
     }
 }

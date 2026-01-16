@@ -29,6 +29,13 @@
     height: 240px;
     z-index: 2;
 }
+.doPlatkarni {
+    top: 410px;
+    left: 958px;
+    width: 273px;
+    height: 298px;
+    z-index: 2;
+}
 .narzedziePrzetwornia {
     top: 100px;
     left: 100px;
@@ -51,6 +58,9 @@
 }
 .zarnaWidok {
     background-image: url('../img/budynki/zarnaPrzetwornia.png');
+}
+.platkarniaWidok {
+    background-image: url('../img/budynki/platkarniaPrzetwornia.png');
 }
 .przetworniaNarzedzieConfirm {
     bottom: 0;
@@ -158,6 +168,37 @@
 .guzikMaselnicaProduktIn {
     width: 116px;
     height: 116px;
+}
+.platkarkaLCelow {
+    width: 69px;
+    height: 22px;
+    font-size: 21px;
+    text-align: center;
+    right: 44px;
+}
+.platkarkaLGryczane {
+    top: 118px;
+}
+.platkarkaLJeczmienne {
+    top: 179px;
+}
+.platkarkaLOrkiszowe {
+    top: 241px;
+}
+.platkarkaLOwsiane {
+    top: 306px;
+}
+.platkarkaLPszenne {
+    top: 366px;
+}
+.platkarkaLRyzowe {
+    top: 428px;
+}
+.platkarkaLZytnie {
+    top: 491px;
+}
+.platkarkaLKukurydziane {
+    top: 554px;
 }
 .maselnicalProduktIn {
     bottom: 2px;
@@ -311,6 +352,42 @@
     height: 24px;
     font-size: 23px;
     text-align: center;
+}
+.guzikPlatkarkaProduktIn {
+    width: 106px;
+    height: 106px;
+}
+.guzikPlatkarkaGryka {
+    top: 78px;
+    left: 52px;
+}
+.guzikPlatkarkaJeczmien {
+    top: 78px;
+    left: 188px;
+}
+.guzikPlatkarkaOrkisz {
+    top: 206px;
+    left: 52px;
+}
+.guzikPlatkarkaOwies {
+    top: 206px;
+    left: 188px;
+}
+.guzikPlatkarkaPszenica {
+    top: 331px;
+    left: 52px;
+}
+.guzikPlatkarkaRyz {
+    top: 331px;
+    left: 188px;
+}
+.guzikPlatkarkaZyto {
+    top: 457px;
+    left: 52px;
+}
+.guzikPlatkarkaKukurydza {
+    top: 457px;
+    left: 188px;
 }
 .tacaPodajnikMaselnica {
     top: 130px;

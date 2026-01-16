@@ -6,8 +6,9 @@
     <div class="abs doMaselnicy"><button class="wyroznionyGuzik" @onclick="() => maselnica = true"><img src="img/budynki/maselnica.png" /></button></div>
     <div class="abs doSerowarni"><button class="wyroznionyGuzik" @onclick="() => serowarnia = true"><img src="img/budynki/serowarnia.png" /></button></div>
     <div class="abs doZaren"><button class="wyroznionyGuzik" @onclick="() => zarna = true"><img src="img/budynki/zarna.png" /></button></div>
+    <div class="abs doPlatkarni"><button class="wyroznionyGuzik" @onclick="() => platkarka = true"><img src="img/budynki/platkarnia.png" /></button></div>
 </div>
-<div class="abs narzedziePrzetwornia @(maselnica ? "maselnica" : serowarnia ? "serowarnia" : zarna ? "zarna" : "")Widok @(widok ? "" : "aktywne")">
+<div class="abs narzedziePrzetwornia @(maselnica ? "maselnica" : serowarnia ? "serowarnia" : zarna ? "zarna" : platkarka ? "platkarnia" : "")Widok @(widok ? "" : "aktywne")">
     <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
     @if (maselnica)
     {
@@ -211,7 +212,22 @@
     }
     else if (platkarka)
     {
-        
+        <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaGryka @(@WPortfelu("gryka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("gryka")'><div class="abs zarnalProduktIn">@WPortfelu("gryka")</div></div>
+        <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaJeczmien @(@WPortfelu("jeczmien") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("jeczmien")'><div class="abs zarnalProduktIn">@WPortfelu("jeczmien")</div></div>
+        <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaOrkisz @(@WPortfelu("orkisz") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("orkisz")'><div class="abs zarnalProduktIn">@WPortfelu("orkisz")</div></div>
+        <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaOwies @(@WPortfelu("owies") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("owies")'><div class="abs zarnalProduktIn">@WPortfelu("owies")</div></div>
+        <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaPszenica @(@WPortfelu("pszenica") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("pszenica")'><div class="abs zarnalProduktIn">@WPortfelu("pszenica")</div></div>
+        <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaRyz @(@WPortfelu("ryz") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("ryz")'><div class="abs zarnalProduktIn">@WPortfelu("ryz")</div></div>
+        <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaZyto @(@WPortfelu("zyto") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("zyto")'><div class="abs zarnalProduktIn">@WPortfelu("zyto")</div></div>
+        <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaKukurydza @(@WPortfelu("kukurydza") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kukurydza")'><div class="abs zarnalProduktIn">@WPortfelu("kukurydza")</div></div>
+        <div class="abs platkarkaLCelow platkarkaLGryczane">@Gracz.ProduktP("grykaPlatki").Ilosc</div>
+        <div class="abs platkarkaLCelow platkarkaLJeczmienne">@Gracz.ProduktP("jeczmienPlatki").Ilosc</div>
+        <div class="abs platkarkaLCelow platkarkaLOrkiszowe">@Gracz.ProduktP("orkiszPlatki").Ilosc</div>
+        <div class="abs platkarkaLCelow platkarkaLOwsiane">@Gracz.ProduktP("owiesPlatki").Ilosc</div>
+        <div class="abs platkarkaLCelow platkarkaLPszenne">@Gracz.ProduktP("pszenicaPlatki").Ilosc</div>
+        <div class="abs platkarkaLCelow platkarkaLRyzowe">@Gracz.ProduktP("ryzPlatki").Ilosc</div>
+        <div class="abs platkarkaLCelow platkarkaLZytnie">@Gracz.ProduktP("zytoPlatki").Ilosc</div>
+        <div class="abs platkarkaLCelow platkarkaLKukurydziane">@Gracz.ProduktP("kukurydzaPlatki").Ilosc</div>
     }
     else if (beczka)
     {
@@ -240,9 +256,10 @@
     }
     List<ProduktNaTace> tacaMaselnica = [ new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), new("indykJajo"), new("olej"), new("smietana"), new("krowaMleko"), new("kozaMleko"), new("owcaMleko") ];
     List<ProduktNaTace> tacaSerowarnia = [new("krowaMleko"), new("kozaMleko"), new("owcaMleko")];
-    List<ProduktNaTace> tacaZarna = [new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), new("indykJajo"), new("zytoMaka"), new("jeczmienMaka"), new("pszenicaMaka"), new("ryzMaka"), new("owiesMaka"), new("grykaMaka"), new("orkiszMaka")];
-    List<ProduktNaTace> tacaPlatkarka = [];
-    List<ProduktNaTace> taca => maselnica ? tacaMaselnica : serowarnia ? tacaSerowarnia : zarna ? tacaZarna : tacaPlatkarka;
+    List<ProduktNaTace> tacaZarna = [ new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), new("indykJajo"), new("zytoMaka"), new("jeczmienMaka"), new("pszenicaMaka"), new("ryzMaka"), new("owiesMaka"), new("grykaMaka"), new("orkiszMaka")];
+    List<ProduktNaTace> tacaPlatkarka = [new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kukurydza")];
+    List<ProduktNaTace> tacaBeczka = [];
+    List<ProduktNaTace> taca => maselnica ? tacaMaselnica : serowarnia ? tacaSerowarnia : zarna ? tacaZarna : platkarka ? tacaPlatkarka : tacaBeczka;
     private int uzyskanaSmietana => 3 * tacaMaselnica.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc);
     private int uzyskaneMaslo => tacaMaselnica.First(t => t.Nazwa == "smietana").Ilosc;
     private int uzyskanyMajonez => Math.Min(tacaMaselnica.Where(t => t.Nazwa.EndsWith("Jajo")).Sum(t => t.Ilosc) / 2, tacaMaselnica.First(t => t.Nazwa == "olej").Ilosc);
@@ -251,6 +268,7 @@
     private int uzyskanyTwarog => !serowarniaModSer ? tacaSerowarnia.Sum(t => t.Ilosc) : 0;
     private int UzyskanaMaka(string zboze) => tacaZarna.First(t => t.Nazwa == zboze).Ilosc / 3;
     private int uzyskanyMakaron => Math.Min(tacaZarna.Where(t => t.Nazwa.EndsWith("Maka")).Sum(t => t.Ilosc) / 2, tacaZarna.First(t => t.Nazwa.EndsWith("Jajo")).Ilosc) * 3;
+    private int UzyskanePlatki(string zboze) => tacaPlatkarka.First(t => t.Nazwa == zboze).Ilosc / 2;
     private void ZamknijNarzedzie()
     {
         maselnica = false;

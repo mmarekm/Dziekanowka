@@ -5,7 +5,7 @@
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
         public int Poziom { get; set; } = poziom;
-        public static List<PrzedmiotGracza> StartowePrzedmioty() => [ new("pustaButelka", 2), new("pelnaButelka"), new("siano", 2),
+        public static List<PrzedmiotGracza> StartowePrzedmioty() => [ new("pustaButelka", 3), new("pelnaButelka", 2), new("drewno", 2), new("siano", 2),
         new("siekiera")];
     }
 }
