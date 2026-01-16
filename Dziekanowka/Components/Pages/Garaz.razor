@@ -2,6 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="garazWidok widok rel">
+    <div class="abs garazDoDom"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/budynki/garazDoDomWiatrolap.png" /></button></div>
     <div class="abs garazDoGospodarstwo"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)" class="wyroznionyGuzik"><img src="img/budynki/garazDoGospodarstwo.png" /></button></div>
     <div class="abs garazDoMiasto"><button @onclick="DoMiasta" class="wyroznionyGuzik"><img src="img/budynki/garazDoMiasta.png" /></button></div>
     <div class="abs stanPaliwaGaraz">

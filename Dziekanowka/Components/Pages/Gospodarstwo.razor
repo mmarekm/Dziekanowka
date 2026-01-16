@@ -5,6 +5,7 @@
 <div class="gospodarstwoWidok widok rel">
     <div class="abs gospodarstwoUl @(Gracz.Statystyki.MoznaMiod ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Miod"><img class="obrazekSieMiesci" src="img/teren/ul.png" /></div>
     <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/zwierzyniec/miod.png" /></div>
+    <div class="abs doDomuGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/teren/dom.png" /></button></div>
     <div class="abs doGarazuGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Garaz)" class="wyroznionyGuzik"><img src="img/budynki/garaz.png" /></button></div>
     <div class="abs garazGospodarczyGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.GarazGospodarczy)" class="wyroznionyGuzik"><img src='img/Budynki/garazGospodarczy@(Gracz.PoziomBudynku("garazGospodarczy")).png' /></button></div>
     <div class="abs studniaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Studnia)" class="wyroznionyGuzik"><img src='img/Budynki/studnia@(Gracz.PoziomBudynku("studnia")).png' /></button></div>

@@ -15,6 +15,13 @@
     height: 200px;
     z-index: 6;
 }
+.doDomuGuzik {
+    top: 205px;
+    left: 0;
+    width: 437px;
+    height: 591px;
+    z-index: 2;
+}
 .doGarazuGuzik {
     top: 505px;
     left: 441px;

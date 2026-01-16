@@ -4,6 +4,7 @@
     {
         Start,
         Gospodarstwo,
+        DomWiatrolap,
         Garaz,
         Przetwornia,
         Rzeznia,

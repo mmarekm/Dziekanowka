@@ -1,5 +1,29 @@
-﻿.garazWidok {
+﻿.domWiatrolapWidok {
+    background-image: url('../img/dom/domWiatrolapWidok.png');
+}
+.garazWidok {
     background-image: url('../img/budynki/garazWidok.png');
+}
+.domDoGospodarstwo {
+    top: 196px;
+    right: 39px;
+    width: 202px;
+    height: 621px;
+    z-index: 2;
+}
+.domDoGaraz {
+    top: 208px;
+    right: 412px;
+    width: 296px;
+    height: 566px;
+    z-index: 2;
+}
+.garazDoDom {
+    top: 237px;
+    right: 168px;
+    width: 272px;
+    height: 659px;
+    z-index: 2;
 }
 .garazDoGospodarstwo {
     top: 276px;
