@@ -7,8 +7,9 @@
     <div class="abs doSerowarni"><button class="wyroznionyGuzik" @onclick="() => serowarnia = true"><img src="img/budynki/serowarnia.png" /></button></div>
     <div class="abs doZaren"><button class="wyroznionyGuzik" @onclick="() => zarna = true"><img src="img/budynki/zarna.png" /></button></div>
     <div class="abs doPlatkarni"><button class="wyroznionyGuzik" @onclick="() => platkarka = true"><img src="img/budynki/platkarnia.png" /></button></div>
+    <div class="abs doBeczki"><button class="wyroznionyGuzik" @onclick="() => beczka = true"><img src="img/budynki/beczka.png" /></button></div>
 </div>
-<div class="abs narzedziePrzetwornia @(maselnica ? "maselnica" : serowarnia ? "serowarnia" : zarna ? "zarna" : platkarka ? "platkarnia" : "")Widok @(widok ? "" : "aktywne")">
+<div class="abs narzedziePrzetwornia @(maselnica ? "maselnica" : serowarnia ? "serowarnia" : zarna ? "zarna" : platkarka ? "platkarnia" : beczka ? "beczka" : "mlynek")Widok @(widok ? "" : "aktywne")">
     <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
     @if (maselnica)
     {

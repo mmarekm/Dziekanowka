@@ -36,6 +36,13 @@
     height: 298px;
     z-index: 2;
 }
+.doBeczki {
+    top: 381px;
+    left: 1279px;
+    width: 212px;
+    height: 308px;
+    z-index: 2;
+}
 .narzedziePrzetwornia {
     top: 100px;
     left: 100px;
@@ -61,6 +68,9 @@
 }
 .platkarniaWidok {
     background-image: url('../img/budynki/platkarniaPrzetwornia.png');
+}
+.beczkaWidok {
+    background-image: url('../img/budynki/beczkaPrzetwornia.png');
 }
 .przetworniaNarzedzieConfirm {
     bottom: 0;
