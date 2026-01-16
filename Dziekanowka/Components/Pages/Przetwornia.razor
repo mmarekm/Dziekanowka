@@ -324,11 +324,12 @@
         public int Ilosc { get; set; } = ilosc;
     }
     List<ProduktNaTace> tacaMaselnica = [ new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), new("indykJajo"), new("olej"), new("smietana"), new("krowaMleko"), new("kozaMleko"), new("owcaMleko") ];
-    List<ProduktNaTace> tacaSerowarnia = [new("krowaMleko"), new("kozaMleko"), new("owcaMleko")];
+    List<ProduktNaTace> tacaSerowarnia = [ new("krowaMleko"), new("kozaMleko"), new("owcaMleko")];
     List<ProduktNaTace> tacaZarna = [ new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), new("indykJajo"), new("zytoMaka"), new("jeczmienMaka"), new("pszenicaMaka"), new("ryzMaka"), new("owiesMaka"), new("grykaMaka"), new("orkiszMaka")];
-    List<ProduktNaTace> tacaPlatkarka = [new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kukurydza")];
-    List<ProduktNaTace> tacaBeczka = [];
-    List<ProduktNaTace> taca => maselnica ? tacaMaselnica : serowarnia ? tacaSerowarnia : zarna ? tacaZarna : platkarka ? tacaPlatkarka : tacaBeczka;
+    List<ProduktNaTace> tacaPlatkarka = [ new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kukurydza")];
+    List<ProduktNaTace> tacaBeczka = [new("winogronoJasne"), new("winogronoRóżowe"), new("winogronoCiemne"), new("kapustaWłoska"), new("ogórek"), new("burak")];
+    List<ProduktNaTace> tacaMlynek = [];
+    List<ProduktNaTace> taca => maselnica ? tacaMaselnica : serowarnia ? tacaSerowarnia : zarna ? tacaZarna : platkarka ? tacaPlatkarka : beczka ? tacaBeczka : tacaMlynek;
     private int uzyskanaSmietana => 3 * tacaMaselnica.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc);
     private int uzyskaneMaslo => tacaMaselnica.First(t => t.Nazwa == "smietana").Ilosc;
     private int uzyskanyMajonez => Math.Min(tacaMaselnica.Where(t => t.Nazwa.EndsWith("Jajo")).Sum(t => t.Ilosc) / 2, tacaMaselnica.First(t => t.Nazwa == "olej").Ilosc);
@@ -350,7 +351,7 @@
     private int WPortfelu(string nazwa)
     {
         var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
-        IDar uGracza = Gracz.Warzywa.Cast<IDar>().Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
+        IDar uGracza = Gracz.Owoce.Cast<IDar>().Concat(Gracz.Warzywa.Cast<IDar>()).Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
         return uGracza.Ilosc - naTacy;
     }
     private void NaTace(string nazwa)
@@ -368,7 +369,7 @@
         {
             if (produkt.Ilosc > 0)
             {
-                IDar uGracza = Gracz.Warzywa.Cast<IDar>().Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
+                IDar uGracza = Gracz.Owoce.Cast<IDar>().Concat(Gracz.Warzywa.Cast<IDar>()).Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
                 uGracza.Ilosc -= produkt.Ilosc;
             }
         }
