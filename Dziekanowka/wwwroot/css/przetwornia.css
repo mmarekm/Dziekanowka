@@ -89,6 +89,13 @@
     height: 148px;
     z-index: 2;
 }
+.guzikHandelPlatkarka {
+    top: 47px;
+    left: 346px;
+    width: 286px;
+    height: 155px;
+    z-index: 2;
+}
 .maselnicaLCelow {
     right: 75px;
     width: 55px;
@@ -475,8 +482,10 @@
     bottom: 0;
     right: 0;
     width: 23px;
-    height: 13px;
-    font-size: 12px;
+    height: 15px;
+    font-size: 14px;
+    color: yellow;
+    font-weight: bold;
     text-align: center;
 }
 .tacaEfektMaselnica {
@@ -509,6 +518,16 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5px 40px;
+}
+.tacaEfektPlatkarka {
+    top: 45px;
+    left: 939px;
+    width: 260px;
+    height: 160px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    padding: 5px;
 }
 .produktTacaEfektZarna {
     width: 55px;

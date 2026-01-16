@@ -212,6 +212,7 @@
     }
     else if (platkarka)
     {
+        <div class="abs guzikHandelPlatkarka"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/budynki/platkarniaPracuj.png" /></button></div>
         <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaGryka @(@WPortfelu("gryka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("gryka")'><div class="abs zarnalProduktIn">@WPortfelu("gryka")</div></div>
         <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaJeczmien @(@WPortfelu("jeczmien") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("jeczmien")'><div class="abs zarnalProduktIn">@WPortfelu("jeczmien")</div></div>
         <div class="abs guzikPlatkarkaProduktIn guzikPlatkarkaOrkisz @(@WPortfelu("orkisz") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("orkisz")'><div class="abs zarnalProduktIn">@WPortfelu("orkisz")</div></div>
@@ -238,6 +239,64 @@
                 </div>
             }
         </div>
+    <div class="abs tacaEfektPlatkarka">
+            @if (UzyskanePlatki("gryka") > 0)
+            {
+                <div class="rel produktTacaPodajnikPlatkarka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/grykaPlatki.png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@UzyskanePlatki("gryka")</div>
+                </div>
+            }
+            @if (UzyskanePlatki("jeczmien") > 0)
+            {
+                <div class="rel produktTacaPodajnikPlatkarka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/jeczmienPlatki.png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@UzyskanePlatki("jeczmien")</div>
+                </div>
+            }
+            @if (UzyskanePlatki("orkisz") > 0)
+            {
+                <div class="rel produktTacaPodajnikPlatkarka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/orkiszPlatki.png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@UzyskanePlatki("orkisz")</div>
+                </div>
+            }
+            @if (UzyskanePlatki("owies") > 0)
+            {
+                <div class="rel produktTacaPodajnikPlatkarka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/owiesPlatki.png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@UzyskanePlatki("owies")</div>
+                </div>
+            }
+            @if (UzyskanePlatki("pszenica") > 0)
+            {
+                <div class="rel produktTacaPodajnikPlatkarka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/pszenicaPlatki.png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@UzyskanePlatki("pszenica")</div>
+                </div>
+            }
+            @if (UzyskanePlatki("ryz") > 0)
+            {
+                <div class="rel produktTacaPodajnikPlatkarka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/ryzPlatki.png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@UzyskanePlatki("ryz")</div>
+                </div>
+            }
+            @if (UzyskanePlatki("zyto") > 0)
+            {
+                <div class="rel produktTacaPodajnikPlatkarka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/zytoPlatki.png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@UzyskanePlatki("zyto")</div>
+                </div>
+            }
+            @if (UzyskanePlatki("kukurydza") > 0)
+            {
+                <div class="rel produktTacaPodajnikPlatkarka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/kukurydzaPlatki.png" />
+                    <div class="abs produktTacaIloscPodajnikPlatkarka">@UzyskanePlatki("kukurydza")</div>
+                </div>
+            }
+    </div>
     }
     else if (beczka)
     {
@@ -357,6 +416,25 @@
                 Gracz.ProduktP("zytoMaka").Ilosc += UzyskanaMaka("zyto");
             if (uzyskanyMakaron > 0)
                 Gracz.ProduktP("makaron").Ilosc += uzyskanyMakaron;
+        }
+        if (platkarka)
+        {
+            if (UzyskanePlatki("gryka") > 0)
+                Gracz.ProduktP("grykaPlatki").Ilosc += UzyskanePlatki("gryka");
+            if (UzyskanePlatki("jeczmien") > 0)
+                Gracz.ProduktP("jeczmienPlatki").Ilosc += UzyskanePlatki("jeczmien");
+            if (UzyskanePlatki("orkisz") > 0)
+                Gracz.ProduktP("orkiszPlatki").Ilosc += UzyskanePlatki("orkisz");
+            if (UzyskanePlatki("owies") > 0)
+                Gracz.ProduktP("owiesPlatki").Ilosc += UzyskanePlatki("owies");
+            if (UzyskanePlatki("pszenica") > 0)
+                Gracz.ProduktP("pszenicaPlatki").Ilosc += UzyskanePlatki("pszenica");
+            if (UzyskanePlatki("ryz") > 0)
+                Gracz.ProduktP("ryzPlatki").Ilosc += UzyskanePlatki("ryz");
+            if (UzyskanePlatki("zyto") > 0)
+                Gracz.ProduktP("zytoPlatki").Ilosc += UzyskanePlatki("zyto");
+            if (UzyskanePlatki("kukurydza") > 0)
+                Gracz.ProduktP("kukurydzaPlatki").Ilosc += UzyskanePlatki("kukurydza");
         }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
