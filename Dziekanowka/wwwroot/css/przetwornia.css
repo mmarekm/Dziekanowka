@@ -130,11 +130,11 @@
 }
 .serowarniaLKrowiego {
     right: 110px;
-    top: 143px;
+    top: 144px;
 }
 .serowarniaLKoziego {
-    right: 107px;
-    top: 223px;
+    right: 108px;
+    top: 224px;
 }
 .serowarniaLOwczego {
     right: 109px;
@@ -142,7 +142,7 @@
 }
 .serowarniaLTwarogu {
     right: 93px;
-    top: 464px;
+    top: 466px;
 }
 .zarnaLCelow {
     width: 69px;
@@ -216,6 +216,29 @@
 }
 .platkarkaLKukurydziane {
     top: 554px;
+}
+.beczkaLCelow {
+    width: 25px;
+    height: 11px;
+    font-size: 10px;
+    text-align: center;
+    border: 1px solid black;
+}
+.beczkaLWino {
+    right: 32px;
+    top: 114px;
+}
+.beczkaLKapusta {
+    right: 29px;
+    top: 213px;
+}
+.beczkaLOgorki {
+    right: 29px;
+    top: 271px;
+}
+.beczkaLBuraki {
+    right: 29px;
+    top: 301px;
 }
 .maselnicalProduktIn {
     bottom: 2px;
@@ -406,6 +429,38 @@
     top: 457px;
     left: 188px;
 }
+.guzikBeczkaProduktIn {
+    width: 77px;
+    height: 77px;
+}
+.guzikBeczkaKapusta {
+    top: 35px;
+    left: 36px;
+}
+.guzikBeczkaOgorek {
+    top: 34px;
+    left: 173px;
+}
+.guzikBeczkaBurak {
+    top: 34px;
+    left: 313px;
+}
+.guzikBeczkaSol {
+    top: 75px;
+    left: 412px;
+}
+.guzikBeczkaCiemne {
+    top: 139px;
+    left: 35px;
+}
+.guzikBeczkaJasne {
+    top: 139px;
+    left: 173px;
+}
+.guzikBeczkaRozowe {
+    top: 139px;
+    left: 313px;
+}
 .tacaPodajnikMaselnica {
     top: 130px;
     left: 820px;
@@ -550,7 +605,7 @@
     width: 39px;
     height: 25px;
     font-size: 24px;
-    color: blue;
+    color: yellow;
     text-align: center;
 }
 .produktTacaEfektSerowarnia {

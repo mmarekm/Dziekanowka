@@ -301,7 +301,17 @@
     }
     else if (beczka)
     {
-        
+        <div class="abs guzikBeczkaProduktIn guzikBeczkaKapusta @(@WPortfelu("kapustaWłoska") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kapustaWłoska")'><div class="abs zarnalProduktIn">@WPortfelu("kapustaWłoska")</div></div>
+        <div class="abs guzikBeczkaProduktIn guzikBeczkaOgorek @(@WPortfelu("ogórek") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("ogórek")'><div class="abs zarnalProduktIn">@WPortfelu("ogórek")</div></div>
+        <div class="abs guzikBeczkaProduktIn guzikBeczkaBurak @(@WPortfelu("burak") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("burak")'><div class="abs zarnalProduktIn">@WPortfelu("burak")</div></div>
+        <div class="abs guzikBeczkaProduktIn guzikBeczkaSol @(@WPortfelu("sol") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("sol")'><div class="abs zarnalProduktIn">@WPortfelu("sol")</div></div>
+        <div class="abs guzikBeczkaProduktIn guzikBeczkaCiemne @(@WPortfelu("winogronoCiemne") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("winogronoCiemne")'><div class="abs zarnalProduktIn">@WPortfelu("winogronoCiemne")</div></div>
+        <div class="abs guzikBeczkaProduktIn guzikBeczkaJasne @(@WPortfelu("winogronoJasne") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("winogronoJasne")'><div class="abs zarnalProduktIn">@WPortfelu("winogronoJasne")</div></div>
+        <div class="abs guzikBeczkaProduktIn guzikBeczkaRozowe @(@WPortfelu("winogronoRóżowe") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("winogronoRóżowe")'><div class="abs zarnalProduktIn">@WPortfelu("winogronoRóżowe")</div></div>
+        <div class="abs beczkaLCelow beczkaLWino">@Gracz.ProduktP("wino").Ilosc</div>
+        <div class="abs beczkaLCelow beczkaLKapusta">@Gracz.ProduktP("kapustaKiszona").Ilosc</div>
+        <div class="abs beczkaLCelow beczkaLOgorki">@Gracz.ProduktP("ogorekKiszony").Ilosc</div>
+        <div class="abs beczkaLCelow beczkaLBuraki">@Gracz.ProduktP("burakKiszony").Ilosc</div>
     }
     else if (mlynek)
     {
@@ -328,7 +338,7 @@
     List<ProduktNaTace> tacaSerowarnia = [ new("krowaMleko"), new("kozaMleko"), new("owcaMleko")];
     List<ProduktNaTace> tacaZarna = [ new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), new("indykJajo"), new("zytoMaka"), new("jeczmienMaka"), new("pszenicaMaka"), new("ryzMaka"), new("owiesMaka"), new("grykaMaka"), new("orkiszMaka")];
     List<ProduktNaTace> tacaPlatkarka = [ new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kukurydza")];
-    List<ProduktNaTace> tacaBeczka = [new("winogronoJasne"), new("winogronoRóżowe"), new("winogronoCiemne"), new("kapustaWłoska"), new("ogórek"), new("burak")];
+    List<ProduktNaTace> tacaBeczka = [new("winogronoJasne"), new("winogronoRóżowe"), new("winogronoCiemne"), new("kapustaWłoska"), new("ogórek"), new("burak"), new("sol")];
     List<ProduktNaTace> tacaMlynek = [];
     List<ProduktNaTace> taca => maselnica ? tacaMaselnica : serowarnia ? tacaSerowarnia : zarna ? tacaZarna : platkarka ? tacaPlatkarka : beczka ? tacaBeczka : tacaMlynek;
     private int uzyskanaSmietana => 3 * tacaMaselnica.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc);
