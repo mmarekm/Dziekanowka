@@ -312,6 +312,19 @@
         <div class="abs beczkaLCelow beczkaLKapusta">@Gracz.ProduktP("kapustaKiszona").Ilosc</div>
         <div class="abs beczkaLCelow beczkaLOgorki">@Gracz.ProduktP("ogorekKiszony").Ilosc</div>
         <div class="abs beczkaLCelow beczkaLBuraki">@Gracz.ProduktP("burakKiszony").Ilosc</div>
+        <div class="abs tacaPodajnikBeczka">
+            @foreach (var produkt in taca)
+            {
+                if (produkt.Ilosc < 1) continue;
+                <div class="rel produktTacaPodajnikBeczka klikalneDivSzare" @onclick="() => ZTacy(produkt.Nazwa)">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/@(produkt.Nazwa).png" />
+                    <div class="abs produktTacaIloscPodajnikBeczka">@produkt.Ilosc</div>
+                </div>
+            }
+        </div>
+    <div class="abs tacaEfektBeczka">
+
+    </div>
     }
     else if (mlynek)
     {
@@ -350,6 +363,7 @@
     private int UzyskanaMaka(string zboze) => tacaZarna.First(t => t.Nazwa == zboze).Ilosc / 3;
     private int uzyskanyMakaron => Math.Min(tacaZarna.Where(t => t.Nazwa.EndsWith("Maka")).Sum(t => t.Ilosc) / 2, tacaZarna.First(t => t.Nazwa.EndsWith("Jajo")).Ilosc) * 3;
     private int UzyskanePlatki(string zboze) => tacaPlatkarka.First(t => t.Nazwa == zboze).Ilosc / 2;
+    private int uzyskaneWino => tacaBeczka.Where(t => t.Nazwa.StartsWith("winogrono")).Sum(t => t.Ilosc) / 3;
     private void ZamknijNarzedzie()
     {
         maselnica = false;
