@@ -43,6 +43,13 @@
     height: 308px;
     z-index: 2;
 }
+.doMlynka {
+    top: 463px;
+    left: 1560px;
+    width: 204px;
+    height: 192px;
+    z-index: 2;
+}
 .narzedziePrzetwornia {
     top: 100px;
     left: 100px;
@@ -71,6 +78,9 @@
 }
 .beczkaWidok {
     background-image: url('../img/budynki/beczkaPrzetwornia.png');
+}
+.mlynekWidok {
+    background-image: url('../img/budynki/mlynekPrzetwornia.png');
 }
 .przetworniaNarzedzieConfirm {
     bottom: 0;
@@ -467,6 +477,110 @@
 .guzikBeczkaRozowe {
     top: 139px;
     left: 313px;
+}
+.guzikMlynekProduktIn {
+    width: 83px;
+    height: 83px;
+}
+.mlyneklProduktIn {
+    top: 0;
+    left: 0;
+    width: 39px;
+    height: 24px;
+    font-size: 23px;
+    text-align: center;
+}
+.guzikMlynekMieloneDrob {
+    top: 49px;
+    left: 40px;
+}
+.guzikMlynekMieloneDzikie {
+    top: 49px;
+    left: 141px;
+}
+.guzikMlynekMieloneSwinia {
+    top: 49px;
+    left: 243px;
+}
+.guzikMlynekMieloneKrowa {
+    top: 49px;
+    left: 345px;
+}
+.guzikMlynekCzosnek {
+    top: 149px;
+    left: 40px;
+}
+.guzikMlynekGesSmalec {
+    top: 149px;
+    left: 141px;
+}
+.guzikMlynekKaczkaSmalec {
+    top: 149px;
+    left: 243px;
+}
+.guzikMlynekSwiniaSmalec {
+    top: 149px;
+    left: 345px;
+}
+.guzikMlynekSol {
+    top: 250px;
+    left: 41px;
+}
+.guzikMlynekKuraJedzenie {
+    top: 250px;
+    left: 143px;
+}
+.guzikMlynekGesJedzenie {
+    top: 254px;
+    left: 244px;
+}
+.guzikMlynekKaczkaJedzenie {
+    top: 253px;
+    left: 347px;
+}
+.guzikMlynekIndykJedzenie {
+    top: 353px;
+    left: 42px;
+}
+.guzikMlynekKrolikJedzenie {
+    top: 353px;
+    left: 144px;
+}
+.guzikMlynekKozaJedzenie {
+    top: 353px;
+    left: 245px;
+}
+.guzikMlynekOwcaJedzenie {
+    top: 353px;
+    left: 348px;
+}
+.guzikMlynekKrowaRostbef {
+    top: 457px;
+    left: 42px;
+}
+.guzikMlynekKrowaAntrykot {
+    top: 458px;
+    left: 146px;
+}
+.guzikMlynekKrowaLopatka {
+    top: 458px;
+    left: 247px;
+}
+.guzikMlynekKrowaPoledwica {
+    top: 458px;
+    left: 348px;
+}
+.guzikMlynekSwiniaSzynka {
+    top: 560px;
+    left: 43px;
+}
+.guzikMlynekSwiniaSchab {
+    top: 561px;
+    left: 147px;
+}
+.guzikMlynekSwiniaBoczek {
+    top: 562px;
+    left: 250px;
 }
 .tacaPodajnikMaselnica {
     top: 130px;

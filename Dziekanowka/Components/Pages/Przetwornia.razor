@@ -8,6 +8,7 @@
     <div class="abs doZaren"><button class="wyroznionyGuzik" @onclick="() => zarna = true"><img src="img/budynki/zarna.png" /></button></div>
     <div class="abs doPlatkarni"><button class="wyroznionyGuzik" @onclick="() => platkarka = true"><img src="img/budynki/platkarnia.png" /></button></div>
     <div class="abs doBeczki"><button class="wyroznionyGuzik" @onclick="() => beczka = true"><img src="img/budynki/beczka.png" /></button></div>
+    <div class="abs doMlynka"><button class="wyroznionyGuzik" @onclick="() => mlynek = true"><img src="img/budynki/mlynek.png" /></button></div>
 </div>
 <div class="abs narzedziePrzetwornia @(maselnica ? "maselnica" : serowarnia ? "serowarnia" : zarna ? "zarna" : platkarka ? "platkarnia" : beczka ? "beczka" : "mlynek")Widok @(widok ? "" : "aktywne")">
     <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
@@ -323,7 +324,7 @@
                 </div>
             }
         </div>
-    <div class="abs tacaEfektBeczka">
+        <div class="abs tacaEfektBeczka">
             @if (uzyskaneWino > 0)
             {
                 <div class="rel produktTacaPodajnikBeczka">
@@ -352,11 +353,33 @@
                     <div class="abs produktTacaIloscPodajnikBeczka">@UzyskanaKiszonka("burak")</div>
                 </div>
             }
-    </div>
+        </div>
     }
-    else if (mlynek)
+    else
     {
-        
+        <div class="abs guzikMlynekProduktIn guzikMlynekMieloneDrob @(@WPortfelu("mieloneDrob") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("mieloneDrob")'><div class="abs mlyneklProduktIn">@WPortfelu("mieloneDrob")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekMieloneDzikie @(@WPortfelu("mieloneDzikie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("mieloneDzikie")'><div class="abs mlyneklProduktIn">@WPortfelu("mieloneDzikie")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekMieloneSwinia @(@WPortfelu("mieloneSwinia") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("mieloneSwinia")'><div class="abs mlyneklProduktIn">@WPortfelu("mieloneSwinia")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekMieloneKrowa @(@WPortfelu("mieloneKrowa") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("mieloneKrowa")'><div class="abs mlyneklProduktIn">@WPortfelu("mieloneKrowa")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekCzosnek @(@WPortfelu("czosnek") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("czosnek")'><div class="abs mlyneklProduktIn">@WPortfelu("czosnek")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekGesSmalec @(@WPortfelu("gesSmalec") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("gesSmalec")'><div class="abs mlyneklProduktIn">@WPortfelu("gesSmalec")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKaczkaSmalec @(@WPortfelu("kaczkaSmalec") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kaczkaSmalec")'><div class="abs mlyneklProduktIn">@WPortfelu("kaczkaSmalec")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekSwiniaSmalec @(@WPortfelu("swiniaSmalec") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("swiniaSmalec")'><div class="abs mlyneklProduktIn">@WPortfelu("swiniaSmalec")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekSol @(@WPortfelu("sol") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("sol")'><div class="abs mlyneklProduktIn">@WPortfelu("sol")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKuraJedzenie @(@WPortfelu("kuraJedzenie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kuraJedzenie")'><div class="abs mlyneklProduktIn">@WPortfelu("kuraJedzenie")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekGesJedzenie @(@WPortfelu("gesJedzenie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("gesJedzenie")'><div class="abs mlyneklProduktIn">@WPortfelu("gesJedzenie")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKaczkaJedzenie @(@WPortfelu("kaczkaJedzenie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kaczkaJedzenie")'><div class="abs mlyneklProduktIn">@WPortfelu("kaczkaJedzenie")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekIndykJedzenie @(@WPortfelu("indykJedzenie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("indykJedzenie")'><div class="abs mlyneklProduktIn">@WPortfelu("indykJedzenie")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKrolikJedzenie @(@WPortfelu("krolikJedzenie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("krolikJedzenie")'><div class="abs mlyneklProduktIn">@WPortfelu("krolikJedzenie")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKozaJedzenie @(@WPortfelu("kozaJedzenie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kozaJedzenie")'><div class="abs mlyneklProduktIn">@WPortfelu("kozaJedzenie")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekOwcaJedzenie @(@WPortfelu("owcaJedzenie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("owcaJedzenie")'><div class="abs mlyneklProduktIn">@WPortfelu("owcaJedzenie")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKrowaRostbef @(@WPortfelu("krowaRostbef") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("krowaRostbef")'><div class="abs mlyneklProduktIn">@WPortfelu("krowaRostbef")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKrowaAntrykot @(@WPortfelu("krowaAntrykot") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("krowaAntrykot")'><div class="abs mlyneklProduktIn">@WPortfelu("krowaAntrykot")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKrowaLopatka @(@WPortfelu("krowaLopatka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("krowaLopatka")'><div class="abs mlyneklProduktIn">@WPortfelu("krowaLopatka")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekKrowaPoledwica @(@WPortfelu("krowaPoledwica") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("krowaPoledwica")'><div class="abs mlyneklProduktIn">@WPortfelu("krowaPoledwica")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekSwiniaSzynka @(@WPortfelu("swiniaSzynka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("swiniaSzynka")'><div class="abs mlyneklProduktIn">@WPortfelu("swiniaSzynka")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekSwiniaSchab @(@WPortfelu("swiniaSchab") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("swiniaSchab")'><div class="abs mlyneklProduktIn">@WPortfelu("swiniaSchab")</div></div>
+        <div class="abs guzikMlynekProduktIn guzikMlynekSwiniaBoczek @(@WPortfelu("swiniaBoczek") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("swiniaBoczek")'><div class="abs mlyneklProduktIn">@WPortfelu("swiniaBoczek")</div></div>
     }
 </div>
 
@@ -377,10 +400,13 @@
     }
     List<ProduktNaTace> tacaMaselnica = [ new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), new("indykJajo"), new("olej"), new("smietana"), new("krowaMleko"), new("kozaMleko"), new("owcaMleko") ];
     List<ProduktNaTace> tacaSerowarnia = [ new("krowaMleko"), new("kozaMleko"), new("owcaMleko")];
-    List<ProduktNaTace> tacaZarna = [ new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), new("indykJajo"), new("zytoMaka"), new("jeczmienMaka"), new("pszenicaMaka"), new("ryzMaka"), new("owiesMaka"), new("grykaMaka"), new("orkiszMaka")];
+    List<ProduktNaTace> tacaZarna = [ new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kuraJajo"), new("gesJajo"), new("kaczkaJajo"), 
+                                    new("indykJajo"), new("zytoMaka"), new("jeczmienMaka"), new("pszenicaMaka"), new("ryzMaka"), new("owiesMaka"), new("grykaMaka"), new("orkiszMaka")];
     List<ProduktNaTace> tacaPlatkarka = [ new("zyto"), new("jeczmien"), new("pszenica"), new("ryz"), new("owies"), new("gryka"), new("orkisz"), new("kukurydza")];
-    List<ProduktNaTace> tacaBeczka = [new("winogronoJasne"), new("winogronoRóżowe"), new("winogronoCiemne"), new("kapustaWłoska"), new("ogórek"), new("burak"), new("sol")];
-    List<ProduktNaTace> tacaMlynek = [];
+    List<ProduktNaTace> tacaBeczka = [ new("winogronoJasne"), new("winogronoRóżowe"), new("winogronoCiemne"), new("kapustaWłoska"), new("ogórek"), new("burak"), new("sol")];
+    List<ProduktNaTace> tacaMlynek = [new("mieloneDrob"), new("mieloneDzikie"), new("mieloneSwinia"), new("mieloneKrowa"), new("czosnek"), new("gesSmalec"), new("kaczkaSmalec"), new("swiniaSmalec"), new("sol"),
+                                    new("kuraJedzenie"), new("gesJedzenie"), new("kaczkaJedzenie"), new("indykJedzenie"), new("krolikJedzenie"), new("kozaJedzenie"), new("owcaJedzenie"),
+                                    new("krowaRostbef"), new("krowaAntrykot"), new("krowaLopatka"), new("krowaPoledwica"), new("swiniaSzynka"), new("swiniaSchab"), new("swiniaBoczek")];
     List<ProduktNaTace> taca => maselnica ? tacaMaselnica : serowarnia ? tacaSerowarnia : zarna ? tacaZarna : platkarka ? tacaPlatkarka : beczka ? tacaBeczka : tacaMlynek;
     private int uzyskanaSmietana => 3 * tacaMaselnica.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc);
     private int uzyskaneMaslo => tacaMaselnica.First(t => t.Nazwa == "smietana").Ilosc;
@@ -392,22 +418,9 @@
     private int uzyskanyMakaron => Math.Min(tacaZarna.Where(t => t.Nazwa.EndsWith("Maka")).Sum(t => t.Ilosc) / 2, tacaZarna.First(t => t.Nazwa.EndsWith("Jajo")).Ilosc) * 3;
     private int UzyskanePlatki(string zboze) => tacaPlatkarka.First(t => t.Nazwa == zboze).Ilosc / 2;
     private int uzyskaneWino => tacaBeczka.Where(t => t.Nazwa.StartsWith("winogrono")).Sum(t => t.Ilosc) / 3;
-    private int UzyskanaKiszonka(string warzywo)
-    {
-        int iloscWarzyw = tacaBeczka.First(t => t.Nazwa == "kapustaWłoska").Ilosc + tacaBeczka.First(t => t.Nazwa == "ogórek").Ilosc + tacaBeczka.First(t => t.Nazwa == "burak").Ilosc;
-        int iloscSoli = tacaBeczka.First(t => t.Nazwa == "sol").Ilosc;
-        if (iloscWarzyw > iloscSoli) return 0;
-        return tacaBeczka.First(t => t.Nazwa == warzywo).Ilosc;
-    }
-    private void ZamknijNarzedzie()
-    {
-        maselnica = false;
-        serowarnia = false;
-        zarna = false;
-        platkarka = false;
-        beczka = false;
-        mlynek = false;
-    }
+    private int UzyskanaKiszonka(string warzywo) =>
+    tacaBeczka.Where(t => new[] { "kapustaWłoska", "ogórek", "burak" }.Contains(t.Nazwa)).Sum(t => t.Ilosc) > tacaBeczka.First(t => t.Nazwa == "sol").Ilosc ? 0 : tacaBeczka.First(t => t.Nazwa == warzywo).Ilosc;
+    private void ZamknijNarzedzie() => maselnica = serowarnia = zarna = platkarka = beczka = mlynek = false;
     private int WPortfelu(string nazwa)
     {
         var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
@@ -507,6 +520,10 @@
                 Gracz.ProduktP("ogorekKiszony").Ilosc += UzyskanaKiszonka("ogórek");
             if (UzyskanaKiszonka("burak") > 0)
                 Gracz.ProduktP("burakKiszony").Ilosc += UzyskanaKiszonka("burak");
+        }
+        if (mlynek)
+        {
+
         }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
