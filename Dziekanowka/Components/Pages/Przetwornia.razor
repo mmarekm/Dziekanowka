@@ -301,6 +301,7 @@
     }
     else if (beczka)
     {
+        <div class="abs guzikHandelBeczka"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/budynki/beczkaPracuj.png" /></button></div>
         <div class="abs guzikBeczkaProduktIn guzikBeczkaKapusta @(@WPortfelu("kapustaWłoska") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("kapustaWłoska")'><div class="abs zarnalProduktIn">@WPortfelu("kapustaWłoska")</div></div>
         <div class="abs guzikBeczkaProduktIn guzikBeczkaOgorek @(@WPortfelu("ogórek") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("ogórek")'><div class="abs zarnalProduktIn">@WPortfelu("ogórek")</div></div>
         <div class="abs guzikBeczkaProduktIn guzikBeczkaBurak @(@WPortfelu("burak") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("burak")'><div class="abs zarnalProduktIn">@WPortfelu("burak")</div></div>
@@ -323,7 +324,34 @@
             }
         </div>
     <div class="abs tacaEfektBeczka">
-
+            @if (uzyskaneWino > 0)
+            {
+                <div class="rel produktTacaPodajnikBeczka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/wino.png" />
+                    <div class="abs produktTacaIloscPodajnikBeczka">@uzyskaneWino</div>
+                </div>
+            }
+            @if (UzyskanaKiszonka("kapustaWłoska") > 0)
+            {
+                <div class="rel produktTacaPodajnikBeczka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/kapustaKiszona.png" />
+                    <div class="abs produktTacaIloscPodajnikBeczka">@UzyskanaKiszonka("kapustaWłoska")</div>
+                </div>
+            }
+            @if (UzyskanaKiszonka("ogórek") > 0)
+            {
+                <div class="rel produktTacaPodajnikBeczka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/ogorekKiszony.png" />
+                    <div class="abs produktTacaIloscPodajnikBeczka">@UzyskanaKiszonka("ogórek")</div>
+                </div>
+            }
+            @if (UzyskanaKiszonka("burak") > 0)
+            {
+                <div class="rel produktTacaPodajnikBeczka">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/burakKiszony.png" />
+                    <div class="abs produktTacaIloscPodajnikBeczka">@UzyskanaKiszonka("burak")</div>
+                </div>
+            }
     </div>
     }
     else if (mlynek)
@@ -364,6 +392,13 @@
     private int uzyskanyMakaron => Math.Min(tacaZarna.Where(t => t.Nazwa.EndsWith("Maka")).Sum(t => t.Ilosc) / 2, tacaZarna.First(t => t.Nazwa.EndsWith("Jajo")).Ilosc) * 3;
     private int UzyskanePlatki(string zboze) => tacaPlatkarka.First(t => t.Nazwa == zboze).Ilosc / 2;
     private int uzyskaneWino => tacaBeczka.Where(t => t.Nazwa.StartsWith("winogrono")).Sum(t => t.Ilosc) / 3;
+    private int UzyskanaKiszonka(string warzywo)
+    {
+        int iloscWarzyw = tacaBeczka.First(t => t.Nazwa == "kapustaWłoska").Ilosc + tacaBeczka.First(t => t.Nazwa == "ogórek").Ilosc + tacaBeczka.First(t => t.Nazwa == "burak").Ilosc;
+        int iloscSoli = tacaBeczka.First(t => t.Nazwa == "sol").Ilosc;
+        if (iloscWarzyw > iloscSoli) return 0;
+        return tacaBeczka.First(t => t.Nazwa == warzywo).Ilosc;
+    }
     private void ZamknijNarzedzie()
     {
         maselnica = false;
@@ -461,6 +496,17 @@
                 Gracz.ProduktP("zytoPlatki").Ilosc += UzyskanePlatki("zyto");
             if (UzyskanePlatki("kukurydza") > 0)
                 Gracz.ProduktP("kukurydzaPlatki").Ilosc += UzyskanePlatki("kukurydza");
+        }
+        if (beczka)
+        {
+            if (uzyskaneWino > 0)
+                Gracz.ProduktP("wino").Ilosc += uzyskaneWino;
+            if (UzyskanaKiszonka("kapustaWłoska") > 0)
+                Gracz.ProduktP("kapustaKiszona").Ilosc += UzyskanaKiszonka("kapustaWłoska");
+            if (UzyskanaKiszonka("ogórek") > 0)
+                Gracz.ProduktP("ogorekKiszony").Ilosc += UzyskanaKiszonka("ogórek");
+            if (UzyskanaKiszonka("burak") > 0)
+                Gracz.ProduktP("burakKiszony").Ilosc += UzyskanaKiszonka("burak");
         }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
