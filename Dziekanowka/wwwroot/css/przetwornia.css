@@ -239,23 +239,48 @@
     height: 11px;
     font-size: 10px;
     text-align: center;
-    border: 1px solid black;
 }
 .beczkaLWino {
     right: 32px;
-    top: 114px;
+    top: 115px;
 }
 .beczkaLKapusta {
     right: 29px;
-    top: 213px;
+    top: 214px;
 }
 .beczkaLOgorki {
     right: 29px;
-    top: 271px;
+    top: 272px;
 }
 .beczkaLBuraki {
     right: 29px;
-    top: 301px;
+    top: 302px;
+}
+.mlynekLCelow {
+    width: 40px;
+    height: 22px;
+    font-size: 19px;
+    text-align: center;
+}
+.mlynekLMieloneDrob {
+    right: 35px;
+    top: 69px;
+}
+.mlynekLMieloneDzikie {
+    right: 34px;
+    top: 163px;
+}
+.mlynekLMieloneSwinia {
+    right: 35px;
+    top: 252px;
+}
+.mlynekLMieloneKrowa {
+    right: 35px;
+    top: 343px;
+}
+.mlynekLKielbasa {
+    right: 41px;
+    top: 498px;
 }
 .maselnicalProduktIn {
     bottom: 2px;
@@ -696,6 +721,34 @@
     font-size: 23px;
     text-align: center;
 }
+.tacaPodajnikMlynek {
+    top: 560px;
+    left: 680px;
+    width: 670px;
+    height: 215px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+.produktTacaPodajnikMlynek {
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;
+}
+.produktTacaIloscPodajnikMlynek {
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 16px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+.obrazekMlynek {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 .tacaEfektMaselnica {
     top: 480px;
     left: 815px;
@@ -740,6 +793,16 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px 35px;
+}
+.tacaEfektMlynek {
+    top: 560px;
+    left: 1395px;
+    width: 270px;
+    height: 215px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    border: 1px solid black;
 }
 .produktTacaEfektMaselnica {
     width: 85px;

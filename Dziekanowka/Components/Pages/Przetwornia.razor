@@ -380,6 +380,24 @@
         <div class="abs guzikMlynekProduktIn guzikMlynekSwiniaSzynka @(@WPortfelu("swiniaSzynka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("swiniaSzynka")'><div class="abs mlyneklProduktIn">@WPortfelu("swiniaSzynka")</div></div>
         <div class="abs guzikMlynekProduktIn guzikMlynekSwiniaSchab @(@WPortfelu("swiniaSchab") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("swiniaSchab")'><div class="abs mlyneklProduktIn">@WPortfelu("swiniaSchab")</div></div>
         <div class="abs guzikMlynekProduktIn guzikMlynekSwiniaBoczek @(@WPortfelu("swiniaBoczek") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("swiniaBoczek")'><div class="abs mlyneklProduktIn">@WPortfelu("swiniaBoczek")</div></div>
+        <div class="abs mlynekLCelow mlynekLMieloneDrob">@Gracz.ProduktP("mieloneDrob").Ilosc</div>
+        <div class="abs mlynekLCelow mlynekLMieloneDzikie">@Gracz.ProduktP("mieloneDzikie").Ilosc</div>
+        <div class="abs mlynekLCelow mlynekLMieloneSwinia">@Gracz.ProduktP("mieloneSwinia").Ilosc</div>
+        <div class="abs mlynekLCelow mlynekLMieloneKrowa">@Gracz.ProduktP("mieloneKrowa").Ilosc</div>
+        <div class="abs mlynekLCelow mlynekLKielbasa">@Gracz.ProduktP("kielbasa").Ilosc</div>
+        <div class="abs tacaPodajnikMlynek">
+            @foreach (var produkt in taca)
+            {
+                if (produkt.Ilosc < 1) continue;
+                <div class="rel produktTacaPodajnikMlynek klikalneDivSzare" @onclick="() => ZTacy(produkt.Nazwa)">
+                    <img class="obrazekMlynek" src="img/przedmioty/przetwornia/@(produkt.Nazwa).png" />
+                    <div class="abs produktTacaIloscPodajnikMlynek">@produkt.Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="abs tacaEfektMlynek">
+
+        </div>
     }
 </div>
 
@@ -418,8 +436,8 @@
     private int uzyskanyMakaron => Math.Min(tacaZarna.Where(t => t.Nazwa.EndsWith("Maka")).Sum(t => t.Ilosc) / 2, tacaZarna.First(t => t.Nazwa.EndsWith("Jajo")).Ilosc) * 3;
     private int UzyskanePlatki(string zboze) => tacaPlatkarka.First(t => t.Nazwa == zboze).Ilosc / 2;
     private int uzyskaneWino => tacaBeczka.Where(t => t.Nazwa.StartsWith("winogrono")).Sum(t => t.Ilosc) / 3;
-    private int UzyskanaKiszonka(string warzywo) =>
-    tacaBeczka.Where(t => new[] { "kapustaWłoska", "ogórek", "burak" }.Contains(t.Nazwa)).Sum(t => t.Ilosc) > tacaBeczka.First(t => t.Nazwa == "sol").Ilosc ? 0 : tacaBeczka.First(t => t.Nazwa == warzywo).Ilosc;
+    private int UzyskanaKiszonka(string warzywo) => tacaBeczka.Where(t => new[] { "kapustaWłoska", "ogórek", "burak" }.Contains(t.Nazwa)).Sum(t => t.Ilosc) > tacaBeczka.First(t => t.Nazwa == "sol").Ilosc ? 0 : tacaBeczka.First(t => t.Nazwa == warzywo).Ilosc;
+    private int uzyskaneMieloneDrob => tacaMlynek.Where(t => new[] { "kuraJedzenie", "gesJedzenie", "kaczkaJedzenie", "indykJedzenie" }.Contains(t.Nazwa)).Sum(t => t.Ilosc);
     private void ZamknijNarzedzie() => maselnica = serowarnia = zarna = platkarka = beczka = mlynek = false;
     private int WPortfelu(string nazwa)
     {
