@@ -23,4 +23,46 @@
     private bool mlynek = false;
     private bool widok => !wyciskarka && !deska && !garnek && !patelnia && !piec && !mlynek;
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = false;
+    public class ProduktNaTace(string nazwa, int ilosc = 0)
+    {
+        public string Nazwa { get; set; } = nazwa;
+        public int Ilosc { get; set; } = ilosc;
+    }
+    List<ProduktNaTace> tacaWyciskarka = [new("marchew"), new("burak"), new("pomidor"), new("jabłko"), new("pomarańcza"), new("grejpfrut"), new("cytryna"), new("ananas"), new("brzoskwinia"), new("morela"), new("wiśnia"), new("truskawka"), new("malina"), new("borówka"), new("porzeczkaCzarna")];
+    List<ProduktNaTace> tacaDeska = [];
+    List<ProduktNaTace> tacaGarnek = [];
+    List<ProduktNaTace> tacaPatelnia = [];
+    List<ProduktNaTace> tacaPiec = [];
+    List<ProduktNaTace> tacaMlynek = [];
+    List<ProduktNaTace> taca => wyciskarka ? tacaWyciskarka : deska ? tacaDeska : garnek ? tacaGarnek : patelnia ? tacaPatelnia : piec ? tacaPiec : tacaMlynek;
+    private int WPortfelu(string nazwa)
+    {
+        var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
+        IDar uGracza = Gracz.Owoce.Cast<IDar>().Concat(Gracz.Warzywa.Cast<IDar>()).Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
+        return uGracza.Ilosc - naTacy;
+    }
+    private void NaTace(string nazwa)
+    {
+        if (WPortfelu(nazwa) < 1) return;
+        taca.First(t => t.Nazwa == nazwa).Ilosc++;
+    }
+    private void ZTacy(string nazwa) => taca.First(t => t.Nazwa == nazwa).Ilosc--;
+    private async Task Handel()
+    {
+        foreach (var produkt in taca)
+        {
+            if (produkt.Ilosc > 0)
+            {
+                IDar uGracza = Gracz.Owoce.Cast<IDar>().Concat(Gracz.Warzywa.Cast<IDar>()).Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
+                uGracza.Ilosc -= produkt.Ilosc;
+            }
+        }
+        if (wyciskarka)
+        {
+            
+        }
+        foreach (var produkt in taca)
+            produkt.Ilosc = 0;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
 }

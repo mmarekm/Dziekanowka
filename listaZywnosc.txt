@@ -5,3 +5,4 @@
 "smietana", "maslo", "majonez", "krowaSer", "kozaSer", "owcaSer", "twarog", "makaron", "kielbasa", "zytoMaka", "jeczmienMaka", "pszenicaMaka", "ryzMaka", "owiesMaka", "grykaMaka", "orkiszMaka", "zytoPlatki", "jeczmienPlatki", "pszenicaPlatki", "ryzPlatki", "owiesPlatki", "grykaPlatki", "orkiszPlatki", "kukurydzaPlatki", "wino", "ogorekKiszony", "kapustaKiszona", "burakKiszony", "mieloneDrob", "mieloneDzikie", "mieloneSwinia", "mieloneKrowa"
 "pieczarka", "rydz", "podgrzybek", "borowik", "kurka"
 "olej", "sol"
+"marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok"

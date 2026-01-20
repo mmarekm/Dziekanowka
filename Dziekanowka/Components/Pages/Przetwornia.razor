@@ -489,10 +489,7 @@
         if (WPortfelu(nazwa) < 1) return;
         taca.First(t => t.Nazwa == nazwa).Ilosc++;
     }
-    private void ZTacy(string nazwa)
-    {
-        taca.First(t => t.Nazwa == nazwa).Ilosc--;
-    }
+    private void ZTacy(string nazwa) => taca.First(t => t.Nazwa == nazwa).Ilosc--;
     private async Task Handel()
     {
         foreach (var produkt in taca)
