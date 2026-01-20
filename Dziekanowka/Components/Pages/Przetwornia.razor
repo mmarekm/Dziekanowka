@@ -357,6 +357,7 @@
     }
     else
     {
+        <div class="abs guzikHandelMlynek"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/budynki/mlynekPracuj.png" /></button></div>
         <div class="abs guzikMlynekProduktIn guzikMlynekMieloneDrob @(@WPortfelu("mieloneDrob") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("mieloneDrob")'><div class="abs mlyneklProduktIn">@WPortfelu("mieloneDrob")</div></div>
         <div class="abs guzikMlynekProduktIn guzikMlynekMieloneDzikie @(@WPortfelu("mieloneDzikie") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("mieloneDzikie")'><div class="abs mlyneklProduktIn">@WPortfelu("mieloneDzikie")</div></div>
         <div class="abs guzikMlynekProduktIn guzikMlynekMieloneSwinia @(@WPortfelu("mieloneSwinia") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("mieloneSwinia")'><div class="abs mlyneklProduktIn">@WPortfelu("mieloneSwinia")</div></div>
@@ -396,7 +397,41 @@
             }
         </div>
         <div class="abs tacaEfektMlynek">
-
+            @if (uzyskaneMieloneDrob > 0)
+            {
+                <div class="rel produktTacaPodajnikMlynek">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/mieloneDrob.png" />
+                    <div class="abs produktTacaIloscPodajnikMlynek">@uzyskaneMieloneDrob</div>
+                </div>
+            }
+            @if (uzyskaneMieloneDzikie > 0)
+            {
+                <div class="rel produktTacaPodajnikMlynek">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/mieloneDzikie.png" />
+                    <div class="abs produktTacaIloscPodajnikMlynek">@uzyskaneMieloneDzikie</div>
+                </div>
+            }
+            @if (uzyskaneMieloneSwinia > 0)
+            {
+                <div class="rel produktTacaPodajnikMlynek">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/mieloneSwinia.png" />
+                    <div class="abs produktTacaIloscPodajnikMlynek">@uzyskaneMieloneSwinia</div>
+                </div>
+            }
+            @if (uzyskaneMieloneKrowa > 0)
+            {
+                <div class="rel produktTacaPodajnikMlynek">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/mieloneKrowa.png" />
+                    <div class="abs produktTacaIloscPodajnikMlynek">@uzyskaneMieloneKrowa</div>
+                </div>
+            }
+            @if (uzyskanaKielbasa > 0)
+            {
+                <div class="rel produktTacaPodajnikMlynek">
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/kielbasa.png" />
+                    <div class="abs produktTacaIloscPodajnikMlynek">@uzyskanaKielbasa</div>
+                </div>
+            }
         </div>
     }
 </div>
@@ -438,6 +473,10 @@
     private int uzyskaneWino => tacaBeczka.Where(t => t.Nazwa.StartsWith("winogrono")).Sum(t => t.Ilosc) / 3;
     private int UzyskanaKiszonka(string warzywo) => tacaBeczka.Where(t => new[] { "kapustaWłoska", "ogórek", "burak" }.Contains(t.Nazwa)).Sum(t => t.Ilosc) > tacaBeczka.First(t => t.Nazwa == "sol").Ilosc ? 0 : tacaBeczka.First(t => t.Nazwa == warzywo).Ilosc;
     private int uzyskaneMieloneDrob => tacaMlynek.Where(t => new[] { "kuraJedzenie", "gesJedzenie", "kaczkaJedzenie", "indykJedzenie" }.Contains(t.Nazwa)).Sum(t => t.Ilosc);
+    private int uzyskaneMieloneDzikie => tacaMlynek.Where(t => new[] { "krolikJedzenie", "kozaJedzenie", "owcaJedzenie" }.Contains(t.Nazwa)).Sum(t => t.Ilosc);
+    private int uzyskaneMieloneSwinia => tacaMlynek.Where(t => new[] { "swiniaSzynka", "swiniaSchab", "swiniaBoczek" }.Contains(t.Nazwa)).Sum(t => t.Ilosc);
+    private int uzyskaneMieloneKrowa => tacaMlynek.Where(t => new[] { "krowaRostbef", "krowaAntrykot", "krowaLopatka", "krowaPoledwica" }.Contains(t.Nazwa)).Sum(t => t.Ilosc);
+    private int uzyskanaKielbasa => tacaMlynek.Where(t => t.Nazwa.StartsWith("mielone")).Sum(t => t.Ilosc) * 3;
     private void ZamknijNarzedzie() => maselnica = serowarnia = zarna = platkarka = beczka = mlynek = false;
     private int WPortfelu(string nazwa)
     {
@@ -541,7 +580,16 @@
         }
         if (mlynek)
         {
-
+            if (uzyskaneMieloneDrob > 0)
+                Gracz.ProduktP("mieloneDrob").Ilosc += uzyskaneMieloneDrob;
+            if (uzyskaneMieloneDzikie > 0)
+                Gracz.ProduktP("mieloneDzikie").Ilosc += uzyskaneMieloneDzikie;
+            if (uzyskaneMieloneSwinia > 0)
+                Gracz.ProduktP("mieloneSwinia").Ilosc += uzyskaneMieloneSwinia;
+            if (uzyskaneMieloneKrowa > 0)
+                Gracz.ProduktP("mieloneKrowa").Ilosc += uzyskaneMieloneKrowa;
+            if (uzyskanaKielbasa > 0)
+                Gracz.ProduktP("kielbasa").Ilosc += uzyskanaKielbasa;
         }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;

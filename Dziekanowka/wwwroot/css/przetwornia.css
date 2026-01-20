@@ -123,6 +123,13 @@
     height: 125px;
     z-index: 2;
 }
+.guzikHandelMlynek {
+    top: 341px;
+    left: 468px;
+    width: 192px;
+    height: 211px;
+    z-index: 2;
+}
 .maselnicaLCelow {
     right: 75px;
     width: 55px;
@@ -795,14 +802,26 @@
     gap: 6px 35px;
 }
 .tacaEfektMlynek {
-    top: 560px;
+    top: 575px;
     left: 1395px;
     width: 270px;
     height: 215px;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
-    border: 1px solid black;
+    gap: 9px;
+}
+.produktTacaPodajnikMlynek {
+    width: 75px;
+    height: 75px;
+    flex-shrink: 0;
+}
+.produktTacaIloscPodajnikMlynek {
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 28px;
+    font-size: 27px;
+    text-align: center;
 }
 .produktTacaEfektMaselnica {
     width: 85px;
