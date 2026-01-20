@@ -5,6 +5,7 @@
         Start,
         Gospodarstwo,
         DomWiatrolap,
+        DomKuchnia,
         Garaz,
         Przetwornia,
         Rzeznia,

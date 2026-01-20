@@ -1,0 +1,26 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="domKuchniaWidok widok rel @(widok ? "" : "przygaszony")">
+    <div class="abs kuchniaDoWiatrolap"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/dom/kuchnia/kuchniaDoWiatrolap.png" /></button></div>
+    <div class="abs doWyciskarki"><button class="wyroznionyGuzik" @onclick="() => wyciskarka = true"><img src="img/dom/kuchnia/wyciskarka.png" /></button></div>
+</div>
+<div class="abs narzedziePrzetwornia @(wyciskarka ? "wyciskarka" : deska ? "deska" : garnek ? "garnek" : patelnia ? "patelnia" : piec ? "piec" : "mlynekKawa")Widok @(widok ? "" : "aktywne")">
+    <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
+    @if (wyciskarka)
+    {
+        
+    }
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool wyciskarka = false;
+    private bool deska = false;
+    private bool garnek = false;
+    private bool patelnia = false;
+    private bool piec = false;
+    private bool mlynek = false;
+    private bool widok => !wyciskarka && !deska && !garnek && !patelnia && !piec && !mlynek;
+    private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = false;
+}

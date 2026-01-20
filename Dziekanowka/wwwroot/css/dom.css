@@ -4,6 +4,9 @@
 .garazWidok {
     background-image: url('../img/budynki/garazWidok.png');
 }
+.domKuchniaWidok {
+    background-image: url('../img/dom/kuchnia/domKuchniaWidok.png');
+}
 .domDoGospodarstwo {
     top: 196px;
     right: 39px;
@@ -16,6 +19,13 @@
     right: 412px;
     width: 296px;
     height: 566px;
+    z-index: 2;
+}
+.domDoKuchnia {
+    bottom: 0;
+    left: 0;
+    width: 455px;
+    height: 915px;
     z-index: 2;
 }
 .garazDoDom {
@@ -39,6 +49,13 @@
     height: 537px;
     z-index: 2;
 }
+.kuchniaDoWiatrolap {
+    right: 0;
+    top: 0;
+    width: 278px;
+    height: 806px;
+    z-index: 2;
+}
 .stanPaliwaGaraz {
     bottom: 50px;
     left: 600px;
@@ -47,4 +64,14 @@
     z-index: 2;
     display: flex;
     gap: 15px;
+}
+.wyciskarkaWidok {
+    background-image: url('../img/dom/kuchnia/wyciskarkaKuchnia.png');
+}
+.doWyciskarki {
+    left: 0;
+    top: 392px;
+    width: 391px;
+    height: 420px;
+    z-index: 2;
 }
