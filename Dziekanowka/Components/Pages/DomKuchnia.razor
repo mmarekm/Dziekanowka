@@ -6,10 +6,62 @@
     <div class="abs doWyciskarki"><button class="wyroznionyGuzik" @onclick="() => wyciskarka = true"><img src="img/dom/kuchnia/wyciskarka.png" /></button></div>
 </div>
 <div class="abs narzedziePrzetwornia @(wyciskarka ? "wyciskarka" : deska ? "deska" : garnek ? "garnek" : patelnia ? "patelnia" : piec ? "piec" : "mlynekKawa")Widok @(widok ? "" : "aktywne")">
-    <div class="abs przetworniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
+    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
     @if (wyciskarka)
     {
-        
+        <div class="abs handelWyciskarka"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujWyciskarka.png" /></button></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaMarchew @(@WPortfelu("marchew") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("marchew")'><div class="abs wyciskarkalProduktIn">@WPortfelu("marchew")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaBurak @(@WPortfelu("burak") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("burak")'><div class="abs wyciskarkalProduktIn">@WPortfelu("burak")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaPomidor @(@WPortfelu("pomidor") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("pomidor")'><div class="abs wyciskarkalProduktIn">@WPortfelu("pomidor")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaAnanas @(@WPortfelu("ananas") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("ananas")'><div class="abs wyciskarkalProduktIn">@WPortfelu("ananas")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaBorowka @(@WPortfelu("borówka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("borówka")'><div class="abs wyciskarkalProduktIn">@WPortfelu("borówka")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaBrzoskwinia @(@WPortfelu("brzoskwinia") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("brzoskwinia")'><div class="abs wyciskarkalProduktIn">@WPortfelu("brzoskwinia")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaCytryna @(@WPortfelu("cytryna") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("cytryna")'><div class="abs wyciskarkalProduktIn">@WPortfelu("cytryna")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaGrejpfrut @(@WPortfelu("grejpfrut") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("grejpfrut")'><div class="abs wyciskarkalProduktIn">@WPortfelu("grejpfrut")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaJablko @(@WPortfelu("jabłko") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("jabłko")'><div class="abs wyciskarkalProduktIn">@WPortfelu("jabłko")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaMalina @(@WPortfelu("malina") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("malina")'><div class="abs wyciskarkalProduktIn">@WPortfelu("malina")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaMorela @(@WPortfelu("morela") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("morela")'><div class="abs wyciskarkalProduktIn">@WPortfelu("morela")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaPomarancza @(@WPortfelu("pomarańcza") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("pomarańcza")'><div class="abs wyciskarkalProduktIn">@WPortfelu("pomarańcza")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaPorzeczka @(@WPortfelu("porzeczkaCzarna") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("porzeczkaCzarna")'><div class="abs wyciskarkalProduktIn">@WPortfelu("porzeczkaCzarna")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaTruskawka @(@WPortfelu("truskawka") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("truskawka")'><div class="abs wyciskarkalProduktIn">@WPortfelu("truskawka")</div></div>
+        <div class="abs wyciskarkaProduktIn wyciskarkaWisnia @(@WPortfelu("wiśnia") > 0 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => NaTace("wiśnia")'><div class="abs wyciskarkalProduktIn">@WPortfelu("wiśnia")</div></div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLMarchwiowego">@Gracz.ProduktP("marchewSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLBuraczanego">@Gracz.ProduktP("burakSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLPomidorowego">@Gracz.ProduktP("pomidorSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLAnanasowego">@Gracz.ProduktP("ananasSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLBorowkowego">@Gracz.ProduktP("borówkaSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLBrzoskwiniowego">@Gracz.ProduktP("brzoskwiniaSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLCytrynowego">@Gracz.ProduktP("cytrynaSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLGrejpfrutowego">@Gracz.ProduktP("grejpfrutSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLJablkowego">@Gracz.ProduktP("jabłkoSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLMalinowego">@Gracz.ProduktP("malinaSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLMorelowego">@Gracz.ProduktP("morelaSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLPomaranczowego">@Gracz.ProduktP("pomarańczaSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLPorzeczkowego">@Gracz.ProduktP("porzeczkaCzarnaSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLTruskawkowego">@Gracz.ProduktP("truskawkaSok").Ilosc</div>
+        <div class="abs wyciskarkaLCelow wyciskarkaLWisniowego">@Gracz.ProduktP("wiśniaSok").Ilosc</div>
+        <div class="abs tacaPodajnikWyciskarka">
+            @foreach (var produkt in taca)
+            {
+                if (produkt.Ilosc < 1) continue;
+                <div class="rel produktPodajnikWyciskarka klikalneDivSzare" @onclick="() => ZTacy(produkt.Nazwa)">
+                    <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(produkt.Nazwa).png" />
+                    <div class="abs produktIloscPodajnikWyciskarka">@produkt.Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="abs tacaEfektWyciskarka">
+            @foreach (var produkt in taca)
+            {
+                @if (UzyskanySok(produkt.Nazwa) > 0)
+                {
+                    <div class="rel produktPodajnikWyciskarka">
+                        <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(produkt.Nazwa)Sok.png" />
+                        <div class="abs produktIloscPodajnikWyciskarka czarny">@UzyskanySok(produkt.Nazwa)</div>
+                    </div>
+                }
+            }
+        </div>
     }
 </div>
 @code {
@@ -35,6 +87,7 @@
     List<ProduktNaTace> tacaPiec = [];
     List<ProduktNaTace> tacaMlynek = [];
     List<ProduktNaTace> taca => wyciskarka ? tacaWyciskarka : deska ? tacaDeska : garnek ? tacaGarnek : patelnia ? tacaPatelnia : piec ? tacaPiec : tacaMlynek;
+    private int UzyskanySok(string wyciskany) => tacaWyciskarka.First(t => t.Nazwa == wyciskany).Ilosc / 3;
     private int WPortfelu(string nazwa)
     {
         var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
@@ -58,9 +111,9 @@
             }
         }
         if (wyciskarka)
-        {
-            
-        }
+            foreach (var produkt in taca)
+                if (UzyskanySok(produkt.Nazwa) > 0)
+                    Gracz.ProduktP($"{produkt.Nazwa}Sok").Ilosc += UzyskanySok(produkt.Nazwa);
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
         await ladowanieGracza.ZapiszAktualnegoGracza();

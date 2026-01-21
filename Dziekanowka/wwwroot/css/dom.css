@@ -75,3 +75,188 @@
     height: 420px;
     z-index: 2;
 }
+.kuchniaNarzedzieConfirm {
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 130px;
+}
+.handelWyciskarka {
+    width: 241px;
+    height: 229px;
+    left: 431px;
+    top: 223px;
+    z-index: 2;
+}
+.wyciskarkaProduktIn {
+    width: 88px;
+    height: 88px;
+}
+.wyciskarkalProduktIn {
+    bottom: 0;
+    right: 0;
+    width: 31px;
+    height: 23px;
+    font-size: 22px;
+    text-align: center;
+}
+.wyciskarkaMarchew {
+    top: 55px;
+    left: 36px;
+}
+.wyciskarkaBurak {
+    top: 55px;
+    left: 157px;
+}
+.wyciskarkaPomidor {
+    top: 54px;
+    left: 278px;
+}
+.wyciskarkaAnanas {
+    top: 163px;
+    left: 33px;
+}
+.wyciskarkaBorowka {
+    top: 163px;
+    left: 155px;
+}
+.wyciskarkaBrzoskwinia {
+    top: 164px;
+    left: 277px;
+}
+.wyciskarkaCytryna {
+    top: 269px;
+    left: 33px;
+}
+.wyciskarkaGrejpfrut {
+    top: 269px;
+    left: 155px;
+}
+.wyciskarkaJablko {
+    top: 272px;
+    left: 276px;
+}
+.wyciskarkaMalina {
+    top: 373px;
+    left: 34px;
+}
+.wyciskarkaMorela {
+    top: 373px;
+    left: 154px;
+}
+.wyciskarkaPomarancza {
+    top: 376px;
+    left: 276px;
+}
+.wyciskarkaPorzeczka {
+    top: 472px;
+    left: 37px;
+}
+.wyciskarkaTruskawka {
+    top: 475px;
+    left: 155px;
+}
+.wyciskarkaWisnia {
+    top: 475px;
+    left: 276px;
+}
+.wyciskarkaLCelow {
+    width: 38px;
+    height: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+.wyciskarkaLMarchwiowego {
+    top: 125px;
+    right: 221px;
+}
+.wyciskarkaLBuraczanego {
+    top: 122px;
+    right: 117px;
+}
+.wyciskarkaLPomidorowego {
+    top: 136px;
+    right: 13px;
+}
+.wyciskarkaLAnanasowego {
+    top: 236px;
+    right: 233px;
+}
+.wyciskarkaLBorowkowego {
+    top: 248px;
+    right: 120px;
+}
+.wyciskarkaLBrzoskwiniowego {
+    top: 243px;
+    right: 27px;
+}
+.wyciskarkaLCytrynowego {
+    top: 358px;
+    right: 229px;
+}
+.wyciskarkaLGrejpfrutowego {
+    top: 357px;
+    right: 125px;
+}
+.wyciskarkaLJablkowego {
+    top: 359px;
+    right: 10px;
+}
+.wyciskarkaLMalinowego {
+    top: 490px;
+    right: 232px;
+}
+.wyciskarkaLMorelowego {
+    top: 489px;
+    right: 122px;
+}
+.wyciskarkaLPomaranczowego {
+    top: 486px;
+    right: 24px;
+}
+.wyciskarkaLPorzeczkowego {
+    top: 607px;
+    right: 217px;
+}
+.wyciskarkaLTruskawkowego {
+    top: 609px;
+    right: 109px;
+}
+.wyciskarkaLWisniowego {
+    top: 606px;
+    right: 15px;
+}
+.tacaPodajnikWyciskarka {
+    width: 620px;
+    height: 160px;
+    top: 607px;
+    left: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.produktPodajnikWyciskarka {
+    width: 70px;
+    height: 70px;
+}
+.produktIloscPodajnikWyciskarka {
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 16px;
+    font-size: 15px;
+    text-align: center;
+    color: yellow;
+}
+.tacaEfektWyciskarka {
+    width: 620px;
+    height: 160px;
+    top: 607px;
+    left: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.czarny {
+    color: black;
+}
