@@ -68,11 +68,21 @@
 .wyciskarkaWidok {
     background-image: url('../img/dom/kuchnia/wyciskarkaKuchnia.png');
 }
+.mlynekKawaWidok {
+    background-image: url('../img/dom/kuchnia/mlynekKuchnia.png');
+}
 .doWyciskarki {
     left: 0;
     top: 392px;
     width: 391px;
     height: 420px;
+    z-index: 2;
+}
+.doKawy {
+    left: 1426px;
+    top: 523px;
+    width: 174px;
+    height: 274px;
     z-index: 2;
 }
 .kuchniaNarzedzieConfirm {
@@ -159,6 +169,28 @@
 .wyciskarkaWisnia {
     top: 475px;
     left: 276px;
+}
+.produktyInMlynekKawa {
+    width: 250px;
+    height: 250px;
+    top: 286px;
+    left: 55px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 50px;
+}
+.produktInMlynekKawa {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+.lProduktuInMlynekKawa {
+    right: 0;
+    bottom: 0;
+    width: 30px;
+    height: 16px;
+    font-size: 15px;
+    text-align: center;
 }
 .wyciskarkaLCelow {
     width: 38px;

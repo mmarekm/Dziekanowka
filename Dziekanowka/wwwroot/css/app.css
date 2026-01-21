@@ -158,6 +158,25 @@ h1:focus {
     .klikalneDivZielone:hover::before {
         background: rgba(0, 255, 0, 0.2);
     }
+.klikalneDivZieloneRel {
+    cursor: pointer;
+    position: relative;
+}
+    .klikalneDivZieloneRel::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        transition: background 0.3s ease;
+        pointer-events: none;
+        z-index: 1;
+    }
+    .klikalneDivZieloneRel:hover::before {
+        background: rgba(0, 255, 0, 0.2);
+    }
 .klikalneDivCzerwone {
     cursor: pointer;
     position: absolute;

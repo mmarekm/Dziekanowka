@@ -4,6 +4,7 @@
 <div class="domKuchniaWidok widok rel @(widok ? "" : "przygaszony")">
     <div class="abs kuchniaDoWiatrolap"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/dom/kuchnia/kuchniaDoWiatrolap.png" /></button></div>
     <div class="abs doWyciskarki"><button class="wyroznionyGuzik" @onclick="() => wyciskarka = true"><img src="img/dom/kuchnia/wyciskarka.png" /></button></div>
+    <div class="abs doKawy"><button class="wyroznionyGuzik" @onclick="() => mlynek = true"><img src="img/dom/kuchnia/mlynek.png" /></button></div>
 </div>
 <div class="abs narzedziePrzetwornia @(wyciskarka ? "wyciskarka" : deska ? "deska" : garnek ? "garnek" : patelnia ? "patelnia" : piec ? "piec" : "mlynekKawa")Widok @(widok ? "" : "aktywne")">
     <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
@@ -63,6 +64,18 @@
             }
         </div>
     }
+    @if(mlynek)
+    {
+        <div class="abs produktyInMlynekKawa">
+        @foreach (var produkt in taca)
+        {
+            <div class="rel produktInMlynekKawa @(@WPortfelu(produkt.Nazwa) > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick='() => NaTace(produkt.Nazwa)'>
+                <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(produkt.Nazwa).png" />
+                <div class="abs lProduktuInMlynekKawa">@WPortfelu(produkt.Nazwa)</div>
+            </div>
+        }
+        </div>
+    }
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
@@ -80,18 +93,18 @@
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
     }
-    List<ProduktNaTace> tacaWyciskarka = [new("marchew"), new("burak"), new("pomidor"), new("jabłko"), new("pomarańcza"), new("grejpfrut"), new("cytryna"), new("ananas"), new("brzoskwinia"), new("morela"), new("wiśnia"), new("truskawka"), new("malina"), new("borówka"), new("porzeczkaCzarna")];
+    List<ProduktNaTace> tacaWyciskarka = [ new("marchew"), new("burak"), new("pomidor"), new("jabłko"), new("pomarańcza"), new("grejpfrut"), new("cytryna"), new("ananas"), new("brzoskwinia"), new("morela"), new("wiśnia"), new("truskawka"), new("malina"), new("borówka"), new("porzeczkaCzarna")];
     List<ProduktNaTace> tacaDeska = [];
     List<ProduktNaTace> tacaGarnek = [];
     List<ProduktNaTace> tacaPatelnia = [];
     List<ProduktNaTace> tacaPiec = [];
-    List<ProduktNaTace> tacaMlynek = [];
+    List<ProduktNaTace> tacaMlynek = [new("ziarnaKawy"), new("pelnaButelka"), new("krowaMleko"), new("kozaMleko"), new("owcaMleko"), new("drewno") ];
     List<ProduktNaTace> taca => wyciskarka ? tacaWyciskarka : deska ? tacaDeska : garnek ? tacaGarnek : patelnia ? tacaPatelnia : piec ? tacaPiec : tacaMlynek;
     private int UzyskanySok(string wyciskany) => tacaWyciskarka.First(t => t.Nazwa == wyciskany).Ilosc / 3;
     private int WPortfelu(string nazwa)
     {
         var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
-        IDar uGracza = Gracz.Owoce.Cast<IDar>().Concat(Gracz.Warzywa.Cast<IDar>()).Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
+        IDar uGracza = Gracz.Przedmioty.Cast<IDar>().Concat(Gracz.Owoce.Cast<IDar>()).Concat(Gracz.Warzywa.Cast<IDar>()).Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == nazwa);
         return uGracza.Ilosc - naTacy;
     }
     private void NaTace(string nazwa)
@@ -106,7 +119,7 @@
         {
             if (produkt.Ilosc > 0)
             {
-                IDar uGracza = Gracz.Owoce.Cast<IDar>().Concat(Gracz.Warzywa.Cast<IDar>()).Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
+                IDar uGracza = Gracz.Przedmioty.Cast<IDar>().Concat(Gracz.Owoce.Cast<IDar>()).Concat(Gracz.Warzywa.Cast<IDar>()).Concat(Gracz.Zboza.Cast<IDar>()).Concat(Gracz.ProduktyZwierzece.Cast<IDar>()).Concat(Gracz.ProduktyPrzetworzone.Cast<IDar>()).Concat(Gracz.ZywnoscPozostala.Cast<IDar>()).First(p => p.Nazwa == produkt.Nazwa);
                 uGracza.Ilosc -= produkt.Ilosc;
             }
         }
