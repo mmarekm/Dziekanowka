@@ -66,6 +66,7 @@
     }
     @if(mlynek)
     {
+        <div class="abs handelMlynekKawa"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujMlynek.png" /></button></div>
         <div class="abs produktyInMlynekKawa">
         @foreach (var produkt in taca)
         {
@@ -76,6 +77,23 @@
         }
         </div>
         <div class="abs mlynekLKawy">@Gracz.ZywnoscP("kawa").Ilosc</div>
+        <div class="abs tacaPodajniklynekKawa">
+            @foreach (var produkt in taca)
+            {
+                if (produkt.Ilosc < 1) continue;
+                <div class="rel produktPodajnikMlynekKawa klikalneDivSzare" @onclick="() => ZTacy(produkt.Nazwa)">
+                    <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(produkt.Nazwa).png" />
+                    <div class="abs produktIloscPodajnikMlynekKawa">@produkt.Ilosc</div>
+                </div>
+            }
+        </div>
+        if (uzyskanaKawa > 0)
+        {
+            <div class="abs kawaEfektMlynekKawa">
+                <img class="obrazekSieMiesci" src="img/dom/kuchnia/kawa.png" />
+                <div class="abs efektIloscKawy">@uzyskanaKawa</div>
+            </div>
+        }
     }
 </div>
 @code {
@@ -102,6 +120,7 @@
     List<ProduktNaTace> tacaMlynek = [new("ziarnaKawy"), new("pelnaButelka"), new("krowaMleko"), new("kozaMleko"), new("owcaMleko"), new("drewno") ];
     List<ProduktNaTace> taca => wyciskarka ? tacaWyciskarka : deska ? tacaDeska : garnek ? tacaGarnek : patelnia ? tacaPatelnia : piec ? tacaPiec : tacaMlynek;
     private int UzyskanySok(string wyciskany) => tacaWyciskarka.First(t => t.Nazwa == wyciskany).Ilosc / 3;
+    private int uzyskanaKawa => new[] { tacaMlynek.First(t => t.Nazwa == "drewno").Ilosc, tacaMlynek.First(t => t.Nazwa == "pelnaButelka").Ilosc, tacaMlynek.First(t => t.Nazwa == "ziarnaKawy").Ilosc, tacaMlynek.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc) }.Min();
     private int WPortfelu(string nazwa)
     {
         var naTacy = taca.First(t => t.Nazwa == nazwa).Ilosc;
@@ -128,6 +147,8 @@
             foreach (var produkt in taca)
                 if (UzyskanySok(produkt.Nazwa) > 0)
                     Gracz.ProduktP($"{produkt.Nazwa}Sok").Ilosc += UzyskanySok(produkt.Nazwa);
+        if (mlynek && uzyskanaKawa > 0)
+            Gracz.ZywnoscP("kawa").Ilosc += uzyskanaKawa;
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
         await ladowanieGracza.ZapiszAktualnegoGracza();

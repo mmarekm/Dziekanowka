@@ -98,6 +98,13 @@
     top: 223px;
     z-index: 2;
 }
+.handelMlynekKawa {
+    width: 467px;
+    height: 213px;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+}
 .wyciskarkaProduktIn {
     width: 88px;
     height: 88px;
@@ -288,6 +295,27 @@
     text-align: center;
     color: yellow;
 }
+.tacaPodajniklynekKawa {
+    width: 212px;
+    height: 200px;
+    top: 572px;
+    left: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px 6px;
+}
+.produktPodajnikMlynekKawa {
+    width: 63px;
+    height: 63px;
+}
+.produktIloscPodajnikMlynekKawa {
+    bottom: 0;
+    right: 0;
+    width: 25px;
+    height: 13px;
+    font-size: 12px;
+    text-align: center;
+}
 .tacaEfektWyciskarka {
     width: 620px;
     height: 160px;
@@ -296,6 +324,20 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+}
+.kawaEfektMlynekKawa {
+    width: 150px;
+    height: 150px;
+    top: 590px;
+    left: 1170px;
+}
+.efektIloscKawy {
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 31px;
+    font-size: 30px;
+    text-align: center;
 }
 .czarny {
     color: black;
