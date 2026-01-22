@@ -5,9 +5,10 @@
     <div class="abs kuchniaDoWiatrolap"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/dom/kuchnia/kuchniaDoWiatrolap.png" /></button></div>
     <div class="abs doWyciskarki"><button class="wyroznionyGuzik" @onclick="() => wyciskarka = true"><img src="img/dom/kuchnia/wyciskarka.png" /></button></div>
     <div class="abs doKawy"><button class="wyroznionyGuzik" @onclick="() => mlynek = true"><img src="img/dom/kuchnia/mlynek.png" /></button></div>
+    <!--<div class="abs doZakwasu"><button class="wyroznionyGuzik" @onclick="() => zakwas = true"><img src="img/dom/kuchnia/zakwas.png" /></button></div>-->
 </div>
-<div class="abs narzedziePrzetwornia @(wyciskarka ? "wyciskarka" : deska ? "deska" : garnek ? "garnek" : patelnia ? "patelnia" : piec ? "piec" : "mlynekKawa")Widok @(widok ? "" : "aktywne")">
-    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
+<div class="abs narzedziePrzetwornia @(wyciskarka ? "wyciskarka" : deska ? "deska" : garnek ? "garnek" : patelnia ? "patelnia" : piec ? "piec" : mlynek ? "mlynekKawa" : "zakwas")Widok @(widok ? "" : "aktywne")">
+    <div class="abs kuchniaNarzedzieConfirm @(zakwas ? "goraPrawoIks" : "")"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
     @if (wyciskarka)
     {
         <div class="abs handelWyciskarka"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujWyciskarka.png" /></button></div>
@@ -95,6 +96,10 @@
             </div>
         }
     }
+    @if (zakwas)
+    {
+        
+    }
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
@@ -105,8 +110,9 @@
     private bool patelnia = false;
     private bool piec = false;
     private bool mlynek = false;
-    private bool widok => !wyciskarka && !deska && !garnek && !patelnia && !piec && !mlynek;
-    private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = false;
+    private bool zakwas = false;
+    private bool widok => !wyciskarka && !deska && !garnek && !patelnia && !piec && !mlynek && !zakwas;
+    private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)
     {
         public string Nazwa { get; set; } = nazwa;

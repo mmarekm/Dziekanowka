@@ -71,6 +71,9 @@
 .mlynekKawaWidok {
     background-image: url('../img/dom/kuchnia/mlynekKuchnia.png');
 }
+.zakwasWidok {
+    background-image: url('../img/dom/kuchnia/zakwasKuchnia.png');
+}
 .doWyciskarki {
     left: 0;
     top: 392px;
@@ -83,6 +86,13 @@
     top: 523px;
     width: 174px;
     height: 274px;
+    z-index: 2;
+}
+.doZakwasu {
+    left: 1138px;
+    top: 140px;
+    width: 166px;
+    height: 126px;
     z-index: 2;
 }
 .kuchniaNarzedzieConfirm {
@@ -341,4 +351,7 @@
 }
 .czarny {
     color: black;
+}
+.goraPrawoIks {
+    top: 0;
 }
