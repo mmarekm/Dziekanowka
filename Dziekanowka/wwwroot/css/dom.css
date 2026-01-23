@@ -68,6 +68,9 @@
 .wyciskarkaWidok {
     background-image: url('../img/dom/kuchnia/wyciskarkaKuchnia.png');
 }
+.piecWidok {
+    background-image: url('../img/dom/kuchnia/piecKuchnia.png');
+}
 .mlynekKawaWidok {
     background-image: url('../img/dom/kuchnia/mlynekKuchnia.png');
 }
@@ -79,6 +82,13 @@
     top: 392px;
     width: 391px;
     height: 420px;
+    z-index: 2;
+}
+.kuchniaDoPieca {
+    left: 1076px;
+    top: 294px;
+    width: 314px;
+    height: 247px;
     z-index: 2;
 }
 .doKawy {
