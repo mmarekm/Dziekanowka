@@ -262,3 +262,22 @@ h1:focus {
         opacity: 0;
         transition: opacity 9s ease-out;
     }
+.progresCzerwony {
+    background: linear-gradient(135deg, #ff6b6b 0%, #e03131 100%);
+    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.5), 0 0 20px rgba(224, 49, 49, 0.3);
+}
+
+.progresPomaranczowy {
+    background: linear-gradient(135deg, #ffb366 0%, #ff922b 100%);
+    box-shadow: 0 2px 10px rgba(255, 146, 43, 0.5), 0 0 20px rgba(255, 179, 102, 0.3);
+}
+
+.progresZolty {
+    background: linear-gradient(135deg, #fff066 0%, #ffe033 100%);
+    box-shadow: 0 2px 10px rgba(255, 224, 51, 0.6), 0 0 20px rgba(255, 237, 78, 0.3);
+}
+
+.progresZielony {
+    background: linear-gradient(135deg, #7ce38b 0%, #5cd672 100%);
+    box-shadow: 0 2px 10px rgba(92, 214, 114, 0.5), 0 0 20px rgba(105, 219, 124, 0.3);
+}
