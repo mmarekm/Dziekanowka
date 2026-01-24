@@ -7,6 +7,9 @@
 .domKuchniaWidok {
     background-image: url('../img/dom/kuchnia/domKuchniaWidok.png');
 }
+.piecPieczywoWidok {
+    background-image: url('../img/dom/kuchnia/piecPieczywoWidok.png');
+}
 .domDoGospodarstwo {
     top: 196px;
     right: 39px;
@@ -77,6 +80,20 @@
 .zakwasWidok {
     background-image: url('../img/dom/kuchnia/zakwasKuchnia.png');
 }
+.narzedzieKuchnia {
+    top: 150px;
+    left: 150px;
+    width: 1600px;
+    height: 700px;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out;
+}
+    .narzedzieKuchnia.aktywne {
+        opacity: 1;
+        pointer-events: all;
+    }
 .doWyciskarki {
     left: 0;
     top: 392px;
@@ -197,28 +214,6 @@
     top: 475px;
     left: 276px;
 }
-.produktyInMlynekKawa {
-    width: 250px;
-    height: 250px;
-    top: 286px;
-    left: 55px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px 50px;
-}
-.produktInMlynekKawa {
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
-}
-.lProduktuInMlynekKawa {
-    right: 0;
-    bottom: 0;
-    width: 30px;
-    height: 16px;
-    font-size: 15px;
-    text-align: center;
-}
 .wyciskarkaLCelow {
     width: 38px;
     height: 15px;
@@ -285,14 +280,6 @@
     top: 606px;
     right: 15px;
 }
-.mlynekLKawy {
-    top: 167px;
-    right: 40px;
-    width: 100px;
-    height: 39px;
-    font-size: 35px;
-    text-align: center;
-}
 .tacaPodajnikWyciskarka {
     width: 620px;
     height: 160px;
@@ -315,6 +302,73 @@
     text-align: center;
     color: yellow;
 }
+.tacaEfektWyciskarka {
+    width: 620px;
+    height: 160px;
+    top: 607px;
+    left: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.piecDoPieczywa {
+    width: 413px;
+    height: 516px;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+.piecDoPizzy {
+    width: 442px;
+    height: 497px;
+    bottom: 0;
+    left: 432px;
+    z-index: 2;
+}
+.piecDoCiasta {
+    width: 341px;
+    height: 364px;
+    bottom: 0;
+    left: 950px;
+    z-index: 2;
+}
+.piecDoWedlin {
+    width: 393px;
+    height: 401px;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+}
+.produktyInMlynekKawa {
+    width: 250px;
+    height: 250px;
+    top: 286px;
+    left: 55px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 50px;
+}
+.produktInMlynekKawa {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+.lProduktuInMlynekKawa {
+    right: 0;
+    bottom: 0;
+    width: 30px;
+    height: 16px;
+    font-size: 15px;
+    text-align: center;
+}
+.mlynekLKawy {
+    top: 167px;
+    right: 40px;
+    width: 100px;
+    height: 39px;
+    font-size: 35px;
+    text-align: center;
+}
 .tacaPodajniklynekKawa {
     width: 212px;
     height: 200px;
@@ -335,15 +389,6 @@
     height: 13px;
     font-size: 12px;
     text-align: center;
-}
-.tacaEfektWyciskarka {
-    width: 620px;
-    height: 160px;
-    top: 607px;
-    left: 700px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
 }
 .kawaEfektMlynekKawa {
     width: 150px;

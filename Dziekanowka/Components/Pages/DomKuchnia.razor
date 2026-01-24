@@ -4,12 +4,12 @@
 <div class="domKuchniaWidok widok rel @(widok ? "" : "przygaszony")">
     <div class="abs kuchniaDoWiatrolap"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/dom/kuchnia/kuchniaDoWiatrolap.png" /></button></div>
     <div class="abs doWyciskarki"><button class="wyroznionyGuzik" @onclick="() => wyciskarka = true"><img src="img/dom/kuchnia/wyciskarka.png" /></button></div>
-    <!--<div class="abs kuchniaDoPieca"><button class="wyroznionyGuzik" @onclick="() => piec = true"><img src="img/dom/kuchnia/piec.png" /></button></div>-->
+    <div class="abs kuchniaDoPieca"><button class="wyroznionyGuzik" @onclick="() => piec = true"><img src="img/dom/kuchnia/piec.png" /></button></div>
     <div class="abs doKawy"><button class="wyroznionyGuzik" @onclick="() => mlynek = true"><img src="img/dom/kuchnia/mlynek.png" /></button></div>
     <div class="abs doZakwasu"><button class="wyroznionyGuzik" @onclick="() => zakwas = true"><img src="img/dom/kuchnia/zakwas.png" /></button></div>
 </div>
 <div class="abs narzedziePrzetwornia @(wyciskarka ? "wyciskarka" : deska ? "deska" : garnek ? "garnek" : patelnia ? "patelnia" : piec ? "piec" : mlynek ? "mlynekKawa" : "zakwas")Widok @(widok ? "" : "aktywne")">
-    <div class="abs kuchniaNarzedzieConfirm @(zakwas || piec ? "goraPrawoIks" : "")"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
+    <div class="abs kuchniaNarzedzieConfirm @(zakwas || piec ? "goraPrawoIks" : "")"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzie" disabled="@(!widokPiec)"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
     @if (wyciskarka)
     {
         <div class="abs handelWyciskarka"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujWyciskarka.png" /></button></div>
@@ -66,6 +66,14 @@
             }
         </div>
     }
+    @if (piec)
+    {
+        <div class="abs piecDoPieczywa"><button class="wyroznionyGuzik" @onclick="() => piecPieczywo = true"><img src="img/dom/kuchnia/piecPieczywo.png" /></button></div>
+        <div class="abs piecDoPizzy"><button class="wyroznionyGuzik" @onclick="() => piecPizza = true"><img src="img/dom/kuchnia/piecPizza.png" /></button></div>
+        <div class="abs piecDoCiasta"><button class="wyroznionyGuzik" @onclick="() => piecCiasto = true"><img src="img/dom/kuchnia/piecCiasto.png" /></button></div>
+        <div class="abs piecDoWedlin"><button class="wyroznionyGuzik" @onclick="() => piecWedlina = true"><img src="img/dom/kuchnia/piecWedlina.png" /></button></div>
+        
+    }
     @if(mlynek)
     {
         <div class="abs handelMlynekKawa"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujMlynek.png" /></button></div>
@@ -108,6 +116,14 @@
         }
     }
 </div>
+<div class="abs narzedzieKuchnia @(piecPieczywo ? "piecPieczywo" : piecPizza ? "piecPizza" : piecCiasto ? "piecCiasto" : "piecWedlina")Widok @(widokPiec ? "" : "aktywne")">
+    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedziePiec"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
+    @if (piecPieczywo)
+    {
+        
+    }
+</div>
+
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
@@ -119,8 +135,14 @@
     private bool mlynek = false;
     private bool zakwas = false;
     private bool widok => !wyciskarka && !deska && !garnek && !patelnia && !piec && !mlynek && !zakwas;
+    private bool piecPieczywo = false;
+    private bool piecPizza = false;
+    private bool piecCiasto = false;
+    private bool piecWedlina = false;
+    private bool widokPiec => !piecPieczywo && !piecPizza && !piecCiasto && !piecWedlina;
     private string[] zboza = ["zyto", "jeczmien", "pszenica", "ryz", "owies", "gryka", "orkisz"];
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
+    private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)
     {
         public string Nazwa { get; set; } = nazwa;
