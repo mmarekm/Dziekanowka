@@ -71,8 +71,7 @@
         <div class="abs piecDoPieczywa"><button class="wyroznionyGuzik" @onclick="() => piecPieczywo = true"><img src="img/dom/kuchnia/piecPieczywo.png" /></button></div>
         <div class="abs piecDoPizzy"><button class="wyroznionyGuzik" @onclick="() => piecPizza = true"><img src="img/dom/kuchnia/piecPizza.png" /></button></div>
         <div class="abs piecDoCiasta"><button class="wyroznionyGuzik" @onclick="() => piecCiasto = true"><img src="img/dom/kuchnia/piecCiasto.png" /></button></div>
-        <div class="abs piecDoWedlin"><button class="wyroznionyGuzik" @onclick="() => piecWedlina = true"><img src="img/dom/kuchnia/piecWedlina.png" /></button></div>
-        
+        <div class="abs piecDoWedlin"><button class="wyroznionyGuzik" @onclick="() => piecWedlina = true"><img src="img/dom/kuchnia/piecWedlina.png" /></button></div>       
     }
     @if(mlynek)
     {
@@ -157,7 +156,7 @@
     List<ProduktNaTace> taca => wyciskarka ? tacaWyciskarka : deska ? tacaDeska : garnek ? tacaGarnek : patelnia ? tacaPatelnia : piec ? tacaPiec : tacaMlynek;
     private int UzyskanySok(string wyciskany) => tacaWyciskarka.First(t => t.Nazwa == wyciskany).Ilosc / 3;
     private int uzyskanaKawa => new[] { tacaMlynek.First(t => t.Nazwa == "drewno").Ilosc, tacaMlynek.First(t => t.Nazwa == "pelnaButelka").Ilosc, tacaMlynek.First(t => t.Nazwa == "ziarnaKawy").Ilosc, tacaMlynek.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc) }.Min();
-    private bool MoznaZakwasic(string zboze) => Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestProduktP($"{zboze}Maka") && Gracz.Zboza.First(z => z.Nazwa == zboze).MoznaZakwasicDzisiaj;
+    private bool MoznaZakwasic(string zboze) => Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestProduktP($"{zboze}Maka") && Gracz.Zboza.First(z => z.Nazwa == zboze).MoznaZakwasicDzisiaj && Gracz.Zboza.First(z => z.Nazwa == zboze).PoziomZakwasu < 3;
     private string ZakwasKolor(int poziom) => poziom switch { 0 => "progresCzerwony", 1 => "progresPomaranczowy", 2 => "progresZolty", _ => "progresZielony" };
     private async Task Zakwas(string zboze)
     {
