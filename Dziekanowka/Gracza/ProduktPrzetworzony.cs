@@ -10,7 +10,10 @@
         new("zytoPlatki"), new("jeczmienPlatki"), new("pszenicaPlatki"), new("ryzPlatki"), new("owiesPlatki"), new("grykaPlatki"), new("orkiszPlatki"), new("kukurydzaPlatki"),
         new("wino"), new("ogorekKiszony"), new("kapustaKiszona"), new("burakKiszony"), new("mieloneDrob"), new("mieloneDzikie"), new("mieloneSwinia"), new("mieloneKrowa"),
         new("marchewSok"), new("burakSok"), new("pomidorSok"), new("jabłkoSok"), new("pomarańczaSok"), new("grejpfrutSok"), new("cytrynaSok"), new("ananasSok"),
-        new("brzoskwiniaSok"), new("morelaSok"), new("wiśniaSok"), new("truskawkaSok"), new("malinaSok"), new("borówkaSok"), new("porzeczkaCzarnaSok")
+        new("brzoskwiniaSok"), new("morelaSok"), new("wiśniaSok"), new("truskawkaSok"), new("malinaSok"), new("borówkaSok"), new("porzeczkaCzarnaSok"),
+        new("zytoChleb"), new("jeczmienChleb"), new("pszenicaChleb"), new("ryzChleb"), new("owiesChleb"), new("grykaChleb"), new("orkiszChleb"),
+        new("zytoBulka"), new("jeczmienBulka"), new("pszenicaBulka"), new("ryzBulka"), new("owiesBulka"), new("grykaBulka"), new("orkiszBulka"),
+        new("brzoskwiniaBuleczka"), new("śliwkaBuleczka"), new("wiśniaBuleczka"), new("jabłkoBuleczka"), new("gruszkaBuleczka"), new("malinaBuleczka"), new("twarogBuleczka")
         ];
     }
 }

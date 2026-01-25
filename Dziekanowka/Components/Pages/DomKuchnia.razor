@@ -139,7 +139,8 @@
     private bool piecCiasto = false;
     private bool piecWedlina = false;
     private bool widokPiec => !piecPieczywo && !piecPizza && !piecCiasto && !piecWedlina;
-    private string[] zboza = ["zyto", "jeczmien", "pszenica", "ryz", "owies", "gryka", "orkisz"];
+    private string[] zboza = [ "zyto", "jeczmien", "pszenica", "ryz", "owies", "gryka", "orkisz"];
+    private string[] slodkieBuleczki = [ "brzoskwiniaBuleczka", "śliwkaBuleczka", "wiśniaBuleczka", "jabłkoBuleczka", "gruszkaBuleczka", "malinaBuleczka", "twarogBuleczka"];
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
     private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)
