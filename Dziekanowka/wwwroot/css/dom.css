@@ -342,13 +342,33 @@
 .produktyInPiecPieczywo {
     left: 15px;
     top: 20px;
-    width: 275px;
+    width: 265px;
     height: 500px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 7px;
-    border: 1px solid black;
+    gap: 4px;
+    padding: 5px;
+}
+.lZbozProduktInPiecPieczywo {
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    width: 30px;
+    height: 16px;
+    font-size: 15px;
+}
+.stanZakwasuProduktInPiecPieczywo {
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+}
+.produktInPiecPieczywo {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border: 1px solid blue;
 }
 .pieczywoGraczaPiec {
     width: 110px;
