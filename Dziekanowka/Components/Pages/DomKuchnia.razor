@@ -116,10 +116,21 @@
     }
 </div>
 <div class="abs narzedzieKuchnia @(piecPieczywo ? "piecPieczywo" : piecPizza ? "piecPizza" : piecCiasto ? "piecCiasto" : "piecWedlina")Widok @(widokPiec ? "" : "aktywne")">
-    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedziePiec"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
+    <div class="abs kuchniaNarzedzieConfirm @(piecPieczywo ? "lewyDolIks" : "")"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedziePiec"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (piecPieczywo)
     {
+        <div class="abs pieczywoGraczaPiec chlebyGraczaPiec">
+            @foreach (var zboze in zboza)
+            {
+                <div class="chlebGraczaPiec"></div>
+            }
+        </div>
+        <div class="abs pieczywoGraczaPiec bulkiGraczaPiec">
         
+        </div>
+        <div class="abs pieczywoGraczaPiec buleczkaGraczaPiec">
+
+        </div>
     }
 </div>
 

@@ -339,6 +339,30 @@
     right: 0;
     z-index: 2;
 }
+.pieczywoGraczaPiec {
+    width: 110px;
+    height: 620px;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border: 1px solid black;
+}
+.chlebyGraczaPiec {
+    right: 270px;
+}
+.bulkiGraczaPiec {
+    right: 150px;
+}
+.buleczkaGraczaPiec {
+    right: 30px;
+}
+.chlebGraczaPiec {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border: 1px solid blue;
+}
 .produktyInMlynekKawa {
     width: 250px;
     height: 250px;
@@ -496,4 +520,8 @@
 }
 .goraPrawoIks {
     top: 0;
+}
+.lewyDolIks {
+    bottom: 0;
+    left: 0;
 }
