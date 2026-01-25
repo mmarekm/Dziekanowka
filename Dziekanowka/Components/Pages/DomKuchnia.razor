@@ -119,18 +119,64 @@
     <div class="abs kuchniaNarzedzieConfirm @(piecPieczywo ? "lewyDolIks" : "")"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedziePiec"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (piecPieczywo)
     {
+        <div class="abs produktyInPiecPieczywo">
+
+        </div>
         <div class="abs pieczywoGraczaPiec chlebyGraczaPiec">
             @foreach (var zboze in zboza)
             {
-                <div class="chlebGraczaPiec"></div>
+                <div class="rel chlebGraczaPiec">
+                    <img src="img/dom/kuchnia/@(zboze)Chleb.png" class="obrazekSieMiesci"/>
+                    <div class="abs liczbaChlebowGraczaPiec">@Gracz.ProduktP($"{zboze}Chleb").Ilosc</div>
+                </div>
             }
         </div>
         <div class="abs pieczywoGraczaPiec bulkiGraczaPiec">
-        
+            @foreach (var zboze in zboza)
+            {
+                <div class="rel chlebGraczaPiec">
+                    <img src="img/dom/kuchnia/@(zboze)Bulka.png" class="obrazekSieMiesci" />
+                    <div class="abs liczbaChlebowGraczaPiec">@Gracz.ProduktP($"{zboze}Bulka").Ilosc</div>
+                </div>
+            }
         </div>
         <div class="abs pieczywoGraczaPiec buleczkaGraczaPiec">
-
+            @foreach (var buleczka in slodkieBuleczki)
+            {
+                <div class="rel chlebGraczaPiec">
+                    <img src="img/dom/kuchnia/@(buleczka)Buleczka.png" class="obrazekSieMiesci" />
+                    <div class="abs liczbaChlebowGraczaPiec">@Gracz.ProduktP($"{buleczka}Buleczka").Ilosc</div>
+                </div>
+            }
         </div>
+        <div class="abs pieczeniePieczywaLampka pieczeniePieczywaLampkaChleb @(pieczeniePieczywa == 1 ? "swiec" : "zgas")" @onclick="() => pieczeniePieczywa = 1"></div>
+        <div class="abs pieczeniePieczywaLampka pieczeniePieczywaLampkaBulka @(pieczeniePieczywa == 2 ? "swiec" : "zgas")" @onclick="() => pieczeniePieczywa = 2"></div>
+        <div class="abs pieczeniePieczywaLampka pieczeniePieczywaLampkaBuleczka @(pieczeniePieczywa == 3 ? "swiec" : "zgas")" @onclick="() => pieczeniePieczywa = 3"></div>
+        @if (makaPieczywo != "")
+        {
+            <img class="abs obrazekSieMiesci zbozeDoMakiPieczywo" src="img/dom/kuchnia/@(makaPieczywo).png" />
+            <div class="abs stanZakwasuBiezacejMakiPieczywo @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == makaPieczywo).PoziomZakwasu)"></div>
+        }
+        @if (smalecPieczywo != "")
+        {
+            <img class="abs obrazekSieMiesci smalecDoPieczywo" src="img/dom/kuchnia/@(smalecPieczywo).png" />
+        }
+        <div class="abs @(pieczeniePieczywa == 3 ? "piecSkladnikiDrozdzowki show" : "piecSkladnikiDrozdzowki op0")">
+            <img class="abs obrazekSieMiesci jajoDoBuleczki" src="img/dom/kuchnia/jajo.png" />
+            <img class="abs obrazekSieMiesci miodDoBuleczki" src="img/dom/kuchnia/miod.png" />
+            @if (jajoDrozdzowka != "")
+            {
+                <img class="abs obrazekSieMiesci jajoCzyjeDoBuleczki" src="img/dom/kuchnia/@(jajoDrozdzowka).png" />
+            }
+            @if (nadzienieDrozdzowka != "")
+            {
+                <img class="abs obrazekSieMiesci nadzienieDoBuleczki" src="img/dom/kuchnia/@(nadzienieDrozdzowka).png" />
+            }
+        </div>
+        @if (pieczywoGotowe != "")
+        {
+            <img class="abs obrazekSieMiesci pieczywoGotowePiec" src="img/dom/kuchnia/@(pieczywoGotowe).png" />
+        }
     }
 </div>
 
@@ -151,7 +197,15 @@
     private bool piecWedlina = false;
     private bool widokPiec => !piecPieczywo && !piecPizza && !piecCiasto && !piecWedlina;
     private string[] zboza = [ "zyto", "jeczmien", "pszenica", "ryz", "owies", "gryka", "orkisz"];
-    private string[] slodkieBuleczki = [ "brzoskwiniaBuleczka", "śliwkaBuleczka", "wiśniaBuleczka", "jabłkoBuleczka", "gruszkaBuleczka", "malinaBuleczka", "twarogBuleczka"];
+    private string[] smalce = [ "ges", "kaczka", "swinia"];
+    private string[] jajka = [ "kura", "ges", "kaczka", "indyk"];
+    private string[] slodkieBuleczki = [ "brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
+    private int pieczeniePieczywa = 0;
+    private string makaPieczywo = "";
+    private string smalecPieczywo = "";
+    private string jajoDrozdzowka = "";
+    private string nadzienieDrozdzowka = "";
+    private string pieczywoGotowe = "";
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
     private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)

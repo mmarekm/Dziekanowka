@@ -339,6 +339,17 @@
     right: 0;
     z-index: 2;
 }
+.produktyInPiecPieczywo {
+    left: 15px;
+    top: 20px;
+    width: 275px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 7px;
+    border: 1px solid black;
+}
 .pieczywoGraczaPiec {
     width: 110px;
     height: 620px;
@@ -346,7 +357,6 @@
     display: flex;
     flex-direction: column;
     gap: 7px;
-    border: 1px solid black;
 }
 .chlebyGraczaPiec {
     right: 270px;
@@ -361,7 +371,80 @@
     width: 80px;
     height: 80px;
     flex-shrink: 0;
-    border: 1px solid blue;
+}
+.liczbaChlebowGraczaPiec {
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 15px;
+    font-size: 14px;
+    text-align: center;
+    color: tan;
+}
+.zbozeDoMakiPieczywo {
+    width: 40px;
+    height: 40px;
+    top: 83px;
+    left: 475px;
+}
+.stanZakwasuBiezacejMakiPieczywo {
+    width: 80px;
+    height: 20px;
+    top: 145px;
+    left: 455px;
+}
+.smalecDoPieczywo {
+    width: 90px;
+    height: 90px;
+    top: 90px;
+    left: 598px;
+}
+.piecSkladnikiDrozdzowki {
+    width: 190px;
+    height: 155px;
+    top: 23px;
+    left: 725px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
+}
+    .piecSkladnikiDrozdzowki.op0 {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .piecSkladnikiDrozdzowki.show {
+        opacity: 1;
+        visibility: visible;
+    }
+.jajoDoBuleczki {
+    width: 50px;
+    height: 70px;
+    top: 5px;
+    left: 5px;
+}
+.miodDoBuleczki {
+    width: 80px;
+    height: 80px;
+    top: 0;
+    left: 90px;
+}
+.jajoCzyjeDoBuleczki {
+    width: 75px;
+    height: 75px;
+    bottom: 0;
+    left: 0;
+}
+.nadzienieDoBuleczki {
+    width: 70px;
+    height: 70px;
+    bottom: 0;
+    right: 0;
+}
+.pieczywoGotowePiec {
+    width: 160px;
+    height: 160px;
+    top: 370px;
+    left: 920px;
 }
 .produktyInMlynekKawa {
     width: 250px;
@@ -515,6 +598,37 @@
 .orkiszZakwas {
     left: 1460px;
 }
+.pieczeniePieczywaLampka {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid yellow;
+    transition: all 0.3s ease;
+    right: 580px;
+}
+.pieczeniePieczywaLampkaChleb {
+    top: 50px;
+}
+.pieczeniePieczywaLampkaBulka {
+    top: 130px;
+}
+.pieczeniePieczywaLampkaBuleczka {
+    top: 210px;
+}
+.pieczeniePieczywaLampka.swiec {
+    background: radial-gradient(circle, gold 0%, darkorange 100%);
+    box-shadow: 0 0 20px gold, 0 0 40px darkorange, inset 0 0 10px white;
+    border-color: goldenrod;
+}
+.pieczeniePieczywaLampka.zgas {
+    background: darkslategray;
+    box-shadow: inset 0 0 5px black;
+    border-color: gray;
+}
+    .pieczeniePieczywaLampka.zgas:hover {
+        background: slategray;
+    }
 .czarny {
     color: black;
 }
