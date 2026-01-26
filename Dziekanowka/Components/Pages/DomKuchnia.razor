@@ -122,10 +122,31 @@
         <div class="abs produktyInPiecPieczywo">
             @foreach (var zboze in zboza)
             {
-                <div class="rel produktInPiecPieczywo @(Gracz.Zboza.First(z => z.Nazwa == zboze).Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneZbozeNaMake(zboze)">
+                <div class="rel produktInPiecPieczywo @(Gracz.ProduktP($"{zboze}Maka").Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneZbozeNaMake(zboze)">
                     <img src="img/dom/kuchnia/@(zboze).png" class="obrazekSieMiesci" />
-                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Zboze(zboze).Ilosc</div>
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP($"{zboze}Maka").Ilosc</div>
                     <div class="abs stanZakwasuProduktInPiecPieczywo @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == zboze).PoziomZakwasu)"></div>
+                </div>
+            }
+            @foreach (var ptak in jajka)
+            {
+                <div class="rel produktInPiecPieczywo @(Gracz.ProduktZ($"{ptak}Jajo").Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneJajoNaBuleczke(ptak)">
+                    <img src="img/dom/kuchnia/@(ptak)Jajo.png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktZ($"{ptak}Jajo").Ilosc</div>
+                </div>
+            }
+            @foreach (var zwierz in smalce)
+            {
+                <div class="rel produktInPiecPieczywo @(Gracz.ProduktZ($"{zwierz}Smalec").Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneSmalecNaPieczywo(zwierz)">
+                    <img src="img/dom/kuchnia/@(zwierz)Smalec.png" class="obrazekSieMiesci" />
+                    <div class="abs liczbaChlebowGraczaPiec czarny">@Gracz.ProduktZ($"{zwierz}Smalec").Ilosc</div>
+                </div>
+            }
+            @foreach (var nadzienie in slodkieBuleczki)
+            {
+                <div class="rel produktInPiecPieczywo @((nadzienie != "twarog" ? Gracz.Owoc(nadzienie).Ilosc > 0 : Gracz.JestProduktP(nadzienie)) ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneNadzienieNaBuleczke(nadzienie)">
+                    <img src="img/dom/kuchnia/@(nadzienie).png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@((nadzienie != "twarog" ? Gracz.Owoc(nadzienie) : Gracz.ProduktP(nadzienie)).Ilosc)</div>
                 </div>
             }
         </div>
@@ -159,25 +180,28 @@
         <div class="abs pieczeniePieczywaLampka pieczeniePieczywaLampkaChleb @(pieczeniePieczywa == 1 ? "swiec" : "zgas")" @onclick="() => pieczeniePieczywa = 1"></div>
         <div class="abs pieczeniePieczywaLampka pieczeniePieczywaLampkaBulka @(pieczeniePieczywa == 2 ? "swiec" : "zgas")" @onclick="() => pieczeniePieczywa = 2"></div>
         <div class="abs pieczeniePieczywaLampka pieczeniePieczywaLampkaBuleczka @(pieczeniePieczywa == 3 ? "swiec" : "zgas")" @onclick="() => pieczeniePieczywa = 3"></div>
+        <div class="abs lWodyPiecPieczywo">@Gracz.Przedmiot("pelnaButelka").Ilosc</div>
+        <div class="abs lSoliPiecPieczywo">@Gracz.ZywnoscP("sol").Ilosc</div>
         @if (makaPieczywo != "")
         {
-            <img class="abs obrazekSieMiesci zbozeDoMakiPieczywo" src="img/dom/kuchnia/@(makaPieczywo).png" role="button" style="cursor: pointer;" @onclick="ZerujZbozeNaMake" />
+            <img class="abs obrazekSieMiesci zbozeDoMakiPieczywo" src="img/dom/kuchnia/@(makaPieczywo).png" role="button" @onclick="ZerujZbozeNaMake" />
             <div class="abs stanZakwasuBiezacejMakiPieczywo @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == makaPieczywo).PoziomZakwasu)"></div>
         }
         @if (smalecPieczywo != "")
         {
-            <img class="abs obrazekSieMiesci smalecDoPieczywo" src="img/dom/kuchnia/@(smalecPieczywo).png" />
+            <img class="abs obrazekSieMiesci smalecDoPieczywo" src="img/dom/kuchnia/@(smalecPieczywo).png" role="button" @onclick="ZerujSmalecNaPieczywo" />
         }
         <div class="abs @(pieczeniePieczywa == 3 ? "piecSkladnikiDrozdzowki show" : "piecSkladnikiDrozdzowki op0")">
             <img class="abs obrazekSieMiesci jajoDoBuleczki" src="img/dom/kuchnia/jajo.png" />
             <img class="abs obrazekSieMiesci miodDoBuleczki" src="img/dom/kuchnia/miod.png" />
+            <div class="abs lMioduPiecPieczywo">@Gracz.ProduktZ("miod").Ilosc</div>
             @if (jajoDrozdzowka != "")
             {
-                <img class="abs obrazekSieMiesci jajoCzyjeDoBuleczki" src="img/dom/kuchnia/@(jajoDrozdzowka).png" />
+                <img class="abs obrazekSieMiesci jajoCzyjeDoBuleczki" src="img/dom/kuchnia/@(jajoDrozdzowka).png" role="button" @onclick="ZerujJajoNaBuleczke" />
             }
             @if (nadzienieDrozdzowka != "")
             {
-                <img class="abs obrazekSieMiesci nadzienieDoBuleczki" src="img/dom/kuchnia/@(nadzienieDrozdzowka).png" />
+                <img class="abs obrazekSieMiesci nadzienieDoBuleczki" src="img/dom/kuchnia/@(nadzienieDrozdzowka).png" role="button" @onclick="ZerujNadzienieNaBuleczke"/>
             }
         </div>
         @if (pieczywoGotowe != "")
@@ -230,10 +254,29 @@
     private int UzyskanySok(string wyciskany) => tacaWyciskarka.First(t => t.Nazwa == wyciskany).Ilosc / 3;
     private void WybraneZbozeNaMake(string zboze)
     {
-        if (Gracz.Zboza.First(z => z.Nazwa == zboze).Ilosc < 1) return;
+        if (Gracz.ProduktP($"{zboze}Maka").Ilosc < 1) return;
         makaPieczywo = zboze;
     }
+    private void WybraneSmalecNaPieczywo(string zwierz)
+    {
+        if (Gracz.ProduktZ($"{zwierz}Smalec").Ilosc < 1) return;
+        smalecPieczywo = zwierz;
+    }
+    private void WybraneJajoNaBuleczke(string ptak)
+    {
+        if (Gracz.ProduktZ($"{ptak}Jajo").Ilosc < 1) return;
+        jajoDrozdzowka = ptak;
+    }
+    private void WybraneNadzienieNaBuleczke(string nadzienie)
+    {
+        bool owoc = nadzienie != "twarog";
+        if (owoc ? Gracz.Owoc(nadzienie).Ilosc < 1 : Gracz.ProduktP(nadzienie).Ilosc < 1) return;
+        nadzienieDrozdzowka = nadzienie;
+    }
     private void ZerujZbozeNaMake() => makaPieczywo = "";
+    private void ZerujSmalecNaPieczywo() => smalecPieczywo = "";
+    private void ZerujJajoNaBuleczke() => jajoDrozdzowka = "";
+    private void ZerujNadzienieNaBuleczke() => nadzienieDrozdzowka = "";
     private int uzyskanaKawa => new[] { tacaMlynek.First(t => t.Nazwa == "drewno").Ilosc, tacaMlynek.First(t => t.Nazwa == "pelnaButelka").Ilosc, tacaMlynek.First(t => t.Nazwa == "ziarnaKawy").Ilosc, tacaMlynek.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc) }.Min();
     private bool MoznaZakwasic(string zboze) => Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestProduktP($"{zboze}Maka") && Gracz.Zboza.First(z => z.Nazwa == zboze).MoznaZakwasicDzisiaj && Gracz.Zboza.First(z => z.Nazwa == zboze).PoziomZakwasu < 3;
     private string ZakwasKolor(int poziom) => poziom switch { 0 => "progresCzerwony", 1 => "progresPomaranczowy", 2 => "progresZolty", _ => "progresZielony" };
