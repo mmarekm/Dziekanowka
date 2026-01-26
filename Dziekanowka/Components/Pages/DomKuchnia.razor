@@ -119,6 +119,7 @@
     <div class="abs kuchniaNarzedzieConfirm @(piecPieczywo ? "lewyDolIks" : "")"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedziePiec"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (piecPieczywo)
     {
+        <div class="abs pieczeniePiecPieczywo"><button class="wyroznionyGuzik" @onclick="Pieczenie"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujPiecPieczywo.png" /></button></div>
         <div class="abs produktyInPiecPieczywo">
             @foreach (var zboze in zboza)
             {
@@ -236,7 +237,9 @@
     private string smalecPieczywo = "";
     private string jajoDrozdzowka = "";
     private string nadzienieDrozdzowka = "";
-    private string pieczywoGotowe = "";
+    private bool saSkladnikiNaPieczywo => Gracz.Przedmiot("pelnaButelka").Ilosc > 0 && Gracz.ZywnoscP("sol").Ilosc > 0 && makaPieczywo != "" && smalecPieczywo != "" && (pieczeniePieczywa != 3 || (jajoDrozdzowka != "" && nadzienieDrozdzowka != "" && Gracz.ProduktZ("miod").Ilosc > 0));
+    private string pieczywoGotowe => !saSkladnikiNaPieczywo ? "" : pieczeniePieczywa == 3 ? $"{nadzienieDrozdzowka}Buleczka" : pieczeniePieczywa == 1 ? $"{makaPieczywo}Chleb" : pieczeniePieczywa == 2 ? $"{makaPieczywo}Bulka" : "";
+
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
     private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)
@@ -284,6 +287,7 @@
     {
         if (!MoznaZakwasic(zboze)) return;
         Gracz.Przedmiot("pelnaButelka").Ilosc--;
+        Gracz.Przedmiot("pustaButelka").Ilosc++;
         Gracz.ProduktP($"{zboze}Maka").Ilosc--;
         Gracz.Zboza.First(z => z.Nazwa == zboze).OstatniDzienZakwaszenia = DateTime.Now.Day;
         Gracz.Zboza.First(z => z.Nazwa == zboze).OstatniMiesiacZakwaszenia = DateTime.Now.Month;
@@ -320,6 +324,34 @@
             Gracz.ZywnoscP("kawa").Ilosc += uzyskanaKawa;
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task Pieczenie()
+    {
+        if (piecPieczywo && (!saSkladnikiNaPieczywo || Gracz.Zboza.First(z => z.Nazwa == makaPieczywo).PoziomZakwasu < 3 || pieczeniePieczywa == 0)) return;
+        if (piecPieczywo)
+        {
+            Gracz.Przedmiot("pelnaButelka").Ilosc--;
+            Gracz.Przedmiot("pustaButelka").Ilosc++;
+            Gracz.ZywnoscP("sol").Ilosc--;
+            Gracz.ProduktZ($"{smalecPieczywo}Smalec").Ilosc--;
+            Gracz.ProduktP($"{makaPieczywo}Maka").Ilosc--;
+            smalecPieczywo = "";
+            if (pieczeniePieczywa == 3)
+            {
+                Gracz.ProduktZ("miod").Ilosc--;
+                Gracz.ProduktZ($"{jajoDrozdzowka}Jajo").Ilosc--;
+                Gracz.ProduktP($"{nadzienieDrozdzowka}Buleczka").Ilosc += 2;
+                jajoDrozdzowka = "";
+                nadzienieDrozdzowka = "";
+            }
+            else if (pieczeniePieczywa == 2)
+                Gracz.ProduktP($"{makaPieczywo}Bulka").Ilosc += 2;
+            else if (pieczeniePieczywa == 1)
+                Gracz.ProduktP($"{makaPieczywo}Chleb").Ilosc++;
+            makaPieczywo = "";
+            pieczeniePieczywa = 0;
+        }
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }

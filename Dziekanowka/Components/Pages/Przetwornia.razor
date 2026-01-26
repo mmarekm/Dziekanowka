@@ -476,7 +476,7 @@
     private int uzyskaneMieloneDzikie => tacaMlynek.Where(t => new[] { "krolikJedzenie", "kozaJedzenie", "owcaJedzenie" }.Contains(t.Nazwa)).Sum(t => t.Ilosc);
     private int uzyskaneMieloneSwinia => tacaMlynek.Where(t => new[] { "swiniaSzynka", "swiniaSchab", "swiniaBoczek" }.Contains(t.Nazwa)).Sum(t => t.Ilosc);
     private int uzyskaneMieloneKrowa => tacaMlynek.Where(t => new[] { "krowaRostbef", "krowaAntrykot", "krowaLopatka", "krowaPoledwica" }.Contains(t.Nazwa)).Sum(t => t.Ilosc);
-    private int uzyskanaKielbasa => tacaMlynek.Where(t => t.Nazwa.StartsWith("mielone")).Sum(t => t.Ilosc) * 3;
+    private int uzyskanaKielbasa => new[] { tacaMlynek.Where(t => t.Nazwa.StartsWith("mielone")).Sum(t => t.Ilosc), tacaMlynek.Where(t => t.Nazwa.EndsWith("Smalec")).Sum(t => t.Ilosc), tacaMlynek.First(t => t.Nazwa == "czosnek").Ilosc, tacaMlynek.First(t => t.Nazwa == "sol").Ilosc }.Min() * 3;
     private void ZamknijNarzedzie() => maselnica = serowarnia = zarna = platkarka = beczka = mlynek = false;
     private int WPortfelu(string nazwa)
     {
