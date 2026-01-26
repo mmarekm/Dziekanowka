@@ -13,6 +13,12 @@
 .piecPizzaWidok {
     background-image: url('../img/dom/kuchnia/piecPizzaWidok.png');
 }
+.piecCiastoWidok {
+    background-image: url('../img/dom/kuchnia/piecCiastoWidok.png');
+}
+.piecWedlinaWidok {
+    background-image: url('../img/dom/kuchnia/piecWedlinaWidok.png');
+}
 .domDoGospodarstwo {
     top: 196px;
     right: 39px;
@@ -402,7 +408,6 @@
     width: 64px;
     height: 64px;
     flex-shrink: 0;
-    border: 1px solid blue;
 }
 .pieczywoGraczaPiec {
     width: 110px;

@@ -9,6 +9,8 @@
         new("zytoMaka"), new("jeczmienMaka"), new("pszenicaMaka"), new("ryzMaka"), new("owiesMaka"), new("grykaMaka"), new("orkiszMaka"),
         new("zytoPlatki"), new("jeczmienPlatki"), new("pszenicaPlatki"), new("ryzPlatki"), new("owiesPlatki"), new("grykaPlatki"), new("orkiszPlatki"), new("kukurydzaPlatki"),
         new("wino"), new("ogorekKiszony"), new("kapustaKiszona"), new("burakKiszony"), new("mieloneDrob"), new("mieloneDzikie"), new("mieloneSwinia"), new("mieloneKrowa"),
+        new("lopatkaWedlina"), new("poledwicaWedlina"), new("boczekWedlina"), new("szynkaWedlina"), new("schabWedlina"), new("kurczakWedlina"), new("indykWedlina"),
+        new("krolikPasztet"), new("drobPasztet"), new("swiniaPasztet"),
         new("marchewSok"), new("burakSok"), new("pomidorSok"), new("jabłkoSok"), new("pomarańczaSok"), new("grejpfrutSok"), new("cytrynaSok"), new("ananasSok"),
         new("brzoskwiniaSok"), new("morelaSok"), new("wiśniaSok"), new("truskawkaSok"), new("malinaSok"), new("borówkaSok"), new("porzeczkaCzarnaSok"),
         new("zytoChleb"), new("jeczmienChleb"), new("pszenicaChleb"), new("ryzChleb"), new("owiesChleb"), new("grykaChleb"), new("orkiszChleb"),

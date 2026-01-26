@@ -68,10 +68,10 @@
     }
     @if (piec)
     {
-        <div class="abs piecDoPieczywa"><button class="wyroznionyGuzik" @onclick="() => piecPieczywo = true"><img src="img/dom/kuchnia/piecPieczywo.png" /></button></div>
-        <div class="abs piecDoPizzy"><button class="wyroznionyGuzik" @onclick="() => piecPizza = true"><img src="img/dom/kuchnia/piecPizza.png" /></button></div>
-        <div class="abs piecDoCiasta"><button class="wyroznionyGuzik" @onclick="() => piecCiasto = true"><img src="img/dom/kuchnia/piecCiasto.png" /></button></div>
-        <div class="abs piecDoWedlin"><button class="wyroznionyGuzik" @onclick="() => piecWedlina = true"><img src="img/dom/kuchnia/piecWedlina.png" /></button></div>       
+        <div class="abs piecDoPieczywa"><button class="wyroznionyGuzik" @onclick="() => piecPieczywo = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecPieczywo.png" /></button></div>
+        <div class="abs piecDoPizzy"><button class="wyroznionyGuzik" @onclick="() => piecPizza = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecPizza.png" /></button></div>
+        <div class="abs piecDoCiasta"><button class="wyroznionyGuzik" @onclick="() => piecCiasto = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecCiasto.png" /></button></div>
+        <div class="abs piecDoWedlin"><button class="wyroznionyGuzik" @onclick="() => piecWedlina = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecWedlina.png" /></button></div>       
     }
     @if(mlynek)
     {
@@ -212,8 +212,8 @@
     }
     @if (piecPizza)
     {
-        //Zakwas + mąka pszenna + woda + olej + sól + pomidory + oregano + czosnek + ser
-        // Papryka, Cebula, Pieczarki, Kukurydza, Ogórek, Kiełbasa, Rydze, Podgrzybki, Borowiki, Kurki
+        //Zakwas + mąka pszenna + woda + olej + sól + pomidory + oregano + bazylia + ser
+        // Papryka, Cebula, Pieczarki, Ananas, Kukurydza, Ogórek, Kiełbasa, Rydze, Podgrzybki, Borowiki, Kurki, SALAMIWEDLINA(sklep), OLIWKI(sklep)
         // LopatkaWedlina, PoledwicaWedlina, BoczekWedlina, SzynkaWedlina, SchabWedlina, KrolikPasztet, MieloneDrobPasztet, MieloneSwiniaPasztet, KuraWedlina(Piers), IndykWedlina(Piers)
     }
 </div>
@@ -245,7 +245,6 @@
     private string nadzienieDrozdzowka = "";
     private bool saSkladnikiNaPieczywo => Gracz.Przedmiot("pelnaButelka").Ilosc > 0 && Gracz.ZywnoscP("sol").Ilosc > 0 && makaPieczywo != "" && smalecPieczywo != "" && (pieczeniePieczywa != 3 || (jajoDrozdzowka != "" && nadzienieDrozdzowka != "" && Gracz.ProduktZ("miod").Ilosc > 0));
     private string pieczywoGotowe => !saSkladnikiNaPieczywo ? "" : pieczeniePieczywa == 3 ? $"{nadzienieDrozdzowka}Buleczka" : pieczeniePieczywa == 1 ? $"{makaPieczywo}Chleb" : pieczeniePieczywa == 2 ? $"{makaPieczywo}Bulka" : "";
-
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
     private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)
