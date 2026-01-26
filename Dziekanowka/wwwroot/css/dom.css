@@ -10,6 +10,9 @@
 .piecPieczywoWidok {
     background-image: url('../img/dom/kuchnia/piecPieczywoWidok.png');
 }
+.piecPizzaWidok {
+    background-image: url('../img/dom/kuchnia/piecPizzaWidok.png');
+}
 .domDoGospodarstwo {
     top: 196px;
     right: 39px;

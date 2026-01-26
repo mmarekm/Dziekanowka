@@ -13,7 +13,9 @@
         new("brzoskwiniaSok"), new("morelaSok"), new("wiśniaSok"), new("truskawkaSok"), new("malinaSok"), new("borówkaSok"), new("porzeczkaCzarnaSok"),
         new("zytoChleb"), new("jeczmienChleb"), new("pszenicaChleb"), new("ryzChleb"), new("owiesChleb"), new("grykaChleb"), new("orkiszChleb"),
         new("zytoBulka"), new("jeczmienBulka"), new("pszenicaBulka"), new("ryzBulka"), new("owiesBulka"), new("grykaBulka"), new("orkiszBulka"),
+        new("pizza"),
         new("brzoskwiniaBuleczka"), new("śliwkaBuleczka"), new("wiśniaBuleczka"), new("jabłkoBuleczka"), new("gruszkaBuleczka"), new("malinaBuleczka"), new("twarogBuleczka")
         ];
+        public HashSet<string> Pizza = [];
     }
 }
