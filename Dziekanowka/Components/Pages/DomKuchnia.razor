@@ -213,8 +213,31 @@
     @if (piecPizza)
     {
         //Zakwas + mąka pszenna + woda + olej + sól + pomidory + oregano + bazylia + ser
-        // Papryka, Cebula, Pieczarki, Ananas, Kukurydza, Ogórek, Kiełbasa, Rydze, Podgrzybki, Borowiki, Kurki, SALAMIWEDLINA(sklep), OLIWKI(sklep)
-        // LopatkaWedlina, PoledwicaWedlina, BoczekWedlina, SzynkaWedlina, SchabWedlina, KrolikPasztet, MieloneDrobPasztet, MieloneSwiniaPasztet, KuraWedlina(Piers), IndykWedlina(Piers)
+        // Papryka, Cebula, Pieczarki, Ananas, Kukurydza, Ogórek, Kiełbasa, Rydze, Podgrzybki, Borowiki, Kurki, OLIWKI(sklep), kielbasaWedlina, salamiWedlina(sklep)
+        // lopatkaWedlina, poledwicaWedlina, boczekWedlina, szynkaWedlina, schabWedlina, kurczakWedlina, indykWedlina, krolikPasztet, drobPasztet, swiniaPasztet
+    }
+    @if (piecWedlina)
+    {
+        <div class="abs wedlinyGracza">
+            @foreach (var wedlina in wedliny)
+            {
+                <div class="rel wedlinaGracza">
+                    <img src="img/dom/kuchnia/@(wedlina)Wedlina.png" class="obrazekSieMiesci" />
+                    <div class="abs liczbaChlebowGraczaPiec">@Gracz.ProduktP($"{wedlina}Wedlina").Ilosc</div>
+                </div>
+            }
+            @foreach (var pasztet in pasztety)
+            {
+                <div class="rel wedlinaGracza">
+                    <img src="img/dom/kuchnia/@(pasztet)Pasztet.png" class="obrazekSieMiesci" />
+                    <div class="abs liczbaChlebowGraczaPiec">@Gracz.ProduktP($"{pasztet}Pasztet").Ilosc</div>
+                </div>
+            }
+        </div>
+        @if (wedlinaGotowa != "")
+        {
+            <img class="abs obrazekSieMiesci wedlinaGotowaPiec" src="img/dom/kuchnia/@(wedlinaGotowa).png" />
+        }
     }
 </div>
 
@@ -238,6 +261,8 @@
     private string[] smalce = [ "ges", "kaczka", "swinia"];
     private string[] jajka = [ "kura", "ges", "kaczka", "indyk"];
     private string[] slodkieBuleczki = [ "brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
+    private string[] wedliny = [ "lopatka", "poledwica", "boczek", "szynka", "schab", "kurczak", "indyk"];
+    private string[] pasztety = [ "krolik", "drob", "swinia" ];
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
     private string smalecPieczywo = "";
@@ -245,6 +270,7 @@
     private string nadzienieDrozdzowka = "";
     private bool saSkladnikiNaPieczywo => Gracz.Przedmiot("pelnaButelka").Ilosc > 0 && Gracz.ZywnoscP("sol").Ilosc > 0 && makaPieczywo != "" && smalecPieczywo != "" && (pieczeniePieczywa != 3 || (jajoDrozdzowka != "" && nadzienieDrozdzowka != "" && Gracz.ProduktZ("miod").Ilosc > 0));
     private string pieczywoGotowe => !saSkladnikiNaPieczywo ? "" : pieczeniePieczywa == 3 ? $"{nadzienieDrozdzowka}Buleczka" : pieczeniePieczywa == 1 ? $"{makaPieczywo}Chleb" : pieczeniePieczywa == 2 ? $"{makaPieczywo}Bulka" : "";
+    private string wedlinaGotowa => "";
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
     private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)

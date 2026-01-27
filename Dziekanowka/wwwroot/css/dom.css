@@ -509,6 +509,26 @@
     top: 370px;
     left: 920px;
 }
+.wedlinyGracza {
+    width: 215px;
+    height: 525px;
+    right: 30px;
+    top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.wedlinaGracza {
+    width: 95px;
+    height: 95px;
+    flex-shrink: 0;
+}
+.wedlinaGotowaPiec {
+    width: 120px;
+    height: 120px;
+    top: 510px;
+    right: 300px;
+}
 .produktyInMlynekKawa {
     width: 250px;
     height: 250px;

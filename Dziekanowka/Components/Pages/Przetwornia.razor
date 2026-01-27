@@ -385,7 +385,7 @@
         <div class="abs mlynekLCelow mlynekLMieloneDzikie">@Gracz.ProduktP("mieloneDzikie").Ilosc</div>
         <div class="abs mlynekLCelow mlynekLMieloneSwinia">@Gracz.ProduktP("mieloneSwinia").Ilosc</div>
         <div class="abs mlynekLCelow mlynekLMieloneKrowa">@Gracz.ProduktP("mieloneKrowa").Ilosc</div>
-        <div class="abs mlynekLCelow mlynekLKielbasa">@Gracz.ProduktP("kielbasa").Ilosc</div>
+        <div class="abs mlynekLCelow mlynekLKielbasa">@Gracz.ProduktP("kielbasaWedlina").Ilosc</div>
         <div class="abs tacaPodajnikMlynek">
             @foreach (var produkt in taca)
             {
@@ -428,7 +428,7 @@
             @if (uzyskanaKielbasa > 0)
             {
                 <div class="rel produktTacaPodajnikMlynek">
-                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/kielbasa.png" />
+                    <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/kielbasaWedlina.png" />
                     <div class="abs produktTacaIloscPodajnikMlynek">@uzyskanaKielbasa</div>
                 </div>
             }
@@ -586,7 +586,7 @@
             if (uzyskaneMieloneKrowa > 0)
                 Gracz.ProduktP("mieloneKrowa").Ilosc += uzyskaneMieloneKrowa;
             if (uzyskanaKielbasa > 0)
-                Gracz.ProduktP("kielbasa").Ilosc += uzyskanaKielbasa;
+                Gracz.ProduktP("kielbasaWedlina").Ilosc += uzyskanaKielbasa;
         }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
