@@ -6,6 +6,7 @@ namespace Dziekanowka.Mechanizm
         public static bool JestZwierze(this Gracz g, string zwierz) => g.Zwierzeta.Any(z => z.Nazwa == zwierz && z.Ilosc > 0);
         public static bool JestProduktZ(this Gracz g, string produkt) => g.ProduktyZwierzece.Any(p => p.Nazwa == produkt && p.Ilosc > 0);
         public static bool JestProduktP(this Gracz g, string produkt) => g.ProduktyPrzetworzone.Any(p => p.Nazwa == produkt && p.Ilosc > 0);
+        public static bool JestZywnoscP(this Gracz g, string produkt) => g.ZywnoscPozostala.Any(p => p.Nazwa == produkt && p.Ilosc > 0);
         public static bool JestWarzywo(this Gracz g, string warzywo) => g.Warzywa.Any(w => w.Nazwa == warzywo && w.Ilosc > 0);
         public static bool JestZboze(this Gracz g, string zboze) => g.Zboza.Any(w => w.Nazwa == zboze && w.Ilosc > 0);
         public static bool JestOwoc(this Gracz g, string owoc) => g.Owoce.Any(o => o.Nazwa == owoc && o.Ilosc > 0);

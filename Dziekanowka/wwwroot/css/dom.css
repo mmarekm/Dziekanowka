@@ -509,6 +509,20 @@
     top: 370px;
     left: 920px;
 }
+.produktyInPiecWedlina {
+    left: 35px;
+    top: 20px;
+    width: 520px;
+    height: 225px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.produktInPiecWedlina {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
 .wedlinyGracza {
     width: 215px;
     height: 525px;
@@ -522,6 +536,74 @@
     width: 95px;
     height: 95px;
     flex-shrink: 0;
+}
+.miesoNaWedline {
+    top: 40px;
+    left: 590px;
+    width: 110px;
+    height: 110px;
+}
+.lSkladnikPiecWedlina {
+    width: 30px;
+    height: 16px;
+    font-size: 15px;
+    text-align: center;
+}
+.lSoliPiecWedlina {
+    top: 140px;
+    left: 720px;
+}
+.lMajerankuPiecWedlina {
+    top: 140px;
+    left: 785px;
+}
+.lPieprzuPiecWedlina {
+    top: 140px;
+    left: 880px;
+}
+.lCzosnkuPiecWedlina {
+    top: 140px;
+    left: 975px;
+}
+.pieczeniePasztetu {
+    left: 1050px;
+    top: 30px;
+    height: 150px;
+    width: 250px;
+}
+.cebulaNaPasztet {
+    left: 0;
+    top: 15px;
+    width: 80px;
+    height: 80px;
+}
+.lCebuliPiecWedlina {
+    top: 110px;
+    left: 30px;
+}
+.jajoNaPasztet {
+    left: 85px;
+    top: 10px;
+    width: 80px;
+    height: 80px;
+}
+.jajoCzyjeNaPasztet {
+    left: 105px;
+    top: 100px;
+    width: 45px;
+    height: 45px;
+}
+.smalecNaPasztet {
+    left: 168px;
+    top: 10px;
+    width: 80px;
+    height: 80px;
+}
+.smalecCzyjNaPasztet {
+    left: 188px;
+    top: 100px;
+    width: 45px;
+    height: 45px;
 }
 .wedlinaGotowaPiec {
     width: 120px;

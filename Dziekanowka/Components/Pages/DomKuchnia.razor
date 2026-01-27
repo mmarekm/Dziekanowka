@@ -185,12 +185,12 @@
         <div class="abs lSoliPiecPieczywo">@Gracz.ZywnoscP("sol").Ilosc</div>
         @if (makaPieczywo != "")
         {
-            <img class="abs obrazekSieMiesci zbozeDoMakiPieczywo" src="img/dom/kuchnia/@(makaPieczywo).png" role="button" @onclick="ZerujZbozeNaMake" />
+            <img class="abs obrazekSieMiesci zbozeDoMakiPieczywo" src="img/dom/kuchnia/@(makaPieczywo).png" role="button" @onclick='() => makaPieczywo = ""' />
             <div class="abs stanZakwasuBiezacejMakiPieczywo @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == makaPieczywo).PoziomZakwasu)"></div>
         }
         @if (smalecPieczywo != "")
         {
-            <img class="abs obrazekSieMiesci smalecDoPieczywo" src="img/dom/kuchnia/@(smalecPieczywo).png" role="button" @onclick="ZerujSmalecNaPieczywo" />
+            <img class="abs obrazekSieMiesci smalecDoPieczywo" src="img/dom/kuchnia/@(smalecPieczywo).png" role="button" @onclick='() => smalecPieczywo = ""' />
         }
         <div class="abs @(pieczeniePieczywa == 3 ? "piecSkladnikiDrozdzowki show" : "piecSkladnikiDrozdzowki op0")">
             <img class="abs obrazekSieMiesci jajoDoBuleczki" src="img/dom/kuchnia/jajo.png" />
@@ -198,11 +198,11 @@
             <div class="abs lMioduPiecPieczywo">@Gracz.ProduktZ("miod").Ilosc</div>
             @if (jajoDrozdzowka != "")
             {
-                <img class="abs obrazekSieMiesci jajoCzyjeDoBuleczki" src="img/dom/kuchnia/@(jajoDrozdzowka).png" role="button" @onclick="ZerujJajoNaBuleczke" />
+                <img class="abs obrazekSieMiesci jajoCzyjeDoBuleczki" src="img/dom/kuchnia/@(jajoDrozdzowka).png" role="button" @onclick='() => jajoDrozdzowka = ""' />
             }
             @if (nadzienieDrozdzowka != "")
             {
-                <img class="abs obrazekSieMiesci nadzienieDoBuleczki" src="img/dom/kuchnia/@(nadzienieDrozdzowka).png" role="button" @onclick="ZerujNadzienieNaBuleczke"/>
+                <img class="abs obrazekSieMiesci nadzienieDoBuleczki" src="img/dom/kuchnia/@(nadzienieDrozdzowka).png" role="button" @onclick='() => nadzienieDrozdzowka = ""'/>
             }
         </div>
         @if (pieczywoGotowe != "")
@@ -218,6 +218,61 @@
     }
     @if (piecWedlina)
     {
+        <div class="abs produktyInPiecWedlina">
+            @foreach (var element in naWedlineZ)
+            {
+                <div class="rel produktInPiecWedlina @(Gracz.ProduktZ(element).Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneMiesoNaWedline(element)">
+                    <img src="img/dom/kuchnia/@(element).png" class="obrazekContain" />
+                    <div class="abs liczbaChlebowGraczaPiec czarny">@Gracz.ProduktZ(element).Ilosc</div>
+                </div>
+            }
+            @foreach (var element in naWedlineP)
+            {
+                <div class="rel produktInPiecWedlina @(Gracz.ProduktP(element).Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneMiesoNaWedline(element)">
+                    <img src="img/dom/kuchnia/@(element).png" class="obrazekContain" />
+                    <div class="abs liczbaChlebowGraczaPiec czarny">@Gracz.ProduktP(element).Ilosc</div>
+                </div>
+            }
+            @foreach (var jajo in jajka)
+            {
+                <div class="rel produktInPiecWedlina @(Gracz.ProduktZ($"{jajo}Jajo").Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneJajoNaWedline(jajo)">
+                    <img src="img/dom/kuchnia/@(jajo)Jajo.png" class="obrazekContain" />
+                    <div class="abs liczbaChlebowGraczaPiec czarny">@Gracz.ProduktZ($"{jajo}Jajo").Ilosc</div>
+                </div>
+            }
+            @foreach (var smalec in smalce)
+            {
+                <div class="rel produktInPiecWedlina @(Gracz.ProduktZ($"{smalec}Smalec").Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneSmalecNaWedline(smalec)">
+                    <img src="img/dom/kuchnia/@(smalec)Smalec.png" class="obrazekContain" />
+                    <div class="abs liczbaChlebowGraczaPiec czarny">@Gracz.ProduktZ($"{smalec}Smalec").Ilosc</div>
+                </div>
+            }
+        </div>
+        @if (miesoWedlina != "")
+        {
+            <img class="abs obrazekContain miesoNaWedline" src="img/dom/kuchnia/@(miesoWedlina).png" role="button" @onclick='() => miesoWedlina = ""' />
+        }
+        <div class="abs lSkladnikPiecWedlina lSoliPiecWedlina">@Gracz.ZywnoscP("sol").Ilosc</div>
+        <div class="abs lSkladnikPiecWedlina lMajerankuPiecWedlina">@Gracz.ZywnoscP("majeranek").Ilosc</div>
+        <div class="abs lSkladnikPiecWedlina lPieprzuPiecWedlina">@Gracz.ZywnoscP("czarnyPieprz").Ilosc</div>
+        <div class="abs lSkladnikPiecWedlina lCzosnkuPiecWedlina">@Gracz.Warzywo("czosnek").Ilosc</div>
+        @if (wybranyPasztet)
+        {
+            <div class="abs pieczeniePasztetu">
+                <img class="abs obrazekContain cebulaNaPasztet" src="img/dom/kuchnia/cebula.png" />
+                <div class="abs lSkladnikPiecWedlina lCebuliPiecWedlina">@Gracz.Warzywo("cebula").Ilosc</div>
+                <img class="abs obrazekContain jajoNaPasztet" src="img/dom/kuchnia/jajo.png" />
+                @if (jajoWedlina != "")
+                {
+                    <img class="abs obrazekContain jajoCzyjeNaPasztet" src="img/dom/kuchnia/@(jajoWedlina).png" role="button" @onclick='() => jajoWedlina = ""' />
+                }
+                <img class="abs obrazekContain smalecNaPasztet" src="img/dom/kuchnia/smalec.png" />
+                @if (smalecWedlina != "")
+                {
+                    <img class="abs obrazekContain smalecCzyjNaPasztet" src="img/dom/kuchnia/@(smalecWedlina).png" role="button" @onclick='() => smalecWedlina = ""' />
+                }
+            </div>
+        }
         <div class="abs wedlinyGracza">
             @foreach (var wedlina in wedliny)
             {
@@ -263,14 +318,35 @@
     private string[] slodkieBuleczki = [ "brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
     private string[] wedliny = [ "lopatka", "poledwica", "boczek", "szynka", "schab", "kurczak", "indyk"];
     private string[] pasztety = [ "krolik", "drob", "swinia" ];
+    private string[] naWedlineZ = ["krowaLopatka", "krowaPoledwica", "swiniaBoczek", "swiniaSzynka", "swiniaSchab", "kuraJedzenie", "indykJedzenie", "krolikJedzenie"];
+    private string[] naWedlineP = ["mieloneDrob", "mieloneSwinia"];
+    private Dictionary<string, string> miesoNaWedline =
+    new()
+    {
+        ["krowaLopatka"] = "lopatkaWedlina",
+        ["krowaPoledwica"] = "poledwicaWedlina",
+        ["swiniaBoczek"] = "boczekWedlina",
+        ["swiniaSzynka"] = "szynkaWedlina",
+        ["swiniaSchab"] = "schabWedlina",
+        ["kuraJedzenie"] = "kurczakWedlina",
+        ["indykJedzenie"] = "indykWedlina",
+        ["krolikJedzenie"] = "krolikPasztet",
+        ["mieloneDrob"] = "drobPasztet",
+        ["mieloneSwinia"] = "swiniaPasztet"
+    };
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
     private string smalecPieczywo = "";
     private string jajoDrozdzowka = "";
     private string nadzienieDrozdzowka = "";
-    private bool saSkladnikiNaPieczywo => Gracz.Przedmiot("pelnaButelka").Ilosc > 0 && Gracz.ZywnoscP("sol").Ilosc > 0 && makaPieczywo != "" && smalecPieczywo != "" && (pieczeniePieczywa != 3 || (jajoDrozdzowka != "" && nadzienieDrozdzowka != "" && Gracz.ProduktZ("miod").Ilosc > 0));
+    private bool saSkladnikiNaPieczywo => Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestZywnoscP("sol") && makaPieczywo != "" && smalecPieczywo != "" && (pieczeniePieczywa != 3 || (jajoDrozdzowka != "" && nadzienieDrozdzowka != "" && Gracz.JestProduktZ("miod")));
     private string pieczywoGotowe => !saSkladnikiNaPieczywo ? "" : pieczeniePieczywa == 3 ? $"{nadzienieDrozdzowka}Buleczka" : pieczeniePieczywa == 1 ? $"{makaPieczywo}Chleb" : pieczeniePieczywa == 2 ? $"{makaPieczywo}Bulka" : "";
-    private string wedlinaGotowa => "";
+    private string miesoWedlina = "";
+    private bool wybranyPasztet => miesoWedlina == "krolikJedzenie" || miesoWedlina == "mieloneDrob" || miesoWedlina == "mieloneSwinia";
+    private string jajoWedlina = "";
+    private string smalecWedlina = "";
+    private bool saSkladnikiNaWedline => miesoWedlina != "" && Gracz.JestZywnoscP("sol") && Gracz.JestZywnoscP("czarnyPieprz") && Gracz.JestZywnoscP("majeranek") && Gracz.JestWarzywo("cebula");
+    private string wedlinaGotowa => !saSkladnikiNaWedline ? "": "";
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
     private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)
@@ -296,10 +372,20 @@
         if (Gracz.ProduktZ($"{zwierz}Smalec").Ilosc < 1) return;
         smalecPieczywo = zwierz;
     }
+    private void WybraneSmalecNaWedline(string zwierz)
+    {
+        if (Gracz.ProduktZ($"{zwierz}Smalec").Ilosc < 1) return;
+        smalecWedlina = zwierz;
+    }
     private void WybraneJajoNaBuleczke(string ptak)
     {
         if (Gracz.ProduktZ($"{ptak}Jajo").Ilosc < 1) return;
         jajoDrozdzowka = ptak;
+    }
+    private void WybraneJajoNaWedline(string ptak)
+    {
+        if (Gracz.ProduktZ($"{ptak}Jajo").Ilosc < 1) return;
+        jajoWedlina = ptak;
     }
     private void WybraneNadzienieNaBuleczke(string nadzienie)
     {
@@ -307,10 +393,12 @@
         if (owoc ? Gracz.Owoc(nadzienie).Ilosc < 1 : Gracz.ProduktP(nadzienie).Ilosc < 1) return;
         nadzienieDrozdzowka = nadzienie;
     }
-    private void ZerujZbozeNaMake() => makaPieczywo = "";
-    private void ZerujSmalecNaPieczywo() => smalecPieczywo = "";
-    private void ZerujJajoNaBuleczke() => jajoDrozdzowka = "";
-    private void ZerujNadzienieNaBuleczke() => nadzienieDrozdzowka = "";
+    private void WybraneMiesoNaWedline(string mieso)
+    {
+        bool odZwierza = mieso != "mieloneDrob" || mieso != "mieloneSwinia";
+        if (odZwierza ? Gracz.ProduktZ(mieso).Ilosc < 1 : Gracz.ProduktP(mieso).Ilosc < 1) return;
+        miesoWedlina = mieso;
+    }
     private int uzyskanaKawa => new[] { tacaMlynek.First(t => t.Nazwa == "drewno").Ilosc, tacaMlynek.First(t => t.Nazwa == "pelnaButelka").Ilosc, tacaMlynek.First(t => t.Nazwa == "ziarnaKawy").Ilosc, tacaMlynek.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc) }.Min();
     private bool MoznaZakwasic(string zboze) => Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestProduktP($"{zboze}Maka") && Gracz.Zboza.First(z => z.Nazwa == zboze).MoznaZakwasicDzisiaj && Gracz.Zboza.First(z => z.Nazwa == zboze).PoziomZakwasu < 3;
     private string ZakwasKolor(int poziom) => poziom switch { 0 => "progresCzerwony", 1 => "progresPomaranczowy", 2 => "progresZolty", _ => "progresZielony" };
