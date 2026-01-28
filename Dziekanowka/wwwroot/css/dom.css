@@ -509,6 +509,13 @@
     top: 370px;
     left: 920px;
 }
+.pieczeniePiecWedlina {
+    width: 138px;
+    height: 232px;
+    top: 206px;
+    left: 1074px;
+    z-index: 2;
+}
 .produktyInPiecWedlina {
     left: 35px;
     top: 20px;
