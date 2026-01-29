@@ -509,6 +509,20 @@
     top: 370px;
     left: 920px;
 }
+.produktyPizzyIn {
+    width: 650px;
+    height: 360px;
+    top: 25px;
+    left: 45px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 30px;
+}
+.produktInPizza {
+    width: 65px;
+    height: 65px;
+    flex-shrink: 0;
+}
 .pieczeniePiecWedlina {
     width: 138px;
     height: 232px;

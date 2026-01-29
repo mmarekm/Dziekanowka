@@ -7,3 +7,9 @@
 "pieczarka", "rydz", "podgrzybek", "borowik", "kurka"
 "oliwki", "olej", "sol", "proszekDoPieczenia", "kminek", "czarnyPieprz", "majeranek", "oregano", "bazylia", "cynamon"
 "marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok"
+
+SKLEP
+wszystkie ProduktZ (prawie)
+wszystkie ProduktP (prawie)
+wszystkie ZywnoscP (wszystkie)
+grzyby NIE
