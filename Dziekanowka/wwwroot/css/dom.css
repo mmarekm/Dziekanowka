@@ -523,6 +523,83 @@
     height: 65px;
     flex-shrink: 0;
 }
+.serNaPizze {
+    width: 50px;
+    height: 50px;
+    bottom: 220px;
+    left: 100px;
+    cursor: pointer;
+}
+.zbozeDoMakiPizza {
+    width: 50px;
+    height: 50px;
+    bottom: 220px;
+    left: 260px;
+    cursor: pointer;
+}
+.stanZakwasuBiezacejMakiPizza {
+    width: 20px;
+    height: 50px;
+    bottom: 220px;
+    left: 310px;
+}
+.lSkladnikowPizza {
+    width: 35px;
+    height: 18px;
+    font-size: 16px;
+    text-align: center;
+}
+.lWodaPizza {
+    bottom: 110px;
+    left: 30px;
+}
+.lSolPizza {
+    bottom: 110px;
+    left: 97px;
+}
+.lOlejPizza {
+    bottom: 110px;
+    left: 164px;
+}
+.lPomidoryPizza {
+    bottom: 110px;
+    left: 270px;
+}
+.lBazyliaPizza {
+    bottom: 40px;
+    left: 110px;
+}
+.lOreganoPizza {
+    bottom: 40px;
+    left: 245px;
+}
+.pizzaWlasciwa {
+    width: 400px;
+    height: 400px;
+    left: 800px;
+    opacity: 0.85;
+}
+.pizzaNarzut {
+    left: 0;
+    top: 0;
+    width: 400px;
+    height: 400px;
+}
+.swiniaPasztetKawalki, .drobPasztetKawalki, .krolikPasztetKawalki, .indykWedlinaKawalki, .kurczakWedlinaKawalki, .schabWedlinaKawalki, .szynkaWedlinaKawalki, .boczekWedlinaKawalki, .poledwicaWedlinaKawalki, .lopatkaWedlinaKawalki {
+    z-index: 2;
+}
+.salamiWedlinaKawalki, .kielbasaWedlinaKawalki {
+    z-index: 3;
+}
+.kurkaKawalki, .borowikKawalki, .podgrzybekKawalki, .rydzKawalki, .pieczarkaKawalki {
+    z-index: 4;
+}
+.ananasKawalki, .ogórekKawalki, .kukurydzaKawalki, .cebulaKawalki, .paprykaKawalki {
+    z-index: 5;
+}
+.oliwkiKawalki {
+    z-index: 6;
+}
 .pieczeniePiecWedlina {
     width: 138px;
     height: 232px;
