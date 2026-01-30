@@ -251,17 +251,14 @@
             <img class="abs obrazekSieMiesci zbozeDoMakiPizza" src="img/dom/kuchnia/@(makaPizza).png" role="button" @onclick='() => makaPizza = ""' />
             <div class="abs stanZakwasuBiezacejMakiPizza @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == "pszenica").PoziomZakwasu)"></div>
         }
-        var pizza = Gracz.ProduktyPrzetworzone.First(p => p.Nazwa == "pizza");
         <div class="abs pizzaWlasciwa"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pizzaCiasto.png"/>
-            <img class="abs pizzaNarzut swiniaPasztetKawalki obrazekSieMiesci" src="img/dom/kuchnia/pizza/salamiWedlinaKawalki.png" />
-            <img class="abs pizzaNarzut drobPasztetKawalki obrazekSieMiesci" src="img/dom/kuchnia/pizza/kurczakWedlinaKawalki.png" />
-            <!--@foreach (var skladnik in skladnikiPizza)
+            @foreach (var skladnik in skladnikiPizza)
             {
-                @if (pizza.Pizza.Contains(skladnik))
+                @if (pizzaRobocza.Contains(skladnik))
                 {
                     <img class="abs pizzaNarzut @(skladnik)Kawalki obrazekSieMiesci" src="img/dom/kuchnia/pizza/@(skladnik)Kawalki.png" />
                 }
-            }-->
+            }
         </div>
     }
     @if (piecWedlina)
@@ -367,6 +364,7 @@
     private string[] sery = [ "krowa", "koza", "owca"];
     private string[] slodkieBuleczki = [ "brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
     private string[] skladnikiPizza = ["papryka", "cebula", "kukurydza", "ogórek", "ananas", "oliwki", "pieczarka", "rydz", "podgrzybek", "borowik", "kurka", "kielbasaWedlina", "salamiWedlina", "lopatkaWedlina", "poledwicaWedlina", "boczekWedlina", "szynkaWedlina", "schabWedlina", "kurczakWedlina", "indykWedlina", "krolikPasztet", "drobPasztet", "swiniaPasztet"];
+    private HashSet<string> pizzaRobocza = [];
     private bool WalidacjaSkladnikaPizzy(string skladnik) => SkladnikPizzy(skladnik).Ilosc > 0;
     private dynamic SkladnikPizzy(string skladnik)
     {
@@ -429,11 +427,10 @@
     private void WybranySkladnikNaPizze(string skladnik)
     {
         if (!WalidacjaSkladnikaPizzy(skladnik)) return;
-        var pizza = Gracz.ProduktyPrzetworzone.First(p => p.Nazwa == "pizza").Pizza;
-        if (pizza.Contains(skladnik))
-            pizza.Remove(skladnik);
+        if (pizzaRobocza.Contains(skladnik))
+            pizzaRobocza.Remove(skladnik);
         else
-            pizza.Add(skladnik);
+            pizzaRobocza.Add(skladnik);
     }
     private void WybraneSmalecNaPieczywo(string zwierz)
     {
