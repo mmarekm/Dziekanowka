@@ -248,7 +248,7 @@
         <div class="abs lSkladnikowPizza lOreganoPizza">@Gracz.ZywnoscP("oregano").Ilosc</div>
         @if (serPizza != "")
         {
-            <img class="abs obrazekContain serNaPizze" src="img/dom/kuchnia/@(serPizza).png" role="button" @onclick='() => serPizza = ""' />
+            <img class="abs obrazekContain serNaPizze" src="img/dom/kuchnia/@(serPizza)Ser.png" role="button" @onclick='() => serPizza = ""' />
         }
         @if (makaPizza != "")
         {
@@ -267,11 +267,10 @@
         @if (pokazPotwierdzeniePizza)
         {
             <div class="abs modalPotwierdzeniePizza">
-                <div class="modalTrescPotwierdzeniePizza">
-                    <p>Masz już pizzę. Czy na pewno chcesz zrobić nową?</p>
-                    <div class="modalPrzyciski">
-                        <button class="wyroznionyGuzik" @onclick="async () => { UpiecPizze(); await ladowanieGracza.ZapiszAktualnegoGracza(); }">Tak, upiecz nową</button>
-                        <button class="wyroznionyGuzik" @onclick="() => pokazPotwierdzeniePizza = false">Anuluj</button>
+                <div class="rel modalTrescPotwierdzeniePizza">
+                    <div class="abs modalPrzyciski">
+                        <button class="wyroznionyGuzik" @onclick="async () => { UpiecPizze(); await ladowanieGracza.ZapiszAktualnegoGracza(); }"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button>
+                        <button class="wyroznionyGuzik" @onclick="() => pokazPotwierdzeniePizza = false"><img src="img/dom/kuchnia/pizza/anulujNowaPizza.png" /></button>
                     </div>
                 </div>
             </div>
@@ -483,7 +482,7 @@
     }
     private void WybraneMiesoNaWedline(string mieso)
     {
-        bool odZwierza = mieso != "mieloneDrob" || mieso != "mieloneSwinia";
+        bool odZwierza = mieso != "mieloneDrob" && mieso != "mieloneSwinia";
         if (odZwierza ? Gracz.ProduktZ(mieso).Ilosc < 1 : Gracz.ProduktP(mieso).Ilosc < 1) return;
         miesoWedlina = mieso;
     }
