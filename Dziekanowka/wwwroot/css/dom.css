@@ -509,6 +509,13 @@
     top: 370px;
     left: 920px;
 }
+.pieczeniePiecPizza {
+    right: 55px;
+    top: 109px;
+    width: 286px;
+    height: 186px;
+    z-index: 2;
+}
 .produktyPizzyIn {
     width: 650px;
     height: 360px;
@@ -600,6 +607,57 @@
 .oliwkiKawalki {
     z-index: 6;
 }
+/*START PROPOZYCJA*/
+.modalPotwierdzeniePizza {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modalTrescPotwierdzeniePizza {
+    background-color: #f4e4c1;
+    border: 4px solid #8b4513;
+    border-radius: 15px;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+    .modalTrescPotwierdzeniePizza p {
+        font-size: 20px;
+        margin-bottom: 25px;
+        color: #3a2a1a;
+        font-weight: bold;
+    }
+.modalPrzyciski {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+    .modalPrzyciski button {
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        border: 2px solid #8b4513;
+        border-radius: 8px;
+        background-color: #d4a574;
+        color: #3a2a1a;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+        .modalPrzyciski button:hover {
+            background-color: #c49563;
+            transform: scale(1.05);
+        }
+        .modalPrzyciski button:active {
+            transform: scale(0.95);
+        }
+/*KONIEC PROPOZYCJA*/
 .pieczeniePiecWedlina {
     width: 138px;
     height: 232px;
@@ -690,6 +748,7 @@
     top: 100px;
     width: 45px;
     height: 45px;
+    cursor: pointer;
 }
 .smalecNaPasztet {
     left: 168px;
@@ -702,6 +761,7 @@
     top: 100px;
     width: 45px;
     height: 45px;
+    cursor: pointer;
 }
 .wedlinaGotowaPiec {
     width: 120px;

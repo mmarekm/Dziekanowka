@@ -212,6 +212,10 @@
     }
     @if (piecPizza)
     {
+        @if (saSkladnikiNaPizze)
+        {
+            <div class="abs pieczeniePiecPizza"><button class="wyroznionyGuzik" @onclick="Pieczenie"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujPiecPizza.png" /></button></div>
+        }
         <div class="abs produktyPizzyIn">
             @foreach (var zboze in zboza)
             {
@@ -260,6 +264,18 @@
                 }
             }
         </div>
+        @if (pokazPotwierdzeniePizza)
+        {
+            <div class="abs modalPotwierdzeniePizza">
+                <div class="modalTrescPotwierdzeniePizza">
+                    <p>Masz już pizzę. Czy na pewno chcesz zrobić nową?</p>
+                    <div class="modalPrzyciski">
+                        <button class="wyroznionyGuzik" @onclick="async () => { UpiecPizze(); await ladowanieGracza.ZapiszAktualnegoGracza(); }">Tak, upiecz nową</button>
+                        <button class="wyroznionyGuzik" @onclick="() => pokazPotwierdzeniePizza = false">Anuluj</button>
+                    </div>
+                </div>
+            </div>
+        }
     }
     @if (piecWedlina)
     {
@@ -391,8 +407,10 @@
     private string nadzienieDrozdzowka = "";
     private bool saSkladnikiNaPieczywo => Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestZywnoscP("sol") && makaPieczywo != "" && smalecPieczywo != "" && (pieczeniePieczywa != 3 || (jajoDrozdzowka != "" && nadzienieDrozdzowka != "" && Gracz.JestProduktZ("miod")));
     private string pieczywoGotowe => !saSkladnikiNaPieczywo ? "" : pieczeniePieczywa == 3 ? $"{nadzienieDrozdzowka}Buleczka" : pieczeniePieczywa == 1 ? $"{makaPieczywo}Chleb" : pieczeniePieczywa == 2 ? $"{makaPieczywo}Bulka" : "";
+    private bool pokazPotwierdzeniePizza = false;
     private string makaPizza = "";
     private string serPizza = "";
+    private bool saSkladnikiNaPizze => makaPizza != "" && serPizza != "" && Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestZywnoscP("sol") && Gracz.JestZywnoscP("olej") && Gracz.JestWarzywo("pomidor") && Gracz.JestZywnoscP("bazylia") && Gracz.JestZywnoscP("oregano") && Gracz.Zboza.First(z => z.Nazwa == makaPizza).PoziomZakwasu >= 3;
     private string miesoWedlina = "";
     private bool wybranyPasztet => miesoWedlina == "krolikJedzenie" || miesoWedlina == "mieloneDrob" || miesoWedlina == "mieloneSwinia";
     private string jajoWedlina = "";
@@ -515,6 +533,29 @@
             produkt.Ilosc = 0;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
+    private void UpiecPizze()
+    {
+        Gracz.Przedmiot("pelnaButelka").Ilosc--;
+        Gracz.Przedmiot("pustaButelka").Ilosc++;
+        Gracz.ZywnoscP("sol").Ilosc--;
+        Gracz.ZywnoscP("olej").Ilosc--;
+        Gracz.Warzywo("pomidor").Ilosc--;
+        Gracz.ZywnoscP("bazylia").Ilosc--;
+        Gracz.ZywnoscP("oregano").Ilosc--;
+        Gracz.ProduktP($"{makaPizza}Maka").Ilosc--;
+        Gracz.ProduktP($"{serPizza}Ser").Ilosc--;
+        Gracz.ProduktyPrzetworzone.First(p => p.Nazwa == "pizza").Pizza.Clear();
+        foreach (var skladnik in pizzaRobocza)
+        {
+            Gracz.ProduktyPrzetworzone.First(p => p.Nazwa == "pizza").Pizza.Add(skladnik);
+            SkladnikPizzy(skladnik).Ilosc--;
+        }
+        Gracz.ProduktP("pizza").Ilosc++;
+        makaPizza = "";
+        serPizza = "";
+        pizzaRobocza.Clear();
+        pokazPotwierdzeniePizza = false;
+    }
     private async Task Pieczenie()
     {
         if (piecPieczywo && (!saSkladnikiNaPieczywo || Gracz.Zboza.First(z => z.Nazwa == makaPieczywo).PoziomZakwasu < 3 || pieczeniePieczywa == 0)) return;
@@ -541,6 +582,15 @@
                 Gracz.ProduktP($"{makaPieczywo}Chleb").Ilosc++;
             makaPieczywo = "";
             pieczeniePieczywa = 0;
+        }
+        if (piecPizza && saSkladnikiNaPizze)
+        {
+            if (Gracz.ProduktP("pizza").Ilosc > 0)
+            {
+                pokazPotwierdzeniePizza = true;
+                return;
+            }
+            UpiecPizze();
         }
         if (piecWedlina)
         {
