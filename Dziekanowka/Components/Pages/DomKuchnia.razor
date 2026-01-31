@@ -276,6 +276,12 @@
             </div>
         }
     }
+    @if (piecCiasto)
+    {
+        <div class="abs produktyInPiecCiasto">
+
+        </div>
+    }
     @if (piecWedlina)
     {
         <div class="abs pieczeniePiecWedlina"><button class="wyroznionyGuzik" @onclick="Pieczenie"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujPiecWedlina.png" /></button></div>
@@ -409,6 +415,12 @@
     private bool pokazPotwierdzeniePizza = false;
     private string makaPizza = "";
     private string serPizza = "";
+    private string makaCiasto = "";
+    private string smalecCiasto = "";
+    private string jajoCiasto = "";
+    private string owocCiasto = "";
+    private bool saSkladnikiNaCiasto => true;
+    private string gotoweCiasto => "";
     private bool saSkladnikiNaPizze => makaPizza != "" && serPizza != "" && Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestZywnoscP("sol") && Gracz.JestZywnoscP("olej") && Gracz.JestWarzywo("pomidor") && Gracz.JestZywnoscP("bazylia") && Gracz.JestZywnoscP("oregano") && Gracz.Zboza.First(z => z.Nazwa == makaPizza).PoziomZakwasu >= 3;
     private string miesoWedlina = "";
     private bool wybranyPasztet => miesoWedlina == "krolikJedzenie" || miesoWedlina == "mieloneDrob" || miesoWedlina == "mieloneSwinia";

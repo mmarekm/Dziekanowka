@@ -650,6 +650,19 @@
         .modalPrzyciski button:active {
             transform: scale(0.95);
         }
+.produktyInPiecCiasto {
+    top: 20px;
+    left: 20px;
+    width: 520px;
+    height: 370px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.produktInPiecCiasto {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
 .pieczeniePiecWedlina {
     width: 138px;
     height: 232px;

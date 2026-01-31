@@ -17,7 +17,8 @@
         new("zytoBulka"), new("jeczmienBulka"), new("pszenicaBulka"), new("ryzBulka"), new("owiesBulka"), new("grykaBulka"), new("orkiszBulka"),
         new("pizza"),
         new("brzoskwiniaBuleczka"), new("śliwkaBuleczka"), new("wiśniaBuleczka"), new("jabłkoBuleczka"), new("gruszkaBuleczka"), new("malinaBuleczka"), new("twarogBuleczka"),
-        new("sernik"), new("babkaPiaskowa"), new("szarlotka"), new("brzoskwiniaCiasto"), new("nektarynkaCiasto"), new("morelaCiasto"), new("śliwkaCiasto"), new("wiśniaCiasto")
+        new("sernik"), new("babkaPiaskowa"), new("szarlotka"), new("brzoskwiniaCiasto"), new("nektarynkaCiasto"), new("morelaCiasto"), new("śliwkaCiasto"), new("wiśniaCiasto"), new("gruszkaCiasto"),
+        new("borówkaCiasto"), new("porzeczkaCzerwonaCiasto"), new("porzeczkaCzarnaCiasto"), new("truskawkaCiasto"), new("malinaCiasto"), new("pomarańczaCiasto"), new("ananasCiasto")
         ];
         public HashSet<string> Pizza = [];
     }
