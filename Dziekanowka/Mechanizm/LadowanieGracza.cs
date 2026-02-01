@@ -30,7 +30,6 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.ProduktyPrzetworzone.ForEach(p => p.Ilosc = Math.Max(0, p.Ilosc - 1));
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
-                //await Dzwieki.Dzwiek!.GraDzwiek("mp3/Dzwieki/witaj.mp3");
                 CzyPokazacWideo = true;
             }
         }

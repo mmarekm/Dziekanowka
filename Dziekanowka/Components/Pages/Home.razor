@@ -4,7 +4,6 @@
 @inject Dzwieki dzwieki
 @implements IDisposable
 @using System.Text.Json
-
 @if (pokazWideo)
 {
     <WidePowitalne />
@@ -25,13 +24,6 @@ else
         }
     </div>
 }
-<!--<div class="kontener @(czyAnimacjaWyjscia ? "fade-out" : "fade-in")">
-    <DynamicComponent Type="@GetComponentType()" Parameters="@GetParameters()" />
-    @if (aktualnyEkran != EkranGry.Start)
-    {
-        <div class="abs @KlasaPowitania"><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /> Witaj! @gracz!.Statystyki.BonusDzienny + @gracz.Przedmiot("siano").Ilosc <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /></div>
-    }
-</div>-->
 
 @code {
     private EkranGry aktualnyEkran = EkranGry.Start;
