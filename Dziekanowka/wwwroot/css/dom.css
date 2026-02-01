@@ -669,6 +669,7 @@
     height: 370px;
     display: flex;
     flex-wrap: wrap;
+    gap: 3px;
 }
 .produktInPiecCiasto {
     width: 70px;
