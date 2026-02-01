@@ -9,5 +9,6 @@ namespace Dziekanowka.Gracza
         public int BonusDzienny { get; set; } = 60;
         public bool MoznaMiod { get; set; } = false;
         public EkranGry Ekran { get; set; } = EkranGry.Gospodarstwo;
+        public string OtwarteOkno { get; set; } = "";
     }
 }

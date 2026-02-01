@@ -36,36 +36,6 @@
     height: 399px;
     z-index: 2;
 }
-.samTraktorWidok {
-    width: 100px;
-    height: 76px;
-    top: 400px;
-    left: 1500px;
-    animation: jedzTraktor 5s linear forwards;
-    z-index: 4;
-}
-    .samTraktorWidok img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-.koloTraktora {
-    border-radius: 50%;
-    background: conic-gradient(black 0deg 270deg, gray 270deg 360deg);
-    animation: krecenie 5s linear forwards;
-}
-.koloTraktoraPrzod {
-    width: 20px;
-    height: 20px;
-    bottom: 1px;
-    right: 1px;
-}
-.koloTraktoraTyl {
-    width: 40px;
-    height: 40px;
-    bottom: 1px;
-    left: 3px;
-}
 .koloKosiarki {
     border-radius: 50%;
     background: conic-gradient(black 0deg 270deg, gray 270deg 360deg);
@@ -83,20 +53,6 @@
     bottom: 15px;
     left: 320px;
 }
-.samTraktorWidokPowrot {
-    width: 100px;
-    height: 76px;
-    top: 100px;
-    left: 1850px;
-    animation: jedzTraktorPowrot 5s linear forwards;
-    z-index: 4;
-    transform: scaleX(-1);
-}
-    .samTraktorWidokPowrot img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
 .studniaGuzik {
     top: 710px;
     left: 1762px;
@@ -124,15 +80,6 @@
     width: 260px;
     height: 365px;
     z-index: 2;
-}
-@keyframes jedzTraktor {
-    to { left: 1850px; top: 100px; }
-}
-@keyframes jedzTraktorPowrot {
-    to { left: 1500px; top: 400px; }
-}
-@keyframes krecenie {
-    to { transform: rotate(3600deg); }
 }
 @keyframes krecenieKosiarka {
     to {

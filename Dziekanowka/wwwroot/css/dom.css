@@ -607,6 +607,13 @@
 .oliwkiKawalki {
     z-index: 6;
 }
+.pizzaWPizza {
+    width: 155px;
+    height: 127px;
+    right: 0;
+    top: 140px;
+    z-index: 2;
+}
 .modalPotwierdzeniePizza {
     position: fixed;
     top: 0;
@@ -620,7 +627,6 @@
     align-items: center;
 }
 .modalTrescPotwierdzeniePizza {
-    background-image: url('/img/dom/kuchnia/pizza/confirmNowejPizzy.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -630,6 +636,12 @@
     width: 700px;
     height: 500px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.modalPtaszki {
+    background-image: url('/img/dom/kuchnia/pizza/confirmNowejPizzy.png');
+}
+.modalNieWidacPizzy {
+    background-image: url('/img/dom/kuchnia/pizza/nieMaPizzy.png');
 }
 .modalPrzyciski {
     display: flex;

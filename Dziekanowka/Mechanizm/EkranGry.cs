@@ -42,6 +42,7 @@
         KoszenieTrawy,
         PsySasiadaSzczekaja,
         SamochodDoMiasta,
-        SamochodDoDomu
+        SamochodDoDomu,
+        PtaszkiZjedza
     }
 }

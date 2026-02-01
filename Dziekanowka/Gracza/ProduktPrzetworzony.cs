@@ -20,6 +20,6 @@
         new("sernik"), new("babkaPiaskowa"), new("szarlotka"), new("brzoskwiniaCiasto"), new("nektarynkaCiasto"), new("morelaCiasto"), new("śliwkaCiasto"), new("wiśniaCiasto"), new("gruszkaCiasto"),
         new("borówkaCiasto"), new("porzeczkaCzerwonaCiasto"), new("porzeczkaCzarnaCiasto"), new("truskawkaCiasto"), new("malinaCiasto"), new("pomarańczaCiasto"), new("ananasCiasto")
         ];
-        public HashSet<string> Pizza = [];
+        public HashSet<string> Pizza { get; set; } = [];
     }
 }

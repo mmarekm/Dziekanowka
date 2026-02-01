@@ -264,12 +264,31 @@
                 }
             }
         </div>
+        <div class="abs pizzaWPizza"><button class="wyroznionyGuzik" @onclick="() => pokazPizze = true"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pizzaWPizza.png"/></button></div>
+        @if (pokazPizze == true)
+        {
+           <div class="abs modalPotwierdzeniePizza">
+                <div class="rel modalTrescPotwierdzeniePizza cPoint @(Gracz.JestProduktP("pizza") ? "" : "modalNieWidacPizzy")" @onclick="() => pokazPizze = false">
+                    @if (Gracz.JestProduktP("pizza"))
+                    {
+                        <img class="obrazekSieMiesci" src="img/dom/kuchnia/pizzaCiasto.png" />
+                        @foreach (var skladnik in skladnikiPizza)
+                        {
+                            @if (Gracz.ProduktyPrzetworzone.First(p => p.Nazwa == "pizza").Pizza.Contains(skladnik))
+                            {
+                                <img class="abs pizzaNarzut @(skladnik)Kawalki obrazekSieMiesci" src="img/dom/kuchnia/pizza/@(skladnik)Kawalki.png" />
+                            }
+                        }
+                    }
+                </div>
+           </div> 
+        }
         @if (pokazPotwierdzeniePizza)
         {
             <div class="abs modalPotwierdzeniePizza">
-                <div class="rel modalTrescPotwierdzeniePizza">
+                <div class="rel modalTrescPotwierdzeniePizza modalPtaszki">
                     <div class="abs modalPrzyciski">
-                        <button class="wyroznionyGuzik" @onclick="async () => { UpiecPizze(); await ladowanieGracza.ZapiszAktualnegoGracza(); }"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button>
+                        <button class="wyroznionyGuzik" @onclick="UpiecPizzeZAnimacja"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button>
                         <button class="wyroznionyGuzik" @onclick="() => pokazPotwierdzeniePizza = false"><img src="img/dom/kuchnia/pizza/anulujNowaPizza.png" /></button>
                     </div>
                 </div>
@@ -366,6 +385,15 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    protected override void OnParametersSet()
+    {
+        if (Gracz.Statystyki.OtwarteOkno == "piecPizza")
+        {
+            piec = true;
+            piecPizza = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+    }
     private bool wyciskarka = false;
     private bool deska = false;
     private bool garnek = false;
@@ -412,6 +440,7 @@
     private string nadzienieDrozdzowka = "";
     private bool saSkladnikiNaPieczywo => Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestZywnoscP("sol") && makaPieczywo != "" && smalecPieczywo != "" && (pieczeniePieczywa != 3 || (jajoDrozdzowka != "" && nadzienieDrozdzowka != "" && Gracz.JestProduktZ("miod")));
     private string pieczywoGotowe => !saSkladnikiNaPieczywo ? "" : pieczeniePieczywa == 3 ? $"{nadzienieDrozdzowka}Buleczka" : pieczeniePieczywa == 1 ? $"{makaPieczywo}Chleb" : pieczeniePieczywa == 2 ? $"{makaPieczywo}Bulka" : "";
+    private bool pokazPizze = false;
     private bool pokazPotwierdzeniePizza = false;
     private string makaPizza = "";
     private string serPizza = "";
@@ -627,5 +656,14 @@
 
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task UpiecPizzeZAnimacja()
+    {
+        UpiecPizze();
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PtaszkiZjedza);
+        await Task.Delay(3600);
+        Gracz.Statystyki.OtwarteOkno = "piecPizza";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
     }
 }
