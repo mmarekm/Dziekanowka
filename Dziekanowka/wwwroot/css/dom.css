@@ -676,6 +676,20 @@
     height: 70px;
     flex-shrink: 0;
 }
+.lProduktuCiasto {
+    width: 30px;
+    height: 16px;
+    font-size: 15px;
+    text-align: center;
+}
+.lMioduCiasto {
+    left: 67px;
+    bottom: 140px;
+}
+.lMaslaCiasto {
+    left: 168px;
+    bottom: 133px;
+}
 .pieczeniePiecWedlina {
     width: 138px;
     height: 232px;

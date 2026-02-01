@@ -328,8 +328,10 @@
                     <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Owoc(owoc).Ilosc</div>
                 </div>
             }
-            <!--(MIOD MASLO, PROSZEK, CYNAMON obligatoryjnie, opcjonalne twarog i smietana, opcjonalne nadzienie bedzie select) -->
         </div>
+        <!--(opcjonalne twarog i smietana, opcjonalne nadzienie bedzie select) -->
+        <div class="abs lProduktuCiasto lMioduCiasto">@Gracz.ProduktZ("miod").Ilosc</div>
+        <div class="abs lProduktuCiasto lMaslaCiasto">@Gracz.ProduktP("maslo").Ilosc</div>
     }
     @if (piecWedlina)
     {
