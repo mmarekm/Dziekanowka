@@ -4,19 +4,41 @@
 @inject Dzwieki dzwieki
 @implements IDisposable
 @using System.Text.Json
-<div class="kontener @(czyAnimacjaWyjscia ? "fade-out" : "fade-in")">
+
+@if (pokazWideo)
+{
+    <WidePowitalne />
+}
+else
+{
+    <div class="kontener @(czyAnimacjaWyjscia ? "fade-out" : "fade-in")">
+        <DynamicComponent Type="@GetComponentType()" Parameters="@GetParameters()" />
+        @if (aktualnyEkran != EkranGry.Start)
+        {
+            <div class="abs @KlasaPowitania">
+                <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" />
+                <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" />
+                Witaj! @gracz!.Statystyki.BonusDzienny + @gracz.Przedmiot("siano").Ilosc
+                <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" />
+                <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" />
+            </div>
+        }
+    </div>
+}
+<!--<div class="kontener @(czyAnimacjaWyjscia ? "fade-out" : "fade-in")">
     <DynamicComponent Type="@GetComponentType()" Parameters="@GetParameters()" />
     @if (aktualnyEkran != EkranGry.Start)
     {
         <div class="abs @KlasaPowitania"><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /> Witaj! @gracz!.Statystyki.BonusDzienny + @gracz.Przedmiot("siano").Ilosc <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /><img class="obrazekWypelnia" src="img/przedmioty/moneta.png" /></div>
     }
-</div>
+</div>-->
 
 @code {
     private EkranGry aktualnyEkran = EkranGry.Start;
     private bool czyAnimacjaWyjscia = false;
     private EkranGry nastepnyEkran;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
+    private bool pokazWideo = false;
     private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa,
         EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu ];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
@@ -29,6 +51,7 @@
     {
         Dzwieki.Dzwiek = dzwieki;
         ladowanieGracza.NowyDzienEvent += OnNowyDzien;
+        dzwieki.WideoPowitalneZakonczoneEvent += OnWideoPowitalneZakonczone;
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -43,6 +66,21 @@
     private void OnNowyDzien()
     {
         czekaNaPowitanie = true;
+    }
+    private async void OnWideoPowitalneZakonczone()
+    {
+        pokazWideo = false;
+        StateHasChanged();
+        EkranGry startowyEkran = gracz!.Statystyki.Ekran;
+        startowyEkran = startowyEkran switch
+        {
+            EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => EkranGry.Gospodarstwo,
+            EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa => EkranGry.PoleIntro,
+            EkranGry.PsySasiadaSzczekaja or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu => EkranGry.ZaBrama,
+            EkranGry.KoszenieTrawy => EkranGry.GarazGospodarczy,
+            _ => startowyEkran
+        };
+        await ZmienEkran(startowyEkran);
     }
     private async Task PowitanieDnia()
     {
@@ -60,6 +98,7 @@
     public void Dispose()
     {
         ladowanieGracza.NowyDzienEvent -= OnNowyDzien;
+        dzwieki.WideoPowitalneZakonczoneEvent -= OnWideoPowitalneZakonczone;
     }
     private Task GraTlo(EkranGry ekran)
     {
@@ -91,6 +130,12 @@
     private async Task WywolajStartGry(string nazwaGracza)
     {
         await ladowanieGracza.ZaladujGracza(nazwaGracza);
+        if (ladowanieGracza.CzyPokazacWideo)
+        {
+            pokazWideo = true;
+            StateHasChanged();
+            return;
+        }
         EkranGry startowyEkran = gracz!.Statystyki.Ekran;
         startowyEkran = startowyEkran switch
         {

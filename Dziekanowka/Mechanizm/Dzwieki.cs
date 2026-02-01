@@ -9,6 +9,7 @@ namespace Dziekanowka.Mechanizm
         private string? aktualnieGraneTlo;
         private int aktualnieGrajaceDzwieki = 0;
         private readonly object blokada = new object();
+        public event Action? WideoPowitalneZakonczoneEvent;
         public Dzwieki(IAudioManager audioManager)
         {
             this.audioManager = audioManager;
@@ -50,6 +51,10 @@ namespace Dziekanowka.Mechanizm
                     aktualnieGrajaceDzwieki--;
                 }
             }
+        }
+        public void ZakonczWidePowitalne()
+        {
+            WideoPowitalneZakonczoneEvent?.Invoke();
         }
     }
 }

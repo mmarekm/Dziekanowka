@@ -8,6 +8,7 @@ namespace Dziekanowka.Mechanizm
         public Gracz? AktualnyGracz { get; private set; }
         public event Action? NowyDzienEvent;
         public Dzwieki? Dzwieki;
+        public bool CzyPokazacWideo { get; private set; } = false;
         private bool CzyNowyDzien() => AktualnyGracz!.Statystyki.DzienLogowania != DateTime.Now.Day || AktualnyGracz.Statystyki.MiesiacLogowania != DateTime.Now.Month;
         public LadowanieGracza()
         {
@@ -29,7 +30,8 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.ProduktyPrzetworzone.ForEach(p => p.Ilosc = Math.Max(0, p.Ilosc - 1));
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
-                await Dzwieki.Dzwiek!.GraDzwiek("mp3/Dzwieki/witaj.mp3");
+                //await Dzwieki.Dzwiek!.GraDzwiek("mp3/Dzwieki/witaj.mp3");
+                CzyPokazacWideo = true;
             }
         }
         public async Task<Gracz> ZaladujGracza(string nazwa)

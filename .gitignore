@@ -412,9 +412,11 @@ Properties/PublishProfiles/*.pubxml.user
 Thumbs.db
 .DS_Store
 
-# Google Drive synchronized images - exclude from repository
+# Google Drive synchronized images and videos - exclude from repository
 **/wwwroot/img
+**/wwwroot/video
 Dziekanowka/wwwroot/img
+Dziekanowka/wwwroot/video
 
 # Ignoruj cały folder Raw
 Dziekanowka/Resources/Raw/
