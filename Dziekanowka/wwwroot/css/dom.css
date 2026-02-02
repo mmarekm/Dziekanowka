@@ -676,6 +676,16 @@
     height: 70px;
     flex-shrink: 0;
 }
+.zbozeDoMakiCiasto {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    left: 60px;
+    bottom: 240px;
+}
+.stanZakwasuBiezacejMakiCiasto {
+
+}
 .lProduktuCiasto {
     width: 30px;
     height: 16px;
@@ -689,6 +699,14 @@
 .lMaslaCiasto {
     left: 168px;
     bottom: 133px;
+}
+.lProszkuCiasto {
+    left: 45px;
+    bottom: 15px;
+}
+.lCynamonuCiasto {
+    left: 150px;
+    bottom: 15px;
 }
 .pieczeniePiecWedlina {
     width: 138px;

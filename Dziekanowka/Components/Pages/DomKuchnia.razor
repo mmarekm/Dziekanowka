@@ -253,7 +253,7 @@
         @if (makaPizza != "")
         {
             <img class="abs obrazekSieMiesci zbozeDoMakiPizza" src="img/dom/kuchnia/@(makaPizza).png" role="button" @onclick='() => makaPizza = ""' />
-            <div class="abs stanZakwasuBiezacejMakiPizza @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == "pszenica").PoziomZakwasu)"></div>
+            <div class="abs stanZakwasuBiezacejMakiPizza @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == makaPizza).PoziomZakwasu)"></div>
         }
         <div class="abs pizzaWlasciwa"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pizzaCiasto.png"/>
             @foreach (var skladnik in skladnikiPizza)
@@ -330,8 +330,15 @@
             }
         </div>
         <!--(opcjonalne twarog i smietana, opcjonalne nadzienie bedzie select) -->
+        @if (makaCiasto != "")
+        {
+            <img class="abs obrazekSieMiesci zbozeDoMakiCiasto" src="img/dom/kuchnia/@(makaCiasto).png" role="button" @onclick='() => makaCiasto = ""' />
+            <div class="abs stanZakwasuBiezacejMakiCiasto @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == makaCiasto).PoziomZakwasu)"></div>
+        }
         <div class="abs lProduktuCiasto lMioduCiasto">@Gracz.ProduktZ("miod").Ilosc</div>
         <div class="abs lProduktuCiasto lMaslaCiasto">@Gracz.ProduktP("maslo").Ilosc</div>
+        <div class="abs lProduktuCiasto lProszkuCiasto">@Gracz.ZywnoscP("proszekDoPieczenia").Ilosc</div>
+        <div class="abs lProduktuCiasto lCynamonuCiasto">@Gracz.ZywnoscP("cynamon").Ilosc</div>
     }
     @if (piecWedlina)
     {
@@ -508,17 +515,17 @@
     private int UzyskanySok(string wyciskany) => tacaWyciskarka.First(t => t.Nazwa == wyciskany).Ilosc / 3;
     private void WybraneZbozeNaMake(string zboze)
     {
-        if (Gracz.ProduktP($"{zboze}Maka").Ilosc < 1) return;
+        if (!Gracz.JestProduktP($"{zboze}Maka")) return;
         makaPieczywo = zboze;
     }
     private void WybraneZbozeNaPizze(string zboze)
     {
-        if (Gracz.ProduktP($"{zboze}Maka").Ilosc < 1) return;
+        if (!Gracz.JestProduktP($"{zboze}Maka")) return;
         makaPizza = zboze;
     }
     private void WybraneZbozeNaCiasto(string zboze)
     {
-        if (Gracz.ProduktP($"{zboze}Maka").Ilosc < 1) return;
+        if (!Gracz.JestProduktP($"{zboze}Maka")) return;
         makaCiasto = zboze;
     }
     private void WybranySkladnikNaPizze(string skladnik)
