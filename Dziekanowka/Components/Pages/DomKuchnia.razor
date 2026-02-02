@@ -335,6 +335,10 @@
             <img class="abs obrazekSieMiesci zbozeDoMakiCiasto" src="img/dom/kuchnia/@(makaCiasto).png" role="button" @onclick='() => makaCiasto = ""' />
             <div class="abs stanZakwasuBiezacejMakiCiasto @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == makaCiasto).PoziomZakwasu)"></div>
         }
+        @if (jajoCiasto != "")
+        {
+            <img class="abs obrazekSieMiesci jajoCzyjeDoCiasto" src="img/dom/kuchnia/@(jajoCiasto).png" role="button" @onclick='() => jajoCiasto = ""' />
+        }
         <div class="abs lProduktuCiasto lMioduCiasto">@Gracz.ProduktZ("miod").Ilosc</div>
         <div class="abs lProduktuCiasto lMaslaCiasto">@Gracz.ProduktP("maslo").Ilosc</div>
         <div class="abs lProduktuCiasto lProszkuCiasto">@Gracz.ZywnoscP("proszekDoPieczenia").Ilosc</div>

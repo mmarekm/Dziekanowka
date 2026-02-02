@@ -684,7 +684,17 @@
     bottom: 240px;
 }
 .stanZakwasuBiezacejMakiCiasto {
-
+    width: 45px;
+    height: 15px;
+    left: 30px;
+    bottom: 215px;
+}
+.jajoCzyjeDoCiasto {
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    left: 150px;
+    bottom: 230px;
 }
 .lProduktuCiasto {
     width: 30px;
