@@ -7,6 +7,24 @@
 .domKuchniaWidok {
     background-image: url('../img/dom/kuchnia/domKuchniaWidok.png');
 }
+.wyciskarkaWidok {
+    background-image: url('../img/dom/kuchnia/wyciskarkaKuchnia.png');
+}
+.deskaWidok {
+    background-image: url('../img/dom/kuchnia/deskaKuchnia.png');
+}
+.piecWidok {
+    background-image: url('../img/dom/kuchnia/piecKuchnia.png');
+}
+.mlynekKawaWidok {
+    background-image: url('../img/dom/kuchnia/mlynekKuchnia.png');
+}
+.zakwasWidok {
+    background-image: url('../img/dom/kuchnia/zakwasKuchnia.png');
+}
+.deskaKanapkiWidok {
+    background-image: url('../img/dom/kuchnia/deskaKanapkiWidok.png');
+}
 .piecPieczywoWidok {
     background-image: url('../img/dom/kuchnia/piecPieczywoWidok.png');
 }
@@ -77,18 +95,6 @@
     display: flex;
     gap: 15px;
 }
-.wyciskarkaWidok {
-    background-image: url('../img/dom/kuchnia/wyciskarkaKuchnia.png');
-}
-.piecWidok {
-    background-image: url('../img/dom/kuchnia/piecKuchnia.png');
-}
-.mlynekKawaWidok {
-    background-image: url('../img/dom/kuchnia/mlynekKuchnia.png');
-}
-.zakwasWidok {
-    background-image: url('../img/dom/kuchnia/zakwasKuchnia.png');
-}
 .narzedzieKuchnia {
     top: 150px;
     left: 150px;
@@ -108,6 +114,13 @@
     top: 392px;
     width: 391px;
     height: 420px;
+    z-index: 2;
+}
+.kuchniaDoDeski {
+    left: 433px;
+    top: 665px;
+    width: 286px;
+    height: 162px;
     z-index: 2;
 }
 .kuchniaDoPieca {
@@ -319,6 +332,13 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+}
+.deskaDoKanapek {
+    width: 504px;
+    height: 663px;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
 }
 .piecDoPieczywa {
     width: 413px;
