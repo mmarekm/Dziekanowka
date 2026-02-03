@@ -662,6 +662,13 @@
         .modalPrzyciski button:active {
             transform: scale(0.95);
         }
+.pieczeniePiecCiasto {
+    top: 0;
+    left: 695px;
+    width: 254px;
+    height: 156px;
+    z-index: 2;
+}
 .produktyInPiecCiasto {
     top: 20px;
     left: 20px;
@@ -675,6 +682,10 @@
     width: 70px;
     height: 70px;
     flex-shrink: 0;
+}
+.wybranySkladnikCiasta {
+    opacity: 0.5;
+    border: 3px solid orange;
 }
 .zbozeDoMakiCiasto {
     cursor: pointer;
@@ -717,6 +728,26 @@
 .lCynamonuCiasto {
     left: 150px;
     bottom: 15px;
+}
+.ciastaGracza {
+    right: 30px;
+    top: 30px;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.ciastoGracza {
+    width: 85px;
+    height: 85px;
+    flex-shrink: 0;
+}
+.ciastoGotowe {
+    width: 100px;
+    height: 100px;
+    top: 33px;
+    right: 500px;
 }
 .pieczeniePiecWedlina {
     width: 138px;
