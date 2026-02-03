@@ -488,6 +488,7 @@
     private bool piecWedlina = false;
     private bool widokPiec => !piecPieczywo && !piecPizza && !piecCiasto && !piecWedlina;
     private string[] zboza = [ "zyto", "jeczmien", "pszenica", "ryz", "owies", "gryka", "orkisz"];
+    private string[] pieczywa => zboza.SelectMany(z => new[] { $"{z}Bulka", $"{z}Chleb" }).ToArray();
     private string[] smalce = [ "ges", "kaczka", "swinia"];
     private string[] jajka = [ "kura", "ges", "kaczka", "indyk"];
     private string[] sery = [ "krowa", "koza", "owca"];
