@@ -6,7 +6,8 @@
 "zytoChleb", "jeczmienChleb", "pszenicaChleb", "ryzChleb", "owiesChleb", "grykaChleb", "orkiszChleb", "zytoBulka", "jeczmienBulka", "pszenicaBulka", "ryzBulka", "owiesBulka", "grykaBulka", "orkiszBulka", "pizza", "brzoskwiniaBuleczka", "śliwkaBuleczka", "wiśniaBuleczka", "jabłkoBuleczka", "gruszkaBuleczka", "malinaBuleczka", "twarogBuleczka", "sernik", "babkaPiaskowa", "szarlotka", "brzoskwiniaCiasto", "nektarynkaCiasto", "morelaCiasto", "śliwkaCiasto", "wiśniaCiasto", "gruszkaCiasto", "borówkaCiasto", "porzeczkaCzerwonaCiasto", "porzeczkaCzarnaCiasto", "truskawkaCiasto", "malinaCiasto", "pomarańczaCiasto", "ananasCiasto",
 "pieczarka", "rydz", "podgrzybek", "borowik", "kurka"
 "oliwki", "olej", "sol", "proszekDoPieczenia", "czarnyPieprz", "majeranek", "oregano", "bazylia", "cynamon"
-"marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok"
+"marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok",
+List<kanapki>
 
 SKLEP
 wszystkie ProduktZ (prawie)
