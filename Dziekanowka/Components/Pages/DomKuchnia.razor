@@ -122,6 +122,10 @@
 </div>
 <div class="abs narzedzieKuchnia @(deskaKanapki ? "deskaKanapki" : deskaSurowki ? "deskaSurowki" : deskaSalatki ? "deskaSalatki" : "deskaInne")Widok @(widokDeska ? "" : "aktywne")">
     <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
+    @if (deskaKanapki)
+    {
+        
+    }
 </div>
 <div class="abs narzedzieKuchnia @(piecPieczywo ? "piecPieczywo" : piecPizza ? "piecPizza" : piecCiasto ? "piecCiasto" : "piecWedlina")Widok @(widokPiec ? "" : "aktywne")">
     <div class="abs kuchniaNarzedzieConfirm @(piecPieczywo ? "lewyDolIks" : "")"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedziePiec"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
