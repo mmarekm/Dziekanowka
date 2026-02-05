@@ -28,6 +28,7 @@ namespace Dziekanowka.Mechanizm
                 var produktyTrwale = new HashSet<string> { "pioroGesi", "pioroKaczki", "futroKrolik", "owcaSkora", "kozaSkora", "krowaSkora", "owcaWelna", "alpakaWelna", "miod" };
                 AktualnyGracz.ProduktyZwierzece.ForEach(p => { if (!produktyTrwale.Contains(p.Nazwa) && p.Ilosc > 0) p.Ilosc--; });
                 AktualnyGracz.ProduktyPrzetworzone.ForEach(p => p.Ilosc = Math.Max(0, p.Ilosc - 1));
+                AktualnyGracz.Kanapki = [];
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
                 CzyPokazacWideo = true;
