@@ -368,6 +368,30 @@
     right: 0;
     z-index: 2;
 }
+.pieczywaInKanapki {
+    width: 555px;
+    height: 135px;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+.pieczywoInKanapki {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+.tluszczeInKanapki {
+    width: 415px;
+    height: 55px;
+    top: 185px;
+    left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
 .pieczeniePiecPieczywo {
     width: 130px;
     height: 201px;

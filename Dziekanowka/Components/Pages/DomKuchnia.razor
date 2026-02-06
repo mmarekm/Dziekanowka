@@ -124,7 +124,22 @@
     <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (deskaKanapki)
     {
-        
+        <div class="abs pieczywaInKanapki">
+            @foreach (var zboze in zboza)
+            {
+                <div class="rel pieczywoInKanapki @(Gracz.JestProduktP($"{zboze}Chleb") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranePieczywoKanapka == $"{zboze}Chleb" ? "wybranySkladnikCiasta" : "")" @onclick='() => wybranePieczywoKanapka = $"{zboze}Chleb"'>
+                    <img src="img/dom/kuchnia/deska/@(zboze)Chleb.png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP($"{zboze}Chleb").Ilosc</div>
+                </div>
+                <div class="rel pieczywoInKanapki @(Gracz.JestProduktP($"{zboze}Bulka") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranePieczywoKanapka == $"{zboze}Bulka" ? "wybranySkladnikCiasta" : "")" @onclick='() => wybranePieczywoKanapka = $"{zboze}Bulka"'>
+                    <img src="img/dom/kuchnia/deska/@(zboze)Bulka.png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP($"{zboze}Bulka").Ilosc</div>
+                </div>
+            }   
+        </div>
+        <div class="abs tluszczeInKanapki">
+
+        </div>
     }
 </div>
 <div class="abs narzedzieKuchnia @(piecPieczywo ? "piecPieczywo" : piecPizza ? "piecPizza" : piecCiasto ? "piecCiasto" : "piecWedlina")Widok @(widokPiec ? "" : "aktywne")">
@@ -519,6 +534,7 @@
     private string[] naWedlineZ = [ "krowaLopatka", "krowaPoledwica", "swiniaBoczek", "swiniaSzynka", "swiniaSchab", "kuraJedzenie", "indykJedzenie", "krolikJedzenie"];
     private string[] naWedlineP = [ "mieloneDrob", "mieloneSwinia"];
     private Dictionary<string, string> miesoNaWedline = new() { ["krowaLopatka"] = "lopatkaWedlina", ["krowaPoledwica"] = "poledwicaWedlina", ["swiniaBoczek"] = "boczekWedlina", ["swiniaSzynka"] = "szynkaWedlina", ["swiniaSchab"] = "schabWedlina", ["kuraJedzenie"] = "kurczakWedlina", ["indykJedzenie"] = "indykWedlina", ["krolikJedzenie"] = "krolikPasztet", ["mieloneDrob"] = "drobPasztet", ["mieloneSwinia"] = "swiniaPasztet" };
+    private string wybranePieczywoKanapka = "";
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
     private string smalecPieczywo = "";
