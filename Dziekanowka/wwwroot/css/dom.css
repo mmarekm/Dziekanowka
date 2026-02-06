@@ -389,8 +389,51 @@
     top: 185px;
     left: 20px;
     display: flex;
+    gap: 25px;
+}
+.tluszczInKanapki {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+}
+.lTluszczuPieczywo {
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+.seryInKanapki {
+    width: 415px;
+    height: 55px;
+    top: 267px;
+    left: 20px;
+    display: flex;
+    gap: 25px;
+}
+.wedlinyInKanapki {
+    width: 460px;
+    height: 135px;
+    top: 20px;
+    left: 620px;
+    display: flex;
     flex-wrap: wrap;
-    gap: 7px;
+    gap: 7px 18px;
+}
+.dodatkiInKanapki {
+    width: 440px;
+    height: 310px;
+    top: 20px;
+    left: 1130px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+}
+.dodatekInKanapki {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
 }
 .pieczeniePiecPieczywo {
     width: 130px;

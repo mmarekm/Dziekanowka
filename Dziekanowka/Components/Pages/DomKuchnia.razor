@@ -127,18 +127,51 @@
         <div class="abs pieczywaInKanapki">
             @foreach (var zboze in zboza)
             {
-                <div class="rel pieczywoInKanapki @(Gracz.JestProduktP($"{zboze}Chleb") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranePieczywoKanapka == $"{zboze}Chleb" ? "wybranySkladnikCiasta" : "")" @onclick='() => wybranePieczywoKanapka = $"{zboze}Chleb"'>
+                <div class="rel pieczywoInKanapki @(Gracz.JestProduktP($"{zboze}Chleb") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranePieczywoKanapka == $"{zboze}Chleb" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzPieczywoNaKanapke($"{zboze}Chleb")'>
                     <img src="img/dom/kuchnia/deska/@(zboze)Chleb.png" class="obrazekSieMiesci" />
                     <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP($"{zboze}Chleb").Ilosc</div>
                 </div>
-                <div class="rel pieczywoInKanapki @(Gracz.JestProduktP($"{zboze}Bulka") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranePieczywoKanapka == $"{zboze}Bulka" ? "wybranySkladnikCiasta" : "")" @onclick='() => wybranePieczywoKanapka = $"{zboze}Bulka"'>
+                <div class="rel pieczywoInKanapki @(Gracz.JestProduktP($"{zboze}Bulka") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranePieczywoKanapka == $"{zboze}Bulka" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzPieczywoNaKanapke($"{zboze}Bulka")'>
                     <img src="img/dom/kuchnia/deska/@(zboze)Bulka.png" class="obrazekSieMiesci" />
                     <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP($"{zboze}Bulka").Ilosc</div>
                 </div>
             }   
         </div>
         <div class="abs tluszczeInKanapki">
-
+            @foreach (var tluszcz in tluszcze)
+            {
+                <div class="rel tluszczInKanapki @(Gracz.JestDar(tluszcz) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranyTluszczKanapka == tluszcz ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzTluszczNaKanapke(tluszcz)'>
+                    <img src="img/dom/kuchnia/deska/@(tluszcz).png" class="obrazekSieMiesci" />
+                    <div class="abs lTluszczuPieczywo">@Gracz.Dar(tluszcz).Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="abs seryInKanapki">
+            @foreach (var ser in seryKanapka)
+            {
+                <div class="rel tluszczInKanapki @(Gracz.JestProduktP(ser) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranySerKanapka == ser ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzSerNaKanapke(ser)'>
+                    <img src="img/dom/kuchnia/deska/@(ser)Plaster.png" class="obrazekSieMiesci" />
+                    <div class="abs lTluszczuPieczywo">@Gracz.ProduktP(ser).Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="abs wedlinyInKanapki">
+            @foreach (var wedlina in wedlinyKanapki)
+            {
+                <div class="rel pieczywoInKanapki @(Gracz.JestProduktP(wedlina) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaWedlinaKanapka == wedlina ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzWedlineNaKanapke(wedlina)'>
+                    <img src="img/dom/kuchnia/deska/@(wedlina)Plaster.png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP(wedlina).Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="abs dodatkiInKanapki">
+            @foreach (var dodatek in dodatkiKanapki)
+            {
+                <div class="rel dodatekInKanapki @(Gracz.JestDar(dodatek) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneDodatkiKanapka.Contains(dodatek) ? "wybranySkladnikCiasta" : "")" @onclick='() => DodatekNaKanapke(dodatek)'>
+                    <img src="img/dom/kuchnia/deska/@(dodatek)Plaster.png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Dar(dodatek).Ilosc</div>
+                </div>
+            }
         </div>
     }
 </div>
@@ -172,9 +205,9 @@
             }
             @foreach (var nadzienie in slodkieBuleczki)
             {
-                <div class="rel produktInPiecPieczywo @((nadzienie != "twarog" ? Gracz.Owoc(nadzienie).Ilosc > 0 : Gracz.JestProduktP(nadzienie)) ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneNadzienieNaBuleczke(nadzienie)">
+                <div class="rel produktInPiecPieczywo @(Gracz.JestDar(nadzienie) ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="() => WybraneNadzienieNaBuleczke(nadzienie)">
                     <img src="img/dom/kuchnia/@(nadzienie).png" class="obrazekSieMiesci" />
-                    <div class="abs lZbozProduktInPiecPieczywo">@((nadzienie != "twarog" ? Gracz.Owoc(nadzienie) : Gracz.ProduktP(nadzienie)).Ilosc)</div>
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Dar(nadzienie).Ilosc</div>
                 </div>
             }
         </div>
@@ -354,9 +387,9 @@
             </div>
             @foreach (var owoc in nadzieniaCiast)
             {
-                <div class="rel produktInPiecCiasto @(Gracz.JestOwoc(owoc) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(owocCiasto == owoc ? "wybranySkladnikCiasta" : "")" @onclick="() => WybraneNadzienieNaCiasto(owoc)">
+                <div class="rel produktInPiecCiasto @(Gracz.JestDar(owoc) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(owocCiasto == owoc ? "wybranySkladnikCiasta" : "")" @onclick="() => WybraneNadzienieNaCiasto(owoc)">
                     <img src="img/dom/kuchnia/@(owoc).png" class="obrazekSieMiesci" />
-                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Owoc(owoc).Ilosc</div>
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Dar(owoc).Ilosc</div>
                 </div>
             }
         </div>
@@ -477,8 +510,8 @@
 </div>
 
 @code {
-    [Parameter] public Gracz Gracz { get; set; } = null!;
-    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+        [Parameter] public Gracz Gracz { get; set; } = null!;
+        [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     protected override void OnParametersSet()
     {
         if (Gracz.Statystyki.OtwarteOkno == "piecPizza")
@@ -509,32 +542,33 @@
     private string[] zboza = [ "zyto", "jeczmien", "pszenica", "ryz", "owies", "gryka", "orkisz"];
     private string[] pieczywa => zboza.SelectMany(z => new[] { $"{z}Bulka", $"{z}Chleb" }).ToArray();
     private string[] smalce = [ "ges", "kaczka", "swinia"];
+    private string[] tluszcze => new[] { "maslo", "awokado" }.Concat(smalce.Select(s => $"{s}Smalec")).ToArray();
     private string[] jajka = [ "kura", "ges", "kaczka", "indyk"];
     private string[] sery = [ "krowa", "koza", "owca"];
+    private string[] seryKanapka => new[] { "twarog" }.Concat(sery.Select(s => $"{s}Ser")).ToArray();
     private string[] slodkieBuleczki = [ "brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
     private string[] skladnikiPizza = ["papryka", "cebula", "kukurydza", "ogórek", "ananas", "oliwki", "pieczarka", "rydz", "podgrzybek", "borowik", "kurka", "kielbasaWedlina", "salamiWedlina", "lopatkaWedlina", "poledwicaWedlina", "boczekWedlina", "szynkaWedlina", "schabWedlina", "kurczakWedlina", "indykWedlina", "krolikPasztet", "drobPasztet", "swiniaPasztet"];
     private HashSet<string> pizzaRobocza = [];
-    private bool WalidacjaSkladnikaPizzy(string skladnik) => SkladnikPizzy(skladnik).Ilosc > 0;
-    private dynamic SkladnikPizzy(string skladnik)
-    {
-        if (new string[] { "papryka", "cebula", "kukurydza", "ogórek" }.Contains(skladnik))
-            return Gracz.Warzywo(skladnik);
-        else if (skladnik == "ananas")
-            return Gracz.Owoc(skladnik);
-        else if (new string[] { "pieczarka", "rydz", "podgrzybek", "borowik", "kurka" }.Contains(skladnik))
-            return Gracz.Grzyb(skladnik);
-        else if (skladnik == "oliwki")
-            return Gracz.ZywnoscP(skladnik);
-        else
-            return Gracz.ProduktP(skladnik);
-    }
+    private bool WalidacjaSkladnikaPizzy(string skladnik) => Gracz.JestDar(skladnik);
+    private IDar SkladnikPizzy(string skladnik) => Gracz.Dar(skladnik);
     private string[] nadzieniaCiast = [ "jabłko", "brzoskwinia", "nektarynka", "morela", "śliwka", "wiśnia", "gruszka", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "truskawka", "malina", "pomarańcza", "ananas"];
     private string[] wedliny = [ "lopatka", "poledwica", "boczek", "szynka", "schab", "kurczak", "indyk"];
     private string[] pasztety = [ "krolik", "drob", "swinia" ];
+    private string[] wedlinyKanapki => new[] { "kielbasaWedlina", "salamiWedlina" }.Concat(wedliny.Select(w => $"{w}Wedlina")).ToArray().Concat(pasztety.Select(p => $"{p}Pasztet")).ToArray();
+    private HashSet<string> dodatkiKanapki = ["pomidor", "ogórek", "papryka", "sałata", "rukola", "rzodkiewka", "szpinak", "szczypiorek", "cebula", "czosnek", "ogorekKiszony", "kapustaKiszona", "oliwki", "kuraJajo", "gesJajo", "kaczkaJajo", "indykJajo", "pietruszka"];
     private string[] naWedlineZ = [ "krowaLopatka", "krowaPoledwica", "swiniaBoczek", "swiniaSzynka", "swiniaSchab", "kuraJedzenie", "indykJedzenie", "krolikJedzenie"];
     private string[] naWedlineP = [ "mieloneDrob", "mieloneSwinia"];
     private Dictionary<string, string> miesoNaWedline = new() { ["krowaLopatka"] = "lopatkaWedlina", ["krowaPoledwica"] = "poledwicaWedlina", ["swiniaBoczek"] = "boczekWedlina", ["swiniaSzynka"] = "szynkaWedlina", ["swiniaSchab"] = "schabWedlina", ["kuraJedzenie"] = "kurczakWedlina", ["indykJedzenie"] = "indykWedlina", ["krolikJedzenie"] = "krolikPasztet", ["mieloneDrob"] = "drobPasztet", ["mieloneSwinia"] = "swiniaPasztet" };
     private string wybranePieczywoKanapka = "";
+    private string WybierzPieczywoNaKanapke(string pieczywo) => wybranePieczywoKanapka == pieczywo ? wybranePieczywoKanapka = "" : Gracz.JestProduktP(pieczywo) ? wybranePieczywoKanapka = pieczywo : wybranePieczywoKanapka;
+    private string wybranyTluszczKanapka = "";
+    private string WybierzTluszczNaKanapke(string tluszcz) => wybranyTluszczKanapka == tluszcz ? wybranyTluszczKanapka = "" : Gracz.JestDar(tluszcz) ? wybranyTluszczKanapka = tluszcz : wybranyTluszczKanapka;
+    private string wybranySerKanapka = "";
+    private string WybierzSerNaKanapke(string ser) => wybranySerKanapka == ser ? wybranySerKanapka = "" : Gracz.JestProduktP(ser) ? wybranySerKanapka = ser : wybranySerKanapka;
+    private string wybranaWedlinaKanapka = "";
+    private string WybierzWedlineNaKanapke(string wedlina) => wybranaWedlinaKanapka == wedlina ? wybranaWedlinaKanapka = "" : Gracz.JestProduktP(wedlina) ? wybranaWedlinaKanapka = wedlina : wybranaWedlinaKanapka;
+    private HashSet<string> wybraneDodatkiKanapka = [];
+    private void DodatekNaKanapke(string dodatek) => _ = Gracz.JestDar(dodatek) && (wybraneDodatkiKanapka.Contains(dodatek) ? wybraneDodatkiKanapka.Remove(dodatek) : wybraneDodatkiKanapka.Add(dodatek));
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
     private string smalecPieczywo = "";
@@ -626,31 +660,14 @@
         if (!Gracz.JestProduktZ($"{ptak}Jajo")) return;
         jajoWedlina = ptak;
     }
-    private void WybraneNadzienieNaBuleczke(string nadzienie)
-    {
-        bool owoc = nadzienie != "twarog";
-        if (owoc ? !Gracz.JestOwoc(nadzienie) : !Gracz.JestProduktP(nadzienie)) return;
-        nadzienieDrozdzowka = nadzienie;
-    }
-    private void WybraneNadzienieNaCiasto(string owoc)
-    {
-        if (!Gracz.JestOwoc(owoc)) return;
-        if (owocCiasto != owoc)
-            owocCiasto = owoc;
-        else
-            owocCiasto = "";
-    }
+    private string WybraneNadzienieNaBuleczke(string nadzienie) => nadzienieDrozdzowka == nadzienie ? nadzienieDrozdzowka = "" : Gracz.JestDar(nadzienie) ? nadzienieDrozdzowka = nadzienie : nadzienieDrozdzowka;
+    private string WybraneNadzienieNaCiasto(string owoc) => owocCiasto == owoc ? owocCiasto = "" : Gracz.JestDar(owoc) ? owocCiasto = owoc : owocCiasto;
     private void WybranySerNaPizze(string ser)
     {
         if (!Gracz.JestProduktP($"{ser}Ser")) return;
         serPizza = ser;
     }
-    private void WybraneMiesoNaWedline(string mieso)
-    {
-        bool odZwierza = mieso != "mieloneDrob" && mieso != "mieloneSwinia";
-        if (odZwierza ? Gracz.ProduktZ(mieso).Ilosc < 1 : Gracz.ProduktP(mieso).Ilosc < 1) return;
-        miesoWedlina = mieso;
-    }
+    private string WybraneMiesoNaWedline(string mieso) => miesoWedlina == mieso ? miesoWedlina = "" : Gracz.JestDar(mieso) ? miesoWedlina = mieso : miesoWedlina;
     private int uzyskanaKawa => new[] { tacaMlynek.First(t => t.Nazwa == "drewno").Ilosc, tacaMlynek.First(t => t.Nazwa == "pelnaButelka").Ilosc, tacaMlynek.First(t => t.Nazwa == "ziarnaKawy").Ilosc, tacaMlynek.Where(t => t.Nazwa.EndsWith("Mleko")).Sum(t => t.Ilosc) }.Min();
     private bool MoznaZakwasic(string zboze) => Gracz.JestPrzedmiot("pelnaButelka") && Gracz.JestProduktP($"{zboze}Maka") && Gracz.Zboza.First(z => z.Nazwa == zboze).MoznaZakwasicDzisiaj && Gracz.Zboza.First(z => z.Nazwa == zboze).PoziomZakwasu < 3;
     private string ZakwasKolor(int poziom) => poziom switch { 0 => "progresCzerwony", 1 => "progresPomaranczowy", 2 => "progresZolty", _ => "progresZielony" };
@@ -810,5 +827,21 @@
         await Task.Delay(3600);
         Gracz.Statystyki.OtwarteOkno = "piecPizza";
         await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
+    }
+    private async Task KanapkaDoPlecaka()
+    {
+        if (wybranePieczywoKanapka == "") return;
+        Gracz.ProduktP(wybranePieczywoKanapka).Ilosc--;
+        if (wybranyTluszczKanapka != "") Gracz.Dar(wybranyTluszczKanapka).Ilosc--;
+        if (wybranySerKanapka != "") Gracz.ProduktP(wybranySerKanapka).Ilosc--;
+        if (wybranaWedlinaKanapka != "") Gracz.ProduktP(wybranaWedlinaKanapka).Ilosc--;
+        foreach (var dodatek in wybraneDodatkiKanapka) Gracz.Dar(dodatek).Ilosc--;
+        Gracz.Kanapki.Add(new KanapkaGracza(wybranePieczywoKanapka, string.IsNullOrEmpty(wybranyTluszczKanapka) ? null : wybranyTluszczKanapka, string.IsNullOrEmpty(wybranySerKanapka) ? null : wybranySerKanapka, string.IsNullOrEmpty(wybranaWedlinaKanapka) ? null : wybranaWedlinaKanapka, wybraneDodatkiKanapka.Count > 0 ? new HashSet<string>(wybraneDodatkiKanapka) : null));
+        wybranePieczywoKanapka = "";
+        wybranyTluszczKanapka = "";
+        wybranySerKanapka = "";
+        wybranaWedlinaKanapka = "";
+        wybraneDodatkiKanapka.Clear();
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }
