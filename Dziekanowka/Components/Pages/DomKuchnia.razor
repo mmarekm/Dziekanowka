@@ -124,6 +124,17 @@
     <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (deskaKanapki)
     {
+        @if (wybranePieczywoKanapka != "")
+        {
+            <div class="abs dodawanieKanapki"><button class="wyroznionyGuzik" @onclick="KanapkaDoPlecaka"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/zrobKanapke.png" /></button></div>
+        }
+        <div class="abs pokazanieListyKanapek"><button class="wyroznionyGuzik" @onclick="() => widocznaListaKanapek = true"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/worekKanapek.png" /></button></div>
+        @if (widocznaListaKanapek)
+        {
+            <div class="abs listaKanapek">
+
+            </div>
+        }
         <div class="abs pieczywaInKanapki">
             @foreach (var zboze in zboza)
             {
@@ -510,8 +521,8 @@
 </div>
 
 @code {
-        [Parameter] public Gracz Gracz { get; set; } = null!;
-        [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     protected override void OnParametersSet()
     {
         if (Gracz.Statystyki.OtwarteOkno == "piecPizza")
@@ -569,6 +580,7 @@
     private string WybierzWedlineNaKanapke(string wedlina) => wybranaWedlinaKanapka == wedlina ? wybranaWedlinaKanapka = "" : Gracz.JestProduktP(wedlina) ? wybranaWedlinaKanapka = wedlina : wybranaWedlinaKanapka;
     private HashSet<string> wybraneDodatkiKanapka = [];
     private void DodatekNaKanapke(string dodatek) => _ = Gracz.JestDar(dodatek) && (wybraneDodatkiKanapka.Contains(dodatek) ? wybraneDodatkiKanapka.Remove(dodatek) : wybraneDodatkiKanapka.Add(dodatek));
+    private bool widocznaListaKanapek = false;
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
     private string smalecPieczywo = "";
@@ -830,7 +842,6 @@
     }
     private async Task KanapkaDoPlecaka()
     {
-        if (wybranePieczywoKanapka == "") return;
         Gracz.ProduktP(wybranePieczywoKanapka).Ilosc--;
         if (wybranyTluszczKanapka != "") Gracz.Dar(wybranyTluszczKanapka).Ilosc--;
         if (wybranySerKanapka != "") Gracz.ProduktP(wybranySerKanapka).Ilosc--;

@@ -333,6 +333,27 @@
     flex-wrap: wrap;
     gap: 5px;
 }
+.dodawanieKanapki {
+    width: 287px;;
+    height: 176px;
+    top: 181px;
+    right: 490px;
+    z-index: 2;
+}
+.pokazanieListyKanapek {
+    width: 264px;
+    height: 329px;
+    bottom: 0;
+    right: 278px;
+    z-index: 2;
+}
+.listaKanapek {
+    top: 50px;
+    left: 50px;
+    width: 1500px;
+    height: 600px;
+    background-color: green;
+}
 .deskaDoKanapek {
     width: 504px;
     height: 663px;
