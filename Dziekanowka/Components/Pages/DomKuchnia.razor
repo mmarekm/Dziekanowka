@@ -132,6 +132,31 @@
         @if (widocznaListaKanapek)
         {
             <div class="abs listaKanapek" @onclick="() => widocznaListaKanapek = false">
+                @foreach (var kanapka in Gracz.Kanapki)
+                {
+                    <div class="rel kanapkaGracza">
+                        <img class="abs obrazekSieMiesci kanapkaSkladnik" src="img/dom/kuchnia/deska/@(kanapka.Pieczywo).png" />
+                        @if (!string.IsNullOrEmpty(kanapka.Tluszcz))
+                        {
+                            <img class="abs obrazekSieMiesci kanapkaSkladnik" src="img/dom/kuchnia/deska/@(kanapka.Tluszcz).png" />
+                        }
+                        @if (!string.IsNullOrEmpty(kanapka.Ser))
+                        {
+                            <img class="abs obrazekSieMiesci kanapkaSkladnik" src="img/dom/kuchnia/deska/@(kanapka.Ser)Plaster.png" />
+                        }
+                        @if (!string.IsNullOrEmpty(kanapka.Wedlina))
+                        {
+                            <img class="abs obrazekSieMiesci kanapkaSkladnik" src="img/dom/kuchnia/deska/@(kanapka.Wedlina)Plaster.png" />
+                        }
+                        @if (kanapka.Dodatki != null && kanapka.Dodatki.Count > 0)
+                        {
+                            @foreach (var dodatek in kanapka.Dodatki)
+                            {
+                                <img class="abs obrazekSieMiesci kanapkaSkladnik" src="img/dom/kuchnia/deska/@(dodatek)Plaster.png" />
+                            }
+                        }
+                    </div>
+                }
             </div>
         }
         <div class="abs pieczywaInKanapki">
