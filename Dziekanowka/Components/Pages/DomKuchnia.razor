@@ -121,7 +121,7 @@
     }
 </div>
 <div class="abs narzedzieKuchnia @(deskaKanapki ? "deskaKanapki" : deskaSurowki ? "deskaSurowki" : deskaSalatki ? "deskaSalatki" : "deskaInne")Widok @(widokDeska ? "" : "aktywne")">
-    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
+    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska" disabled="@(widocznaListaKanapek)" ><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (deskaKanapki)
     {
         @if (wybranePieczywoKanapka != "")
@@ -131,8 +131,7 @@
         <div class="abs pokazanieListyKanapek"><button class="wyroznionyGuzik" @onclick="() => widocznaListaKanapek = true"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/worekKanapek.png" /></button></div>
         @if (widocznaListaKanapek)
         {
-            <div class="abs listaKanapek">
-
+            <div class="abs listaKanapek" @onclick="() => widocznaListaKanapek = false">
             </div>
         }
         <div class="abs pieczywaInKanapki">
