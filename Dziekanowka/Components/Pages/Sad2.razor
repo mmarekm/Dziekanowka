@@ -64,10 +64,14 @@
             if (krzewowe.Contains(drzewo.Owoc)) Krzew = true;
             if (pnące.Contains(drzewo.Owoc)) Pnacze = true;
             if (ziemne.Contains(drzewo.Owoc)) Ziemne = true;
+            bool standard = !Palma && !Krzew && !Pnacze && !Ziemne;
             drzewo.Poziom = 0;
             Gracz.Przedmioty.RemoveAll(p => p.Nazwa == "sekator");
             await NaZmianeEkranu.InvokeAsync(EkranGry.CzyszczenieDrzewa);
-            await Task.Delay(5000);
+            if (standard)
+                await Task.Delay(8000);
+            else
+                await Task.Delay(5000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Sad2);
         }
         else

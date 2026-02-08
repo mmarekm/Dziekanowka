@@ -7,7 +7,7 @@
 "pieczarka", "rydz", "podgrzybek", "borowik", "kurka"
 "oliwki", "olej", "sol", "proszekDoPieczenia", "czarnyPieprz", "majeranek", "oregano", "bazylia", "cynamon"
 "marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok",
-List<kanapki>
+List<kanapki, Salatki, Surowki>
 
 SKLEP
 wszystkie ProduktZ (prawie)

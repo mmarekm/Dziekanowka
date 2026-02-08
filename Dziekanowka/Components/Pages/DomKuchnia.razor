@@ -71,6 +71,7 @@
     {
         <div class="abs deskaDoKanapek"><button class="wyroznionyGuzik" @onclick="() => deskaKanapki = true" disabled="@(!widokDeska)"><img src="img/dom/kuchnia/deskaKanapki.png" /></button></div>
         <div class="abs deskaDoSalatek"><button class="wyroznionyGuzik" @onclick="() => deskaSalatki = true" disabled="@(!widokDeska)"><img src="img/dom/kuchnia/deskaSalatki.png" /></button></div>
+        <div class="abs deskaDoSurowek"><button class="wyroznionyGuzik" @onclick="() => deskaSurowki = true" disabled="@(!widokDeska)"><img src="img/dom/kuchnia/deskaSurowki.png" /></button></div>
     }
     @if (piec)
     {
@@ -632,6 +633,7 @@
     private string[] wedlinyKanapki => new[] { "kielbasaWedlina", "salamiWedlina" }.Concat(wedliny.Select(w => $"{w}Wedlina")).ToArray().Concat(pasztety.Select(p => $"{p}Pasztet")).ToArray();
     private HashSet<string> dodatkiKanapki = ["pomidor", "ogórek", "papryka", "sałata", "rukola", "rzodkiewka", "szpinak", "szczypiorek", "cebula", "czosnek", "ogorekKiszony", "kapustaKiszona", "oliwki", "kuraJajo", "gesJajo", "kaczkaJajo", "indykJajo", "pietruszka"];
     private string[] owoceSalatka = [ "brzoskwinia", "nektarynka", "morela", "śliwka", "jabłko", "gruszka", "truskawka", "malina", "jeżyna", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "żurawina", "pomarańcza", "mandarynka", "grejpfrut", "banan", "ananas", "mango", "papaja", "marakuja", "kokos", "awokado", "arbuz", "melon", "winogronoJasne", "winogronoRóżowe", "winogronoCiemne", "kiwi" ];
+    private string[] warzywaSurowki = ["marchew", "burak", "sałata", "pomidor", "papryka", "ogórek", "rzodkiewka", "szpinak", "rukola", "szczaw", "kapustaWłoska", "kapustaPekińska", "brokuł", "kukurydza", "groch", "fasola", "szparagi", "brukselka", "cebula", "szczypiorek", "czosnek", "ogorekKiszony", "kapustaKiszona", "burakKiszony"];
     private string[] naWedlineZ = [ "krowaLopatka", "krowaPoledwica", "swiniaBoczek", "swiniaSzynka", "swiniaSchab", "kuraJedzenie", "indykJedzenie", "krolikJedzenie"];
     private string[] naWedlineP = [ "mieloneDrob", "mieloneSwinia"];
     private Dictionary<string, string> miesoNaWedline = new() { ["krowaLopatka"] = "lopatkaWedlina", ["krowaPoledwica"] = "poledwicaWedlina", ["swiniaBoczek"] = "boczekWedlina", ["swiniaSzynka"] = "szynkaWedlina", ["swiniaSchab"] = "schabWedlina", ["kuraJedzenie"] = "kurczakWedlina", ["indykJedzenie"] = "indykWedlina", ["krolikJedzenie"] = "krolikPasztet", ["mieloneDrob"] = "drobPasztet", ["mieloneSwinia"] = "swiniaPasztet" };
@@ -651,6 +653,12 @@
     private bool miodNaSalatce = false;
     private void MiodNaSalatke() => miodNaSalatce = Gracz.JestProduktZ("miod") ? !miodNaSalatce : miodNaSalatce;
     private bool widocznaListaSalatek = false;
+    private HashSet<string> wybraneWarzywaSurowka = [];
+    private void WarzywoNaSurowke(string warzywo) => _ = Gracz.JestWarzywo(warzywo) && (wybraneWarzywaSurowka.Contains(warzywo) ? wybraneWarzywaSurowka.Remove(warzywo) : wybraneWarzywaSurowka.Add(warzywo));
+    private bool majonezNaSurowce = false;
+    private void MajonezNaSurowce() => majonezNaSurowce = Gracz.JestDar("majonez") ? !majonezNaSurowce : majonezNaSurowce;
+    private string wybraneJajoNaSurowce = "";
+    private string WybierzJajoNaSurowce(string ptak) => wybraneJajoNaSurowce == $"{ptak}Jajo" ? wybraneJajoNaSurowce = "" : Gracz.JestProduktZ($"{ptak}Jajo") ? wybraneJajoNaSurowce = $"{ptak}Jajo" : wybraneJajoNaSurowce;
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
     private string smalecPieczywo = "";
@@ -932,6 +940,18 @@
         Gracz.Salatki.Add(new SalatkaGracza(miodNaSalatce, new HashSet<string>(wybraneOwoceSalatka)));
         wybraneOwoceSalatka.Clear();
         miodNaSalatce = false;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task SurowkaDoPlecaka()
+    {
+        foreach (var warzywo in wybraneWarzywaSurowka) Gracz.Warzywo(warzywo).Ilosc--;
+        Gracz.ZywnoscP("sol").Ilosc--;
+        if (majonezNaSurowce) Gracz.Dar("majonez").Ilosc--;
+        if (!string.IsNullOrEmpty(wybraneJajoNaSurowce)) Gracz.ProduktZ(wybraneJajoNaSurowce).Ilosc--;
+        Gracz.Surowki.Add(new SurowkaGracza(majonezNaSurowce, wybraneJajoNaSurowce, new HashSet<string>(wybraneWarzywaSurowka)));
+        wybraneWarzywaSurowka.Clear();
+        wybraneJajoNaSurowce = "";
+        majonezNaSurowce = false;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }

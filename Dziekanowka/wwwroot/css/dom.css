@@ -421,6 +421,13 @@
     bottom: 0;
     z-index: 2;
 }
+.deskaDoSurowek {
+    top: 0;
+    left: 540px;
+    width: 684px;
+    height: 346px;
+    z-index: 2;
+}
 .piecDoPieczywa {
     width: 413px;
     height: 516px;
