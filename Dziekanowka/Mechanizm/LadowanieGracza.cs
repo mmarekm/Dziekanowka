@@ -29,6 +29,7 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.ProduktyZwierzece.ForEach(p => { if (!produktyTrwale.Contains(p.Nazwa) && p.Ilosc > 0) p.Ilosc--; });
                 AktualnyGracz.ProduktyPrzetworzone.ForEach(p => p.Ilosc = Math.Max(0, p.Ilosc - 1));
                 AktualnyGracz.Kanapki = [];
+                AktualnyGracz.Salatki = [];
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
                 CzyPokazacWideo = true;

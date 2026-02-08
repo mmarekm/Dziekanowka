@@ -19,6 +19,7 @@ namespace Dziekanowka
         public List<UprawaZboza> UprawyZboza { get; set; } = UprawaZboza.StartoweUprawyZboza();
         public List<ZbozeGracza> Zboza { get; set; } = ZbozeGracza.StartoweZboza();
         public List<KanapkaGracza> Kanapki { get; set; } = [];
+        public List<SalatkaGracza> Salatki { get; set; } = [];
         public List<PrzedmiotGracza> Przedmioty { get; set; } = PrzedmiotGracza.StartowePrzedmioty();
         public Paliwo Paliwo { get; set; } = new Paliwo();
         public int PoziomBudynku(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom;

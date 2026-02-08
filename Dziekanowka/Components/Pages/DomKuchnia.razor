@@ -70,6 +70,7 @@
     @if (deska)
     {
         <div class="abs deskaDoKanapek"><button class="wyroznionyGuzik" @onclick="() => deskaKanapki = true" disabled="@(!widokDeska)"><img src="img/dom/kuchnia/deskaKanapki.png" /></button></div>
+        <div class="abs deskaDoSalatek"><button class="wyroznionyGuzik" @onclick="() => deskaSalatki = true" disabled="@(!widokDeska)"><img src="img/dom/kuchnia/deskaSalatki.png" /></button></div>
     }
     @if (piec)
     {
@@ -121,14 +122,14 @@
     }
 </div>
 <div class="abs narzedzieKuchnia @(deskaKanapki ? "deskaKanapki" : deskaSurowki ? "deskaSurowki" : deskaSalatki ? "deskaSalatki" : "deskaInne")Widok @(widokDeska ? "" : "aktywne")">
-    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska" disabled="@(widocznaListaKanapek)" ><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
+    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska" disabled="@(widocznaListaKanapek || widocznaListaSalatek)" ><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (deskaKanapki)
     {
         @if (wybranePieczywoKanapka != "")
         {
             <div class="abs dodawanieKanapki"><button class="wyroznionyGuzik" @onclick="KanapkaDoPlecaka"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/zrobKanapke.png" /></button></div>
         }
-        <div class="abs pokazanieListyKanapek"><button class="wyroznionyGuzik" @onclick="() => widocznaListaKanapek = true"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/worekKanapek.png" /></button></div>
+        <div class="abs pokazanieListyKanapek"><button class="wyroznionyGuzik" @onclick="() => widocznaListaKanapek = true" disabled="@(widocznaListaKanapek)"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/worekKanapek.png" /></button></div>
         @if (widocznaListaKanapek)
         {
             <div class="abs listaKanapek" @onclick="() => widocznaListaKanapek = false">
@@ -207,6 +208,45 @@
                     <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Dar(dodatek).Ilosc</div>
                 </div>
             }
+        </div>
+    }
+    @if (deskaSalatki)
+    {
+        @if (miodNaSalatce && wybraneOwoceSalatka.Count > 0 || wybraneOwoceSalatka.Count > 1)
+        {
+            <div class="abs dodawanieSalatki"><button class="wyroznionyGuzik" @onclick="SalatkaDoPlecaka"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/zrobSalatke.png" /></button></div>
+        }
+        <div class="abs pokazanieListySalatek"><button class="wyroznionyGuzik" @onclick="() => widocznaListaSalatek = true" disabled="@(widocznaListaSalatek)"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/worekSalatek.png" /></button></div>
+        @if (widocznaListaSalatek)
+        {
+            <div class="abs listaKanapek" @onclick="() => widocznaListaSalatek = false">
+                @foreach (var salatka in Gracz.Salatki)
+                {
+                    <div class="kanapkaGracza">
+                        @if (salatka.JestMiod)
+                        {
+                            <img class="obrazekSieMiesci" src="img/dom/kuchnia/miod.png" />
+                        }
+                        @foreach (var owoc in salatka.Owoce)
+                        {
+                            <img class="obrazekSieMiesci" src="img/przedmioty/owoce/@(owoc).png" />
+                        }
+                    </div>
+                }
+            </div>
+        }
+        <div class="abs owoceInSalatka">
+            @foreach (var owoc in owoceSalatka)
+            {
+                <div class="rel owocInSalatka @(Gracz.JestOwoc(owoc) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneOwoceSalatka.Contains(owoc) ? "wybranySkladnikCiasta" : "")" @onclick='() => OwocNaSalatke(owoc)'>
+                    <img src="img/przedmioty/owoce/@(owoc).png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Owoc(owoc).Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="rel miodNaSalatke @(Gracz.JestDar("miod") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(miodNaSalatce == true ? "wybranySkladnikCiasta" : "")" @onclick='MiodNaSalatke'>
+            <img src="img/dom/kuchnia/miod.png" class="obrazekSieMiesci" />
+            <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Dar("miod").Ilosc</div>
         </div>
     }
 </div>
@@ -591,6 +631,7 @@
     private string[] pasztety = [ "krolik", "drob", "swinia" ];
     private string[] wedlinyKanapki => new[] { "kielbasaWedlina", "salamiWedlina" }.Concat(wedliny.Select(w => $"{w}Wedlina")).ToArray().Concat(pasztety.Select(p => $"{p}Pasztet")).ToArray();
     private HashSet<string> dodatkiKanapki = ["pomidor", "ogórek", "papryka", "sałata", "rukola", "rzodkiewka", "szpinak", "szczypiorek", "cebula", "czosnek", "ogorekKiszony", "kapustaKiszona", "oliwki", "kuraJajo", "gesJajo", "kaczkaJajo", "indykJajo", "pietruszka"];
+    private string[] owoceSalatka = [ "brzoskwinia", "nektarynka", "morela", "śliwka", "jabłko", "gruszka", "truskawka", "malina", "jeżyna", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "żurawina", "pomarańcza", "mandarynka", "grejpfrut", "banan", "ananas", "mango", "papaja", "marakuja", "kokos", "awokado", "arbuz", "melon", "winogronoJasne", "winogronoRóżowe", "winogronoCiemne", "kiwi" ];
     private string[] naWedlineZ = [ "krowaLopatka", "krowaPoledwica", "swiniaBoczek", "swiniaSzynka", "swiniaSchab", "kuraJedzenie", "indykJedzenie", "krolikJedzenie"];
     private string[] naWedlineP = [ "mieloneDrob", "mieloneSwinia"];
     private Dictionary<string, string> miesoNaWedline = new() { ["krowaLopatka"] = "lopatkaWedlina", ["krowaPoledwica"] = "poledwicaWedlina", ["swiniaBoczek"] = "boczekWedlina", ["swiniaSzynka"] = "szynkaWedlina", ["swiniaSchab"] = "schabWedlina", ["kuraJedzenie"] = "kurczakWedlina", ["indykJedzenie"] = "indykWedlina", ["krolikJedzenie"] = "krolikPasztet", ["mieloneDrob"] = "drobPasztet", ["mieloneSwinia"] = "swiniaPasztet" };
@@ -605,6 +646,11 @@
     private HashSet<string> wybraneDodatkiKanapka = [];
     private void DodatekNaKanapke(string dodatek) => _ = Gracz.JestDar(dodatek) && (wybraneDodatkiKanapka.Contains(dodatek) ? wybraneDodatkiKanapka.Remove(dodatek) : wybraneDodatkiKanapka.Add(dodatek));
     private bool widocznaListaKanapek = false;
+    private HashSet<string> wybraneOwoceSalatka = [];
+    private void OwocNaSalatke(string owoc) => _ = Gracz.JestOwoc(owoc) && (wybraneOwoceSalatka.Contains(owoc) ? wybraneOwoceSalatka.Remove(owoc) : wybraneOwoceSalatka.Add(owoc));
+    private bool miodNaSalatce = false;
+    private void MiodNaSalatke() => miodNaSalatce = Gracz.JestProduktZ("miod") ? !miodNaSalatce : miodNaSalatce;
+    private bool widocznaListaSalatek = false;
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
     private string smalecPieczywo = "";
@@ -877,6 +923,15 @@
         wybranySerKanapka = "";
         wybranaWedlinaKanapka = "";
         wybraneDodatkiKanapka.Clear();
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task SalatkaDoPlecaka()
+    {
+        foreach (var owoc in wybraneOwoceSalatka) Gracz.Owoc(owoc).Ilosc--;
+        if (miodNaSalatce) Gracz.ProduktZ("miod").Ilosc--;
+        Gracz.Salatki.Add(new SalatkaGracza(miodNaSalatce, new HashSet<string>(wybraneOwoceSalatka)));
+        wybraneOwoceSalatka.Clear();
+        miodNaSalatce = false;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }
