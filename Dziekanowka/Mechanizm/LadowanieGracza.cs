@@ -25,11 +25,13 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Warzywa.ForEach(w => w.Ilosc = w.Ilosc > 0 ? w.Ilosc - (w.Ilosc / 5 + 1) : w.Ilosc);
                 AktualnyGracz.Owoce.ForEach(o => o.Ilosc = o.Ilosc > 0 ? o.Ilosc - (o.Ilosc / 5 + 1) : o.Ilosc);
                 AktualnyGracz.Zboza.ForEach(z => z.Ilosc = z.Ilosc > 0 ? z.Ilosc - (z.Ilosc / 5 + 1) : z.Ilosc);
+                AktualnyGracz.Ryby = Ryba.StartoweRyby();
                 var produktyTrwale = new HashSet<string> { "pioroGesi", "pioroKaczki", "futroKrolik", "owcaSkora", "kozaSkora", "krowaSkora", "owcaWelna", "alpakaWelna", "miod" };
                 AktualnyGracz.ProduktyZwierzece.ForEach(p => { if (!produktyTrwale.Contains(p.Nazwa) && p.Ilosc > 0) p.Ilosc--; });
                 AktualnyGracz.ProduktyPrzetworzone.ForEach(p => p.Ilosc = Math.Max(0, p.Ilosc - 1));
                 AktualnyGracz.Kanapki = [];
                 AktualnyGracz.Salatki = [];
+                AktualnyGracz.Surowki = [];
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
                 CzyPokazacWideo = true;

@@ -28,6 +28,9 @@
 .deskaSalatkiWidok {
     background-image: url('../img/dom/kuchnia/deskaSalatkiWidok.png');
 }
+.deskaSurowkiWidok {
+    background-image: url('../img/dom/kuchnia/deskaSurowkiWidok.png');
+}
 .piecPieczywoWidok {
     background-image: url('../img/dom/kuchnia/piecPieczywoWidok.png');
 }
@@ -407,20 +410,62 @@
     right: 312px;
     z-index: 2;
 }
+.dodawanieSurowki {
+    width: 279px;
+    height: 208px;
+    top: 246px;
+    right: 0;
+    z-index: 2;
+}
+.lSoliSurowka {
+    top: 20px;
+    left: 682px;
+    width: 40px;
+    height: 19px;
+    font-size: 18px;
+    text-align: center;
+}
 .warzywaInSurowka {
     width: 600px;
     height: 440px;
-    bottom: 20px;
-    left: 20px;
+    top: 40px;
+    left: 40px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px 27px;
-    border: 1px solid black;
 }
 .warzywoInSurowka {
     width: 75px;
     height: 75px;
     flex-shrink: 0;
+}
+.jajaInSurowka {
+    width: 180px;
+    height: 180px;
+    top: 30px;
+    right: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px 15px;
+}
+.jajoInSurowka {
+    width: 75px;
+    height: 75px;
+    flex-shrink: 0;
+}
+.majonezNaSurowke {
+    width: 130px;
+    height: 130px;
+    top: 60px;
+    right: 260px;
+    cursor: pointer;
+}
+.pokazanieListySurowek {
+    width: 173px;
+    height: 181px;
+    top: 0;
+    right: 512px;
+    z-index: 2;
 }
 .deskaDoKanapek {
     width: 504px;

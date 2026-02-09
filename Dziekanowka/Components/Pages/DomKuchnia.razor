@@ -252,6 +252,34 @@
     }
     @if (deskaSurowki)
     {
+        @if (moznaDodacSurowke)
+        {
+            <div class="abs dodawanieSurowki"><button class="wyroznionyGuzik" @onclick="SurowkaDoPlecaka"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/zrobSurowke.png" /></button></div>
+        }
+        <div class="abs pokazanieListySurowek"><button class="wyroznionyGuzik" @onclick="() => widocznaListaSurowek = true" disabled="@(widocznaListaSurowek)"><img class="obrazekSieMiesci" src="img/dom/kuchnia/deska/worekSurowek.png" /></button></div>
+        @if (widocznaListaSurowek)
+        {
+            <div class="abs listaKanapek" @onclick="() => widocznaListaSurowek = false">
+                @foreach (var surowka in Gracz.Surowki)
+                {
+                    <div class="kanapkaGracza">
+                        @if (surowka.JestMajonez)
+                        {
+                            <img class="obrazekSieMiesci" src="img/przedmioty/przetwornia/majonez.png" />
+                        }
+                        @if (!string.IsNullOrEmpty(surowka.Jajo))
+                        {
+                            <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(surowka.Jajo).png" />
+                        }
+                        @foreach (var warzywo in surowka.Warzywa)
+                        {
+                            <img class="obrazekSieMiesci" src="img/przedmioty/warzywa/@(warzywo).png" />
+                        }
+                    </div>
+                }
+            </div>
+        }
+        <div class="abs lSoliSurowka">@Gracz.Dar("sol").Ilosc</div>
         <div class="abs warzywaInSurowka">
             @foreach (var warzywo in warzywaSurowki)
             {
@@ -267,6 +295,19 @@
                     <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP(warzywo).Ilosc</div>
                 </div>
             }
+        </div>
+        <div class="abs jajaInSurowka">
+            @foreach (var ptak in jajka)
+            {
+                <div class="rel jajoInSurowka @(Gracz.JestProduktZ($"{ptak}Jajo") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneJajoNaSurowce == $"{ptak}Jajo" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzJajoNaSurowce(ptak)'>
+                    <img src="img/dom/kuchnia/@(ptak)Jajo.png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktZ($"{ptak}Jajo").Ilosc</div>
+                </div>
+            }
+        </div>
+        <div class="abs majonezNaSurowke @(Gracz.JestDar("majonez") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(majonezNaSurowce == true ? "wybranySkladnikCiasta" : "")" @onclick='MajonezNaSurowce'>
+            <img src="img/przedmioty/przetwornia/majonez.png" class="obrazekSieMiesci" />
+            <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Dar("majonez").Ilosc</div>
         </div>
     }
 </div>
@@ -679,6 +720,7 @@
     private void MajonezNaSurowce() => majonezNaSurowce = Gracz.JestDar("majonez") ? !majonezNaSurowce : majonezNaSurowce;
     private string wybraneJajoNaSurowce = "";
     private string WybierzJajoNaSurowce(string ptak) => wybraneJajoNaSurowce == $"{ptak}Jajo" ? wybraneJajoNaSurowce = "" : Gracz.JestProduktZ($"{ptak}Jajo") ? wybraneJajoNaSurowce = $"{ptak}Jajo" : wybraneJajoNaSurowce;
+    private bool moznaDodacSurowke => Gracz.JestZywnoscP("sol") && (wybraneWarzywaSurowka.Count > 1 || (wybraneWarzywaSurowka.Count > 0 && (majonezNaSurowce || wybraneJajoNaSurowce != "")));
     private bool widocznaListaSurowek = false;
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
@@ -965,7 +1007,7 @@
     }
     private async Task SurowkaDoPlecaka()
     {
-        foreach (var warzywo in wybraneWarzywaSurowka) Gracz.Warzywo(warzywo).Ilosc--;
+        foreach (var warzywo in wybraneWarzywaSurowka) Gracz.Dar(warzywo).Ilosc--;
         Gracz.ZywnoscP("sol").Ilosc--;
         if (majonezNaSurowce) Gracz.Dar("majonez").Ilosc--;
         if (!string.IsNullOrEmpty(wybraneJajoNaSurowce)) Gracz.ProduktZ(wybraneJajoNaSurowce).Ilosc--;
