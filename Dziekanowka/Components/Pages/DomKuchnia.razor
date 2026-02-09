@@ -123,7 +123,7 @@
     }
 </div>
 <div class="abs narzedzieKuchnia @(deskaKanapki ? "deskaKanapki" : deskaSurowki ? "deskaSurowki" : deskaSalatki ? "deskaSalatki" : "deskaInne")Widok @(widokDeska ? "" : "aktywne")">
-    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska" disabled="@(widocznaListaKanapek || widocznaListaSalatek)" ><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
+    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska" disabled="@(widocznaListaKanapek || widocznaListaSalatek || widocznaListaSurowek)" ><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (deskaKanapki)
     {
         @if (wybranePieczywoKanapka != "")
@@ -248,6 +248,25 @@
         <div class="rel miodNaSalatke @(Gracz.JestDar("miod") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(miodNaSalatce == true ? "wybranySkladnikCiasta" : "")" @onclick='MiodNaSalatke'>
             <img src="img/dom/kuchnia/miod.png" class="obrazekSieMiesci" />
             <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Dar("miod").Ilosc</div>
+        </div>
+    }
+    @if (deskaSurowki)
+    {
+        <div class="abs warzywaInSurowka">
+            @foreach (var warzywo in warzywaSurowki)
+            {
+                <div class="rel warzywoInSurowka @(Gracz.JestWarzywo(warzywo) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneWarzywaSurowka.Contains(warzywo) ? "wybranySkladnikCiasta" : "")" @onclick='() => WarzywoNaSurowke(warzywo)'>
+                    <img src="img/przedmioty/warzywa/@(warzywo).png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Warzywo(warzywo).Ilosc</div>
+                </div>
+            }
+            @foreach (var warzywo in kiszonkiSurowki)
+            {
+                <div class="rel warzywoInSurowka @(Gracz.JestProduktP(warzywo) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneWarzywaSurowka.Contains(warzywo) ? "wybranySkladnikCiasta" : "")" @onclick='() => WarzywoNaSurowke(warzywo)'>
+                    <img src="img/przedmioty/przetwornia/@(warzywo).png" class="obrazekSieMiesci" />
+                    <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP(warzywo).Ilosc</div>
+                </div>
+            }
         </div>
     }
 </div>
@@ -633,7 +652,8 @@
     private string[] wedlinyKanapki => new[] { "kielbasaWedlina", "salamiWedlina" }.Concat(wedliny.Select(w => $"{w}Wedlina")).ToArray().Concat(pasztety.Select(p => $"{p}Pasztet")).ToArray();
     private HashSet<string> dodatkiKanapki = ["pomidor", "ogórek", "papryka", "sałata", "rukola", "rzodkiewka", "szpinak", "szczypiorek", "cebula", "czosnek", "ogorekKiszony", "kapustaKiszona", "oliwki", "kuraJajo", "gesJajo", "kaczkaJajo", "indykJajo", "pietruszka"];
     private string[] owoceSalatka = [ "brzoskwinia", "nektarynka", "morela", "śliwka", "jabłko", "gruszka", "truskawka", "malina", "jeżyna", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "żurawina", "pomarańcza", "mandarynka", "grejpfrut", "banan", "ananas", "mango", "papaja", "marakuja", "kokos", "awokado", "arbuz", "melon", "winogronoJasne", "winogronoRóżowe", "winogronoCiemne", "kiwi" ];
-    private string[] warzywaSurowki = ["marchew", "burak", "sałata", "pomidor", "papryka", "ogórek", "rzodkiewka", "szpinak", "rukola", "szczaw", "kapustaWłoska", "kapustaPekińska", "brokuł", "kukurydza", "groch", "fasola", "szparagi", "brukselka", "cebula", "szczypiorek", "czosnek", "ogorekKiszony", "kapustaKiszona", "burakKiszony"];
+    private string[] warzywaSurowki = ["marchew", "burak", "sałata", "pomidor", "papryka", "ogórek", "rzodkiewka", "szpinak", "rukola", "szczaw", "kapustaWłoska", "kapustaPekińska", "brokuł", "kukurydza", "groch", "fasola", "szparagi", "brukselka", "cebula", "szczypiorek", "czosnek" ];
+    private string[] kiszonkiSurowki = ["ogorekKiszony", "kapustaKiszona", "burakKiszony"];
     private string[] naWedlineZ = [ "krowaLopatka", "krowaPoledwica", "swiniaBoczek", "swiniaSzynka", "swiniaSchab", "kuraJedzenie", "indykJedzenie", "krolikJedzenie"];
     private string[] naWedlineP = [ "mieloneDrob", "mieloneSwinia"];
     private Dictionary<string, string> miesoNaWedline = new() { ["krowaLopatka"] = "lopatkaWedlina", ["krowaPoledwica"] = "poledwicaWedlina", ["swiniaBoczek"] = "boczekWedlina", ["swiniaSzynka"] = "szynkaWedlina", ["swiniaSchab"] = "schabWedlina", ["kuraJedzenie"] = "kurczakWedlina", ["indykJedzenie"] = "indykWedlina", ["krolikJedzenie"] = "krolikPasztet", ["mieloneDrob"] = "drobPasztet", ["mieloneSwinia"] = "swiniaPasztet" };
@@ -659,6 +679,7 @@
     private void MajonezNaSurowce() => majonezNaSurowce = Gracz.JestDar("majonez") ? !majonezNaSurowce : majonezNaSurowce;
     private string wybraneJajoNaSurowce = "";
     private string WybierzJajoNaSurowce(string ptak) => wybraneJajoNaSurowce == $"{ptak}Jajo" ? wybraneJajoNaSurowce = "" : Gracz.JestProduktZ($"{ptak}Jajo") ? wybraneJajoNaSurowce = $"{ptak}Jajo" : wybraneJajoNaSurowce;
+    private bool widocznaListaSurowek = false;
     private int pieczeniePieczywa = 0;
     private string makaPieczywo = "";
     private string smalecPieczywo = "";

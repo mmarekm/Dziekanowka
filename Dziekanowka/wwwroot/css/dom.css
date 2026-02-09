@@ -401,11 +401,26 @@
     cursor: pointer;
 }
 .pokazanieListySalatek {
-    width: 261px;
+    width: 260px;
     height: 335px;
     bottom: 0;
-    right: 313px;
+    right: 312px;
     z-index: 2;
+}
+.warzywaInSurowka {
+    width: 600px;
+    height: 440px;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 27px;
+    border: 1px solid black;
+}
+.warzywoInSurowka {
+    width: 75px;
+    height: 75px;
+    flex-shrink: 0;
 }
 .deskaDoKanapek {
     width: 504px;
