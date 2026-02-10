@@ -4,6 +4,6 @@
     {
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = 0;
-        public static List<Obiad> StartoweObiady() => [new("jajecznica")];
+        public static List<Obiad> StartoweObiady() => [new("jajecznica"), new("jajkoSadzone"), new("omlet"), new("shakshuka"), new("kotletSchabowy")];
     }
 }

@@ -8,6 +8,7 @@
 "losos", "pstrag", "halibut", "okon", "sledz",
 "oliwki", "olej", "sol", "proszekDoPieczenia", "czarnyPieprz", "majeranek", "oregano", "bazylia", "cynamon"
 "marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok",
+"jajecznica", "jajkoSadzone", "omlet", "shakshuka", "kotletSchabowy"
 List<kanapki, Salatki, Surowki>
 
 SKLEP
@@ -15,3 +16,4 @@ wszystkie ProduktZ (prawie)
 wszystkie ProduktP (prawie)
 wszystkie ZywnoscP (wszystkie)
 grzyby NIE
+ryby NIE
