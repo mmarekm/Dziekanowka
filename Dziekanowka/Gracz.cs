@@ -9,6 +9,7 @@ namespace Dziekanowka
         public List<ZwierzeGracza> Zwierzeta { get; set; } = ZwierzeGracza.StartoweZwierzaki();
         public List<ProduktZwierzecy> ProduktyZwierzece { get; set; } = ProduktZwierzecy.StartoweProdukty();
         public List<ProduktPrzetworzony> ProduktyPrzetworzone { get; set; } = ProduktPrzetworzony.StartoweProdukty();
+        public List<Obiad> Obiady { get; set; } = Obiad.StartoweObiady();
         public List<Grzyb> Grzyby {  get; set; } = Grzyb.StartoweGrzyby();
         public List<Ryba> Ryby { get; set; } = Ryba.StartoweRyby();
         public List<ZywnoscPozostale> ZywnoscPozostala { get; set; } = ZywnoscPozostale.StartowaZywnosc();

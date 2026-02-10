@@ -1,0 +1,10 @@
+﻿.szkolaIntro {
+    background-image: url('../img/miasto/szkola/szkolaIntroWidok.png');
+}
+.szkolaDoMiasta {
+    bottom: 0;
+    left: 809px;
+    width: 263px;
+    height: 219px;
+    z-index: 2;
+}

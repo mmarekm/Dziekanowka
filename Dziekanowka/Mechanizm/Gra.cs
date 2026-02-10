@@ -11,6 +11,7 @@ namespace Dziekanowka.Mechanizm
         public static bool JestZboze(this Gracz g, string zboze) => g.Zboza.Any(w => w.Nazwa == zboze && w.Ilosc > 0);
         public static bool JestOwoc(this Gracz g, string owoc) => g.Owoce.Any(o => o.Nazwa == owoc && o.Ilosc > 0);
         public static bool JestGrzyb(this Gracz g, string grzyb) => g.Grzyby.Any(g => g.Nazwa == grzyb && g.Ilosc > 0);
+        public static bool JestRyba(this Gracz g, string ryba) => g.Ryby.Any(r => r.Nazwa == ryba && r.Ilosc > 0);
         public static bool JestDar(this Gracz g, string dar) => g.ProduktyZwierzece.Any(p => p.Nazwa == dar && p.Ilosc > 0) || g.ProduktyPrzetworzone.Any(p => p.Nazwa == dar && p.Ilosc > 0) || g.ZywnoscPozostala.Any(p => p.Nazwa == dar && p.Ilosc > 0) || g.Warzywa.Any(w => w.Nazwa == dar && w.Ilosc > 0) || g.Zboza.Any(z => z.Nazwa == dar && z.Ilosc > 0) || g.Owoce.Any(o => o.Nazwa == dar && o.Ilosc > 0) || g.Grzyby.Any(gr => gr.Nazwa == dar && gr.Ilosc > 0) || g.Ryby.Any(r => r.Nazwa == dar && r.Ilosc > 0);
         public static bool JestPrzedmiot(this Gracz g, string przedmiot) => g.Przedmioty.Any(p => p.Nazwa == przedmiot && p.Ilosc > 0);
         public static ZwierzeGracza Zwierze(this Gracz g, string zwierz) => g.Zwierzeta.First(z => z.Nazwa == zwierz);
@@ -21,6 +22,7 @@ namespace Dziekanowka.Mechanizm
         public static IDar Zboze(this Gracz g, string zboze) => g.Zboza.First(z => z.Nazwa == zboze);
         public static IDar Owoc(this Gracz g, string owoc) => g.Owoce.First(o => o.Nazwa == owoc);
         public static IDar Grzyb(this Gracz g, string grzyb) => g.Grzyby.First(g => g.Nazwa == grzyb);
+        public static IDar Ryba(this Gracz g, string ryba) => g.Ryby.First(r => r.Nazwa == ryba);
         public static IDar Dar(this Gracz g, string dar)
         {
             if (g.ProduktyZwierzece.Any(p => p.Nazwa == dar)) return g.ProduktyZwierzece.First(p => p.Nazwa == dar);
