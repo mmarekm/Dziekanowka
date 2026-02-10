@@ -8,7 +8,7 @@
 "losos", "pstrag", "halibut", "okon", "sledz",
 "oliwki", "olej", "sol", "proszekDoPieczenia", "czarnyPieprz", "majeranek", "oregano", "bazylia", "cynamon"
 "marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok",
-"jajecznica", "jajkoSadzone", "omlet", "shakshuka", "kotletSchabowy"
+"jajecznica", "jajkoSadzone", "omlet", "shakshuka", "kotletSchabowy", "kotletMielony", "stek", "piersZKurczaka", "bitki", "indykSmazony", "krolikSmazony", "pstragSmazony", "lososSmazony", "halibutSmazony", "okonSmazony", "sledzSmazony",
 List<kanapki, Salatki, Surowki>
 
 SKLEP

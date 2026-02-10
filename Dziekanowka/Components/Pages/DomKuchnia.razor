@@ -76,6 +76,7 @@
     }
     @if (piec)
     {
+        <div class="abs lDrewnaPiec">@Gracz.Przedmiot("drewno").Ilosc</div>
         <div class="abs piecDoPieczywa"><button class="wyroznionyGuzik" @onclick="() => piecPieczywo = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecPieczywo.png" /></button></div>
         <div class="abs piecDoPizzy"><button class="wyroznionyGuzik" @onclick="() => piecPizza = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecPizza.png" /></button></div>
         <div class="abs piecDoCiasta"><button class="wyroznionyGuzik" @onclick="() => piecCiasto = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecCiasto.png" /></button></div>
@@ -409,7 +410,7 @@
     }
     @if (piecPizza)
     {
-        @if (saSkladnikiNaPizze)
+        @if (saSkladnikiNaPizze && Gracz.JestPrzedmiot("drewno"))
         {
             <div class="abs pieczeniePiecPizza"><button class="wyroznionyGuzik" @onclick="Pieczenie"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujPiecPizza.png" /></button></div>
         }
@@ -494,7 +495,7 @@
     }
     @if (piecCiasto)
     {
-        @if (saSkladnikiNaCiasto)
+        @if (saSkladnikiNaCiasto && Gracz.JestPrzedmiot("drewno"))
         {
             <div class="abs pieczeniePiecCiasto"><button class="wyroznionyGuzik" @onclick="Pieczenie"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujPiecCiasto.png" /></button></div>
         }
@@ -893,6 +894,7 @@
     }
     private async Task Pieczenie()
     {
+        if (!Gracz.JestPrzedmiot("drewno")) return;
         if (piecPieczywo && (!saSkladnikiNaPieczywo || Gracz.Zboza.First(z => z.Nazwa == makaPieczywo).PoziomZakwasu < 3 || pieczeniePieczywa == 0)) return;
         if (piecWedlina && !saSkladnikiNaWedline) return;
         if (piecPieczywo)
@@ -971,6 +973,7 @@
             miesoWedlina = "";
 
         }
+        Gracz.Przedmiot("drewno").Ilosc--;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private async Task UpiecPizzeZAnimacja()

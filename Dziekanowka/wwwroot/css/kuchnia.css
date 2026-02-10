@@ -102,6 +102,15 @@
     width: 200px;
     height: 130px;
 }
+.lDrewnaPiec {
+    top: 120px;
+    left: 150px;
+    width: 70px;
+    height: 31px;
+    font-size: 30px;
+    text-align: center;
+    color: tan;
+}
 .handelWyciskarka {
     width: 241px;
     height: 229px;
