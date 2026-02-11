@@ -74,6 +74,19 @@
         <div class="abs deskaDoSalatek"><button class="wyroznionyGuzik" @onclick="() => deskaSalatki = true" disabled="@(!widokDeska)"><img src="img/dom/kuchnia/deskaSalatki.png" /></button></div>
         <div class="abs deskaDoSurowek"><button class="wyroznionyGuzik" @onclick="() => deskaSurowki = true" disabled="@(!widokDeska)"><img src="img/dom/kuchnia/deskaSurowki.png" /></button></div>
     }
+    @if (patelnia)
+    {
+        <div class="abs lDrewnaPatelnia">@Gracz.Przedmiot("drewno").Ilosc</div>
+        <div class="abs patelniaDania">
+            @foreach (var danie in Gracz.Obiady)
+            {
+                <div class="rel patelniaDanie @(danie.Ilosc > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick='() => KosztaDania(danie.Nazwa)'>
+                    <img class="obrazekSieMiesci" src="img/dom/kuchnia/patelnia/@(danie.Nazwa).png" />
+                    <div class="abs lDaniaPatelnia">@danie.Ilosc</div>
+                </div>
+            }
+        </div>
+    }
     @if (piec)
     {
         <div class="abs lDrewnaPiec">@Gracz.Przedmiot("drewno").Ilosc</div>
@@ -1020,5 +1033,10 @@
         wybraneJajoNaSurowce = "";
         majonezNaSurowce = false;
         await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private void KosztaDania(string danie)
+    {
+        var wybrane = Gracz.Obiady.First(d => d.Nazwa == danie);
+        if (wybrane.Ilosc < 1) return;
     }
 }

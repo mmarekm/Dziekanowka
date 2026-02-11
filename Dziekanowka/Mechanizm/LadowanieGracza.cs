@@ -32,6 +32,7 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Kanapki = [];
                 AktualnyGracz.Salatki = [];
                 AktualnyGracz.Surowki = [];
+                AktualnyGracz.Obiady = Obiad.StartoweObiady();
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
                 CzyPokazacWideo = true;
