@@ -135,6 +135,19 @@
                             }
                         </div>
                     }
+                    else if (skladnik == "maka")
+                    {
+                        <div class="rel skladnikDaniaObiad skladnikSzczegolowyWiekszyDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            @foreach (var zboze in zboza)
+                            {
+                                var obiekt = Gracz.ProduktP($"{zboze}Maka");
+                                <div class="rel szczegolObiad @(Gracz.JestProduktP($"{zboze}Maka") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaMakaSkladnikObiad == $"{zboze}Maka" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzMakeSkladnikObiad(zboze)'>
+                                    <img class="obrazekContain" src="img/dom/kuchnia/@(obiekt.Nazwa).png" />
+                                    <div class="abs lProduktuInMlynekKawa">@obiekt.Ilosc</div>
+                                </div>
+                            }
+                        </div>
+                    }
                     else if (skladnik == "swiniSzynkaLubSchab")
                     {
                         <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
@@ -906,6 +919,7 @@
     private string wybranyTluszczSkladnikObiad = "";
     private string WybierzTluszczSkladnikObiad(string tluszcz) => wybranyTluszczSkladnikObiad == tluszcz ? wybranyTluszczSkladnikObiad = "" : Gracz.JestDar(tluszcz) ? wybranyTluszczSkladnikObiad = tluszcz : wybranyTluszczSkladnikObiad;
     private string wybranaMakaSkladnikObiad = "";
+    private string WybierzMakeSkladnikObiad(string zboze) => wybranaMakaSkladnikObiad == $"{zboze}Maka" ? wybranaMakaSkladnikObiad = "" : Gracz.JestProduktP($"{zboze}Maka") ? wybranaMakaSkladnikObiad = $"{zboze}Maka" : wybranaMakaSkladnikObiad;
     private string wybranaBulkaSkladnikObiad = "";
     private string WybierzBulkeSkladnikObiad(string zboze) => wybranaBulkaSkladnikObiad == $"{zboze}Bulka" ? wybranaBulkaSkladnikObiad = "" : Gracz.JestProduktP($"{zboze}Bulka") ? wybranaBulkaSkladnikObiad = $"{zboze}Bulka" : wybranaBulkaSkladnikObiad;
     private string wybraneMieloneMiesoSkladnikObiad = "";
