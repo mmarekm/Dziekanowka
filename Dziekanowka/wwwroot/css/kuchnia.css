@@ -145,7 +145,6 @@
     color: white;
 }
 .kosztaDania {
-    position: absolute;
     left: 100px;
     top: 100px;
     width: 1500px;
@@ -155,25 +154,10 @@
     opacity: 0.85;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-start;
-    gap: 30px 20px;
-    padding: 30px;
-    box-sizing: border-box;
-    overflow-y: auto;
-}
-.kategoriaTytul {
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 5px;
-}
-.skladnikiOpcje {
-    display: flex;
-    flex-wrap: wrap;
     gap: 10px;
 }
 .rezygnacjaZDania,
 .ugotujDanie {
-    position: absolute;
     bottom: 30px;
     width: 200px;
     height: 200px;
@@ -186,7 +170,6 @@
     left: 200px;
 }
 .rysDania {
-    position: absolute;
     left: 30px;
     top: 30px;
     width: 200px;
@@ -194,90 +177,39 @@
     background-color: antiquewhite;
     border-radius: 15px;
 }
-.skladnikiKategoria {
+.skladnikiDaniaObiad {
+    left: 300px;
+    top: 30px;
+    width: 1100px;
+    height: 350px;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    min-width: 200px;
-    max-width: 300px;
-    background: rgba(255,255,240,0.5);
-    border-radius: 10px;
-    padding: 10px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
-.skladniki_jajo {
-    left: 260px;
-    top: 30px;
-    width: 600px;
-    height: 180px;
-}
-.skladniki_tluszcz {
-    left: 260px;
-    top: 230px;
-    width: 400px;
-    height: 180px;
-}
-.skladniki_sol {
-    left: 680px;
-    top: 230px;
-    width: 120px;
-    height: 180px;
-}
-.skladniki_mieso {
-    left: 260px;
-    top: 30px;
-    width: 600px;
-    height: 180px;
-}
-.skladniki_pomidor,
-.skladniki_papryka,
-.skladniki_cebula,
-.skladniki_czosnek,
-.skladniki_pieprz,
-.skladniki_bulka,
-.skladniki_maka,
-.skladniki_ser,
-.skladniki_ryba,
-.skladniki_ziemniak,
-.skladniki_owoc,
-.skladniki_kapusta,
-.skladniki_grzyb,
-.skladniki_mleko,
-.skladniki_ryz,
-.skladniki_majeranek,
-.skladniki_cytryna,
-.skladniki_proszek,
-.skladniki_jablko,
-.skladniki_olej,
-.skladniki_maslo,
-.skladniki_nadzienie {
-    left: 900px;
-    top: 30px;
-    width: 550px;
-    height: 550px;
-}
-.skladnikDoWyboru {
-    width: 120px;
-    height: 120px;
+.skladnikDaniaObiad {
+    width: 150px;
+    height: 150px;
     flex-shrink: 0;
-    border: 3px solid transparent;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.3);
-    transition: 0.2s;
-    cursor: pointer;
-    position: relative;
 }
-    .skladnikDoWyboru:hover {
-        transform: scale(1.05);
-    }
-.iloscPotrzebna {
-    top: 5px;
-    left: 5px;
-    background-color: rgba(139, 69, 19, 0.8);
-    color: white;
-    padding: 2px 6px;
-    border-radius: 5px;
-    font-size: 16px;
+.skladnikSzczegolowyDaniaObiad {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.info3JajaPotrzebne {
+    width: 30px;
+    height: 50px;
+    font-size: 49px;
+    text-align: center;
+    color: navy;
+    left: 50px;
+    top: 65px;
     font-weight: bold;
+}
+.szczegolObiad {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
 }
 .handelWyciskarka {
     width: 241px;

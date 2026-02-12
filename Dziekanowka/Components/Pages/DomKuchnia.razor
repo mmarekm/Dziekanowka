@@ -78,9 +78,9 @@
     {
         <div class="abs lDrewnaPatelnia">@Gracz.Przedmiot("drewno").Ilosc</div>
         <div class="abs patelniaDania">
-            @foreach (var danie in Gracz.Obiady)
+            @foreach (var danie in Obiad.DaniaZPatelni)
             {
-                <div class="rel patelniaDanie" @onclick='() => { widoczneKosztaDania = true; wybranyObiad = danie.Nazwa;}'>
+                <div class="rel patelniaDanie" @onclick='() => { widoczneKosztaDania = true; wybranyObiad = danie.Nazwa; }'>
                     <img class="obrazekSieMiesci" src="img/dom/kuchnia/patelnia/@(danie.Nazwa).png" />
                     <div class="abs lDaniaPatelnia">@danie.Ilosc</div>
                 </div>
@@ -92,30 +92,57 @@
         <div class="abs kosztaDania">
             <div class="abs rysDania"><img class="obrazekSieMiesci" src="img/dom/kuchnia/patelnia/@(wybranyObiad).png" /></div>
             <div class="abs rezygnacjaZDania"><button class="wyroznionyGuzik" @onclick='WyczyscWyborDania'><img class="obrazekSieMiesci" src="img/dom/rezygnacja.png" /></button></div>
-            @foreach (var skladnikDania in KosztaDania(wybranyObiad))
-            {
-                <div class="abs skladnikiKategoria">
-                    <div class="kategoriaTytul">@skladnikDania.Kategoria</div>
-                    <div class="skladnikiOpcje">
-                    @foreach (var opcja in skladnikDania.Opcje)
+            <!--<div class="abs skladnikiDaniaObiad">
+                @foreach (var skladnik in KosztaDania(wybranyObiad))
+                {
+                    if (skladnik == "jajo")
                     {
-                        <div class="rel skladnikDoWyboru @(Gracz.JestDar(opcja) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneSkładniki.GetValueOrDefault(skladnikDania.Kategoria) == opcja ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzSkladnik(skladnikDania.Kategoria, opcja)'>
-                            <img src="img/dom/kuchnia/@(opcja).png" class="obrazekSieMiesci" />
-                            <div class="abs lZbozProduktInPiecPieczywo">@Gracz.Dar(opcja).Ilosc</div>
-                            @if (skladnikDania.Ilosc > 1)
+                        <div class="rel skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            <div class="abs info3JajaPotrzebne">3</div>
+                            @foreach (var ptak in jajka)
                             {
-                                <div class="abs iloscPotrzebna">x@skladnikDania.Ilosc</div>
+                                var obiekt = Gracz.ProduktZ($"{ptak}Jajo");
+                                <div class="rel szczegolObiad @(Gracz.JestProduktZ($"{ptak}Jajo") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneJajoSkladnikObiad == $"{ptak}Jajo" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzJajoSkladnikObiad(ptak)'>
+                                    <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(obiekt.Nazwa).png" />
+                                    <div class="abs lProduktuInMlynekKawa">@obiekt.Ilosc</div>
+                                </div>
                             }
                         </div>
                     }
-                    </div>
-                </div>
-            }
+                    else if (skladnik == "tluszcz")
+                    {
+                        <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            <div class="rel szczegolObiad @(Gracz.JestProduktP("maslo") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranyTluszczSkladnikObiad == "maslo" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzTluszczSkladnikObiad("maslo")'>
+                                <img class="obrazekSieMiesci" src="img/dom/kuchnia/maslo.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktP("maslo").Ilosc</div>
+                            </div>
+                            <div class="rel szczegolObiad @(Gracz.JestZywnoscP("olej") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranyTluszczSkladnikObiad == "olej" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzTluszczSkladnikObiad("olej")'>
+                                <img class="obrazekSieMiesci" src="img/dom/kuchnia/olej.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.ZywnoscP("olej").Ilosc</div>
+                            </div>
+                        </div>
+                    }
+                    else if (skladnik == "swiniSzynkaLubSchab")
+                    {
+                        
+                    }
+                    else
+                    {
+                        var obiekt = Gracz.Dar(skladnik);
+                        <div class="rel skladnikDaniaObiad">
+                            <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(skladnik).png" />
+                            <div class="abs lDaniaPatelnia">@obiekt.Ilosc</div>
+                        </div>
+                    }
+                }
+            </div>-->
             @if (MoznaUgotowacDanie)
             {
-                <div class="abs ugotujDanie"><button class="wyroznionyGuzik" @onclick="UgotujDanie"><img src="img/dom/kuchnia/ugotuj.png" /></button></div>
+                <div class="abs ugotujDanie"><button class="wyroznionyGuzik" @onclick="UgotujDanie"><img class="obrazekSieMiesci" src="img/dom/potwierdzenie.png" /></button></div>
             }
         </div>
+        // jaj 3, mleka 2, ziemniakow 3, ryzu 3, (makaronu 3)
+        //mleko, jajo, tluszcz, maka, swiniSzynkaLubSchab, bulka, krowyRostbefLubAntrykotLubswiniSzynkaLubSchab, krowyLopatkaLubPoledwica, twarogLubSer, grzyb, nadzienieSlodkie(owoce, twarogISery), kapusta
     }
     @if (piec)
     {
@@ -123,19 +150,19 @@
         <div class="abs piecDoPieczywa"><button class="wyroznionyGuzik" @onclick="() => piecPieczywo = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecPieczywo.png" /></button></div>
         <div class="abs piecDoPizzy"><button class="wyroznionyGuzik" @onclick="() => piecPizza = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecPizza.png" /></button></div>
         <div class="abs piecDoCiasta"><button class="wyroznionyGuzik" @onclick="() => piecCiasto = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecCiasto.png" /></button></div>
-        <div class="abs piecDoWedlin"><button class="wyroznionyGuzik" @onclick="() => piecWedlina = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecWedlina.png" /></button></div>       
+        <div class="abs piecDoWedlin"><button class="wyroznionyGuzik" @onclick="() => piecWedlina = true" disabled="@(!widokPiec)"><img src="img/dom/kuchnia/piecWedlina.png" /></button></div>
     }
-    @if(mlynek)
+    @if (mlynek)
     {
         <div class="abs handelMlynekKawa"><button class="wyroznionyGuzik" @onclick="Handel"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pracujMlynek.png" /></button></div>
         <div class="abs produktyInMlynekKawa">
-        @foreach (var produkt in taca)
-        {
-            <div class="rel produktInMlynekKawa @(@WPortfelu(produkt.Nazwa) > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick='() => NaTace(produkt.Nazwa)'>
-                <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(produkt.Nazwa).png" />
-                <div class="abs lProduktuInMlynekKawa">@WPortfelu(produkt.Nazwa)</div>
-            </div>
-        }
+            @foreach (var produkt in taca)
+            {
+                <div class="rel produktInMlynekKawa @(@WPortfelu(produkt.Nazwa) > 0 ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick='() => NaTace(produkt.Nazwa)'>
+                    <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(produkt.Nazwa).png" />
+                    <div class="abs lProduktuInMlynekKawa">@WPortfelu(produkt.Nazwa)</div>
+                </div>
+            }
         </div>
         <div class="abs mlynekLKawy">@Gracz.ZywnoscP("kawa").Ilosc</div>
         <div class="abs tacaPodajniklynekKawa">
@@ -168,7 +195,7 @@
     }
 </div>
 <div class="abs narzedzieKuchnia @(deskaKanapki ? "deskaKanapki" : deskaSurowki ? "deskaSurowki" : deskaSalatki ? "deskaSalatki" : "deskaInne")Widok @(widokDeska ? "" : "aktywne")">
-    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska" disabled="@(widocznaListaKanapek || widocznaListaSalatek || widocznaListaSurowek)" ><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
+    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijNarzedzieDeska" disabled="@(widocznaListaKanapek || widocznaListaSalatek || widocznaListaSurowek)"><img src="img/dom/kuchnia/confirmNarzedziePlus.png" /></button></div>
     @if (deskaKanapki)
     {
         @if (wybranePieczywoKanapka != "")
@@ -217,7 +244,7 @@
                     <img src="img/dom/kuchnia/deska/@(zboze)Bulka.png" class="obrazekSieMiesci" />
                     <div class="abs lZbozProduktInPiecPieczywo">@Gracz.ProduktP($"{zboze}Bulka").Ilosc</div>
                 </div>
-            }   
+            }
         </div>
         <div class="abs tluszczeInKanapki">
             @foreach (var tluszcz in tluszcze)
@@ -396,7 +423,7 @@
             @foreach (var zboze in zboza)
             {
                 <div class="rel chlebGraczaPiec">
-                    <img src="img/dom/kuchnia/@(zboze)Chleb.png" class="obrazekSieMiesci"/>
+                    <img src="img/dom/kuchnia/@(zboze)Chleb.png" class="obrazekSieMiesci" />
                     <div class="abs liczbaChlebowGraczaPiec">@Gracz.ProduktP($"{zboze}Chleb").Ilosc</div>
                 </div>
             }
@@ -443,7 +470,7 @@
             }
             @if (nadzienieDrozdzowka != "")
             {
-                <img class="abs obrazekSieMiesci nadzienieDoBuleczki" src="img/dom/kuchnia/@(nadzienieDrozdzowka).png" role="button" @onclick='() => nadzienieDrozdzowka = ""'/>
+                <img class="abs obrazekSieMiesci nadzienieDoBuleczki" src="img/dom/kuchnia/@(nadzienieDrozdzowka).png" role="button" @onclick='() => nadzienieDrozdzowka = ""' />
             }
         </div>
         @if (pieczywoGotowe != "")
@@ -496,7 +523,8 @@
             <img class="abs obrazekSieMiesci zbozeDoMakiPizza" src="img/dom/kuchnia/@(makaPizza).png" role="button" @onclick='() => makaPizza = ""' />
             <div class="abs stanZakwasuBiezacejMakiPizza @ZakwasKolor(Gracz.Zboza.First(z => z.Nazwa == makaPizza).PoziomZakwasu)"></div>
         }
-        <div class="abs pizzaWlasciwa"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pizzaCiasto.png"/>
+        <div class="abs pizzaWlasciwa">
+            <img class="obrazekSieMiesci" src="img/dom/kuchnia/pizzaCiasto.png" />
             @foreach (var skladnik in skladnikiPizza)
             {
                 @if (pizzaRobocza.Contains(skladnik))
@@ -505,10 +533,10 @@
                 }
             }
         </div>
-        <div class="abs pizzaWPizza"><button class="wyroznionyGuzik" @onclick="() => pokazPizze = true"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pizzaWPizza.png"/></button></div>
+        <div class="abs pizzaWPizza"><button class="wyroznionyGuzik" @onclick="() => pokazPizze = true"><img class="obrazekSieMiesci" src="img/dom/kuchnia/pizzaWPizza.png" /></button></div>
         @if (pokazPizze == true)
         {
-           <div class="abs modalPotwierdzeniePizza">
+            <div class="abs modalPotwierdzeniePizza">
                 <div class="rel modalTrescPotwierdzeniePizza cPoint @(Gracz.JestProduktP("pizza") ? "" : "modalNieWidacPizzy")" @onclick="() => pokazPizze = false">
                     @if (Gracz.JestProduktP("pizza"))
                     {
@@ -522,7 +550,7 @@
                         }
                     }
                 </div>
-           </div> 
+            </div>
         }
         @if (pokazPotwierdzeniePizza)
         {
@@ -693,20 +721,6 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    public class SkladnikDania
-    {
-        public List<string> Opcje { get; set; }
-        public string Kategoria { get; set; }
-        public bool Obowiazkowy { get; set; } = true;
-        public int Ilosc { get; set; } = 1;
-        public SkladnikDania(List<string> opcje, string kategoria, int ilosc = 1, bool obowiazkowy = true)
-        {
-            Opcje = opcje;
-            Kategoria = kategoria;
-            Ilosc = ilosc;
-            Obowiazkowy = obowiazkowy;
-        }
-    }
     protected override void OnParametersSet()
     {
         if (Gracz.Statystyki.OtwarteOkno == "piecPizza")
@@ -734,28 +748,28 @@
     private bool piecCiasto = false;
     private bool piecWedlina = false;
     private bool widokPiec => !piecPieczywo && !piecPizza && !piecCiasto && !piecWedlina;
-    private string[] zboza = [ "zyto", "jeczmien", "pszenica", "ryz", "owies", "gryka", "orkisz"];
+    private string[] zboza = ["zyto", "jeczmien", "pszenica", "ryz", "owies", "gryka", "orkisz"];
     private string[] pieczywa => zboza.SelectMany(z => new[] { $"{z}Bulka", $"{z}Chleb" }).ToArray();
-    private string[] smalce = [ "ges", "kaczka", "swinia"];
+    private string[] smalce = ["ges", "kaczka", "swinia"];
     private string[] tluszcze => new[] { "maslo", "awokado" }.Concat(smalce.Select(s => $"{s}Smalec")).ToArray();
-    private string[] jajka = [ "kura", "ges", "kaczka", "indyk"];
-    private string[] sery = [ "krowa", "koza", "owca"];
+    private string[] jajka = ["kura", "ges", "kaczka", "indyk"];
+    private string[] sery = ["krowa", "koza", "owca"];
     private string[] seryKanapka => new[] { "twarog" }.Concat(sery.Select(s => $"{s}Ser")).ToArray();
-    private string[] slodkieBuleczki = [ "brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
+    private string[] slodkieBuleczki = ["brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
     private string[] skladnikiPizza = ["papryka", "cebula", "kukurydza", "ogórek", "ananas", "oliwki", "pieczarka", "rydz", "podgrzybek", "borowik", "kurka", "kielbasaWedlina", "salamiWedlina", "lopatkaWedlina", "poledwicaWedlina", "boczekWedlina", "szynkaWedlina", "schabWedlina", "kurczakWedlina", "indykWedlina", "krolikPasztet", "drobPasztet", "swiniaPasztet"];
     private HashSet<string> pizzaRobocza = [];
     private bool WalidacjaSkladnikaPizzy(string skladnik) => Gracz.JestDar(skladnik);
     private IDar SkladnikPizzy(string skladnik) => Gracz.Dar(skladnik);
-    private string[] nadzieniaCiast = [ "jabłko", "brzoskwinia", "nektarynka", "morela", "śliwka", "wiśnia", "gruszka", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "truskawka", "malina", "pomarańcza", "ananas"];
-    private string[] wedliny = [ "lopatka", "poledwica", "boczek", "szynka", "schab", "kurczak", "indyk"];
-    private string[] pasztety = [ "krolik", "drob", "swinia" ];
+    private string[] nadzieniaCiast = ["jabłko", "brzoskwinia", "nektarynka", "morela", "śliwka", "wiśnia", "gruszka", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "truskawka", "malina", "pomarańcza", "ananas"];
+    private string[] wedliny = ["lopatka", "poledwica", "boczek", "szynka", "schab", "kurczak", "indyk"];
+    private string[] pasztety = ["krolik", "drob", "swinia"];
     private string[] wedlinyKanapki => new[] { "kielbasaWedlina", "salamiWedlina" }.Concat(wedliny.Select(w => $"{w}Wedlina")).ToArray().Concat(pasztety.Select(p => $"{p}Pasztet")).ToArray();
     private HashSet<string> dodatkiKanapki = ["pomidor", "ogórek", "papryka", "sałata", "rukola", "rzodkiewka", "szpinak", "szczypiorek", "cebula", "czosnek", "ogorekKiszony", "kapustaKiszona", "oliwki", "kuraJajo", "gesJajo", "kaczkaJajo", "indykJajo", "pietruszka"];
-    private string[] owoceSalatka = [ "brzoskwinia", "nektarynka", "morela", "śliwka", "jabłko", "gruszka", "truskawka", "malina", "jeżyna", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "żurawina", "pomarańcza", "mandarynka", "grejpfrut", "banan", "ananas", "mango", "papaja", "marakuja", "kokos", "awokado", "arbuz", "melon", "winogronoJasne", "winogronoRóżowe", "winogronoCiemne", "kiwi" ];
-    private string[] warzywaSurowki = ["marchew", "burak", "sałata", "pomidor", "papryka", "ogórek", "rzodkiewka", "szpinak", "rukola", "szczaw", "kapustaWłoska", "kapustaPekińska", "brokuł", "kukurydza", "groch", "fasola", "szparagi", "brukselka", "cebula", "szczypiorek", "czosnek" ];
+    private string[] owoceSalatka = ["brzoskwinia", "nektarynka", "morela", "śliwka", "jabłko", "gruszka", "truskawka", "malina", "jeżyna", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "żurawina", "pomarańcza", "mandarynka", "grejpfrut", "banan", "ananas", "mango", "papaja", "marakuja", "kokos", "awokado", "arbuz", "melon", "winogronoJasne", "winogronoRóżowe", "winogronoCiemne", "kiwi"];
+    private string[] warzywaSurowki = ["marchew", "burak", "sałata", "pomidor", "papryka", "ogórek", "rzodkiewka", "szpinak", "rukola", "szczaw", "kapustaWłoska", "kapustaPekińska", "brokuł", "kukurydza", "groch", "fasola", "szparagi", "brukselka", "cebula", "szczypiorek", "czosnek"];
     private string[] kiszonkiSurowki = ["ogorekKiszony", "kapustaKiszona", "burakKiszony"];
-    private string[] naWedlineZ = [ "krowaLopatka", "krowaPoledwica", "swiniaBoczek", "swiniaSzynka", "swiniaSchab", "kuraJedzenie", "indykJedzenie", "krolikJedzenie"];
-    private string[] naWedlineP = [ "mieloneDrob", "mieloneSwinia"];
+    private string[] naWedlineZ = ["krowaLopatka", "krowaPoledwica", "swiniaBoczek", "swiniaSzynka", "swiniaSchab", "kuraJedzenie", "indykJedzenie", "krolikJedzenie"];
+    private string[] naWedlineP = ["mieloneDrob", "mieloneSwinia"];
     private Dictionary<string, string> miesoNaWedline = new() { ["krowaLopatka"] = "lopatkaWedlina", ["krowaPoledwica"] = "poledwicaWedlina", ["swiniaBoczek"] = "boczekWedlina", ["swiniaSzynka"] = "szynkaWedlina", ["swiniaSchab"] = "schabWedlina", ["kuraJedzenie"] = "kurczakWedlina", ["indykJedzenie"] = "indykWedlina", ["krolikJedzenie"] = "krolikPasztet", ["mieloneDrob"] = "drobPasztet", ["mieloneSwinia"] = "swiniaPasztet" };
     private string wybranePieczywoKanapka = "";
     private string WybierzPieczywoNaKanapke(string pieczywo) => wybranePieczywoKanapka == pieczywo ? wybranePieczywoKanapka = "" : Gracz.JestProduktP(pieczywo) ? wybranePieczywoKanapka = pieczywo : wybranePieczywoKanapka;
@@ -816,301 +830,71 @@
         public string Nazwa { get; set; } = nazwa;
         public int Ilosc { get; set; } = ilosc;
     }
-    List<ProduktNaTace> tacaWyciskarka = [ new("marchew"), new("burak"), new("pomidor"), new("jabłko"), new("pomarańcza"), new("grejpfrut"), new("cytryna"), new("ananas"), new("brzoskwinia"), new("morela"), new("wiśnia"), new("truskawka"), new("malina"), new("borówka"), new("porzeczkaCzarna")];
+    List<ProduktNaTace> tacaWyciskarka = [new("marchew"), new("burak"), new("pomidor"), new("jabłko"), new("pomarańcza"), new("grejpfrut"), new("cytryna"), new("ananas"), new("brzoskwinia"), new("morela"), new("wiśnia"), new("truskawka"), new("malina"), new("borówka"), new("porzeczkaCzarna")];
     List<ProduktNaTace> tacaDeska = [];
     List<ProduktNaTace> tacaGarnek = [];
     List<ProduktNaTace> tacaPatelnia = [];
     List<ProduktNaTace> tacaPiec = [];
-    List<ProduktNaTace> tacaMlynek = [new("ziarnaKawy"), new("pelnaButelka"), new("krowaMleko"), new("kozaMleko"), new("owcaMleko"), new("drewno") ];
+    List<ProduktNaTace> tacaMlynek = [new("ziarnaKawy"), new("pelnaButelka"), new("krowaMleko"), new("kozaMleko"), new("owcaMleko"), new("drewno")];
     List<ProduktNaTace> taca => wyciskarka ? tacaWyciskarka : deska ? tacaDeska : garnek ? tacaGarnek : patelnia ? tacaPatelnia : piec ? tacaPiec : tacaMlynek;
     private bool widoczneKosztaDania = false;
     private string wybranyObiad = "";
-    private Dictionary<string, string> wybraneSkładniki = new();
-    private List<SkladnikDania> KosztaDania(string danie)
+    private string wybraneMlekoSkladnikObiad = "";
+    private string wybraneJajoSkladnikObiad = "";
+    private string WybierzJajoSkladnikObiad(string ptak) => wybraneJajoSkladnikObiad == $"{ptak}Jajo" ? wybraneJajoSkladnikObiad = "" : Gracz.JestProduktZ($"{ptak}Jajo") ? wybraneJajoSkladnikObiad = $"{ptak}Jajo" : wybraneJajoSkladnikObiad;
+    private string wybranyTluszczSkladnikObiad = "";
+    private string WybierzTluszczSkladnikObiad(string tluszcz) => wybranyTluszczSkladnikObiad == tluszcz ? wybranyTluszczSkladnikObiad = "" : Gracz.JestDar(tluszcz) ? wybranyTluszczSkladnikObiad = tluszcz : wybranyTluszczSkladnikObiad;
+    private string wybranaMakaSkladnikObiad = "";
+    private string wybranaBulkaSkladnikObiad = "";
+    private string wybranaCzescSwiniSkladnikObiad = "";
+    private string WybierzCzescSwiniSkladnikObiad(string czesc) => wybranaCzescSwiniSkladnikObiad == czesc ? wybranaCzescSwiniSkladnikObiad = "" : Gracz.JestProduktZ(czesc) ? wybranaCzescSwiniSkladnikObiad = czesc : wybranaCzescSwiniSkladnikObiad;
+    private string wybranaCzescKrowySkladnikObiad = "";
+    private string wybranaCzescSwiniLubKrowySkladnikObiad = "";
+    private string wybranyTwarogLubSerSkladnikObiad = "";
+    private string wybranyGrzybSkladnikObiad = "";
+    private string wybraneNadzienieSlodkieSkladnikObiad = "";
+    private string wybranaKapustaSkladnikObiad = "";
+    private List<string> KosztaDania(string danie) => danie switch
     {
-        return danie switch
-        {
-            "jajecznica" => new List<SkladnikDania>
-        {
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo", 5),
-            new(new List<string> { "maslo", "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "jajkoSadzone" => new List<SkladnikDania>
-        {
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo", 3),
-            new(new List<string> { "maslo", "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "omlet" => new List<SkladnikDania>
-        {
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo", 4),
-            new(new List<string> { "maslo", "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "shakshuka" => new List<SkladnikDania>
-        {
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo", 4),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "pomidor" }, "pomidor", 3),
-            new(new List<string> { "papryka" }, "papryka", 2),
-            new(new List<string> { "cebula" }, "cebula"),
-            new(new List<string> { "czosnek" }, "czosnek", 2),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },
-            "kotletSchabowy" => new List<SkladnikDania>
-        {
-            new(new List<string> { "swiniaSzynka", "swiniaSchab" }, "mieso", 2),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo", 2),
-            new(pieczywa.Where(p => p.EndsWith("Bulka")).ToList(), "bulka"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },
-            "kotletMielony" => new List<SkladnikDania>
-        {
-            new(new List<string> { "mieloneSwinia", "mieloneKrowa" }, "mieso", 3),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo"),
-            new(new List<string> { "cebula" }, "cebula"),
-            new(pieczywa.Where(p => p.EndsWith("Bulka")).ToList(), "bulka"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },
-            "stek" => new List<SkladnikDania>
-        {
-            new(new List<string> { "krowaRostbef", "krowaAntrykot", "swiniaSzynka", "swiniaSchab" }, "mieso", 2),
-            new(new List<string> { "olej", "maslo" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz"),
-            new(new List<string> { "czosnek" }, "czosnek", 2)
-        },
-            "piersZKurczaka" => new List<SkladnikDania>
-        {
-            new(new List<string> { "kuraJedzenie" }, "mieso", 2),
-            new(new List<string> { "olej", "maslo" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz"),
-            new(new List<string> { "majeranek" }, "majeranek")
-        },
-            "bitki" => new List<SkladnikDania>
-        {
-            new(new List<string> { "krowaLopatka", "krowaPoledwica" }, "mieso", 3),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "cebula" }, "cebula"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },
-            "indykSmazony" => new List<SkladnikDania>
-        {
-            new(new List<string> { "indykJedzenie" }, "mieso", 2),
-            new(new List<string> { "olej", "maslo" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },
-            "krolikSmazony" => new List<SkladnikDania>
-        {
-            new(new List<string> { "krolikJedzenie" }, "mieso", 2),
-            new(new List<string> { "olej", "maslo" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz"),
-            new(new List<string> { "majeranek" }, "majeranek")
-        },
-            "pstragSmazony" => new List<SkladnikDania>
-        {
-            new(new List<string> { "pstrag" }, "ryba", 2),
-            new(new List<string> { "pszenicaMaka" }, "maka"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "lososSmazony" => new List<SkladnikDania>
-        {
-            new(new List<string> { "losos" }, "ryba", 2),
-            new(new List<string> { "olej", "maslo" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz"),
-            new(new List<string> { "cytryna" }, "cytryna")
-        },
-            "halibutSmazony" => new List<SkladnikDania>
-        {
-            new(new List<string> { "halibut" }, "ryba", 2),
-            new(new List<string> { "pszenicaMaka" }, "maka"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },
-            "okonSmazony" => new List<SkladnikDania>
-        {
-            new(new List<string> { "okon" }, "ryba", 2),
-            new(new List<string> { "pszenicaMaka" }, "maka"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "sledzSmazony" => new List<SkladnikDania>
-        {
-            new(new List<string> { "sledz" }, "ryba", 3),
-            new(new List<string> { "pszenicaMaka" }, "maka"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "plackiZiemniaczane" => new List<SkladnikDania>
-        {
-            new(new List<string> { "ziemniak" }, "ziemniak", 5),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo", 2),
-            new(new List<string> { "pszenicaMaka" }, "maka", 2),
-            new(new List<string> { "cebula" }, "cebula"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },
-            "frytki" => new List<SkladnikDania>
-        {
-            new(new List<string> { "ziemniak" }, "ziemniak", 4),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "pierogiRuskie" => new List<SkladnikDania>
-        {
-            new(new List<string> { "pszenicaMaka" }, "maka", 3),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo"),
-            new(new List<string> { "ziemniak" }, "ziemniak", 4),
-            new(new List<string> { "twarog", "krowaSer" }, "ser", 2),
-            new(new List<string> { "cebula" }, "cebula"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "pierogiZMiesem" => new List<SkladnikDania>
-        {
-            new(new List<string> { "pszenicaMaka" }, "maka", 3),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo"),
-            new(new List<string> { "mieloneSwinia", "mieloneKrowa" }, "mieso", 2),
-            new(new List<string> { "cebula" }, "cebula"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },
-            "pierogiZKapustaIGrzybami" => new List<SkladnikDania>
-        {
-            new(new List<string> { "pszenicaMaka" }, "maka", 3),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo"),
-            new(new List<string> { "kapustaKiszona" }, "kapusta", 2),
-            new(new List<string> { "pieczarka", "borowik" }, "grzyb", 2),
-            new(new List<string> { "cebula" }, "cebula"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "pierogiZOwocami" => new List<SkladnikDania>
-        {
-            new(new List<string> { "pszenicaMaka" }, "maka", 3),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo"),
-            new(new List<string> { "truskawka", "borówka", "wiśnia", "jabłko" }, "owoc", 3),
-            new(new List<string> { "olej" }, "olej"),
-            new(new List<string> { "maslo" }, "maslo")
-        },
-            "kopytka" => new List<SkladnikDania>
-        {
-            new(new List<string> { "ziemniak" }, "ziemniak", 5),
-            new(new List<string> { "pszenicaMaka" }, "maka", 2),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo"),
-            new(new List<string> { "maslo" }, "maslo"),
-            new(new List<string> { "sol" }, "sol")
-        },
-            "knedle" => new List<SkladnikDania>
-        {
-            new(new List<string> { "ziemniak" }, "ziemniak", 5),
-            new(new List<string> { "pszenicaMaka" }, "maka", 2),
-            new(new List<string> { "wiśnia", "śliwka" }, "owoc", 3),
-            new(new List<string> { "maslo" }, "maslo")
-        },
-            "nalesniki" => new List<SkladnikDania>
-        {
-            new(new List<string> { "pszenicaMaka" }, "maka", 2),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo", 2),
-            new(new List<string> { "krowaMleko", "kozaMleko", "owcaMleko" }, "mleko", 2),
-            new(new List<string> { "olej", "maslo" }, "tluszcz"),
-            new(new List<string> { "miod", "truskawka", "malina", "wiśnia", "twarog", "krowaSer" }, "nadzienie", 2, false)
-        },
-            "racuchy" => new List<SkladnikDania>
-        {
-            new(new List<string> { "pszenicaMaka" }, "maka", 2),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo"),
-            new(new List<string> { "krowaMleko", "kozaMleko", "owcaMleko" }, "mleko"),
-            new(new List<string> { "jabłko" }, "jablko", 2),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "proszekDoPieczenia" }, "proszek")
-        },
-            "golabki" => new List<SkladnikDania>
-        {
-            new(new List<string> { "kapustaWłoska", "kapustaPekińska" }, "kapusta", 8),
-            new(new List<string> { "mieloneSwinia", "mieloneKrowa" }, "mieso", 3),
-            new(new List<string> { "ryz" }, "ryz", 2),
-            new(new List<string> { "cebula" }, "cebula"),
-            new(new List<string> { "kuraJajo", "gesJajo", "indykJajo", "kaczkaJajo" }, "jajo"),
-            new(new List<string> { "olej" }, "tluszcz"),
-            new(new List<string> { "pomidor" }, "pomidor", 3),
-            new(new List<string> { "sol" }, "sol"),
-            new(new List<string> { "czarnyPieprz" }, "pieprz")
-        },   
-            _ => new List<SkladnikDania>()
-        };
-    }
-    private void WybierzSkladnik(string kategoria, string skladnik)
-    {
-        var skladnikDoDania = KosztaDania(wybranyObiad).FirstOrDefault(s => s.Kategoria == kategoria);
-        if (skladnikDoDania == null || !skladnikDoDania.Opcje.Contains(skladnik)) return;
-        if (!Gracz.JestDar(skladnik)) return;
-        if (wybraneSkładniki.ContainsKey(kategoria) && wybraneSkładniki[kategoria] == skladnik)
-            wybraneSkładniki.Remove(kategoria);
-        else
-            wybraneSkładniki[kategoria] = skladnik;
-    }
-    private int IleMam(string nazwa)
-    {
-        IDar? dar = Gracz.Przedmioty.FirstOrDefault(p => p.Nazwa == nazwa) as IDar;
-        dar ??= Gracz.ProduktyZwierzece.FirstOrDefault(p => p.Nazwa == nazwa) as IDar;
-        dar ??= Gracz.ProduktyPrzetworzone.FirstOrDefault(p => p.Nazwa == nazwa) as IDar;
-        dar ??= Gracz.ZywnoscPozostala.FirstOrDefault(p => p.Nazwa == nazwa) as IDar;
-        dar ??= Gracz.Warzywa.FirstOrDefault(w => w.Nazwa == nazwa) as IDar;
-        dar ??= Gracz.Zboza.FirstOrDefault(z => z.Nazwa == nazwa) as IDar;
-        dar ??= Gracz.Owoce.FirstOrDefault(o => o.Nazwa == nazwa) as IDar;
-        dar ??= Gracz.Grzyby.FirstOrDefault(g => g.Nazwa == nazwa) as IDar;
-        dar ??= Gracz.Ryby.FirstOrDefault(r => r.Nazwa == nazwa) as IDar;
-        return dar?.Ilosc ?? 0;
-    }
-    private bool MoznaUgotowacDanie
-    {
-        get
-        {
-            var koszty = KosztaDania(wybranyObiad);
-            foreach (var skladnik in koszty.Where(s => s.Obowiazkowy))
-            {
-                if (!wybraneSkładniki.ContainsKey(skladnik.Kategoria))
-                    return false;
-                var wybrany = wybraneSkładniki[skladnik.Kategoria];
-                if (IleMam(wybrany) < skladnik.Ilosc)
-                    return false;
-            }
-            return koszty.Count > 0 && Gracz.JestPrzedmiot("drewno");
-        }
-    }
+        "jajecznica" => ["jajo", "tluszcz", "sol"],
+        "jajkoSadzone" => ["jajo", "tluszcz", "sol"],
+        "omlet" => ["jajo", "tluszcz", "sol"],
+        "shakshuka" => ["jajo", "tluszcz", "pomidor", "papryka", "cebula", "czosnek", "czarnyPieprz"],
+        "kotletSchabowy" => ["swiniSzynkaLubSchab", "jajo", "bulka", "olej", "sol", "czarnyPieprz"],
+        "kotletMielony" => ["mieloneMieso", "jajo", "bulka", "cebula", "olej", "sol", "czarnyPieprz"],
+        "stek" => ["krowyRostbefLubAntrykotLubswiniSzynkaLubSchab", "tluszcz", "sol", "czarnyPieprz", "czosnek"],
+        "piersZKurczaka" => ["kuraJedzenie", "tluszcz", "sol", "czarnyPieprz", "majeranek"],
+        "bitki" => ["krowyLopatkaLubPoledwica", "olej", "cebula", "sol", "czarnyPieprz"],
+        "indykSmazony" => ["indykJedzenie", "tluszcz", "sol", "czarnyPieprz"],
+        "krolikSmazony" => ["krolikJedzenie", "tluszcz", "sol", "czarnyPieprz", "majeranek"],
+        "pstragSmazony" => ["pstrag", "maka", "olej", "sol"],
+        "lososSmazony" => ["losos", "tluszcz", "sol", "czarnyPieprz", "cytryna"],
+        "halibutSmazony" => ["halibut", "maka", "olej", "sol", "czarnyPieprz"],
+        "okonSmazony" => ["okon", "maka", "olej", "sol"],
+        "sledzSmazony" => ["sledz", "maka", "olej", "sol"],
+        "plackiZiemniaczane" => ["ziemniak", "jajo", "maka", "cebula", "olej", "sol", "czarnyPieprz"],
+        "frytki" => ["ziemniak", "olej", "sol"],
+        "pierogiRuskie" => ["maka", "jajo", "ziemniak", "twarogLubSer", "cebula", "olej", "sol"],
+        "pierogiZMiesem" => ["maka", "jajo", "mieloneMieso", "cebula", "olej", "sol", "czarnyPieprz"],
+        "pierogiZKapustaIGrzybami" => ["maka", "jajo", "kapustaKiszona", "grzyb", "cebula", "olej", "sol"],
+        "pierogiZOwocami" => ["maka", "jajo", "tluszcz", "nadzienieSlodkie"],
+        "kopytka" => ["ziemniak", "maka", "jajo", "maslo", "sol"],
+        "knedle" => ["ziemniak", "maka", "maslo", "sliwka"],
+        "nalesniki" => ["maka", "jajo", "mleko", "tluszcz", "miod", "nadzienieSlodkie"],
+        "racuchy" => ["maka", "jajo", "mleko", "jabłko", "olej", "proszekDoPieczenia"],
+        "golabki" => ["kapusta", "mieloneMieso", "ryz", "cebula", "jajo", "olej", "pomidor", "sol", "czarnyPieprz"],
+        _ => []
+    };
+    private bool MoznaUgotowacDanie => true;
     private void WyczyscWyborDania()
     {
         widoczneKosztaDania = false;
         wybranyObiad = "";
-        wybraneSkładniki.Clear();
     }
     private async Task UgotujDanie()
     {
         if (!MoznaUgotowacDanie) return;
-        var koszty = KosztaDania(wybranyObiad);
-        foreach (var skladnik in koszty)
-        {
-            if (wybraneSkładniki.ContainsKey(skladnik.Kategoria))
-            {
-                var wybrany = wybraneSkładniki[skladnik.Kategoria];
-                Gracz.Dar(wybrany).Ilosc -= skladnik.Ilosc;
-            }
-        }
+
         Gracz.Przedmiot("drewno").Ilosc--;
         Gracz.Obiady.First(o => o.Nazwa == wybranyObiad).Ilosc++;
         WyczyscWyborDania();
