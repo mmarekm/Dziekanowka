@@ -92,7 +92,7 @@
         <div class="abs kosztaDania">
             <div class="abs rysDania"><img class="obrazekSieMiesci" src="img/dom/kuchnia/patelnia/@(wybranyObiad).png" /></div>
             <div class="abs rezygnacjaZDania"><button class="wyroznionyGuzik" @onclick='WyczyscWyborDania'><img class="obrazekSieMiesci" src="img/dom/rezygnacja.png" /></button></div>
-            <!--<div class="abs skladnikiDaniaObiad">
+            <div class="abs skladnikiDaniaObiad">
                 @foreach (var skladnik in KosztaDania(wybranyObiad))
                 {
                     if (skladnik == "jajo")
@@ -122,27 +122,86 @@
                             </div>
                         </div>
                     }
+                    else if (skladnik == "bulka")
+                    {
+                        <div class="rel skladnikDaniaObiad skladnikSzczegolowyWiekszyDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            @foreach (var zboze in zboza)
+                            {
+                                var obiekt = Gracz.ProduktP($"{zboze}Bulka");
+                                <div class="rel szczegolObiad @(Gracz.JestProduktP($"{zboze}Bulka") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaBulkaSkladnikObiad == $"{zboze}Bulka" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzBulkeSkladnikObiad(zboze)'>
+                                    <img class="obrazekContain" src="img/dom/kuchnia/@(obiekt.Nazwa).png" />
+                                    <div class="abs lProduktuInMlynekKawa">@obiekt.Ilosc</div>
+                                </div>
+                            }
+                        </div>
+                    }
                     else if (skladnik == "swiniSzynkaLubSchab")
                     {
-                        
+                        <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            <div class="rel szczegolObiad @(Gracz.JestProduktZ("swiniaSzynka") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaCzescSwiniSkladnikObiad == "swiniaSzynka" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzCzescSwiniSkladnikObiad("swiniaSzynka")'>
+                                <img class="obrazekContain" src="img/dom/kuchnia/swiniaSzynka.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktZ("swiniaSzynka").Ilosc</div>
+                            </div>
+                            <div class="rel szczegolObiad @(Gracz.JestProduktZ("swiniaSchab") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaCzescSwiniSkladnikObiad == "swiniaSchab" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzCzescSwiniSkladnikObiad("swiniaSchab")'>
+                                <img class="obrazekContain" src="img/dom/kuchnia/swiniaSchab.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktZ("swiniaSchab").Ilosc</div>
+                            </div>
+                        </div>
+                    }
+                    else if (skladnik == "krowyLopatkaLubPoledwica")
+                    {
+                        <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            <div class="rel szczegolObiad @(Gracz.JestProduktZ("krowaLopatka") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaCzescKrowySkladnikObiad == "krowaLopatka" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzCzescKrowySkladnikObiad("krowaLopatka")'>
+                                <img class="obrazekContain" src="img/dom/kuchnia/krowaLopatka.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktZ("krowaLopatka").Ilosc</div>
+                            </div>
+                            <div class="rel szczegolObiad @(Gracz.JestProduktZ("krowaPoledwica") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaCzescKrowySkladnikObiad == "krowaPoledwica" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzCzescKrowySkladnikObiad("krowaPoledwica")'>
+                                <img class="obrazekContain" src="img/dom/kuchnia/krowaPoledwica.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktZ("krowaPoledwica").Ilosc</div>
+                            </div>
+                        </div>
+                    }
+                    else if (skladnik == "krowyRostbefLubAntrykotLubswiniSzynkaLubSchab")
+                    {
+                        <div class="rel skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            @foreach (var mieso in miesaNaSteki)
+                            {
+                                <div class="rel szczegolObiad @(Gracz.JestProduktZ(mieso) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaCzescSwiniLubKrowySkladnikObiad == mieso ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzCzescSwiniLubKrowySkladnikObiad(mieso)'>
+                                    <img class="obrazekContain" src="img/przedmioty/przetwornia/@(mieso).png" />
+                                    <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktZ(mieso).Ilosc</div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else if (skladnik == "mieloneMieso")
+                    {
+                        <div class="rel skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            @foreach (var mieso in miesaMielone)
+                            {
+                                <div class="rel szczegolObiad @(Gracz.JestProduktP(mieso) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneMieloneMiesoSkladnikObiad == mieso ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzMieloneMiesoSkladnikObiad(mieso)'>
+                                    <img class="obrazekContain" src="img/przedmioty/przetwornia/@(mieso).png" />
+                                    <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktP(mieso).Ilosc</div>
+                                </div>
+                            }
+                        </div>
                     }
                     else
                     {
                         var obiekt = Gracz.Dar(skladnik);
                         <div class="rel skladnikDaniaObiad">
-                            <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(skladnik).png" />
+                            <img class="obrazekContain" src="img/dom/kuchnia/@(skladnik).png" />
                             <div class="abs lDaniaPatelnia">@obiekt.Ilosc</div>
                         </div>
                     }
                 }
-            </div>-->
+            </div>
             @if (MoznaUgotowacDanie)
             {
                 <div class="abs ugotujDanie"><button class="wyroznionyGuzik" @onclick="UgotujDanie"><img class="obrazekSieMiesci" src="img/dom/potwierdzenie.png" /></button></div>
             }
         </div>
         // jaj 3, mleka 2, ziemniakow 3, ryzu 3, (makaronu 3)
-        //mleko, jajo, tluszcz, maka, swiniSzynkaLubSchab, bulka, krowyRostbefLubAntrykotLubswiniSzynkaLubSchab, krowyLopatkaLubPoledwica, twarogLubSer, grzyb, nadzienieSlodkie(owoce, twarogISery), kapusta
+        //mleko, jajo, tluszcz, maka, swiniSzynkaLubSchab, bulka, mieloneMieso, krowyRostbefLubAntrykotLubswiniSzynkaLubSchab, krowyLopatkaLubPoledwica, twarogLubSer, grzyb, nadzienieSlodkie(owoce, twarogISery), kapusta
     }
     @if (piec)
     {
@@ -755,6 +814,8 @@
     private string[] jajka = ["kura", "ges", "kaczka", "indyk"];
     private string[] sery = ["krowa", "koza", "owca"];
     private string[] seryKanapka => new[] { "twarog" }.Concat(sery.Select(s => $"{s}Ser")).ToArray();
+    private string[] miesaMielone = ["mieloneDrob", "mieloneSwinia", "mieloneDzikie", "mieloneKrowa"];
+    private string[] miesaNaSteki = ["swiniaSzynka", "swiniaSchab", "krowaRostbef", "krowaAntrykot"];
     private string[] slodkieBuleczki = ["brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
     private string[] skladnikiPizza = ["papryka", "cebula", "kukurydza", "ogórek", "ananas", "oliwki", "pieczarka", "rydz", "podgrzybek", "borowik", "kurka", "kielbasaWedlina", "salamiWedlina", "lopatkaWedlina", "poledwicaWedlina", "boczekWedlina", "szynkaWedlina", "schabWedlina", "kurczakWedlina", "indykWedlina", "krolikPasztet", "drobPasztet", "swiniaPasztet"];
     private HashSet<string> pizzaRobocza = [];
@@ -846,10 +907,15 @@
     private string WybierzTluszczSkladnikObiad(string tluszcz) => wybranyTluszczSkladnikObiad == tluszcz ? wybranyTluszczSkladnikObiad = "" : Gracz.JestDar(tluszcz) ? wybranyTluszczSkladnikObiad = tluszcz : wybranyTluszczSkladnikObiad;
     private string wybranaMakaSkladnikObiad = "";
     private string wybranaBulkaSkladnikObiad = "";
+    private string WybierzBulkeSkladnikObiad(string zboze) => wybranaBulkaSkladnikObiad == $"{zboze}Bulka" ? wybranaBulkaSkladnikObiad = "" : Gracz.JestProduktP($"{zboze}Bulka") ? wybranaBulkaSkladnikObiad = $"{zboze}Bulka" : wybranaBulkaSkladnikObiad;
+    private string wybraneMieloneMiesoSkladnikObiad = "";
+    private string WybierzMieloneMiesoSkladnikObiad(string mieso) => wybraneMieloneMiesoSkladnikObiad == mieso ? wybraneMieloneMiesoSkladnikObiad = "" : Gracz.JestProduktP(mieso) ? wybraneMieloneMiesoSkladnikObiad = mieso : wybraneMieloneMiesoSkladnikObiad;
     private string wybranaCzescSwiniSkladnikObiad = "";
     private string WybierzCzescSwiniSkladnikObiad(string czesc) => wybranaCzescSwiniSkladnikObiad == czesc ? wybranaCzescSwiniSkladnikObiad = "" : Gracz.JestProduktZ(czesc) ? wybranaCzescSwiniSkladnikObiad = czesc : wybranaCzescSwiniSkladnikObiad;
     private string wybranaCzescKrowySkladnikObiad = "";
+    private string WybierzCzescKrowySkladnikObiad(string czesc) => wybranaCzescKrowySkladnikObiad == czesc ? wybranaCzescKrowySkladnikObiad = "" : Gracz.JestProduktZ(czesc) ? wybranaCzescKrowySkladnikObiad = czesc : wybranaCzescKrowySkladnikObiad;
     private string wybranaCzescSwiniLubKrowySkladnikObiad = "";
+    private string WybierzCzescSwiniLubKrowySkladnikObiad(string mieso) => wybranaCzescSwiniLubKrowySkladnikObiad == mieso ? wybranaCzescSwiniLubKrowySkladnikObiad = "" : Gracz.JestProduktZ(mieso) ? wybranaCzescSwiniLubKrowySkladnikObiad = mieso : wybranaCzescSwiniLubKrowySkladnikObiad;
     private string wybranyTwarogLubSerSkladnikObiad = "";
     private string wybranyGrzybSkladnikObiad = "";
     private string wybraneNadzienieSlodkieSkladnikObiad = "";
