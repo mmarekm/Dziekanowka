@@ -7,6 +7,9 @@
 .deskaWidok {
     background-image: url('../img/dom/kuchnia/deskaKuchnia.png');
 }
+.garnekWidok {
+    background-image: url('../img/dom/kuchnia/garnekKuchnia.png');
+}
 .patelniaWidok {
     background-image: url('../img/dom/kuchnia/patelniaKuchnia.png');
 }
@@ -66,6 +69,13 @@
     top: 665px;
     width: 286px;
     height: 162px;
+    z-index: 2;
+}
+.kuchniaDoGarnka {
+    left: 752px;
+    top: 543px;
+    width: 294px;
+    height: 239px;
     z-index: 2;
 }
 .kuchniaDoPatelni {
