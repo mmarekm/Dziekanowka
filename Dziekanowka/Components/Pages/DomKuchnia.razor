@@ -1041,19 +1041,19 @@
     {
         foreach (var skladnik in KosztaDania(wybranyObiad))
         {
-            if (skladnik == "mleko" && Gracz.ProduktZ(wybraneMlekoSkladnikObiad).Ilosc < 2) return false;
-            else if (skladnik == "jajo" && Gracz.ProduktZ(wybraneJajoSkladnikObiad).Ilosc < 3) return false;
-            else if (skladnik == "tluszcz" && !Gracz.JestDar(wybranyTluszczSkladnikObiad)) return false;
-            else if (skladnik == "maka" && !Gracz.JestDar(wybranaMakaSkladnikObiad)) return false;
-            else if (skladnik == "bulka" && !Gracz.JestDar(wybranaBulkaSkladnikObiad)) return false;
-            else if (skladnik == "mieloneMieso" && !Gracz.JestDar(wybraneMieloneMiesoSkladnikObiad)) return false;
-            else if (skladnik == "swiniSzynkaLubSchab" && !Gracz.JestDar(wybranaCzescSwiniSkladnikObiad)) return false;
-            else if (skladnik == "krowyLopatkaLubPoledwica" && !Gracz.JestDar(wybranaCzescKrowySkladnikObiad)) return false;
-            else if (skladnik == "krowyRostbefLubAntrykotLubswiniSzynkaLubSchab" && !Gracz.JestDar(wybranaCzescSwiniLubKrowySkladnikObiad)) return false;
-            else if (skladnik == "twarogLubSer" && !Gracz.JestDar(wybranyTwarogLubSerSkladnikObiad)) return false;
-            else if (skladnik == "grzyb" && !Gracz.JestGrzyb(wybranyGrzybSkladnikObiad)) return false;
-            else if (skladnik == "kapusta" && !Gracz.JestDar(wybranaKapustaSkladnikObiad)) return false;
-            else if (skladnik == "nadzienieSlodkie" && !Gracz.JestDar(wybraneNadzienieSlodkieSkladnikObiad)) return false;
+            if (skladnik == "mleko" && (string.IsNullOrEmpty(wybraneMlekoSkladnikObiad) || Gracz.ProduktZ(wybraneMlekoSkladnikObiad).Ilosc < 2)) return false;
+            else if (skladnik == "jajo" && (string.IsNullOrEmpty(wybraneJajoSkladnikObiad) || Gracz.ProduktZ(wybraneJajoSkladnikObiad).Ilosc < 3)) return false;
+            else if (skladnik == "tluszcz" && (string.IsNullOrEmpty(wybranyTluszczSkladnikObiad) || !Gracz.JestDar(wybranyTluszczSkladnikObiad))) return false;
+            else if (skladnik == "maka" && (string.IsNullOrEmpty(wybranaMakaSkladnikObiad) || !Gracz.JestDar(wybranaMakaSkladnikObiad))) return false;
+            else if (skladnik == "bulka" && (string.IsNullOrEmpty(wybranaBulkaSkladnikObiad) || !Gracz.JestDar(wybranaBulkaSkladnikObiad))) return false;
+            else if (skladnik == "mieloneMieso" && (string.IsNullOrEmpty(wybraneMieloneMiesoSkladnikObiad) || !Gracz.JestDar(wybraneMieloneMiesoSkladnikObiad))) return false;
+            else if (skladnik == "swiniSzynkaLubSchab" && (string.IsNullOrEmpty(wybranaCzescSwiniSkladnikObiad) || !Gracz.JestDar(wybranaCzescSwiniSkladnikObiad))) return false;
+            else if (skladnik == "krowyLopatkaLubPoledwica" && (string.IsNullOrEmpty(wybranaCzescKrowySkladnikObiad) || !Gracz.JestDar(wybranaCzescKrowySkladnikObiad))) return false;
+            else if (skladnik == "krowyRostbefLubAntrykotLubswiniSzynkaLubSchab" && (string.IsNullOrEmpty(wybranaCzescSwiniLubKrowySkladnikObiad) || !Gracz.JestDar(wybranaCzescSwiniLubKrowySkladnikObiad))) return false;
+            else if (skladnik == "twarogLubSer" && (string.IsNullOrEmpty(wybranyTwarogLubSerSkladnikObiad) || !Gracz.JestDar(wybranyTwarogLubSerSkladnikObiad))) return false;
+            else if (skladnik == "grzyb" && (string.IsNullOrEmpty(wybranyGrzybSkladnikObiad) || !Gracz.JestGrzyb(wybranyGrzybSkladnikObiad))) return false;
+            else if (skladnik == "kapusta" && (string.IsNullOrEmpty(wybranaKapustaSkladnikObiad) || !Gracz.JestDar(wybranaKapustaSkladnikObiad))) return false;
+            else if (skladnik == "nadzienieSlodkie" && (string.IsNullOrEmpty(wybraneNadzienieSlodkieSkladnikObiad) || !Gracz.JestDar(wybraneNadzienieSlodkieSkladnikObiad))) return false;
             else if ((skladnik == "ziemniak" || skladnik == "ryz") && Gracz.Dar(skladnik).Ilosc < 3) return false;
             else if (!Gracz.JestDar(skladnik)) return false;
         }
