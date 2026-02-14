@@ -262,11 +262,32 @@
                             }
                         </div>
                     }
+                    else if (skladnik == "kuraLubIndyk")
+                    {
+                        <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            <div class="rel szczegolObiad @(Gracz.JestProduktZ("kuraJedzenie") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneKuraLubIndykDoRosolu == "kuraJedzenie" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzKureLubIndykDoRosolu("kuraJedzenie")'>
+                                <img class="obrazekContain" src="img/przedmioty/przetwornia/kuraJedzenie.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktZ("kuraJedzenie").Ilosc</div>
+                            </div>
+                            <div class="rel szczegolObiad @(Gracz.JestProduktZ("indykJedzenie") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneKuraLubIndykDoRosolu == "indykJedzenie" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzKureLubIndykDoRosolu("indykJedzenie")'>
+                                <img class="obrazekContain" src="img/przedmioty/przetwornia/indykJedzenie.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktZ("indykJedzenie").Ilosc</div>
+                            </div>
+                        </div>
+                    }
+                    else if (skladnik == "zakwasZytni")
+                    {
+                        <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad"><img class="obrazekContain" src="img/dom/kuchnia/zakwasZytni.png" /></div>
+                    }
+                    else if (skladnik == "pelnaButelka")
+                    {
+                        <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad"><img class="obrazekContain" src="img/dom/kuchnia/pelnaButelka.png" /></div>
+                    }
                     else
                     {
                         var obiekt = Gracz.Dar(skladnik);
                         <div class="rel skladnikDaniaObiad">
-                            @if (skladnik == "ziemniak" || skladnik == "ryz")
+                            @if (skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien")
                             {
                                 <div class="abs info3SkladnikiPotrzebne">3</div>
                             }
@@ -1006,6 +1027,9 @@
     private string WybierzNadzienieSkladnikObiad(string nadzienie) => wybraneNadzienieSlodkieSkladnikObiad == nadzienie ? wybraneNadzienieSlodkieSkladnikObiad = "" : Gracz.JestDar(nadzienie) ? wybraneNadzienieSlodkieSkladnikObiad = nadzienie : wybraneNadzienieSlodkieSkladnikObiad;
     private string wybranaKapustaSkladnikObiad = "";
     private string WybierzKapustaSkladnikObiad(string kapusta) => wybranaKapustaSkladnikObiad == kapusta ? wybranaKapustaSkladnikObiad = "" : Gracz.JestWarzywo(kapusta) ? wybranaKapustaSkladnikObiad = kapusta : wybranaKapustaSkladnikObiad;
+    private string wybraneKuraLubIndykDoRosolu = "";
+    private string WybierzKureLubIndykDoRosolu(string mieso) => wybraneKuraLubIndykDoRosolu == mieso ? wybraneKuraLubIndykDoRosolu = "" : Gracz.JestWarzywo(mieso) ? wybraneKuraLubIndykDoRosolu = mieso : wybraneKuraLubIndykDoRosolu;
+
     private List<string> KosztaDania(string danie) => danie switch
     {
         "jajecznica" => ["jajo", "tluszcz", "sol"],
@@ -1035,6 +1059,21 @@
         "nalesniki" => ["maka", "jajo", "mleko", "tluszcz", "miod", "nadzienieSlodkie"],
         "racuchy" => ["maka", "jajo", "mleko", "jabłko", "olej", "proszekDoPieczenia"],
         "golabki" => ["kapusta", "mieloneMieso", "ryz", "cebula", "jajo", "olej", "pomidor", "sol", "czarnyPieprz"],
+        "rosol" => ["kuraLubIndyk", "marchew", "pietruszka", "seler", "por", "cebula", "sol", "makaron", "pelnaButelka"],
+        "barszczCzerwony" => ["burak", "marchew", "cebula", "czosnek", "sol", "pelnaButelka"],
+        "zurek" => ["zakwasZytni", "kielbasa", "jajo", "majeranek", "czosnek", "sol", "pelnaButelka"],
+        "krupnik" => ["jeczmien", "marchew", "seler", "pietruszka", "por", "ziemniak", "sol", "pelnaButelka"],
+        "zupaPomidorowa" => ["pomidor", "marchew", "cebula", "czosnek", "bazylia", "sol", "makaronLubRyz", "pelnaButelka"],
+        "zupaOgorkowa" => ["ogorekKiszony", "ziemniak", "marchew", "sol", "smietana", "pelnaButelka"],
+        "zupaGrzybowa" => ["grzyb", "marchew", "seler", "pietruszka", "sol", "majeranek", "makaronLubZiemniak", "pelnaButelka"],
+        "kapusniak" => ["kapustaKiszona", "ziemniak", "marchew", "cebula", "czarnyPieprz", "majeranek", "sol", "pelnaButelka"],
+        "grochowka" => ["groch", "ziemniak", "marchew", "cebula", "majeranek", "sol", "kielbasa", "pelnaButelka"],
+        "zupaFasolowa" => ["fasola", "ziemniak", "marchew", "sol", "smietana", "pelnaButelka"],
+        "zupaCebulowa" => ["cebula", "bulka", "ser", "maslo", "sol", "czarnyPieprz", "pelnaButelka"],
+        "chlodnik" => ["burak", "ogórek", "rzodkiewka", "szczypiorek", "smietana", "jajo", "sol", "pomidor", "pelnaButelka"],
+        "kremZBrokulow" => ["brokuł", "ziemniak", "cebula", "czosnek", "smietana", "sol", "pelnaButelka"],
+        "kremZDyni" => ["dynia", "mleko", "miod", "pelnaButelka"],
+        "kremZKalafiora" => ["kalafior", "ziemniak", "cebula", "smietana", "sol", "pelnaButelka"],
         _ => []
     };
     private bool MoznaUgotowacDanie()
@@ -1054,7 +1093,10 @@
             else if (skladnik == "grzyb" && (string.IsNullOrEmpty(wybranyGrzybSkladnikObiad) || !Gracz.JestGrzyb(wybranyGrzybSkladnikObiad))) return false;
             else if (skladnik == "kapusta" && (string.IsNullOrEmpty(wybranaKapustaSkladnikObiad) || !Gracz.JestDar(wybranaKapustaSkladnikObiad))) return false;
             else if (skladnik == "nadzienieSlodkie" && (string.IsNullOrEmpty(wybraneNadzienieSlodkieSkladnikObiad) || !Gracz.JestDar(wybraneNadzienieSlodkieSkladnikObiad))) return false;
-            else if ((skladnik == "ziemniak" || skladnik == "ryz") && Gracz.Dar(skladnik).Ilosc < 3) return false;
+            else if (skladnik == "pelnaButelka" && Gracz.JestPrzedmiot("pelnaButelka")) return false;
+            else if (skladnik == "kuraLubIndyk" && (string.IsNullOrEmpty(wybraneKuraLubIndykDoRosolu) || !Gracz.JestDar(wybraneKuraLubIndykDoRosolu))) return false;
+            else if ((skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien") && Gracz.Dar(skladnik).Ilosc < 3) return false;
+            else if (skladnik == "zakwasZytni" && Gracz.Zboza.First(z => z.Nazwa == "zyto").PoziomZakwasu < 3) return false;
             else if (!Gracz.JestDar(skladnik)) return false;
         }
         return true;
@@ -1076,6 +1118,7 @@
         wybranyGrzybSkladnikObiad = "";
         wybranaKapustaSkladnikObiad = "";
         wybraneNadzienieSlodkieSkladnikObiad = "";
+        wybraneKuraLubIndykDoRosolu = "";
     }
     private void ZaplacZaObiad()
     {
@@ -1094,12 +1137,17 @@
             else if (skladnik == "grzyb") Gracz.Grzyby.First(g => g.Nazwa == wybranyGrzybSkladnikObiad).Ilosc--;
             else if (skladnik == "kapusta") Gracz.Dar(wybranaKapustaSkladnikObiad).Ilosc--;
             else if (skladnik == "nadzienieSlodkie") Gracz.Dar(wybraneNadzienieSlodkieSkladnikObiad).Ilosc--;
-            else if ((skladnik == "ziemniak" || skladnik == "ryz")) Gracz.Dar(skladnik).Ilosc -= 3;
+            else if (skladnik == "pelnaButelka")
+            {
+                Gracz.Przedmiot("pelnaButelka").Ilosc--;
+                Gracz.Przedmiot("pustaButelka").Ilosc++;
+            }
+            else if (skladnik == "kuraLubIndyk") Gracz.Dar(wybraneKuraLubIndykDoRosolu).Ilosc--;
+            else if ((skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien")) Gracz.Dar(skladnik).Ilosc -= 3;
+            else if (skladnik == "zakwasZytni") continue;
             else Gracz.Dar(skladnik).Ilosc--;
         }
     }
-    // jaj 3, mleka 2, ziemniakow 3, ryzu 3, (makaronu 3)
-    //mleko, jajo, tluszcz, bulka, maka, swiniSzynkaLubSchab, krowyLopatkaLubPoledwica, krowyRostbefLubAntrykotLubswiniSzynkaLubSchab, mieloneMieso, twarogLubSer, grzyb, kapusta, nadzienieSlodkie
     private async Task UgotujDanie()
     {
         if (!MoznaUgotowacDanie()) return;
