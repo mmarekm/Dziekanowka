@@ -130,6 +130,24 @@
     text-align: center;
     color: firebrick;
 }
+.lDrewnaGarnek {
+    top: 30px;
+    left: 1170px;
+    width: 70px;
+    height: 31px;
+    font-size: 30px;
+    text-align: center;
+    color: tan;
+}
+.lWodyGarnek {
+    top: 30px;
+    left: 250px;
+    width: 70px;
+    height: 31px;
+    font-size: 30px;
+    text-align: center;
+    color: black;
+}
 .patelniaDania {
     width: 1400px;
     height: 650px;
@@ -144,6 +162,15 @@
     height: 150px;
     flex-shrink: 0;
     cursor: pointer;
+}
+.garnekDania {
+    width: 1600px;
+    height: 650px;
+    top: 130px;
+    left: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 10px;
 }
 .lDaniaPatelnia {
     right: 0;

@@ -88,10 +88,25 @@
             }
         </div>
     }
+    @if (garnek)
+    {
+        <div class="abs lDrewnaGarnek">@Gracz.Przedmiot("drewno").Ilosc</div>
+        <div class="abs lWodyGarnek">@Gracz.Przedmiot("pelnaButelka").Ilosc</div>
+        <div class="abs garnekDania">
+            @foreach (var danie in Obiad.DaniaZGarnka)
+            {
+                <div class="rel patelniaDanie" @onclick='() => { widoczneKosztaDania = true; wybranyObiad = danie.Nazwa; }'>
+                    <img class="obrazekSieMiesci" src="img/dom/kuchnia/garnek/@(danie.Nazwa).png" />
+                    <div class="abs lDaniaPatelnia">@danie.Ilosc</div>
+                </div>
+            }
+        </div>
+    }
     @if (widoczneKosztaDania)
     {
         <div class="abs kosztaDania">
-            <div class="abs rysDania"><img class="obrazekSieMiesci" src="img/dom/kuchnia/patelnia/@(wybranyObiad).png" /></div>
+            @{ string naczynie = patelnia ? "patelnia" : "garnek"; }
+            <div class="abs rysDania"><img class="obrazekSieMiesci" src="img/dom/kuchnia/@(naczynie)/@(wybranyObiad).png" /></div>
             <div class="abs rezygnacjaZDania"><button class="wyroznionyGuzik" @onclick='WyczyscWyborDania'><img class="obrazekSieMiesci" src="img/dom/rezygnacja.png" /></button></div>
             <div class="abs skladnikiDaniaObiad">
                 @foreach (var skladnik in KosztaDania(wybranyObiad))
@@ -104,6 +119,19 @@
                             {
                                 var obiekt = Gracz.ProduktZ($"{zwierz}Mleko");
                                 <div class="rel szczegolObiad @(Gracz.JestProduktZ($"{zwierz}Mleko") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneMlekoSkladnikObiad == $"{zwierz}Mleko" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzMlekoSkladnikObiad(zwierz)'>
+                                    <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(obiekt.Nazwa).png" />
+                                    <div class="abs lProduktuInMlynekKawa">@obiekt.Ilosc</div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else if (skladnik == "ser")
+                    {
+                        <div class="rel skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            @foreach (var zwierz in sery)
+                            {
+                                var obiekt = Gracz.ProduktP($"{zwierz}Ser");
+                                <div class="rel szczegolObiad @(Gracz.JestProduktP($"{zwierz}Ser") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranySerSkladnikObiad == $"{zwierz}Ser" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzSerSkladnikObiad(zwierz)'>
                                     <img class="obrazekSieMiesci" src="img/dom/kuchnia/@(obiekt.Nazwa).png" />
                                     <div class="abs lProduktuInMlynekKawa">@obiekt.Ilosc</div>
                                 </div>
@@ -272,6 +300,32 @@
                             <div class="rel szczegolObiad @(Gracz.JestProduktZ("indykJedzenie") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybraneKuraLubIndykDoRosolu == "indykJedzenie" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzKureLubIndykDoRosolu("indykJedzenie")'>
                                 <img class="obrazekContain" src="img/przedmioty/przetwornia/indykJedzenie.png" />
                                 <div class="abs lProduktuInMlynekKawa">@Gracz.ProduktZ("indykJedzenie").Ilosc</div>
+                            </div>
+                        </div>
+                    }
+                    else if (skladnik == "makaronLubRyz")
+                    {
+                        <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            <div class="rel szczegolObiad @(Gracz.JestDar("makaron") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranyMakaronLubRyzDoZupy == "makaron" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzMakaronLubRyzDoZupy("makaron")'>
+                                <img class="obrazekContain" src="img/przedmioty/przetwornia/makaron.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.Dar("makaron").Ilosc</div>
+                            </div>
+                            <div class="rel szczegolObiad @(Gracz.JestDar("ryz") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranyMakaronLubRyzDoZupy == "ryz" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzMakaronLubRyzDoZupy("ryz")'>
+                                <img class="obrazekContain" src="img/dom/kuchnia/ryz.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.Dar("ryz").Ilosc</div>
+                            </div>
+                        </div>
+                    }
+                    else if (skladnik == "makaronLubZiemniak")
+                    {
+                        <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            <div class="rel szczegolObiad @(Gracz.JestDar("makaron") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranyMakaronLubZiemniakDoZupy == "makaron" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzMakaronLubZiemniakDoZupy("makaron")'>
+                                <img class="obrazekContain" src="img/przedmioty/przetwornia/makaron.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.Dar("makaron").Ilosc</div>
+                            </div>
+                            <div class="rel szczegolObiad @(Gracz.JestDar("ziemniak") ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranyMakaronLubZiemniakDoZupy == "ziemniak" ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzMakaronLubZiemniakDoZupy("ziemniak")'>
+                                <img class="obrazekContain" src="img/dom/kuchnia/ziemniak.png" />
+                                <div class="abs lProduktuInMlynekKawa">@Gracz.Dar("ziemniak").Ilosc</div>
                             </div>
                         </div>
                     }
@@ -1003,6 +1057,8 @@
     private string wybranyObiad = "";
     private string wybraneMlekoSkladnikObiad = "";
     private string WybierzMlekoSkladnikObiad(string zwierz) => wybraneMlekoSkladnikObiad == $"{zwierz}Mleko" ? wybraneMlekoSkladnikObiad = "" : Gracz.JestProduktZ($"{zwierz}Mleko") ? wybraneMlekoSkladnikObiad = $"{zwierz}Mleko" : wybraneMlekoSkladnikObiad;
+    private string wybranySerSkladnikObiad = "";
+    private string WybierzSerSkladnikObiad(string ser) => wybranySerSkladnikObiad == ser ? wybranySerSkladnikObiad = "" : Gracz.JestProduktP(ser) ? wybranySerSkladnikObiad = ser : wybranySerSkladnikObiad;
     private string wybraneJajoSkladnikObiad = "";
     private string WybierzJajoSkladnikObiad(string ptak) => wybraneJajoSkladnikObiad == $"{ptak}Jajo" ? wybraneJajoSkladnikObiad = "" : Gracz.JestProduktZ($"{ptak}Jajo") ? wybraneJajoSkladnikObiad = $"{ptak}Jajo" : wybraneJajoSkladnikObiad;
     private string wybranyTluszczSkladnikObiad = "";
@@ -1029,6 +1085,10 @@
     private string WybierzKapustaSkladnikObiad(string kapusta) => wybranaKapustaSkladnikObiad == kapusta ? wybranaKapustaSkladnikObiad = "" : Gracz.JestWarzywo(kapusta) ? wybranaKapustaSkladnikObiad = kapusta : wybranaKapustaSkladnikObiad;
     private string wybraneKuraLubIndykDoRosolu = "";
     private string WybierzKureLubIndykDoRosolu(string mieso) => wybraneKuraLubIndykDoRosolu == mieso ? wybraneKuraLubIndykDoRosolu = "" : Gracz.JestWarzywo(mieso) ? wybraneKuraLubIndykDoRosolu = mieso : wybraneKuraLubIndykDoRosolu;
+    private string wybranyMakaronLubRyzDoZupy = "";
+    private string WybierzMakaronLubRyzDoZupy(string skladnik) => wybranyMakaronLubRyzDoZupy == skladnik ? wybranyMakaronLubRyzDoZupy = "" : Gracz.JestDar(skladnik) ? wybranyMakaronLubRyzDoZupy = skladnik : wybranyMakaronLubRyzDoZupy;
+    private string wybranyMakaronLubZiemniakDoZupy = "";
+    private string WybierzMakaronLubZiemniakDoZupy(string skladnik) => wybranyMakaronLubZiemniakDoZupy == skladnik ? wybranyMakaronLubZiemniakDoZupy = "" : Gracz.JestDar(skladnik) ? wybranyMakaronLubZiemniakDoZupy = skladnik : wybranyMakaronLubZiemniakDoZupy;
 
     private List<string> KosztaDania(string danie) => danie switch
     {
@@ -1061,19 +1121,22 @@
         "golabki" => ["kapusta", "mieloneMieso", "ryz", "cebula", "jajo", "olej", "pomidor", "sol", "czarnyPieprz"],
         "rosol" => ["kuraLubIndyk", "marchew", "pietruszka", "seler", "por", "cebula", "sol", "makaron", "pelnaButelka"],
         "barszczCzerwony" => ["burak", "marchew", "cebula", "czosnek", "sol", "pelnaButelka"],
-        "zurek" => ["zakwasZytni", "kielbasa", "jajo", "majeranek", "czosnek", "sol", "pelnaButelka"],
+        "zurek" => ["zakwasZytni", "kielbasaWedlina", "jajo", "majeranek", "czosnek", "sol", "pelnaButelka"],
         "krupnik" => ["jeczmien", "marchew", "seler", "pietruszka", "por", "ziemniak", "sol", "pelnaButelka"],
         "zupaPomidorowa" => ["pomidor", "marchew", "cebula", "czosnek", "bazylia", "sol", "makaronLubRyz", "pelnaButelka"],
         "zupaOgorkowa" => ["ogorekKiszony", "ziemniak", "marchew", "sol", "smietana", "pelnaButelka"],
         "zupaGrzybowa" => ["grzyb", "marchew", "seler", "pietruszka", "sol", "majeranek", "makaronLubZiemniak", "pelnaButelka"],
         "kapusniak" => ["kapustaKiszona", "ziemniak", "marchew", "cebula", "czarnyPieprz", "majeranek", "sol", "pelnaButelka"],
-        "grochowka" => ["groch", "ziemniak", "marchew", "cebula", "majeranek", "sol", "kielbasa", "pelnaButelka"],
+        "grochowka" => ["groch", "ziemniak", "marchew", "cebula", "majeranek", "sol", "kielbasaWedlina", "pelnaButelka"],
         "zupaFasolowa" => ["fasola", "ziemniak", "marchew", "sol", "smietana", "pelnaButelka"],
         "zupaCebulowa" => ["cebula", "bulka", "ser", "maslo", "sol", "czarnyPieprz", "pelnaButelka"],
         "chlodnik" => ["burak", "ogórek", "rzodkiewka", "szczypiorek", "smietana", "jajo", "sol", "pomidor", "pelnaButelka"],
         "kremZBrokulow" => ["brokuł", "ziemniak", "cebula", "czosnek", "smietana", "sol", "pelnaButelka"],
         "kremZDyni" => ["dynia", "mleko", "miod", "pelnaButelka"],
         "kremZKalafiora" => ["kalafior", "ziemniak", "cebula", "smietana", "sol", "pelnaButelka"],
+        "karkowka" => ["swiniSzynkaLubSchab", "cebula", "czosnek", "majeranek", "czarnyPieprz", "sol", "pelnaButelka"],
+        "gulasz" => ["krowyLopatkaLubPoledwica", "cebula", "papryka", "pomidor", "majeranek", "czarnyPieprz", "sol", "pelnaButelka"],
+
         _ => []
     };
     private bool MoznaUgotowacDanie()
@@ -1081,6 +1144,7 @@
         foreach (var skladnik in KosztaDania(wybranyObiad))
         {
             if (skladnik == "mleko" && (string.IsNullOrEmpty(wybraneMlekoSkladnikObiad) || Gracz.ProduktZ(wybraneMlekoSkladnikObiad).Ilosc < 2)) return false;
+            else if (skladnik == "ser" && (string.IsNullOrEmpty(wybranySerSkladnikObiad) || !Gracz.JestProduktP(wybranySerSkladnikObiad))) return false;
             else if (skladnik == "jajo" && (string.IsNullOrEmpty(wybraneJajoSkladnikObiad) || Gracz.ProduktZ(wybraneJajoSkladnikObiad).Ilosc < 3)) return false;
             else if (skladnik == "tluszcz" && (string.IsNullOrEmpty(wybranyTluszczSkladnikObiad) || !Gracz.JestDar(wybranyTluszczSkladnikObiad))) return false;
             else if (skladnik == "maka" && (string.IsNullOrEmpty(wybranaMakaSkladnikObiad) || !Gracz.JestDar(wybranaMakaSkladnikObiad))) return false;
@@ -1097,6 +1161,8 @@
             else if (skladnik == "kuraLubIndyk" && (string.IsNullOrEmpty(wybraneKuraLubIndykDoRosolu) || !Gracz.JestDar(wybraneKuraLubIndykDoRosolu))) return false;
             else if ((skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien") && Gracz.Dar(skladnik).Ilosc < 3) return false;
             else if (skladnik == "zakwasZytni" && Gracz.Zboza.First(z => z.Nazwa == "zyto").PoziomZakwasu < 3) return false;
+            else if (skladnik == "makaronLubRyz" && (string.IsNullOrEmpty(wybranyMakaronLubRyzDoZupy) || !Gracz.JestDar(wybranyMakaronLubRyzDoZupy))) return false;
+            else if (skladnik == "makaronLubZiemniak" && (string.IsNullOrEmpty(wybranyMakaronLubZiemniakDoZupy) || !Gracz.JestDar(wybranyMakaronLubZiemniakDoZupy))) return false;
             else if (!Gracz.JestDar(skladnik)) return false;
         }
         return true;
@@ -1106,6 +1172,7 @@
         widoczneKosztaDania = false;
         wybranyObiad = "";
         wybraneMlekoSkladnikObiad = "";
+        wybranySerSkladnikObiad = "";
         wybraneJajoSkladnikObiad = "";
         wybranyTluszczSkladnikObiad = "";
         wybranaBulkaSkladnikObiad = "";
@@ -1119,12 +1186,15 @@
         wybranaKapustaSkladnikObiad = "";
         wybraneNadzienieSlodkieSkladnikObiad = "";
         wybraneKuraLubIndykDoRosolu = "";
+        wybranyMakaronLubRyzDoZupy = "";
+        wybranyMakaronLubZiemniakDoZupy = "";
     }
     private void ZaplacZaObiad()
     {
         foreach (var skladnik in KosztaDania(wybranyObiad))
         {
             if (skladnik == "mleko") Gracz.ProduktZ(wybraneMlekoSkladnikObiad).Ilosc -= 2;
+            else if (skladnik == "ser") Gracz.Dar(wybranySerSkladnikObiad).Ilosc--;
             else if (skladnik == "jajo") Gracz.ProduktZ(wybraneJajoSkladnikObiad).Ilosc -= 3;
             else if (skladnik == "tluszcz") Gracz.Dar(wybranyTluszczSkladnikObiad).Ilosc--;
             else if (skladnik == "maka") Gracz.Dar(wybranaMakaSkladnikObiad).Ilosc--;
@@ -1143,6 +1213,8 @@
                 Gracz.Przedmiot("pustaButelka").Ilosc++;
             }
             else if (skladnik == "kuraLubIndyk") Gracz.Dar(wybraneKuraLubIndykDoRosolu).Ilosc--;
+            else if (skladnik == "makaronLubRyz") Gracz.Dar(wybranyMakaronLubRyzDoZupy).Ilosc--;
+            else if (skladnik == "makaronLubZiemniak") Gracz.Dar(wybranyMakaronLubZiemniakDoZupy).Ilosc--;
             else if ((skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien")) Gracz.Dar(skladnik).Ilosc -= 3;
             else if (skladnik == "zakwasZytni") continue;
             else Gracz.Dar(skladnik).Ilosc--;
