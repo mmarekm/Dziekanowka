@@ -1,0 +1,10 @@
+﻿.lasIntroWidok {
+    background-image: url('../img/teren/las/lasIntroWidok.png');
+}
+.lasDoZaBrama {
+    bottom: 0;
+    left: 830px;
+    width: 382px;
+    height: 117px;
+    z-index: 2;
+}

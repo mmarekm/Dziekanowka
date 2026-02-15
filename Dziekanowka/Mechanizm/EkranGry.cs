@@ -22,6 +22,7 @@
         Obora,
         Stajnia,
         ZaBrama,
+        LasIntro,
         GarazGospodarczy,
         Studnia,
         Sklepik,

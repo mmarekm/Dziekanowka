@@ -342,6 +342,18 @@
                             </div>
                         </div>
                     }
+                    else if (skladnik == "borowkaLubJezynaLubPorzeczka")
+                    {
+                        <div class="rel skladnikDaniaObiad skladnikSzczegolowyDaniaObiad">
+                            @foreach (var jagoda in jagody)
+                            {
+                                <div class="rel szczegolObiad @(Gracz.JestOwoc(jagoda) ? "klikalneDivZieloneRel" : "nieMoznaKliknac") @(wybranaJagodaDoDzemu == jagoda ? "wybranySkladnikCiasta" : "")" @onclick='() => WybierzJagodeDoDzemu(jagoda)'>
+                                    <img class="obrazekContain" src="img/przedmioty/owoce/@(jagoda).png" />
+                                    <div class="abs lProduktuInMlynekKawa">@Gracz.Owoc(jagoda).Ilosc</div>
+                                </div>
+                            }
+                        </div>
+                    }
                     else if (skladnik == "zakwasZytni")
                     {
                         <div class="skladnikDaniaObiad skladnikSzczegolowyDaniaObiad"><img class="obrazekContain" src="img/dom/kuchnia/zakwasZytni.png" /></div>
@@ -985,6 +997,7 @@
     private string[] miesaNaSteki = ["swiniaSzynka", "swiniaSchab", "krowaRostbef", "krowaAntrykot"];
     private string[] grzyby = ["pieczarka", "rydz", "podgrzybek", "borowik", "kurka"];
     private string[] slodkieBuleczki = ["brzoskwinia", "śliwka", "wiśnia", "jabłko", "gruszka", "malina", "twarog"];
+    private string[] jagody = ["borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "jeżyna"];
     private string[] skladnikiPizza = ["papryka", "cebula", "kukurydza", "ogórek", "ananas", "oliwki", "pieczarka", "rydz", "podgrzybek", "borowik", "kurka", "kielbasaWedlina", "salamiWedlina", "lopatkaWedlina", "poledwicaWedlina", "boczekWedlina", "szynkaWedlina", "schabWedlina", "kurczakWedlina", "indykWedlina", "krolikPasztet", "drobPasztet", "swiniaPasztet"];
     private HashSet<string> pizzaRobocza = [];
     private bool WalidacjaSkladnikaPizzy(string skladnik) => Gracz.JestDar(skladnik);
@@ -1104,6 +1117,8 @@
     private string WybierzMakaronLubZiemniakDoZupy(string skladnik) => wybranyMakaronLubZiemniakDoZupy == skladnik ? wybranyMakaronLubZiemniakDoZupy = "" : Gracz.JestDar(skladnik) ? wybranyMakaronLubZiemniakDoZupy = skladnik : wybranyMakaronLubZiemniakDoZupy;
     private string wybranyOkonLubPstragSkladnikObiad = "";
     private string WybierzOkonLubPstragSkladnikObiad(string ryba) => wybranyOkonLubPstragSkladnikObiad == ryba ? wybranyOkonLubPstragSkladnikObiad = "" : Gracz.JestRyba(ryba) ? wybranyOkonLubPstragSkladnikObiad = ryba : wybranyOkonLubPstragSkladnikObiad;
+    private string wybranaJagodaDoDzemu = "";
+    private string WybierzJagodeDoDzemu(string jagoda) => wybranaJagodaDoDzemu == jagoda ? wybranaJagodaDoDzemu = "" : Gracz.JestOwoc(jagoda) ? wybranaJagodaDoDzemu = jagoda : wybranaJagodaDoDzemu;
 
     private List<string> KosztaDania(string danie) => danie switch
     {
@@ -1159,9 +1174,19 @@
         "fasolkaPoBretonsku" => ["fasola", "kielbasaWedlina", "pomidor", "cebula", "sol", "pelnaButelka"],
         "lososGotowany" => ["losos", "cytryna", "sol", "pelnaButelka"],
         "rybaPoGrecku" => ["okonLubPstrag", "marchew", "cebula", "seler", "pietruszka", "pomidor", "olej", "sol", "pelnaButelka"],
+        "sledzWOleju" => ["sledz", "cebula", "olej", "sol", "czarnyPieprz", "pelnaButelka"],
         "truskawkaDzem" => ["truskawka", "miod", "pelnaButelka"],
         "malinaDzem" => ["malina", "miod", "pelnaButelka"],
-        "sliwkaDzem" => ["śliwka", "miod", "cynamon"],
+        "sliwkaDzem" => ["śliwka", "miod", "cynamon", "pelnaButelka"],
+        "brzoskwiniaDzem" => ["brzoskwinia", "miod", "pelnaButelka"],
+        "wisniaDzem" => ["wiśnia", "miod", "pelnaButelka"],
+        "dzemJagodowy" => ["borowkaLubJezynaLubPorzeczka", "miod", "pelnaButelka"],
+        "morelaDzem" => ["morela", "miod", "pelnaButelka"],
+        "wisniaKompot" => ["wiśnia", "miod", "pelnaButelka"],
+        "truskawkaKompot" => ["truskawka", "miod", "pelnaButelka"],
+        "ketchup" => ["pomidor", "cebula", "miod", "sol", "czarnyPieprz", "pelnaButelka"],
+        "ziemniakiGotowe" => ["ziemniak", "sol", "pelnaButelka"],
+        "ryzGotowy" => ["ryz", "sol", "maslo", "pelnaButelka"],
         _ => []
     };
     private bool MoznaUgotowacDanie()
@@ -1189,6 +1214,7 @@
             else if (skladnik == "makaronLubRyz" && (string.IsNullOrEmpty(wybranyMakaronLubRyzDoZupy) || !Gracz.JestDar(wybranyMakaronLubRyzDoZupy))) return false;
             else if (skladnik == "makaronLubZiemniak" && (string.IsNullOrEmpty(wybranyMakaronLubZiemniakDoZupy) || !Gracz.JestDar(wybranyMakaronLubZiemniakDoZupy))) return false;
             else if (skladnik == "okonLubPstrag" && (string.IsNullOrEmpty(wybranyOkonLubPstragSkladnikObiad) || !Gracz.JestRyba(wybranyOkonLubPstragSkladnikObiad))) return false;
+            else if (skladnik == "borowkaLubJezynaLubPorzeczka" && (string.IsNullOrEmpty(wybranaJagodaDoDzemu) || !Gracz.JestOwoc(wybranaJagodaDoDzemu))) return false;
             else if (!Gracz.JestDar(skladnik)) return false;
         }
         return true;
@@ -1215,6 +1241,7 @@
         wybranyMakaronLubRyzDoZupy = "";
         wybranyMakaronLubZiemniakDoZupy = "";
         wybranyOkonLubPstragSkladnikObiad = "";
+        wybranaJagodaDoDzemu = "";
     }
     private void ZaplacZaObiad()
     {
@@ -1243,6 +1270,7 @@
             else if (skladnik == "makaronLubRyz") Gracz.Dar(wybranyMakaronLubRyzDoZupy).Ilosc--;
             else if (skladnik == "makaronLubZiemniak") Gracz.Dar(wybranyMakaronLubZiemniakDoZupy).Ilosc--;
             else if (skladnik == "okonLubPstrag") Gracz.Ryba(wybranyOkonLubPstragSkladnikObiad).Ilosc--;
+            else if (skladnik == "borowkaLubJezynaLubPorzeczka") Gracz.Owoc(wybranaJagodaDoDzemu).Ilosc--;
             else if ((skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien")) Gracz.Dar(skladnik).Ilosc -= 3;
             else if (skladnik == "zakwasZytni") continue;
             else Gracz.Dar(skladnik).Ilosc--;

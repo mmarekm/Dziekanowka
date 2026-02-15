@@ -9,7 +9,8 @@
         new("plackiZiemniaczane"), new("frytki"), new("pierogiRuskie"), new("pierogiZMiesem"), new("pierogiZKapustaIGrzybami"), new("pierogiZOwocami"), new("kopytka"), new("nalesniki"), new("racuchy")];
         public static List<Obiad> DaniaZGarnka = [new("rosol"), new("barszczCzerwony"), new("zurek"), new("krupnik"), new("zupaPomidorowa"), new("zupaOgorkowa"), new("zupaGrzybowa"), new("kapusniak"), new("grochowka"),
         new("zupaFasolowa"), new("zupaCebulowa"), new("chlodnik"), new("kremZBrokulow"), new("kremZDyni"), new("kremZKalafiora"), new("karkowka"), new("gulasz"), new("pieczenWolowa"), new("indykDuszony"), new("krolikWWinie"),
-        new("ratatouille"), new("leczo"), new("fasolkaPoBretonsku"), new("knedle"), new("lososGotowany"), new("rybaPoGrecku"), new("truskawkaDzem"), new("malinaDzem"), new("sliwkaDzem")];
+        new("ratatouille"), new("leczo"), new("fasolkaPoBretonsku"), new("knedle"), new("lososGotowany"), new("rybaPoGrecku"), new("sledzWOleju"), new("truskawkaDzem"), new("malinaDzem"), new("sliwkaDzem"),
+        new("brzoskwiniaDzem"), new("wisniaDzem"), new("dzemJagodowy"), new("morelaDzem"), new("wisniaKompot"), new("truskawkaKompot"), new("ketchup"), new("ziemniakiGotowe"), new("ryzGotowy")];
         public static List<Obiad> StartoweObiady() => DaniaZPatelni.Concat(DaniaZGarnka).Select(d => new Obiad(d.Nazwa)).ToList();
     }
 }

@@ -26,6 +26,13 @@
     height: 583px;
     z-index: 2;
 }
+.zaBramaDoLas {
+    top: 0;
+    left: 0;
+    width: 502px;
+    height: 296px;
+    z-index: 2;
+}
 .stanPaliwaZaBrama {
     top: 10px;
     left: 1130px;
