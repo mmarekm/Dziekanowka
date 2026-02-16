@@ -106,7 +106,9 @@
     @if (widoczneKosztaDania)
     {
         <div class="abs kosztaDania">
-            @{ string naczynie = patelnia ? "patelnia" : "garnek"; }
+            @{
+                string naczynie = patelnia ? "patelnia" : "garnek";
+            }
             <div class="abs rysDania"><img class="obrazekSieMiesci" src="img/dom/kuchnia/@(naczynie)/@(wybranyObiad).png" /></div>
             <div class="abs rezygnacjaZDania"><button class="wyroznionyGuzik" @onclick='WyczyscWyborDania'><img class="obrazekSieMiesci" src="img/dom/rezygnacja.png" /></button></div>
             <div class="abs skladnikiDaniaObiad">
@@ -1085,7 +1087,7 @@
     private string wybraneMlekoSkladnikObiad = "";
     private string WybierzMlekoSkladnikObiad(string zwierz) => wybraneMlekoSkladnikObiad == $"{zwierz}Mleko" ? wybraneMlekoSkladnikObiad = "" : Gracz.JestProduktZ($"{zwierz}Mleko") ? wybraneMlekoSkladnikObiad = $"{zwierz}Mleko" : wybraneMlekoSkladnikObiad;
     private string wybranySerSkladnikObiad = "";
-    private string WybierzSerSkladnikObiad(string ser) => wybranySerSkladnikObiad == ser ? wybranySerSkladnikObiad = "" : Gracz.JestProduktP(ser) ? wybranySerSkladnikObiad = ser : wybranySerSkladnikObiad;
+    private string WybierzSerSkladnikObiad(string ser) => wybranySerSkladnikObiad == $"{ser}Ser" ? wybranySerSkladnikObiad = "" : Gracz.JestProduktP($"{ser}Ser") ? wybranySerSkladnikObiad = $"{ser}Ser" : wybranySerSkladnikObiad;
     private string wybraneJajoSkladnikObiad = "";
     private string WybierzJajoSkladnikObiad(string ptak) => wybraneJajoSkladnikObiad == $"{ptak}Jajo" ? wybraneJajoSkladnikObiad = "" : Gracz.JestProduktZ($"{ptak}Jajo") ? wybraneJajoSkladnikObiad = $"{ptak}Jajo" : wybraneJajoSkladnikObiad;
     private string wybranyTluszczSkladnikObiad = "";
@@ -1189,237 +1191,130 @@
         "ryzGotowy" => ["ryz", "sol", "maslo", "pelnaButelka"],
         _ => []
     };
-    /*private bool MoznaUgotowacDanie()
+    private bool MoznaUgotowacDanie()
     {
         if (!Gracz.JestPrzedmiot("drewno")) return false;
+        if (string.IsNullOrEmpty(wybranyObiad)) return false;
         foreach (var skladnik in KosztaDania(wybranyObiad))
         {
-            if (skladnik == "mleko" && (string.IsNullOrEmpty(wybraneMlekoSkladnikObiad) || Gracz.ProduktZ(wybraneMlekoSkladnikObiad).Ilosc < 2)) return false;
-            else if (skladnik == "ser" && (string.IsNullOrEmpty(wybranySerSkladnikObiad) || !Gracz.JestProduktP(wybranySerSkladnikObiad))) return false;
-            else if (skladnik == "jajo" && (string.IsNullOrEmpty(wybraneJajoSkladnikObiad) || Gracz.ProduktZ(wybraneJajoSkladnikObiad).Ilosc < 3)) return false;
-            else if (skladnik == "tluszcz" && (string.IsNullOrEmpty(wybranyTluszczSkladnikObiad) || !Gracz.JestDar(wybranyTluszczSkladnikObiad))) return false;
-            else if (skladnik == "maka" && (string.IsNullOrEmpty(wybranaMakaSkladnikObiad) || !Gracz.JestDar(wybranaMakaSkladnikObiad))) return false;
-            else if (skladnik == "bulka" && (string.IsNullOrEmpty(wybranaBulkaSkladnikObiad) || !Gracz.JestDar(wybranaBulkaSkladnikObiad))) return false;
-            else if (skladnik == "mieloneMieso" && (string.IsNullOrEmpty(wybraneMieloneMiesoSkladnikObiad) || !Gracz.JestDar(wybraneMieloneMiesoSkladnikObiad))) return false;
-            else if (skladnik == "swiniSzynkaLubSchab" && (string.IsNullOrEmpty(wybranaCzescSwiniSkladnikObiad) || !Gracz.JestDar(wybranaCzescSwiniSkladnikObiad))) return false;
-            else if (skladnik == "krowyLopatkaLubPoledwica" && (string.IsNullOrEmpty(wybranaCzescKrowySkladnikObiad) || !Gracz.JestDar(wybranaCzescKrowySkladnikObiad))) return false;
-            else if (skladnik == "krowyRostbefLubAntrykotLubswiniSzynkaLubSchab" && (string.IsNullOrEmpty(wybranaCzescSwiniLubKrowySkladnikObiad) || !Gracz.JestDar(wybranaCzescSwiniLubKrowySkladnikObiad))) return false;
-            else if (skladnik == "twarogLubSer" && (string.IsNullOrEmpty(wybranyTwarogLubSerSkladnikObiad) || !Gracz.JestDar(wybranyTwarogLubSerSkladnikObiad))) return false;
-            else if (skladnik == "grzyb" && (string.IsNullOrEmpty(wybranyGrzybSkladnikObiad) || !Gracz.JestGrzyb(wybranyGrzybSkladnikObiad))) return false;
-            else if (skladnik == "kapusta" && (string.IsNullOrEmpty(wybranaKapustaSkladnikObiad) || !Gracz.JestDar(wybranaKapustaSkladnikObiad))) return false;
-            else if (skladnik == "nadzienieSlodkie" && (string.IsNullOrEmpty(wybraneNadzienieSlodkieSkladnikObiad) || !Gracz.JestDar(wybraneNadzienieSlodkieSkladnikObiad))) return false;
-            else if (skladnik == "pelnaButelka" && !Gracz.JestPrzedmiot("pelnaButelka")) return false;
-            else if (skladnik == "kuraLubIndyk" && (string.IsNullOrEmpty(wybraneKuraLubIndykDoRosolu) || !Gracz.JestDar(wybraneKuraLubIndykDoRosolu))) return false;
-            else if ((skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien") && Gracz.Dar(skladnik).Ilosc < 3) return false;
-            else if (skladnik == "zakwasZytni" && Gracz.Zboza.First(z => z.Nazwa == "zyto").PoziomZakwasu < 3) return false;
-            else if (skladnik == "makaronLubRyz" && (string.IsNullOrEmpty(wybranyMakaronLubRyzDoZupy) || !Gracz.JestDar(wybranyMakaronLubRyzDoZupy))) return false;
-            else if (skladnik == "makaronLubZiemniak" && (string.IsNullOrEmpty(wybranyMakaronLubZiemniakDoZupy) || !Gracz.JestDar(wybranyMakaronLubZiemniakDoZupy))) return false;
-            else if (skladnik == "okonLubPstrag" && (string.IsNullOrEmpty(wybranyOkonLubPstragSkladnikObiad) || !Gracz.JestRyba(wybranyOkonLubPstragSkladnikObiad))) return false;
-            else if (skladnik == "borowkaLubJezynaLubPorzeczka" && (string.IsNullOrEmpty(wybranaJagodaDoDzemu) || !Gracz.JestOwoc(wybranaJagodaDoDzemu))) return false;
-            else if (!Gracz.JestDar(skladnik)) return false;
-        }
-        return true;
-    }*/
-
-private bool MoznaUgotowacDanie()
-{
-    if (!Gracz.JestPrzedmiot("drewno"))
-    {
-        Debug.WriteLine("❌ FAIL: Brak drewna");
-        return false;
-    }
-    
-    if (string.IsNullOrEmpty(wybranyObiad))
-    {
-        Debug.WriteLine("❌ FAIL: Nie wybrano dania");
-        return false;
-    }
-
-    Debug.WriteLine($"✅ Sprawdzam składniki dla: {wybranyObiad}");
-    var skladniki = KosztaDania(wybranyObiad);
-    Debug.WriteLine($"✅ Liczba składników: {skladniki.Count}");
-
-    int index = 0;
-    foreach (var skladnik in skladniki)
-    {
-        index++;
-        Debug.WriteLine($"--- Składnik {index}: {skladnik} ---");
-        
-        if (skladnik == "mleko")
-        {
-            bool ok = !string.IsNullOrEmpty(wybraneMlekoSkladnikObiad) &&
-                      Gracz.ProduktZ(wybraneMlekoSkladnikObiad).Ilosc >= 2;
-            Debug.WriteLine($"  mleko: wybrane={wybraneMlekoSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "ser")
-        {
-            bool ok = !string.IsNullOrEmpty(wybranySerSkladnikObiad) &&
-                      Gracz.JestProduktP(wybranySerSkladnikObiad);
-            Debug.WriteLine($"  ser: wybrane={wybranySerSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "jajo")
-        {
-            bool ok = !string.IsNullOrEmpty(wybraneJajoSkladnikObiad) &&
-                      Gracz.ProduktZ(wybraneJajoSkladnikObiad).Ilosc >= 3;
-            Debug.WriteLine($"  jajo: wybrane={wybraneJajoSkladnikObiad}, ilosc={(!string.IsNullOrEmpty(wybraneJajoSkladnikObiad) ? Gracz.ProduktZ(wybraneJajoSkladnikObiad).Ilosc : 0)}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "tluszcz")
-        {
-            bool ok = !string.IsNullOrEmpty(wybranyTluszczSkladnikObiad) &&
-                      Gracz.JestDar(wybranyTluszczSkladnikObiad);
-            Debug.WriteLine($"  tluszcz: wybrane={wybranyTluszczSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "maka")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestProduktP()
-            bool ok = !string.IsNullOrEmpty(wybranaMakaSkladnikObiad) &&
-                      Gracz.JestProduktP(wybranaMakaSkladnikObiad);
-            Debug.WriteLine($"  maka: wybrane={wybranaMakaSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "bulka")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestProduktP()
-            bool ok = !string.IsNullOrEmpty(wybranaBulkaSkladnikObiad) &&
-                      Gracz.JestProduktP(wybranaBulkaSkladnikObiad);
-            Debug.WriteLine($"  bulka: wybrane={wybranaBulkaSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "mieloneMieso")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestProduktP()
-            bool ok = !string.IsNullOrEmpty(wybraneMieloneMiesoSkladnikObiad) &&
-                      Gracz.JestProduktP(wybraneMieloneMiesoSkladnikObiad);
-            Debug.WriteLine($"  mieloneMieso: wybrane={wybraneMieloneMiesoSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "swiniSzynkaLubSchab")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestProduktZ()
-            bool ok = !string.IsNullOrEmpty(wybranaCzescSwiniSkladnikObiad) &&
-                      Gracz.JestProduktZ(wybranaCzescSwiniSkladnikObiad);
-            Debug.WriteLine($"  swiniSzynkaLubSchab: wybrane={wybranaCzescSwiniSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "krowyLopatkaLubPoledwica")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestProduktZ()
-            bool ok = !string.IsNullOrEmpty(wybranaCzescKrowySkladnikObiad) &&
-                      Gracz.JestProduktZ(wybranaCzescKrowySkladnikObiad);
-            Debug.WriteLine($"  krowyLopatkaLubPoledwica: wybrane={wybranaCzescKrowySkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "krowyRostbefLubAntrykotLubswiniSzynkaLubSchab")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestProduktZ()
-            bool ok = !string.IsNullOrEmpty(wybranaCzescSwiniLubKrowySkladnikObiad) &&
-                      Gracz.JestProduktZ(wybranaCzescSwiniLubKrowySkladnikObiad);
-            Debug.WriteLine($"  steki: wybrane={wybranaCzescSwiniLubKrowySkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "twarogLubSer")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestProduktP()
-            bool ok = !string.IsNullOrEmpty(wybranyTwarogLubSerSkladnikObiad) &&
-                      Gracz.JestProduktP(wybranyTwarogLubSerSkladnikObiad);
-            Debug.WriteLine($"  twarogLubSer: wybrane={wybranyTwarogLubSerSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "grzyb")
-        {
-            bool ok = !string.IsNullOrEmpty(wybranyGrzybSkladnikObiad) &&
-                      Gracz.JestGrzyb(wybranyGrzybSkladnikObiad);
-            Debug.WriteLine($"  grzyb: wybrane={wybranyGrzybSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "kapusta")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestWarzywo()
-            bool ok = !string.IsNullOrEmpty(wybranaKapustaSkladnikObiad) &&
-                      Gracz.JestWarzywo(wybranaKapustaSkladnikObiad);
-            Debug.WriteLine($"  kapusta: wybrane={wybranaKapustaSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "nadzienieSlodkie")
-        {
-            bool ok = !string.IsNullOrEmpty(wybraneNadzienieSlodkieSkladnikObiad) &&
-                      Gracz.JestDar(wybraneNadzienieSlodkieSkladnikObiad);
-            Debug.WriteLine($"  nadzienieSlodkie: wybrane={wybraneNadzienieSlodkieSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "pelnaButelka")
-        {
-            bool ok = Gracz.JestPrzedmiot("pelnaButelka");
-            Debug.WriteLine($"  pelnaButelka: ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "kuraLubIndyk")
-        {
-            // ⚠️ NAPRAWIONE: było JestDar(), powinno być JestProduktZ()
-            bool ok = !string.IsNullOrEmpty(wybraneKuraLubIndykDoRosolu) &&
-                      Gracz.JestProduktZ(wybraneKuraLubIndykDoRosolu);
-            Debug.WriteLine($"  kuraLubIndyk: wybrane={wybraneKuraLubIndykDoRosolu}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien")
-        {
-            bool ok = Gracz.Dar(skladnik).Ilosc >= 3;
-            Debug.WriteLine($"  {skladnik}: ilosc={Gracz.Dar(skladnik).Ilosc}/3, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "zakwasZytni")
-        {
-            bool ok = Gracz.Zboza.First(z => z.Nazwa == "zyto").PoziomZakwasu >= 3;
-            Debug.WriteLine($"  zakwasZytni: poziom={Gracz.Zboza.First(z => z.Nazwa == "zyto").PoziomZakwasu}/3, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "makaronLubRyz")
-        {
-            bool ok = !string.IsNullOrEmpty(wybranyMakaronLubRyzDoZupy) &&
-                      Gracz.JestDar(wybranyMakaronLubRyzDoZupy);
-            Debug.WriteLine($"  makaronLubRyz: wybrane={wybranyMakaronLubRyzDoZupy}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "makaronLubZiemniak")
-        {
-            bool ok = !string.IsNullOrEmpty(wybranyMakaronLubZiemniakDoZupy) &&
-                      Gracz.JestDar(wybranyMakaronLubZiemniakDoZupy);
-            Debug.WriteLine($"  makaronLubZiemniak: wybrane={wybranyMakaronLubZiemniakDoZupy}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "okonLubPstrag")
-        {
-            bool ok = !string.IsNullOrEmpty(wybranyOkonLubPstragSkladnikObiad) &&
-                      Gracz.JestRyba(wybranyOkonLubPstragSkladnikObiad);
-            Debug.WriteLine($"  okonLubPstrag: wybrane={wybranyOkonLubPstragSkladnikObiad}, ok={ok}");
-            if (!ok) return false;
-        }
-        else if (skladnik == "borowkaLubJezynaLubPorzeczka")
-        {
-            bool ok = !string.IsNullOrEmpty(wybranaJagodaDoDzemu) &&
-                      Gracz.JestOwoc(wybranaJagodaDoDzemu);
-            Debug.WriteLine($"  jagody: wybrane={wybranaJagodaDoDzemu}, ok={ok}");
-            if (!ok) return false;
-        }
-        else
-        {
-            bool ok = Gracz.JestDar(skladnik);
-            Debug.WriteLine($"  {skladnik}: JestDar={ok}");
-            if (!ok)
+            if (skladnik == "mleko")
             {
-                Debug.WriteLine($"  ❌❌❌ FAIL NA SKŁADNIKU: {skladnik} ❌❌❌");
-                return false;
+                bool ok = !string.IsNullOrEmpty(wybraneMlekoSkladnikObiad) && Gracz.ProduktZ(wybraneMlekoSkladnikObiad).Ilosc >= 2;
+                if (!ok) return false;
+            }
+            else if (skladnik == "ser")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranySerSkladnikObiad) && Gracz.JestProduktP(wybranySerSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "jajo")
+            {
+                bool ok = !string.IsNullOrEmpty(wybraneJajoSkladnikObiad) && Gracz.ProduktZ(wybraneJajoSkladnikObiad).Ilosc >= 3;
+                if (!ok) return false;
+            }
+            else if (skladnik == "tluszcz")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranyTluszczSkladnikObiad) && Gracz.JestDar(wybranyTluszczSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "maka")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranaMakaSkladnikObiad) && Gracz.JestProduktP(wybranaMakaSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "bulka")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranaBulkaSkladnikObiad) && Gracz.JestProduktP(wybranaBulkaSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "mieloneMieso")
+            {
+                bool ok = !string.IsNullOrEmpty(wybraneMieloneMiesoSkladnikObiad) && Gracz.JestProduktP(wybraneMieloneMiesoSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "swiniSzynkaLubSchab")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranaCzescSwiniSkladnikObiad) && Gracz.JestProduktZ(wybranaCzescSwiniSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "krowyLopatkaLubPoledwica")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranaCzescKrowySkladnikObiad) && Gracz.JestProduktZ(wybranaCzescKrowySkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "krowyRostbefLubAntrykotLubswiniSzynkaLubSchab")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranaCzescSwiniLubKrowySkladnikObiad) && Gracz.JestProduktZ(wybranaCzescSwiniLubKrowySkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "twarogLubSer")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranyTwarogLubSerSkladnikObiad) && Gracz.JestProduktP(wybranyTwarogLubSerSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "grzyb")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranyGrzybSkladnikObiad) && Gracz.JestGrzyb(wybranyGrzybSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "kapusta")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranaKapustaSkladnikObiad) && Gracz.JestWarzywo(wybranaKapustaSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "nadzienieSlodkie")
+            {
+                bool ok = !string.IsNullOrEmpty(wybraneNadzienieSlodkieSkladnikObiad) && Gracz.JestDar(wybraneNadzienieSlodkieSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "pelnaButelka")
+            {
+                bool ok = Gracz.JestPrzedmiot("pelnaButelka");
+                if (!ok) return false;
+            }
+            else if (skladnik == "kuraLubIndyk")
+            {
+                bool ok = !string.IsNullOrEmpty(wybraneKuraLubIndykDoRosolu) && Gracz.JestProduktZ(wybraneKuraLubIndykDoRosolu);
+                if (!ok) return false;
+            }
+            else if (skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien")
+            {
+                bool ok = Gracz.Dar(skladnik).Ilosc >= 3;
+                if (!ok) return false;
+            }
+            else if (skladnik == "zakwasZytni")
+            {
+                bool ok = Gracz.Zboza.First(z => z.Nazwa == "zyto").PoziomZakwasu >= 3;
+                if (!ok) return false;
+            }
+            else if (skladnik == "makaronLubRyz")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranyMakaronLubRyzDoZupy) && Gracz.JestDar(wybranyMakaronLubRyzDoZupy);
+                if (!ok) return false;
+            }
+            else if (skladnik == "makaronLubZiemniak")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranyMakaronLubZiemniakDoZupy) && Gracz.JestDar(wybranyMakaronLubZiemniakDoZupy);
+                if (!ok) return false;
+            }
+            else if (skladnik == "okonLubPstrag")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranyOkonLubPstragSkladnikObiad) && Gracz.JestRyba(wybranyOkonLubPstragSkladnikObiad);
+                if (!ok) return false;
+            }
+            else if (skladnik == "borowkaLubJezynaLubPorzeczka")
+            {
+                bool ok = !string.IsNullOrEmpty(wybranaJagodaDoDzemu) && Gracz.JestOwoc(wybranaJagodaDoDzemu);
+                if (!ok) return false;
+            }
+            else
+            {
+                bool ok = Gracz.JestDar(skladnik);
+                if (!ok) return false;
             }
         }
+        return true;
     }
-    
-    Debug.WriteLine("✅✅✅ WSZYSTKO OK - MOŻNA UGOTOWAĆ! ✅✅✅");
-    return true;
-}
     private void WyczyscWyborDania()
     {
         widoczneKosztaDania = false;
