@@ -33,6 +33,31 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Salatki = [];
                 AktualnyGracz.Surowki = [];
                 AktualnyGracz.Obiady = Obiad.StartoweObiady();
+                //START DEBUG
+                /*
+                foreach (var item in AktualnyGracz.Przedmioty)
+                    item.Ilosc += 10;
+                foreach (var item in AktualnyGracz.Owoce)
+                    item.Ilosc += 10;
+                foreach (var item in AktualnyGracz.Warzywa)
+                    item.Ilosc += 10;
+                foreach (var item in AktualnyGracz.Zboza)
+                {
+                    item.Ilosc += 10;
+                    item.PoziomZakwasu += 10;
+                }
+                foreach (var item in AktualnyGracz.ProduktyZwierzece)
+                    item.Ilosc += 10;
+                foreach (var item in AktualnyGracz.ProduktyPrzetworzone)
+                    item.Ilosc += 10;
+                foreach (var item in AktualnyGracz.Ryby)
+                    item.Ilosc += 10;
+                foreach (var item in AktualnyGracz.Grzyby)
+                    item.Ilosc += 10;
+                foreach (var item in AktualnyGracz.ZywnoscPozostala)
+                    item.Ilosc += 10;
+                */
+                //KONIEC DEBUG
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
                 CzyPokazacWideo = true;

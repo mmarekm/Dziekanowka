@@ -955,7 +955,61 @@
         }
     }
 </div>
+<!--
+<!-- PANEL DEBUGOWANIA -->
+<div style="position: fixed; bottom: 0; left: 0; background: black; color: lime; padding: 10px; max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 12px; z-index: 9999; width: 100%;">
+    <div><strong>🐛 DEBUG PANEL</strong></div>
+    <div>Wybrane danie: @wybranyObiad</div>
+    <div>Drewno: @Gracz.Przedmiot("drewno").Ilosc</div>
+    <div>Może ugotować: @MoznaUgotowacDanie()</div>
 
+    @if (!string.IsNullOrEmpty(wybranyObiad))
+    {
+        <div style="margin-top: 10px;"><strong>📋 Składniki dla: @wybranyObiad</strong></div>
+        @foreach (var skladnik in KosztaDania(wybranyObiad))
+        {
+            <div style="margin-left: 20px;">
+                @skladnik:
+                @try
+                {
+                    if (skladnik == "ziemniak" || skladnik == "ryz" || skladnik == "jeczmien")
+                    {
+                        <span>@Gracz.Dar(skladnik).Ilosc / 3 ✅</span>
+                    }
+                    else if (skladnik == "pelnaButelka")
+                    {
+                        <span>@Gracz.Przedmiot("pelnaButelka").Ilosc @(Gracz.JestPrzedmiot("pelnaButelka") ? "✅" : "❌")</span>
+                    }
+                    else if (skladnik == "mleko")
+                    {
+                        <span>Wybrane: @wybraneMlekoSkladnikObiad @(string.IsNullOrEmpty(wybraneMlekoSkladnikObiad) ? "❌" : "✅")</span>
+                    }
+                    else if (skladnik == "jajo")
+                    {
+                        <span>Wybrane: @wybraneJajoSkladnikObiad @(string.IsNullOrEmpty(wybraneJajoSkladnikObiad) ? "❌" : "✅")</span>
+                    }
+                    else if (skladnik == "tluszcz")
+                    {
+                        <span>Wybrane: @wybranyTluszczSkladnikObiad @(string.IsNullOrEmpty(wybranyTluszczSkladnikObiad) ? "❌" : "✅")</span>
+                    }
+                    else if (Gracz.JestDar(skladnik))
+                    {
+                        <span>@Gracz.Dar(skladnik).Ilosc ✅</span>
+                    }
+                    else
+                    {
+                        <span style="color: red;">BRAK ❌</span>
+                    }
+                }
+                catch (Exception ex)
+                {
+                    <span style="color: red;">ERROR: @ex.Message</span>
+                }
+            </div>
+        }
+    }
+</div>
+-->
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
@@ -1191,6 +1245,7 @@
     };
     private bool MoznaUgotowacDanie()
     {
+        if (!Gracz.JestPrzedmiot("drewno")) return false;
         foreach (var skladnik in KosztaDania(wybranyObiad))
         {
             if (skladnik == "mleko" && (string.IsNullOrEmpty(wybraneMlekoSkladnikObiad) || Gracz.ProduktZ(wybraneMlekoSkladnikObiad).Ilosc < 2)) return false;
