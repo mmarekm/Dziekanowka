@@ -35,6 +35,8 @@
         Sad2,
         Zboze,
         Miasto1,
+        Miasto2,
+        Kiosk,
         SzkolaIntro,
         SklepDrobiu,
         AnimacjaTraktora,

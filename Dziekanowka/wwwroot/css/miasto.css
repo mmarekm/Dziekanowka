@@ -1,6 +1,18 @@
 ﻿.miasto1Widok {
     background-image: url('../img/teren/miasto1.png');
 }
+.miasto2Widok {
+    background-image: url('../img/teren/miasto2.png');
+}
+.lBiletowMiasto1 {
+    left: 75px;
+    top: 75px;
+    color: yellow;
+    font-size: 46px;
+    width: 70px;
+    height: 47px;
+    text-align: center;
+}
 .miasto1Powrot {
     top: 223px;
     right: 0;
@@ -110,4 +122,101 @@
     justify-content: center;
     font-size: 36px;
     top: 200px;
+}
+.miasto1DoKiosk {
+    bottom: 63px;
+    left: 50px;
+    width: 266px;
+    height: 179px;
+    z-index: 2;
+}
+.kiosk1Widok {
+    background-image: url('../img/miasto/kiosk1Widok.png');
+}
+.kioskDoMiasto1 {
+    bottom: 0;
+    left: 0;
+    width: 334px;
+    height: 206px;
+    z-index: 2;
+}
+.lMonetKiosk1 {
+    left: 1390px;
+    top: 40px;
+    width: 190px;
+    height: 80px;
+    font-size: 79px;
+    text-align: center;
+    color: tan;
+}
+.lBiletowKiosk1 {
+    left: 500px;
+    top: 40px;
+    width: 130px;
+    height: 80px;
+    font-size: 79px;
+    text-align: center;
+    color: gold;
+}
+.kupBiletKiosk1 {
+    top: 552px;
+    left: 703px;
+    width: 178px;
+    height: 160px;
+}
+.autobusAnimacjaM1 {
+    left: -150px;
+    top: 400px;
+    width: 100px;
+    height: 100px;
+    cursor: default;
+    pointer-events: none;
+}
+.autobusUkrytyM1 {
+    opacity: 0;
+    left: -150px;
+    top: 400px;
+    pointer-events: none;
+    transition: none;
+}
+.autobusJedzieM1 {
+    opacity: 1;
+    left: 200px;
+    top: 600px;
+    pointer-events: none;
+    transition: left 1s ease, top 1s ease;
+}
+.autobusStoiM1 {
+    opacity: 1;
+    left: 200px;
+    top: 600px;
+    pointer-events: all;
+    cursor: pointer;
+    transition: none;
+}
+.autobusOdjedzieM1 {
+    opacity: 1;
+    left: -150px;
+    top: 400px;
+    pointer-events: none;
+    transform: scaleX(-1);
+    transition: left 1s ease, top 1s ease;
+}
+.autobusAnimacjaM21 {
+    right: 0;
+    bottom: 0;
+    width: 270px;
+    height: 270px;
+    pointer-events: none;
+}
+.autobusUkrytyM21 {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.autobusStoiM21 {
+    opacity: 1;
+    pointer-events: all;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }

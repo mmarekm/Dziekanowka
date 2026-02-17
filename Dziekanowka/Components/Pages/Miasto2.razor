@@ -1,0 +1,50 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@implements IDisposable
+<div class="miasto2Widok widok rel">
+    <div class="abs autobusAnimacjaM21 @klasaAutobusu" @onclick="WsiadzDoAutobusu1"><img class="obrazekWypelnia" src="img/miasto/autobus.png" /></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string klasaAutobusu = "autobusUkrytyM21";
+    private bool moznaWsiasc = false;
+    private CancellationTokenSource? _cts;
+    protected override void OnInitialized()
+    {
+        _ = PetlaAutobusu();
+    }
+    private async Task PetlaAutobusu()
+    {
+        _cts = new CancellationTokenSource();
+        var token = _cts.Token;
+        try
+        {
+            while (!token.IsCancellationRequested)
+            {
+                await Task.Delay(5000, token);
+                klasaAutobusu = "autobusStoiM21";
+                moznaWsiasc = true;
+                StateHasChanged();
+                await Task.Delay(2000, token);
+                moznaWsiasc = false;
+                klasaAutobusu = "autobusUkrytyM21";
+                StateHasChanged();
+            }
+        }
+        catch (TaskCanceledException) { }
+    }
+    public async Task WsiadzDoAutobusu1()
+    {
+        //if (Gracz.Przedmiot("biletAutobus").Ilosc < 1 || !moznaWsiasc) return;
+        if (!moznaWsiasc) return; // na razie za darmo, bo nie ma jak kupić biletów
+        //Gracz.Przedmiot("biletAutobus").Ilosc--;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1);
+    }
+    public void Dispose()
+    {
+        _cts?.Cancel();
+    }
+}

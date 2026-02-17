@@ -1,0 +1,25 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="kiosk@(Gracz.Statystyki.Kiosk)Widok widok rel">
+    <div class="abs lMonetKiosk@(Gracz.Statystyki.Kiosk)">@Gracz.Monety</div>
+    <div class="abs lBiletowKiosk@(Gracz.Statystyki.Kiosk)">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
+    <div class="abs kupBiletKiosk@(Gracz.Statystyki.Kiosk) @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet"><img src="img/miasto/kupWKiosk@(Gracz.Statystyki.Kiosk).png" /></div>
+    @if (Gracz.Statystyki.Kiosk == 1)
+    {
+        <div class="abs kioskDoMiasto1"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1)"><img src="img/miasto/confirmKiosk1.png" /></button></div>
+    }
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int cenaBiletu => Gracz.Statystyki.Kiosk == 1 ? 2 : 0;
+    private async Task KupBilet()
+    {
+        if (Gracz.Monety < cenaBiletu) return;
+        Gracz.Monety -= cenaBiletu;
+        Gracz.Przedmiot("biletAutobus").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}
