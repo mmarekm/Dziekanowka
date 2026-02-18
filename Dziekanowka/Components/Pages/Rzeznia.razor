@@ -9,10 +9,10 @@
     <div class="abs lZwierzatRzaznia lGesiRzeznia">@Gracz.Zwierze("ges").Ilosc</div>
     <div class="abs lZwierzatRzaznia lIndykowRzeznia">@Gracz.Zwierze("indyk").Ilosc</div>
     <div class="abs lZwierzatRzaznia lKaczekRzeznia">@Gracz.Zwierze("kaczka").Ilosc</div>
-    <div class="abs lZwierzatRzaznia lKrolikowRzeznia">@Gracz.Zwierze("krolik").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lKrolikowRzeznia">@Gracz.Zwierze("krolik").Gotowe</div>
     <div class="abs lZwierzatRzaznia lOwiecRzeznia">@Gracz.Zwierze("owca").Ilosc</div>
     <div class="abs lZwierzatRzaznia lKozRzeznia">@Gracz.Zwierze("koza").Ilosc</div>
-    <div class="abs lZwierzatRzaznia lSwinRzeznia">@Gracz.Zwierze("swinia").Ilosc</div>
+    <div class="abs lZwierzatRzaznia lSwinRzeznia">@Gracz.Zwierze("swinia").Gotowe</div>
     <div class="abs lZwierzatRzaznia lKrowRzeznia">@Gracz.Zwierze("krowa").Ilosc</div>
     <div class="abs lDuzyProduktRzaznia lMiesoKura">@Gracz.ProduktZ("kuraJedzenie").Ilosc</div>
     <div class="abs lDuzyProduktRzaznia lMiesoGes">@Gracz.ProduktZ("gesJedzenie").Ilosc</div>
@@ -41,16 +41,16 @@
     <div class="abs guzikRzaznia gesRzeznia @(Gracz.JestZwierze("ges") && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("ges")'></div>
     <div class="abs guzikRzaznia indykRzeznia @(Gracz.JestZwierze("indyk") && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("indyk")'></div>
     <div class="abs guzikRzaznia kaczkaRzeznia @(Gracz.JestZwierze("kaczka") && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("kaczka")'></div>
-    <div class="abs guzikRzaznia krolikRzeznia @(Gracz.JestZwierze("krolik") && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("krolik")'></div>
+    <div class="abs guzikRzaznia krolikRzeznia @(Gracz.Zwierze("krolik").Gotowe > 0 && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("krolik")'></div>
     <div class="abs guzikRzaznia owcaRzeznia @(Gracz.JestZwierze("owca") && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("owca")'></div>
     <div class="abs guzikRzaznia kozaRzeznia @(Gracz.JestZwierze("koza") && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("koza")'></div>
-    <div class="abs guzikRzaznia swiniaRzeznia @(Gracz.JestZwierze("swinia") && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("swinia")'></div>
+    <div class="abs guzikRzaznia swiniaRzeznia @(Gracz.Zwierze("swinia").Gotowe > 0 && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("swinia")'></div>
     <div class="abs guzikRzaznia krowaRzeznia @(Gracz.JestZwierze("krowa") && Gracz.JestPrzedmiot("siekiera") ? "klikalneDivCzerwone" : "nieMoznaKliknac")" @onclick='async () => await Ubij("krowa")'></div>
 </div>
 
 @code {
-    [Parameter] public Gracz Gracz { get; set; } = null!;
-    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+        [Parameter] public Gracz Gracz { get; set; } = null!;
+        [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private void MiesoZwierza(string zwierz)
     {
         if (zwierz == "swinia")
@@ -78,11 +78,11 @@
     }
     private async Task Ubij(string zwierz)
     {
-        if (!Gracz.JestZwierze(zwierz) || !Gracz.JestPrzedmiot("siekiera")) return;
+        if (!Gracz.JestPrzedmiot("siekiera") || (zwierz == "swinia" || zwierz == "krolik") ? Gracz.Zwierze(zwierz).Gotowe < 1 : !Gracz.JestZwierze(zwierz)) return;
+        ZwierzeGotowe(zwierz);
         Gracz.Przedmiot("siekiera").Ilosc--;
         Gracz.Zwierze(zwierz).Ilosc--;
         Gracz.Zwierze(zwierz).Nakarmione = 0;
-        ZwierzeGotowe(zwierz);
         MiesoZwierza(zwierz);
         if (zwierz == "ges" || zwierz == "kaczka" || zwierz == "swinia")
             Gracz.ProduktZ($"{zwierz}Smalec").Ilosc += 2;
