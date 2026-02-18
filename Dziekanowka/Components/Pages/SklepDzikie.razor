@@ -1,0 +1,52 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
+<div class="sklepDzikieWidok widok rel">
+    <div class="abs lMonetSklepDzikie">@Gracz.Monety</div>
+    <div class="abs sklepDzikieDoMiasto2"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)" class="wyroznionyGuzik"><img src="img/miasto/confirmSklepDzikie.png" /></button></div>
+    <div class="abs zwierzeSklepDrobiu krolikSklepDzikie @(Gracz.Zwierze("krolik").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("krolik")'>
+        <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoKrolikarnia.png" /><div>@Gracz.Zwierze("krolik").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/krolik.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("krolik").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+    <div class="abs zwierzeSklepDrobiu swiniaSklepDzikie @(Gracz.Zwierze("swinia").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("swinia")'>
+        <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoChlew.png" /><div>@Gracz.Zwierze("swinia").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekContain" src="img/zwierzyniec/swinia.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("swinia").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private System.Threading.Timer? timerSwini;
+    private Random random = new Random();
+    protected override void OnInitialized()
+    {
+        ChrumkanieSwini();
+    }
+    private void ChrumkanieSwini() => timerSwini = new System.Threading.Timer(async _ =>
+    { 
+        await dzwieki.GraDzwiek("mp3/Dzwieki/kwikSwini.mp3");
+        timerSwini?.Change(TimeSpan.FromSeconds(random.Next(5, 8)), Timeout.InfiniteTimeSpan);
+    }, null, TimeSpan.FromSeconds(4), Timeout.InfiniteTimeSpan);
+    private async Task Kup(string zwierz)
+    {
+        var zwierze = Gracz.Zwierze(zwierz);
+        if (Gracz.Monety >= zwierze.Cena)
+        {
+            Gracz.Monety -= zwierze.Cena;
+            zwierze.Ilosc += 1;
+            zwierze.Nakarmione = 0;
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+            if (zwierz == "swinia")
+                await dzwieki.GraDzwiek("mp3/Dzwieki/kwikSwini.mp3");
+        }
+    }
+    public void Dispose()
+    {
+        timerSwini?.Dispose();
+    }
+}

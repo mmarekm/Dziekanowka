@@ -39,6 +39,7 @@
         Kiosk,
         SzkolaIntro,
         SklepDrobiu,
+        SklepDzikie,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         CzyszczeniePola,

@@ -2,19 +2,17 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="kiosk@(Gracz.Statystyki.Kiosk)Widok widok rel">
-    <div class="abs lMonetKiosk@(Gracz.Statystyki.Kiosk)">@Gracz.Monety</div>
-    <div class="abs lBiletowKiosk@(Gracz.Statystyki.Kiosk)">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
+    <div class="abs lMonetKiosk lMonetKiosk@(Gracz.Statystyki.Kiosk)">@Gracz.Monety</div>
+    <div class="abs lBiletowKiosk lBiletowKiosk@(Gracz.Statystyki.Kiosk)">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
     <div class="abs kupBiletKiosk@(Gracz.Statystyki.Kiosk) @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet"><img src="img/miasto/kupWKiosk@(Gracz.Statystyki.Kiosk).png" /></div>
-    @if (Gracz.Statystyki.Kiosk == 1)
-    {
-        <div class="abs kioskDoMiasto1"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1)"><img src="img/miasto/confirmKiosk1.png" /></button></div>
-    }
+    <div class="abs kioskDoMiasto kioskDoMiasto@(Gracz.Statystyki.Kiosk)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/confirmKiosk@(Gracz.Statystyki.Kiosk).png" /></button></div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private int cenaBiletu => Gracz.Statystyki.Kiosk == 1 ? 2 : 0;
+    private EkranGry Wyjscie => Gracz.Statystyki.Kiosk switch { 1 => EkranGry.Miasto1, 2 => EkranGry.Miasto2, _ => throw new ArgumentOutOfRangeException() };
+    private int cenaBiletu => Gracz.Statystyki.Kiosk == 1 ? 2 : Gracz.Statystyki.Kiosk == 2 ? 3 : 0;
     private async Task KupBilet()
     {
         if (Gracz.Monety < cenaBiletu) return;

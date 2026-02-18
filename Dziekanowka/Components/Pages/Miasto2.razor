@@ -3,7 +3,10 @@
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
 <div class="miasto2Widok widok rel">
+    <div class="abs lBiletowMiasto1">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
     <div class="abs autobusAnimacjaM21 @klasaAutobusu" @onclick="WsiadzDoAutobusu1"><img class="obrazekWypelnia" src="img/miasto/autobus.png" /></div>
+    <div class="abs miasto2doSklepDzikich"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepDzikie)"><img src="img/miasto/miastoDoSklepDzikich.png" /></button></div>
+    <div class="abs miasto2DoKiosk"><button class="wyroznionyGuzik" @onclick="DoKiosku"><img src="img/miasto/miasto2DoKiosk.png" /></button></div>
 </div>
 
 @code {
@@ -38,10 +41,14 @@
     }
     public async Task WsiadzDoAutobusu1()
     {
-        //if (Gracz.Przedmiot("biletAutobus").Ilosc < 1 || !moznaWsiasc) return;
-        if (!moznaWsiasc) return; // na razie za darmo, bo nie ma jak kupić biletów
-        //Gracz.Przedmiot("biletAutobus").Ilosc--;
+        if (Gracz.Przedmiot("biletAutobus").Ilosc < 1 || !moznaWsiasc) return;
+        Gracz.Przedmiot("biletAutobus").Ilosc--;
         await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1);
+    }
+    public async Task DoKiosku()
+    {
+        Gracz.Statystyki.Kiosk = 2;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);
     }
     public void Dispose()
     {
