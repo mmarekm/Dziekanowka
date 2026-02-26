@@ -40,6 +40,7 @@
         SzkolaIntro,
         SklepDrobiu,
         SklepDzikie,
+        Sklepiczek,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         CzyszczeniePola,

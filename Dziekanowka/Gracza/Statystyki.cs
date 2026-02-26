@@ -11,5 +11,6 @@ namespace Dziekanowka.Gracza
         public EkranGry Ekran { get; set; } = EkranGry.Gospodarstwo;
         public string OtwarteOkno { get; set; } = "";
         public int Kiosk { get; set; } = 0;
+        public int Sklepiczek { get; set; } = 0;
     }
 }

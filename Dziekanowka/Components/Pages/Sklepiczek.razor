@@ -1,0 +1,54 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+
+<div class="sklepiczekWidok widok rel">
+    <div class="abs wyjscieSklepiczekGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)" class="wyroznionyGuzik"><img src='img/dom/potwierdzenie.png' /></button></div>
+    <div class="abs lMonetSklepiczek">@Gracz.Monety</div>
+    @foreach (var towar in towary)
+    {
+        <div class="abs towarSklepiczek @(towar)Sklepiczek @(Gracz.Monety < 2 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick='() => KupTowar(towar)'><div class="abs lTowaruSklepiczek">@Gracz.ZywnoscP(towar).Ilosc</div></div>
+    }
+    <div class="abs kupnoSiekierySklepiczek @(Gracz.Monety < 28 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupSiekiere"></div>
+    <div class="abs lSiekierSklepiczek">@Gracz.Przedmiot("siekiera").Ilosc</div>
+    <div class="abs upgSiekierySklepiczek @(Gracz.Monety < @Math.Pow(2, Gracz.Przedmioty.First(p => p.Nazwa == "siekiera").Poziom) ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="UpgSiekiery"></div>
+    <div class="abs cenaUpgSiekieraSklepiczek">@Math.Pow(2, Gracz.Przedmioty.First(p => p.Nazwa == "siekiera").Poziom)</div>
+    <div class="abs poziomSiekierySklepiczek">@Gracz.Przedmioty.First(p => p.Nazwa == "siekiera").Poziom</div>
+    <div class="abs przedmiotSklepiczek @(!Gracz.JestPrzedmiot(Gra.SklepiczekWymagane[Gracz.Statystyki.Sklepiczek]) ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="UzyskajPrzedmiot" @onmouseenter="() => pokazPodpowiedz = true" @onmouseleave="() => pokazPodpowiedz = false"><img src="img/przedmioty/sklepiczek/@(Gra.Sklepiczek[Gracz.Statystyki.Sklepiczek]).png" /></div>
+    <div class="abs podpowiedzSklepiczek @(pokazPodpowiedz ? "widocznySklepiczek" : "")"><img src="img/przedmioty/sklepiczek/@(Gra.SklepiczekWymagane[Gracz.Statystyki.Sklepiczek]).png" /></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool pokazPodpowiedz = false;
+    private string[] towary = ["oliwki", "sol", "olej", "czarnyPieprz", "majeranek", "oregano", "bazylia", "proszekDoPieczenia", "cynamon"];
+    private async Task KupTowar(string towar)
+    {
+        if (Gracz.Monety < 2) return;
+        Gracz.Monety -= 2;
+        Gracz.ZywnoscP(towar).Ilosc += towar == "oliwki" ? 1 : 3;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task KupSiekiere()
+    {
+        if (Gracz.Monety < 28) return;
+        Gracz.Monety -= 28;
+        Gracz.Przedmiot("siekiera").Ilosc += Gracz.Przedmioty.First(p => p.Nazwa == "siekiera").Poziom;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task UpgSiekiery()
+    {
+        if (Gracz.Monety < @Math.Pow(2, Gracz.Przedmioty.First(p => p.Nazwa == "siekiera").Poziom)) return;
+        Gracz.Monety -= (int)@Math.Pow(2, Gracz.Przedmioty.First(p => p.Nazwa == "siekiera").Poziom);
+        Gracz.Przedmioty.First(p => p.Nazwa == "siekiera").Poziom++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task UzyskajPrzedmiot()
+    {
+        if (!Gracz.JestPrzedmiot(Gra.SklepiczekWymagane[Gracz.Statystyki.Sklepiczek])) return;
+        Gracz.Przedmiot(Gra.Sklepiczek[Gracz.Statystyki.Sklepiczek]).Ilosc++;
+        Gracz.Statystyki.Sklepiczek++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

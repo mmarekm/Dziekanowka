@@ -61,6 +61,9 @@
 .sklepDzikieWidok {
     background-image: url('../img/miasto/sklepDzikieWidok.png');
 }
+.sklepiczekWidok {
+    background-image: url('../img/miasto/sklepiczekWidok.png');
+}
 .lMonetSklepDrobiu {
     bottom: 40px;
     left: 140px;
@@ -155,6 +158,156 @@
     width: 656px;
     height: 401px;
     z-index: 2;
+}
+.miasto2doSklepiczek {
+    top: 66px;
+    left: 524px;
+    width: 214px;
+    height: 154px;
+    z-index: 2;
+}
+.wyjscieSklepiczekGuzik {
+    top: 50px;
+    left: 90px;
+    width: 200px;
+    height: 200px;
+    z-index: 2;
+}
+.lMonetSklepiczek {
+    width: 400px;
+    height: 130px;
+    right: 30px;
+    top: 20px;
+    font-size: 100px;
+    padding: 15px;
+    border-radius: 20px;
+    background-color: sandybrown;
+    opacity: 0.4;
+}
+.towarSklepiczek {
+    width: 185px;
+    height: 185px;
+}
+.lTowaruSklepiczek {
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 50px;
+    font-size: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.oliwkiSklepiczek {
+    top: 240px;
+    left: 520px;
+}
+.solSklepiczek {
+    top: 240px;
+    left: 745px;
+}
+.olejSklepiczek {
+    top: 240px;
+    left: 963px;
+}
+.czarnyPieprzSklepiczek {
+    top: 463px;
+    left: 520px;
+}
+.majeranekSklepiczek {
+    top: 463px;
+    left: 745px;
+}
+.oreganoSklepiczek {
+    top: 463px;
+    left: 963px;
+}
+.bazyliaSklepiczek {
+    top: 695px;
+    left: 520px;
+}
+.cynamonSklepiczek {
+    top: 695px;
+    left: 745px;
+}
+.proszekDoPieczeniaSklepiczek {
+    top: 695px;
+    left: 963px;
+}
+.kupnoSiekierySklepiczek {
+    top: 540px;
+    left: 1255px;
+    width: 520px;
+    height: 340px;
+    z-index: 2
+}
+.lSiekierSklepiczek {
+    top: 700px;
+    left: 1500px;
+    width: 230px;
+    height: 101px;
+    font-size: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cenaUpgSiekieraSklepiczek {
+    top: 430px;
+    left: 1260px;
+    width: 120px;
+    height: 50px;
+    font-size: 49px;
+    color: brown;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.poziomSiekierySklepiczek {
+    top: 240px;
+    left: 1530px;
+    width: 200px;
+    height: 100px;
+    font-size: 99px;
+    font-weight: bold;
+    color: navy;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.upgSiekierySklepiczek {
+    top: 230px;
+    left: 1255px;
+    width: 520px;
+    height: 270px;
+    z-index: 2;
+}
+.przedmiotSklepiczek {
+    width: 290px;
+    height: 370px;
+    left: 100px;
+    top: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.podpowiedzSklepiczek {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    top: 300px;
+    left: 900px;
+    border: 5px solid red;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.widocznySklepiczek {
+    opacity: 1;
+    visibility: visible;
 }
 .miasto1DoKiosk {
     bottom: 63px;

@@ -40,10 +40,8 @@
 </div>
 
 @code {
-    [Parameter]
-    public Gracz Gracz { get; set; } = null!;
-    [Parameter]
-    public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private string masz = "masz";
     private string nieMasz = "nie masz";
     private int maxIloscButelek => (Gracz.PoziomBudynku("studnia") * 6 + 5) * 4;

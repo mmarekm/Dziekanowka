@@ -36,5 +36,7 @@ namespace Dziekanowka.Mechanizm
             throw new InvalidOperationException($"Nie znaleziono daru: {dar}");
         }
         public static IDar Przedmiot(this Gracz g, string przedmiot) => g.Przedmioty.First(p => p.Nazwa == przedmiot);
+        public static string[] Sklepiczek = ["kosc", ""];
+        public static string[] SklepiczekWymagane = ["zielonaKuleczka", ""];
     }
 }
