@@ -1,10 +1,112 @@
 ﻿.lasIntroWidok {
     background-image: url('../img/teren/las/lasIntroWidok.png');
 }
+.karczowiskoWidok {
+    background-image: url('../img/teren/las/lasKarczowiskoWidok.png');
+}
+.lasGrzybyWidok {
+    background-image: url('../img/teren/las/lasGrzybyWidok.png');
+}
+.lMonetLasIntro {
+    bottom: 13px;
+    left: 410px;
+    width: 90px;
+    height: 31px;
+    font-size: 30px;
+    text-align: center;
+}
 .lasDoZaBrama {
     bottom: 0;
     left: 830px;
     width: 382px;
     height: 117px;
+    z-index: 2;
+}
+.lasDoKarczowiska {
+    right: 72px;
+    bottom: 0;
+    width: 541px;
+    height: 460px;
+    z-index: 2;
+}
+.karczowiskoDoLas {
+    bottom: 0;
+    left: 0;
+    width: 272px;
+    height: 147px;
+    z-index: 2;
+}
+.lKarczowisko {
+    top: 100px;
+    width: 100px;
+    height: 30px;
+    font-size: 29px;
+    text-align: center;
+    color: red;
+}
+.lSiekierKarczowisko {
+    left: 900px;
+}
+.lDrewnaKarczowisko {
+    left: 655px;
+}
+.rabanieKarczowisko {
+    top: 500px;
+    left: 850px;
+    width: 350px;
+    height: 350px;
+}
+.karczowiskoDziupla {
+    top: 135px;
+    left: 1540px;
+    width: 54px;
+    height: 58px;
+}
+.lasNaGrzyby {
+    top: 360px;
+    left: 100px;
+    width: 500px;
+    height: 350px;
+}
+.grzybyLasAnuluj {
+    left: 0;
+    bottom: 0;
+    width: 200px;
+    height: 197px;
+    z-index: 2;
+}
+.grzybyDzialanie {
+    top: 50px;
+    left: 100px;
+    width: 1700px;
+    height: 900px;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease-in-out;
+}
+    .grzybyDzialanie.aktywne {
+        opacity: 1;
+        pointer-events: auto;
+    }
+.mapaGrzybow {
+    bottom: 0;
+    left: 351px;
+    width: 595px;
+    height: 747px;
+    z-index: 2;
+}
+.zgadywanieGrzybow {
+    top: 0;
+    right: 0;
+    width: 524px;
+    height: 679px;
+    z-index: 2;
+}
+.grzybyZgadywanieAnuluj {
+    bottom: 0;
+    left: 650px;
+    width: 395px;
+    height: 135px;
     z-index: 2;
 }

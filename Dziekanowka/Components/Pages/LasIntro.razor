@@ -1,9 +1,21 @@
 ﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
 <div class="lasIntroWidok widok rel">
     <div class="abs lasDoZaBrama"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama)" class="wyroznionyGuzik"><img src='img/teren/las/lasDoZaBrama.png' /></button></div>
+    <div class="abs lasDoKarczowiska"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasKarczowisko)" class="wyroznionyGuzik"><img src='img/teren/las/lasDoKarczowisko.png' /></button></div>
+    <!--<div class="abs lasNaGrzyby @(Gracz.Monety > 1 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="NaGrzyby"></div>-->
+    <div class="abs lMonetLasIntro">@Gracz.Monety</div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private async Task NaGrzyby()
+    {
+        if (Gracz.Monety < 2) return;
+        Gracz.Monety -= 2;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LasGrzyby);
+    }
 }

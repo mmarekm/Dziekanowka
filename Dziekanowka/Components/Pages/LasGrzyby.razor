@@ -1,0 +1,52 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="lasGrzybyWidok widok rel">
+    <div class="abs grzybyLasAnuluj"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)" disabled="@(widocznaMapa || widoczneZgadywanie)"><img src="img/teren/las/anulujGrzyby.png" /></button></div>
+    <div class="abs mapaGrzybow"><button class="wyroznionyGuzik" @onclick="() => widocznaMapa = true" disabled="@(widocznaMapa || widoczneZgadywanie)"><img src="img/teren/las/mapaGrzybow.png" /></button></div>
+    <div class="abs zgadywanieGrzybow"><button class="wyroznionyGuzik" @onclick="() => widoczneZgadywanie = true" disabled="@(widocznaMapa || widoczneZgadywanie)"><img src="img/teren/las/szukacGrzybow.png" /></button></div>
+</div>
+<div class="abs grzybyDzialanie @(widocznaMapa || widoczneZgadywanie ? "aktywne" : "") @(widocznaMapa ? "cPoint" : "")" style="background-image: url('img/teren/las/tlo@(widocznaMapa ? "Mapy" : "Zgadywania").png');" @onclick="@(widoczneZgadywanie ? null! : ZamknijMape)">
+    @if (widocznaMapa)
+    {
+        
+    }
+    @if (widoczneZgadywanie)
+    {
+        <div class="abs grzybyZgadywanieAnuluj"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)"><img src="img/teren/las/anulujZgadywanie.png" /></button></div>
+        @for (int i = 1; i < 8; i++)
+        {
+            int toI = i;
+            <div class="abs zgadywanieGrzybow@(toI)"><button class="wyroznionyGuzik"><img src="img/teren/las/wybrana@(toI)droga.png"/></button></div>
+        }
+    }
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int[] doPieczarki = [0, 0, 0, 0, 0, 0, 0];
+    private int[] doRydza = [0, 0, 0, 0, 0, 0, 0];
+    private int[] doPodgrzybka = [0, 0, 0, 0, 0, 0, 0];
+    private int[] doBorowika = [0, 0, 0, 0, 0, 0, 0];
+    private int[] doKurki = [0, 0, 0, 0, 0, 0, 0];
+    private bool widocznaMapa = false;
+    private bool widoczneZgadywanie = false;
+    private int wykonanyKrok = 0;
+    protected override void OnInitialized()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            doPieczarki[i] = Random.Shared.Next(1, 8);
+            doRydza[i] = Random.Shared.Next(1, 8);
+            doPodgrzybka[i] = Random.Shared.Next(1, 8);
+            doBorowika[i] = Random.Shared.Next(1, 8);
+            doKurki[i] = Random.Shared.Next(1, 8);
+        }
+    }
+    private void ZamknijMape()
+    {
+        if (widoczneZgadywanie) return;
+        widocznaMapa = false;
+    }
+}

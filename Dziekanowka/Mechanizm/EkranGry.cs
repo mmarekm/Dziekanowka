@@ -23,6 +23,8 @@
         Stajnia,
         ZaBrama,
         LasIntro,
+        LasKarczowisko,
+        LasGrzyby,
         GarazGospodarczy,
         Studnia,
         Sklepik,

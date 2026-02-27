@@ -71,6 +71,7 @@ else
             EkranGry.PsySasiadaSzczekaja or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu => EkranGry.ZaBrama,
             EkranGry.KoszenieTrawy => EkranGry.GarazGospodarczy,
             EkranGry.PtaszkiZjedza => EkranGry.DomKuchnia,
+            EkranGry.LasGrzyby => EkranGry.LasIntro,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);
@@ -139,6 +140,7 @@ else
             EkranGry.PsySasiadaSzczekaja or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu => EkranGry.ZaBrama,
             EkranGry.KoszenieTrawy => EkranGry.GarazGospodarczy,
             EkranGry.PtaszkiZjedza => EkranGry.DomKuchnia,
+            EkranGry.LasGrzyby => EkranGry.LasIntro,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);

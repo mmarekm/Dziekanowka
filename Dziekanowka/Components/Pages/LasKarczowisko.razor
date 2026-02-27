@@ -1,0 +1,46 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+<div class="karczowiskoWidok widok rel">
+    <div class="abs karczowiskoDoLas"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)"><img src="img/teren/las/karczowiskoDoLasu.png" /></button></div>
+    <div class="abs karczowiskoDziupla @(Gracz.Statystyki.MoznaSianoZKarczowiska ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Siano"><img class="obrazekSieMiesci" src="img/teren/las/dziupla.png" /></div>
+    <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/przedmioty/siano.png" /></div>
+    <div class="abs lKarczowisko lSiekierKarczowisko">@Gracz.Przedmiot("siekiera").Ilosc</div>
+    <div class="abs lKarczowisko lDrewnaKarczowisko">@Gracz.Przedmiot("drewno").Ilosc</div>
+    <div class="abs rabanieKarczowisko @(Gracz.JestPrzedmiot("siekiera") ? "klikalneDivZielone" : "nieMoznaKliknac" )" @onclick="Rabanie"></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private async Task Rabanie()
+    {
+        if (!Gracz.JestPrzedmiot("siekiera")) return;
+        Gracz.Przedmiot("siekiera").Ilosc--;
+        Gracz.Przedmiot("drewno").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await dzwieki.GraDzwiek("mp3/Dzwieki/siekiera.mp3");
+    }
+    private async Task Siano()
+    {
+        if (!Gracz.Statystyki.MoznaSianoZKarczowiska) return;
+        Gracz.Przedmiot("siano").Ilosc++;
+        Gracz.Statystyki.MoznaSianoZKarczowiska = false;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Powitaj = true;
+        Znikanie = false;
+        StateHasChanged();
+        await Task.Delay(100);
+        Znikanie = true;
+        StateHasChanged();
+        await dzwieki.GraDzwiek("mp3/Dzwieki/fanfaraKrotka.mp3");
+        await Task.Delay(4000);
+        Powitaj = false;
+        Znikanie = false;
+        StateHasChanged();
+    }
+}
