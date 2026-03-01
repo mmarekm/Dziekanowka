@@ -2,14 +2,98 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="lasGrzybyWidok widok rel">
+    @foreach (var grzyb in grzyby)
+    {
+        <div class="abs lGrzybowLas l@(grzyb)Las">@Gracz.Grzyb(grzyb).Ilosc</div>
+    }
     <div class="abs grzybyLasAnuluj"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)" disabled="@(widocznaMapa || widoczneZgadywanie)"><img src="img/teren/las/anulujGrzyby.png" /></button></div>
     <div class="abs mapaGrzybow"><button class="wyroznionyGuzik" @onclick="() => widocznaMapa = true" disabled="@(widocznaMapa || widoczneZgadywanie)"><img src="img/teren/las/mapaGrzybow.png" /></button></div>
     <div class="abs zgadywanieGrzybow"><button class="wyroznionyGuzik" @onclick="() => widoczneZgadywanie = true" disabled="@(widocznaMapa || widoczneZgadywanie)"><img src="img/teren/las/szukacGrzybow.png" /></button></div>
 </div>
-<div class="abs grzybyDzialanie @(widocznaMapa || widoczneZgadywanie ? "aktywne" : "") @(widocznaMapa ? "cPoint" : "")" style="background-image: url('img/teren/las/tlo@(widocznaMapa ? "Mapy" : "Zgadywania").png');" @onclick="@(widoczneZgadywanie ? null! : ZamknijMape)">
+<div class="abs grzybyDzialanie @(widocznaMapa || widoczneZgadywanie ? "aktywne" : "") @(widocznaMapa ? "cPoint" : "") @(widocznaMapa ? "cPoint" : "") @(pokazMigniecie ? "migniecie" : "")" style="background-image: url('img/teren/las/tlo@(widocznaMapa ? "Mapy" : "Zgadywania").png');" @onclick="@(widoczneZgadywanie ? null! : ZamknijMape)">
+    @if (pokazMigniecie)
+    {
+        <div class="overlayMigniecie"></div>
+    }
     @if (widocznaMapa)
     {
-        
+        var posortowane = SciezkiPosortowane();
+        var poziomy = new List<List<(double x, List<KeyValuePair<string, int[]>> grzyby)>>();
+        poziomy.Add(new List<(double, List<KeyValuePair<string, int[]>>)> { (850.0, posortowane.ToList()) });
+        for (int nrPoziom = 1; nrPoziom <= 7; nrPoziom++)
+        {
+            var nowePlatformy = new List<(double x, List<KeyValuePair<string, int[]>> grzyby)>();
+            foreach (var platforma in poziomy[nrPoziom - 1])
+            {
+                var podgrupy = platforma.grzyby.GroupBy(kv => kv.Value[nrPoziom - 1]).OrderBy(g => g.Key).ToList();
+                foreach (var podgrupa in podgrupy)
+                {
+                    nowePlatformy.Add((0.0, podgrupa.ToList()));
+                }
+            }
+            int ilosc = nowePlatformy.Count;
+            double calkowitaSzerokosc = 260 * ilosc + 50 * (ilosc - 1);
+            double poczatekX = (1700 - calkowitaSzerokosc) / 2;
+            for (int i = 0; i < ilosc; i++)
+            {
+                double xSrodka = poczatekX + 130 + i * 310;
+                nowePlatformy[i] = (xSrodka, nowePlatformy[i].grzyby);
+            }
+            poziomy.Add(nowePlatformy);
+        }
+        <svg width="1700" height="900">
+            <line x1="100" y1="880" x2="1600" y2="880" stroke="black" stroke-width="4" />
+            @for (int i = 1; i <= 7; i++)
+            {
+                double xStart = i * 200 + 100;
+                double xKoniec = xStart + (i - 4) * 15;
+                <line x1="@xStart" y1="880" x2="@xKoniec" y2="845" stroke="black" stroke-width="2" />
+            }
+            @for (int nrPoziom = 2; nrPoziom <= 8; nrPoziom++)
+            {
+                double y = 880 - ((nrPoziom - 1) * 100);
+                double yPrzed = y + 100;
+                double ySrodek = y + 65;
+                var platformy = poziomy[nrPoziom - 1];
+                var platformyPrzed = poziomy[nrPoziom - 2];
+                @foreach (var platforma in platformy)
+                {
+                    double szerokosc = nrPoziom == 2 ? 260 : 260;
+                    <line x1="@(platforma.x - 130)" y1="@y" x2="@(platforma.x + 130)" y2="@y" stroke="black" stroke-width="4" />
+                }
+                @foreach (var platforma in platformy)
+                {
+                    var grzyb = platforma.grzyby.First();
+                    var platformaRodzic = platformyPrzed.First(p => p.grzyby.Any(g => g.Key == grzyb.Key));
+                    int cyfra = grzyb.Value[nrPoziom - 2];
+                    double xPoczatekRodzica = nrPoziom == 2 ? cyfra * 200 + 100 : platformaRodzic.x - 130;
+                    double mnoznik = nrPoziom == 2 ? 15 : 2;
+                    double odstepRodzic = nrPoziom == 2 ? 0 : 35;
+                    double xKoniecOdnogi = nrPoziom == 2 ? xPoczatekRodzica + (cyfra - 4) * mnoznik : xPoczatekRodzica + (cyfra * odstepRodzic) + (cyfra - 4) * mnoznik;
+                    <line x1="@xKoniecOdnogi" y1="@ySrodek" x2="@platforma.x" y2="@y" stroke="black" stroke-width="2" />
+                }
+                @if (nrPoziom < 8)
+                {
+                    @foreach (var platforma in platformy)
+                    {
+                        double xPoczatek = platforma.x - 130;
+                        @for (int i = 1; i <= 7; i++)
+                        {
+                            double xStart = xPoczatek + (i * 35);
+                            double xKoniec = xStart + (i - 4) * 2;
+                            <line x1="@xStart" y1="@y" x2="@xKoniec" y2="@(y - 35)" stroke="black" stroke-width="2" />
+                        }
+                    }
+                }
+            }
+            @foreach (var platforma in poziomy[7])
+            {
+                @foreach (var grzyb in platforma.grzyby)
+                {
+                    <image href="img/dom/kuchnia/@(grzyb.Key).png" x="@(platforma.x - 60)" y="20" width="120" height="120" />
+                }
+            }
+        </svg>
     }
     @if (widoczneZgadywanie)
     {
@@ -17,7 +101,7 @@
         @for (int i = 1; i < 8; i++)
         {
             int toI = i;
-            <div class="abs zgadywanieGrzybow@(toI)"><button class="wyroznionyGuzik"><img src="img/teren/las/wybrana@(toI)droga.png"/></button></div>
+            <div class="abs zgadywanieGrzybow@(toI)"><button class="wyroznionyGuzik" @onclick="async () => await WybranaDroga(toI)"><img src="img/teren/las/wybrana@(toI)droga.png"/></button></div>
         }
     }
 </div>
@@ -25,28 +109,50 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private int[] doPieczarki = [0, 0, 0, 0, 0, 0, 0];
-    private int[] doRydza = [0, 0, 0, 0, 0, 0, 0];
-    private int[] doPodgrzybka = [0, 0, 0, 0, 0, 0, 0];
-    private int[] doBorowika = [0, 0, 0, 0, 0, 0, 0];
-    private int[] doKurki = [0, 0, 0, 0, 0, 0, 0];
+    private Dictionary<string, int[]> sciezkiGrzybow = new();
+    private string[] grzyby = ["pieczarka", "rydz", "podgrzybek", "borowik", "kurka"];
+    private int[] drogaGracza = [0, 0, 0, 0, 0, 0, 0];
     private bool widocznaMapa = false;
     private bool widoczneZgadywanie = false;
     private int wykonanyKrok = 0;
+    private bool pokazMigniecie = false;
     protected override void OnInitialized()
     {
-        for (int i = 0; i < 7; i++)
-        {
-            doPieczarki[i] = Random.Shared.Next(1, 8);
-            doRydza[i] = Random.Shared.Next(1, 8);
-            doPodgrzybka[i] = Random.Shared.Next(1, 8);
-            doBorowika[i] = Random.Shared.Next(1, 8);
-            doKurki[i] = Random.Shared.Next(1, 8);
-        }
+        sciezkiGrzybow["pieczarka"] = GenerujSciezke();
+        sciezkiGrzybow["rydz"] = GenerujSciezke();
+        sciezkiGrzybow["podgrzybek"] = GenerujSciezke();
+        sciezkiGrzybow["borowik"] = GenerujSciezke();
+        sciezkiGrzybow["kurka"] = GenerujSciezke();
     }
+    private int[] GenerujSciezke() => Enumerable.Range(0, 7).Select(_ => Random.Shared.Next(1, 8)).ToArray();
+    private static int PorownajTablice(int[] a, int[] b) => a.Zip(b, (x, y) => x.CompareTo(y)).FirstOrDefault(d => d != 0, 0);
+    private List<KeyValuePair<string, int[]>> SciezkiPosortowane() => sciezkiGrzybow.OrderBy(kv => kv.Value, Comparer<int[]>.Create(PorownajTablice)).ToList();
     private void ZamknijMape()
     {
         if (widoczneZgadywanie) return;
         widocznaMapa = false;
+    }
+    private async Task WybranaDroga(int droga)
+    {
+        pokazMigniecie = true;
+        StateHasChanged();
+
+        await Task.Delay(300); // czas mignięcia
+
+        pokazMigniecie = false;
+        StateHasChanged();
+
+        drogaGracza[wykonanyKrok] = droga;
+        wykonanyKrok++;
+
+        if (wykonanyKrok == 7)
+        {
+            foreach (var grzyb in grzyby)
+                if (drogaGracza.SequenceEqual(sciezkiGrzybow[grzyb]))
+                    Gracz.Grzyb(grzyb).Ilosc += 3;
+
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+            await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro);
+        }
     }
 }
