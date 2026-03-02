@@ -136,15 +136,11 @@
     {
         pokazMigniecie = true;
         StateHasChanged();
-
-        await Task.Delay(300); // czas mignięcia
-
+        await Task.Delay(300);
         pokazMigniecie = false;
         StateHasChanged();
-
         drogaGracza[wykonanyKrok] = droga;
         wykonanyKrok++;
-
         if (wykonanyKrok == 7)
         {
             foreach (var grzyb in grzyby)

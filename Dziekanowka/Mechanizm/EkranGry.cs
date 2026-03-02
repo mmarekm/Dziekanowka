@@ -45,6 +45,7 @@
         Sklepiczek,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
+        AutobusJedzie,
         CzyszczeniePola,
         CzyszczenieDrzewa,
         KoszenieTrawy,

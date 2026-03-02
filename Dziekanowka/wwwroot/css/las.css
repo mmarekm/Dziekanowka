@@ -189,19 +189,16 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background-color: lime;
+    background-color: forestgreen;
     animation: migniecieAnim 0.3s ease-in-out;
 }
-
 @keyframes migniecieAnim {
     0% {
         opacity: 0;
     }
-
     50% {
         opacity: 0.8;
     }
-
     100% {
         opacity: 0;
     }
