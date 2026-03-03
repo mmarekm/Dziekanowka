@@ -220,6 +220,19 @@
     left: 100px;
     width: 1700px;
     height: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px 220px;
+    align-content: center;
+    justify-content: center;
+    background-color: rgba(0, 105, 148, 0.8);
+    z-index: 3;
+}
+.losowanaRyba {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    cursor: pointer;
 }
 @keyframes migniecieAnim {
     0% {
