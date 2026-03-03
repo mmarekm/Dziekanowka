@@ -44,7 +44,7 @@
     {
         if (Gracz.Przedmiot("biletAutobus").Ilosc < 1 || !moznaWsiasc) return;
         Gracz.Przedmiot("biletAutobus").Ilosc--;
-        await NaZmianeEkranu.InvokeAsync(EkranGry.AutobusJedzie);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.AutobusJedzie21);
         await Task.Delay(8000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1);
     }

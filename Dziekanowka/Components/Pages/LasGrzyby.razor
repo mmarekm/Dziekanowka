@@ -134,6 +134,7 @@
     }
     private async Task WybranaDroga(int droga)
     {
+        bool znaleziono = false;
         pokazMigniecie = true;
         StateHasChanged();
         await Task.Delay(300);
@@ -145,9 +146,16 @@
         {
             foreach (var grzyb in grzyby)
                 if (drogaGracza.SequenceEqual(sciezkiGrzybow[grzyb]))
+                {
                     Gracz.Grzyb(grzyb).Ilosc += 3;
-
+                    znaleziono = true;
+                }
             await ladowanieGracza.ZapiszAktualnegoGracza();
+            if (znaleziono)
+            {
+                await NaZmianeEkranu.InvokeAsync(EkranGry.GrzybyZnalezione);
+                await Task.Delay(3100);
+            }
             await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro);
         }
     }

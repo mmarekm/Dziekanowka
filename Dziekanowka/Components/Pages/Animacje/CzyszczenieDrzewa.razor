@@ -1,21 +1,8 @@
-﻿@if (tlo != "Palmy")
-{
-    <div class="videoAnimacjaKontener">
-        <video autoplay muted playsinline class="videoAnimacjaPelnyEkran">
-            <source src="video/sekator@(tlo).mp4" type="video/mp4" />
-        </video>
-    </div>
-}
-else
-{
-    <div class="czyszczenieDrzewaWidok widok rel" style="background-image: url('../img/pole/czyszczenie@(tlo).png');">
-        <div class="abs sekatorDziala">
-            <div class="sekator"></div>
-            <div class="sekator-gora"></div>
-            <div class="sekator-dol"></div>
-        </div>
-    </div>
-}
+﻿<div class="videoAnimacjaKontener">
+    <video autoplay muted playsinline class="videoAnimacjaPelnyEkran">
+        <source src="video/sekator@(tlo).mp4" type="video/mp4" />
+    </video>
+</div>
 
 @code {
     private string tlo => Sad2.Palma ? "Palmy" : Sad2.Krzew ? "Krzewu" : Sad2.Pnacze ? "Pnacza" : Sad2.Ziemne ? "Ziemnych" : "Drzewa";
