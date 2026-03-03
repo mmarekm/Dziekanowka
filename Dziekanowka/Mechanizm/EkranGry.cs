@@ -26,6 +26,7 @@
         LasKarczowisko,
         LasGrzyby,
         GrzybyZnalezione,
+        LasJezioro,
         GarazGospodarczy,
         Studnia,
         Sklepik,

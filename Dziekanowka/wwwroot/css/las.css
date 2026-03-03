@@ -7,6 +7,9 @@
 .lasGrzybyWidok {
     background-image: url('../img/teren/las/lasGrzybyWidok.png');
 }
+.lasJezioroWidok {
+    background-image: url('../img/teren/las/lasJezioroWidok.png');
+}
 .lMonetLasIntro {
     bottom: 13px;
     left: 410px;
@@ -192,13 +195,41 @@
     background-color: forestgreen;
     animation: migniecieAnim 0.3s ease-in-out;
 }
+.lasDoJeziora {
+    top: 0;
+    left: 238px;
+    width: 379px;
+    height: 197px;
+    z-index: 2;
+}
+.jezioroDoLas {
+    bottom: 0;
+    right: 0;
+    width: 697px;
+    height: 249px;
+    z-index: 2;
+}
+.jezioroNaRyby {
+    top: 250px;
+    left: 200px;
+    width: 800px;
+    height: 700px;
+}
+.jezioroLowienie {
+    top: 50px;
+    left: 100px;
+    width: 1700px;
+    height: 900px;
+}
 @keyframes migniecieAnim {
     0% {
         opacity: 0;
     }
+
     50% {
         opacity: 0.8;
     }
+
     100% {
         opacity: 0;
     }
