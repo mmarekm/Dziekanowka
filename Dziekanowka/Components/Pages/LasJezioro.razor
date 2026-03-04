@@ -3,13 +3,19 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="lasJezioroWidok widok rel">
     <div class="abs jezioroDoLas"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)" class="wyroznionyGuzik" disabled="@(lowienie)"><img src='img/teren/las/jezioroDoLas.png' /></button></div>
-    <!--<div class="abs jezioroNaRyby @(Gracz.Monety > 1 && !lowienie ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="NaRyby"></div>-->
+    <div class="abs jezioroNaRyby @(Gracz.Monety > 1 && !lowienie ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="NaRyby"></div>
+    @foreach (var ryba in ryby)
+    {
+        <div class="abs lRybJezioro l@(ryba)Jezioro">@Gracz.Ryba(ryba).Ilosc</div>
+    }
+    <div class="abs lMonetLasJezioro">@Gracz.Monety</div>
     @if (lowienie)
     {
         <div class="abs jezioroLowienie">
-            @foreach (var ryba in wylosowaneRyby)
+            @for (int i = 0; i < wylosowaneRyby.Count(); i++)
             {
-                <div class="losowanaRyba"><img class="obrazekContain" src="img/przedmioty/ryby/@(ryba).png"/></div>
+                int toI = i;
+                <div class="losowanaRyba @(odwracaneKarty.Contains(toI) ? "odwracana" : "" )" @onclick="async () => await WybierzKarte(toI)"><img class="obrazekContain" src="img/@(SciezkaKarty(wylosowaneRyby[toI], zaznaczoneKarty.GetValueOrDefault(toI, false))).png" /></div>
             }
         </div>   
     }
@@ -19,10 +25,14 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool lowienie = false;
+    private bool ukazanieKart = false;
     private string[] ryby = ["losos", "pstrag", "halibut", "okon", "sledz"];
     private string[] wylosowaneRyby = [];
+    private Dictionary<int, bool> zaznaczoneKarty = [];
+    private string SciezkaKarty(string ryba, bool zaznaczona) => ukazanieKart ? $"przedmioty/ryby/{ryba}" : zaznaczona ? "teren/las/kartaRybaWybrana" : "teren/las/kartaRyba";
     private void LosujRyby()
     {
+        zaznaczoneKarty = [];
         var lista = ryby.SelectMany(r => Enumerable.Repeat(r, 5)).ToArray();
         for (int i = lista.Length - 1; i > 0; i--)
         {
@@ -38,5 +48,46 @@
         await ladowanieGracza.ZapiszAktualnegoGracza();
         LosujRyby();
         lowienie = true;
+        ukazanieKart = false;
+        StateHasChanged();
+        await Task.Delay(500);
+        ukazanieKart = true;
+        StateHasChanged();
+        await Task.Delay(2000);
+        ukazanieKart = false;
+        StateHasChanged();
+    }
+    private HashSet<int> odwracaneKarty = [];
+    private async Task WybierzKarte(int indeks)
+    {
+        if (ukazanieKart) return;
+        odwracaneKarty.Add(indeks);
+        StateHasChanged();
+        await Task.Delay(300);
+        if (zaznaczoneKarty.ContainsKey(indeks))
+            zaznaczoneKarty[indeks] = !zaznaczoneKarty[indeks];
+        else
+            zaznaczoneKarty[indeks] = true;
+        odwracaneKarty.Remove(indeks);
+        StateHasChanged();
+            if (zaznaczoneKarty.Count(k => k.Value) == 5)
+        {
+            var zaznaczone = zaznaczoneKarty.Where(k => k.Value).Select(k => wylosowaneRyby[k.Key]).ToList();
+            bool zlowiono = false;
+            if (zaznaczone.Distinct().Count() == 1)
+            {
+                string ryba = zaznaczone.First();
+                Gracz.Ryba(ryba).Ilosc++;
+                await ladowanieGracza.ZapiszAktualnegoGracza();
+                zlowiono = true;
+            }
+            lowienie = false;
+            if (zlowiono)
+            {
+                await NaZmianeEkranu.InvokeAsync(EkranGry.RybaZlowiona);
+                await Task.Delay(3100);
+                await NaZmianeEkranu.InvokeAsync(EkranGry.LasJezioro);
+            }
+        }
     }
 }

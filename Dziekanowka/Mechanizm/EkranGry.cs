@@ -27,6 +27,7 @@
         LasGrzyby,
         GrzybyZnalezione,
         LasJezioro,
+        RybaZlowiona,
         GarazGospodarczy,
         Studnia,
         Sklepik,

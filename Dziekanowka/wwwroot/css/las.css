@@ -216,6 +216,7 @@
     height: 700px;
 }
 .jezioroLowienie {
+    perspective: 600px;
     top: 50px;
     left: 100px;
     width: 1700px;
@@ -233,6 +234,46 @@
     height: 150px;
     flex-shrink: 0;
     cursor: pointer;
+}
+.lRybJezioro {
+    top: 90px;
+    width: 100px;
+    height: 60px;
+    font-size: 59px;
+    text-align: center;
+    color: yellow;
+}
+.llososJezioro {
+    left: 30px;
+}
+.lpstragJezioro {
+    left: 210px;
+}
+.lhalibutJezioro {
+    left: 390px;
+}
+.lokonJezioro {
+    left: 540px;
+}
+.lsledzJezioro {
+    left: 690px;
+}
+.lMonetLasJezioro {
+    color: wheat;
+    bottom: 35px;
+    left: 60px;
+    width: 90px;
+    height: 31px;
+    font-size: 30px;
+    text-align: center;
+}
+.losowanaRyba img {
+    transition: transform 0.15s ease;
+    backface-visibility: hidden;
+}
+
+.losowanaRyba.odwracana img {
+    transform: rotateY(90deg);
 }
 @keyframes migniecieAnim {
     0% {

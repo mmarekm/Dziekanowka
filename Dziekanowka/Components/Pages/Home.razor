@@ -31,7 +31,7 @@ else
     private EkranGry nastepnyEkran;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
     private bool pokazWideo = false;
-    private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa, EkranGry.GrzybyZnalezione,
+    private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa, EkranGry.GrzybyZnalezione, EkranGry.RybaZlowiona,
         EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21 ];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
@@ -73,6 +73,7 @@ else
             EkranGry.PtaszkiZjedza => EkranGry.DomKuchnia,
             EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
             EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
+            EkranGry.RybaZlowiona => EkranGry.LasJezioro,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);
@@ -105,7 +106,7 @@ else
             EkranGry.Garaz or EkranGry.GarazGospodarczy => "mp3/Tla/garazgospodarczy.mp3",
             EkranGry.LasIntro => "mp3/Tla/las.mp3",
             EkranGry.SzkolaIntro => "mp3/Tla/szkola.mp3",
-            EkranGry.GrzybyZnalezione => "mp3/Dzwieki/fanfaraKrotka.mp3",
+            EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona => "mp3/Dzwieki/fanfaraKrotka.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
             _ => $"mp3/Tla/{ekran.ToString().ToLower()}.mp3"
         };
@@ -144,6 +145,7 @@ else
             EkranGry.PtaszkiZjedza => EkranGry.DomKuchnia,
             EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
             EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
+            EkranGry.RybaZlowiona => EkranGry.LasJezioro,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);
