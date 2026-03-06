@@ -11,8 +11,8 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private EkranGry Wyjscie => Gracz.Statystyki.Kiosk switch { 1 => EkranGry.Miasto1, 2 => EkranGry.Miasto2, _ => throw new ArgumentOutOfRangeException() };
-    private int cenaBiletu => Gracz.Statystyki.Kiosk == 1 ? 2 : Gracz.Statystyki.Kiosk == 2 ? 3 : 0;
+    private EkranGry Wyjscie => Gracz.Statystyki.Kiosk switch { 1 => EkranGry.Miasto1, 2 => EkranGry.Miasto2, 3 => EkranGry.Miasto3, _ => throw new ArgumentOutOfRangeException() };
+    private int cenaBiletu => Gracz.Statystyki.Kiosk == 1 ? 2 : Gracz.Statystyki.Kiosk == 2 ? 3 : Gracz.Statystyki.Kiosk == 3 ? 5 : 0;
     private async Task KupBilet()
     {
         if (Gracz.Monety < cenaBiletu) return;

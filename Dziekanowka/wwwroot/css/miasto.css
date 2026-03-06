@@ -4,9 +4,22 @@
 .miasto2Widok {
     background-image: url('../img/teren/miasto2.png');
 }
+.miasto3Widok {
+    background-image: url('../img/teren/miasto3.png');
+    overflow: hidden;
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
+    color: yellow;
+    font-size: 46px;
+    width: 70px;
+    height: 47px;
+    text-align: center;
+}
+.lBiletowMiasto3 {
+    left: 110px;
+    bottom: 20px;
     color: yellow;
     font-size: 46px;
     width: 70px;
@@ -424,6 +437,44 @@
     transform: scaleX(-1);
     transition: left 1s ease, top 1s ease;
 }
+.autobusAnimacjaM3 {
+    left: 2050px;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    cursor: default;
+    pointer-events: none;
+}
+.autobusUkrytyM3 {
+    opacity: 0;
+    left: 2050px;
+    top: 0;
+    pointer-events: none;
+    transition: none;
+}
+.autobusJedzieM3 {
+    opacity: 1;
+    left: 1400px;
+    top: 190px;
+    pointer-events: none;
+    transition: left 1s ease, top 1s ease;
+}
+.autobusStoiM3 {
+    opacity: 1;
+    left: 1400px;
+    top: 190px;
+    pointer-events: all;
+    cursor: pointer;
+    transition: none;
+}
+.autobusOdjedzieM3 {
+    opacity: 1;
+    left: 2050px;
+    top: 0;
+    pointer-events: none;
+    transform: scaleX(-1);
+    transition: left 1s ease, top 1s ease;
+}
 .autobusAnimacjaM21 {
     right: 0;
     bottom: 0;
@@ -431,12 +482,19 @@
     height: 270px;
     pointer-events: none;
 }
-.autobusUkrytyM21 {
+.autobusAnimacjaM22 {
+    left: 0;
+    bottom: 0;
+    width: 270px;
+    height: 270px;
+    pointer-events: none;
+}
+.autobusUkrytyM21, .autobusUkrytyM22 {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
-.autobusStoiM21 {
+.autobusStoiM21, .autobusStoiM22 {
     opacity: 1;
     pointer-events: all;
     cursor: pointer;
