@@ -68,6 +68,13 @@
     height: 322px;
     z-index: 2;
 }
+.miasto3doSklepBydlo {
+    top: 288px;
+    left: 0;
+    width: 657px;
+    height: 334px;
+    z-index: 2;
+}
 .sklepDrobiuWidok {
     background-image: url('../img/miasto/sklepDrobiuWidok.png');
 }
@@ -76,6 +83,9 @@
 }
 .sklepiczekWidok {
     background-image: url('../img/miasto/sklepiczekWidok.png');
+}
+.sklepBydloWidok {
+    background-image: url('../img/miasto/sklepBydloWidok.png');
 }
 .lMonetSklepDrobiu {
     bottom: 40px;
@@ -94,11 +104,26 @@
     text-align: center;
     font-size: 69px;
 }
+.lMonetSklepBydlo {
+    bottom: 25px;
+    left: 970px;
+    width: 210px;
+    height: 70px;
+    text-align: center;
+    font-size: 69px;
+}
 .sklepDrobiuDoMiasto1 {
     bottom: 0;
     right: 0;
     width: 305px;
     height: 169px;
+    z-index: 2;
+}
+.sklepBydloDoMiasto3 {
+    bottom: 0;
+    left: 0;
+    width: 165px;
+    height: 108px;
     z-index: 2;
 }
 .sklepDzikieDoMiasto2 {
@@ -111,6 +136,22 @@
 .zwierzeSklepDrobiu {
     width: 188px;
     height: 250px;
+}
+.owcaSklepBydlo {
+    top: 20px;
+    left: 15px;
+}
+.kozaSklepBydlo {
+    top: 20px;
+    left: 220px;
+}
+.krowaSklepBydlo {
+    top: 300px;
+    left: 15px;
+}
+.alpakaSklepBydlo {
+    top: 300px;
+    left: 220px;
 }
 .kuraSklepDrobiu {
     top: 250px;

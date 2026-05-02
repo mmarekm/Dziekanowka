@@ -1,0 +1,62 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+@implements IDisposable
+<div class="sklepBydloWidok widok rel">
+    <div class="abs lMonetSklepBydlo">@Gracz.Monety</div>
+    <div class="abs sklepBydloDoMiasto3"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto3)" class="wyroznionyGuzik"><img src="img/miasto/confirmSklepBydlo.png" /></button></div>
+    <div class="abs zwierzeSklepDrobiu owcaSklepBydlo @(Gracz.Zwierze("owca").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("owca")'>
+        <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoOwczarnia.png" /><div>@Gracz.Zwierze("owca").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/owca.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("owca").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+    <div class="abs zwierzeSklepDrobiu kozaSklepBydlo @(Gracz.Zwierze("koza").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("koza")'>
+        <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoOwczarnia.png" /><div>@Gracz.Zwierze("koza").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/koza.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("koza").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+    <div class="abs zwierzeSklepDrobiu krowaSklepBydlo @(Gracz.Zwierze("krowa").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("krowa")'>
+        <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoOwczarnia.png" /><div>@Gracz.Zwierze("krowa").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/krowa.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("krowa").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+    <div class="abs zwierzeSklepDrobiu alpakaSklepBydlo @(Gracz.Zwierze("alpaka").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("alpaka")'>
+        <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoOwczarnia.png" /><div>@Gracz.Zwierze("alpaka").Ilosc</div></div>
+        <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/alpaka.png" /></div>
+        <div class="abs cenaSklepDrobiu"><div>@Gracz.Zwierze("alpaka").Cena</div><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    </div>
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private async Task Kup(string zwierz)
+    {
+        var zwierze = Gracz.Zwierze(zwierz);
+        if (Gracz.Monety >= zwierze.Cena)
+        {
+            Gracz.Monety -= zwierze.Cena;
+            zwierze.Ilosc += 1;
+            if (zwierz != "alpaka")
+            {
+                zwierze.Nakarmione = 0;
+                Gracz.ProduktZ($"{zwierz}Mleko").Ilosc++;
+            }
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+            string dzwiek = zwierz switch
+            {
+                "owca" => "mp3/Dzwieki/mekOwcy.mp3",
+                "koza" => "mp3/Dzwieki/bekKozy.mp3",
+                "krowa" => "mp3/Dzwieki/rykKrowy.mp3",
+                "alpaka" => "mp3/Dzwieki/mruczenieAlpaki.mp3",
+                _ => ""
+            };
+            try { await dzwieki.GraDzwiek(dzwiek); }
+            catch { }
+        }
+    }
+    public void Dispose()
+    {
+       
+    }
+}

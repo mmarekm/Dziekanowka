@@ -46,6 +46,7 @@
         SzkolaIntro,
         SklepDrobiu,
         SklepDzikie,
+        SklepBydlo,
         Sklepiczek,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
