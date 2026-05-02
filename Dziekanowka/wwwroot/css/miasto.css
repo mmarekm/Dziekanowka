@@ -336,11 +336,21 @@
     height: 211px;
     z-index: 2;
 }
+.miasto3DoKiosk {
+    top: 0px;
+    right: 678px;
+    width: 326px;
+    height: 164px;
+    z-index: 2;
+}
 .kiosk1Widok {
     background-image: url('../img/miasto/kiosk1Widok.png');
 }
 .kiosk2Widok {
     background-image: url('../img/miasto/kiosk2Widok.png');
+}
+.kiosk3Widok {
+    background-image: url('../img/miasto/kiosk3Widok.png');
 }
 .kioskDoMiasto {
     bottom: 0;
@@ -354,6 +364,10 @@
 .kioskDoMiasto2 {
     width: 327px;
     height: 211px;
+}
+.kioskDoMiasto3 {
+    width: 290px;
+    height: 179px;
 }
 .lMonetKiosk {
     width: 190px;
@@ -371,6 +385,11 @@
     top: 40px;
     color: gold;
 }
+.lMonetKiosk3 {
+    left: 930px;
+    bottom: 26px;
+    color: black;
+}
 .lBiletowKiosk {
     width: 130px;
     height: 80px;
@@ -387,6 +406,11 @@
     top: 40px;
     color: antiquewhite;
 }
+.lBiletowKiosk3 {
+    left: 570px;
+    top: 22px;
+    color: antiquewhite;
+}
 .kupBiletKiosk1 {
     top: 552px;
     left: 703px;
@@ -398,6 +422,12 @@
     left: 1043px;
     width: 99px;
     height: 91px;
+}
+.kupBiletKiosk3 {
+    top: 546px;
+    left: 619px;
+    width: 307px;
+    height: 122px;
 }
 .autobusAnimacjaM1 {
     left: -150px;
