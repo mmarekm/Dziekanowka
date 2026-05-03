@@ -1,0 +1,47 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="sklepMiasto3Widok widok rel">
+    <div class="abs confirmSklepMiasto3"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto3)" class="wyroznionyGuzik"><img src="img/miasto/confirmSklepMiasto3.png" /></button></div>
+    <div class="abs lMonetSklepMiasto3">@Gracz.Monety</div>
+    <div class="abs produktySklepMiasto3">
+        @foreach (var produkt in produkty)
+        {
+            <div class="produktSklep @(Gracz.Monety < produkt.Cena ? "nieMoznaKliknac" : "klikalneDivZieloneRel")"
+                 @onclick="async () => await Kup(produkt)">
+                <img src="img/dom/kuchnia/@(produkt.Nazwa).png" />
+                <span>@produkt.Cena <img class="monetaIkonka" src="img/przedmioty/moneta.png" /></span>
+                <span>posiadasz: @produkt.Ilosc</span>
+            </div>
+        }
+    </div>
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private class ProduktSklep(string nazwa, int cena, int ilosc)
+    {
+        public string Nazwa { get; set; } = nazwa;
+        public int Cena { get; set; } = cena;
+        public int Ilosc { get; set; } = ilosc;
+    }
+    private List<ProduktSklep> produkty = [];
+    protected override void OnParametersSet()
+    {
+        produkty =
+        [
+            new("kuraJajo", 10, Gracz.ProduktZ("kuraJajo").Ilosc),
+            new("kuraJedzenie", 15, Gracz.ProduktZ("kuraJedzenie").Ilosc),
+            new("gesJajo", 16, Gracz.ProduktZ("gesJajo").Ilosc),
+            new("gesJedzenie", 23, Gracz.ProduktZ("gesJedzenie").Ilosc),
+        ];
+    }
+    private async Task Kup(ProduktSklep produkt)
+    {
+        if (Gracz.Monety < produkt.Cena) return;
+        Gracz.Monety -= produkt.Cena;
+        Gracz.ProduktZ(produkt.Nazwa).Ilosc += produkt.Ilosc;
+        produkt.Ilosc = Gracz.ProduktZ(produkt.Nazwa).Ilosc;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

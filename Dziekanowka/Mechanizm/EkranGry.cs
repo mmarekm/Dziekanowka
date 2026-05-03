@@ -42,6 +42,7 @@
         Miasto1,
         Miasto2,
         Miasto3,
+        SklepMiasto3,
         Kiosk,
         SzkolaIntro,
         SklepDrobiu,
