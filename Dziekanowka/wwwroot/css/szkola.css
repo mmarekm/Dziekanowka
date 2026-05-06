@@ -1,6 +1,9 @@
 ﻿.szkolaIntro {
     background-image: url('../img/miasto/szkola/szkolaIntroWidok.png');
 }
+.szkolaReligiaWidok {
+    background-image: url('../img/miasto/szkola/szkolaReligiaWidok.png');
+}
 .szkolaInformatykaWidok {
     background-image: url('../img/miasto/szkola/szkolaInformatykaWidok.png');
 }
@@ -16,6 +19,20 @@
     top: 377px;
     width: 136px;
     height: 129px;
+    z-index: 2;
+}
+.szkolaIntroDoReligia {
+    left: 360px;
+    bottom: 166px;
+    width: 305px;
+    height: 251px;
+    z-index: 2;
+}
+.szkolaReligiaDoIntro {
+    bottom: 0;
+    left: 0;
+    width: 205px;
+    height: 109px;
     z-index: 2;
 }
 .szkolaInformatykaDoIntro {
