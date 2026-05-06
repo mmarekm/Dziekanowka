@@ -45,6 +45,7 @@
         SklepMiasto3,
         Kiosk,
         SzkolaIntro,
+        SzkolaInformatyka,
         SklepDrobiu,
         SklepDzikie,
         SklepBydlo,

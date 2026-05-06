@@ -46,7 +46,6 @@
     public async Task Koszenie()
     {
         if (Gracz.Paliwo.IloscPaliwa < 1) return;
-        await ladowanieGracza.ZapiszAktualnegoGracza();
         int ilosc = wykorzystanieKosiarki;
         Gracz.Paliwo.IloscPaliwa -= ilosc;
         Gracz.Przedmioty.First(p => p.Nazwa == "siano").Ilosc += ilosc;

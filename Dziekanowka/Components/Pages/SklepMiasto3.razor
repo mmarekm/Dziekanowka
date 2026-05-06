@@ -5,14 +5,17 @@
     <div class="abs confirmSklepMiasto3"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto3)" class="wyroznionyGuzik"><img src="img/miasto/confirmSklepMiasto3.png" /></button></div>
     <div class="abs lMonetSklepMiasto3">@Gracz.Monety</div>
     <div class="abs produktySklepMiasto3">
-        @foreach (var produkt in produkty)
+        @foreach (var (lista, folder, pobierz) in wszystkieProdukty)
         {
-            <div class="produktSklep @(Gracz.Monety < produkt.Cena ? "nieMoznaKliknac" : "klikalneDivZieloneRel")"
-                 @onclick="async () => await Kup(produkt)">
-                <img src="img/dom/kuchnia/@(produkt.Nazwa).png" />
-                <span>@produkt.Cena <img class="monetaIkonka" src="img/przedmioty/moneta.png" /></span>
-                <span>posiadasz: @produkt.Ilosc</span>
-            </div>
+            @foreach (var produkt in lista)
+            {
+                <div class="produktSklep @(Gracz.Monety < produkt.Cena ? "nieMoznaKliknac" : "klikalneDivZieloneRel")"
+                     @onclick="async () => await Kup(produkt, pobierz)">
+                    <span class="iloscSklepMiasto3">@produkt.Ilosc</span>
+                    <img src="img/@(folder)/@(produkt.Nazwa).png" />
+                    <span class="cenaSklepMiasto3"><b>@produkt.Cena</b> <img class="monetaIkonka" src="img/przedmioty/moneta.png" /></span>
+                </div>
+            }
         }
     </div>
 </div>
@@ -25,23 +28,87 @@
         public int Cena { get; set; } = cena;
         public int Ilosc { get; set; } = ilosc;
     }
-    private List<ProduktSklep> produkty = [];
+    private IEnumerable<(List<ProduktSklep> lista, string folder, Func<string, dynamic> pobierz)> wszystkieProdukty = [];
     protected override void OnParametersSet()
     {
-        produkty =
-        [
-            new("kuraJajo", 10, Gracz.ProduktZ("kuraJajo").Ilosc),
+        var produkty = new List<ProduktSklep>
+        {
             new("kuraJedzenie", 15, Gracz.ProduktZ("kuraJedzenie").Ilosc),
-            new("gesJajo", 16, Gracz.ProduktZ("gesJajo").Ilosc),
             new("gesJedzenie", 23, Gracz.ProduktZ("gesJedzenie").Ilosc),
+            new("gesSmalec", 13, Gracz.ProduktZ("gesSmalec").Ilosc),
+            new("indykJedzenie", 22, Gracz.ProduktZ("indykJedzenie").Ilosc),
+            new("kaczkaJedzenie", 17, Gracz.ProduktZ("kaczkaJedzenie").Ilosc),
+            new("kaczkaSmalec", 10, Gracz.ProduktZ("kaczkaSmalec").Ilosc),
+            new("krolikJedzenie", 29, Gracz.ProduktZ("krolikJedzenie").Ilosc),
+            new("swiniaSzynka", 22, Gracz.ProduktZ("swiniaSzynka").Ilosc),
+            new("swiniaSchab", 22, Gracz.ProduktZ("swiniaSchab").Ilosc),
+            new("swiniaBoczek", 22, Gracz.ProduktZ("swiniaBoczek").Ilosc),
+            new("swiniaSmalec", 12, Gracz.ProduktZ("swiniaSmalec").Ilosc),
+            new("krowaRostbef", 24, Gracz.ProduktZ("krowaRostbef").Ilosc),
+            new("krowaAntrykot", 24, Gracz.ProduktZ("krowaAntrykot").Ilosc),
+            new("krowaLopatka", 24, Gracz.ProduktZ("krowaLopatka").Ilosc),
+            new("krowaPoledwica", 24, Gracz.ProduktZ("krowaPoledwica").Ilosc),
+            new("owcaJedzenie", 29, Gracz.ProduktZ("owcaJedzenie").Ilosc),
+            new("kozaJedzenie", 27, Gracz.ProduktZ("kozaJedzenie").Ilosc),
+            new("miod", 29, Gracz.ProduktZ("miod").Ilosc)
+        };
+        var owoce = new List<ProduktSklep>
+        {
+            new("brzoskwinia", 3, Gracz.Owoc("brzoskwinia").Ilosc),
+            new("śliwka", 3, Gracz.Owoc("śliwka").Ilosc),
+            new("wiśnia", 3, Gracz.Owoc("wiśnia").Ilosc),
+            new("czereśnia", 3, Gracz.Owoc("czereśnia").Ilosc),
+            new("jabłko", 3, Gracz.Owoc("jabłko").Ilosc),
+            new("truskawka", 3, Gracz.Owoc("truskawka").Ilosc),
+            new("malina", 3, Gracz.Owoc("malina").Ilosc),
+            new("pomarańcza", 3, Gracz.Owoc("pomarańcza").Ilosc),
+            new("cytryna", 3, Gracz.Owoc("cytryna").Ilosc),
+            new("banan", 3, Gracz.Owoc("banan").Ilosc),
+            new("arbuz", 3, Gracz.Owoc("arbuz").Ilosc),
+            new("awokado", 3, Gracz.Owoc("awokado").Ilosc),
+            new("winogronoJasne", 3, Gracz.Owoc("winogronoJasne").Ilosc),
+            new("winogronoCiemne", 3, Gracz.Owoc("winogronoCiemne").Ilosc)
+        };
+        var warzywa = new List<ProduktSklep>
+        {
+            new("pomidor", 2, Gracz.Warzywo("pomidor").Ilosc),
+            new("ogórek", 2, Gracz.Warzywo("ogórek").Ilosc),
+            new("marchew", 2, Gracz.Warzywo("marchew").Ilosc),
+            new("cebula", 2, Gracz.Warzywo("cebula").Ilosc),
+            new("pietruszka", 2, Gracz.Warzywo("pietruszka").Ilosc),
+            new("groch", 2, Gracz.Warzywo("groch").Ilosc),
+            new("burak", 2, Gracz.Warzywo("burak").Ilosc),
+            new("sałata", 2, Gracz.Warzywo("sałata").Ilosc),
+            new("ziemniak", 2, Gracz.Warzywo("ziemniak").Ilosc),
+            new("szczypiorek", 2, Gracz.Warzywo("szczypiorek").Ilosc),
+            new("papryka", 2, Gracz.Warzywo("papryka").Ilosc),
+            new("czosnek", 2, Gracz.Warzywo("czosnek").Ilosc),
+            new("rzodkiewka", 2, Gracz.Warzywo("rzodkiewka").Ilosc),
+            new("szpinak", 2, Gracz.Warzywo("szpinak").Ilosc),
+            new("szczaw", 2, Gracz.Warzywo("szczaw").Ilosc),
+            new("seler", 2, Gracz.Warzywo("seler").Ilosc),
+            new("por", 2, Gracz.Warzywo("por").Ilosc),
+            new("fasola", 2, Gracz.Warzywo("fasola").Ilosc),
+            new("bób", 2, Gracz.Warzywo("bób").Ilosc),
+            new("cukinia", 2, Gracz.Warzywo("cukinia").Ilosc),
+            new("dynia", 2, Gracz.Warzywo("dynia").Ilosc),
+            new("brokuł", 2, Gracz.Warzywo("brokuł").Ilosc),
+            new("kalafior", 2, Gracz.Warzywo("kalafior").Ilosc),
+            new("kapustaWłoska", 2, Gracz.Warzywo("kapustaWłoska").Ilosc)
+        };
+        wszystkieProdukty =
+        [
+            (produkty, "dom/kuchnia",          Gracz.ProduktZ),
+            (owoce,    "przedmioty/owoce",     Gracz.Owoc),
+            (warzywa,  "przedmioty/warzywa",   Gracz.Warzywo)
         ];
     }
-    private async Task Kup(ProduktSklep produkt)
+    private async Task Kup(ProduktSklep produkt, Func<string, dynamic> pobierz)
     {
         if (Gracz.Monety < produkt.Cena) return;
         Gracz.Monety -= produkt.Cena;
-        Gracz.ProduktZ(produkt.Nazwa).Ilosc += produkt.Ilosc;
-        produkt.Ilosc = Gracz.ProduktZ(produkt.Nazwa).Ilosc;
+        pobierz(produkt.Nazwa).Ilosc++;
+        produkt.Ilosc = pobierz(produkt.Nazwa).Ilosc;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }

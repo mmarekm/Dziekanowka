@@ -27,7 +27,7 @@
             "indyk" => Ilosc < 1 ? 28 : Ilosc * 5 + 37,
             "kaczka" => Ilosc < 1 ? 23 : Ilosc * 11 + 30,
             "krolik" => 40,
-            "swinia" => 60,
+            "swinia" => 50,
             "owca" => Ilosc < 1 ? 40 : Ilosc * 20 + 45,
             "alpaka" => Ilosc * 50 + 100,
             "koza" => Ilosc < 1 ? 35 : Ilosc * 15 + 50,
