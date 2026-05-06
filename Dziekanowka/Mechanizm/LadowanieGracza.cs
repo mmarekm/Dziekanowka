@@ -94,5 +94,10 @@ namespace Dziekanowka.Mechanizm
             var json = JsonSerializer.Serialize(gracze, opcje);
             await File.WriteAllTextAsync(_sciezkaDoPliku, json);
         }
+        public async Task<string> PobierzHaslo(string nazwa)
+        {
+            var gracze = await WczytajWszystkichGraczy();
+            return gracze[nazwa.ToLower()].Haslo;
+        }
     }
 }

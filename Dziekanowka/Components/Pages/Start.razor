@@ -1,16 +1,43 @@
-﻿<div class="widok powitanie rel">
-    <div class="guzikStartMama abs"><button class="btnStart wyroznionyGuzik" @onclick='() => StartGry("Mama")'><img src="img/Mama.png"/></button></div>
-    <div class="guzikStartTata abs"><button class="btnStart wyroznionyGuzik" @onclick='() => StartGry("Tata")'><img src="img/Tata.png" /></button></div>
-    <div class="guzikStartUla abs"><button class="btnStart wyroznionyGuzik" @onclick='() => StartGry("Ula")'><img src="img/Ula.png" /></button></div>
-    <div class="guzikStartBasia abs"><button class="btnStart wyroznionyGuzik" @onclick='() => StartGry("Basia")'><img src="img/Basia.png" /></button></div>
-    <div class="guzikStartAnia abs"><button class="btnStart wyroznionyGuzik" @onclick='() => StartGry("Ania")'><img src="img/Ania.png" /></button></div>
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="widok powitanie rel">
+    <div class="guzikStartMama abs"><button class="btnStart wyroznionyGuzik" disabled="@pokazHaslo" @onclick='() => StartGry("Mama")'><img src="img/Mama.png" /></button></div>
+    <div class="guzikStartTata abs"><button class="btnStart wyroznionyGuzik" disabled="@pokazHaslo" @onclick='() => StartGry("Tata")'><img src="img/Tata.png" /></button></div>
+    <div class="guzikStartUla abs"><button class="btnStart wyroznionyGuzik" disabled="@pokazHaslo" @onclick='() => StartGry("Ula")'><img src="img/Ula.png" /></button></div>
+    <div class="guzikStartBasia abs"><button class="btnStart wyroznionyGuzik" disabled="@pokazHaslo" @onclick='() => StartGry("Basia")'><img src="img/Basia.png" /></button></div>
+    <div class="guzikStartAnia abs"><button class="btnStart wyroznionyGuzik" disabled="@pokazHaslo" @onclick='() => StartGry("Ania")'><img src="img/Ania.png" /></button></div>
+    @if (pokazHaslo)
+    {
+        <div class="abs panelHaslo">
+            <input class="inputHaslo" type="password" @bind="wpisaneHaslo" />
+            <button class="wyroznionyGuzik" @onclick="PotwierdzHaslo"><img src="img/potwierdz.png" /></button>
+        </div>
+    }
 </div>
 
 @code {
-    [Parameter]
-    public EventCallback<string> NaStartGry { get; set; }
+    [Parameter] public EventCallback<string> NaStartGry { get; set; }
+    private bool pokazHaslo = false;
+    private string aktualnyGracz = "";
+    private string wpisaneHaslo = "";
     private async Task StartGry(string nazwaGracza)
     {
-        await NaStartGry.InvokeAsync(nazwaGracza);
+        var haslo = await ladowanieGracza.PobierzHaslo(nazwaGracza);
+        if (haslo == "")
+        {
+            await NaStartGry.InvokeAsync(nazwaGracza);
+            return;
+        }
+        aktualnyGracz = nazwaGracza;
+        pokazHaslo = true;
+    }
+    private async Task PotwierdzHaslo()
+    {
+        var haslo = await ladowanieGracza.PobierzHaslo(aktualnyGracz);
+        pokazHaslo = false;
+        if (wpisaneHaslo == haslo)
+            await NaStartGry.InvokeAsync(aktualnyGracz);
+        wpisaneHaslo = "";
     }
 }

@@ -27,3 +27,38 @@
     top: 700px;
     left: 790px;
 }
+.panelHaslo {
+    top: 100px;
+    right: 100px;
+    width: 900px;
+    height: 130px;
+}
+    .panelHaslo input {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 800px;
+        height: 120px;
+        font-size: 100px;
+        line-height: 120px;
+        background: rgba(144, 200, 100, 0.85);
+        border: 3px solid #5a9e2f;
+        border-radius: 12px;
+        color: #2d5a1b;
+        padding: 0 15px;
+        outline: none;
+    }
+    .panelHaslo button {
+        position: absolute;
+        top: 150px;
+        left: 100px;
+        width: 120px;
+        height: 120px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+        .panelHaslo button img {
+            width: 120px;
+            height: 120px;
+        }
