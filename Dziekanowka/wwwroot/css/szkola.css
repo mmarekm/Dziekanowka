@@ -35,6 +35,19 @@
     height: 109px;
     z-index: 2;
 }
+.doSlowa {
+    left: 659px;
+    top: 344px;
+    width: 616px;
+    height: 406px;
+    z-index: 2;
+}
+.slowoDzis {
+    left: 80px;
+    top: 0;
+    width: 1340px;
+    height: 650px;
+}
 .szkolaInformatykaDoIntro {
     top: 48px;
     left: 110px;

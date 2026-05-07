@@ -2,16 +2,11 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="szkolaInformatykaWidok widok rel">
-    <div class="abs szkolaInformatykaDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img src="img/miasto/szkola/szkolaInformatykaDoIntro.png" /></button></div>
+    <div class="abs szkolaInformatykaDoIntro"><button class="wyroznionyGuzik" disabled="@(panelZmianaHasla)" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img src="img/miasto/szkola/szkolaInformatykaDoIntro.png" /></button></div>
     <div class="abs doZmianyHasla"><button class="wyroznionyGuzik" @onclick="() => panelZmianaHasla = true"><img src="img/miasto/szkola/doHasla.png" /></button></div>
 </div>
 <div class="abs narzedziePrzetwornia @(widok ? "" : "aktywne")">
     <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijPanel" ><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
-    <div class="abs kuchniaNarzedzieConfirm">
-        <button class="wyroznionyGuzik" @onclick="ZamknijPanel">
-            <img src="img/budynki/przetworniaNarzedzieConfirm.png" />
-        </button>
-    </div>
     <div class="abs poleStareHaslo"><img src="img/miasto/szkola/staraKlodka.jpg" /><input type="password" @bind="stareHaslo" /></div>
     <div class="abs poleNoweHaslo"><img src="img/miasto/szkola/nowaKlodka.jpg" /><input type="password" @bind="noweHaslo" /></div>
     <div class="abs polePotwierdzHaslo"><img src="img/miasto/szkola/nowaKlodka.jpg" /><input type="password" @bind="potwierdzHaslo" /></div>

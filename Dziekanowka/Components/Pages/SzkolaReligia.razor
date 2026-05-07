@@ -1,9 +1,19 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 <div class="szkolaReligiaWidok widok rel">
-    <div class="abs szkolaReligiaDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img src="img/miasto/szkola/confirmReligia.png" /></button></div>
+    <div class="abs szkolaReligiaDoIntro"><button class="wyroznionyGuzik" disabled="@(otwarteSlowo)" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img src="img/miasto/szkola/confirmReligia.png" /></button></div>
+    <!--<div class="abs doSlowa"><button class="wyroznionyGuzik" @onclick="() => otwarteSlowo = true"><img src="img/miasto/szkola/religiaSlowo.png" /></button></div>-->
+</div>
+<div class="abs narzedziePrzetwornia @(widok ? "" : "aktywne")">
+    <div class="abs slowoDzis">
+
+    </div>
+    <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijKsiege"><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool otwarteSlowo = false;
+    private bool widok => !otwarteSlowo;
+    private void ZamknijKsiege() => otwarteSlowo = false;
 }
