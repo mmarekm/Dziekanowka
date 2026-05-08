@@ -217,7 +217,7 @@ namespace Dziekanowka.Mechanizm
             ["20260610"] = ["sr10zwII"],
             ["20260611"] = ["cz10zwII", "BarnabyApostola"],
             ["20260612"] = ["NajswietszegoSercaPanaJezusaA"],
-            ["20260613"] = ["sb10zwII"],
+            ["20260613"] = ["sb10zwII", "NiepokalanegoSercaNMP"],
             ["20260614"] = ["Ndz11zwA"],
             ["20260615"] = ["pn11zwII"],
             ["20260616"] = ["wt11zwII"],
@@ -231,7 +231,10 @@ namespace Dziekanowka.Mechanizm
             ["20260624"] = ["NarodzenieJanaChrzciciela"],
             ["20260625"] = ["cz12zwII"],
             ["20260626"] = ["pt12zwII"],
-            ["20260627"] = ["sb12zwII"]
+            ["20260627"] = ["sb12zwII"],
+            ["20260628"] = ["Ndz13zwA", "WigiliaApostolowPiotraIPawla"],
+            ["20260629"] = ["ApostolowPiotraIPawla"],
+            ["20260630"] = ["wt13zwII"]
         };
     }
 }
