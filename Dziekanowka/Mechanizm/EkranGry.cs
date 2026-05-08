@@ -5,6 +5,8 @@
         Start,
         Gospodarstwo,
         DomWiatrolap,
+        DomSalon,
+        GryPlanszowe,
         DomKuchnia,
         Garaz,
         Przetwornia,

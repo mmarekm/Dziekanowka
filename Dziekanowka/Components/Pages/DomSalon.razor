@@ -1,0 +1,36 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@inject Dzwieki dzwieki
+<div class="domSalonWidok widok rel">
+    <div class="abs salonDoWiatrolap"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/dom/salon/salonDoWiatrolap.png" /></button></div>
+    <!--<div class="abs salonDoGier"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.GryPlanszowe)" class="wyroznionyGuzik"><img src="img/dom/salon/salonDoGier.png" /></button></div>-->
+    <div class="abs salonKacik @(Gracz.Statystyki.MoznaKaweZSalonu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Kawa"><img class="obrazekSieMiesci" src="img/dom/salon/salonKacik.png" /></div>
+    <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/dom/kuchnia/ziarnaKawy.png" /></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private async Task Kawa()
+    {
+        if (!Gracz.Statystyki.MoznaKaweZSalonu) return;
+        Gracz.ZywnoscP("ziarnaKawy").Ilosc++;
+        Gracz.Statystyki.MoznaKaweZSalonu = false;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Powitaj = true;
+        Znikanie = false;
+        StateHasChanged();
+        await Task.Delay(100);
+        Znikanie = true;
+        StateHasChanged();
+        await dzwieki.GraDzwiek("mp3/Dzwieki/fanfaraKrotka.mp3");
+        await Task.Delay(4000);
+        Powitaj = false;
+        Znikanie = false;
+        StateHasChanged();
+    }
+}

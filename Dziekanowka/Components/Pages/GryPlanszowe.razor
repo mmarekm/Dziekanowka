@@ -1,0 +1,33 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+<div class="gryPlanszoweWidok widok rel">
+    <div class="abs gryPlanszoweDoSalon"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSalon)" class="wyroznionyGuzik"><img src="img/dom/salon/confirmGryPlanszowe.png" /></button></div>
+    <div class="abs gramySzachy"><button class="wyroznionyGuzik" @onclick="() => wyborRywala2os = true"><img src="img/dom/salon/gramySzachy.png" /></button></div>
+    @if (wyborRywala2os)
+    {
+        <div class="abs wyborRywala2os">
+            @foreach (var rywal in rywale2os)
+            {
+                <div class="rywal2os"><button class="wyroznionyGuzik" @onclick="() => DoSzachownicy(rywal)"><img src="img/@(rywal).png" /></button></div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool wyborRywala2os = false;
+    private bool gramySzachy = false;
+    private string partia1 = "";
+    private string partia2 = "";
+    private List<string> wszyscy = ["Mama", "Tata", "Ula", "Basia", "Ania"];
+    private List<string> rywale2os => wszyscy.Where(g => g != Gracz.Nazwa).ToList();
+    private void DoSzachownicy(string rywal)
+    {
+        partia1 = $"{Gracz.Nazwa}{rywal}";
+        partia2 = $"{rywal}{Gracz.Nazwa}";
+        wyborRywala2os = false;
+        gramySzachy = true;
+    }
+}

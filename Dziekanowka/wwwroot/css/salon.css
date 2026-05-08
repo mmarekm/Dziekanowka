@@ -1,0 +1,51 @@
+﻿.domSalonWidok {
+    background-image: url('../img/dom/salon/domSalonWidok.png');
+}
+.gryPlanszoweWidok {
+    background-image: url('../img/dom/salon/gryPlanszoweWidok.png');
+}
+.salonDoWiatrolap {
+    top: 0;
+    right: 0;
+    width: 285px;
+    height: 1000px;
+}
+.salonKacik {
+    left: 97px;
+    bottom: 93px;
+    width: 56px;
+    height: 39px;
+}
+.salonDoGier {
+    right: 485px;
+    top: 354px;
+    width: 149px;
+    height: 211px;
+    z-index: 2;
+}
+.gryPlanszoweDoSalon {
+    left: 0;
+    bottom: 0;
+    width: 293px;
+    height: 214px;
+    z-index: 2;
+}
+.wyborRywala2os {
+    left: 400px;
+    top: 200px;
+    width: 1100px;
+    height: 200px;
+    display: flex;
+    gap: 100px;
+}
+.rywal2os {
+    width: 200px;
+    height: 200px;
+}
+.gramySzachy {
+    left: 660px;
+    top: 407px;
+    width: 912px;
+    height: 500px;
+    z-index: 2;
+}

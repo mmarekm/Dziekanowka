@@ -23,6 +23,7 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Monety += AktualnyGracz.Statystyki.BonusDzienny + AktualnyGracz.Przedmiot("siano").Ilosc;
                 AktualnyGracz.Statystyki.MoznaMiod = true;
                 AktualnyGracz.Statystyki.MoznaSianoZKarczowiska = true;
+                AktualnyGracz.Statystyki.MoznaKaweZSalonu = true;
                 AktualnyGracz.Warzywa.ForEach(w => w.Ilosc = w.Ilosc > 0 ? w.Ilosc - (w.Ilosc / 5 + 1) : w.Ilosc);
                 AktualnyGracz.Owoce.ForEach(o => o.Ilosc = o.Ilosc > 0 ? o.Ilosc - (o.Ilosc / 5 + 1) : o.Ilosc);
                 AktualnyGracz.Zboza.ForEach(z => z.Ilosc = z.Ilosc > 0 ? z.Ilosc - (z.Ilosc / 5 + 1) : z.Ilosc);

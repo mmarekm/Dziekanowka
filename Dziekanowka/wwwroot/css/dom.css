@@ -18,6 +18,13 @@
     height: 566px;
     z-index: 2;
 }
+.domDoSalon {
+    top: 240px;
+    right: 771px;
+    width: 261px;
+    height: 563px;
+    z-index: 2;
+}
 .domDoKuchnia {
     bottom: 0;
     left: 0;
