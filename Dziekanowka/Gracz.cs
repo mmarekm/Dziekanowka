@@ -8,7 +8,6 @@ namespace Dziekanowka
         public string Haslo { get; set; } = "";
         public int Monety { get; set; } = 250;
         public Statystyki Statystyki { get; set; } = new Statystyki();
-        public List<GraPlanszowa> Rozgrywki { get; set; } = [];
         public List<ZwierzeGracza> Zwierzeta { get; set; } = ZwierzeGracza.StartoweZwierzaki();
         public List<ProduktZwierzecy> ProduktyZwierzece { get; set; } = ProduktZwierzecy.StartoweProdukty();
         public List<ProduktPrzetworzony> ProduktyPrzetworzone { get; set; } = ProduktPrzetworzony.StartoweProdukty();

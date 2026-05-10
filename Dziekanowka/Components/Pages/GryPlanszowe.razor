@@ -1,6 +1,6 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
-<div class="gryPlanszoweWidok widok rel">
+<div class="gryPlanszoweWidok widok rel @(pokazPlansze ? "przygaszony" : "")">
     <div class="abs gryPlanszoweDoSalon"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSalon)" class="wyroznionyGuzik"><img src="img/dom/salon/confirmGryPlanszowe.png" /></button></div>
     <div class="abs gramySzachy"><button class="wyroznionyGuzik" @onclick="() => wyborRywala2os = true"><img src="img/dom/salon/gramySzachy.png" /></button></div>
     @if (wyborRywala2os)
@@ -13,20 +13,41 @@
         </div>
     }
 </div>
+@if (pokazPlansze)
+{
+    <div class="abs rozgrywkaSalon">
+        @if (graDwuosobowa)
+        {
+            <div class="abs graczAktywnySalon2os"><img class="obrazekSieMiesci" src="img/@(Gracz.Nazwa).png" /></div>
+            <div class="abs rywalAktywnySalon2os"><img class="obrazekSieMiesci" src="img/@(rywal2os).png" /></div>
+            @if (gramySzachy)
+            {
+                <div class="rel widokGramySzachy">
+                    <div class="abs partia1szachy"><img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" /></div>
+                    <div class="abs partia2szachy"><img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" /></div>
+                </div>
+            }
+        }
+    </div>
+}
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool wyborRywala2os = false;
     private bool gramySzachy = false;
+    private bool pokazPlansze => gramySzachy;
+    private bool graDwuosobowa => gramySzachy;
+    private string rywal2os = "";
     private string partia1 = "";
     private string partia2 = "";
     private List<string> wszyscy = ["Mama", "Tata", "Ula", "Basia", "Ania"];
     private List<string> rywale2os => wszyscy.Where(g => g != Gracz.Nazwa).ToList();
     private void DoSzachownicy(string rywal)
     {
-        partia1 = $"{Gracz.Nazwa}{rywal}";
-        partia2 = $"{rywal}{Gracz.Nazwa}";
+        rywal2os = rywal;
+        partia1 = $"{Gracz.Nazwa}{rywal2os}";
+        partia2 = $"{rywal2os}{Gracz.Nazwa}";
         wyborRywala2os = false;
         gramySzachy = true;
     }

@@ -21,6 +21,7 @@ else
                 <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" />
                 <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" />
             </div>
+            <div class="powrotMenu" @onclick="Menu"></div>
         }
     </div>
 }
@@ -151,5 +152,10 @@ else
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);
+    }
+    private async Task Menu()
+    {
+        aktualnyEkran = EkranGry.Start;
+        await GraTlo(EkranGry.Start);
     }
 }

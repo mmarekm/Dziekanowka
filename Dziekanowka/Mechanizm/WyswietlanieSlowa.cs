@@ -179,18 +179,14 @@ namespace Dziekanowka.Mechanizm
 
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260506"] = ["FilipaJakubaApostolow"],
-            ["20260507"] = ["cz5Wlk"],
-            ["20260508"] = ["StanislawaBiskupaMeczennikaPatronaPolski"],
-            ["20260509"] = ["sb5Wlk", "NMPLaskawejPatronkiWarszawy"],
             ["20260510"] = ["Ndz6WlkA"],
             ["20260511"] = ["pn6Wlk"],
             ["20260512"] = ["wt6Wlk"],
             ["20260513"] = ["sr6Wlk"],
-            ["20260514"] = ["MaciejaApostola"],
+            ["20260514"] = ["WniebowstapieniePanskieA", "MaciejaApostola"],
             ["20260515"] = ["pt6Wlk"],
             ["20260516"] = ["AndrzejaBoboliPatronaPolskiMetropoliiWarszawskiej"],
-            ["20260517"] = ["WniebowstapieniePanskieA"],
+            ["20260517"] = ["WniebowstapieniePanskieA", "Ndz7WlkA"],
             ["20260518"] = ["pn7Wlk"],
             ["20260519"] = ["wt7Wlk"],
             ["20260520"] = ["sr7Wlk"],

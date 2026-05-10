@@ -31,6 +31,16 @@ h1:focus {
     width: 100%;
     z-index: 100;
 }
+.powrotMenu {
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    background-color: red;
+    cursor: pointer;
+    z-index: 10000;
+}
 .zielonyCienHover {
     position: relative;
 }
