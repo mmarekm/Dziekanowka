@@ -1,5 +1,7 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
+@using Dziekanowka.Rozgrywki
+@inject SerwisSzachowy serwisSzachowy
 <div class="gryPlanszoweWidok widok rel @(pokazPlansze ? "przygaszony" : "")">
     <div class="abs gryPlanszoweDoSalon"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSalon)" class="wyroznionyGuzik"><img src="img/dom/salon/confirmGryPlanszowe.png" /></button></div>
     <div class="abs gramySzachy"><button class="wyroznionyGuzik" @onclick="() => wyborRywala2os = true"><img src="img/dom/salon/gramySzachy.png" /></button></div>
@@ -26,15 +28,15 @@
                     <div class="abs partiaSzachy partia1szachy">
                         <img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" />
                         <div class="rel menuSzachisty">
-                            <div class="abs poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
-                            <div class="abs proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
+                            <div class="abs klikSzachy poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
+                            <div class="abs klikSzachy proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
                         </div>
                     </div>
                     <div class="abs partiaSzachy partia2szachy">
                         <img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" />
                         <div class="rel menuSzachisty">
-                            <div class="abs poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
-                            <div class="abs proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
+                            <div class="abs klikSzachy poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
+                            <div class="abs klikSzachy proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
                         </div>
                     </div>
                 </div>
@@ -48,6 +50,8 @@
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool wyborRywala2os = false;
     private bool gramySzachy = false;
+    private PartiaSzachow? aktywnaPartia1;
+    private PartiaSzachow? aktywnaPartia2;
     private bool pokazPlansze => gramySzachy;
     private bool graDwuosobowa => gramySzachy;
     private string rywal2os = "";
@@ -55,11 +59,13 @@
     private string partia2 = "";
     private List<string> wszyscy = ["Mama", "Tata", "Ula", "Basia", "Ania"];
     private List<string> rywale2os => wszyscy.Where(g => g != Gracz.Nazwa).ToList();
-    private void DoSzachownicy(string rywal)
+    private async Task DoSzachownicy(string rywal)
     {
         rywal2os = rywal;
         partia1 = $"{Gracz.Nazwa}{rywal2os}";
         partia2 = $"{rywal2os}{Gracz.Nazwa}";
+        aktywnaPartia1 = await serwisSzachowy.PobierzPartie(partia1);
+        aktywnaPartia2 = await serwisSzachowy.PobierzPartie(partia2);
         wyborRywala2os = false;
         gramySzachy = true;
     }

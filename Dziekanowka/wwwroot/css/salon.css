@@ -91,17 +91,15 @@
     width: 200px;
     height: 300px;
 }
-.poddajSieSzachy {
+.klikSzachy {
     width: 80px;
     height: 80px;
     left: 10px;
-    top: 35px;
     cursor: pointer;
 }
+.poddajSieSzachy {
+    top: 35px;
+}
 .proponujRemisSzachy {
-    width: 80px;
-    height: 80px;
-    left: 10px;
     top: 185px;
-    cursor: pointer;
 }

@@ -1,4 +1,5 @@
 ﻿using Dziekanowka.Mechanizm;
+using Dziekanowka.Rozgrywki;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
 namespace Dziekanowka
@@ -16,6 +17,7 @@ namespace Dziekanowka
                 });
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddScoped<LadowanieGracza>();
+            builder.Services.AddScoped<SerwisSzachowy>();
             builder.Services.AddSingleton(AudioManager.Current);
             builder.Services.AddSingleton<Dzwieki>();
 #if DEBUG
