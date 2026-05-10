@@ -69,6 +69,7 @@ namespace Dziekanowka.Mechanizm
         {
             var gracze = await WczytajWszystkichGraczy();
             AktualnyGracz = gracze[nazwa.ToLower()];
+            CzyPokazacWideo = false;
             await SprawdzenieCzyPierwszyRazWDniu();
             return AktualnyGracz;
         }

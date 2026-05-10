@@ -18,13 +18,25 @@
     <div class="abs rozgrywkaSalon">
         @if (graDwuosobowa)
         {
-            <div class="abs graczAktywnySalon2os"><img class="obrazekSieMiesci" src="img/@(Gracz.Nazwa).png" /></div>
-            <div class="abs rywalAktywnySalon2os"><img class="obrazekSieMiesci" src="img/@(rywal2os).png" /></div>
+            <div class="abs graczSalon2os graczAktywnySalon2os"><img class="obrazekSieMiesci" src="img/@(Gracz.Nazwa).png" /></div>
+            <div class="abs graczSalon2os rywalAktywnySalon2os"><img class="obrazekSieMiesci" src="img/@(rywal2os).png" /></div>
             @if (gramySzachy)
             {
                 <div class="rel widokGramySzachy">
-                    <div class="abs partia1szachy"><img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" /></div>
-                    <div class="abs partia2szachy"><img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" /></div>
+                    <div class="abs partiaSzachy partia1szachy">
+                        <img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" />
+                        <div class="rel menuSzachisty">
+                            <div class="abs poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
+                            <div class="abs proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
+                        </div>
+                    </div>
+                    <div class="abs partiaSzachy partia2szachy">
+                        <img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" />
+                        <div class="rel menuSzachisty">
+                            <div class="abs poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
+                            <div class="abs proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
+                        </div>
+                    </div>
                 </div>
             }
         }

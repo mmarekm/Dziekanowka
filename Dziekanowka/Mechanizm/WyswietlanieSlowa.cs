@@ -230,7 +230,14 @@ namespace Dziekanowka.Mechanizm
             ["20260627"] = ["sb12zwII"],
             ["20260628"] = ["Ndz13zwA", "WigiliaApostolowPiotraIPawla"],
             ["20260629"] = ["ApostolowPiotraIPawla"],
-            ["20260630"] = ["wt13zwII"]
+            ["20260630"] = ["wt13zwII"],
+            ["20260701"] = ["sr13zwII"],
+            ["20260702"] = ["cz13zwII"],
+            ["20260703"] = ["TomaszaApostola"],
+            ["20260704"] = ["sb13zwII"],
+            ["20260705"] = ["Ndz14zwA"],
+            ["20260706"] = ["pn14zwII"],
+            ["20260707"] = ["wt14zwII"]
         };
     }
 }

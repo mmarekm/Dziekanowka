@@ -4,7 +4,7 @@
 @inject Dzwieki dzwieki
 <div class="domSalonWidok widok rel">
     <div class="abs salonDoWiatrolap"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/dom/salon/salonDoWiatrolap.png" /></button></div>
-    <div class="abs salonDoGier"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.GryPlanszowe)" class="wyroznionyGuzik"><img src="img/dom/salon/salonDoGier.png" /></button></div>
+    <!--<div class="abs salonDoGier"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.GryPlanszowe)" class="wyroznionyGuzik"><img src="img/dom/salon/salonDoGier.png" /></button></div>-->
     <div class="abs salonKacik @(Gracz.Statystyki.MoznaKaweZSalonu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Kawa"><img class="obrazekSieMiesci" src="img/dom/salon/salonKacik.png" /></div>
     <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/dom/kuchnia/ziarnaKawy.png" /></div>
 </div>

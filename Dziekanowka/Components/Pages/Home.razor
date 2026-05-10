@@ -21,7 +21,10 @@ else
                 <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" />
                 <img class="obrazekWypelnia" src="img/przedmioty/moneta.png" />
             </div>
-            <div class="powrotMenu" @onclick="Menu"></div>
+            @if (!czekaNaPowitanie)
+            {
+                <div class="powrotMenu" @onclick="Menu"></div>
+            }
         }
     </div>
 }
