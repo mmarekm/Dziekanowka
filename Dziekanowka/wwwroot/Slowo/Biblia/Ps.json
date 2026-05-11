@@ -442,6 +442,10 @@
 		"5b": "a grzech mój jest zawsze przede mną.",
 		"6a": "Przeciwko Tobie samemu zgrzeszyłem",
 		"6b": "i dopuściłem się tego, co za złe uznajesz,",
+		"8a": "Oto miłujesz prawdę ukrytą,",
+		"8b": "naucz mnie tajników mądrości!",
+		"9a": "Pokrop mnie hizopem, abym stał się czysty,",
+		"9b": "obmyj mnie, bym nad śnieg był bielszy.",
 		"11a": "Odwróć oblicze od grzechów moich",
 		"11b": "i zgładź wszystkie moje nieprawości.",
 		"12a": "Stwórz we mnie czyste serce, Boże,",
@@ -455,6 +459,8 @@
 		"16a": "Wybaw mnie od krwi, o Boże,",
 		"16b": "Boże, mój Zbawco,",
 		"16c": "a język mój wyśpiewa Twoją sprawiedliwość.",
+		"17a": "Panie, otwórz wargi moje,",
+		"17b": "a usta moje będą głosić Twoją chwałę.",
 		"18a": "Bo nie pragniesz, bym Ci składał ofiary,",
 		"18b": "ani nie masz upodobania w całopaleniach.",
 		"19a": "Ofiarą dla Boga jest duch skruszony;",
@@ -649,6 +655,17 @@
 		"9a": "Pomóż nam, Boże, nasz Zbawco!",
 		"9b": "Wyzwól nas dla chwały Twego imienia, Panie!",
 		"9c": "Przebacz nam grzechy przez wzgląd na imię Twoje!"
+	},
+	"80": {
+		"2a": "Pasterzu Izraela, wysłuchaj!",
+		"2c": "co zasiadasz nad cherubami, ukaż się!",
+		"3b": "wzbudź swą potęgę",
+		"3c": "i przyjdź nas wybawić!",
+		"15a": "Odnów nas, Boże Zastępów,",
+		"15b": "spójrz z nieba i zobacz!",
+		"15c": "Nawiedź tę winnicę!",
+		"16a": "Utwierdź tę, którą zasadziła Twoja prawa ręka,",
+		"16b": "syna, którego umocniłeś dla siebie."
 	},
 	"81": {
 		"6c": "usłyszał język nieznany:",
@@ -1200,6 +1217,15 @@
 		"7c": "i obfite u Niego odkupienie.",
 		"8a": "To On odkupi Izraela",
 		"8b": "ze wszystkich jego przewinień."
+	},
+	"131": {
+		"1a": "Panie, moje serce się nie wynosi,",
+		"1b": "oczy moje nie patrzą z góry,",
+		"1c": "nie ubiegam się o rzeczy wielkie ani o zbyt cudowne.",
+		"2a": "I oto jestem spokojny.",
+		"2b": "Ucichłem jak niemowlę nakarmione przez matkę.",
+		"2c": "Jestem jak nakarmione niemowlę.",
+		"3": "Niech Izrael zaufa Panu teraz i na wieki!"
 	},
 	"132": {
 		"11a": "A Pan złożył Dawidowi nieodwołalną przysięgę",

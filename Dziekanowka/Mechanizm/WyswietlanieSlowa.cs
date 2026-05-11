@@ -236,8 +236,11 @@ namespace Dziekanowka.Mechanizm
             ["20260703"] = ["TomaszaApostola"],
             ["20260704"] = ["sb13zwII"],
             ["20260705"] = ["Ndz14zwA"],
-            ["20260706"] = ["pn14zwII"],
-            ["20260707"] = ["wt14zwII"]
+            ["20260706"] = ["pn14zwII", "MariiTeresyLedochowskiej"],
+            ["20260707"] = ["wt14zwII"],
+            ["20260708"] = ["sr14zwII", "JanaZDukli"],
+            ["20260709"] = ["cz14zwII"],
+            ["20260710"] = ["pt14zwII"]
         };
     }
 }
