@@ -85,6 +85,30 @@
 .partia2szachy {
     right: 150px;
 }
+.obrazSzachownicy {
+    position: relative;
+    background-image: url('../img/dom/salon/szachownica.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(8, 56px);
+    grid-template-rows: repeat(8, 56px);
+    padding: 12px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-items: center;
+}
+.bierka {
+    width: 50px;
+    height: 50px;
+}
+.poleSzachownicy {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
 .menuSzachisty {
     margin-left: 50px;
     margin-top: 100px;
@@ -102,4 +126,7 @@
 }
 .proponujRemisSzachy {
     top: 185px;
+}
+.zaznaczonaBierka {
+    filter: drop-shadow(0 0 10px green);
 }

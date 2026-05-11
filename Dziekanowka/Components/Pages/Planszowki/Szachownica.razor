@@ -1,0 +1,63 @@
+﻿@using Dziekanowka.Rozgrywki
+<div class="abs partiaSzachy @KlasaCss">
+    <div class="obrazSzachownicy">
+        @foreach (var pole in Partia.Plansza)
+        {
+            var kolumna = Odwrocona ? 9 - pole.X : pole.X;
+            var rzad = Odwrocona ? pole.Y : 9 - pole.Y;
+            if (pole.Bierka != "")
+            {
+                <img class="@KlasaBierki(pole)" src="img/dom/salon/szachy/@(pole.Bierka).png" style="@($"grid-column: {kolumna}; grid-row: {rzad};")" @onclick="async () => await PoleKlik(pole)" />
+            }
+            else
+            {
+                <div class="poleSzachownicy" style="@($"grid-column: {kolumna}; grid-row: {rzad};")" @onclick="async () => await PoleKlik(pole)"></div>
+            }
+        }
+    </div>
+    <div class="rel menuSzachisty">
+        <div class="abs klikSzachy poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
+        <div class="abs klikSzachy proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
+    </div>
+</div>
+
+@code {
+        [Parameter] public PartiaSzachow Partia { get; set; } = null!;
+        [Parameter] public string KlasaCss { get; set; } = "";
+        [Parameter] public bool Odwrocona { get; set; } = false;
+        [Parameter] public SerwisSzachowy Serwis { get; set; } = null!;
+    private PoleSzachownicy? wybranaBierka;
+    private PoleSzachownicy? docelowePole;
+    private string KlasaBierki(PoleSzachownicy pole)
+    {
+        var klasy = new List<string> { "bierka" };
+        if (wybranaBierka?.X == pole.X && wybranaBierka?.Y == pole.Y)
+            klasy.Add("zaznaczonaBierka");
+        return string.Join(" ", klasy);
+    }
+    private async Task PoleKlik(PoleSzachownicy pole)
+    {
+        if (wybranaBierka == null)
+        {
+            if (pole.Bierka != "")
+                wybranaBierka = pole;
+            return;
+        }
+        if (wybranaBierka.X == pole.X && wybranaBierka.Y == pole.Y)
+        {
+            wybranaBierka = null;
+            return;
+        }
+        if (pole.Bierka != "" && wybranaBierka.Bierka.EndsWith("Bialy") == pole.Bierka.EndsWith("Bialy"))
+        {
+            wybranaBierka = pole;
+            return;
+        }
+        docelowePole = pole;
+        docelowePole.Bierka = wybranaBierka.Bierka;
+        wybranaBierka.Bierka = "";
+        wybranaBierka = null;
+        docelowePole = null;
+        //await Serwis.ZapiszPartie(Partia);
+    }
+}

@@ -83,9 +83,10 @@ namespace Dziekanowka.Mechanizm
             {
                 if (CzyEwangelia(node))
                 {
-                    var wersetEwangelii = node.SelectSingleNode(".//*[contains(@class,'werset')]");
-                    if (wersetEwangelii != null)
-                        await UzupelnijWerset(wersetEwangelii);
+                    var wersety = node.SelectNodes(".//*[contains(@class,'werset')]");
+                    if (wersety != null)
+                        foreach (var w in wersety)
+                            await UzupelnijWerset(w);
                     if (aktualnaGrupa.Count > 0)
                     {
                         var aklamacja = aktualnaGrupa.Last();
@@ -179,7 +180,6 @@ namespace Dziekanowka.Mechanizm
 
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260510"] = ["Ndz6WlkA"],
             ["20260511"] = ["pn6Wlk"],
             ["20260512"] = ["wt6Wlk"],
             ["20260513"] = ["sr6Wlk"],

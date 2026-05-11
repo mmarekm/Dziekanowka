@@ -1,6 +1,7 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @using Dziekanowka.Rozgrywki
+@using Dziekanowka.Components.Pages.Planszowki
 @inject SerwisSzachowy serwisSzachowy
 <div class="gryPlanszoweWidok widok rel @(pokazPlansze ? "przygaszony" : "")">
     <div class="abs gryPlanszoweDoSalon"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSalon)" class="wyroznionyGuzik"><img src="img/dom/salon/confirmGryPlanszowe.png" /></button></div>
@@ -10,7 +11,7 @@
         <div class="abs wyborRywala2os">
             @foreach (var rywal in rywale2os)
             {
-                <div class="rywal2os"><button class="wyroznionyGuzik" @onclick="() => DoSzachownicy(rywal)"><img src="img/@(rywal).png" /></button></div>
+                <div class="rywal2os"><button class="wyroznionyGuzik" @onclick="async () => await DoSzachownicy(rywal)"><img src="img/@(rywal).png" /></button></div>
             }
         </div>
     }
@@ -25,20 +26,8 @@
             @if (gramySzachy)
             {
                 <div class="rel widokGramySzachy">
-                    <div class="abs partiaSzachy partia1szachy">
-                        <img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" />
-                        <div class="rel menuSzachisty">
-                            <div class="abs klikSzachy poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
-                            <div class="abs klikSzachy proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
-                        </div>
-                    </div>
-                    <div class="abs partiaSzachy partia2szachy">
-                        <img class="obrazekSieMiesci" src="img/dom/salon/szachownica.png" />
-                        <div class="rel menuSzachisty">
-                            <div class="abs klikSzachy poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
-                            <div class="abs klikSzachy proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
-                        </div>
-                    </div>
+                    <Szachownica KlasaCss="partia1szachy" Partia="aktywnaPartia1!" Serwis="serwisSzachowy" />
+                    <Szachownica KlasaCss="partia2szachy" Partia="aktywnaPartia2!" Odwrocona="true" Serwis="serwisSzachowy" />
                 </div>
             }
         }
