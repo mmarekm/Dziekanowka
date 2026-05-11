@@ -19,6 +19,7 @@
 @if (pokazPlansze)
 {
     <div class="abs rozgrywkaSalon">
+        <div class="abs doSzafkiZGrami wyroznionyGuzik" @onclick="NieGramy"><img src="img/dom/potwierdzenie.png" class="obrazekContain"/></div>
         @if (graDwuosobowa)
         {
             <div class="abs graczSalon2os graczAktywnySalon2os"><img class="obrazekSieMiesci" src="img/@(Gracz.Nazwa).png" /></div>
@@ -37,6 +38,7 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private void NieGramy() => gramySzachy = false;
     private bool wyborRywala2os = false;
     private bool gramySzachy = false;
     private PartiaSzachow? aktywnaPartia1;
