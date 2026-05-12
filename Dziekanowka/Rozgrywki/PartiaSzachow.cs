@@ -11,6 +11,11 @@
         public string Nazwa { get; set; } = "";
         public bool RuchBialych { get; set; } = true;
         public List<PoleSzachownicy> Plansza { get; set; } = [];
+        public int OstatniRuchX { get; set; } = 0;
+        public int OstatniRuchY { get; set; } = 0;
+        public int OstatniStartX { get; set; } = 0;
+        public int OstatniStartY { get; set; } = 0;
+        public string OstatniaBierka { get; set; } = "";
         public static List<PoleSzachownicy> StartowePlansza()
         {
             var plansza = new List<PoleSzachownicy>();

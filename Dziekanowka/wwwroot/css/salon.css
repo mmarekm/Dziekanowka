@@ -111,6 +111,7 @@
 .bierka {
     width: 50px;
     height: 50px;
+    cursor: pointer
 }
 .poleSzachownicy {
     width: 100%;
@@ -137,4 +138,11 @@
 }
 .zaznaczonaBierka {
     filter: drop-shadow(0 0 10px green);
+}
+.poprzedniRuchTutaj {
+    filter: drop-shadow(0 0 12px coral) drop-shadow(0 0 8px red);
+}
+.mozliwyRuch {
+    background: rgba(100, 200, 100, 0.4);
+    border-radius: 50%;
 }

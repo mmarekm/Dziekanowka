@@ -11,7 +11,7 @@
             }
             else
             {
-                <div class="poleSzachownicy" style="@($"grid-column: {kolumna}; grid-row: {rzad};")" @onclick="async () => await PoleKlik(pole)"></div>
+                <div class="@KlasaPustegoPola(pole)" style="@($"grid-column: {kolumna}; grid-row: {rzad};")" @onclick="async () => await PoleKlik(pole)"></div>
             }
         }
     </div>
@@ -22,42 +22,66 @@
 </div>
 
 @code {
-        [Parameter] public PartiaSzachow Partia { get; set; } = null!;
-        [Parameter] public string KlasaCss { get; set; } = "";
-        [Parameter] public bool Odwrocona { get; set; } = false;
-        [Parameter] public SerwisSzachowy Serwis { get; set; } = null!;
+    [Parameter] public PartiaSzachow Partia { get; set; } = null!;
+    [Parameter] public string KlasaCss { get; set; } = "";
+    [Parameter] public bool Odwrocona { get; set; } = false;
+    [Parameter] public SerwisSzachowy Serwis { get; set; } = null!;
     private PoleSzachownicy? wybranaBierka;
-    private PoleSzachownicy? docelowePole;
+    private List<PoleSzachownicy> mozliweRuchy = [];
     private string KlasaBierki(PoleSzachownicy pole)
     {
         var klasy = new List<string> { "bierka" };
         if (wybranaBierka?.X == pole.X && wybranaBierka?.Y == pole.Y)
             klasy.Add("zaznaczonaBierka");
+        if (Partia.OstatniRuchX == pole.X && Partia.OstatniRuchY == pole.Y)
+            klasy.Add("poprzedniRuchTutaj");
+        if (mozliweRuchy.Any(p => p.X == pole.X && p.Y == pole.Y))
+            klasy.Add("mozliwyRuch");
+        return string.Join(" ", klasy);
+    }
+    private string KlasaPustegoPola(PoleSzachownicy pole)
+    {
+        var klasy = new List<string> { "poleSzachownicy" };
+        if (mozliweRuchy.Any(p => p.X == pole.X && p.Y == pole.Y))
+            klasy.Add("mozliwyRuch");
         return string.Join(" ", klasy);
     }
     private async Task PoleKlik(PoleSzachownicy pole)
     {
+        if (Partia.RuchBialych == Odwrocona) return;
         if (wybranaBierka == null)
         {
-            if (pole.Bierka != "")
+            if (pole.Bierka != "" && pole.Bierka.EndsWith("Bialy") == Partia.RuchBialych)
+            {    
                 wybranaBierka = pole;
+                mozliweRuchy = MechanizmSzachow.MozliweRuchy(pole, Partia.Plansza);
+            }
             return;
         }
         if (wybranaBierka.X == pole.X && wybranaBierka.Y == pole.Y)
         {
             wybranaBierka = null;
+            mozliweRuchy = [];
             return;
         }
         if (pole.Bierka != "" && wybranaBierka.Bierka.EndsWith("Bialy") == pole.Bierka.EndsWith("Bialy"))
         {
             wybranaBierka = pole;
+            mozliweRuchy = MechanizmSzachow.MozliweRuchy(pole, Partia.Plansza);
             return;
         }
-        docelowePole = pole;
+        if (!mozliweRuchy.Any(p => p.X == pole.X && p.Y == pole.Y)) return;
+        var docelowePole = pole;
         docelowePole.Bierka = wybranaBierka.Bierka;
+        Partia.OstatniRuchX = docelowePole.X;
+        Partia.OstatniRuchY = docelowePole.Y;
+        Partia.RuchBialych = !Partia.RuchBialych;
+        Partia.OstatniStartX = wybranaBierka.X;
+        Partia.OstatniStartY = wybranaBierka.Y;
+        Partia.OstatniaBierka = wybranaBierka.Bierka;
         wybranaBierka.Bierka = "";
         wybranaBierka = null;
-        docelowePole = null;
-        //await Serwis.ZapiszPartie(Partia);
+        mozliweRuchy = [];
+        await Serwis.ZapiszPartie(Partia);
     }
 }
