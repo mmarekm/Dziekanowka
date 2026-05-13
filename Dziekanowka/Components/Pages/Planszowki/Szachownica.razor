@@ -40,6 +40,15 @@
             <div class="abs przyciskSzachy decyzjaSzachyNie"><button class="wyroznionyGuzik" @onclick="() => chybaPrzegram = false"><img class="obrazekWypelnia" src="img/dom/rezygnacja.png" /></button></div>
         </div>
     }
+    @if (oczekujePromocji)
+    {
+        <div class="abs overlaySzachy overlayPromocja">
+            <div class="abs przyciskSzachy promocjaHetman" @onclick='() => Promuj("hetman")'><img class="obrazekWypelnia" src="img/dom/salon/szachy/hetman@(kolorPromocji).png" /></div>
+            <div class="abs przyciskSzachy promocjaWieza" @onclick='() => Promuj("wieza")'><img class="obrazekWypelnia" src="img/dom/salon/szachy/wieza@(kolorPromocji).png" /></div>
+            <div class="abs przyciskSzachy promocjaGoniec" @onclick='() => Promuj("goniec")'><img class="obrazekWypelnia" src="img/dom/salon/szachy/goniec@(kolorPromocji).png" /></div>
+            <div class="abs przyciskSzachy promocjaSkoczek" @onclick='() => Promuj("skoczek")'><img class="obrazekWypelnia" src="img/dom/salon/szachy/skoczek@(kolorPromocji).png" /></div>
+        </div>
+    }
 </div>
 
 @code {
@@ -60,6 +69,10 @@
     private bool chybaPrzegram = false;
     private double punktyGracza => Gracz.Statystyki.Mecze.Szachy.TryGetValue($"{NazwaPrzeciwnika}{(Odwrocona ? "Czarny" : "Bialy")}", out var p) ? p : 0;
     private double punktyPrzeciwnika => rywal?.Statystyki.Mecze.Szachy.TryGetValue($"{NazwaGracza}{(Odwrocona ? "Bialy" : "Czarny")}", out var p) == true ? p : 0;
+    private bool oczekujePromocji = false;
+    private PoleSzachownicy? polePromocji = null;
+    private string? kolorPromocji = null;
+    private int? ostatniStartX, ostatniStartY;
     private string KlasaBierki(PoleSzachownicy pole)
     {
         var klasy = new List<string> { "bierka" };
@@ -80,6 +93,7 @@
     }
     private async Task PoleKlik(PoleSzachownicy pole)
     {
+        if (oczekujePromocji) return;
         if (Partia.RuchBialych == Odwrocona) return;
         if (wybranaBierka == null)
         {
@@ -111,11 +125,28 @@
         }
         pole.Bierka = wybranaBierka.Bierka;
         wybranaBierka.Bierka = "";
+        int staryX = wybranaBierka.X;
+        int staryY = wybranaBierka.Y;
+        ostatniStartX = staryX;
+        ostatniStartY = staryY;
+        string bierkaNazwa = pole.Bierka;
+        if (bierkaNazwa.StartsWith("pion") && (pole.Y == 8 || pole.Y == 1))
+        {
+            oczekujePromocji = true;
+            polePromocji = pole;
+            kolorPromocji = pole.Bierka.EndsWith("Bialy") ? "Bialy" : "Czarny";
+            wybranaBierka = null;
+            mozliweRuchy = [];
+            StateHasChanged();
+            return;
+        }
         Partia.OstatniRuchX = pole.X;
         Partia.OstatniRuchY = pole.Y;
-        Partia.OstatniStartX = wybranaBierka.X;
-        Partia.OstatniStartY = wybranaBierka.Y;
-        Partia.OstatniaBierka = pole.Bierka;
+        Partia.OstatniStartX = staryX;
+        Partia.OstatniStartY = staryY;
+        ostatniStartX = null;
+        ostatniStartY = null;
+        Partia.OstatniaBierka = bierkaNazwa;
         Partia.RuchBialych = !Partia.RuchBialych;
         wybranaBierka = null;
         mozliweRuchy = [];
@@ -168,4 +199,21 @@
         await Serwis.ZapiszPartie(Partia);
     }
     private PoleSzachownicy? Pole(int x, int y) => Partia.Plansza.FirstOrDefault(p => p.X == x && p.Y == y);
+    private async Task Promuj(string figura)
+    {
+        if (polePromocji == null || kolorPromocji == null) return;
+        polePromocji.Bierka = figura + kolorPromocji;
+        Partia.OstatniRuchX = polePromocji.X;
+        Partia.OstatniRuchY = polePromocji.Y;
+        Partia.OstatniStartX = ostatniStartX ?? 0;
+        Partia.OstatniStartY = ostatniStartY ?? 0;
+        Partia.OstatniaBierka = polePromocji.Bierka;
+        Partia.RuchBialych = !Partia.RuchBialych;
+        oczekujePromocji = false;
+        polePromocji = null;
+        kolorPromocji = null;
+        ostatniStartX = null;
+        ostatniStartY = null;
+        await Serwis.ZapiszPartie(Partia);
+    }
 }

@@ -33,7 +33,6 @@
                 if (poleBicia != null)
                     mozliwe.Add(poleBicia);
             }
-            // dodac promocje
             return mozliwe;
         }
         private static List<PoleSzachownicy> RuchySkoczka(PoleSzachownicy bierka, List<PoleSzachownicy> plansza)

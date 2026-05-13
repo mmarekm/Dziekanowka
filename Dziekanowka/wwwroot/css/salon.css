@@ -173,6 +173,7 @@
     height: 120px;
     bottom: 50px;
     z-index: 99;
+    cursor: pointer;
 }
 .decyzjaSzachyTak {
     left: 50px;
@@ -182,4 +183,16 @@
 }
 .overlayPorazka {
     background-image: url('../img/dom/salon/porazka.png');
+}
+.promocjaSkoczek {
+    left: 0;
+}
+.promocjaGoniec {
+    left: 125px;
+}
+.promocjaWieza {
+    left: 250px;
+}
+.promocjaHetman {
+    left: 375px;
 }

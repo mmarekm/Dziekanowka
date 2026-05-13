@@ -30,6 +30,9 @@
             for (int x = 1; x <= 8; x++) Postaw(x, 2, "pionBialy");
             Postaw(1, 8, "wiezaCzarny"); Postaw(2, 8, "skoczekCzarny"); Postaw(3, 8, "goniecCzarny"); Postaw(4, 8, "hetmanCzarny"); Postaw(5, 8, "krolCzarny"); Postaw(6, 8, "goniecCzarny"); Postaw(7, 8, "skoczekCzarny"); Postaw(8, 8, "wiezaCzarny");
             for (int x = 1; x <= 8; x++) Postaw(x, 7, "pionCzarny");
+            // debug
+            // Postaw(4, 4, "krolBialy");
+            //debug
             return plansza;
         }
         public static Dictionary<string, PartiaSzachow> StartowePartie()
