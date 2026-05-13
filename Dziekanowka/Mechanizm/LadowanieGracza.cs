@@ -101,5 +101,17 @@ namespace Dziekanowka.Mechanizm
             var gracze = await WczytajWszystkichGraczy();
             return gracze[nazwa.ToLower()].Haslo;
         }
+        public async Task<Gracz> PobierzGracza(string nazwa)
+        {
+            var gracze = await WczytajWszystkichGraczy();
+            return gracze[nazwa.ToLower()];
+        }
+
+        public async Task ZapiszGracza(Gracz gracz)
+        {
+            var gracze = await WczytajWszystkichGraczy();
+            gracze[gracz.Nazwa.ToLower()] = gracz;
+            await ZapiszWszystkichGraczy(gracze);
+        }
     }
 }

@@ -2,6 +2,7 @@
 @using Dziekanowka.Gracza
 @using Dziekanowka.Rozgrywki
 @using Dziekanowka.Components.Pages.Planszowki
+@inject LadowanieGracza ladowanieGracza
 @inject SerwisSzachowy serwisSzachowy
 <div class="gryPlanszoweWidok widok rel @(pokazPlansze ? "przygaszony" : "")">
     <div class="abs gryPlanszoweDoSalon"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSalon)" class="wyroznionyGuzik"><img src="img/dom/salon/confirmGryPlanszowe.png" /></button></div>
@@ -27,8 +28,8 @@
             @if (gramySzachy)
             {
                 <div class="rel widokGramySzachy">
-                    <Szachownica KlasaCss="partia1szachy" Partia="aktywnaPartia1!" Serwis="serwisSzachowy" />
-                    <Szachownica KlasaCss="partia2szachy" Partia="aktywnaPartia2!" Odwrocona="true" Serwis="serwisSzachowy" />
+                    <Szachownica KlasaCss="partia1szachy" Partia="aktywnaPartia1!" Serwis="serwisSzachowy" Gracz="Gracz" />
+                    <Szachownica KlasaCss="partia2szachy" Partia="aktywnaPartia2!" Odwrocona="true" Serwis="serwisSzachowy" Gracz="Gracz" />
                 </div>
             }
         }
