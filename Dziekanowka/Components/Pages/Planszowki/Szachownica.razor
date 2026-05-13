@@ -124,17 +124,64 @@
             if (zbityPion != null) zbityPion.Bierka = "";
         }
         pole.Bierka = wybranaBierka.Bierka;
-        wybranaBierka.Bierka = "";
+        string bierkaNazwa = pole.Bierka;
+        bool czyKrol = bierkaNazwa.StartsWith("krol");
+        bool czyWieza = bierkaNazwa.StartsWith("wieza");
         int staryX = wybranaBierka.X;
         int staryY = wybranaBierka.Y;
+        bool biala = bierkaNazwa.EndsWith("Bialy");
+        if (czyKrol && Math.Abs(pole.X - staryX) == 2)
+        {
+            int y = pole.Y;
+            int nowaXWiezy, staraXWiezy;
+            if (pole.X == 7)
+            {
+                staraXWiezy = 8;
+                nowaXWiezy = 6;
+            }
+            else if (pole.X == 3)
+            {
+                staraXWiezy = 1;
+                nowaXWiezy = 4;
+            }
+            else return;
+            var wieza = Pole(staraXWiezy, y);
+            var nowePoleWiezy = Pole(nowaXWiezy, y);
+            if (wieza != null && nowePoleWiezy != null && wieza.Bierka.StartsWith("wieza"))
+            {
+                nowePoleWiezy.Bierka = wieza.Bierka;
+                wieza.Bierka = "";
+                bool bialaWiezy = nowePoleWiezy.Bierka.EndsWith("Bialy");
+                if (bialaWiezy && staraXWiezy == 1)
+                    Partia.BialaWiezaKrolowaRuszala = true;
+                else if (bialaWiezy && staraXWiezy == 8)
+                    Partia.BialaWiezaKrolRuszala = true;
+                else if (!bialaWiezy && staraXWiezy == 1)
+                    Partia.CzarnaWiezaKrolowaRuszala = true;
+                else if (!bialaWiezy && staraXWiezy == 8)
+                    Partia.CzarnaWiezaKrolRuszala = true;
+            }
+        }
+        wybranaBierka.Bierka = "";
+        if (czyKrol)
+        {
+            if (biala) Partia.BialyKrolRuszal = true;
+            else Partia.CzarnyKrolRuszal = true;
+        }
+        if (czyWieza)
+        {
+            if (biala && staryX == 1 && staryY == 1) Partia.BialaWiezaKrolowaRuszala = true;
+            else if (biala && staryX == 8 && staryY == 1) Partia.BialaWiezaKrolRuszala = true;
+            else if (!biala && staryX == 1 && staryY == 8) Partia.CzarnaWiezaKrolowaRuszala = true;
+            else if (!biala && staryX == 8 && staryY == 8) Partia.CzarnaWiezaKrolRuszala = true;
+        }
         ostatniStartX = staryX;
         ostatniStartY = staryY;
-        string bierkaNazwa = pole.Bierka;
         if (bierkaNazwa.StartsWith("pion") && (pole.Y == 8 || pole.Y == 1))
         {
             oczekujePromocji = true;
             polePromocji = pole;
-            kolorPromocji = pole.Bierka.EndsWith("Bialy") ? "Bialy" : "Czarny";
+            kolorPromocji = biala ? "Bialy" : "Czarny";
             wybranaBierka = null;
             mozliweRuchy = [];
             StateHasChanged();
@@ -144,10 +191,10 @@
         Partia.OstatniRuchY = pole.Y;
         Partia.OstatniStartX = staryX;
         Partia.OstatniStartY = staryY;
-        ostatniStartX = null;
-        ostatniStartY = null;
         Partia.OstatniaBierka = bierkaNazwa;
         Partia.RuchBialych = !Partia.RuchBialych;
+        ostatniStartX = null;
+        ostatniStartY = null;
         wybranaBierka = null;
         mozliweRuchy = [];
         await Serwis.ZapiszPartie(Partia);
@@ -196,6 +243,12 @@
         Partia.OstatniStartY = 0;
         Partia.OstatniaBierka = "";
         Partia.TrwaPropozyjaRemisu = "";
+        Partia.BialyKrolRuszal = false;
+        Partia.BialaWiezaKrolowaRuszala = false;
+        Partia.BialaWiezaKrolRuszala = false;
+        Partia.CzarnyKrolRuszal = false;
+        Partia.CzarnaWiezaKrolowaRuszala = false;
+        Partia.CzarnaWiezaKrolRuszala = false;
         await Serwis.ZapiszPartie(Partia);
     }
     private PoleSzachownicy? Pole(int x, int y) => Partia.Plansza.FirstOrDefault(p => p.X == x && p.Y == y);

@@ -19,6 +19,12 @@
         public string TrwaPropozyjaRemisu { get; set; } = "";
         public string NazwaBialego { get; set; } = "";
         public string NazwaCzarnego { get; set; } = "";
+        public bool BialyKrolRuszal { get; set; } = false;
+        public bool BialaWiezaKrolowaRuszala { get; set; } = false;
+        public bool BialaWiezaKrolRuszala { get; set; } = false;
+        public bool CzarnyKrolRuszal { get; set; } = false;
+        public bool CzarnaWiezaKrolowaRuszala { get; set; } = false;
+        public bool CzarnaWiezaKrolRuszala { get; set; } = false;
         public static List<PoleSzachownicy> StartowePlansza()
         {
             var plansza = new List<PoleSzachownicy>();
@@ -30,9 +36,6 @@
             for (int x = 1; x <= 8; x++) Postaw(x, 2, "pionBialy");
             Postaw(1, 8, "wiezaCzarny"); Postaw(2, 8, "skoczekCzarny"); Postaw(3, 8, "goniecCzarny"); Postaw(4, 8, "hetmanCzarny"); Postaw(5, 8, "krolCzarny"); Postaw(6, 8, "goniecCzarny"); Postaw(7, 8, "skoczekCzarny"); Postaw(8, 8, "wiezaCzarny");
             for (int x = 1; x <= 8; x++) Postaw(x, 7, "pionCzarny");
-            // debug
-            // Postaw(4, 4, "krolBialy");
-            //debug
             return plansza;
         }
         public static Dictionary<string, PartiaSzachow> StartowePartie()

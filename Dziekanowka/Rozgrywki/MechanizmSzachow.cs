@@ -83,7 +83,7 @@
             return mozliwe;
         }
         private static List<PoleSzachownicy> RuchyHetmana(PoleSzachownicy bierka, List<PoleSzachownicy> plansza) => [.. RuchyWiezy(bierka, plansza), .. RuchyGonca(bierka, plansza)];
-        private static List<PoleSzachownicy> RuchyKrola(PoleSzachownicy bierka, List<PoleSzachownicy> plansza)
+        private static List<PoleSzachownicy> RuchyKrola(PoleSzachownicy bierka, List<PoleSzachownicy> plansza, PartiaSzachow partia, bool ignorujRoszade = false)
         {
             var mozliwe = new List<PoleSzachownicy>();
             var kroki = new (int dx, int dy)[] { (1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1) };
@@ -94,18 +94,67 @@
                 if (sprPole.Bierka != "" && sprPole.Bierka.EndsWith("Bialy") == bierka.Bierka.EndsWith("Bialy")) continue;
                 mozliwe.Add(sprPole);
             }
-            // uwzglednic roszade i niemoznosc wejscia na szachowane pola
+            if (!ignorujRoszade)
+            {
+                bool bialy = bierka.Bierka.EndsWith("Bialy");
+                int yKrola = bialy ? 1 : 8;
+                if (bierka.X == 5 && bierka.Y == yKrola)
+                {
+                    if ((bialy && !partia.BialyKrolRuszal && !partia.BialaWiezaKrolRuszala) ||
+                        (!bialy && !partia.CzarnyKrolRuszal && !partia.CzarnaWiezaKrolRuszala))
+                    {
+                        if (Pole(6, yKrola, plansza)?.Bierka == "" && Pole(7, yKrola, plansza)?.Bierka == "")
+                        {
+                            if (!CzyPoleAtakowane(5, yKrola, !bialy, plansza, partia) &&
+                                !CzyPoleAtakowane(6, yKrola, !bialy, plansza, partia) &&
+                                !CzyPoleAtakowane(7, yKrola, !bialy, plansza, partia))
+                            {
+                                var poleRoszady = Pole(7, yKrola, plansza);
+                                if (poleRoszady != null) mozliwe.Add(poleRoszady);
+                            }
+                        }
+                    }
+                    if ((bialy && !partia.BialyKrolRuszal && !partia.BialaWiezaKrolowaRuszala) ||
+                        (!bialy && !partia.CzarnyKrolRuszal && !partia.CzarnaWiezaKrolowaRuszala))
+                    {
+                        if (Pole(4, yKrola, plansza)?.Bierka == "" && Pole(3, yKrola, plansza)?.Bierka == "" && Pole(2, yKrola, plansza)?.Bierka == "")
+                        {
+                            if (!CzyPoleAtakowane(5, yKrola, !bialy, plansza, partia) &&
+                                !CzyPoleAtakowane(4, yKrola, !bialy, plansza, partia) &&
+                                !CzyPoleAtakowane(3, yKrola, !bialy, plansza, partia))
+                            {
+                                var poleRoszady = Pole(3, yKrola, plansza);
+                                if (poleRoszady != null) mozliwe.Add(poleRoszady);
+                            }
+                        }
+                    }
+                }
+            }
+            // uwzglednic niemoznosc wejscia na szachowane pola
             return mozliwe;
         }
-        public static List<PoleSzachownicy> MozliweRuchy(PoleSzachownicy bierka, List<PoleSzachownicy> plansza, PartiaSzachow partia) => bierka.Bierka switch
+        public static List<PoleSzachownicy> MozliweRuchy(PoleSzachownicy bierka, List<PoleSzachownicy> plansza, PartiaSzachow partia, bool ignorujRoszade = false) => bierka.Bierka switch
             {
                 var b when b.StartsWith("pion") => RuchyPiona(bierka, plansza, partia),
                 var b when b.StartsWith("skoczek") => RuchySkoczka(bierka, plansza),
                 var b when b.StartsWith("goniec") => RuchyGonca(bierka, plansza),
                 var b when b.StartsWith("wieza") => RuchyWiezy(bierka, plansza),
                 var b when b.StartsWith("hetman") => RuchyHetmana(bierka, plansza),
-                var b when b.StartsWith("krol") => RuchyKrola(bierka, plansza),
+                var b when b.StartsWith("krol") => RuchyKrola(bierka, plansza, partia, ignorujRoszade),
                 _ => []
             };
+        public static bool CzyPoleAtakowane(int x, int y, bool przezBialych, List<PoleSzachownicy> plansza, PartiaSzachow partia)
+        {
+            foreach (var pole in plansza)
+            {
+                if (pole.Bierka != "" && pole.Bierka.EndsWith("Bialy") == przezBialych)
+                {
+                    var ruchy = MozliweRuchy(pole, plansza, partia, ignorujRoszade: true);
+                    if (ruchy.Any(p => p.X == x && p.Y == y))
+                        return true;
+                }
+            }
+            return false;
+        }
     }
 }
