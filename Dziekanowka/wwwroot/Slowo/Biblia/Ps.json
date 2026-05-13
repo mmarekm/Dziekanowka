@@ -1,5 +1,20 @@
 {
-    "2": {
+    "1": {
+		"1a": "Szczęśliwy, kto nie słucha rady bezbożnych,",
+		"1b": "nie wstępuje na drogę grzeszników",
+		"1c": "i nie zasiada w gronie szyderców,",
+		"2a": "lecz upodobał sobie w Prawie Pana,",
+		"2b": "nad Jego Prawem rozmyśla dniem i nocą.",
+		"3a": "On jest jak drzewo zasadzone nad strumieniami wód,",
+		"3b": "które przynosi owoc w swoim czasie.",
+		"3c": "Jego liście nie więdną",
+		"3d": "i wszystko, co robi, jest udane.",
+		"4a": "A bezbożni – przeciwnie:",
+		"4b": "są jak plewa, którą wiatr unosi.",
+		"6a": "Bo Pan zna drogę sprawiedliwych,",
+		"6b": "a droga bezbożnych zaginie."
+	},
+	"2": {
 		"1a": "Dlaczego burzą się narody",
 		"1b": "i ludy daremnie spiskują?",
 		"2a": "Powstali królowie ziemi i sprzymierzyli się książęta",
@@ -316,6 +331,10 @@
 		"8b": "aby ich ocalić.",
 		"9a": "Skosztujcie i zobaczcie, że Pan jest dobry,",
 		"9b": "szczęśliwy ten, kto się do Niego ucieka.",
+		"10a": "Bójcie się Pana, wszyscy Jego święci,",
+		"10b": "gdyż bogobojni nie zaznają biedy.",
+		"11a": "Bogaci popadli w biedę i zaznali głodu,",
+		"11b": "a szukającym woli Pana niczego nie zabraknie.",
 		"17a": "Od złoczyńców Pan się odwraca,",
 		"17b": "by nie zostało o nich wspomnienie na ziemi.",
 		"18a": "Pan słyszy wołających o pomoc",
@@ -401,6 +420,13 @@
 		"3a": "Piękne to wzgórze jest radością całej ziemi;",
 		"3b": "góra Syjon na krańcach północy jest miastem wielkiego Króla.",
 		"4": "Bóg w pałacach Syjonu okazał się twierdzą.",
+		"5a": "Bo oto zebrali się królowie,",
+		"5b": "zeszli się i razem wyruszyli.",
+		"6a": "Zdumieli się na ten widok",
+		"6b": "i zadrżeli z przerażenia.",
+		"7a": "Strach ich tam ogarnął,",
+		"7b": "ból – jak rodzącą kobietę.",
+		"8": "Jak wtedy, gdy wiatrem wschodnim rozbijasz okręty Tarszisz.",
 		"10a": "Rozważamy Twą łaskawość, Boże,",
 		"10b": "we wnętrzu Twojej świątyni.",
 		"11a": "Jak imię Twe, Boże, tak i chwała Twoja sięga po krańce ziemi,",
@@ -431,7 +457,12 @@
 		"16b": "„Czemu głosisz moje nakazy",
 		"16c": "i wymawiasz ustami moje przymierze,",
 		"17a": "skoro nienawidzisz karności",
-		"17b": "i lekceważysz moje słowa?"
+		"17b": "i lekceważysz moje słowa?",
+		"21a": "Tak postępujesz, a Ja mam milczeć?",
+		"21b": "Sądzisz, że jestem do ciebie podobny?",
+		"21c": "Rzucę ci w twarz oskarżenie!",
+		"23a": "Kto składa ofiarę uwielbienia, oddaje Mi chwałę",
+		"23b": "i na tej drodze okażę mu Boże zbawienie”."
 	},
 	"51": {
 		"3a": "Zmiłuj się nade mną, Boże, w łaskawości Twojej,",
@@ -510,7 +541,10 @@
 		"12a": "Rok wieńczysz Twoimi plonami,",
 		"12b": "tam gdzie przejdziesz, wzbudzasz świeżą zieleń.",
 		"13a": "Użyźniasz stepowe pastwiska,",
-		"13b": "a wzgórza przepasujesz weselem."
+		"13b": "a wzgórza przepasujesz weselem.",
+		"14a": "Łąki odziewają się stadami,",
+		"14b": "a doliny okrywają się zbożem.",
+		"14c": "Wybuchają radosnym śpiewem."
 	},
 	"66": {
 		"1": "Radośnie sławcie Boga, wszystkie ziemie!",
@@ -796,6 +830,24 @@
 		"5a": "Twoje świadectwa są godne wiary,",
 		"5b": "Twemu domowi, Panie, przystoi świętość",
 		"5c": "na wieczne czasy."
+	},
+	"94": {
+		"5a": "Twój lud gnębią, Panie,",
+		"5b": "dręczą dziedzictwo Twoje.",
+		"6a": "Zabijają wdowy i cudzoziemców,",
+		"6b": "mordują sieroty.",
+		"7a": "Mówią: „Pan tego nie widzi,",
+		"7b": "Bóg Jakuba nie dostrzega!”.",
+		"8a": "Zrozumcie więc, niemądrzy wśród ludu!",
+		"8b": "Kiedy wy, głupcy, zmądrzejecie?",
+		"9a": "Czy Ten, który stworzył ucho, nie usłyszy?",
+		"9b": "Ten, który ukształtował oko, nie zobaczy?",
+		"10a": "Czy Ten, co karci narody, nie zgromi?",
+		"10b": "Ponieważ to On uczy człowieka wiedzy.",
+		"14a": "Wszak Pan nie odrzuci swego ludu",
+		"14b": "i dziedzictwa swego nie zostawi,",
+		"15a": "aż przywróci sprawiedliwe sądy",
+		"15b": "i pójdą za Nim wszyscy prawego serca."
 	},
 	"95": {
         "1a": "Chodźcie, śpiewajmy Panu,",
@@ -1132,6 +1184,17 @@
 		"27b": "i nas oświeca!"
 	},
 	"119": {
+		"9a": "W jaki sposób młodzieniec prostuje swą drogę?",
+		"9b": "Zachowując Twoje słowa!",
+		"10a": "Całym sercem szukam Twojej woli;",
+		"10b": "nie odtrącaj mnie od nakazów Twoich!",
+		"11a": "W mym sercu zachowuję Twoje słowa,",
+		"11b": "abym nie zgrzeszył przeciw Tobie.",
+		"12a": "Błogosławiony jesteś, Panie,",
+		"12b": "naucz mnie Twoich ustaw.",
+		"13": "Mymi wargami ogłaszam wszystkie wyroki ust Twoich.",
+		"14a": "Na drodze Twych pouczeń znajduję radość większą",
+		"14b": "niż z wielkiego bogactwa.",
 		"23a": "Oto władcy zasiedli, żeby mnie oskarżać,",
 		"23b": "lecz sługa Twój rozmyśla o Twoich ustawach.",
 		"24a": "Gdyż Twoje pouczenia są dla mnie rozkoszą,",

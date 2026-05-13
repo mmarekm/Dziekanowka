@@ -16,9 +16,28 @@
         }
     </div>
     <div class="rel menuSzachisty">
-        <div class="abs klikSzachy poddajSieSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
-        <div class="abs klikSzachy proponujRemisSzachy"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
+        <div class="abs klikSzachy punktyGraczaSzachy punktyRywalaSzachy">@punktyPrzeciwnika</div>
+        <div class="abs klikSzachy poddajSieSzachy" @onclick="() => chybaPrzegram = true"><img class="obrazekSieMiesci" src="img/dom/salon/porazka.png" /></div>
+        <div class="abs klikSzachy proponujRemisSzachy" @onclick="ProponujRemis"><img class="obrazekSieMiesci" src="img/dom/salon/remis.png" /></div>
+        <div class="abs klikSzachy punktyGraczaSzachy punktyMojeSzachy">@punktyGracza</div>
     </div>
+    @if (Partia.TrwaPropozyjaRemisu != "")
+    {
+        <div class="abs overlaySzachy overlayRemis">
+            @if (Partia.TrwaPropozyjaRemisu == NazwaGracza)
+            {
+                <div class="abs przyciskSzachy decyzjaSzachyTak"><button class="wyroznionyGuzik" @onclick="PrzyjmijRemis"><img class="obrazekWypelnia" src="img/dom/potwierdzenie.png" /></button></div>
+                <div class="abs przyciskSzachy decyzjaSzachyNie"><button class="wyroznionyGuzik" @onclick="OdrzucRemis"><img class="obrazekWypelnia" src="img/dom/rezygnacja.png" /></button></div>
+            }
+        </div>
+    }
+    @if (chybaPrzegram)
+    {
+        <div class="abs overlaySzachy overlayPorazka">
+            <div class="abs przyciskSzachy decyzjaSzachyTak"><button class="wyroznionyGuzik" @onclick="PoddajSie"><img class="obrazekWypelnia" src="img/dom/potwierdzenie.png" /></button></div>
+            <div class="abs przyciskSzachy decyzjaSzachyNie"><button class="wyroznionyGuzik" @onclick="() => chybaPrzegram = false"><img class="obrazekWypelnia" src="img/dom/rezygnacja.png" /></button></div>
+        </div>
+    }
 </div>
 
 @code {
@@ -26,8 +45,13 @@
     [Parameter] public string KlasaCss { get; set; } = "";
     [Parameter] public bool Odwrocona { get; set; } = false;
     [Parameter] public SerwisSzachowy Serwis { get; set; } = null!;
+    private string NazwaGracza => Odwrocona ? Partia.NazwaCzarnego : Partia.NazwaBialego;
+    private string NazwaPrzeciwnika => Odwrocona ? Partia.NazwaBialego : Partia.NazwaCzarnego;
     private PoleSzachownicy? wybranaBierka;
     private List<PoleSzachownicy> mozliweRuchy = [];
+    private bool chybaPrzegram = false;
+    private double punktyGracza => 0; // logika liczenia punktow - pozniej
+    private double punktyPrzeciwnika => 0; // logika liczenia punktow - pozniej
     private string KlasaBierki(PoleSzachownicy pole)
     {
         var klasy = new List<string> { "bierka" };
@@ -82,6 +106,39 @@
         wybranaBierka.Bierka = "";
         wybranaBierka = null;
         mozliweRuchy = [];
+        await Serwis.ZapiszPartie(Partia);
+    }
+    private async Task ProponujRemis()
+    {
+        Partia.TrwaPropozyjaRemisu = NazwaPrzeciwnika;
+        await Serwis.ZapiszPartie(Partia);
+    }
+    private async Task PrzyjmijRemis()
+    {
+        // logika dodania 0.5 punktu - pozniej
+        await NowaPartia();
+    }
+    private async Task OdrzucRemis()
+    {
+        Partia.TrwaPropozyjaRemisu = "";
+        await Serwis.ZapiszPartie(Partia);
+    }
+    private async Task PoddajSie()
+    {
+        chybaPrzegram = false;
+        // logika dodania 0 punktow graczowi i 1 punktu rywalowi - pozniej
+        await NowaPartia();
+    }
+    private async Task NowaPartia()
+    {
+        Partia.Plansza = PartiaSzachow.StartowePlansza();
+        Partia.RuchBialych = true;
+        Partia.OstatniRuchX = 0;
+        Partia.OstatniRuchY = 0;
+        Partia.OstatniStartX = 0;
+        Partia.OstatniStartY = 0;
+        Partia.OstatniaBierka = "";
+        Partia.TrwaPropozyjaRemisu = "";
         await Serwis.ZapiszPartie(Partia);
     }
 }

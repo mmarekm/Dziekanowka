@@ -120,9 +120,8 @@
 }
 .menuSzachisty {
     margin-left: 50px;
-    margin-top: 100px;
     width: 200px;
-    height: 300px;
+    height: 500px;
 }
 .klikSzachy {
     width: 80px;
@@ -130,11 +129,24 @@
     left: 10px;
     cursor: pointer;
 }
+.punktyRywalaSzachy {
+    top: 0;
+}
 .poddajSieSzachy {
-    top: 35px;
+    top: 135px;
 }
 .proponujRemisSzachy {
-    top: 185px;
+    top: 285px;
+}
+.punktyMojeSzachy {
+    bottom: 0;
+}
+.punktyGraczaSzachy {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: white;
 }
 .zaznaczonaBierka {
     filter: drop-shadow(0 0 10px green);
@@ -145,4 +157,29 @@
 .mozliwyRuch {
     background: rgba(100, 200, 100, 0.4);
     border-radius: 50%;
+}
+.overlaySzachy {
+    width: 500px;
+    height: 500px;
+    top: 0;
+    left: 0;
+    z-index: 98;
+}
+.overlayRemis {
+    background-image: url('../img/dom/salon/remis.png');
+}
+.przyciskSzachy {
+    width: 120px;
+    height: 120px;
+    bottom: 50px;
+    z-index: 99;
+}
+.decyzjaSzachyTak {
+    left: 50px;
+}
+.decyzjaSzachyNie {
+    right: 50px;
+}
+.overlayPorazka {
+    background-image: url('../img/dom/salon/porazka.png');
 }

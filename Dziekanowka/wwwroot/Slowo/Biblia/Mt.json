@@ -205,6 +205,9 @@
 		"31": "Nie bójcie się więc! Wy jesteście warci więcej niż wiele wróbli.",
 		"32": "Kto się przyzna do Mnie przed ludźmi, do tego i Ja się przyznam przed moim Ojcem, który jest w niebie.",
 		"33": "Ale jeśli ktoś się Mnie wyprze przed ludźmi, tego i Ja się wyprę przed moim Ojcem, który jest w niebie.",
+		"34": "Nie myślcie, że przyszedłem przynieść pokój na ziemię. Nie przyszedłem przynieść pokoju, ale miecz.",
+		"35": "Przyszedłem poróżnić syna z ojcem, córkę z matką, a synową z teściową.",
+		"36": "Nieprzyjaciółmi człowieka staną się jego domownicy.",
 		"37": "Jeżeli ktoś kocha ojca lub matkę bardziej niż Mnie, nie jest Mnie godny. Podobnie jeśli ktoś kocha syna lub córkę bardziej niż Mnie, nie jest Mnie godny.",
 		"38": "Kto nie bierze swego krzyża i nie naśladuje Mnie, nie jest Mnie godny.",
 		"39": "Ten, kto znajduje swoje życie, straci je; ten zaś, kto traci swoje życie z mojego powodu, znajdzie je.",
@@ -213,6 +216,12 @@
 		"42": "Zapewniam was: Jeśli ktoś poda choćby kubek zimnej wody jednemu z tych najmniejszych ze względu na to, że jest moim uczniem, nie utraci swojej zapłaty”."
 	},
 	"11": {
+		"1": "Gdy Jezus skończył udzielać pouczeń dwunastu uczniom, odszedł stamtąd, aby głosić naukę w miastach.",
+		"20": "Potem zaczął czynić wyrzuty miastom, w których dokonał najwięcej cudów, za to, że się nie nawróciły.",
+		"21": "„Biada tobie, Korozain! Biada tobie, Betsaido! Gdyby w Tyrze i Sydonie działy się te cuda, które u was się dokonały, już dawno by pokutowały w worze pokutnym i popiele i nawróciłyby się.",
+		"22": "Dlatego mówię wam: Lżej będzie Tyrowi i Sydonowi w dniu sądu niż wam.",
+		"23": "A ty, Kafarnaum: Czy aż do nieba masz być wywyższone? Aż do piekła zstąpisz! Bo gdyby w Sodomie dokonały się cuda, które u ciebie miały miejsce, ocalałaby aż po dziś dzień.",
+		"24": "Dlatego mówię wam, że ziemi Sodomy lżej będzie w dniu sądu niż tobie”.",
 		"25": "Wtedy Jezus przemówił: „Wysławiam Cię, Ojcze, Panie nieba i ziemi, że zakryłeś to przed mądrymi i roztropnymi, a objawiłeś tym, którzy są jak małe dzieci.",
 		"26": "Tak, Ojcze. Bo tak się Tobie spodobało.",
 		"27": "Mój Ojciec przekazał Mi wszystko i nikt nie zna Syna jak tylko Ojciec. Nikt nie zna też Ojca jak tylko Syn i ten, komu Syn zechce objawić.",
@@ -228,6 +237,29 @@
 		"50": "Bo kto wypełnia wolę mojego Ojca, który jest w niebie, ten jest moim bratem, siostrą i matką”."
 	},
 	"13": {
+		"1": "Pewnego dnia Jezus wyszedł z domu i usiadł nad jeziorem.",
+		"2": "Zgromadziły się wokół Niego tak wielkie tłumy, że musiał wsiąść do łodzi, podczas gdy cały lud pozostał na brzegu.",
+		"3": "I wiele im mówił w przypowieściach. Powiedział: „Oto siewca wyszedł siać.",
+		"4": "A gdy siał, niektóre ziarna padły koło drogi. Przyleciały ptaki i wydziobały je.",
+		"5": "Inne padły na grunt kamienisty, gdzie było mało ziemi, i szybko wzeszły, bo gleba nie była głęboka.",
+		"6": "Lecz gdy pokazało się słońce, przypaliło je i uschły, bo nie zapuściły korzeni.",
+		"7": "Inne padły między ciernie. A ciernie wyrosły i przygłuszyły je.",
+		"8": "Jeszcze inne padły na glebę urodzajną i wydały plon: jedno stokrotny, inne sześćdziesięciokrotny, a jeszcze inne trzydziestokrotny.",
+		"9": "Kto ma uszy, niech słucha”.",
+		"10": "Wtedy uczniowie podeszli do Niego i zapytali: „Dlaczego mówisz do nich w przypowieściach?”.",
+		"11": "A On odpowiedział: „To wam dane jest poznać tajemnice królestwa niebieskiego, a nie tamtym.",
+		"12": "Bo temu, kto ma, będzie dodane i będzie miał w nadmiarze. A temu, kto nie ma, zabiorą nawet to, co ma.",
+		"13": "Dlatego mówię do nich w przypowieściach, gdyż patrzą, a nie widzą; słuchają, a nie słyszą i niczego nie rozumieją.",
+		"14": "Tak spełnia się na nich proroctwo Izajasza: Będziecie przysłuchiwać się, ale nic nie zrozumiecie, będziecie się wpatrywać, ale nie zobaczycie.",
+		"15": "Serce tego ludu stało się bowiem gnuśne, ich uszy dotknęła głuchota, a oczy ślepota, bo nie chcą widzieć ani słyszeć i nie chcą zrozumieć ani się nawrócić, żebym ich uzdrowił.",
+		"16": "Lecz szczęśliwe wasze oczy, że widzą, i uszy, że słyszą.",
+		"17": "Zapewniam was bowiem: Wielu proroków i sprawiedliwych pragnęło zobaczyć to, co wy widzicie, a nie zobaczyli; i usłyszeć to, co wy słyszycie, a nie usłyszeli.",
+		"18": "Posłuchajcie zatem objaśnienia przypowieści o siewcy.",
+		"19": "Do tego, który słucha nauki o królestwie, a nie rozumie, przychodzi Zły i wyrywa to, co zostało zasiane w jego sercu. Taki człowiek przypomina ziarno zasiane koło drogi.",
+		"20": "A do ziarna zasianego na gruncie kamienistym podobny jest ten, kto słucha słowa i przyjmuje je natychmiast z radością,",
+		"21": "ale nie ma w sobie korzenia i jest niestały. Dlatego gdy przychodzą trudności lub prześladowanie z powodu słowa, zaraz się załamuje.",
+		"22": "Do ziarna zasianego między cierniami podobny jest ten, kto słucha słowa, ale codzienne troski i powaby bogactwa zagłuszają w nim słowo i nie wydaje ono owocu.",
+		"23": "Wreszcie do ziarna zasianego na glebie urodzajnej podobny jest ten, kto słucha nauki i ją rozumie. Dlatego przynosi plon: jeden stokrotny, drugi sześćdziesięciokrotny, a trzeci trzydziestokrotny”.",
 		"54": "Przyszedł do swego miasta rodzinnego i nauczał w synagodze. Zdziwieni mieszkańcy pytali: „Skąd u Niego tak niezwykła mądrość i cuda?",
 		"55": "Jest przecież synem cieśli. Czyż Jego Matka nie ma na imię Maryja, a Jego bracia Jakub, Józef, Szymon i Juda?",
 		"56": "Także Jego siostry mieszkają wśród nas. Skąd więc ma to wszystko?”.",
@@ -260,6 +292,11 @@
 		"34": "I pan rozgniewany wydał go katom, dopóki nie odda mu całego długu.",
 		"35": "Podobnie postąpi z wami mój Ojciec, który jest w niebie, jeśli każdy z was szczerze nie przebaczy swojemu bratu”."
     },
+	"19": {
+		"27": "Wówczas Piotr powiedział: „Oto my zostawiliśmy wszystko i poszliśmy za Tobą. Co za to otrzymamy?”.",
+		"28": "Jezus im odpowiedział: „Zapewniam was: Ponieważ poszliście za Mną, to przy odnowieniu świata, kiedy Syn Człowieczy zasiądzie na chwalebnym tronie, również i wy zasiądziecie na dwunastu tronach i będziecie rządzili dwunastoma plemionami Izraela.",
+		"29": "I każdy, kto ze względu na Mnie opuści dom, braci, siostry, ojca, matkę, dzieci lub pole, stokroć więcej otrzyma i będzie miał udział w życiu wiecznym."
+	},
 	"21": {
 		"1": "Gdy zbliżyli się do Jerozolimy, przyszli do Betfage na Górze Oliwnej. Wtedy Jezus wysłał dwóch uczniów,",
 		"2": "mówiąc im: „Idźcie do wsi, która jest przed wami. Tam znajdziecie uwiązaną oślicę, a wraz z nią osiołka. Odwiążcie je i przyprowadźcie do Mnie.",
@@ -272,6 +309,13 @@
 		"9": "Przed Nim i za Nim szły tłumy i wołały: „Hosanna Synowi Dawida! Chwała Temu, który przychodzi w imię Pana. Hosanna na wysokościach!”.",
 		"10": "Kiedy wszedł do Jerozolimy, poruszyło się całe miasto. Pytano: „Kto to jest?”.",
 		"11": "A tłumy odpowiadały: „To jest Jezus, prorok z Nazaretu w Galilei”."
+	},
+	"23": {
+		"8": "Wy natomiast nie pozwalajcie nazywać się rabbi, gdyż macie tylko jednego nauczyciela, a wszyscy jesteście braćmi.",
+		"9": "Nie nazywajcie też nikogo na ziemi ojcem, gdyż macie tylko jednego Ojca, który jest w niebie.",
+		"10": "Nie pozwalajcie również, aby was nazywano mistrzami, bo jedynym waszym mistrzem jest Chrystus.",
+		"11": "Największy z was niech się stanie waszym sługą.",
+		"12": "Kto się wywyższa, będzie poniżony, a kto się poniża, będzie wywyższony."
 	},
 	"26": {
 		"14": "Wtedy jeden z Dwunastu, imieniem Judasz Iskariota, poszedł do wyższych kapłanów",

@@ -16,6 +16,9 @@
         public int OstatniStartX { get; set; } = 0;
         public int OstatniStartY { get; set; } = 0;
         public string OstatniaBierka { get; set; } = "";
+        public string TrwaPropozyjaRemisu { get; set; } = "";
+        public string NazwaBialego { get; set; } = "";
+        public string NazwaCzarnego { get; set; } = "";
         public static List<PoleSzachownicy> StartowePlansza()
         {
             var plansza = new List<PoleSzachownicy>();
@@ -40,6 +43,8 @@
                         {
                             Nazwa = $"{biale}{czarne}",
                             RuchBialych = true,
+                            NazwaBialego = biale,
+                            NazwaCzarnego = czarne,
                             Plansza = StartowePlansza()
                         };
             return partie;
