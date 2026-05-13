@@ -4,11 +4,12 @@
     {
         private static PoleSzachownicy? Pole(int x, int y, List<PoleSzachownicy> plansza) => plansza.FirstOrDefault(p => p.X == x && p.Y == y);
         //uwzglednic priorytet ucieczki spod szacha, a takze np. nieodsloniecie krola
-        private static List<PoleSzachownicy> RuchyPiona(PoleSzachownicy bierka, List<PoleSzachownicy> plansza)
+        private static List<PoleSzachownicy> RuchyPiona(PoleSzachownicy bierka, List<PoleSzachownicy> plansza, PartiaSzachow partia)
         {
             var mozliwe = new List<PoleSzachownicy>();
             int kierunek = bierka.Bierka.EndsWith("Bialy") ? 1 : -1;
             int startY = bierka.Bierka.EndsWith("Bialy") ? 2 : 7;
+            int liniaBiciaWPrzelocie = bierka.Bierka.EndsWith("Bialy") ? 5 : 4;
             var przod = Pole(bierka.X, bierka.Y + kierunek, plansza);
             if (przod != null && przod.Bierka == "")
             {
@@ -26,7 +27,13 @@
                 if (skos != null && skos.Bierka != "" && skos.Bierka.EndsWith("Bialy") != bierka.Bierka.EndsWith("Bialy"))
                     mozliwe.Add(skos);
             }
-            // dodac bicie w przelocie i promocje
+            if (bierka.Y == liniaBiciaWPrzelocie && partia.OstatniaBierka.StartsWith("pion") && partia.OstatniaBierka.EndsWith("Bialy") != bierka.Bierka.EndsWith("Bialy") && Math.Abs(partia.OstatniRuchY - partia.OstatniStartY) == 2 && partia.OstatniRuchY == bierka.Y && (partia.OstatniRuchX == bierka.X + 1 || partia.OstatniRuchX == bierka.X - 1))
+            {
+                var poleBicia = Pole(partia.OstatniRuchX, bierka.Y + kierunek, plansza);
+                if (poleBicia != null)
+                    mozliwe.Add(poleBicia);
+            }
+            // dodac promocje
             return mozliwe;
         }
         private static List<PoleSzachownicy> RuchySkoczka(PoleSzachownicy bierka, List<PoleSzachownicy> plansza)
@@ -91,9 +98,9 @@
             // uwzglednic roszade i niemoznosc wejscia na szachowane pola
             return mozliwe;
         }
-        public static List<PoleSzachownicy> MozliweRuchy(PoleSzachownicy bierka, List<PoleSzachownicy> plansza) => bierka.Bierka switch
+        public static List<PoleSzachownicy> MozliweRuchy(PoleSzachownicy bierka, List<PoleSzachownicy> plansza, PartiaSzachow partia) => bierka.Bierka switch
             {
-                var b when b.StartsWith("pion") => RuchyPiona(bierka, plansza),
+                var b when b.StartsWith("pion") => RuchyPiona(bierka, plansza, partia),
                 var b when b.StartsWith("skoczek") => RuchySkoczka(bierka, plansza),
                 var b when b.StartsWith("goniec") => RuchyGonca(bierka, plansza),
                 var b when b.StartsWith("wieza") => RuchyWiezy(bierka, plansza),

@@ -81,39 +81,56 @@
     private async Task PoleKlik(PoleSzachownicy pole)
     {
         if (Partia.RuchBialych == Odwrocona) return;
+
         if (wybranaBierka == null)
         {
             if (pole.Bierka != "" && pole.Bierka.EndsWith("Bialy") == Partia.RuchBialych)
-            {    
+            {
                 wybranaBierka = pole;
-                mozliweRuchy = MechanizmSzachow.MozliweRuchy(pole, Partia.Plansza);
+                mozliweRuchy = MechanizmSzachow.MozliweRuchy(pole, Partia.Plansza, Partia);
             }
             return;
         }
+
         if (wybranaBierka.X == pole.X && wybranaBierka.Y == pole.Y)
         {
             wybranaBierka = null;
             mozliweRuchy = [];
             return;
         }
+
         if (pole.Bierka != "" && wybranaBierka.Bierka.EndsWith("Bialy") == pole.Bierka.EndsWith("Bialy"))
         {
             wybranaBierka = pole;
-            mozliweRuchy = MechanizmSzachow.MozliweRuchy(pole, Partia.Plansza);
+            mozliweRuchy = MechanizmSzachow.MozliweRuchy(pole, Partia.Plansza, Partia);
             return;
         }
+
         if (!mozliweRuchy.Any(p => p.X == pole.X && p.Y == pole.Y)) return;
-        var docelowePole = pole;
-        docelowePole.Bierka = wybranaBierka.Bierka;
-        Partia.OstatniRuchX = docelowePole.X;
-        Partia.OstatniRuchY = docelowePole.Y;
-        Partia.RuchBialych = !Partia.RuchBialych;
+
+        // bicie w przelocie – usuń zbitego piona
+        if (wybranaBierka.Bierka.StartsWith("pion") &&
+            pole.X != wybranaBierka.X && pole.Bierka == "")
+        {
+            var zbityPion = Pole(pole.X, wybranaBierka.Y);
+            if (zbityPion != null) zbityPion.Bierka = "";
+        }
+
+        // przenieś bierkę
+        pole.Bierka = wybranaBierka.Bierka;
+        wybranaBierka.Bierka = "";
+
+        // zapisz stan ruchu
+        Partia.OstatniRuchX = pole.X;
+        Partia.OstatniRuchY = pole.Y;
         Partia.OstatniStartX = wybranaBierka.X;
         Partia.OstatniStartY = wybranaBierka.Y;
-        Partia.OstatniaBierka = wybranaBierka.Bierka;
-        wybranaBierka.Bierka = "";
+        Partia.OstatniaBierka = pole.Bierka;
+        Partia.RuchBialych = !Partia.RuchBialych;
+
         wybranaBierka = null;
         mozliweRuchy = [];
+
         await Serwis.ZapiszPartie(Partia);
     }
     private async Task DodajPunkty(double dlaGracza, double dlaRywala)
@@ -162,4 +179,5 @@
         Partia.TrwaPropozyjaRemisu = "";
         await Serwis.ZapiszPartie(Partia);
     }
+    private PoleSzachownicy? Pole(int x, int y) => Partia.Plansza.FirstOrDefault(p => p.X == x && p.Y == y);
 }
