@@ -3,7 +3,7 @@
     public static class MechanizmSzachow
     {
         private static PoleSzachownicy? Pole(int x, int y, List<PoleSzachownicy> plansza) => plansza.FirstOrDefault(p => p.X == x && p.Y == y);
-        //uwzglednic priorytet ucieczki spod szacha, a takze np. nieodsloniecie krola
+        public enum StanGry { Trwa, Szach, Mat, Pat }
         private static List<PoleSzachownicy> RuchyPiona(PoleSzachownicy bierka, List<PoleSzachownicy> plansza, PartiaSzachow partia)
         {
             var mozliwe = new List<PoleSzachownicy>();
@@ -103,7 +103,9 @@
                     if ((bialy && !partia.BialyKrolRuszal && !partia.BialaWiezaKrolRuszala) ||
                         (!bialy && !partia.CzarnyKrolRuszal && !partia.CzarnaWiezaKrolRuszala))
                     {
-                        if (Pole(6, yKrola, plansza)?.Bierka == "" && Pole(7, yKrola, plansza)?.Bierka == "")
+                        var wiezaKrolewska = Pole(8, yKrola, plansza);
+                        if (wiezaKrolewska != null && wiezaKrolewska.Bierka.StartsWith("wieza") &&
+                            Pole(6, yKrola, plansza)?.Bierka == "" && Pole(7, yKrola, plansza)?.Bierka == "")
                         {
                             if (!CzyPoleAtakowane(5, yKrola, !bialy, plansza, partia) &&
                                 !CzyPoleAtakowane(6, yKrola, !bialy, plansza, partia) &&
@@ -117,7 +119,9 @@
                     if ((bialy && !partia.BialyKrolRuszal && !partia.BialaWiezaKrolowaRuszala) ||
                         (!bialy && !partia.CzarnyKrolRuszal && !partia.CzarnaWiezaKrolowaRuszala))
                     {
-                        if (Pole(4, yKrola, plansza)?.Bierka == "" && Pole(3, yKrola, plansza)?.Bierka == "" && Pole(2, yKrola, plansza)?.Bierka == "")
+                        var wiezaHetmanska = Pole(1, yKrola, plansza);
+                        if (wiezaHetmanska != null && wiezaHetmanska.Bierka.StartsWith("wieza") &&
+                            Pole(2, yKrola, plansza)?.Bierka == "" && Pole(3, yKrola, plansza)?.Bierka == "" && Pole(4, yKrola, plansza)?.Bierka == "")
                         {
                             if (!CzyPoleAtakowane(5, yKrola, !bialy, plansza, partia) &&
                                 !CzyPoleAtakowane(4, yKrola, !bialy, plansza, partia) &&
@@ -130,7 +134,6 @@
                     }
                 }
             }
-            // uwzglednic niemoznosc wejscia na szachowane pola
             return mozliwe;
         }
         public static List<PoleSzachownicy> MozliweRuchy(PoleSzachownicy bierka, List<PoleSzachownicy> plansza, PartiaSzachow partia, bool ignorujRoszade = false) => bierka.Bierka switch
@@ -143,16 +146,86 @@
                 var b when b.StartsWith("krol") => RuchyKrola(bierka, plansza, partia, ignorujRoszade),
                 _ => []
             };
+        public static List<PoleSzachownicy> LegalneRuchy(PoleSzachownicy bierka, List<PoleSzachownicy> plansza, PartiaSzachow partia)
+        {
+            var pseudolegalne = MozliweRuchy(bierka, plansza, partia);
+            var legalne = new List<PoleSzachownicy>();
+            bool bialy = bierka.Bierka.EndsWith("Bialy");
+            int startX = bierka.X;
+            int startY = bierka.Y;
+            string nazwaBierki = bierka.Bierka;
+            foreach (var cel in pseudolegalne)
+            {
+                string oryginalnaBierkaCelu = cel.Bierka;
+                PoleSzachownicy? zbityPionWPrzelocie = null;
+                string nazwaZbitegoPiona = "";
+                bool czyRoszada = nazwaBierki.StartsWith("krol") && Math.Abs(cel.X - startX) == 2;
+                PoleSzachownicy? wiezaStart = null;
+                PoleSzachownicy? wiezaCel = null;
+                string nazwaWiezy = "";
+                cel.Bierka = nazwaBierki;
+                bierka.Bierka = "";
+                if (nazwaBierki.StartsWith("pion") && cel.X != startX && oryginalnaBierkaCelu == "")
+                {
+                    zbityPionWPrzelocie = Pole(cel.X, startY, plansza);
+                    if (zbityPionWPrzelocie != null)
+                    {
+                        nazwaZbitegoPiona = zbityPionWPrzelocie.Bierka;
+                        zbityPionWPrzelocie.Bierka = "";
+                    }
+                }
+                if (czyRoszada)
+                {
+                    int xWiezy = cel.X == 7 ? 8 : 1;
+                    int xNowyWiezy = cel.X == 7 ? 6 : 4;
+                    wiezaStart = Pole(xWiezy, cel.Y, plansza);
+                    wiezaCel = Pole(xNowyWiezy, cel.Y, plansza);
+                    if (wiezaStart != null && wiezaCel != null)
+                    {
+                        nazwaWiezy = wiezaStart.Bierka;
+                        wiezaCel.Bierka = nazwaWiezy;
+                        wiezaStart.Bierka = "";
+                    }
+                }
+                var krol = plansza.FirstOrDefault(p => p.Bierka == (bialy ? "krolBialy" : "krolCzarny"));
+                if (krol != null && !CzyPoleAtakowane(krol.X, krol.Y, !bialy, plansza, partia))
+                        legalne.Add(cel);
+                if (czyRoszada && wiezaStart != null && wiezaCel != null)
+                {
+                    wiezaStart.Bierka = nazwaWiezy;
+                    wiezaCel.Bierka = "";
+                }
+                if (zbityPionWPrzelocie != null)
+                    zbityPionWPrzelocie.Bierka = nazwaZbitegoPiona;
+                bierka.Bierka = nazwaBierki;
+                cel.Bierka = oryginalnaBierkaCelu;
+            }
+            return legalne;
+        }
+        public static StanGry SprawdzStanGry(bool ruchBialych, List<PoleSzachownicy> plansza, PartiaSzachow partia)
+        {
+            var krol = plansza.First(p => p.Bierka == (ruchBialych ? "krolBialy" : "krolCzarny"));
+            bool czySzach = CzyPoleAtakowane(krol.X, krol.Y, !ruchBialych, plansza, partia);
+            bool maLegalnyRuch = plansza.Where(p => p.Bierka != "" && p.Bierka.EndsWith(ruchBialych ? "Bialy" : "Czarny")).Any(p => LegalneRuchy(p, plansza, partia).Count > 0);
+            if (maLegalnyRuch) return czySzach ? StanGry.Szach : StanGry.Trwa;
+            if (czySzach) return StanGry.Mat;
+            return StanGry.Pat;
+        }
         public static bool CzyPoleAtakowane(int x, int y, bool przezBialych, List<PoleSzachownicy> plansza, PartiaSzachow partia)
         {
             foreach (var pole in plansza)
             {
-                if (pole.Bierka != "" && pole.Bierka.EndsWith("Bialy") == przezBialych)
+                if (pole.Bierka == "" || pole.Bierka.EndsWith("Bialy") != przezBialych) continue;
+                if (pole.Bierka.StartsWith("pion"))
                 {
-                    var ruchy = MozliweRuchy(pole, plansza, partia, ignorujRoszade: true);
-                    if (ruchy.Any(p => p.X == x && p.Y == y))
+                    int kierunek = pole.Bierka.EndsWith("Bialy") ? 1 : -1;
+                    if (Math.Abs(pole.X - x) == 1 && pole.Y + kierunek == y)
                         return true;
+                    continue;
                 }
+                var ruchy = MozliweRuchy(pole, plansza, partia, ignorujRoszade: true);
+                if (ruchy.Any(p => p.X == x && p.Y == y))
+                    return true;
             }
             return false;
         }

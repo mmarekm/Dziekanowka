@@ -58,6 +58,7 @@
     [Parameter] public SerwisSzachowy Serwis { get; set; } = null!;
     [Parameter] public Gracz Gracz { get; set; } = null!;
     private Gracz? rywal;
+    private MechanizmSzachow.StanGry aktualnyStan = MechanizmSzachow.StanGry.Trwa;
     protected override async Task OnInitializedAsync()
     {
         rywal = await LadowanieGracza.PobierzGracza(NazwaPrzeciwnika);
@@ -91,8 +92,33 @@
             klasy.Add("mozliwyRuch");
         return string.Join(" ", klasy);
     }
+    private async Task SprawdzStanPoRuchu()
+    {
+        aktualnyStan = MechanizmSzachow.SprawdzStanGry(Partia.RuchBialych, Partia.Plansza, Partia);
+        if (aktualnyStan == MechanizmSzachow.StanGry.Mat || aktualnyStan == MechanizmSzachow.StanGry.Pat)
+        {
+            StateHasChanged();
+            await Task.Delay(3000);
+
+            if (aktualnyStan == MechanizmSzachow.StanGry.Mat)
+            {
+                bool bialiWygrali = !Partia.RuchBialych;
+                bool myWygralismy = (bialiWygrali && !Odwrocona) || (!bialiWygrali && Odwrocona);
+                if (myWygralismy)
+                    await DodajPunkty(1, 0);
+                else
+                    await DodajPunkty(0, 1);
+            }
+            else
+            {
+                await DodajPunkty(0.5, 0.5);
+            }
+            await NowaPartia();
+        }
+    }
     private async Task PoleKlik(PoleSzachownicy pole)
     {
+        if (aktualnyStan != MechanizmSzachow.StanGry.Trwa && aktualnyStan != MechanizmSzachow.StanGry.Szach) return;
         if (oczekujePromocji) return;
         if (Partia.RuchBialych == Odwrocona) return;
         if (wybranaBierka == null)
@@ -100,7 +126,7 @@
             if (pole.Bierka != "" && pole.Bierka.EndsWith("Bialy") == Partia.RuchBialych)
             {
                 wybranaBierka = pole;
-                mozliweRuchy = MechanizmSzachow.MozliweRuchy(pole, Partia.Plansza, Partia);
+                mozliweRuchy = MechanizmSzachow.LegalneRuchy(pole, Partia.Plansza, Partia);
             }
             return;
         }
@@ -113,7 +139,7 @@
         if (pole.Bierka != "" && wybranaBierka.Bierka.EndsWith("Bialy") == pole.Bierka.EndsWith("Bialy"))
         {
             wybranaBierka = pole;
-            mozliweRuchy = MechanizmSzachow.MozliweRuchy(pole, Partia.Plansza, Partia);
+            mozliweRuchy = MechanizmSzachow.LegalneRuchy(pole, Partia.Plansza, Partia);
             return;
         }
         if (!mozliweRuchy.Any(p => p.X == pole.X && p.Y == pole.Y)) return;
@@ -198,6 +224,7 @@
         wybranaBierka = null;
         mozliweRuchy = [];
         await Serwis.ZapiszPartie(Partia);
+        await SprawdzStanPoRuchu();
     }
     private async Task DodajPunkty(double dlaGracza, double dlaRywala)
     {
@@ -236,6 +263,9 @@
     private async Task NowaPartia()
     {
         Partia.Plansza = PartiaSzachow.StartowePlansza();
+        aktualnyStan = MechanizmSzachow.StanGry.Trwa;
+        wybranaBierka = null;
+        mozliweRuchy = [];
         Partia.RuchBialych = true;
         Partia.OstatniRuchX = 0;
         Partia.OstatniRuchY = 0;
