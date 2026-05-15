@@ -958,7 +958,6 @@
         }
     }
 </div>
-
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
@@ -968,6 +967,28 @@
         {
             piec = true;
             piecPizza = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "garnekGotowanie")
+        {
+            garnek = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "patelniaSmazenie")
+        {
+            patelnia = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "piecChleb")
+        {
+            piec = true;
+            piecPieczywo = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "piecCiasto")
+        {
+            piec = true;
+            piecCiasto = true;
             Gracz.Statystyki.OtwarteOkno = "";
         }
     }
@@ -1033,7 +1054,11 @@
     private void MiodNaSalatke() => miodNaSalatce = Gracz.JestProduktZ("miod") ? !miodNaSalatce : miodNaSalatce;
     private bool widocznaListaSalatek = false;
     private HashSet<string> wybraneWarzywaSurowka = [];
-    private void WarzywoNaSurowke(string warzywo) => _ = Gracz.JestWarzywo(warzywo) && (wybraneWarzywaSurowka.Contains(warzywo) ? wybraneWarzywaSurowka.Remove(warzywo) : wybraneWarzywaSurowka.Add(warzywo));
+    private void WarzywoNaSurowke(string warzywo)
+    {
+        bool jest = kiszonkiSurowki.Contains(warzywo) ? Gracz.JestProduktP(warzywo) : Gracz.JestWarzywo(warzywo);
+        _ = jest && (wybraneWarzywaSurowka.Contains(warzywo) ? wybraneWarzywaSurowka.Remove(warzywo) : wybraneWarzywaSurowka.Add(warzywo));
+    }
     private bool majonezNaSurowce = false;
     private void MajonezNaSurowce() => majonezNaSurowce = Gracz.JestDar("majonez") ? !majonezNaSurowce : majonezNaSurowce;
     private string wybraneJajoNaSurowce = "";
@@ -1113,7 +1138,7 @@
     private string wybranaKapustaSkladnikObiad = "";
     private string WybierzKapustaSkladnikObiad(string kapusta) => wybranaKapustaSkladnikObiad == kapusta ? wybranaKapustaSkladnikObiad = "" : Gracz.JestWarzywo(kapusta) ? wybranaKapustaSkladnikObiad = kapusta : wybranaKapustaSkladnikObiad;
     private string wybraneKuraLubIndykDoRosolu = "";
-    private string WybierzKureLubIndykDoRosolu(string mieso) => wybraneKuraLubIndykDoRosolu == mieso ? wybraneKuraLubIndykDoRosolu = "" : Gracz.JestWarzywo(mieso) ? wybraneKuraLubIndykDoRosolu = mieso : wybraneKuraLubIndykDoRosolu;
+    private string WybierzKureLubIndykDoRosolu(string mieso) => wybraneKuraLubIndykDoRosolu == mieso ? wybraneKuraLubIndykDoRosolu = "" : Gracz.JestProduktZ(mieso) ? wybraneKuraLubIndykDoRosolu = mieso : wybraneKuraLubIndykDoRosolu;
     private string wybranyMakaronLubRyzDoZupy = "";
     private string WybierzMakaronLubRyzDoZupy(string skladnik) => wybranyMakaronLubRyzDoZupy == skladnik ? wybranyMakaronLubRyzDoZupy = "" : Gracz.JestDar(skladnik) ? wybranyMakaronLubRyzDoZupy = skladnik : wybranyMakaronLubRyzDoZupy;
     private string wybranyMakaronLubZiemniakDoZupy = "";
@@ -1377,7 +1402,21 @@
         if (!MoznaUgotowacDanie()) return;
         ZaplacZaObiad();
         Gracz.Przedmiot("drewno").Ilosc--;
-        Gracz.Obiady.First(o => o.Nazwa == wybranyObiad).Ilosc++;
+        Gracz.Obiady.First(o => o.Nazwa == wybranyObiad).Ilosc++;      
+        if (Obiad.DaniaZGarnka.Any(d => d.Nazwa == wybranyObiad))
+        {
+            await NaZmianeEkranu.InvokeAsync(EkranGry.GarnekGotowanie);
+            await Task.Delay(7300);
+            Gracz.Statystyki.OtwarteOkno = "garnekGotowanie";
+            await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
+        }
+        else
+        {
+            await NaZmianeEkranu.InvokeAsync(EkranGry.PatelniaSmazenie);
+            await Task.Delay(7300);
+            Gracz.Statystyki.OtwarteOkno = "patelniaSmazenie";
+            await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
+        }
         WyczyscWyborDania();
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
@@ -1532,6 +1571,10 @@
                 Gracz.ProduktP($"{makaPieczywo}Bulka").Ilosc += 2;
             else if (pieczeniePieczywa == 1)
                 Gracz.ProduktP($"{makaPieczywo}Chleb").Ilosc++;
+            await NaZmianeEkranu.InvokeAsync(EkranGry.PieczenieChleba);
+            await Task.Delay(7300);
+            Gracz.Statystyki.OtwarteOkno = "piecChleb";
+            await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
             makaPieczywo = "";
             pieczeniePieczywa = 0;
         }
@@ -1564,6 +1607,10 @@
             owocCiasto = "";
             twarogCiasto = false;
             smietanaCiasto = false;
+            await NaZmianeEkranu.InvokeAsync(EkranGry.PieczenieCiasta);
+            await Task.Delay(7300);
+            Gracz.Statystyki.OtwarteOkno = "piecCiasto";
+            await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
         }
         if (piecWedlina)
         {

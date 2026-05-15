@@ -65,6 +65,10 @@
         PsySasiadaSzczekaja,
         SamochodDoMiasta,
         SamochodDoDomu,
-        PtaszkiZjedza
+        PtaszkiZjedza,
+        GarnekGotowanie,
+        PatelniaSmazenie,
+        PieczenieChleba,
+        PieczenieCiasta
     }
 }
