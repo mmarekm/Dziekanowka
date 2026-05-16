@@ -69,6 +69,7 @@
         GarnekGotowanie,
         PatelniaSmazenie,
         PieczenieChleba,
-        PieczenieCiasta
+        PieczenieCiasta,
+        PieczenieWedliny
     }
 }

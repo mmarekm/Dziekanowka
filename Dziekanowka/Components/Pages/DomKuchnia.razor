@@ -991,6 +991,12 @@
             piecCiasto = true;
             Gracz.Statystyki.OtwarteOkno = "";
         }
+        else if (Gracz.Statystyki.OtwarteOkno == "piecWedlina")
+        {
+            piec = true;
+            piecWedlina = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
     }
     private bool wyciskarka = false;
     private bool deska = false;
@@ -1636,6 +1642,10 @@
 
         }
         Gracz.Przedmiot("drewno").Ilosc--;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PieczenieWedliny);
+        await Task.Delay(7300);
+        Gracz.Statystyki.OtwarteOkno = "piecWedline";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private async Task UpiecPizzeZAnimacja()
