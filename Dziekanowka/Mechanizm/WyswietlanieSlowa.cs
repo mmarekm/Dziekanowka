@@ -207,7 +207,7 @@ namespace Dziekanowka.Mechanizm
             ["20260606"] = ["sb9zwII"],
             ["20260607"] = ["Ndz10zwA"],
             ["20260608"] = ["pn10zwII"],
-            ["20260609"] = ["wt10zwII"],
+            ["20260609"] = ["RocznicaPoswieceniaBazylikiArchikatedralnejWWarszawiezw"],
             ["20260610"] = ["sr10zwII"],
             ["20260611"] = ["cz10zwII", "BarnabyApostola"],
             ["20260612"] = ["NajswietszegoSercaPanaJezusaA"],

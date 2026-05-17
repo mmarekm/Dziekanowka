@@ -46,6 +46,7 @@
         Miasto3,
         SklepMiasto3,
         Kiosk,
+        Stacja,
         SzkolaIntro,
         SzkolaReligia,
         SzkolaInformatyka,
@@ -70,6 +71,12 @@
         PatelniaSmazenie,
         PieczenieChleba,
         PieczenieCiasta,
-        PieczenieWedliny
+        PieczenieWedliny,
+        MaselnicaPraca,
+        SerowarniaPraca,
+        ZarnaPraca,
+        PlatkarkaPraca,
+        BeczkaPraca,
+        MlynekPraca
     }
 }

@@ -37,7 +37,8 @@ else
     private bool pokazWideo = false;
     private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa, EkranGry.GrzybyZnalezione, EkranGry.RybaZlowiona,
         EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21, EkranGry.AutobusJedzie22, EkranGry.AutobusJedzie3,
-        EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny ];
+        EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
+        EkranGry.BeczkaPraca, EkranGry.MlynekPraca ];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
@@ -76,6 +77,7 @@ else
             EkranGry.PsySasiadaSzczekaja or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu => EkranGry.ZaBrama,
             EkranGry.KoszenieTrawy => EkranGry.GarazGospodarczy,
             EkranGry.PtaszkiZjedza or EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny => EkranGry.DomKuchnia,
+            EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca => EkranGry.Przetwornia,
             EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
             EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
             EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
@@ -112,8 +114,9 @@ else
             EkranGry.Garaz or EkranGry.GarazGospodarczy => "mp3/Tla/garazgospodarczy.mp3",
             EkranGry.LasIntro => "mp3/Tla/las.mp3",
             EkranGry.SzkolaIntro => "mp3/Tla/szkola.mp3",
+            EkranGry.Stacja => "mp3/Tla/kolej.mp3",
             EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona => "mp3/Dzwieki/fanfaraKrotka.mp3",
-            EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny => "mp3/Tla/akcjaSprawna.mp3",
+            EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca => "mp3/Tla/akcjaSprawna.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
             _ => $"mp3/Tla/{ekran.ToString().ToLower()}.mp3"
         };
@@ -150,6 +153,7 @@ else
             EkranGry.PsySasiadaSzczekaja or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu => EkranGry.ZaBrama,
             EkranGry.KoszenieTrawy => EkranGry.GarazGospodarczy,
             EkranGry.PtaszkiZjedza or EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny => EkranGry.DomKuchnia,
+            EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca => EkranGry.Przetwornia,
             EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
             EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
             EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,

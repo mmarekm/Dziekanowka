@@ -643,3 +643,13 @@
     cursor: pointer;
     transition: opacity 0.3s ease;
 }
+.miasto3NaStacje {
+    left: 0;
+    top: 0;
+    width: 542px;
+    height: 259px;
+    z-index: 2;
+}
+.stacjamiasto3Widok {
+    background-image: url('../img/miasto/stacjaMiasto3Widok.jpg');
+}

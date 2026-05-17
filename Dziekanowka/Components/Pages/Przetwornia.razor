@@ -439,6 +439,39 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    protected override void OnParametersSet()
+    {
+        if (Gracz.Statystyki.OtwarteOkno == "maselnicaPraca")
+        {
+            maselnica = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "serowarniaPraca")
+        {
+            serowarnia = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "zarnaPraca")
+        {
+            zarna = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "platkarkaPraca")
+        {
+            platkarka = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "beczkaPraca")
+        {
+            beczka = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "mlynekPraca")
+        {
+            mlynek = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+    }
     private bool maselnica = false;
     private bool serowarnia = false;
     private bool zarna = false;
@@ -508,6 +541,13 @@
                 Gracz.ProduktP("maslo").Ilosc += uzyskaneMaslo;
             if (uzyskanyMajonez > 0)
                 Gracz.ProduktP("majonez").Ilosc += uzyskanyMajonez;
+            if (uzyskanaSmietana > 0 || uzyskaneMaslo > 0 || uzyskanyMajonez > 0)
+            {
+                await NaZmianeEkranu.InvokeAsync(EkranGry.MaselnicaPraca);
+                await Task.Delay(6500);
+                Gracz.Statystyki.OtwarteOkno = "maselnicaPraca";
+                await NaZmianeEkranu.InvokeAsync(EkranGry.Przetwornia);
+            }
         }
         if (serowarnia)
         {
@@ -519,11 +559,24 @@
                     Gracz.ProduktP("kozaSer").Ilosc += UzyskanySer("kozaMleko");
                 if (UzyskanySer("owcaMleko") > 0)
                     Gracz.ProduktP("owcaSer").Ilosc += UzyskanySer("owcaMleko");
+                if (UzyskanySer("krowaMleko") > 0 || UzyskanySer("kozaMleko") > 0 || UzyskanySer("owcaMleko") > 0)
+                {
+                    await NaZmianeEkranu.InvokeAsync(EkranGry.SerowarniaPraca);
+                    await Task.Delay(6300);
+                    Gracz.Statystyki.OtwarteOkno = "serowarniaPraca";
+                    await NaZmianeEkranu.InvokeAsync(EkranGry.Przetwornia);
+                }
             }
             else
             {
                 if (uzyskanyTwarog > 0)
+                {
                     Gracz.ProduktP("twarog").Ilosc += uzyskanyTwarog;
+                    await NaZmianeEkranu.InvokeAsync(EkranGry.SerowarniaPraca);
+                    await Task.Delay(6300);
+                    Gracz.Statystyki.OtwarteOkno = "serowarniaPraca";
+                    await NaZmianeEkranu.InvokeAsync(EkranGry.Przetwornia);
+                }
             }
         }
         if (zarna)
@@ -544,6 +597,13 @@
                 Gracz.ProduktP("zytoMaka").Ilosc += UzyskanaMaka("zyto");
             if (uzyskanyMakaron > 0)
                 Gracz.ProduktP("makaron").Ilosc += uzyskanyMakaron;
+            if (UzyskanaMaka("gryka") > 0 || UzyskanaMaka("jeczmien") > 0 || UzyskanaMaka("orkisz") > 0 || UzyskanaMaka("owies") > 0 || UzyskanaMaka("pszenica") > 0 || UzyskanaMaka("ryz") > 0 || UzyskanaMaka("zyto") > 0 || uzyskanyMakaron > 0)
+            {
+                await NaZmianeEkranu.InvokeAsync(EkranGry.ZarnaPraca);
+                await Task.Delay(8000);
+                Gracz.Statystyki.OtwarteOkno = "zarnaPraca";
+                await NaZmianeEkranu.InvokeAsync(EkranGry.Przetwornia);
+            }
         }
         if (platkarka)
         {
@@ -563,6 +623,13 @@
                 Gracz.ProduktP("zytoPlatki").Ilosc += UzyskanePlatki("zyto");
             if (UzyskanePlatki("kukurydza") > 0)
                 Gracz.ProduktP("kukurydzaPlatki").Ilosc += UzyskanePlatki("kukurydza");
+            if (UzyskanePlatki("gryka") > 0 || UzyskanePlatki("jeczmien") > 0 || UzyskanePlatki("orkisz") > 0 || UzyskanePlatki("owies") > 0 || UzyskanePlatki("pszenica") > 0 || UzyskanePlatki("ryz") > 0 || UzyskanePlatki("zyto") > 0 || UzyskanePlatki("kukurydza") > 0)
+            {
+                await NaZmianeEkranu.InvokeAsync(EkranGry.PlatkarkaPraca);
+                await Task.Delay(8200);
+                Gracz.Statystyki.OtwarteOkno = "platkarkaPraca";
+                await NaZmianeEkranu.InvokeAsync(EkranGry.Przetwornia);
+            }
         }
         if (beczka)
         {
@@ -574,6 +641,13 @@
                 Gracz.ProduktP("ogorekKiszony").Ilosc += UzyskanaKiszonka("ogórek");
             if (UzyskanaKiszonka("burak") > 0)
                 Gracz.ProduktP("burakKiszony").Ilosc += UzyskanaKiszonka("burak");
+            if (uzyskaneWino > 0 || UzyskanaKiszonka("kapustaWłoska") > 0 || UzyskanaKiszonka("ogórek") > 0 || UzyskanaKiszonka("burak") > 0)
+            {
+                await NaZmianeEkranu.InvokeAsync(EkranGry.BeczkaPraca);
+                await Task.Delay(6300);
+                Gracz.Statystyki.OtwarteOkno = "beczkaPraca";
+                await NaZmianeEkranu.InvokeAsync(EkranGry.Przetwornia);
+            }
         }
         if (mlynek)
         {
@@ -587,6 +661,13 @@
                 Gracz.ProduktP("mieloneKrowa").Ilosc += uzyskaneMieloneKrowa;
             if (uzyskanaKielbasa > 0)
                 Gracz.ProduktP("kielbasaWedlina").Ilosc += uzyskanaKielbasa;
+            if (uzyskaneMieloneDrob > 0 || uzyskaneMieloneDzikie > 0 || uzyskaneMieloneSwinia > 0 || uzyskaneMieloneKrowa > 0 || uzyskanaKielbasa > 0)
+            {
+                await NaZmianeEkranu.InvokeAsync(EkranGry.MlynekPraca);
+                await Task.Delay(8100);
+                Gracz.Statystyki.OtwarteOkno = "mlynekPraca";
+                await NaZmianeEkranu.InvokeAsync(EkranGry.Przetwornia);
+            }
         }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
