@@ -1,9 +1,77 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
+@implements IDisposable
 <div class="stacja@(Gracz.Statystyki.Stacja)Widok widok rel">
+    <div class="abs wyjscieStacja@(Gracz.Statystyki.Stacja)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/stacje/confirmStacja@(Gracz.Statystyki.Stacja).png" /></button></div>
+    <div class="abs ileBiletowL@(Gracz.Statystyki.Stacja)">@Gracz.Przedmiot("biletPociag").Ilosc</div>
+    <div class="abs ileBiletow@(Gracz.Statystyki.Stacja)"><img class="obrazekContain" src="img/przedmioty/biletPociag.png" /></div>
+    @if (Gracz.Statystyki.Stacja == "miasto3")
+    {
+        <div class="abs zaslonaPociagu1miasto3"><img src="img/miasto/stacje/latarnia1Miasto3.png" /></div>
+        <div class="abs zaslonaPociagu2miasto3"><img src="img/miasto/stacje/latarnia2Miasto3.png" /></div>
+        <div class="abs zaslonaPociagu3miasto3"><img src="img/miasto/stacje/daszekMiasto3.png" /></div>
+    }
+    <div class="abs kupBiletStacja@(Gracz.Statystyki.Stacja) @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacja@(Gracz.Statystyki.Stacja).png" /></div>
+    <div class="abs pociag1@(Gracz.Statystyki.Stacja)Animacja @klasaPociagu1" @onclick="() => WsiadzDoPociagu1(1)"><img class="obrazekWypelnia" src="img/miasto/pociag.png" /></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private CancellationTokenSource? _cts1;
+    protected override void OnParametersSet()
+    {
+        klasaPociagu1 = $"pociag1{Gracz.Statystyki.Stacja}Ukryty";
+        if (_cts1 == null)
+        {
+            _cts1 = new CancellationTokenSource();
+            _ = Pociag1Jedzie(_cts1.Token);
+        }
+    }
+    private async Task Pociag1Jedzie(CancellationToken token)
+    {
+        try
+        {
+            while (!token.IsCancellationRequested)
+            {
+                await Task.Delay(7000, token);
+                klasaPociagu1 = $"pociag1{Gracz.Statystyki.Stacja}Jedzie";
+                moznaWsiascPociag1 = false;
+                StateHasChanged();
+                await Task.Delay(3000, token);
+                klasaPociagu1 = $"pociag1{Gracz.Statystyki.Stacja}Stoi";
+                moznaWsiascPociag1 = true;
+                StateHasChanged();
+                await Task.Delay(3000, token);
+                moznaWsiascPociag1 = false;
+                klasaPociagu1 = $"pociag1{Gracz.Statystyki.Stacja}Odjedzie";
+                StateHasChanged();
+                await Task.Delay(3000, token);
+                klasaPociagu1 = $"pociag1{Gracz.Statystyki.Stacja}Ukryty";
+                StateHasChanged();
+            }
+        }
+        catch (TaskCanceledException) { }
+    }
+    private EkranGry Wyjscie => Gracz.Statystyki.Stacja switch { "miasto3" => EkranGry.Miasto3, _ => throw new ArgumentOutOfRangeException() };
+    private string klasaPociagu1 = "";
+    private bool moznaWsiascPociag1 = false;
+    private int cenaBiletu => Gracz.Statystyki.Stacja == "miasto3" ? 7 : 0;
+    private async Task KupBilet()
+    {
+        if (Gracz.Monety < cenaBiletu) return;
+        Gracz.Monety -= cenaBiletu;
+        Gracz.Przedmiot("biletPociag").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task WsiadzDoPociagu1(int nrPociagu)
+    {
+        if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !moznaWsiascPociag1) return;
+        return;
+        //Gracz.Przedmiot("biletPociag").Ilosc--;
+    }
+    public void Dispose()
+    {
+        _cts1?.Cancel();
+    }  
 }

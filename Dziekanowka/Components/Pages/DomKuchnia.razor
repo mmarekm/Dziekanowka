@@ -963,7 +963,17 @@
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     protected override void OnParametersSet()
     {
-        if (Gracz.Statystyki.OtwarteOkno == "piecPizza")
+        if (Gracz.Statystyki.OtwarteOkno == "wyciskarkaPraca")
+        {
+            wyciskarka = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "kawaPraca")
+        {
+            mlynek = true;
+            Gracz.Statystyki.OtwarteOkno = "";
+        }
+        else if (Gracz.Statystyki.OtwarteOkno == "piecPizza")
         {
             piec = true;
             piecPizza = true;
@@ -1522,9 +1532,21 @@
         if (wyciskarka)
             foreach (var produkt in taca)
                 if (UzyskanySok(produkt.Nazwa) > 0)
+                {
                     Gracz.ProduktP($"{produkt.Nazwa}Sok").Ilosc += UzyskanySok(produkt.Nazwa);
+                    await NaZmianeEkranu.InvokeAsync(EkranGry.WyciskarkaPraca);
+                    await Task.Delay(10000);
+                    Gracz.Statystyki.OtwarteOkno = "wyciskarkaPraca";
+                    await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
+                }
         if (mlynek && uzyskanaKawa > 0)
+        {
             Gracz.ZywnoscP("kawa").Ilosc += uzyskanaKawa;
+            await NaZmianeEkranu.InvokeAsync(EkranGry.KawaPraca);
+            await Task.Delay(8000);
+            Gracz.Statystyki.OtwarteOkno = "kawaPraca";
+            await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
+        }
         foreach (var produkt in taca)
             produkt.Ilosc = 0;
         await ladowanieGracza.ZapiszAktualnegoGracza();

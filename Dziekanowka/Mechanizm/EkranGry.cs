@@ -67,6 +67,8 @@
         SamochodDoMiasta,
         SamochodDoDomu,
         PtaszkiZjedza,
+        WyciskarkaPraca,
+        KawaPraca,
         GarnekGotowanie,
         PatelniaSmazenie,
         PieczenieChleba,
