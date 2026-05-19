@@ -1,0 +1,110 @@
+﻿.bibliotekaIntroWidok {
+    background-image: url('../img/miasto/biblioteka/bibliotekaIntroWidok.png');
+}
+.bibliotekaCzytelniaWidok {
+    background-image: url('../img/miasto/biblioteka/bibliotekaCzytelniaWidok.png');
+}
+.bibliotekaGaleriaWidok {
+    background-image: url('../img/miasto/biblioteka/bibliotekaGaleriaWidok.png');
+}
+.bibliotekaDoMiasto {
+    bottom: 0;
+    right: 0;
+    width: 252px;
+    height: 788px;
+    z-index: 2;
+}
+.bibliotekaDoCzytelnia {
+    bottom: 0;
+    left: 59px;
+    width: 537px;
+    height: 489px;
+    z-index: 2;
+}
+.bibliotekaDoGalerii {
+    left: 721px;
+    top: 171px;
+    width: 331px;
+    height: 578px;
+    z-index: 2;
+}
+.czytelniaDoIntro {
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 63px;
+    z-index: 2;
+}
+.czytelniaKsiazki {
+    top: 60px;
+    left: 20px;
+    width: 1860px;
+    height: 830px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.czytelnia {
+    top: 0;
+    left: 0;
+    width: 1900px;
+    height: 1000px;
+    z-index: 100;
+}
+.ksiazka {
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    margin: 8px;
+}
+.trescKsiazki {
+    width: 1800px;
+    height: 880px;
+    margin: 20px auto;
+    overflow-y: auto;
+    background: #fdf6e3;
+    padding: 40px;
+    border-radius: 10px;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 1.8;
+}
+.stronaKsiazki {
+    white-space: pre-wrap;
+}
+    .stronaKsiazki p {
+        font-size: 25px;
+        line-height: 2;
+        font-family: Georgia, serif;
+    }
+.nawigacjaKsiazki {
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+}
+.nawigacjaKsiazki input {
+    width: 60px;
+    text-align: center;
+    font-size: 18px;
+    border: 2px solid #8b4513;
+    border-radius: 6px;
+    padding: 4px;
+    margin: 0 8px;
+}
+.zamknijKsiazke {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    background: #8b4513;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+.galeriaDoIntro {
+    bottom: 0;
+    left: 637px;
+    width: 648px;
+    height: 96px;
+    z-index: 2;
+}

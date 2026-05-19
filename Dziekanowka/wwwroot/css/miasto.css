@@ -51,6 +51,13 @@
     width: 130px;
     height: 100px;
 }
+.miastoDoBiblioteki {
+    width: 367px;
+    height: 715px;
+    top: 20px;
+    left: 983px;
+    z-index: 2;
+}
 .sprzedawcaMiasto1 {
     width: 80px;
 }

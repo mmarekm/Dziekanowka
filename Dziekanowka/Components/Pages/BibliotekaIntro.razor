@@ -1,0 +1,17 @@
+﻿@using Dziekanowka.Mechanizm
+<div class="bibliotekaIntroWidok widok rel">
+    <div class="abs bibliotekaDoMiasto"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)"><img src="img/miasto/biblioteka/bibliotekaDoMiasto.png" /></button></div>
+    <div class="abs bibliotekaDoCzytelnia"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaCzytelnia)"><img src="img/miasto/biblioteka/introDoCzytelni.png" /></button></div>
+    <div class="abs bibliotekaDoGalerii"><button class="wyroznionyGuzik" @onclick="DoGalerii"><img src="img/miasto/biblioteka/introDoGalerii.png" /></button></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private async Task DoGalerii()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.WejscieDoGalerii);
+        await Task.Delay(5900);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaGaleria);
+    }
+}
