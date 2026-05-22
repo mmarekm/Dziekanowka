@@ -180,11 +180,6 @@ namespace Dziekanowka.Mechanizm
 
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260517"] = ["WniebowstapieniePanskieA", "Ndz7WlkA"],
-            ["20260518"] = ["pn7Wlk"],
-            ["20260519"] = ["wt7Wlk"],
-            ["20260520"] = ["sr7Wlk"],
-            ["20260521"] = ["cz7Wlk"],
             ["20260522"] = ["pt7Wlk"],
             ["20260523"] = ["sb7Wlk", "WigiliaZeslaniaDuchaSwietego"],
             ["20260524"] = ["ZeslanieDuchaSwietegoA"],
@@ -240,7 +235,12 @@ namespace Dziekanowka.Mechanizm
             ["20260713"] = ["pn15zwII", "PustelnikowAndrzejaSwieradaIBenedykta"],
             ["20260714"] = ["wt15zwII"],
             ["20260715"] = ["sr15zwII", "BonawenturyBiskupaDoktoraKosciola"],
-            ["20260716"] = ["cz15zwII", "NMPZGoryKarmel"]
+            ["20260716"] = ["cz15zwII", "NMPZGoryKarmel"],
+            ["20260717"] = ["pt15zwII"],
+            ["20260718"] = ["sb15zwII"],
+            ["20260719"] = ["Ndz16zwA"],
+            ["20260720"] = ["pn16zwII"],
+            ["20260721"] = ["wt16zwII"]
         };
     }
 }

@@ -96,6 +96,24 @@
 		"9a": "ptactwo powietrzne i ryby morskie,",
 		"9b": "wędrujące szlakami mórz."
 	},
+	"10": {
+		"1a": "Czemu, o Panie, stoisz daleko,",
+		"1b": "ukrywasz się w czasie ucisku?",
+		"2a": "Pycha bezbożnika niszczy ubogiego.",
+		"2b": "Oby bezbożni zaplątali się w zamysły, które uknuli!",
+		"3a": "Bezbożny przechwala się swymi pragnieniami,",
+		"3b": "wyzyskiwacz bluźni i znieważa Pana.",
+		"4a": "Bezbożny mówi w swej pysze:",
+		"4b": "„Jego gniew nie skarci! Nie ma Boga!”.",
+		"7a": "Jego usta pełne są zdrady i trucizny,",
+		"7b": "swoim językiem zadaje ból i cierpienie.",
+		"8a": "W zaroślach robi zasadzkę, w ukryciu zabija niewinnego.",
+		"8b": "Jego oczy śledzą nędzarza.",
+		"14a": "Przecież Ty widzisz. Dostrzegasz trud i cierpienie,",
+		"14b": "by wziąć je w swe ręce.",
+		"14c": "Tobie oddaje się nędzarz,",
+		"14d": "Ty jesteś opiekunem sieroty."
+	},
 	"11": {
 		"4a": "Pan w swojej świątyni,",
 		"4b": "Pan w niebie zasiada na tronie.",
@@ -435,6 +453,10 @@
 	"50": {
 		"1a": "Pan jest Bogiem nad bogami;",
 		"1b": "przemawia i wzywa ziemię od wschodu aż po zachód słońca.",
+		"5a": "„Zgromadźcie Mi świętych moich,",
+		"5b": "co przez ofiarę zawarli ze Mną przymierze”.",
+		"6a": "Niebiosa głoszą Jego sprawiedliwość,",
+		"6b": "gdyż Bóg sam jest Sędzią.",
 		"7a": "„Posłuchaj, mój ludu, gdyż będę mówić,",
 		"7b": "i świadczyć będę przeciwko Tobie:",
 		"7c": "Ja jestem Bogiem, twoim Bogiem!",
@@ -734,6 +756,18 @@
 		"11c": "niż mieszkać w namiotach bezbożników!"
 	},
 	"85": {
+		"2a": "Byłeś łaskawy dla Twej ziemi, Panie,",
+		"2b": "wyzwoliłeś Jakuba z niewoli.",
+		"3a": "Odpuściłeś nieprawość Twego ludu,",
+		"3b": "zmazałeś wszystkie jego grzechy.",
+		"5a": "Odnów nas, Boże, nasz Zbawco,",
+		"5b": "i odwróć od nas Twoje zagniewanie!",
+		"6a": "Czy wiecznie będziesz na nas oburzony",
+		"6b": "i gniew Twój rozciągniesz na pokolenia?",
+		"7a": "Boże, Ty nam przywrócisz życie,",
+		"7b": "a Twój lud Tobą się ucieszy.",
+		"8a": "Okaż nam, Panie, łaskawość swoją",
+		"8b": "i daj nam swoje zbawienie.",
 		"9a": "Posłucham, co mówi Pan Bóg:",
 		"9b": "Oto ogłasza pokój swemu ludowi,",
 		"9c": "swoim wiernym i tym, którzy Mu ufają.",
@@ -745,6 +779,19 @@
 		"13b": "a ziemia nasza wyda owoc.",
 		"14a": "Przed Nim pójdzie Sprawiedliwość,",
 		"14b": "będzie wytyczać drogę Jego krokom."
+	},
+	"86": {
+		"5a": "Gdyż Ty, Panie, jesteś dobry i przebaczający,",
+		"5b": "pełen łaski dla tych, którzy Cię wzywają.",
+		"6a": "Panie, usłysz modlitwę moją,",
+		"6b": "pospiesz na głos mej prośby!",
+		"9a": "Wszystkie narody, które stworzyłeś, przyjdą i oddadzą Ci pokłon, Panie,",
+		"9b": "i sławić będą Twe imię.",
+		"10a": "Bo Ty jesteś wielki i czynisz cuda,",
+		"10b": "tylko Ty jesteś Bogiem.",
+		"15a": "Ty jednak, Panie, jesteś Bogiem miłosiernym i litościwym,",
+		"15b": "cierpliwym, pełnym łaski i wierności.",
+		"16a": "Spójrz na mnie i zmiłuj się nade mną!"
 	},
 	"87": {
 		"1": "Pan miłuje to, co założył na świętych górach:",
