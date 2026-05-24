@@ -1,6 +1,4 @@
 ﻿@using Dziekanowka.Mechanizm
-@using UglyToad.PdfPig
-@using UglyToad.PdfPig.Content
 <div class="bibliotekaCzytelniaWidok widok rel">
     <div class="abs czytelniaDoIntro"><button disabled="@czytanie" class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img src="img/miasto/biblioteka/confirmCzytelnia.png" /></button></div>
     <div class="abs czytelniaKsiazki">
@@ -32,33 +30,37 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool czytanie = false;
-    private List<string> lektury = ["QuoVadis", "PanTadeusz", "WPustyniIWPuszczy",
+    private List<string> lektury = ["MalySwiatekDonCamilla", "RokDonCamilla", "BladyWymoczek", "Ludziska", "DziesiatySpiskowiec",
+    "QuoVadis", "PanTadeusz", "WPustyniIWPuszczy", "OgniemIMieczem", "Potop", "PanWolodyjowski", "MalyKsiaze",
     "Narnia1LewCzarownicaIStaraSzafa", "Narnia2KsiazeKaspian", "Narnia3PodrozWedrowcaDoSwitu", "Narnia4SrebrneKrzeslo", "Narnia5KonIJegoChlopiec", "Narnia6SiostrzeniecCzarodzieja", "Narnia7OstatniaBitwa",
     "Hobbit", "DruzynaPierscienia1", "DruzynaPierscienia2", "DwieWieze1", "DwieWieze2", "PowrotKrola1", "PowrotKrola2",
     "Ania1ZZielonegoWzgorza", "Ania2AniaZAvonlea", "Ania3AniaNaUniwersytecie", "Ania4AniaZSzumiacychTopoli", "Ania5WymarzonyDomAni", "Ania6AniaZeZlotegoBrzegu", "Ania7DolinaTeczy", "Ania8RillaZeZlotegoBrzegu", "Ania9AniaZWyspyKsieciaEdwarda"];
     private int nrStrony = 1;
     private int liczbaStron = 0;
     private List<string> strony = [];
+    private List<string> PodzielNaStrony(string tekst, int znakiNaStrone)
+    {
+        var strony = new List<string>();
+        int i = 0;
+        while (i < tekst.Length)
+        {
+            int koniec = Math.Min(i + znakiNaStrone, tekst.Length);
+            if (koniec < tekst.Length)
+            {
+                int ostatniaSpacja = tekst.LastIndexOf(' ', koniec, koniec - i);
+                if (ostatniaSpacja > i) koniec = ostatniaSpacja + 1;
+            }
+            strony.Add(tekst[i..koniec].Trim());
+            i = koniec;
+        }
+        return strony;
+    }
     private void Czytaj(string ksiazka)
     {
-        strony.Clear();
         var baseDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot", "img", "miasto", "biblioteka", "lektury");
-
-        var sciezkaPdf = Path.Combine(baseDir, $"{ksiazka}.pdf");
-        var sciezkaTxt = Path.Combine(baseDir, $"{ksiazka}.txt");
-        if (File.Exists(sciezkaPdf))
-        {
-            using var pdf = PdfDocument.Open(sciezkaPdf);
-            foreach (Page strona in pdf.GetPages())
-                strony.Add(strona.Text);
-        }
-        else if (File.Exists(sciezkaTxt))
-        {
-            var tekst = File.ReadAllText(sciezkaTxt, System.Text.Encoding.UTF8);
-            int znakiNaStrone = ksiazka == "PanTadeusz" ? 1000 : 3000;
-            for (int i = 0; i < tekst.Length; i += znakiNaStrone)
-                strony.Add(tekst.Substring(i, Math.Min(znakiNaStrone, tekst.Length - i)));
-        }
+        var tekst = File.ReadAllText(Path.Combine(baseDir, $"{ksiazka}.txt"), System.Text.Encoding.UTF8);
+        int znakiNaStrone = ksiazka == "PanTadeusz" ? 1000 : 3000;
+        strony = PodzielNaStrony(tekst, znakiNaStrone);
         liczbaStron = strony.Count;
         nrStrony = 1;
         czytanie = true;
