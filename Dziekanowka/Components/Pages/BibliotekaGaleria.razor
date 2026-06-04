@@ -1,8 +1,52 @@
 ﻿@using Dziekanowka.Mechanizm
 <div class="bibliotekaGaleriaWidok widok rel">
     <div class="abs galeriaDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img src="img/miasto/biblioteka/confirmGaleria.png" /></button></div>
+    <div class="abs galeriaKolekcje">
+        @foreach (var (nazwa, inf) in kolekcje)
+        {
+            var lokalnaNazwa = nazwa;
+            @if (poziom >= inf.Prog)
+            {
+                <div class="galeriaKolekcja" @onclick='() => OtworzKolekcje(lokalnaNazwa)'>
+                    <img class="obrazekContain" src="img/miasto/biblioteka/kolekcje/@(lokalnaNazwa)/0.png" />
+                </div>
+            }
+        }
+    </div>
+    @if (otwartaKolekcja != null && kolekcje.TryGetValue(otwartaKolekcja, out var info))
+    {
+        <div class="abs kolekcjaOverlay" @onclick="() => otwartaKolekcja = null">
+            @for (int i = 0; i <= Math.Min(info.Maks, poziom - info.Prog); i++)
+            {
+                var lokalneI = i;
+                <div class="kolekcjaElement" @onmouseenter='() => pokazElement = $"{otwartaKolekcja}/{lokalneI}"' @onmouseleave='() => pokazElement = null'>
+                    <img class="obrazekContain" src="img/miasto/biblioteka/kolekcje/@(otwartaKolekcja)/@(lokalneI).png" />
+                </div>
+            }
+            @if (pokazElement != null)
+            {
+                <div class="powiekszonyElement">
+                    <img src="img/miasto/biblioteka/kolekcje/@(pokazElement).png" />
+                </div>
+            }
+        </div>
+    }
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int poziom => Gracz.Statystyki.Kolekcje;
+    private string? pokazElement = null;
+    private string? otwartaKolekcja = null;
+    private record KolekcjaInfo(int Maks, int Prog);
+    private Dictionary<string, KolekcjaInfo> kolekcje = new()
+    {
+        { "narnia1", new(52, 0) },
+        { "narnia2", new(68, 53) }
+        // { "narnia3", new(75, 122) }
+    };
+    private void OtworzKolekcje(string kolekcja)
+    {
+        otwartaKolekcja = kolekcja;
+    }
 }

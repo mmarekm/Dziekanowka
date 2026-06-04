@@ -1,13 +1,27 @@
 ﻿@using Dziekanowka.Mechanizm
 <div class="bibliotekaCzytelniaWidok widok rel">
-    <div class="abs czytelniaDoIntro"><button disabled="@czytanie" class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img src="img/miasto/biblioteka/confirmCzytelnia.png" /></button></div>
+    <div class="abs czytelniaDoIntro">
+        <button disabled="@czytanie" class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)">
+            <img src="img/miasto/biblioteka/confirmCzytelnia.png" />
+        </button>
+    </div>
     <div class="abs czytelniaKsiazki">
         @foreach (var lektura in lektury)
         {
             var lokalnaLektura = lektura;
-            <div class="ksiazka" @onclick='() => Czytaj(lokalnaLektura)'><img class="obrazekContain" src="img/miasto/biblioteka/lektury/@(lektura).png" /></div>
+            <div class="ksiazka" @onclick='() => Czytaj(lokalnaLektura)'>
+                <div class="abs miejscePowiekszeniaOkladki" @onmouseenter='() => pokazOkladke = lokalnaLektura' @onmouseleave='() => pokazOkladke = null'></div>
+                <img class="obrazekContain" src="img/miasto/biblioteka/lektury/@(lektura).png" />
+            </div>
         }
     </div>
+
+    @if (pokazOkladke != null)
+    {
+        <div class="abs powiekszonaOkladka">
+            <img src="img/miasto/biblioteka/lektury/@(pokazOkladke).png" />
+        </div>
+    }
 </div>
 
 @if (czytanie)
@@ -30,8 +44,9 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool czytanie = false;
+    private string? pokazOkladke = null;
     private List<string> lektury = ["MalySwiatekDonCamilla", "RokDonCamilla", "TowarzyszDonCamillo", "DonCamilloIJegoTrzodka", "BladyWymoczek", "Ludziska", "DziesiatySpiskowiec",
-    "PodroznikWC", "GringoWsrodDzikichPlemion", "WyspaNaPrerii",
+    "PodroznikWC", "KoltunSieJezy", "MlotNaLewice", "GringoWsrodDzikichPlemion", "WyspaNaPrerii", "PiechotaDoZrodelOrinoko",
     "QuoVadis", "PanTadeusz", "WPustyniIWPuszczy", "OgniemIMieczem", "Potop", "PanWolodyjowski", "MalyKsiaze",
     "Narnia1LewCzarownicaIStaraSzafa", "Narnia2KsiazeKaspian", "Narnia3PodrozWedrowcaDoSwitu", "Narnia4SrebrneKrzeslo", "Narnia5KonIJegoChlopiec", "Narnia6SiostrzeniecCzarodzieja", "Narnia7OstatniaBitwa",
     "Hobbit", "DruzynaPierscienia1", "DruzynaPierscienia2", "DwieWieze1", "DwieWieze2", "PowrotKrola1", "PowrotKrola2",

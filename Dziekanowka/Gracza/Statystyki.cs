@@ -7,6 +7,8 @@ namespace Dziekanowka.Gracza
         public int DzienLogowania { get; set; } = 0;
         public int MiesiacLogowania { get; set; } = 0;
         public RozgrywkiWewnetrzne Mecze { get; set; } = new();
+        public (bool chlopiecMiska, bool pizza, bool zwierz, bool restauracja) SkladoweDoKolekcji { get; set; } = (false, false, false, false);
+        public int Kolekcje { get; set; } = 0;
         public int BonusDzienny { get; set; } = 33;
         public bool MoznaMiod { get; set; } = false;
         public bool MoznaKaweZSalonu { get; set; } = false;
