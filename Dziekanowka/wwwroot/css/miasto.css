@@ -549,6 +549,18 @@
     width: 307px;
     height: 122px;
 }
+.chlopiecMiska {
+    bottom: 70px;
+    right: 300px;
+    width: 200px;
+    height: 200px;
+}
+.kiosk1Puchar {
+    top: 20px;
+    right: 40px;
+    width: 200px;
+    height: 200px;
+}
 .autobusAnimacjaM1 {
     left: -150px;
     top: 400px;

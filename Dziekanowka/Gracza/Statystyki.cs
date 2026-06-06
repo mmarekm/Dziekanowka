@@ -6,10 +6,6 @@ namespace Dziekanowka.Gracza
         public int DzienLogowania { get; set; } = 0;
         public int MiesiacLogowania { get; set; } = 0;
         public bool MoznaOdebracObraz { get; set; } = false;
-        public bool MoznaKarmicChlopca { get; set; } = true;
-        public bool MoznaKarmicKotKiosk { get; set; } = false;
-        public bool MoznaKarmicRestauracja { get; set; } = false;
-        public bool MoznaKarmicPizza { get; set; } = false;
         private static readonly List<string> zbiorChlopiecMiska = ["rosol", "barszczCzerwony", "zurek", "krupnik", "zupaPomidorowa", "zupaOgorkowa", "zupaGrzybowa", "kapusniak", "grochowka", "zupaFasolowa", "zupaCebulowa", "chlodnik", "kremZBrokulow", "kremZDyni", "kremZKalafiora"];
         public string ChlopiecMiska { get; set; } = zbiorChlopiecMiska[Random.Shared.Next(zbiorChlopiecMiska.Count)];
         public int Kolekcje { get; set; } = 0;

@@ -1,18 +1,26 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="kiosk@(Gracz.Statystyki.Kiosk)Widok widok rel">
-    <div class="abs lMonetKiosk lMonetKiosk@(Gracz.Statystyki.Kiosk)">@Gracz.Monety</div>
-    <div class="abs lBiletowKiosk lBiletowKiosk@(Gracz.Statystyki.Kiosk)">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
-    <div class="abs kupBiletKiosk@(Gracz.Statystyki.Kiosk) @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet"><img src="img/miasto/kupWKiosk@(Gracz.Statystyki.Kiosk).png" /></div>
-    <div class="abs kioskDoMiasto kioskDoMiasto@(Gracz.Statystyki.Kiosk)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/confirmKiosk@(Gracz.Statystyki.Kiosk).png" /></button></div>
+<div class="kiosk@(kiosk)Widok widok rel">
+    <div class="abs lMonetKiosk lMonetKiosk@(kiosk)">@Gracz.Monety</div>
+    <div class="abs lBiletowKiosk lBiletowKiosk@(kiosk)">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
+    <div class="abs kupBiletKiosk@(kiosk) @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet"><img src="img/miasto/kupWKiosk@(kiosk).png" /></div>
+    <div class="abs kioskDoMiasto kioskDoMiasto@(kiosk)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/confirmKiosk@(kiosk).png" /></button></div>
+    @if (kiosk == 1)
+    {
+        <div class="abs chlopiecMiska"><img src="img/dom/kuchnia/garnek/@(sciezkaMiski).png"/></div>
+        <div class="abs kiosk1Puchar"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private EkranGry Wyjscie => Gracz.Statystyki.Kiosk switch { 1 => EkranGry.Miasto1, 2 => EkranGry.Miasto2, 3 => EkranGry.Miasto3, _ => throw new ArgumentOutOfRangeException() };
-    private int cenaBiletu => Gracz.Statystyki.Kiosk == 1 ? 2 : Gracz.Statystyki.Kiosk == 2 ? 3 : Gracz.Statystyki.Kiosk == 3 ? 5 : 0;
+    private int kiosk => Gracz.Statystyki.Kiosk;
+    private EkranGry Wyjscie => kiosk switch { 1 => EkranGry.Miasto1, 2 => EkranGry.Miasto2, 3 => EkranGry.Miasto3, _ => throw new ArgumentOutOfRangeException() };
+    private int cenaBiletu => kiosk == 1 ? 2 : kiosk == 2 ? 3 : kiosk == 3 ? 5 : 0;
+    private string sciezkaMiski => Gracz.Statystyki.ChlopiecMiska == "" ? "pustaMiska" : Gracz.Statystyki.ChlopiecMiska;
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
     private async Task KupBilet()
     {
         if (Gracz.Monety < cenaBiletu) return;
