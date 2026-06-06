@@ -38,7 +38,7 @@ else
     private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa, EkranGry.GrzybyZnalezione, EkranGry.RybaZlowiona,
         EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21, EkranGry.AutobusJedzie22, EkranGry.AutobusJedzie3,
         EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
-        EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii ];
+        EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.ChlopiecZje ];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
@@ -83,6 +83,7 @@ else
             EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
             EkranGry.RybaZlowiona => EkranGry.LasJezioro,
             EkranGry.WejscieDoGalerii => EkranGry.BibliotekaIntro,
+            EkranGry.ChlopiecZje => EkranGry.Kiosk,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);
@@ -119,6 +120,7 @@ else
             EkranGry.Stacja => "mp3/Tla/kolej.mp3",
             EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona => "mp3/Dzwieki/fanfaraKrotka.mp3",
             EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca or EkranGry.WyciskarkaPraca => "mp3/Tla/akcjaSprawna.mp3",
+            EkranGry.ChlopiecZje => "mp3/Dzwieki/fanfara.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
             _ => $"mp3/Tla/{ekran.ToString().ToLower()}.mp3"
         };
@@ -161,6 +163,7 @@ else
             EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
             EkranGry.RybaZlowiona => EkranGry.LasJezioro,
             EkranGry.WejscieDoGalerii => EkranGry.BibliotekaIntro,
+            EkranGry.ChlopiecZje => EkranGry.Kiosk,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);

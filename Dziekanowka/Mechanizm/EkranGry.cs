@@ -83,6 +83,7 @@
         ZarnaPraca,
         PlatkarkaPraca,
         BeczkaPraca,
-        MlynekPraca
+        MlynekPraca,
+        ChlopiecZje
     }
 }

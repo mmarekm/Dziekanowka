@@ -561,6 +561,13 @@
     width: 200px;
     height: 200px;
 }
+.chlopiecZje {
+    top: 327px;
+    right: 182px;
+    width: 335px;
+    height: 402px;
+    z-index: 2;
+}
 .autobusAnimacjaM1 {
     left: -150px;
     top: 400px;
