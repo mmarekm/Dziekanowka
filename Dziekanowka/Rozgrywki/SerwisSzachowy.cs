@@ -5,37 +5,55 @@ namespace Dziekanowka.Rozgrywki
     public class SerwisSzachowy
     {
         private readonly string _sciezkaDoPliku;
+
         public SerwisSzachowy()
         {
             _sciezkaDoPliku = Path.Combine(AppContext.BaseDirectory, "szachy.json");
         }
-        private async Task<Dictionary<string, PartiaSzachow>> WczytajWszystkiePartie()
+
+        private async Task<DaneSzachowe> WczytajDane()
         {
             if (!File.Exists(_sciezkaDoPliku))
             {
-                var startowePartie = PartiaSzachow.StartowePartie();
-                await ZapiszWszystkiePartie(startowePartie);
-                return startowePartie;
+                var dane = new DaneSzachowe { Partie = PartiaSzachow.StartowePartie() };
+                await ZapiszDane(dane);
+                return dane;
             }
             var json = await File.ReadAllTextAsync(_sciezkaDoPliku);
-            return JsonSerializer.Deserialize<Dictionary<string, PartiaSzachow>>(json) ?? new Dictionary<string, PartiaSzachow>();
+            return JsonSerializer.Deserialize<DaneSzachowe>(json) ?? new DaneSzachowe();
         }
-        private async Task ZapiszWszystkiePartie(Dictionary<string, PartiaSzachow> partie)
+
+        private async Task ZapiszDane(DaneSzachowe dane)
         {
             var opcje = new JsonSerializerOptions { WriteIndented = true };
-            var json = JsonSerializer.Serialize(partie, opcje);
+            var json = JsonSerializer.Serialize(dane, opcje);
             await File.WriteAllTextAsync(_sciezkaDoPliku, json);
         }
+
         public async Task<PartiaSzachow> PobierzPartie(string nazwa)
         {
-            var partie = await WczytajWszystkiePartie();
-            return partie[nazwa];
+            var dane = await WczytajDane();
+            return dane.Partie[nazwa];
         }
+
         public async Task ZapiszPartie(PartiaSzachow partia)
         {
-            var partie = await WczytajWszystkiePartie();
-            partie[partia.Nazwa] = partia;
-            await ZapiszWszystkiePartie(partie);
+            var dane = await WczytajDane();
+            dane.Partie[partia.Nazwa] = partia;
+            await ZapiszDane(dane);
+        }
+
+        public async Task<Dictionary<string, double>> PobierzPunkty(string nazwaGracza)
+        {
+            var dane = await WczytajDane();
+            return dane.Mecze.TryGetValue(nazwaGracza, out var punkty) ? punkty : [];
+        }
+
+        public async Task ZapiszPunkty(string nazwaGracza, Dictionary<string, double> punkty)
+        {
+            var dane = await WczytajDane();
+            dane.Mecze[nazwaGracza] = punkty;
+            await ZapiszDane(dane);
         }
     }
 }

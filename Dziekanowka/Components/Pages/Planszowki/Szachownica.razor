@@ -62,14 +62,20 @@
     protected override async Task OnInitializedAsync()
     {
         rywal = await LadowanieGracza.PobierzGracza(NazwaPrzeciwnika);
+        var mojePunkty = await Serwis.PobierzPunkty(Gracz.Nazwa);
+        var kluczGracza = $"{NazwaPrzeciwnika}{(Odwrocona ? "Czarny" : "Bialy")}";
+        mojePunkty.TryGetValue(kluczGracza, out punktyGracza);
+        var punktyRywala = await Serwis.PobierzPunkty(NazwaPrzeciwnika);
+        var kluczRywala = $"{NazwaGracza}{(Odwrocona ? "Bialy" : "Czarny")}";
+        punktyRywala.TryGetValue(kluczRywala, out punktyPrzeciwnika);
     }
     private string NazwaGracza => Odwrocona ? Partia.NazwaCzarnego : Partia.NazwaBialego;
     private string NazwaPrzeciwnika => Odwrocona ? Partia.NazwaBialego : Partia.NazwaCzarnego;
     private PoleSzachownicy? wybranaBierka;
     private List<PoleSzachownicy> mozliweRuchy = [];
     private bool chybaPrzegram = false;
-    private double punktyGracza => Gracz.Statystyki.Mecze.Szachy.TryGetValue($"{NazwaPrzeciwnika}{(Odwrocona ? "Czarny" : "Bialy")}", out var p) ? p : 0;
-    private double punktyPrzeciwnika => rywal?.Statystyki.Mecze.Szachy.TryGetValue($"{NazwaGracza}{(Odwrocona ? "Bialy" : "Czarny")}", out var p) == true ? p : 0;
+    private double punktyGracza = 0;
+    private double punktyPrzeciwnika = 0;
     private bool oczekujePromocji = false;
     private PoleSzachownicy? polePromocji = null;
     private string? kolorPromocji = null;
@@ -230,14 +236,16 @@
     {
         var kluczGracza = $"{NazwaPrzeciwnika}{(Odwrocona ? "Czarny" : "Bialy")}";
         var kluczRywala = $"{NazwaGracza}{(Odwrocona ? "Bialy" : "Czarny")}";
-        Gracz.Statystyki.Mecze.Szachy.TryGetValue(kluczGracza, out var obecneGracza);
-        Gracz.Statystyki.Mecze.Szachy[kluczGracza] = obecneGracza + dlaGracza;
-        await LadowanieGracza.ZapiszAktualnegoGracza();
-        rywal = await LadowanieGracza.PobierzGracza(NazwaPrzeciwnika);
-        rywal.Statystyki.Mecze.Szachy.TryGetValue(kluczRywala, out var obecneRywala);
-        rywal.Statystyki.Mecze.Szachy[kluczRywala] = obecneRywala + dlaRywala;
-        await LadowanieGracza.ZapiszGracza(rywal);
-        rywal = await LadowanieGracza.PobierzGracza(NazwaPrzeciwnika);
+        var mojePunkty = await Serwis.PobierzPunkty(Gracz.Nazwa);
+        mojePunkty.TryGetValue(kluczGracza, out var obecneGracza);
+        mojePunkty[kluczGracza] = obecneGracza + dlaGracza;
+        await Serwis.ZapiszPunkty(Gracz.Nazwa, mojePunkty);
+        var punktyRywala = await Serwis.PobierzPunkty(NazwaPrzeciwnika);
+        punktyRywala.TryGetValue(kluczRywala, out var obecneRywala);
+        punktyRywala[kluczRywala] = obecneRywala + dlaRywala;
+        await Serwis.ZapiszPunkty(NazwaPrzeciwnika, punktyRywala);
+        punktyGracza = mojePunkty[kluczGracza];
+        punktyPrzeciwnika = punktyRywala[kluczRywala];
     }
     private async Task ProponujRemis()
     {

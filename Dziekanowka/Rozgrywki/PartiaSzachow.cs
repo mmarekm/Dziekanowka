@@ -1,5 +1,10 @@
 ﻿namespace Dziekanowka.Rozgrywki
 {
+    public class DaneSzachowe
+    {
+        public Dictionary<string, PartiaSzachow> Partie { get; set; } = [];
+        public Dictionary<string, Dictionary<string, double>> Mecze { get; set; } = [];
+    }
     public class PoleSzachownicy
     {
         public int X { get; set; }
