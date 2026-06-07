@@ -7,6 +7,9 @@
 .bibliotekaGaleriaWidok {
     background-image: url('../img/miasto/biblioteka/bibliotekaGaleriaWidok.png');
 }
+.bibliotekaPaniWidok {
+    background-image: url('../img/miasto/biblioteka/bibliotekaPaniWidok.png');
+}
 .bibliotekaDoMiasto {
     bottom: 0;
     right: 0;
@@ -26,6 +29,13 @@
     top: 171px;
     width: 331px;
     height: 578px;
+    z-index: 2;
+}
+.bibliotekaDoPani {
+    top: 398px;
+    left: 1156px;
+    width: 329px;
+    height: 290px;
     z-index: 2;
 }
 .czytelniaDoIntro {
@@ -183,3 +193,31 @@
         height: 100%;
         object-fit: contain;
     }
+.paniDoIntro {
+    bottom: 0;
+    left: 0;
+    width: 571px;
+    height: 349px;
+    z-index: 2;
+}
+.paniDoGaleria {
+    top: 0;
+    left: 0;
+    width: 258px;
+    height: 359px;
+    z-index: 2;
+}
+.paniDoMiasto {
+    top: 0;
+    right: 0;
+    width: 367px;
+    height: 442px;
+    z-index: 2;
+}
+.uPaniLezyMedal {
+    top: 660px;
+    left: 1220px;
+    width: 130px;
+    height: 130px;
+    z-index: 2;
+}

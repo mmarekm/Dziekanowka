@@ -52,6 +52,8 @@
         SzkolaInformatyka,
         BibliotekaIntro,
         BibliotekaCzytelnia,
+        BibliotekaPani,
+        UzyskanieObrazu,
         WejscieDoGalerii,
         BibliotekaGaleria,
         SklepDrobiu,

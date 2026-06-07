@@ -1,0 +1,34 @@
+﻿@using Dziekanowka.Mechanizm
+@inject LadowanieGracza ladowanieGracza
+<div class="bibliotekaPaniWidok widok rel">
+    <div class="abs paniDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img src="img/miasto/biblioteka/paniDoIntro.png" /></button></div>
+    <div class="abs paniDoGaleria"><button class="wyroznionyGuzik" @onclick="DoGalerii"><img src="img/miasto/biblioteka/paniDoGaleria.png" /></button></div>
+    <div class="abs paniDoMiasto"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)"><img src="img/miasto/biblioteka/paniDoMiasto.png" /></button></div>
+    <div class="abs uPaniLezyMedal @(!Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "klikalneDivZielone")" @onclick="ZyskajObraz">
+    @if (!Gracz.Statystyki.MoznaOdebracObraz)
+    {
+        <img class="obrazekContain" src="img/przedmioty/medalRestauracyjnyZdobyty.png" />
+    }
+    </div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private async Task DoGalerii()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.WejscieDoGalerii);
+        await Task.Delay(5900);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaGaleria);
+    }
+    private async Task ZyskajObraz()
+    {
+        if (!Gracz.Statystyki.MoznaOdebracObraz) return;
+        Gracz.Statystyki.Kolekcje++;
+        Gracz.Statystyki.MoznaOdebracObraz = false;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.UzyskanieObrazu);
+        await Task.Delay(8900);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaPani);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}
