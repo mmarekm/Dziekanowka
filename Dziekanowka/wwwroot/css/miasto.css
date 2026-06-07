@@ -562,8 +562,8 @@
     height: 200px;
 }
 .chlopiecZje {
-    top: 327px;
-    right: 182px;
+    top: 328px;
+    right: 183px;
     width: 335px;
     height: 402px;
     z-index: 2;
@@ -766,4 +766,15 @@
     left: -1500px;
     pointer-events: none;
     transition: left 2s ease;
+}
+@keyframes poblysk {
+    0%, 100% {
+        filter: brightness(1);
+    }
+    20% {
+        filter: brightness(1.4) drop-shadow(0 0 8px gold);
+    }
+}
+.poblyskuje {
+    animation: poblysk 2s ease-in-out infinite;
 }

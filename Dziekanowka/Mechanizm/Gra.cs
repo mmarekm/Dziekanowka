@@ -13,6 +13,7 @@ namespace Dziekanowka.Mechanizm
         public static bool JestGrzyb(this Gracz g, string grzyb) => g.Grzyby.Any(g => g.Nazwa == grzyb && g.Ilosc > 0);
         public static bool JestRyba(this Gracz g, string ryba) => g.Ryby.Any(r => r.Nazwa == ryba && r.Ilosc > 0);
         public static bool JestDar(this Gracz g, string dar) => g.ProduktyZwierzece.Any(p => p.Nazwa == dar && p.Ilosc > 0) || g.ProduktyPrzetworzone.Any(p => p.Nazwa == dar && p.Ilosc > 0) || g.ZywnoscPozostala.Any(p => p.Nazwa == dar && p.Ilosc > 0) || g.Warzywa.Any(w => w.Nazwa == dar && w.Ilosc > 0) || g.Zboza.Any(z => z.Nazwa == dar && z.Ilosc > 0) || g.Owoce.Any(o => o.Nazwa == dar && o.Ilosc > 0) || g.Grzyby.Any(gr => gr.Nazwa == dar && gr.Ilosc > 0) || g.Ryby.Any(r => r.Nazwa == dar && r.Ilosc > 0);
+        public static bool JestObiad(this Gracz g, string obiad) => g.Obiady.Any(o => o.Nazwa == obiad && o.Ilosc > 0);
         public static bool JestPrzedmiot(this Gracz g, string przedmiot) => g.Przedmioty.Any(p => p.Nazwa == przedmiot && p.Ilosc > 0);
         public static ZwierzeGracza Zwierze(this Gracz g, string zwierz) => g.Zwierzeta.First(z => z.Nazwa == zwierz);
         public static IDar ProduktZ(this Gracz g, string produkt) => g.ProduktyZwierzece.First(p => p.Nazwa == produkt);
@@ -35,6 +36,7 @@ namespace Dziekanowka.Mechanizm
             if (g.Ryby.Any(r => r.Nazwa == dar)) return g.Ryby.First(r => r.Nazwa == dar);
             throw new InvalidOperationException($"Nie znaleziono daru: {dar}");
         }
+        public static IDar Obiad(this Gracz g, string obiad) => g.Obiady.First(o => o.Nazwa == obiad);
         public static IDar Przedmiot(this Gracz g, string przedmiot) => g.Przedmioty.First(p => p.Nazwa == przedmiot);
         public static string[] Sklepiczek = ["kosc", ""];
         public static string[] SklepiczekWymagane = ["zielonaKuleczka", ""];
