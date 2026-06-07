@@ -6,7 +6,7 @@ namespace Dziekanowka
     {
         public string Nazwa { get; set; } = nazwa;
         public string Haslo { get; set; } = "";
-        public int Monety { get; set; } = 200;
+        public int Monety { get; set; } = 1000;
         public Statystyki Statystyki { get; set; } = new Statystyki();
         public List<ZwierzeGracza> Zwierzeta { get; set; } = ZwierzeGracza.StartoweZwierzaki();
         public List<ProduktZwierzecy> ProduktyZwierzece { get; set; } = ProduktZwierzecy.StartoweProdukty();
