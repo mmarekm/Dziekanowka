@@ -555,9 +555,21 @@
     width: 200px;
     height: 200px;
 }
+.kotMiska {
+    bottom: 200px;
+    right: 100px;
+    width: 200px;
+    height: 200px;
+}
 .kiosk1Puchar {
     top: 20px;
     right: 40px;
+    width: 200px;
+    height: 200px;
+}
+.kiosk2Puchar {
+    top: 150px;
+    right: 100px;
     width: 200px;
     height: 200px;
 }
@@ -566,6 +578,13 @@
     right: 183px;
     width: 335px;
     height: 402px;
+    z-index: 2;
+}
+.kotZje {
+    bottom: 78px;
+    left: 1127px;
+    width: 254px;
+    height: 136px;
     z-index: 2;
 }
 .autobusAnimacjaM1 {

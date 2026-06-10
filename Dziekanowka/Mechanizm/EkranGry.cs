@@ -86,6 +86,7 @@
         PlatkarkaPraca,
         BeczkaPraca,
         MlynekPraca,
-        ChlopiecZje
+        ChlopiecZje,
+        KotZje
     }
 }

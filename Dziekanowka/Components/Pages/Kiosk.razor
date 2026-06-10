@@ -12,18 +12,26 @@
         <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
         <div class="abs chlopiecZje @(moznaKarmic ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Nakarm"><img src="img/miasto/chlopiecZje.png" /></div>
     }
+    @if (kiosk == 2)
+    {
+        <div class="abs kotMiska"><img src="img/przedmioty/ryby/@(sciezkaMiski).png" /></div>
+        <div class="abs kiosk2Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+        <div class="abs kotZje @(moznaKarmicKota ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Nakarm"><img src="img/miasto/kotZje.png" /></div>
+    }
+    )
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private int kiosk => Gracz.Statystyki.Kiosk;
-    private string pokarm => kiosk == 1 ? Gracz.Statystyki.ChlopiecMiska : "";
+    private string pokarm => kiosk == 1 ? Gracz.Statystyki.ChlopiecMiska : kiosk == 2 ? Gracz.Statystyki.KotKiosk : "";
     private EkranGry Wyjscie => kiosk switch { 1 => EkranGry.Miasto1, 2 => EkranGry.Miasto2, 3 => EkranGry.Miasto3, _ => throw new ArgumentOutOfRangeException() };
     private int cenaBiletu => kiosk == 1 ? 2 : kiosk == 2 ? 3 : kiosk == 3 ? 5 : 0;
-    private string sciezkaMiski => pokarm == "" ? "pustaMiska" : pokarm;
+    private string sciezkaMiski => pokarm == "" ? $"pustaMiska{(kiosk == 1 ? "" : "Kota")}" : pokarm;
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
     private bool moznaKarmic => pokarm != "" && Gra.JestObiad(Gracz, pokarm);
+    private bool moznaKarmicKota => pokarm != "" && Gra.JestRyba(Gracz, pokarm);
     private static List<string> zbiorRyb = ["losos", "pstrag", "halibut", "okon", "sledz"];
     private async Task KupBilet()
     {
@@ -43,6 +51,15 @@
             Gracz.Statystyki.KotKiosk = zbiorRyb[Random.Shared.Next(zbiorRyb.Count)];
             await NaZmianeEkranu.InvokeAsync(EkranGry.ChlopiecZje);
             await Task.Delay(9000);
+            await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);
+        }
+        if (kiosk == 2)
+        {
+            Gra.Ryba(Gracz, pokarm).Ilosc--;
+            Gracz.Statystyki.KotKiosk = "";
+            // nastepny glodny
+            await NaZmianeEkranu.InvokeAsync(EkranGry.KotZje);
+            await Task.Delay(8000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
