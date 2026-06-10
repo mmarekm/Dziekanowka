@@ -42,7 +42,8 @@
     }
     private async Task Nakarm()
     {
-        if (!moznaKarmic) return;
+        if (kiosk == 1 && !moznaKarmic) return;
+        if (kiosk == 2 && !moznaKarmicKota) return;
         Gracz.Statystyki.MoznaOdebracObraz = true;
         if (kiosk == 1)
         {
@@ -58,6 +59,9 @@
             Gra.Ryba(Gracz, pokarm).Ilosc--;
             Gracz.Statystyki.KotKiosk = "";
             // nastepny glodny
+            List<string> zbiorChlopiecMiska = ["rosol", "barszczCzerwony", "zurek", "krupnik", "zupaPomidorowa", "zupaOgorkowa", "zupaGrzybowa", "kapusniak", "grochowka", "zupaFasolowa", "zupaCebulowa", "chlodnik", "kremZBrokulow", "kremZDyni", "kremZKalafiora"];
+            Gracz.Statystyki.ChlopiecMiska = zbiorChlopiecMiska[Random.Shared.Next(zbiorChlopiecMiska.Count)];
+            // zmienic to wyzej
             await NaZmianeEkranu.InvokeAsync(EkranGry.KotZje);
             await Task.Delay(8000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);
