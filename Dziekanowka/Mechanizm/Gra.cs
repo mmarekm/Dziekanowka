@@ -40,5 +40,10 @@ namespace Dziekanowka.Mechanizm
         public static IDar Przedmiot(this Gracz g, string przedmiot) => g.Przedmioty.First(p => p.Nazwa == przedmiot);
         public static string[] Sklepiczek = ["kosc", ""];
         public static string[] SklepiczekWymagane = ["zielonaKuleczka", ""];
+        public static List<string> ZbiorChlopiecMiska = ["rosol", "barszczCzerwony", "zurek", "krupnik", "zupaPomidorowa", "zupaOgorkowa", "zupaGrzybowa", "kapusniak", "grochowka", "zupaFasolowa", "zupaCebulowa", "chlodnik", "kremZBrokulow", "kremZDyni", "kremZKalafiora"];
+        public static List<string> Ryby = ["losos", "pstrag", "halibut", "okon", "sledz"];
+        public static List<string> Warzywa = [];
+        public static List<string> Owoce = [];
+        public static List<string> Soki = [];
     }
 }

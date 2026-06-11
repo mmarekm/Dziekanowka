@@ -32,7 +32,6 @@
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
     private bool moznaKarmic => pokarm != "" && Gra.JestObiad(Gracz, pokarm);
     private bool moznaKarmicKota => pokarm != "" && Gra.JestRyba(Gracz, pokarm);
-    private static List<string> zbiorRyb = ["losos", "pstrag", "halibut", "okon", "sledz"];
     private async Task KupBilet()
     {
         if (Gracz.Monety < cenaBiletu) return;
@@ -49,7 +48,7 @@
         {
             Gra.Obiad(Gracz, pokarm).Ilosc--;
             Gracz.Statystyki.ChlopiecMiska = "";
-            Gracz.Statystyki.KotKiosk = zbiorRyb[Random.Shared.Next(zbiorRyb.Count)];
+            Gracz.Statystyki.KotKiosk = Gra.Ryby[Random.Shared.Next(Gra.Ryby.Count)];
             await NaZmianeEkranu.InvokeAsync(EkranGry.ChlopiecZje);
             await Task.Delay(9000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);
@@ -59,8 +58,8 @@
             Gra.Ryba(Gracz, pokarm).Ilosc--;
             Gracz.Statystyki.KotKiosk = "";
             // nastepny glodny
-            List<string> zbiorChlopiecMiska = ["rosol", "barszczCzerwony", "zurek", "krupnik", "zupaPomidorowa", "zupaOgorkowa", "zupaGrzybowa", "kapusniak", "grochowka", "zupaFasolowa", "zupaCebulowa", "chlodnik", "kremZBrokulow", "kremZDyni", "kremZKalafiora"];
-            Gracz.Statystyki.ChlopiecMiska = zbiorChlopiecMiska[Random.Shared.Next(zbiorChlopiecMiska.Count)];
+            Gracz.Statystyki.ChlopiecMiska = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
+            //List<string> warzywa
             // zmienic to wyzej
             await NaZmianeEkranu.InvokeAsync(EkranGry.KotZje);
             await Task.Delay(8000);
