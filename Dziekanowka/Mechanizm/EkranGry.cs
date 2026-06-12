@@ -59,6 +59,7 @@
         SklepDrobiu,
         SklepDzikie,
         SklepBydlo,
+        Apteka,
         Sklepiczek,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,

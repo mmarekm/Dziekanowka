@@ -57,10 +57,7 @@
         {
             Gra.Ryba(Gracz, pokarm).Ilosc--;
             Gracz.Statystyki.KotKiosk = "";
-            // nastepny glodny
-            Gracz.Statystyki.ChlopiecMiska = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
-            //List<string> warzywa
-            // zmienic to wyzej
+            Gracz.Statystyki.FanWarzywIOwocow = [Gra.Warzywa[Random.Shared.Next(Gra.Warzywa.Count)], Gra.Owoce[Random.Shared.Next(Gra.Owoce.Count)], Gra.Soki[Random.Shared.Next(Gra.Soki.Count)]];
             await NaZmianeEkranu.InvokeAsync(EkranGry.KotZje);
             await Task.Delay(8000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);

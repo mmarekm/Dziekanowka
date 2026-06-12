@@ -416,6 +416,10 @@
 		"4d": "Boże, mój Boże!"
 	},
 	"45": {
+		"7a": "Tron Twój, Boże, na wieczne czasy,",
+		"7b": "berłem sprawiedliwości berło Twego królowania.",
+		"10a": "Córki królewskie wychodzą ci na spotkanie.",
+		"10b": "Królowa stanęła po twojej prawej stronie złotem Ofiru zdobna.",
 		"11a": "Posłuchaj, córko, spójrz i nakłoń ucha,",
 		"11b": "zapomnij o swym ludzie, o domu ojca swego.",
 		"12a": "Król pragnie twej piękności:",
@@ -635,6 +639,16 @@
 		"16b": "opowiem, co dla mnie uczynił.",
 		"20a": "Niech będzie Bóg błogosławiony, bo nie odtrącił mojej modlitwy",
 		"20b": "ani swej łaski mi nie odmówił!"
+	},
+	"67": {
+		"2a": "Niech Bóg się zmiłuje nad nami i nas błogosławi,",
+		"2b": "niech rozjaśni nad nami swe oblicze,",
+		"3a": "aby poznano na ziemi drogę wskazaną przez Ciebie,",
+		"3b": "Twoje zbawienie wśród wszystkich narodów.",
+		"5a": "Niech się narody cieszą i radują,",
+		"5b": "bo Ty sądzisz ludy sprawiedliwie i kierujesz narodami na ziemi.",
+		"8a": "Niech nas Bóg błogosławi",
+		"8b": "i niech się Go boją wszystkie krańce ziemi."
 	},
 	"68": {
 		"2a": "Bóg powstaje, a Jego wrogowie pierzchają,",
@@ -1287,6 +1301,10 @@
 		"16b": "a ziemię oddał synom ludzkim."
 	},
 	"116": {
+		"10a": "Ufałem nawet wtedy, gdy mówiłem:",
+		"10b": "Jestem w wielkim ucisku.",
+		"11a": "Będąc przerażony, mówiłem:",
+		"11b": "Każdy człowiek jest kłamcą!",
 		"12a": "Czym się Panu odwdzięczę",
 		"12b": "za wszystko, co mi wyświadczył?",
 		"13a": "Podniosę kielich zbawienia",
@@ -1499,6 +1517,14 @@
 		"3": "Niech Izrael zaufa Panu teraz i na wieki!"
 	},
 	"132": {
+		"6a": "Oto słyszeliśmy o arce w Efrata,",
+		"6b": "znaleźliśmy ją na polach Jaaru:",
+		"7a": "„Wejdziemy do Jego siedziby,",
+		"7b": "pokłonimy się przed podnóżkiem stóp Jego”.",
+		"9a": "Niech kapłani Twoi ubiorą się w sprawiedliwość,",
+		"9b": "a Twoi wierni niech wołają radośnie.",
+		"10a": "Ze względu na Twego sługę, Dawida,",
+		"10b": "nie odrzucaj swego pomazańca.",
 		"11a": "A Pan złożył Dawidowi nieodwołalną przysięgę",
 		"11b": "i od niej nie odstąpi:",
 		"11c": "„Potomka rodu twego posadzę na twoim tronie!",

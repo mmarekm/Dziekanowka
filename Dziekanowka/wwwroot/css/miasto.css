@@ -104,6 +104,9 @@
 .sklepMiasto3Widok {
     background-image: url('../img/miasto/sklepMiasto3Widok.png');
 }
+.aptekaWidok {
+    background-image: url('../img/miasto/aptekaWidok.png');
+}
 .lMonetSklepDrobiu {
     bottom: 40px;
     left: 140px;
@@ -240,6 +243,20 @@
     left: 251px;
     width: 656px;
     height: 401px;
+    z-index: 2;
+}
+.miasto3DoApteka {
+    top: 337px;
+    right: 81px;
+    width: 380px;
+    height: 218px;
+    z-index: 2;
+}
+.aptekaDoMiasto {
+    left: 0;
+    bottom: 0;
+    width: 315px;
+    height: 149px;
     z-index: 2;
 }
 .miasto2doSklepiczek {

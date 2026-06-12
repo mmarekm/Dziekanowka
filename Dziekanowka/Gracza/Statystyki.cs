@@ -8,7 +8,7 @@ namespace Dziekanowka.Gracza
         public bool MoznaOdebracObraz { get; set; } = false;
         public string ChlopiecMiska { get; set; } = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
         public string KotKiosk { get; set; } = "";
-        public string FanWarzywIOwocow { get; set; } = "";
+        public string[] FanWarzywIOwocow { get; set; } = ["", "", ""];
         public string MilosnikPieczywa { get; set; } = "";
         public int Kolekcje { get; set; } = 0;
         public int BonusDzienny { get; set; } = 33;

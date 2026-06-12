@@ -1,0 +1,27 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="aptekaWidok widok rel">
+    <div class="abs aptekaDoMiasto"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto3)"><img src="img/miasto/confirmApteka.png" /></button></div>
+    <div class="abs aptekaOGesi" @onclick='async () => await SprzedajSmalec("ges")'></div>
+    <div class="abs aptekalSmalcu aptekalGesi">@gesi</div>
+    <div class="abs aptekaOKaczce" @onclick='async () => await SprzedajSmalec("kaczka")'></div>
+    <div class="abs aptekalSmalcu aptekalKaczki">@kaczy</div>
+    <div class="abs aptekaOSwini" @onclick='async () => await SprzedajSmalec("swinia")'></div>
+    <div class="abs aptekalSmalcu aptekalSwini">@swini</div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int gesi => Gracz.ProduktZ("gesSmalec").Ilosc;
+    private int kaczy => Gracz.ProduktZ("kaczkaSmalec").Ilosc;
+    private int swini => Gracz.ProduktZ("swiniaSmalec").Ilosc;
+    private async Task SprzedajSmalec(string zwierz)
+    {
+        if (!Gracz.JestProduktZ($"{zwierz}Smalec")) return;
+        Gracz.Monety += 15;
+        Gracz.ProduktZ($"{zwierz}Smalec").Ilosc--;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}
