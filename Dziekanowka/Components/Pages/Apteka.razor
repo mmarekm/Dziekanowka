@@ -3,12 +3,13 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="aptekaWidok widok rel">
     <div class="abs aptekaDoMiasto"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto3)"><img src="img/miasto/confirmApteka.png" /></button></div>
-    <div class="abs aptekaOGesi" @onclick='async () => await SprzedajSmalec("ges")'></div>
+    <div class="abs aptekaOGesi @(!Gracz.JestProduktZ("gesSmalec") ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick='async () => await SprzedajSmalec("ges")'></div>
     <div class="abs aptekalSmalcu aptekalGesi">@gesi</div>
-    <div class="abs aptekaOKaczce" @onclick='async () => await SprzedajSmalec("kaczka")'></div>
+    <div class="abs aptekaOKaczce @(!Gracz.JestProduktZ("kaczkaSmalec") ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick='async () => await SprzedajSmalec("kaczka")'></div>
     <div class="abs aptekalSmalcu aptekalKaczki">@kaczy</div>
-    <div class="abs aptekaOSwini" @onclick='async () => await SprzedajSmalec("swinia")'></div>
+    <div class="abs aptekaOSwini @(!Gracz.JestProduktZ("swiniaSmalec") ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick='async () => await SprzedajSmalec("swinia")'></div>
     <div class="abs aptekalSmalcu aptekalSwini">@swini</div>
+    <div class="abs lMonetApteka">@Gracz.Monety <img class="obrazekContain" src="img/przedmioty/moneta.png" /></div>
 </div>
 
 @code {

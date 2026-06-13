@@ -259,6 +259,63 @@
     height: 149px;
     z-index: 2;
 }
+.aptekalSmalcu {
+    width: 100px;
+    height: 30px;
+    font-size: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.aptekalGesi {
+    top: 406px;
+    left: 52px;
+}
+.aptekaOGesi {
+    top: 230px;
+    left: 30px;
+    width: 155px;
+    height: 220px;
+}
+.aptekaOKaczce {
+    top: 230px;
+    left: 210px;
+    width: 155px;
+    height: 220px;
+}
+.aptekaOSwini {
+    top: 230px;
+    left: 390px;
+    width: 232px;
+    height: 220px;
+}
+.aptekalKaczki {
+    top: 404px;
+    left: 232px;
+}
+.aptekalSwini {
+    top: 400px;
+    left: 440px;
+}
+.lMonetApteka {
+    bottom: 40px;
+    left: 400px;
+    border-radius: 5px;
+    width: 400px;
+    height: 50px;
+    font-size: 49px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    display: flex;
+    background-color: tan;
+    opacity: 0.9;
+    z-index: 2;
+}
+    .lMonetApteka img {
+        width: 40px;
+        height: 40px;
+    }
 .miasto2doSklepiczek {
     top: 66px;
     left: 524px;
