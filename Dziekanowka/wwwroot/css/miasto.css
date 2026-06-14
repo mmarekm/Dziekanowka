@@ -796,7 +796,7 @@
     height: 206px;
 }
 .wyjscieStacjamiastoLesne {
-    left: 626px;
+    left: 701px;
     bottom: 0;
     width: 440px;
     height: 123px;
@@ -810,6 +810,25 @@
     z-index: 2;
 }
 .ileBiletowLmiasto3 {
+    top: 10px;
+    left: 205px;
+    width: 150px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    z-index: 2;
+    color: cyan;
+}
+.ileBiletowmiastoLesne {
+    top: 10px;
+    left: 100px;
+    width: 100px;
+    height: 100px;
+    z-index: 2;
+}
+.ileBiletowLmiastoLesne {
     top: 10px;
     left: 205px;
     width: 150px;
@@ -841,6 +860,11 @@
     top: 10px;
     right: 10px;
     color: saddlebrown;
+}
+.stacjaCzasmiastoLesne {
+    top: 10px;
+    right: 10px;
+    color: yellow;
 }
 .zobaczRozkladStacjimiasto3 {
     bottom: 0;
@@ -939,6 +963,61 @@
     width: 75px;
     height: 75px;
 }
+
+
+/* TUTAJ START POPRAWIANIA*/
+.zobaczRozkladStacjimiastoLesne {
+    bottom: 0;
+    left: 0;
+    width: 464px;
+    height: 376px;
+    z-index: 2;
+}
+.kupBiletStacjamiastoLesne {
+    width: 104px;
+    height: 102px;
+    bottom: 220px;
+    left: 1371px;
+}
+
+/* === animacja pociag2 dla miastoLesne === */
+.pociag2miastoLesneAnimacja {
+    left: -1500px;
+    top: 335px;
+    width: 920px;
+    height: 370px;
+    cursor: default;
+    pointer-events: none;
+    z-index: 2;
+    transform: scaleX(-1);
+}
+.pociag2miastoLesneUkryty {
+    opacity: 0;
+    left: -1500px;
+    pointer-events: none;
+    transition: none;
+}
+.pociag2miastoLesneJedzie {
+    opacity: 1;
+    left: 100px;
+    pointer-events: none;
+    transition: left 2.4s ease;
+}
+.pociag2miastoLesneStoi {
+    opacity: 1;
+    left: 100px;
+    pointer-events: all;
+    cursor: pointer;
+    transition: none;
+}
+.pociag2miastoLesneOdjedzie {
+    opacity: 1;
+    left: 2050px;
+    pointer-events: none;
+    transition: left 2s ease;
+}
+/* TUTAJ KONIEC POPRAWIANIA*/
+
 @keyframes poblysk {
     0%, 100% {
         filter: brightness(1);

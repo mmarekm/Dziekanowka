@@ -13,12 +13,19 @@
         <div class="abs zaslonaPociagu1miasto3"><img src="img/miasto/stacje/latarnia1Miasto3.png" /></div>
         <div class="abs zaslonaPociagu2miasto3"><img src="img/miasto/stacje/latarnia2Miasto3.png" /></div>
         <div class="abs zaslonaPociagu3miasto3"><img src="img/miasto/stacje/daszekMiasto3.png" /></div>
+        <div class="abs pociag1@(stacja)Animacja @klasaPociagu1" @onclick="() => WsiadzDoPociagu(1)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
+        </div>
+    }
+    @if (stacja == "miastoLesne")
+    {
+        <div class="abs pociag2@(stacja)Animacja @klasaPociagu2" @onclick="() => WsiadzDoPociagu(2)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
+        </div>
     }
     <div class="abs kupBiletStacja@(stacja) @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacja@(stacja).png" /></div>
-    <div class="abs pociag1@(stacja)Animacja @klasaPociagu1" @onclick="() => WsiadzDoPociagu1(1)">
-        <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-        <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
-    </div>
 </div>
 @if (wyswietlonyRozklad)
 {
@@ -27,10 +34,20 @@
             @if (stacja == "miasto3")
             {
                 <div class="rozkladPociagu1">
-                    <div class="nazwaPociagu1"><img src="img/miasto/stacje/miastoLesneLabel.png"/></div>
+                    <div class="nazwaPociagu1"><img src="img/miasto/stacje/miastoLesneLabel.png" /></div>
                     @for (int i = 0; i < odjazdyMiasto3DoMiastaLesnego.Length; i++)
                     {
                         <div>@odjazdyMiasto3DoMiastaLesnego[i]</div>
+                    }
+                </div>
+            }
+            @if (stacja == "miastoLesne")
+            {
+                <div class="rozkladPociagu1">
+                    <div class="nazwaPociagu1"><img src="img/miasto/stacje/miasto3Label.png" /></div>
+                    @for (int i = 0; i < odjazdyMiastoLesneDoMiasta3.Length; i++)
+                    {
+                        <div>@odjazdyMiastoLesneDoMiasta3[i]</div>
                     }
                 </div>
             }
@@ -46,8 +63,10 @@
     private int czas = 0;
     private bool wyswietlonyRozklad = false;
     private int[] odjazdyMiasto3DoMiastaLesnego = [10, 25, 35, 60, 90];
+    private int[] odjazdyMiastoLesneDoMiasta3 = [8, 20, 50, 85];
     private string klasaPociagu1 = "";
-    private bool moznaWsiascPociag1 = false;
+    private string klasaPociagu2 = "";
+    private bool moznaWsiascPociag = false;
     protected override void OnParametersSet()
     {
         AktualizujPociagi();
@@ -75,7 +94,11 @@
     {
         if (stacja == "miasto3")
         {
-            (klasaPociagu1, moznaWsiascPociag1) = StanPociagu("pociag1", odjazdyMiasto3DoMiastaLesnego);
+            (klasaPociagu1, moznaWsiascPociag) = StanPociagu("pociag1", odjazdyMiasto3DoMiastaLesnego);
+        }
+        if (stacja == "miastoLesne")
+        {
+            (klasaPociagu2, moznaWsiascPociag) = StanPociagu("pociag2", odjazdyMiastoLesneDoMiasta3);
         }
     }
     private (string, bool) StanPociagu(string nazwa, int[] rozklad)
@@ -101,14 +124,14 @@
         Gracz.Przedmiot("biletPociag").Ilosc++;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
-    public async Task WsiadzDoPociagu1(int nrPociagu)
+    public async Task WsiadzDoPociagu(int nrPociagu)
     {
-        if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !moznaWsiascPociag1) return;
+        if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !moznaWsiascPociag) return;
         Gracz.Przedmiot("biletPociag").Ilosc--;
         Gracz.Statystyki.Stacja = nrPociagu == 1 ? "miastoLesne" : "miasto3";
     }
     public void Dispose()
     {
         _ctsZegar?.Cancel();
-    }  
+    }
 }
