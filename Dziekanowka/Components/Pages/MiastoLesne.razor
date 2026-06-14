@@ -1,0 +1,15 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+<div class="miastoLesneWidok widok rel">
+    <div class="abs miastoLesneNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoLesneNaStacje.png" /></button></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task NaStacje()
+    {
+        Gracz.Statystyki.Stacja = "miastoLesne";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
+    }
+}

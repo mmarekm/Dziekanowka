@@ -245,7 +245,10 @@ namespace Dziekanowka.Mechanizm
             ["20260813"] = ["cz19zwII"],
             ["20260814"] = ["pt19zwII", "MaksymilianaMariiKolbego", "WigiliaWniebowzieciaNMP"],
             ["20260815"] = ["WniebowziecieNMP"],
-            ["20260816"] = ["Ndz20zwA"]
+            ["20260816"] = ["Ndz20zwA"],
+            ["20260817"] = ["pn20zwII", "Jacka"],
+            ["20260818"] = ["wt20zwII"],
+            ["20260819"] = ["sr20zwII"]
         };
     }
 }

@@ -4,6 +4,10 @@
 .miasto2Widok {
     background-image: url('../img/teren/miasto2.png');
 }
+.miastoLesneWidok {
+    background-image: url('../img/miasto/miastoLesneWidok.jpg');
+    overflow: hidden;
+}
 .miasto3Widok {
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
@@ -769,8 +773,19 @@
     height: 259px;
     z-index: 2;
 }
+.miastoLesneNaStacje {
+    top: 0;
+    left: 526px;
+    width: 566px;
+    height: 286px;
+    z-index: 2;
+}
 .stacjamiasto3Widok {
     background-image: url('../img/miasto/stacjaMiasto3Widok.jpg');
+    overflow: hidden;
+}
+.stacjamiastoLesneWidok {
+    background-image: url('../img/miasto/stacjaMiastoLesneWidok.jpg');
     overflow: hidden;
 }
 .wyjscieStacjamiasto3 {
@@ -779,6 +794,13 @@
     left: 662px;
     width: 385px;
     height: 206px;
+}
+.wyjscieStacjamiastoLesne {
+    left: 626px;
+    bottom: 0;
+    width: 440px;
+    height: 123px;
+    z-index: 2;
 }
 .ileBiletowmiasto3 {
     top: 10px;
@@ -804,6 +826,57 @@
     height: 102px;
     bottom: 220px;
     left: 1371px;
+}
+.stacjaCzas {
+    width: 200px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    font-weight: bold;
+    z-index: 101;
+}
+.stacjaCzasmiasto3 {
+    top: 10px;
+    right: 10px;
+    color: saddlebrown;
+}
+.zobaczRozkladStacjimiasto3 {
+    bottom: 0;
+    left: 0;
+    width: 464px;
+    height: 376px;
+    z-index: 2;
+}
+.overlayRoklady {
+    left: 100px;
+    top: 50px;
+    width: 1700px;
+    height: 900px;
+    z-index: 100;
+    background-image: url('../img/miasto/stacje/overlayRozklady.png');
+}
+.wypisaneRozklady {
+    top: 160px;
+    left: 230px;
+    width: 1245px;
+    height: 670px;
+}
+.rozkladPociagu1 {
+    display: flex;
+    font-size: 70px;
+    font-style: italic;
+    color: black;
+    font-family: 'Times New Roman';
+    gap: 20px;
+}
+.zamknijRozklady {
+    bottom: 10px;
+    left: 10px;
+    width: 150px;
+    height: 150px;
+    z-index: 2;
 }
 .zaslonaPociagu1miasto3 {
     z-index: 4;
@@ -845,7 +918,7 @@
     opacity: 1;
     left: 100px;
     pointer-events: none;
-    transition: left 3s ease;
+    transition: left 2.4s ease;
 }
 .pociag1miasto3Stoi {
     opacity: 1;
@@ -859,6 +932,12 @@
     left: -1500px;
     pointer-events: none;
     transition: left 2s ease;
+}
+.celPociagu {
+    bottom: 85px;
+    right: 190px;
+    width: 75px;
+    height: 75px;
 }
 @keyframes poblysk {
     0%, 100% {
