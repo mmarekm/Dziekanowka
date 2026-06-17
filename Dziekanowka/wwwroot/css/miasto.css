@@ -846,6 +846,12 @@
     bottom: 220px;
     left: 1371px;
 }
+.kupBiletStacjamiastoLesne {
+    width: 69px;
+    height: 46px;
+    bottom: 124px;
+    left: 1552px;
+}
 .stacjaCzas {
     width: 200px;
     height: 100px;
@@ -871,6 +877,13 @@
     left: 0;
     width: 464px;
     height: 376px;
+    z-index: 2;
+}
+.zobaczRozkladStacjimiastoLesne {
+    bottom: 0;
+    left: 0;
+    width: 455px;
+    height: 260px;
     z-index: 2;
 }
 .overlayRoklady {
@@ -923,39 +936,72 @@
     width: 517px;
     height: 275px;
 }
-.pociag1miasto3Animacja {
-    left: 2050px;
-    top: 87px;
+.zaslonaPociagu1miastoLesne {
+    z-index: 4;
+    left: 412px;
+    top: 550px;
+    width: 124px;
+    height: 198px;
+}
+.zaslonaPociagu2miastoLesne {
+    z-index: 4;
+    left: 1277px;
+    top: 532px;
+    width: 569px;
+    height: 198px;
+}
+.pociagKazdyAnimacja {
     width: 920px;
     height: 370px;
     cursor: default;
     pointer-events: none;
-    z-index: 2;
 }
-.pociag1miasto3Ukryty {
-    opacity: 0;
-    left: 2050px;
+.kazdyPociagUkryty {
     pointer-events: none;
     transition: none;
+    opacity: 0;
 }
-.pociag1miasto3Jedzie {
-    opacity: 1;
-    left: 100px;
+.kazdyPociagJedzie {
     pointer-events: none;
     transition: left 2.4s ease;
-}
-.pociag1miasto3Stoi {
     opacity: 1;
-    left: 100px;
+}
+.kazdyPociagStoi {
     pointer-events: all;
     cursor: pointer;
     transition: none;
+    opacity: 1;
+}
+.kazdyPociagOdjedzie {
+    pointer-events: none;
+    transition: left 2.4s ease;
+    opacity: 1;
+}
+.pociag1miasto3Animacja {
+    left: 100px;
+    top: 87px;
+    z-index: 2;
+}
+.pociag1miasto3Ukryty {
+    left: 2050px;
 }
 .pociag1miasto3Odjedzie {
-    opacity: 1;
     left: -1500px;
-    pointer-events: none;
-    transition: left 2s ease;
+}
+.pociag2miastoLesneAnimacja {
+    left: 300px;
+    top: 335px;
+    z-index: 3;
+    transform: scaleX(-1);
+}
+    .pociag2miastoLesneAnimacja .celPociagu {
+        transform: scaleX(-1);
+    }
+.pociag2miastoLesneUkryty {
+    left: -1500px;
+}
+.pociag2miastoLesneOdjedzie {
+    left: 2050px;
 }
 .celPociagu {
     bottom: 85px;
@@ -963,61 +1009,6 @@
     width: 75px;
     height: 75px;
 }
-
-
-/* TUTAJ START POPRAWIANIA*/
-.zobaczRozkladStacjimiastoLesne {
-    bottom: 0;
-    left: 0;
-    width: 464px;
-    height: 376px;
-    z-index: 2;
-}
-.kupBiletStacjamiastoLesne {
-    width: 104px;
-    height: 102px;
-    bottom: 220px;
-    left: 1371px;
-}
-
-/* === animacja pociag2 dla miastoLesne === */
-.pociag2miastoLesneAnimacja {
-    left: -1500px;
-    top: 335px;
-    width: 920px;
-    height: 370px;
-    cursor: default;
-    pointer-events: none;
-    z-index: 2;
-    transform: scaleX(-1);
-}
-.pociag2miastoLesneUkryty {
-    opacity: 0;
-    left: -1500px;
-    pointer-events: none;
-    transition: none;
-}
-.pociag2miastoLesneJedzie {
-    opacity: 1;
-    left: 100px;
-    pointer-events: none;
-    transition: left 2.4s ease;
-}
-.pociag2miastoLesneStoi {
-    opacity: 1;
-    left: 100px;
-    pointer-events: all;
-    cursor: pointer;
-    transition: none;
-}
-.pociag2miastoLesneOdjedzie {
-    opacity: 1;
-    left: 2050px;
-    pointer-events: none;
-    transition: left 2s ease;
-}
-/* TUTAJ KONIEC POPRAWIANIA*/
-
 @keyframes poblysk {
     0%, 100% {
         filter: brightness(1);
