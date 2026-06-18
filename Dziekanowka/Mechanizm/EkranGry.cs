@@ -62,6 +62,7 @@
         SklepBydlo,
         Apteka,
         Sklepiczek,
+        FanZdrowy,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,

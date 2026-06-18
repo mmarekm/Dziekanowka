@@ -12,6 +12,9 @@
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
 }
+.fanZdrowyWidok {
+    background-image: url('../img/miasto/fanZdrowiaWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1019,4 +1022,18 @@
 }
 .poblyskuje {
     animation: poblysk 2s ease-in-out infinite;
+}
+.lesneDoFanaZdrowia {
+    width: 528px;
+    height: 580px;
+    bottom: 174px;
+    left: 0;
+    z-index: 2;
+}
+.fanZdrowyDoLesnego {
+    bottom: 0;
+    left: 0;
+    width: 296px;
+    height: 161px;
+    z-index: 2;
 }
