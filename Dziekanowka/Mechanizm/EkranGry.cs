@@ -90,6 +90,7 @@
         BeczkaPraca,
         MlynekPraca,
         ChlopiecZje,
-        KotZje
+        KotZje,
+        FanZdrowyRadosc
     }
 }

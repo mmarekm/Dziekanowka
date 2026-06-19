@@ -1037,3 +1037,9 @@
     height: 161px;
     z-index: 2;
 }
+.misjaFanZdrowy {
+    top: 40px;
+    left: 40px;
+    width: 240px;
+    height: 460px;
+}

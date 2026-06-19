@@ -2,9 +2,14 @@
 @using Dziekanowka.Gracza
 <div class="fanZdrowyWidok widok rel">
     <div class="abs fanZdrowyDoLesnego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoLesne)"><img src="img/miasto/fanZdrowyDoLesnego.png" /></button></div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    <div class="abs misjaFanZdrowy">
+
+    </div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
 }
