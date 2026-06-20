@@ -7,9 +7,7 @@
             var lokalnaNazwa = nazwa;
             @if (poziom >= inf.Prog)
             {
-                <div class="galeriaKolekcja" @onclick='() => OtworzKolekcje(lokalnaNazwa)'>
-                    <img class="obrazekContain" src="img/miasto/biblioteka/kolekcje/@(lokalnaNazwa)/0.png" />
-                </div>
+                <div class="galeriaKolekcja" @onclick='() => OtworzKolekcje(lokalnaNazwa)'><video class="obrazekContain" src="img/miasto/biblioteka/kolekcje/@(lokalnaNazwa)/0.mp4#t=0.1" preload="metadata" muted playsinline></video></div>
             }
         }
     </div>
@@ -20,14 +18,12 @@
             {
                 var lokalneI = i;
                 <div class="kolekcjaElement" @onmouseenter='() => pokazElement = $"{otwartaKolekcja}/{lokalneI}"' @onmouseleave='() => pokazElement = null'>
-                    <img class="obrazekContain" src="img/miasto/biblioteka/kolekcje/@(otwartaKolekcja)/@(lokalneI).png" />
+                    <video class="obrazekContain" src="img/miasto/biblioteka/kolekcje/@(otwartaKolekcja)/@(lokalneI).mp4" preload="metadata" muted playsinline></video>
                 </div>
             }
             @if (pokazElement != null)
             {
-                <div class="powiekszonyElement">
-                    <video src="img/miasto/biblioteka/kolekcje/@(pokazElement).mp4" autoplay loop muted playsinline />
-                </div>
+                <div class="powiekszonyElement"><video src="img/miasto/biblioteka/kolekcje/@(pokazElement).mp4" autoplay loop muted playsinline /></div>
             }
         </div>
     }
