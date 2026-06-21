@@ -18,7 +18,6 @@
         <div class="abs kiosk2Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
         <div class="abs kotZje @(moznaKarmicKota ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Nakarm"><img src="img/miasto/kotZje.png" /></div>
     }
-    )
 </div>
 
 @code {
@@ -30,8 +29,8 @@
     private int cenaBiletu => kiosk == 1 ? 2 : kiosk == 2 ? 3 : kiosk == 3 ? 5 : 0;
     private string sciezkaMiski => pokarm == "" ? $"pustaMiska{(kiosk == 1 ? "" : "Kota")}" : pokarm;
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
-    private bool moznaKarmic => pokarm != "" && Gra.JestObiad(Gracz, pokarm);
-    private bool moznaKarmicKota => pokarm != "" && Gra.JestRyba(Gracz, pokarm);
+    private bool moznaKarmic => Gracz.JestObiad(pokarm);
+    private bool moznaKarmicKota => Gracz.JestRyba(pokarm);
     private async Task KupBilet()
     {
         if (Gracz.Monety < cenaBiletu) return;
@@ -46,7 +45,7 @@
         Gracz.Statystyki.MoznaOdebracObraz = true;
         if (kiosk == 1)
         {
-            Gra.Obiad(Gracz, pokarm).Ilosc--;
+            Gracz.Obiad(pokarm).Ilosc--;
             Gracz.Statystyki.ChlopiecMiska = "";
             Gracz.Statystyki.KotKiosk = Gra.Ryby[Random.Shared.Next(Gra.Ryby.Count)];
             await NaZmianeEkranu.InvokeAsync(EkranGry.ChlopiecZje);
@@ -55,7 +54,7 @@
         }
         if (kiosk == 2)
         {
-            Gra.Ryba(Gracz, pokarm).Ilosc--;
+            Gracz.Ryba(pokarm).Ilosc--;
             Gracz.Statystyki.KotKiosk = "";
             Gracz.Statystyki.FanWarzywIOwocow = [Gra.Warzywa[Random.Shared.Next(Gra.Warzywa.Count)], Gra.Owoce[Random.Shared.Next(Gra.Owoce.Count)], Gra.Soki[Random.Shared.Next(Gra.Soki.Count)]];
             await NaZmianeEkranu.InvokeAsync(EkranGry.KotZje);

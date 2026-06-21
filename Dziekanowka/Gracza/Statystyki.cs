@@ -15,6 +15,7 @@ namespace Dziekanowka.Gracza
         public bool MoznaMiod { get; set; } = false;
         public bool MoznaKaweZSalonu { get; set; } = false;
         public bool MoznaSianoZKarczowiska { get; set; } = false;
+        public bool PokazNagrodeFanZdrowy { get; set; } = false;
         public EkranGry Ekran { get; set; } = EkranGry.Gospodarstwo;
         public string OtwarteOkno { get; set; } = "";
         public int Kiosk { get; set; } = 0;

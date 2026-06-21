@@ -1,15 +1,60 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
 <div class="fanZdrowyWidok widok rel">
+    <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> 100 <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
     <div class="abs fanZdrowyDoLesnego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoLesne)"><img src="img/miasto/fanZdrowyDoLesnego.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
-    <div class="abs misjaFanZdrowy">
-
+    <div class="abs misjaFanZdrowy @(moznaDacChlopcu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajChlopcu">
+        @if (Gracz.Statystyki.FanWarzywIOwocow.All(x => x != ""))
+        {
+            <div class="abs fanZdrowyElMisji fanZdrowyWarzywo"><img class="obrazekContain" src="img/przedmioty/warzywa/@(Gracz.Statystyki.FanWarzywIOwocow[0]).png" /></div>
+            <div class="abs fanZdrowyElMisji fanZdrowyOwoc"><img class="obrazekContain" src="img/przedmioty/owoce/@(Gracz.Statystyki.FanWarzywIOwocow[1]).png" /></div>
+            <div class="abs fanZdrowyElMisji fanZdrowySok"><img class="obrazekContain" src="img/przedmioty/soki/@(Gracz.Statystyki.FanWarzywIOwocow[2]).png" /></div>
+        }
+        else
+        {
+            <img style="opacity: 0.7;" src="img/miasto/fanZdrowyFull.png" />
+        }
     </div>
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (Gracz.Statystyki.PokazNagrodeFanZdrowy)
+        {
+            Gracz.Statystyki.PokazNagrodeFanZdrowy = false;
+            Powitaj = true;
+            Znikanie = false;
+            StateHasChanged();
+            await Task.Delay(100);
+            Znikanie = true;
+            StateHasChanged();
+            await Task.Delay(7000);
+            Powitaj = false;
+            Znikanie = false;
+            StateHasChanged();
+        }
+    }
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private bool moznaDacChlopcu => Gracz.JestWarzywo(Gracz.Statystyki.FanWarzywIOwocow[0]) && Gracz.JestOwoc(Gracz.Statystyki.FanWarzywIOwocow[1]) && Gracz.JestProduktP(Gracz.Statystyki.FanWarzywIOwocow[2]);
+    private async Task DajChlopcu()
+    {
+        if (!moznaDacChlopcu) return;
+        Gracz.Statystyki.MoznaOdebracObraz = true;
+        Gracz.Statystyki.FanWarzywIOwocow = ["", "", ""];
+        Gracz.Monety += 100;
+        Gracz.Statystyki.ChlopiecMiska = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
+        Gracz.Statystyki.PokazNagrodeFanZdrowy = true;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.FanZdrowyRadosc);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.FanZdrowy);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
 }

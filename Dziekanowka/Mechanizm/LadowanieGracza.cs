@@ -37,6 +37,8 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Obiady = Obiad.StartoweObiady();
                 //START DEBUG
                 /*
+                AktualnyGracz.Monety += 1000;
+                AktualnyGracz.Statystyki.Kolekcje += 100;
                 foreach (var item in AktualnyGracz.Przedmioty)
                     item.Ilosc += 100;
                 foreach (var item in AktualnyGracz.Owoce)
@@ -57,6 +59,10 @@ namespace Dziekanowka.Mechanizm
                 foreach (var item in AktualnyGracz.Grzyby)
                     item.Ilosc += 100;
                 foreach (var item in AktualnyGracz.ZywnoscPozostala)
+                    item.Ilosc += 100;
+                foreach (var item in AktualnyGracz.Zwierzeta)
+                    item.Ilosc += 100;
+                foreach (var item in AktualnyGracz.Obiady)
                     item.Ilosc += 100;
                 */
                 //KONIEC DEBUG
