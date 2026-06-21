@@ -24,9 +24,9 @@
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     protected override async Task OnInitializedAsync()
     {
-        if (Gracz.Statystyki.PokazNagrodeFanZdrowy)
+        if (Gracz.Statystyki.OtwarteOkno == "bonusOdFanaZdrowia")
         {
-            Gracz.Statystyki.PokazNagrodeFanZdrowy = false;
+            Gracz.Statystyki.OtwarteOkno = "";
             Powitaj = true;
             Znikanie = false;
             StateHasChanged();
@@ -51,7 +51,7 @@
         Gracz.Statystyki.FanWarzywIOwocow = ["", "", ""];
         Gracz.Monety += 100;
         Gracz.Statystyki.ChlopiecMiska = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
-        Gracz.Statystyki.PokazNagrodeFanZdrowy = true;
+        Gracz.Statystyki.OtwarteOkno = "bonusOdFanaZdrowia";
         await NaZmianeEkranu.InvokeAsync(EkranGry.FanZdrowyRadosc);
         await Task.Delay(10000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.FanZdrowy);
