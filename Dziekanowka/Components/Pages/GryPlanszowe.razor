@@ -4,9 +4,10 @@
 @using Dziekanowka.Components.Pages.Planszowki
 @inject LadowanieGracza ladowanieGracza
 @inject SerwisSzachowy serwisSzachowy
-<div class="gryPlanszoweWidok widok rel @(pokazPlansze ? "przygaszony" : "")">
+<div class="gryPlanszoweWidok widok rel @(pokazPlansze || graTelefon ? "przygaszony" : "")">
     <div class="abs gryPlanszoweDoSalon"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSalon)" class="wyroznionyGuzik"><img src="img/dom/salon/confirmGryPlanszowe.png" /></button></div>
     <div class="abs gramySzachy"><button class="wyroznionyGuzik" @onclick="() => wyborRywala2os = true"><img src="img/dom/salon/gramySzachy.png" /></button></div>
+    <div class="abs graTelefon"><button class="wyroznionyGuzik" @onclick="() => graTelefon = true"><img src="img/dom/salon/gramyTel.png" /></button></div>
     @if (wyborRywala2os)
     {
         <div class="abs wyborRywala2os">
@@ -33,15 +34,26 @@
                 </div>
             }
         }
+        
     </div>
 }
-
+@if (graTelefon)
+{
+    <div class="abs rozgrywkaSalon telefonWidok">
+        <div class="abs doSzafkiZGrami wyroznionyGuzik" @onclick="NieGramy"><img src="img/dom/potwierdzenie.png" class="obrazekContain" /></div>
+    </div>
+}
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
-    private void NieGramy() => gramySzachy = false;
+    private void NieGramy()
+    { 
+        gramySzachy = false;
+        graTelefon = false;
+    }
     private bool wyborRywala2os = false;
     private bool gramySzachy = false;
+    private bool graTelefon = false;
     private PartiaSzachow? aktywnaPartia1;
     private PartiaSzachow? aktywnaPartia2;
     private bool pokazPlansze => gramySzachy;

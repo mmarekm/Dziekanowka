@@ -57,6 +57,16 @@
     height: 252px;
     z-index: 2;
 }
+.graTelefon {
+    right: 143px;
+    bottom: 172px;
+    width: 474px;
+    height: 205px;
+    z-index: 2;
+}
+.telefonWidok {
+    background-image: url('../img/dom/salon/telefonWidok.png');
+}
 .rozgrywkaSalon {
     top: 50px;
     left: 100px;
