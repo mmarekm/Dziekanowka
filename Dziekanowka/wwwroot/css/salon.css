@@ -26,8 +26,8 @@
 .gryPlanszoweDoSalon {
     left: 0;
     bottom: 0;
-    width: 293px;
-    height: 214px;
+    width: 220px;
+    height: 107px;
     z-index: 2;
 }
 .doSzafkiZGrami {
@@ -51,10 +51,10 @@
     height: 200px;
 }
 .gramySzachy {
-    left: 660px;
-    top: 407px;
-    width: 912px;
-    height: 500px;
+    left: 0;
+    bottom: 164px;
+    width: 872px;
+    height: 252px;
     z-index: 2;
 }
 .rozgrywkaSalon {
