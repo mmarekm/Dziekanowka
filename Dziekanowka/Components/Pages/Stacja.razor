@@ -103,21 +103,8 @@
             (klasaPociagu2, moznaWsiascPociag) = StanPociagu("pociag2", odjazdyMiastoLesneDoMiasta3);
         }
     }
-    private (string, bool) StanPociagu(string nazwa, int[] rozklad)
-    {
-        foreach (var odjazd in rozklad)
-        {
-            var offset = (czas - odjazd + 100) % 100;
-            if (offset is 97 or 98 or 99)
-                return ("kazdyPociagJedzie", false);
-            if (offset is 0 or 1 or 2)
-                return ("kazdyPociagStoi", true);
-            if (offset is 3 or 4 or 5)
-                return ($"kazdyPociagOdjedzie {nazwa}{stacja}Odjedzie", false);
-        }
-        return ($"kazdyPociagUkryty {nazwa}{stacja}Ukryty", false);
-    }
     private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, _ => throw new ArgumentOutOfRangeException() };
+    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 => "miastoLesne", 2 => "miasto3", _ => throw new ArgumentOutOfRangeException() };
     private int cenaBiletu => stacja == "miasto3" ? 7 : 10;
     private async Task KupBilet()
     {
@@ -131,8 +118,22 @@
         if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !moznaWsiascPociag) return;
         Gracz.Przedmiot("biletPociag").Ilosc--;
         czas = 0;
-        Gracz.Statystyki.Stacja = nrPociagu == 1 ? "miastoLesne" : "miasto3";
+        Gracz.Statystyki.Stacja = CelPociagu(nrPociagu);
         await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private (string, bool) StanPociagu(string nazwa, int[] rozklad)
+    {
+        foreach (var odjazd in rozklad)
+        {
+            var offset = (czas - odjazd + 100) % 100;
+            if (offset is 97 or 98 or 99)
+                return ("kazdyPociagJedzie", false);
+            if (offset is 0 or 1 or 2)
+                return ("kazdyPociagStoi", true);
+            if (offset is 3 or 4 or 5)
+                return ($"kazdyPociagOdjedzie {nazwa}{stacja}Odjedzie", false);
+        }
+        return ($"kazdyPociagUkryty {nazwa}{stacja}Ukryty", false);
     }
     public void Dispose()
     {
