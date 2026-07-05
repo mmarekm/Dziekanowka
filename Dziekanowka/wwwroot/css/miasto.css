@@ -787,6 +787,13 @@
     height: 286px;
     z-index: 2;
 }
+.miastoBialeNaStacje {
+    top: 0;
+    left: 502px;
+    width: 440px;
+    height: 306px;
+    z-index: 2;
+}
 .stacjamiasto3Widok {
     background-image: url('../img/miasto/stacjaMiasto3Widok.jpg');
     overflow: hidden;
@@ -813,14 +820,21 @@
     height: 123px;
     z-index: 2;
 }
-.ileBiletowmiasto3 {
+.wyjscieStacjamiastoBiale {
+    bottom: 0;
+    left: 563px;
+    width: 630px;
+    height: 124px;
+    z-index: 2;
+}
+.ileBiletowKazdeMiasto {
     top: 10px;
     left: 100px;
     width: 100px;
     height: 100px;
     z-index: 2;
 }
-.ileBiletowLmiasto3 {
+.ileBiletowLKazdeMiasto {
     top: 10px;
     left: 205px;
     width: 150px;
@@ -830,25 +844,11 @@
     justify-content: center;
     font-size: 80px;
     z-index: 2;
+}
+.ileBiletowLmiasto3 {   
     color: cyan;
 }
-.ileBiletowmiastoLesne {
-    top: 10px;
-    left: 100px;
-    width: 100px;
-    height: 100px;
-    z-index: 2;
-}
 .ileBiletowLmiastoLesne {
-    top: 10px;
-    left: 205px;
-    width: 150px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    z-index: 2;
     color: cyan;
 }
 .kupBiletStacjamiasto3 {
@@ -856,6 +856,9 @@
     height: 102px;
     bottom: 220px;
     left: 1371px;
+}
+.ileBiletowLmiastoBiale {
+    color: white;
 }
 .kupBiletStacjamiastoLesne {
     width: 69px;

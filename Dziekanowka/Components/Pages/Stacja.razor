@@ -4,8 +4,8 @@
 @implements IDisposable
 <div class="stacja@(stacja)Widok widok rel @(wyswietlonyRozklad ? "blokadaKlikniec" : "")">
     <div class="abs wyjscieStacja@(stacja)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/stacje/confirmStacja@(stacja).png" /></button></div>
-    <div class="abs ileBiletowL@(stacja)">@Gracz.Przedmiot("biletPociag").Ilosc</div>
-    <div class="abs ileBiletow@(stacja)"><img class="obrazekContain" src="img/przedmioty/biletPociag.png" /></div>
+    <div class="abs ileBiletowLKazdeMiasto ileBiletowL@(stacja)">@Gracz.Przedmiot("biletPociag").Ilosc</div>
+    <div class="abs ileBiletowKazdeMiasto"><img class="obrazekContain" src="img/przedmioty/biletPociag.png" /></div>
     <div class="abs stacjaCzas stacjaCzas@(stacja)">@czas</div>
     <div class="abs zobaczRozkladStacji@(stacja)"><button class="wyroznionyGuzik" @onclick="() => wyswietlonyRozklad = true"><img src="img/miasto/stacje/zobaczRozkladStacja@(stacja).png" /></button></div>
     @if (stacja == "miasto3")
