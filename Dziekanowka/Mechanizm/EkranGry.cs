@@ -45,6 +45,7 @@
         Miasto2,
         Miasto3,
         MiastoLesne,
+        MiastoBiale,
         SklepMiasto3,
         Kiosk,
         Stacja,

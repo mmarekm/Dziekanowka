@@ -17,6 +17,10 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
         </div>
+        <div class="abs pociagKazdyAnimacja pociag3@(stacja)Animacja @klasaPociagu3" @onclick="() => WsiadzDoPociagu(3)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
+        </div>
     }
     @if (stacja == "miastoLesne")
     {
@@ -27,7 +31,15 @@
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
         </div>
     }
-    <div class="abs kupBiletStacja@(stacja) @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacja@(stacja).png" /></div>
+    @if (stacja == "miastoBiale")
+    {
+        <div class="abs zaslonaPociagu1miastoBiale"><img src="img/miasto/stacje/rozkladZaslaniaMiastoBiale.png" /></div>
+        <div class="abs zaslonaPociagu2miastoBiale"><img src="img/miasto/stacje/daszekMiastoBiale.png" /></div>
+        <div class="abs pociagKazdyAnimacja pociag4@(stacja)Animacja @klasaPociagu4" @onclick="() => WsiadzDoPociagu(4)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
+        </div>
+    }
 </div>
 @if (wyswietlonyRozklad)
 {
@@ -40,6 +52,13 @@
                     @for (int i = 0; i < odjazdyMiasto3DoMiastaLesnego.Length; i++)
                     {
                         <div>@odjazdyMiasto3DoMiastaLesnego[i]</div>
+                    }
+                </div>
+                <div class="rozkladPociagu1">
+                    <div class="nazwaPociagu3"><img src="img/miasto/stacje/miastoBialeLabel.png" /></div>
+                    @for (int i = 0; i < odjazdyMiasto3DoMiastoBiale.Length; i++)
+                    {
+                        <div>@odjazdyMiasto3DoMiastoBiale[i]</div>
                     }
                 </div>
             }
@@ -66,9 +85,16 @@
     private bool wyswietlonyRozklad = false;
     private int[] odjazdyMiasto3DoMiastaLesnego = [10, 25, 35, 60, 90];
     private int[] odjazdyMiastoLesneDoMiasta3 = [8, 20, 50, 85];
+    private int[] odjazdyMiasto3DoMiastoBiale = [15, 45, 75];
+    private int[] odjazdyMiastoBialeDoMiasta3 = [10, 20, 30, 80];
     private string klasaPociagu1 = "";
     private string klasaPociagu2 = "";
-    private bool moznaWsiascPociag = false;
+    private string klasaPociagu3 = "";
+    private string klasaPociagu4 = "";
+    private bool moznaWsiascPociag1 = false;
+    private bool moznaWsiascPociag2 = false;
+    private bool moznaWsiascPociag3 = false;
+    private bool moznaWsiascPociag4 = false;
     protected override void OnParametersSet()
     {
         AktualizujPociagi();
@@ -96,15 +122,20 @@
     {
         if (stacja == "miasto3")
         {
-            (klasaPociagu1, moznaWsiascPociag) = StanPociagu("pociag1", odjazdyMiasto3DoMiastaLesnego);
+            (klasaPociagu1, moznaWsiascPociag1) = StanPociagu("pociag1", odjazdyMiasto3DoMiastaLesnego);
+            (klasaPociagu3, moznaWsiascPociag3) = StanPociagu("pociag3", odjazdyMiasto3DoMiastoBiale);
         }
         if (stacja == "miastoLesne")
         {
-            (klasaPociagu2, moznaWsiascPociag) = StanPociagu("pociag2", odjazdyMiastoLesneDoMiasta3);
+            (klasaPociagu2, moznaWsiascPociag2) = StanPociagu("pociag2", odjazdyMiastoLesneDoMiasta3);
+        }
+        if (stacja == "miastoBiale")
+        {
+            (klasaPociagu4, moznaWsiascPociag4) = StanPociagu("pociag4", odjazdyMiastoBialeDoMiasta3);
         }
     }
-    private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, _ => throw new ArgumentOutOfRangeException() };
-    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 => "miastoLesne", 2 => "miasto3", _ => throw new ArgumentOutOfRangeException() };
+    private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, "miastoBiale" => EkranGry.MiastoBiale, _ => throw new ArgumentOutOfRangeException() };
+    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 => "miastoLesne", 2 or 4 => "miasto3", 3 => "miastoBiale", _ => throw new ArgumentOutOfRangeException() };
     private int cenaBiletu => stacja == "miasto3" ? 7 : 10;
     private async Task KupBilet()
     {
@@ -115,7 +146,8 @@
     }
     public async Task WsiadzDoPociagu(int nrPociagu)
     {
-        if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !moznaWsiascPociag) return;
+        var mozna = nrPociagu switch { 1 => moznaWsiascPociag1, 2 => moznaWsiascPociag2, 3 => moznaWsiascPociag3, 4 => moznaWsiascPociag4, _ => false };
+        if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !mozna) return;
         Gracz.Przedmiot("biletPociag").Ilosc--;
         czas = 0;
         Gracz.Statystyki.Stacja = CelPociagu(nrPociagu);
