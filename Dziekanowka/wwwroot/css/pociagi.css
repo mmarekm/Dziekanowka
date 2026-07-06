@@ -55,20 +55,26 @@
 .ileBiletowLmiastoLesne {
     color: cyan;
 }
+.ileBiletowLmiastoBiale {
+    color: white;
+}
 .kupBiletStacjamiasto3 {
     width: 104px;
     height: 102px;
     bottom: 220px;
     left: 1371px;
 }
-.ileBiletowLmiastoBiale {
-    color: white;
-}
 .kupBiletStacjamiastoLesne {
     width: 69px;
     height: 46px;
     bottom: 124px;
     left: 1552px;
+}
+.kupBiletStacjamiastoBiale {
+    width: 101px;
+    height: 37px;
+    bottom: 190px;
+    left: 391px;
 }
 .stacjaCzas {
     width: 200px;
@@ -182,7 +188,7 @@
 }
 .zaslonaPociagu1miastoBiale {
     z-index: 4;
-    width: 390px;
+    width: 385px;
     height: 135px;
     right: 85px;
     bottom: 264px;
