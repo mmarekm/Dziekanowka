@@ -109,6 +109,13 @@
     height: 260px;
     z-index: 2;
 }
+.zobaczRozkladStacjimiastoBiale {
+    bottom: 0;
+    right: 0;
+    width: 481px;
+    height: 267px;
+    z-index: 2;
+}
 .overlayRoklady {
     left: 100px;
     top: 50px;
@@ -175,6 +182,10 @@
 }
 .zaslonaPociagu1miastoBiale {
     z-index: 4;
+    width: 390px;
+    height: 135px;
+    right: 85px;
+    bottom: 264px;
 }
 .zaslonaPociagu2miastoBiale {
     z-index: 4;
