@@ -12,9 +12,7 @@ namespace Dziekanowka.Gracza
         public string MilosnikPieczywa { get; set; } = "";
         public int Kolekcje { get; set; } = 0;
         public int BonusDzienny { get; set; } = 33;
-        public bool MoznaMiod { get; set; } = false;
-        public bool MoznaKaweZSalonu { get; set; } = false;
-        public bool MoznaSianoZKarczowiska { get; set; } = false;
+        public HashSet<string> Bonusy { get; set; } = ["miodUl", "kawaSalon", "karczowiskoSiano"];
         public EkranGry Ekran { get; set; } = EkranGry.Gospodarstwo;
         public string OtwarteOkno { get; set; } = "";
         public int Kiosk { get; set; } = 0;

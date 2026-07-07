@@ -4,7 +4,7 @@
 @inject Dzwieki dzwieki
 <div class="karczowiskoWidok widok rel">
     <div class="abs karczowiskoDoLas"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)"><img src="img/teren/las/karczowiskoDoLasu.png" /></button></div>
-    <div class="abs karczowiskoDziupla @(Gracz.Statystyki.MoznaSianoZKarczowiska ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Siano"><img class="obrazekSieMiesci" src="img/teren/las/dziupla.png" /></div>
+    <div class="abs karczowiskoDziupla @(Gracz.Statystyki.Bonusy.Contains("karczowiskoSiano") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Siano"><img class="obrazekSieMiesci" src="img/teren/las/dziupla.png" /></div>
     <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/przedmioty/siano.png" /></div>
     <div class="abs lKarczowisko lSiekierKarczowisko">@Gracz.Przedmiot("siekiera").Ilosc</div>
     <div class="abs lKarczowisko lDrewnaKarczowisko">@Gracz.Przedmiot("drewno").Ilosc</div>
@@ -27,9 +27,9 @@
     }
     private async Task Siano()
     {
-        if (!Gracz.Statystyki.MoznaSianoZKarczowiska) return;
+        if (!Gracz.Statystyki.Bonusy.Contains("karczowiskoSiano")) return;
         Gracz.Przedmiot("siano").Ilosc++;
-        Gracz.Statystyki.MoznaSianoZKarczowiska = false;
+        Gracz.Statystyki.Bonusy.Remove("karczowiskoSiano");
         await ladowanieGracza.ZapiszAktualnegoGracza();
         Powitaj = true;
         Znikanie = false;

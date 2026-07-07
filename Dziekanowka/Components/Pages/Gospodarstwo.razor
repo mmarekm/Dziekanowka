@@ -3,7 +3,7 @@
 @inject Dzwieki dzwieki
 @inject LadowanieGracza ladowanieGracza
 <div class="gospodarstwoWidok widok rel">
-    <div class="abs gospodarstwoUl @(Gracz.Statystyki.MoznaMiod ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Miod"><img class="obrazekSieMiesci" src="img/teren/ul.png" /></div>
+    <div class="abs gospodarstwoUl @(Gracz.Statystyki.Bonusy.Contains("miodUl") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Miod"><img class="obrazekSieMiesci" src="img/teren/ul.png" /></div>
     <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/zwierzyniec/miod.png" /></div>
     <div class="abs doDomuGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)" class="wyroznionyGuzik"><img src="img/teren/dom.png" /></button></div>
     <div class="abs doGarazuGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Garaz)" class="wyroznionyGuzik"><img src="img/budynki/garaz.png" /></button></div>
@@ -23,9 +23,9 @@
     private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
     private async Task Miod()
     {
-        if (!Gracz.Statystyki.MoznaMiod) return;
+        if (!Gracz.Statystyki.Bonusy.Contains("miodUl")) return;
         Gracz.ProduktZ("miod").Ilosc += 5;
-        Gracz.Statystyki.MoznaMiod = false;
+        Gracz.Statystyki.Bonusy.Remove("miodUl");
         await ladowanieGracza.ZapiszAktualnegoGracza();
         Powitaj = true;
         Znikanie = false;

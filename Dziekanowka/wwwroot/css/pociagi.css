@@ -152,49 +152,49 @@
     z-index: 2;
 }
 .zaslonaPociagu1miasto3 {
-    z-index: 4;
+    z-index: 6;
     top: 346px;
     left: 400px;
     width: 162px;
     height: 300px;
 }
 .zaslonaPociagu2miasto3 {
-    z-index: 4;
+    z-index: 6;
     top: 338px;
     left: 1250px;
     width: 162px;
     height: 300px;
 }
 .zaslonaPociagu3miasto3 {
-    z-index: 4;
+    z-index: 6;
     top: 358px;
     right: 80px;
     width: 517px;
     height: 275px;
 }
 .zaslonaPociagu1miastoLesne {
-    z-index: 4;
+    z-index: 6;
     left: 412px;
     top: 550px;
     width: 124px;
     height: 198px;
 }
 .zaslonaPociagu2miastoLesne {
-    z-index: 4;
+    z-index: 6;
     left: 1277px;
     top: 532px;
     width: 569px;
     height: 198px;
 }
 .zaslonaPociagu1miastoBiale {
-    z-index: 4;
+    z-index: 6;
     width: 385px;
     height: 135px;
     right: 85px;
     bottom: 264px;
 }
 .zaslonaPociagu2miastoBiale {
-    z-index: 4;
+    z-index: 6;
     left: 78px;
     top: 355px;
     width: 510px;
@@ -254,9 +254,9 @@
     left: 2050px;
 }
 .pociag2miastoLesneAnimacja {
-    left: 300px;
+    left: 750px;
     top: 335px;
-    z-index: 3;
+    z-index: 4;
     transform: scaleX(-1);
 }
     .pociag2miastoLesneAnimacja .celPociagu {
@@ -268,16 +268,42 @@
 .pociag2miastoLesneOdjedzie {
     left: 2050px;
 }
+.pociag5miastoLesneAnimacja {
+    left: 50px;
+    top: 259px;
+    z-index: 3;
+}
+.pociag5miastoLesneUkryty {
+    left: 2050px;
+}
+.pociag5miastoLesneOdjedzie {
+    left: -1500px;
+}
 .pociag4miastoBialeAnimacja {
-    left: 200px;
+    left: 100px;
     top: 258px;
-    z-index: 2;
+    z-index: 3;
 }
 .pociag4miastoBialeUkryty {
     left: 2050px;
 }
 .pociag4miastoBialeOdjedzie {
     left: -1500px;
+}
+.pociag6miastoBialeAnimacja {
+    left: 800px;
+    top: 341px;
+    z-index: 4;
+    transform: scaleX(-1);
+}
+    .pociag6miastoBialeAnimacja .celPociagu {
+        transform: scaleX(-1);
+    }
+.pociag6miastoBialeUkryty {
+    left: -1500px;
+}
+.pociag6miastoBialeOdjedzie {
+    left: 2050px;
 }
 .celPociagu {
     bottom: 85px;

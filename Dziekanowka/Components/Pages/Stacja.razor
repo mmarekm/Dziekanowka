@@ -14,11 +14,11 @@
         <div class="abs zaslonaPociagu1miasto3"><img src="img/miasto/stacje/latarnia1Miasto3.png" /></div>
         <div class="abs zaslonaPociagu2miasto3"><img src="img/miasto/stacje/latarnia2Miasto3.png" /></div>
         <div class="abs zaslonaPociagu3miasto3"><img src="img/miasto/stacje/daszekMiasto3.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag1@(stacja)Animacja @klasaPociagu1" @onclick="() => WsiadzDoPociagu(1)">
+        <div class="abs pociagKazdyAnimacja pociag1@(stacja)Animacja @pociagi[1].klasa" @onclick="() => WsiadzDoPociagu(1)">
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
         </div>
-        <div class="abs pociagKazdyAnimacja pociag3@(stacja)Animacja @klasaPociagu3" @onclick="() => WsiadzDoPociagu(3)">
+        <div class="abs pociagKazdyAnimacja pociag3@(stacja)Animacja @pociagi[3].klasa" @onclick="() => WsiadzDoPociagu(3)">
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
         </div>
@@ -27,18 +27,26 @@
     {
         <div class="abs zaslonaPociagu1miastoLesne"><img src="img/miasto/stacje/latarniaMiastoLesne.png" /></div>
         <div class="abs zaslonaPociagu2miastoLesne"><img src="img/miasto/stacje/daszekMiastoLesne.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag2@(stacja)Animacja @klasaPociagu2" @onclick="() => WsiadzDoPociagu(2)">
+        <div class="abs pociagKazdyAnimacja pociag2@(stacja)Animacja @pociagi[2].klasa" @onclick="() => WsiadzDoPociagu(2)">
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacja pociag5@(stacja)Animacja @pociagi[5].klasa" @onclick="() => WsiadzDoPociagu(5)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
         </div>
     }
     @if (stacja == "miastoBiale")
     {
         <div class="abs zaslonaPociagu1miastoBiale"><img class="obrazekContain" src="img/miasto/stacje/rozkladZaslaniaMiastoBiale.png" /></div>
         <div class="abs zaslonaPociagu2miastoBiale"><img class="obrazekContain" src="img/miasto/stacje/daszekMiastoBiale.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag4@(stacja)Animacja @klasaPociagu4" @onclick="() => WsiadzDoPociagu(4)">
+        <div class="abs pociagKazdyAnimacja pociag4@(stacja)Animacja @pociagi[4].klasa" @onclick="() => WsiadzDoPociagu(4)">
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacja pociag6@(stacja)Animacja @pociagi[6].klasa" @onclick="() => WsiadzDoPociagu(6)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
         </div>
     }
 </div>
@@ -49,14 +57,14 @@
             @if (stacja == "miasto3")
             {
                 <div class="rozkladPociagu1">
-                    <div class="nazwaPociagu1"><img src="img/miasto/stacje/miastoLesneLabel.png" /></div>
+                    <div><img src="img/miasto/stacje/miastoLesneLabel.png" /></div>
                     @for (int i = 0; i < odjazdyMiasto3DoMiastaLesnego.Length; i++)
                     {
                         <div>@odjazdyMiasto3DoMiastaLesnego[i]</div>
                     }
                 </div>
                 <div class="rozkladPociagu1">
-                    <div class="nazwaPociagu3"><img src="img/miasto/stacje/miastoBialeLabel.png" /></div>
+                    <div><img src="img/miasto/stacje/miastoBialeLabel.png" /></div>
                     @for (int i = 0; i < odjazdyMiasto3DoMiastoBiale.Length; i++)
                     {
                         <div>@odjazdyMiasto3DoMiastoBiale[i]</div>
@@ -66,20 +74,34 @@
             @if (stacja == "miastoLesne")
             {
                 <div class="rozkladPociagu1">
-                    <div class="nazwaPociagu1"><img src="img/miasto/stacje/miasto3Label.png" /></div>
+                    <div><img src="img/miasto/stacje/miasto3Label.png" /></div>
                     @for (int i = 0; i < odjazdyMiastoLesneDoMiasta3.Length; i++)
                     {
                         <div>@odjazdyMiastoLesneDoMiasta3[i]</div>
+                    }
+                </div>
+                <div class="rozkladPociagu1">
+                    <div><img src="img/miasto/stacje/miastoBialeLabel.png" /></div>
+                    @for (int i = 0; i < odjazdyMiastoLesneDoMiastoBiale.Length; i++)
+                    {
+                        <div>@odjazdyMiastoLesneDoMiastoBiale[i]</div>
                     }
                 </div>
             }
             @if (stacja == "miastoBiale")
             {
                 <div class="rozkladPociagu1">
-                    <div class="nazwaPociagu1"><img src="img/miasto/stacje/miasto3Label.png" /></div>
+                    <div><img src="img/miasto/stacje/miasto3Label.png" /></div>
                     @for (int i = 0; i < odjazdyMiastoBialeDoMiasta3.Length; i++)
                     {
                         <div>@odjazdyMiastoBialeDoMiasta3[i]</div>
+                    }
+                </div>
+                <div class="rozkladPociagu1">
+                    <div><img src="img/miasto/stacje/miastoLesneLabel.png" /></div>
+                    @for (int i = 0; i < odjazdyMiastoBialeDoMiastoLesne.Length; i++)
+                    {
+                        <div>@odjazdyMiastoBialeDoMiastoLesne[i]</div>
                     }
                 </div>
             }
@@ -95,17 +117,15 @@
     private int czas = 0;
     private bool wyswietlonyRozklad = false;
     private int[] odjazdyMiasto3DoMiastaLesnego = [10, 25, 35, 60, 90];
-    private int[] odjazdyMiastoLesneDoMiasta3 = [8, 20, 50, 85];
+    private int[] odjazdyMiastoLesneDoMiasta3 = [10, 25, 55, 85];
     private int[] odjazdyMiasto3DoMiastoBiale = [15, 45, 75];
     private int[] odjazdyMiastoBialeDoMiasta3 = [10, 20, 30, 80];
-    private string klasaPociagu1 = "";
-    private string klasaPociagu2 = "";
-    private string klasaPociagu3 = "";
-    private string klasaPociagu4 = "";
-    private bool moznaWsiascPociag1 = false;
-    private bool moznaWsiascPociag2 = false;
-    private bool moznaWsiascPociag3 = false;
-    private bool moznaWsiascPociag4 = false;
+    private int[] odjazdyMiastoLesneDoMiastoBiale = [50];
+    private int[] odjazdyMiastoBialeDoMiastoLesne = [50];
+    private Dictionary<int, (string klasa, bool moznaWsiasc)> pociagi = new()
+    {
+        {1, ("", false)}, {2, ("", false)}, {3, ("", false)}, {4, ("", false)}, {5, ("", false)}, {6, ("", false)}
+    };
     protected override void OnParametersSet()
     {
         AktualizujPociagi();
@@ -133,20 +153,22 @@
     {
         if (stacja == "miasto3")
         {
-            (klasaPociagu1, moznaWsiascPociag1) = StanPociagu("pociag1", odjazdyMiasto3DoMiastaLesnego);
-            (klasaPociagu3, moznaWsiascPociag3) = StanPociagu("pociag3", odjazdyMiasto3DoMiastoBiale);
+            pociagi[1] = StanPociagu("pociag1", odjazdyMiasto3DoMiastaLesnego);
+            pociagi[3] = StanPociagu("pociag3", odjazdyMiasto3DoMiastoBiale);
         }
         if (stacja == "miastoLesne")
         {
-            (klasaPociagu2, moznaWsiascPociag2) = StanPociagu("pociag2", odjazdyMiastoLesneDoMiasta3);
+            pociagi[2] = StanPociagu("pociag2", odjazdyMiastoLesneDoMiasta3);
+            pociagi[5] = StanPociagu("pociag5", odjazdyMiastoLesneDoMiastoBiale);
         }
         if (stacja == "miastoBiale")
         {
-            (klasaPociagu4, moznaWsiascPociag4) = StanPociagu("pociag4", odjazdyMiastoBialeDoMiasta3);
+            pociagi[4] = StanPociagu("pociag4", odjazdyMiastoBialeDoMiasta3);
+            pociagi[6] = StanPociagu("pociag6", odjazdyMiastoBialeDoMiastoLesne);
         }
     }
     private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, "miastoBiale" => EkranGry.MiastoBiale, _ => throw new ArgumentOutOfRangeException() };
-    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 => "miastoLesne", 2 or 4 => "miasto3", 3 => "miastoBiale", _ => throw new ArgumentOutOfRangeException() };
+    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 => "miastoLesne", 2 or 4 => "miasto3", 3 or 5 => "miastoBiale", _ => throw new ArgumentOutOfRangeException() };
     private int cenaBiletu => stacja == "miasto3" ? 7 : 10;
     private async Task KupBilet()
     {
@@ -157,8 +179,7 @@
     }
     public async Task WsiadzDoPociagu(int nrPociagu)
     {
-        var mozna = nrPociagu switch { 1 => moznaWsiascPociag1, 2 => moznaWsiascPociag2, 3 => moznaWsiascPociag3, 4 => moznaWsiascPociag4, _ => false };
-        if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !mozna) return;
+        if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !pociagi[nrPociagu].moznaWsiasc) return;
         Gracz.Przedmiot("biletPociag").Ilosc--;
         czas = 0;
         Gracz.Statystyki.Stacja = CelPociagu(nrPociagu);
