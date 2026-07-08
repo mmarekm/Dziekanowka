@@ -10,7 +10,7 @@ namespace Dziekanowka.Gracza
         public string KotKiosk { get; set; } = "";
         public string[] FanWarzywIOwocow { get; set; } = ["", "", ""];
         public string MilosnikPieczywa { get; set; } = "";
-        public int Kolekcje { get; set; } = 0;
+        public int Kolekcje { get; set; } = 15;
         public int BonusDzienny { get; set; } = 33;
         public HashSet<string> Bonusy { get; set; } = ["miodUl", "kawaSalon", "karczowiskoSiano"];
         public EkranGry Ekran { get; set; } = EkranGry.Gospodarstwo;
