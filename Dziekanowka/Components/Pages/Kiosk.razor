@@ -24,7 +24,7 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private int kiosk => Gracz.Statystyki.Kiosk;
-    private string pokarm => kiosk == 1 ? Gracz.Statystyki.ChlopiecMiska : kiosk == 2 ? Gracz.Statystyki.KotKiosk : "";
+    private string pokarm => kiosk == 1 && Gracz.Statystyki.AktualnaMisja == Misje.Chlopiec ? Gracz.Statystyki.DaneMisji[0] : kiosk == 2 && Gracz.Statystyki.AktualnaMisja == Misje.Kot ? Gracz.Statystyki.DaneMisji[0] : "";
     private EkranGry Wyjscie => kiosk switch { 1 => EkranGry.Miasto1, 2 => EkranGry.Miasto2, 3 => EkranGry.Miasto3, _ => throw new ArgumentOutOfRangeException() };
     private int cenaBiletu => kiosk == 1 ? 2 : kiosk == 2 ? 3 : kiosk == 3 ? 5 : 0;
     private string sciezkaMiski => pokarm == "" ? $"pustaMiska{(kiosk == 1 ? "" : "Kota")}" : pokarm;
@@ -46,8 +46,8 @@
         if (kiosk == 1)
         {
             Gracz.Obiad(pokarm).Ilosc--;
-            Gracz.Statystyki.ChlopiecMiska = "";
-            Gracz.Statystyki.KotKiosk = Gra.Ryby[Random.Shared.Next(Gra.Ryby.Count)];
+            Gracz.Statystyki.DaneMisji = [Gra.Ryby[Random.Shared.Next(Gra.Ryby.Count)], "", ""];
+            Gracz.Statystyki.AktualnaMisja = Misje.Kot;
             await NaZmianeEkranu.InvokeAsync(EkranGry.ChlopiecZje);
             await Task.Delay(9000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);
@@ -55,8 +55,8 @@
         if (kiosk == 2)
         {
             Gracz.Ryba(pokarm).Ilosc--;
-            Gracz.Statystyki.KotKiosk = "";
-            Gracz.Statystyki.FanWarzywIOwocow = [Gra.Warzywa[Random.Shared.Next(Gra.Warzywa.Count)], Gra.Owoce[Random.Shared.Next(Gra.Owoce.Count)], Gra.Soki[Random.Shared.Next(Gra.Soki.Count)]];
+            Gracz.Statystyki.DaneMisji = [Gra.Warzywa[Random.Shared.Next(Gra.Warzywa.Count)], Gra.Owoce[Random.Shared.Next(Gra.Owoce.Count)], Gra.Soki[Random.Shared.Next(Gra.Soki.Count)]];
+            Gracz.Statystyki.AktualnaMisja = Misje.FanZdrowia;
             await NaZmianeEkranu.InvokeAsync(EkranGry.KotZje);
             await Task.Delay(8000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);

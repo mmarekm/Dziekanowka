@@ -6,11 +6,11 @@
     <div class="abs fanZdrowyDoLesnego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoLesne)"><img src="img/miasto/fanZdrowyDoLesnego.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     <div class="abs misjaFanZdrowy @(moznaDacChlopcu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajChlopcu">
-        @if (Gracz.Statystyki.FanWarzywIOwocow.All(x => x != ""))
+        @if (Gracz.Statystyki.AktualnaMisja == Misje.FanZdrowia)
         {
-            <div class="abs fanZdrowyElMisji fanZdrowyWarzywo"><img class="obrazekContain" src="img/przedmioty/warzywa/@(Gracz.Statystyki.FanWarzywIOwocow[0]).png" /></div>
-            <div class="abs fanZdrowyElMisji fanZdrowyOwoc"><img class="obrazekContain" src="img/przedmioty/owoce/@(Gracz.Statystyki.FanWarzywIOwocow[1]).png" /></div>
-            <div class="abs fanZdrowyElMisji fanZdrowySok"><img class="obrazekContain" src="img/przedmioty/soki/@(Gracz.Statystyki.FanWarzywIOwocow[2]).png" /></div>
+            <div class="abs fanZdrowyElMisji fanZdrowyWarzywo"><img class="obrazekContain" src="img/przedmioty/warzywa/@(Gracz.Statystyki.DaneMisji[0]).png" /></div>
+            <div class="abs fanZdrowyElMisji fanZdrowyOwoc"><img class="obrazekContain" src="img/przedmioty/owoce/@(Gracz.Statystyki.DaneMisji[1]).png" /></div>
+            <div class="abs fanZdrowyElMisji fanZdrowySok"><img class="obrazekContain" src="img/przedmioty/soki/@(Gracz.Statystyki.DaneMisji[2]).png" /></div>
         }
         else
         {
@@ -43,17 +43,17 @@
     private bool Znikanie { get; set; } = false;
     private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
-    private bool moznaDacChlopcu => Gracz.JestWarzywo(Gracz.Statystyki.FanWarzywIOwocow[0]) && Gracz.JestOwoc(Gracz.Statystyki.FanWarzywIOwocow[1]) && Gracz.JestProduktP(Gracz.Statystyki.FanWarzywIOwocow[2]);
+    private bool moznaDacChlopcu => Gracz.Statystyki.AktualnaMisja == Misje.FanZdrowia && Gracz.JestWarzywo(Gracz.Statystyki.DaneMisji[0]) && Gracz.JestOwoc(Gracz.Statystyki.DaneMisji[1]) && Gracz.JestProduktP(Gracz.Statystyki.DaneMisji[2]);
     private async Task DajChlopcu()
     {
         if (!moznaDacChlopcu) return;
-        Gracz.Warzywo(Gracz.Statystyki.FanWarzywIOwocow[0]).Ilosc--;
-        Gracz.Owoc(Gracz.Statystyki.FanWarzywIOwocow[1]).Ilosc--;
-        Gracz.ProduktP(Gracz.Statystyki.FanWarzywIOwocow[2]).Ilosc--;
+        Gracz.Warzywo(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
+        Gracz.Owoc(Gracz.Statystyki.DaneMisji[1]).Ilosc--;
+        Gracz.ProduktP(Gracz.Statystyki.DaneMisji[2]).Ilosc--;
         Gracz.Statystyki.MoznaOdebracObraz = true;
-        Gracz.Statystyki.FanWarzywIOwocow = ["", "", ""];
         Gracz.Monety += 100;
-        Gracz.Statystyki.DomMleka = Gra.Mleka[Random.Shared.Next(Gra.Mleka.Count)];
+        Gracz.Statystyki.DaneMisji = [Gra.Mleka[Random.Shared.Next(Gra.Mleka.Count)], "", ""];
+        Gracz.Statystyki.AktualnaMisja = Misje.DomMleka;
         Gracz.Statystyki.OtwarteOkno = "bonusOdFanaZdrowia";
         await NaZmianeEkranu.InvokeAsync(EkranGry.FanZdrowyRadosc);
         await Task.Delay(10000);

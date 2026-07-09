@@ -1,15 +1,20 @@
 ﻿using Dziekanowka.Mechanizm;
 namespace Dziekanowka.Gracza
-{    
+{
+    public static class Misje
+    {
+        public const string Chlopiec = "Chlopiec";
+        public const string Kot = "Kot";
+        public const string FanZdrowia = "FanZdrowia";
+        public const string DomMleka = "DomMleka";
+    }
     public class Statystyki
     {
         public int DzienLogowania { get; set; } = 0;
         public int MiesiacLogowania { get; set; } = 0;
         public bool MoznaOdebracObraz { get; set; } = false;
-        public string ChlopiecMiska { get; set; } = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
-        public string KotKiosk { get; set; } = "";
-        public string[] FanWarzywIOwocow { get; set; } = ["", "", ""];
-        public string DomMleka { get; set; } = "";
+        public string AktualnaMisja { get; set; } = Misje.Chlopiec;
+        public string[] DaneMisji { get; set; } = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
         public string MilosnikPieczywa { get; set; } = "";
         public int Kolekcje { get; set; } = 18;
         public int BonusDzienny { get; set; } = 33;
