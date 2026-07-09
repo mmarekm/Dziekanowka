@@ -36,7 +36,7 @@ else
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
     private bool pokazWideo = false;
     private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa, EkranGry.GrzybyZnalezione, EkranGry.RybaZlowiona,
-        EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21, EkranGry.AutobusJedzie22, EkranGry.AutobusJedzie3,
+        EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21, EkranGry.AutobusJedzie22, EkranGry.AutobusJedzie3, EkranGry.PociagJedzie,
         EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
         EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc, EkranGry.MlekoLeciWDomMleka ];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
@@ -81,6 +81,7 @@ else
             EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
             EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
             EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
+            EkranGry.PociagJedzie => EkranGry.Stacja,
             EkranGry.RybaZlowiona => EkranGry.LasJezioro,
             EkranGry.WejscieDoGalerii => EkranGry.BibliotekaIntro,
             EkranGry.UzyskanieObrazu => EkranGry.BibliotekaPani,
@@ -120,7 +121,7 @@ else
             EkranGry.LasIntro => "mp3/Tla/las.mp3",
             EkranGry.SzkolaIntro => "mp3/Tla/szkola.mp3",
             EkranGry.BibliotekaIntro or EkranGry.BibliotekaCzytelnia or EkranGry.BibliotekaGaleria or EkranGry.WejscieDoGalerii or EkranGry.BibliotekaPani => "mp3/Tla/biblioteka.mp3",
-            EkranGry.Stacja => "mp3/Tla/kolej.mp3",
+            EkranGry.Stacja or EkranGry.PociagJedzie => "mp3/Tla/kolej.mp3",
             EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona or EkranGry.UzyskanieObrazu => "mp3/Dzwieki/fanfaraKrotka.mp3",
             EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca or EkranGry.WyciskarkaPraca => "mp3/Tla/akcjaSprawna.mp3",
             EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka => "mp3/Dzwieki/fanfara.mp3",
@@ -166,6 +167,7 @@ else
             EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
             EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
             EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
+            EkranGry.PociagJedzie => EkranGry.Stacja,
             EkranGry.RybaZlowiona => EkranGry.LasJezioro,
             EkranGry.WejscieDoGalerii => EkranGry.BibliotekaIntro,
             EkranGry.UzyskanieObrazu => EkranGry.BibliotekaPani,

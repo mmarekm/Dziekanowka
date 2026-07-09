@@ -71,6 +71,7 @@
         AutobusJedzie21,
         AutobusJedzie22,
         AutobusJedzie3,
+        PociagJedzie,
         CzyszczeniePola,
         CzyszczenieDrzewa,
         KoszenieTrawy,

@@ -183,6 +183,9 @@
         Gracz.Przedmiot("biletPociag").Ilosc--;
         czas = 0;
         Gracz.Statystyki.Stacja = CelPociagu(nrPociagu);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PociagJedzie);
+        await Task.Delay(7000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private (string, bool) StanPociagu(string nazwa, int[] rozklad)
