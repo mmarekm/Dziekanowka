@@ -24,7 +24,6 @@ namespace Dziekanowka.Gracza
         public int Kiosk { get; set; } = 0;
         public string Stacja { get; set; } = "";
         public int Sklepiczek { get; set; } = 0;
-        //private List<string> zbiorRestauracja = ["karkowka", "gulasz", "pieczenWolowa", "indykDuszony", "krolikWWinie", "ratatouille", "leczo", "fasolkaPoBretonsku", "knedle", "lososGotowany", "rybaPoGrecku", "sledzWOleju", "jajecznica", "jajkoSadzone", "omlet", "shakshuka", "kotletSchabowy", "kotletMielony", "stek", "piersZKurczaka", "bitki", "indykSmazony", "krolikSmazony", "golabki", "pstragSmazony", "lososSmazony", "halibutSmazony", "okonSmazony", "sledzSmazony", "plackiZiemniaczane", "frytki", "pierogiRuskie", "pierogiZMiesem", "pierogiZKapustaIGrzybami", "pierogiZOwocami"];
         private List<string> skladnikiPizza = ["papryka", "cebula", "kukurydza", "ogórek", "ananas", "oliwki", "pieczarka", "rydz", "podgrzybek", "borowik", "kurka", "kielbasaWedlina", "salamiWedlina", "lopatkaWedlina", "poledwicaWedlina", "boczekWedlina", "szynkaWedlina", "schabWedlina", "kurczakWedlina", "indykWedlina", "krolikPasztet", "drobPasztet", "swiniaPasztet"];
         private string Losuj(List<string> zbior) => zbior[Random.Shared.Next(zbior.Count)];
         private List<string> LosujPizza(int ile)
