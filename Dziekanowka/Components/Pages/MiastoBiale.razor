@@ -2,6 +2,7 @@
 @using Dziekanowka.Gracza
 <div class="miastoBialeWidok widok rel">
     <div class="abs miastoBialeNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoBialeNaStacje.png" /></button></div>
+    <div class="abs miastoDoDomuMleka"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomMleka)"><img src="img/miasto/miastoDoDomMleka.png" /></button></div>
 </div>
 
 @code {

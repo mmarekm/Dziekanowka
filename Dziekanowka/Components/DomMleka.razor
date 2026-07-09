@@ -1,0 +1,30 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="domMlekaWidok@(poszukiwaneMleko ? "Pusty" : "Pelny") widok rel">
+    <div class="abs domMlekaDoMiasta"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoBiale)"><img src="img/miasto/domMlekaDrzwi.png" /></button></div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    @if (poszukiwaneMleko)
+    {
+        <div class="abs dajMlekoWDomuMleka @(moznaDacMleko ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajMleko">2 <img class="obrazekContain" src="img/dom/kuchnia/@(Gracz.Statystyki.DomMleka).png"/></div>
+    }
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool poszukiwaneMleko => Gracz.Statystyki.DomMleka != "";
+    private bool moznaDacMleko => Gracz.ProduktyZwierzece.Any(m => m.Nazwa == Gracz.Statystyki.DomMleka && m.Ilosc > 1);
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private async Task DajMleko()
+    {
+        if (!moznaDacMleko) return;
+        Gracz.ProduktZ(Gracz.Statystyki.DomMleka).Ilosc -= 2;
+        Gracz.Statystyki.MoznaOdebracObraz = true;
+        Gracz.Statystyki.DomMleka = "";
+        Gracz.Statystyki.ChlopiecMiska = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
+        await NaZmianeEkranu.InvokeAsync(EkranGry.MlekoLeciWDomMleka);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.DomMleka);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

@@ -47,10 +47,13 @@
     private async Task DajChlopcu()
     {
         if (!moznaDacChlopcu) return;
+        Gracz.Warzywo(Gracz.Statystyki.FanWarzywIOwocow[0]).Ilosc--;
+        Gracz.Owoc(Gracz.Statystyki.FanWarzywIOwocow[1]).Ilosc--;
+        Gracz.ProduktP(Gracz.Statystyki.FanWarzywIOwocow[2]).Ilosc--;
         Gracz.Statystyki.MoznaOdebracObraz = true;
         Gracz.Statystyki.FanWarzywIOwocow = ["", "", ""];
         Gracz.Monety += 100;
-        Gracz.Statystyki.ChlopiecMiska = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
+        Gracz.Statystyki.DomMleka = Gra.Mleka[Random.Shared.Next(Gra.Mleka.Count)];
         Gracz.Statystyki.OtwarteOkno = "bonusOdFanaZdrowia";
         await NaZmianeEkranu.InvokeAsync(EkranGry.FanZdrowyRadosc);
         await Task.Delay(10000);

@@ -9,8 +9,9 @@ namespace Dziekanowka.Gracza
         public string ChlopiecMiska { get; set; } = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
         public string KotKiosk { get; set; } = "";
         public string[] FanWarzywIOwocow { get; set; } = ["", "", ""];
+        public string DomMleka { get; set; } = "";
         public string MilosnikPieczywa { get; set; } = "";
-        public int Kolekcje { get; set; } = 15;
+        public int Kolekcje { get; set; } = 18;
         public int BonusDzienny { get; set; } = 33;
         public HashSet<string> Bonusy { get; set; } = ["miodUl", "kawaSalon", "karczowiskoSiano"];
         public EkranGry Ekran { get; set; } = EkranGry.Gospodarstwo;

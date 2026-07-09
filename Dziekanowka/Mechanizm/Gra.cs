@@ -45,5 +45,6 @@ namespace Dziekanowka.Mechanizm
         public static List<string> Warzywa = ["kukurydza", "groch", "jarmuż", "pasternak", "pietruszka", "burak", "brukselka", "sorgo", "rzepaPastewna", "koniczyna", "sałata", "marchew", "ziemniak", "cebula", "szczypiorek", "pomidor", "papryka", "ogórek", "czosnek", "rzodkiewka", "szpinak", "rukola", "batat", "szczaw", "seler", "boćwina", "por", "fasola", "bób", "ciecierzyca", "bakłażan", "cukinia", "dynia", "brokuł", "kalafior", "kapustaWłoska", "kapustaPekińska", "szparagi", "selerNaciowy", "soczewica"];
         public static List<string> Owoce = ["brzoskwinia", "nektarynka", "morela", "śliwka", "wiśnia", "czereśnia", "jabłko", "gruszka", "truskawka", "malina", "jeżyna", "borówka", "porzeczkaCzerwona", "porzeczkaCzarna", "żurawina", "pomarańcza", "mandarynka", "cytryna", "grejpfrut", "banan", "ananas", "mango", "papaja", "marakuja", "kokos", "awokado", "arbuz", "melon", "winogronoJasne", "winogronoRóżowe", "winogronoCiemne", "kiwi"];
         public static List<string> Soki = ["marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok"];
+        public static List<string> Mleka = ["krowaMleko", "kozaMleko", "owcaMleko"];
     }
 }

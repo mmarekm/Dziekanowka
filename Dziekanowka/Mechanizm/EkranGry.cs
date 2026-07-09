@@ -64,6 +64,7 @@
         Apteka,
         Sklepiczek,
         FanZdrowy,
+        DomMleka,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
@@ -92,6 +93,7 @@
         MlynekPraca,
         ChlopiecZje,
         KotZje,
-        FanZdrowyRadosc
+        FanZdrowyRadosc,
+        MlekoLeciWDomMleka
     }
 }
