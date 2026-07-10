@@ -97,6 +97,7 @@
         ChlopiecZje,
         KotZje,
         FanZdrowyRadosc,
-        MlekoLeciWDomMleka
+        MlekoLeciWDomMleka,
+        KuchniaPracuje
     }
 }

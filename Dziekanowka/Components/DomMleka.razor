@@ -20,8 +20,8 @@
         if (!moznaDacMleko) return;
         Gracz.ProduktZ(Gracz.Statystyki.DaneMisji[0]).Ilosc -= 2;
         Gracz.Statystyki.MoznaOdebracObraz = true;
-        Gracz.Statystyki.DaneMisji = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
-        Gracz.Statystyki.AktualnaMisja = Misje.Chlopiec;
+        Gracz.Statystyki.DaneMisji = [Gra.Restauracja[Random.Shared.Next(Gra.Restauracja.Count)], "", ""];
+        Gracz.Statystyki.AktualnaMisja = Misje.KuchniaMorska;
         await NaZmianeEkranu.InvokeAsync(EkranGry.MlekoLeciWDomMleka);
         await Task.Delay(8000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.DomMleka);

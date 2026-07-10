@@ -897,3 +897,9 @@
     height: 100px;
     z-index: 2;
 }
+.misjaKuchniaMorska {
+    bottom: 60px;
+    right: 90px;
+    width: 200px;
+    height: 200px;
+}
