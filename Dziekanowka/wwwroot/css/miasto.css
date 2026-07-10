@@ -12,6 +12,10 @@
     background-image: url('../img/miasto/miastoBialeWidok.png');
     overflow: hidden;
 }
+.miastoMorskieWidok {
+    background-image: url('../img/miasto/miastoMorskieWidok.png');
+    overflow: hidden;
+}
 .miasto3Widok {
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
@@ -24,6 +28,9 @@
 }
 .domMlekaWidokPelny {
     background-image: url('../img/miasto/domMlekaPelny.png');
+}
+.kuchniaMorskaWidok {
+    background-image: url('../img/miasto/kuchniaMorskaWidok.png');
 }
 .lBiletowMiasto1 {
     left: 75px;
@@ -800,6 +807,13 @@
     height: 306px;
     z-index: 2;
 }
+.miastoMorskieNaStacje {
+    top: 0;
+    left: 789px;
+    width: 320px;
+    height: 224px;
+    z-index: 2;
+}
 @keyframes poblysk {
     0%, 100% {
         filter: brightness(1);
@@ -868,4 +882,18 @@
     font-size: 110px;
     font-weight: bold;
     gap: 30px;
+}
+.morskieDoKuchni {
+    top: 122px;
+    right: 333px;
+    width: 453px;
+    height: 295px;
+    z-index: 2;
+}
+.kuchaniaMorskaDoMiasta {
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    z-index: 2;
 }

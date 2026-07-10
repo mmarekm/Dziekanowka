@@ -1,0 +1,49 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="kuchniaMorskaWidok widok rel">
+    <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> 100 <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
+    <div class="abs kuchaniaMorskaDoMiasta"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoMorskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (Gracz.Statystyki.OtwarteOkno == "bonusOdMorskiejKuchni")
+        {
+            Gracz.Statystyki.OtwarteOkno = "";
+            Powitaj = true;
+            Znikanie = false;
+            StateHasChanged();
+            await Task.Delay(100);
+            Znikanie = true;
+            StateHasChanged();
+            await Task.Delay(7000);
+            Powitaj = false;
+            Znikanie = false;
+            StateHasChanged();
+        }
+    }
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private bool moznaDacChlopcu => Gracz.Statystyki.AktualnaMisja == Misje.FanZdrowia && Gracz.JestWarzywo(Gracz.Statystyki.DaneMisji[0]);
+    private async Task DajDanie()
+    {
+        if (!moznaDacChlopcu) return;
+        //Gracz.Warzywo(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
+        Gracz.Statystyki.MoznaOdebracObraz = true;
+        Gracz.Monety += 100;
+        Gracz.Statystyki.DaneMisji = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
+        Gracz.Statystyki.AktualnaMisja = Misje.Chlopiec;
+        Gracz.Statystyki.OtwarteOkno = "bonusOdMorskiejKuchni";
+        //await NaZmianeEkranu.InvokeAsync(EkranGry.FanZdrowyRadosc);
+        //await Task.Delay(10000);
+        //await NaZmianeEkranu.InvokeAsync(EkranGry.KuchniaMorska);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using Dziekanowka.Mechanizm;
+using System.Security.Cryptography.X509Certificates;
 namespace Dziekanowka.Gracza
 {
     public static class Misje
@@ -7,6 +8,7 @@ namespace Dziekanowka.Gracza
         public const string Kot = "Kot";
         public const string FanZdrowia = "FanZdrowia";
         public const string DomMleka = "DomMleka";
+        public const string KuchniaMorska = "KuchniaMorska";
     }
     public class Statystyki
     {

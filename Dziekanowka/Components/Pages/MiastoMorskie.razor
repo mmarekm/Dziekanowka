@@ -1,0 +1,16 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+<div class="miastoMorskieWidok widok rel">
+    <div class="abs miastoMorskieNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoMorskieNaStacje.png" /></button></div>
+    <!--<div class="abs morskieDoKuchni"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.KuchniaMorska)"><img src="img/miasto/morskieDoRestauracji.png" /></button></div>-->
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    public async Task NaStacje()
+    {
+        Gracz.Statystyki.Stacja = "miastoMorskie";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
+    }
+}
