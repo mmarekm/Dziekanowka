@@ -41,7 +41,7 @@
     private bool Znikanie { get; set; } = false;
     private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
-    private bool moznaDacKucharzowi => Gracz.Statystyki.AktualnaMisja == Misje.KuchniaMorska && Gracz.JestWarzywo(Gracz.Statystyki.DaneMisji[0]);
+    private bool moznaDacKucharzowi => Gracz.Statystyki.AktualnaMisja == Misje.KuchniaMorska && Gracz.JestObiad(Gracz.Statystyki.DaneMisji[0]);
     private async Task DajDanie()
     {
         if (!moznaDacKucharzowi) return;
