@@ -180,13 +180,6 @@ namespace Dziekanowka.Mechanizm
 
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260705"] = ["Ndz14zwA"],
-            ["20260706"] = ["pn14zwII", "MariiTeresyLedochowskiej"],
-            ["20260707"] = ["wt14zwII"],
-            ["20260708"] = ["sr14zwII", "JanaZDukli"],
-            ["20260709"] = ["cz14zwII"],
-            ["20260710"] = ["pt14zwII"],
-            ["20260711"] = ["BenedyktaOpataPatronaEuropy"],
             ["20260712"] = ["Ndz15zwA"],
             ["20260713"] = ["pn15zwII", "PustelnikowAndrzejaSwieradaIBenedykta"],
             ["20260714"] = ["wt15zwII"],
@@ -264,7 +257,17 @@ namespace Dziekanowka.Mechanizm
             ["20260924"] = ["cz25zwII"],
             ["20260925"] = ["pt25zwII"],
             ["20260926"] = ["sb25zwII"],
-            ["20260927"] = ["Ndz26zwA"]
+            ["20260927"] = ["Ndz26zwA"],
+            ["20260928"] = ["pn26zwII", "WaclawaMeczennika"],
+            ["20260929"] = ["ArchaniolowMichalaGabrielaIRafala"],
+            ["20260930"] = ["sr26zwII", "HieronimaDoktoraKosciola"],
+            ["20261001"] = ["cz26zwII", "TeresyOdDzieciatkaJezusDoktoraKosciola"],
+            ["20261002"] = ["pt26zwII", "AniolowStrozow"],
+            ["20261003"] = ["sb26zwII"],
+            ["20261004"] = ["Ndz27zwA"],
+            ["20261005"] = ["pn27zwII", "FaustynyKowalskiej"],
+            ["20261006"] = ["wt27zwII"],
+            ["20261007"] = ["sr27zwII", "NMPRozancowej"]
         };
     }
 }
