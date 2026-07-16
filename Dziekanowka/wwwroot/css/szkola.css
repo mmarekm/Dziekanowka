@@ -159,3 +159,17 @@
         height: 100%;
         object-fit: contain;
     }
+.panelAdmin {
+    top: 300px;
+    left: 1000px;
+    width: 100px;
+    height: 100px;
+}
+    .panelAdmin:hover {
+        background-color: red;
+    }
+panelAdminWprowadz {
+    top: 300px;
+    left: 1000px;
+    background-color: green;
+}

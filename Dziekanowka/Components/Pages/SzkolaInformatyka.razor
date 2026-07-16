@@ -4,6 +4,25 @@
 <div class="szkolaInformatykaWidok widok rel">
     <div class="abs szkolaInformatykaDoIntro"><button class="wyroznionyGuzik" disabled="@(panelZmianaHasla)" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img src="img/miasto/szkola/szkolaInformatykaDoIntro.png" /></button></div>
     <div class="abs doZmianyHasla"><button class="wyroznionyGuzik" @onclick="() => panelZmianaHasla = true"><img src="img/miasto/szkola/doHasla.png" /></button></div>
+    @if (Gracz.Nazwa == "Tata")
+    {
+        @if (widacPanelAdmin)
+        {
+            <div class="abs panelAdminWprowadz">
+                <div>Mama <input @bind="monetyMama" /></div>
+                <div>Tata <input @bind="monetyTata" /></div>
+                <div>Ula <input @bind="monetyUla" /></div>
+                <div>Basia <input @bind="monetyBasia" /></div>
+                <div>Ania <input @bind="monetyAnia" /></div>
+                <button @onclick="ZmienMonety">Zapisz</button>
+            </div>
+        }
+        else
+        {
+            <div class="abs panelAdmin" @onclick="() => widacPanelAdmin = true"></div>
+        }
+        
+    }
 </div>
 <div class="abs narzedziePrzetwornia @(widok ? "" : "aktywne")">
     <div class="abs kuchniaNarzedzieConfirm"><button class="wyroznionyGuzik" @onclick="ZamknijPanel" ><img src="img/budynki/przetworniaNarzedzieConfirm.png" /></button></div>
@@ -32,5 +51,24 @@
         noweHaslo = "";
         potwierdzHaslo = "";
         ZamknijPanel();
+    }
+    private bool widacPanelAdmin = false;
+    private int monetyMama = 0;
+    private int monetyTata = 0;
+    private int monetyUla = 0;
+    private int monetyBasia = 0;
+    private int monetyAnia = 0;
+    private async Task ZmienMonety()
+    {
+        await ladowanieGracza.ZmienMonetyWieluGraczy(new()
+        {
+            ["Mama"] = monetyMama,
+            ["Tata"] = monetyTata,
+            ["Ula"] = monetyUla,
+            ["Basia"] = monetyBasia,
+            ["Ania"] = monetyAnia,
+        });
+        monetyMama = monetyTata = monetyUla = monetyBasia = monetyAnia = 0;
+        widacPanelAdmin = false;
     }
 }

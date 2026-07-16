@@ -110,7 +110,21 @@ namespace Dziekanowka.Mechanizm
             var gracze = await WczytajWszystkichGraczy();
             return gracze[nazwa.ToLower()];
         }
+        public async Task ZmienMonetyWieluGraczy(Dictionary<string, int> zmiany)
+        {
+            var gracze = await WczytajWszystkichGraczy();
+            foreach (var (nazwa, zmiana) in zmiany)
+            {
+                if (zmiana == 0) continue;
+                var klucz = nazwa.ToLower();
+                if (gracze.TryGetValue(klucz, out var g))
+                    g.Monety += zmiana;
+            }
+            await ZapiszWszystkichGraczy(gracze);
 
+            if (AktualnyGracz != null && gracze.TryGetValue(AktualnyGracz.Nazwa.ToLower(), out var aktualny))
+                AktualnyGracz.Monety = aktualny.Monety;
+        }
         public async Task ZapiszGracza(Gracz gracz)
         {
             var gracze = await WczytajWszystkichGraczy();
