@@ -1,12 +1,18 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
 <div class="miastoMorskieWidok widok rel">
     <div class="abs miastoMorskieNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje" disabled="@okienko"><img src="img/miasto/miastoMorskieNaStacje.png" /></button></div>
     <div class="abs morskieDoKuchni"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.KuchniaMorska)" disabled="@okienko"><img src="img/miasto/morskieDoRestauracji.png" /></button></div>
+    <div class="abs morskieDoPlebana"><button class="wyroznionyGuzik" @onclick='() => { okienko = true; rodzajOkienka = "plebanMorze"; }' disabled="@okienko"><img src="img/miasto/morskieDoPlebana.png" /></button></div>
     @if (okienko)
     {
-        <div class="abs okienkoMiastoMorskie">
-
+        <div class="abs okienkoMiastoMorskie @(rodzajOkienka)Widok">
+            <div class="abs confirmMorski @(rodzajOkienka)Confirm"><button class="wyroznionyGuzik" @onclick='() => { okienko = false; rodzajOkienka = ""; }'><img src="img/miasto/confirm@(rodzajOkienka).png"/></button></div>
+            @if (rodzajOkienka == "plebanMorze")
+            {
+                <div class="abs plebanDajWino @((!Gracz.JestProduktP("wino") || !Gracz.Statystyki.Bonusy.Contains("winoMorskie")) ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick='DajWino'></div>
+            }
         </div>
     }
 </div>
@@ -15,9 +21,22 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool okienko = false;
+    private string rodzajOkienka = "";
     public async Task NaStacje()
     {
         Gracz.Statystyki.Stacja = "miastoMorskie";
         await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
+    }
+    private async Task DajWino()
+    {
+        if (!Gracz.JestProduktP("wino")) return;
+        if (!Gracz.Statystyki.Bonusy.Contains("winoMorskie")) return;
+        Gracz.ProduktP("wino").Ilosc--;
+        Gracz.Monety += 50;
+        Gracz.Statystyki.Bonusy.Remove("winoMorskie");
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.WinoMorskieDlaPlebana);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoMorskie);
     }
 }

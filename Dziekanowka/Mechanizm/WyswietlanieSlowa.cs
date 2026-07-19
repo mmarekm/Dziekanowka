@@ -180,14 +180,6 @@ namespace Dziekanowka.Mechanizm
 
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260712"] = ["Ndz15zwA"],
-            ["20260713"] = ["pn15zwII", "PustelnikowAndrzejaSwieradaIBenedykta"],
-            ["20260714"] = ["wt15zwII"],
-            ["20260715"] = ["sr15zwII", "BonawenturyBiskupaDoktoraKosciola"],
-            ["20260716"] = ["cz15zwII", "NMPZGoryKarmel"],
-            ["20260717"] = ["pt15zwII"],
-            ["20260718"] = ["sb15zwII"],
-            ["20260719"] = ["Ndz16zwA"],
             ["20260720"] = ["pn16zwII"],
             ["20260721"] = ["wt16zwII"],
             ["20260722"] = ["MariiMagdaleny"],

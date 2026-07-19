@@ -98,6 +98,7 @@
         KotZje,
         FanZdrowyRadosc,
         MlekoLeciWDomMleka,
-        KuchniaPracuje
+        KuchniaPracuje,
+        WinoMorskieDlaPlebana
     }
 }

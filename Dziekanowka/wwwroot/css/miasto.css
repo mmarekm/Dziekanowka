@@ -903,9 +903,33 @@
     width: 200px;
     height: 200px;
 }
+.morskieDoPlebana {
+    left: 0;
+    bottom: 159px;
+    width: 292px;
+    height: 279px;
+}
 .okienkoMiastoMorskie {
     top: 50px;
     left: 100px;
     width: 1700px;
     height: 900px;
+    z-index: 10;
+}
+.plebanMorzeWidok {
+    background-image: url('../img/miasto/plebanMorzeWidok.png');
+}
+.confirmMorski {
+    bottom: 0;
+    left: 0;
+}
+.plebanMorzeConfirm {
+    width: 147px;
+    height: 143px;
+}
+.plebanDajWino {
+    width: 500px;
+    height: 200px;
+    left: 1150px;
+    top: 540px;
 }
