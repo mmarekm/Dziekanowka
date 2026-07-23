@@ -38,7 +38,8 @@ else
     private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa, EkranGry.GrzybyZnalezione, EkranGry.RybaZlowiona,
         EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21, EkranGry.AutobusJedzie22, EkranGry.AutobusJedzie3, EkranGry.PociagJedzie,
         EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
-        EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc, EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana ];
+        EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc, EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana,
+        EkranGry.WniesionoBuleczke ];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
@@ -90,6 +91,7 @@ else
             EkranGry.MlekoLeciWDomMleka => EkranGry.DomMleka,
             EkranGry.KuchniaPracuje => EkranGry.KuchniaMorska,
             EkranGry.WinoMorskieDlaPlebana => EkranGry.MiastoMorskie,
+            EkranGry.WniesionoBuleczke => EkranGry.DomSlodkichBulek,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);
@@ -120,13 +122,14 @@ else
             EkranGry.PoleIntro or EkranGry.Pole1 or EkranGry.Pole2 or EkranGry.Sad1 or EkranGry.Sad2 => "mp3/Tla/poleIntro.mp3",
             EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu or EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 or EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => "mp3/Tla/traktorJazda.mp3",
             EkranGry.Garaz or EkranGry.GarazGospodarczy => "mp3/Tla/garazgospodarczy.mp3",
-            EkranGry.LasIntro => "mp3/Tla/las.mp3",
+            EkranGry.LasIntro or EkranGry.Las1 => "mp3/Tla/las.mp3",
+            EkranGry.DomSlodkichBulek => "mp3/Tla/miejsceLas.mp3",
             EkranGry.SzkolaIntro => "mp3/Tla/szkola.mp3",
             EkranGry.BibliotekaIntro or EkranGry.BibliotekaCzytelnia or EkranGry.BibliotekaGaleria or EkranGry.WejscieDoGalerii or EkranGry.BibliotekaPani => "mp3/Tla/biblioteka.mp3",
             EkranGry.Stacja or EkranGry.PociagJedzie => "mp3/Tla/kolej.mp3",
             EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona or EkranGry.UzyskanieObrazu => "mp3/Dzwieki/fanfaraKrotka.mp3",
             EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca or EkranGry.WyciskarkaPraca or EkranGry.WinoMorskieDlaPlebana => "mp3/Tla/akcjaSprawna.mp3",
-            EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje => "mp3/Dzwieki/fanfara.mp3",
+            EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke => "mp3/Dzwieki/fanfara.mp3",
             EkranGry.FanZdrowy => "mp3/Tla/miastolesne.mp3",
             EkranGry.DomMleka => "mp3/Tla/miastobiale.mp3",
             EkranGry.KuchniaMorska => "mp3/Tla/miastomorskie.mp3",
@@ -179,6 +182,7 @@ else
             EkranGry.MlekoLeciWDomMleka => EkranGry.DomMleka,
             EkranGry.KuchniaPracuje => EkranGry.KuchniaMorska,
             EkranGry.WinoMorskieDlaPlebana => EkranGry.MiastoMorskie,
+            EkranGry.WniesionoBuleczke => EkranGry.DomSlodkichBulek,
             _ => startowyEkran
         };
         await ZmienEkran(startowyEkran);

@@ -10,6 +10,12 @@
 .lasJezioroWidok {
     background-image: url('../img/teren/las/lasJezioroWidok.png');
 }
+.las1Widok {
+    background-image: url('../img/teren/las/las1Widok.png');
+}
+.domSlodkichBulekWidok {
+    background-image: url('../img/teren/las/domSlodkichBulekWidok.png');
+}
 .lMonetLasIntro {
     bottom: 13px;
     left: 410px;
@@ -287,4 +293,83 @@
     100% {
         opacity: 0;
     }
+}
+.lasIntroDoLas1 {
+    width: 574px;
+    height: 338px;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+.las1DoLasIntro {
+    width: 727px;
+    height: 175px;
+    bottom: 0;
+    left: 568px;
+    z-index: 2;
+}
+.las1DoDomSlodkichBulek {
+    width: 475px;
+    height: 303px;
+    top: 200px;
+    left: 731px;
+    z-index: 2;
+}
+.domSlodkichBulekDoLas1 {
+    top: 0;
+    left: 0;
+    width: 174px;
+    height: 87px;
+    z-index: 2;
+}
+.misjaDomSlodkichBuleczek {
+    top: 170px;
+    left: 500px;
+    width: 150px;
+    height: 150px;
+    z-index: 2;
+}
+.dajBuleczkeSlodka {
+    top: 600px;
+    left: 890px;
+    width: 260px;
+    height: 100px;
+}
+.sprzedajMiod {
+    bottom: 200px;
+    left: 200px;
+    width: 200px;
+    height: 200px;
+}
+.lDomSlodkichBulek {
+    width: 60px;
+    height: 21px;
+    font-size: 20px;
+    text-align: center;
+    color: gray;
+}
+.lMioduDomSlodkichBulek {
+    left: 25px;
+    bottom: 390px;   
+}
+.lMonetDomSlodkichBulek {   
+    left: 40px;
+    bottom: 165px;
+}
+@keyframes zaswiecenieMonet {
+    0% {
+        color: gray;
+        text-shadow: none;
+    }
+    30% {
+        color: gold;
+        text-shadow: 0 0 8px gold;
+    }
+    100% {
+        color: gray;
+        text-shadow: none;
+    }
+}
+.efektZaswiecenia {
+    animation: zaswiecenieMonet 0.2s ease-in-out;
 }

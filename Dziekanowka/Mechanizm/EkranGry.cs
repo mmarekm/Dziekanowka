@@ -30,6 +30,8 @@
         GrzybyZnalezione,
         LasJezioro,
         RybaZlowiona,
+        Las1,
+        DomSlodkichBulek,
         GarazGospodarczy,
         Studnia,
         Sklepik,
@@ -99,6 +101,7 @@
         FanZdrowyRadosc,
         MlekoLeciWDomMleka,
         KuchniaPracuje,
-        WinoMorskieDlaPlebana
+        WinoMorskieDlaPlebana,
+        WniesionoBuleczke
     }
 }

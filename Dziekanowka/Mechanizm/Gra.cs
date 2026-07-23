@@ -47,5 +47,6 @@ namespace Dziekanowka.Mechanizm
         public static List<string> Soki = ["marchewSok", "burakSok", "pomidorSok", "jabłkoSok", "pomarańczaSok", "grejpfrutSok", "cytrynaSok", "ananasSok", "brzoskwiniaSok", "morelaSok", "wiśniaSok", "truskawkaSok", "malinaSok", "borówkaSok", "porzeczkaCzarnaSok"];
         public static List<string> Mleka = ["krowaMleko", "kozaMleko", "owcaMleko"];
         public static List<string> Restauracja = ["karkowka", "gulasz", "pieczenWolowa", "indykDuszony", "krolikWWinie", "ratatouille", "leczo", "fasolkaPoBretonsku", "knedle", "lososGotowany", "rybaPoGrecku", "sledzWOleju", "jajecznica", "jajkoSadzone", "omlet", "shakshuka", "kotletSchabowy", "kotletMielony", "stek", "piersZKurczaka", "bitki", "indykSmazony", "krolikSmazony", "golabki", "pstragSmazony", "lososSmazony", "halibutSmazony", "okonSmazony", "sledzSmazony", "plackiZiemniaczane", "frytki", "pierogiRuskie", "pierogiZMiesem", "pierogiZKapustaIGrzybami", "pierogiZOwocami"];
+        public static List<string> SlodkieBuleczki = ["brzoskwiniaBuleczka", "śliwkaBuleczka", "wiśniaBuleczka", "jabłkoBuleczka", "gruszkaBuleczka", "malinaBuleczka", "twarogBuleczka"];
     }
 }

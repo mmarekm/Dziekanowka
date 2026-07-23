@@ -1109,7 +1109,7 @@
     private bool saSkladnikiNaWedline => miesoWedlina != "" && Gracz.JestZywnoscP("sol") && Gracz.JestZywnoscP("czarnyPieprz") && Gracz.JestZywnoscP("majeranek") && Gracz.JestWarzywo("czosnek") && (!wybranyPasztet || (Gracz.JestWarzywo("cebula") && jajoWedlina != "" && smalecWedlina != ""));
     private string wedlinaGotowa => !saSkladnikiNaWedline ? "" : miesoNaWedline[miesoWedlina];
     private void ZamknijNarzedzie() => wyciskarka = deska = garnek = patelnia = piec = mlynek = zakwas = false;
-    private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = false;
+    private void ZamknijNarzedziePiec() => piecPieczywo = piecPizza = piecCiasto = piecWedlina = pokazPotwierdzeniePizza = false;
     private void ZamknijNarzedzieDeska() => deskaKanapki = deskaSurowki = deskaSalatki = deskaInne = false;
     public class ProduktNaTace(string nazwa, int ilosc = 0)
     {
@@ -1579,6 +1579,7 @@
         if (!Gracz.JestPrzedmiot("drewno")) return;
         if (piecPieczywo && (!saSkladnikiNaPieczywo || Gracz.Zboza.First(z => z.Nazwa == makaPieczywo).PoziomZakwasu < 3 || pieczeniePieczywa == 0)) return;
         if (piecWedlina && !saSkladnikiNaWedline) return;
+
         if (piecPieczywo)
         {
             Gracz.Przedmiot("pelnaButelka").Ilosc--;
@@ -1599,13 +1600,19 @@
                 Gracz.ProduktP($"{makaPieczywo}Bulka").Ilosc += 2;
             else if (pieczeniePieczywa == 1)
                 Gracz.ProduktP($"{makaPieczywo}Chleb").Ilosc++;
+
+            Gracz.Przedmiot("drewno").Ilosc--;
+            makaPieczywo = "";
+            pieczeniePieczywa = 0;
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+
             await NaZmianeEkranu.InvokeAsync(EkranGry.PieczenieChleba);
             await Task.Delay(7300);
             Gracz.Statystyki.OtwarteOkno = "piecChleb";
             await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
-            makaPieczywo = "";
-            pieczeniePieczywa = 0;
+            return;
         }
+
         if (piecPizza && saSkladnikiNaPizze)
         {
             if (Gracz.ProduktP("pizza").Ilosc > 0)
@@ -1614,7 +1621,11 @@
                 return;
             }
             UpiecPizze();
+            Gracz.Przedmiot("drewno").Ilosc--;
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+            return; // brak animacji tutaj
         }
+
         if (piecCiasto && saSkladnikiNaCiasto)
         {
             Gracz.ProduktP($"{makaCiasto}Maka").Ilosc--;
@@ -1630,16 +1641,22 @@
             if (owocCiasto != "")
                 Gracz.Owoc(owocCiasto).Ilosc--;
             Gracz.ProduktP(gotoweCiasto).Ilosc++;
+
+            Gracz.Przedmiot("drewno").Ilosc--;
             makaCiasto = "";
             jajoCiasto = "";
             owocCiasto = "";
             twarogCiasto = false;
             smietanaCiasto = false;
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+
             await NaZmianeEkranu.InvokeAsync(EkranGry.PieczenieCiasta);
             await Task.Delay(7300);
             Gracz.Statystyki.OtwarteOkno = "piecCiasto";
             await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
+            return;
         }
+
         if (piecWedlina)
         {
             Gracz.ZywnoscP("sol").Ilosc--;
@@ -1662,13 +1679,14 @@
             Gracz.ProduktP(miesoNaWedline[miesoWedlina]).Ilosc += 4;
             miesoWedlina = "";
 
+            Gracz.Przedmiot("drewno").Ilosc--;
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+
+            await NaZmianeEkranu.InvokeAsync(EkranGry.PieczenieWedliny);
+            await Task.Delay(7300);
+            Gracz.Statystyki.OtwarteOkno = "piecWedlina";
+            await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
         }
-        Gracz.Przedmiot("drewno").Ilosc--;
-        await NaZmianeEkranu.InvokeAsync(EkranGry.PieczenieWedliny);
-        await Task.Delay(7300);
-        Gracz.Statystyki.OtwarteOkno = "piecWedline";
-        await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
-        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private async Task UpiecPizzeZAnimacja()
     {

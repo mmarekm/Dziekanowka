@@ -1,0 +1,52 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="domSlodkichBulekWidok widok rel">
+    <div class="abs domSlodkichBulekDoLas1"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Las1)" class="wyroznionyGuzik"><img src='img/teren/las/confirmDomSlodkichBulek.png' /></button></div>
+    <div class="abs misjaDomSlodkichBuleczek">
+        @if (Gracz.Statystyki.AktualnaMisja == Misje.SlodkaBuleczka)
+        {
+            <img class="obrazekContain" src="img/dom/kuchnia/@(Gracz.Statystyki.DaneMisji[0]).png" />
+        }
+        else
+        {
+            <img class="obrazekContain" src="img/dom/kuchnia/garnek/pustaMiska.png" />
+        }
+    </div>
+    <div class="abs dajBuleczkeSlodka @(jestBuleczka ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajBuleczke"></div>
+    <div class="abs sprzedajMiod @(Gracz.JestProduktZ("miod") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="SprzedajMiod"></div>
+    <div class="abs lDomSlodkichBulek lMioduDomSlodkichBulek @(efektZloty ? "efektZaswiecenia" : "")">@Gracz.ProduktZ("miod").Ilosc</div>
+    <div class="abs lDomSlodkichBulek lMonetDomSlodkichBulek @(efektZloty ? "efektZaswiecenia" : "")">@Gracz.Monety</div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private bool jestBuleczka => Gracz.Statystyki.AktualnaMisja == Misje.SlodkaBuleczka && Gracz.JestProduktP(Gracz.Statystyki.DaneMisji[0]);
+    private bool efektZloty = false;
+    private async Task DajBuleczke()
+    {
+        if (!jestBuleczka) return;
+        Gracz.ProduktP(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
+        Gracz.Statystyki.MoznaOdebracObraz = true;
+        Gracz.Statystyki.DaneMisji = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
+        Gracz.Statystyki.AktualnaMisja = Misje.Chlopiec;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.WniesionoBuleczke);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.DomSlodkichBulek);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task SprzedajMiod()
+    {
+        if (!Gracz.JestProduktZ("miod")) return;
+        Gracz.ProduktZ("miod").Ilosc--;
+        Gracz.Monety += 2;
+        efektZloty = true;
+        StateHasChanged();
+        await Task.Delay(200);
+        efektZloty = false;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

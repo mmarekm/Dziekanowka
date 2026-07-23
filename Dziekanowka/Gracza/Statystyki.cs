@@ -9,6 +9,7 @@ namespace Dziekanowka.Gracza
         public const string FanZdrowia = "FanZdrowia";
         public const string DomMleka = "DomMleka";
         public const string KuchniaMorska = "KuchniaMorska";
+        public const string SlodkaBuleczka = "SlodkaBuleczka";
     }
     public class Statystyki
     {
@@ -17,7 +18,6 @@ namespace Dziekanowka.Gracza
         public bool MoznaOdebracObraz { get; set; } = false;
         public string AktualnaMisja { get; set; } = Misje.Chlopiec;
         public string[] DaneMisji { get; set; } = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
-        public string MilosnikPieczywa { get; set; } = "";
         public int Kolekcje { get; set; } = 18;
         public int BonusDzienny { get; set; } = 33;
         public HashSet<string> Bonusy { get; set; } = ["miodUl", "kawaSalon", "karczowiskoSiano", "winoMorskie"];
