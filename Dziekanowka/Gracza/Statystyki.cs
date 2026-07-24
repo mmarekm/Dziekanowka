@@ -21,6 +21,7 @@ namespace Dziekanowka.Gracza
         public int Kolekcje { get; set; } = 18;
         public int BonusDzienny { get; set; } = 33;
         public HashSet<string> Bonusy { get; set; } = ["miodUl", "kawaSalon", "karczowiskoSiano", "winoMorskie"];
+        public string ZwierzeNaDrodze { get; set; } = "krowa";
         public EkranGry Ekran { get; set; } = EkranGry.Gospodarstwo;
         public string OtwarteOkno { get; set; } = "";
         public int Kiosk { get; set; } = 0;
