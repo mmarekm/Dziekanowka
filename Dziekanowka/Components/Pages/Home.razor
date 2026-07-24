@@ -66,35 +66,34 @@ else
     {
         czekaNaPowitanie = true;
     }
+    private static EkranGry PrecyzujEkranStartowy(EkranGry ekran) => ekran switch
+    {
+        EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => EkranGry.Gospodarstwo,
+        EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa => EkranGry.PoleIntro,
+        EkranGry.PsySasiadaSzczekaja or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu => EkranGry.ZaBrama,
+        EkranGry.KoszenieTrawy => EkranGry.GarazGospodarczy,
+        EkranGry.PtaszkiZjedza or EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.WyciskarkaPraca or EkranGry.KawaPraca => EkranGry.DomKuchnia,
+        EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca => EkranGry.Przetwornia,
+        EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
+        EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
+        EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
+        EkranGry.PociagJedzie => EkranGry.Stacja,
+        EkranGry.RybaZlowiona => EkranGry.LasJezioro,
+        EkranGry.WejscieDoGalerii => EkranGry.BibliotekaIntro,
+        EkranGry.UzyskanieObrazu => EkranGry.BibliotekaPani,
+        EkranGry.ChlopiecZje or EkranGry.KotZje => EkranGry.Kiosk,
+        EkranGry.FanZdrowyRadosc => EkranGry.FanZdrowy,
+        EkranGry.MlekoLeciWDomMleka => EkranGry.DomMleka,
+        EkranGry.KuchniaPracuje => EkranGry.KuchniaMorska,
+        EkranGry.WinoMorskieDlaPlebana => EkranGry.MiastoMorskie,
+        EkranGry.WniesionoBuleczke => EkranGry.DomSlodkichBulek,
+        _ => ekran
+    };
     private async void OnWideoPowitalneZakonczone()
     {
         pokazWideo = false;
         StateHasChanged();
-        EkranGry startowyEkran = gracz!.Statystyki.Ekran;
-        startowyEkran = startowyEkran switch
-        {
-            EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => EkranGry.Gospodarstwo,
-            EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa => EkranGry.PoleIntro,
-            EkranGry.PsySasiadaSzczekaja or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu => EkranGry.ZaBrama,
-            EkranGry.KoszenieTrawy => EkranGry.GarazGospodarczy,
-            EkranGry.PtaszkiZjedza or EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.WyciskarkaPraca or EkranGry.KawaPraca => EkranGry.DomKuchnia,
-            EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca => EkranGry.Przetwornia,
-            EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
-            EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
-            EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
-            EkranGry.PociagJedzie => EkranGry.Stacja,
-            EkranGry.RybaZlowiona => EkranGry.LasJezioro,
-            EkranGry.WejscieDoGalerii => EkranGry.BibliotekaIntro,
-            EkranGry.UzyskanieObrazu => EkranGry.BibliotekaPani,
-            EkranGry.ChlopiecZje or EkranGry.KotZje => EkranGry.Kiosk,
-            EkranGry.FanZdrowyRadosc => EkranGry.FanZdrowy,
-            EkranGry.MlekoLeciWDomMleka => EkranGry.DomMleka,
-            EkranGry.KuchniaPracuje => EkranGry.KuchniaMorska,
-            EkranGry.WinoMorskieDlaPlebana => EkranGry.MiastoMorskie,
-            EkranGry.WniesionoBuleczke => EkranGry.DomSlodkichBulek,
-            _ => startowyEkran
-        };
-        await ZmienEkran(startowyEkran);
+        await ZmienEkran(PrecyzujEkranStartowy(gracz!.Statystyki.Ekran));
     }
     private async Task PowitanieDnia()
     {
@@ -161,31 +160,7 @@ else
             StateHasChanged();
             return;
         }
-        EkranGry startowyEkran = gracz!.Statystyki.Ekran;
-        startowyEkran = startowyEkran switch
-        {
-            EkranGry.AnimacjaTraktora or EkranGry.AnimacjaTraktoraPowrot => EkranGry.Gospodarstwo,
-            EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa => EkranGry.PoleIntro,
-            EkranGry.PsySasiadaSzczekaja or EkranGry.SamochodDoMiasta or EkranGry.SamochodDoDomu => EkranGry.ZaBrama,
-            EkranGry.KoszenieTrawy => EkranGry.GarazGospodarczy,
-            EkranGry.PtaszkiZjedza or EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.WyciskarkaPraca or EkranGry.KawaPraca => EkranGry.DomKuchnia,
-            EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca => EkranGry.Przetwornia,
-            EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
-            EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
-            EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
-            EkranGry.PociagJedzie => EkranGry.Stacja,
-            EkranGry.RybaZlowiona => EkranGry.LasJezioro,
-            EkranGry.WejscieDoGalerii => EkranGry.BibliotekaIntro,
-            EkranGry.UzyskanieObrazu => EkranGry.BibliotekaPani,
-            EkranGry.ChlopiecZje or EkranGry.KotZje => EkranGry.Kiosk,
-            EkranGry.FanZdrowyRadosc => EkranGry.FanZdrowy,
-            EkranGry.MlekoLeciWDomMleka => EkranGry.DomMleka,
-            EkranGry.KuchniaPracuje => EkranGry.KuchniaMorska,
-            EkranGry.WinoMorskieDlaPlebana => EkranGry.MiastoMorskie,
-            EkranGry.WniesionoBuleczke => EkranGry.DomSlodkichBulek,
-            _ => startowyEkran
-        };
-        await ZmienEkran(startowyEkran);
+        await ZmienEkran(PrecyzujEkranStartowy(gracz!.Statystyki.Ekran));
     }
     private async Task Menu()
     {
