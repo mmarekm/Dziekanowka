@@ -180,12 +180,6 @@ namespace Dziekanowka.Mechanizm
 
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260720"] = ["pn16zwII"],
-            ["20260721"] = ["wt16zwII"],
-            ["20260722"] = ["MariiMagdaleny"],
-            ["20260723"] = ["BrygidyPatronkiEuropy"],
-            ["20260724"] = ["pt16zwII", "Kingi"],
-            ["20260725"] = ["JakubaApostola"],
             ["20260726"] = ["Ndz17zwA"],
             ["20260727"] = ["pn17zwII"],
             ["20260728"] = ["wt17zwII"],
@@ -259,7 +253,21 @@ namespace Dziekanowka.Mechanizm
             ["20261004"] = ["Ndz27zwA"],
             ["20261005"] = ["pn27zwII", "FaustynyKowalskiej"],
             ["20261006"] = ["wt27zwII"],
-            ["20261007"] = ["sr27zwII", "NMPRozancowej"]
+            ["20261007"] = ["sr27zwII", "NMPRozancowej"],
+            ["20261008"] = ["cz27zwII"],
+            ["20261009"] = ["pt27zwII"],
+            ["20261010"] = ["sb27zwII"],
+            ["20261011"] = ["Ndz28zwA"],
+            ["20261012"] = ["pn28zwII"],
+            ["20261013"] = ["wt28zwII", "HonorataKozminskiego"],
+            ["20261014"] = ["sr28zwII"],
+            ["20261015"] = ["cz28zwII", "TeresyOdJezusaDoktoraKosciola"],
+            ["20261016"] = ["pt28zwII", "JadwigiSlaskiej"],
+            ["20261017"] = ["sb28zwII", "IgnacegoAntiochenskiego"],
+            ["20261018"] = ["Ndz29zwA"],
+            ["20261019"] = ["pn29zwII", "JerzegoPopieluszki"],
+            ["20261020"] = ["wt29zwII", "JanaKantego"],
+            ["20261021"] = ["sr29zwII"]
         };
     }
 }

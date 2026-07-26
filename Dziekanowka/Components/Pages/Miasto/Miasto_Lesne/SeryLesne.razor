@@ -1,0 +1,30 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="seryLesneWidok widok rel">
+    <div class="abs seryLesneDoMiastoLesne"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoLesne)"><img src="img/miasto/miastoLesneDoSery/seryLesneDoMiastoLesne.png" /></button></div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    @if (Gracz.Statystyki.AktualnaMisja == Misje.SeryLesne)
+    {
+        <div class="abs potrzebnySerLesnymMyszkom @(jestSer ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajSer"><img class="obrazekContain" src="img/dom/kuchnia/@(Gracz.Statystyki.DaneMisji[0]).png" /></div>
+    }
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private bool jestSer => Gracz.Statystyki.AktualnaMisja == Misje.SeryLesne && Gracz.JestProduktP(Gracz.Statystyki.DaneMisji[0]);
+    private async Task DajSer()
+    {
+        if (!jestSer) return;
+        Gracz.ProduktP(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
+        Gracz.Statystyki.MoznaOdebracObraz = true;
+        Gracz.Statystyki.DaneMisji = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
+        Gracz.Statystyki.AktualnaMisja = Misje.Chlopiec;
+        //await NaZmianeEkranu.InvokeAsync(EkranGry.WniesionoBuleczke);
+        //await Task.Delay(10000);
+        //await NaZmianeEkranu.InvokeAsync(EkranGry.DomSlodkichBulek);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

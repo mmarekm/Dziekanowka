@@ -1,0 +1,13 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+<div class="videoAnimacjaKontener">
+    <video autoplay playsinline class="videoAnimacjaPelnyEkran">
+        <source src="video/miastoLesnePrzystanek@(zwierze).mp4" type="video/mp4" />
+    </video>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string zwierze => Gracz.Statystyki.ZwierzeNaDrodze;
+}

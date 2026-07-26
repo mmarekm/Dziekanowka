@@ -23,6 +23,9 @@
 .fanZdrowyWidok {
     background-image: url('../img/miasto/fanZdrowiaWidok.png');
 }
+.seryLesneWidok {
+    background-image: url('../img/miasto/miastoLesneDoSery/lesneSeryWidok.png');
+}
 .domMlekaWidokPusty {
     background-image: url('../img/miasto/domMlekaPusty.png');
 }
@@ -800,6 +803,13 @@
     height: 286px;
     z-index: 2;
 }
+.miastoLesneDoSerow {
+    bottom: 0;
+    right: 398px;
+    width: 399px;
+    height: 315px;
+    z-index: 2;
+}
 .miastoBialeNaStacje {
     top: 0;
     left: 502px;
@@ -858,6 +868,65 @@
 }
 .fanZdrowySok {
     top: 306px;
+}
+.powrotZPrzystankuDoMiastaLesnego {
+    left: 0;
+    top: 400px;
+    width: 250px;
+    height: 380px;
+    z-index: 2;
+    background-color: transparent;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+}
+    .powrotZPrzystankuDoMiastaLesnego:hover {
+        cursor: pointer;
+        background-color: lime;
+        opacity: 0.3;
+    }
+.pokarmNaPrzystankuDoSerowLesnych {
+    top: 70px;
+    width: 150px;
+    height: 150px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+}
+.pokarm1NaPrzystankuDoSerowLesnych {
+    left: 600px;
+}
+.pokarm2NaPrzystankuDoSerowLesnych {
+    left: 1430px;
+}
+.pokarm3NaPrzystankuDoSerowLesnych {
+    left: 1015px;
+}
+.pokarmNaPrzystankuDoSerowLesnychJest {
+    background-color: transparent;
+    transition: all 0.25s ease-in-out;
+}
+    .pokarmNaPrzystankuDoSerowLesnychJest:hover {
+        cursor: pointer;
+        background-color: gold;
+        opacity: 0.3;
+    }
+.pokarmNaPrzystankuDoSerowLesnychNieMa:hover {
+    cursor: not-allowed;
+}
+.seryLesneDoMiastoLesne {
+    left: 0;
+    top: 270px;
+    width: 581px;
+    height: 422px;
+    z-index: 2;
+}
+.potrzebnySerLesnymMyszkom {
+    width: 200px;
+    height: 200px;
+    top: 300px;
+    left: 1000px;
 }
 .miastoDoDomuMleka {
     top: 322px;

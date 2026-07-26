@@ -40,7 +40,7 @@ namespace Dziekanowka.Mechanizm
         public static IDar Przedmiot(this Gracz g, string przedmiot) => g.Przedmioty.First(p => p.Nazwa == przedmiot);
         public static string[] Sklepiczek = ["kosc", ""];
         public static string[] SklepiczekWymagane = ["zielonaKuleczka", ""];
-        public static List<string> ZwierzetaNaDrodze = ["krowa", "owca", "alpaka", "koza", "koń", "słoń", "żyrafa"]; // słoń: sorgo, arbuz żyrafa: selerNaciowy, mango
+        public static List<string> ZwierzetaNaDrodze = ["krowa"];//, "owca", "alpaka", "koza", "koń", "słoń", "żyrafa"]; // słoń: sorgo, arbuz żyrafa: selerNaciowy, mango
         public static List<string> ZbiorChlopiecMiska = ["rosol", "barszczCzerwony", "zurek", "krupnik", "zupaPomidorowa", "zupaOgorkowa", "zupaGrzybowa", "kapusniak", "grochowka", "zupaFasolowa", "zupaCebulowa", "chlodnik", "kremZBrokulow", "kremZDyni", "kremZKalafiora"];
         public static List<string> Ryby = ["losos", "pstrag", "halibut", "okon", "sledz"];
         public static List<string> Warzywa = ["kukurydza", "groch", "jarmuż", "pasternak", "pietruszka", "burak", "brukselka", "sorgo", "rzepaPastewna", "koniczyna", "sałata", "marchew", "ziemniak", "cebula", "szczypiorek", "pomidor", "papryka", "ogórek", "czosnek", "rzodkiewka", "szpinak", "rukola", "batat", "szczaw", "seler", "boćwina", "por", "fasola", "bób", "ciecierzyca", "bakłażan", "cukinia", "dynia", "brokuł", "kalafior", "kapustaWłoska", "kapustaPekińska", "szparagi", "selerNaciowy", "soczewica"];
@@ -49,5 +49,6 @@ namespace Dziekanowka.Mechanizm
         public static List<string> Mleka = ["krowaMleko", "kozaMleko", "owcaMleko"];
         public static List<string> Restauracja = ["karkowka", "gulasz", "pieczenWolowa", "indykDuszony", "krolikWWinie", "ratatouille", "leczo", "fasolkaPoBretonsku", "knedle", "lososGotowany", "rybaPoGrecku", "sledzWOleju", "jajecznica", "jajkoSadzone", "omlet", "shakshuka", "kotletSchabowy", "kotletMielony", "stek", "piersZKurczaka", "bitki", "indykSmazony", "krolikSmazony", "golabki", "pstragSmazony", "lososSmazony", "halibutSmazony", "okonSmazony", "sledzSmazony", "plackiZiemniaczane", "frytki", "pierogiRuskie", "pierogiZMiesem", "pierogiZKapustaIGrzybami", "pierogiZOwocami"];
         public static List<string> SlodkieBuleczki = ["brzoskwiniaBuleczka", "śliwkaBuleczka", "wiśniaBuleczka", "jabłkoBuleczka", "gruszkaBuleczka", "malinaBuleczka", "twarogBuleczka"];
+        public static List<string> Sery = ["krowaSer", "kozaSer", "owcaSer"];
     }
 }

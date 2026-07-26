@@ -10,6 +10,7 @@ namespace Dziekanowka.Gracza
         public const string DomMleka = "DomMleka";
         public const string KuchniaMorska = "KuchniaMorska";
         public const string SlodkaBuleczka = "SlodkaBuleczka";
+        public const string SeryLesne = "SeryLesne";
     }
     public class Statystyki
     {
