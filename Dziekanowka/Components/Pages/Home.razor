@@ -39,7 +39,7 @@ else
         EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21, EkranGry.AutobusJedzie22, EkranGry.AutobusJedzie3, EkranGry.PociagJedzie,
         EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
         EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc,
-        EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana, EkranGry.WniesionoBuleczke ];
+        EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana, EkranGry.WniesionoBuleczke, EkranGry.LesneMyszyZjedza ];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
@@ -88,6 +88,7 @@ else
         EkranGry.KuchniaPracuje => EkranGry.KuchniaMorska,
         EkranGry.WinoMorskieDlaPlebana => EkranGry.MiastoMorskie,
         EkranGry.WniesionoBuleczke => EkranGry.DomSlodkichBulek,
+        EkranGry.LesneMyszyZjedza => EkranGry.SeryLesne,
         _ => ekran
     };
     private async void OnWideoPowitalneZakonczone()
@@ -130,7 +131,7 @@ else
             EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona or EkranGry.UzyskanieObrazu => "mp3/Dzwieki/fanfaraKrotka.mp3",
             EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca or EkranGry.WyciskarkaPraca or EkranGry.WinoMorskieDlaPlebana => "mp3/Tla/akcjaSprawna.mp3",
             EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke => "mp3/Dzwieki/fanfara.mp3",
-            EkranGry.FanZdrowy or EkranGry.AutostopDoSerowLesnych or EkranGry.PrzystanekDoSerowLesnych or EkranGry.ZwierzPuszczaDoSerowLesnych or EkranGry.SeryLesne => "mp3/Tla/miastolesne.mp3",
+            EkranGry.FanZdrowy or EkranGry.AutostopDoSerowLesnych or EkranGry.PrzystanekDoSerowLesnych or EkranGry.ZwierzPuszczaDoSerowLesnych or EkranGry.SeryLesne or EkranGry.LesneMyszyZjedza => "mp3/Tla/miastolesne.mp3",
             EkranGry.DomMleka => "mp3/Tla/miastobiale.mp3",
             EkranGry.KuchniaMorska => "mp3/Tla/miastomorskie.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
