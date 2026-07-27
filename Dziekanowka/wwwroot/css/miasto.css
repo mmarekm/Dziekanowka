@@ -26,6 +26,9 @@
 .seryLesneWidok {
     background-image: url('../img/miasto/miastoLesneDoSery/lesneSeryWidok.png');
 }
+.seryLesneWidokGlodny {
+    background-image: url('../img/miasto/miastoLesneDoSery/lesneSeryWidokGlodny.png');
+}
 .domMlekaWidokPusty {
     background-image: url('../img/miasto/domMlekaPusty.png');
 }

@@ -1,7 +1,7 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="seryLesneWidok widok rel">
+<div class="seryLesneWidok@(Gracz.Statystyki.AktualnaMisja == Misje.SeryLesne ? "Glodny" : "") widok rel">
     <div class="abs seryLesneDoMiastoLesne"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoLesne)"><img src="img/miasto/miastoLesneDoSery/seryLesneDoMiastoLesne.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (Gracz.Statystyki.AktualnaMisja == Misje.SeryLesne)
