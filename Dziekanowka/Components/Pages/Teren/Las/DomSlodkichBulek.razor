@@ -31,8 +31,8 @@
         if (!jestBuleczka) return;
         Gracz.ProduktP(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
         Gracz.Statystyki.MoznaOdebracObraz = true;
-        Gracz.Statystyki.DaneMisji = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
-        Gracz.Statystyki.AktualnaMisja = Misje.Chlopiec;
+        Gracz.Statystyki.DaneMisji = [Gra.Sery[Random.Shared.Next(Gra.Sery.Count)], "", ""];
+        Gracz.Statystyki.AktualnaMisja = Misje.SeryLesne;
         await NaZmianeEkranu.InvokeAsync(EkranGry.WniesionoBuleczke);
         await Task.Delay(10000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.DomSlodkichBulek);

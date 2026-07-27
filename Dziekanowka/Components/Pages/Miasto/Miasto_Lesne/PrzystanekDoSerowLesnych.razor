@@ -21,8 +21,8 @@
     private string[] warzywa = ["brokuł", "por", "brukselka", "rzodkiewka", "szpinak", "burak", "kapustaPekińska", "dynia", "sorgo", "selerNaciowy"];
     private string[] owoce = ["arbuz", "mango"];
     private string[] zboza = ["gryka"];
-    private string pokarm1 => zwierze == "krowa" ? "brokuł" : zwierze == "koń" ? "siano" : zwierze == "owca" ? "brukselka" : zwierze == "koza" ? "burak" : zwierze == "słoń" ? "sorgo" : "";
-    private string pokarm2 => zwierze == "krowa" ? "por" : zwierze == "owca" ? "rzodkiewka" : zwierze == "koza" ? "kapustaPekińska" : zwierze == "słoń" ? "arbuz" : "";
+    private string pokarm1 => zwierze == "krowa" ? "brokuł" : zwierze == "koń" ? "siano" : zwierze == "owca" ? "brukselka" : zwierze == "koza" ? "burak" : zwierze == "słoń" ? "sorgo" : zwierze == "żyrafa" ? "selerNaciowy" : "";
+    private string pokarm2 => zwierze == "krowa" ? "por" : zwierze == "owca" ? "rzodkiewka" : zwierze == "koza" ? "kapustaPekińska" : zwierze == "słoń" ? "arbuz" : zwierze == "żyrafa" ? "mango" : "";
     private string pokarm3 => zwierze == "krowa" ? "gryka" : zwierze == "owca" ? "szpinak" : zwierze == "koza" ? "dynia" : "";
     private async Task OpuscPrzystanek()
     {

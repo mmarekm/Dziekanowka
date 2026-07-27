@@ -22,9 +22,9 @@
         Gracz.Statystyki.MoznaOdebracObraz = true;
         Gracz.Statystyki.DaneMisji = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
         Gracz.Statystyki.AktualnaMisja = Misje.Chlopiec;
-        //await NaZmianeEkranu.InvokeAsync(EkranGry.WniesionoBuleczke);
-        //await Task.Delay(10000);
-        //await NaZmianeEkranu.InvokeAsync(EkranGry.DomSlodkichBulek);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LesneMyszyZjedza);
+        await Task.Delay(6500);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.SeryLesne);
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }
