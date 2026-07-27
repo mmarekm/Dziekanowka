@@ -18,11 +18,11 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private string zwierze => Gracz.Statystyki.ZwierzeNaDrodze;
-    private string[] warzywa = ["brokuł", "por", "brukselka", "rzodkiewka", "szpinak", "burak", "kapustaPekińska", "dynia"];
-    private string[] owoce = [];
+    private string[] warzywa = ["brokuł", "por", "brukselka", "rzodkiewka", "szpinak", "burak", "kapustaPekińska", "dynia", "sorgo", "selerNaciowy"];
+    private string[] owoce = ["arbuz", "mango"];
     private string[] zboza = ["gryka"];
-    private string pokarm1 => zwierze == "krowa" ? "brokuł" : zwierze == "koń" ? "siano" : zwierze == "owca" ? "brukselka" : zwierze == "koza" ? "burak" : "";
-    private string pokarm2 => zwierze == "krowa" ? "por" : zwierze == "owca" ? "rzodkiewka" : zwierze == "koza" ? "kapustaPekińska" : "";
+    private string pokarm1 => zwierze == "krowa" ? "brokuł" : zwierze == "koń" ? "siano" : zwierze == "owca" ? "brukselka" : zwierze == "koza" ? "burak" : zwierze == "słoń" ? "sorgo" : "";
+    private string pokarm2 => zwierze == "krowa" ? "por" : zwierze == "owca" ? "rzodkiewka" : zwierze == "koza" ? "kapustaPekińska" : zwierze == "słoń" ? "arbuz" : "";
     private string pokarm3 => zwierze == "krowa" ? "gryka" : zwierze == "owca" ? "szpinak" : zwierze == "koza" ? "dynia" : "";
     private async Task OpuscPrzystanek()
     {
@@ -44,6 +44,10 @@
             Gracz.Warzywo("brukselka").Ilosc -= 2;
         else if (zwierze == "koza")
             Gracz.Warzywo("burak").Ilosc -= 2;
+        else if (zwierze == "słoń")
+            Gracz.Warzywo("sorgo").Ilosc -= 2;
+        else if (zwierze == "żyrafa")
+            Gracz.Warzywo("selerNaciowy").Ilosc -= 2;
         await OpuscPrzystanek();
     }
     private async Task Karm2IJedzDalej()
@@ -55,6 +59,10 @@
             Gracz.Warzywo("rzodkiewka").Ilosc -= 2;
         else if (zwierze == "koza")
             Gracz.Warzywo("kapustaPekińska").Ilosc -= 2;
+        else if (zwierze == "słoń")
+            Gracz.Owoc("arbuz").Ilosc -= 2;
+        else if (zwierze == "żyrafa")
+            Gracz.Owoc("mango").Ilosc -= 2;
         await OpuscPrzystanek();
     }
     private async Task Karm3IJedzDalej()
@@ -72,10 +80,6 @@
     {
         if (warzywa.Contains(pokarm1))
             return Gracz.JestWarzywo(pokarm1) && Gracz.Warzywo(pokarm1).Ilosc >= 2;
-        else if (zboza.Contains(pokarm1))
-            return Gracz.JestZboze(pokarm1) && Gracz.Zboze(pokarm1).Ilosc >= 2;
-        else if (owoce.Contains(pokarm1))
-            return Gracz.JestOwoc(pokarm1) && Gracz.Owoc(pokarm1).Ilosc >= 2;
         else
             return Gracz.JestPrzedmiot(pokarm1) && Gracz.Przedmiot(pokarm1).Ilosc >= 2;
     }
@@ -83,8 +87,6 @@
     {
         if (warzywa.Contains(pokarm2))
             return Gracz.JestWarzywo(pokarm2) && Gracz.Warzywo(pokarm2).Ilosc >= 2;
-        else if (zboza.Contains(pokarm2))
-            return Gracz.JestZboze(pokarm2) && Gracz.Zboze(pokarm2).Ilosc >= 2;
         else
             return Gracz.JestOwoc(pokarm2) && Gracz.Owoc(pokarm2).Ilosc >= 2;
     }
@@ -92,19 +94,13 @@
     {
         if (warzywa.Contains(pokarm3))
             return Gracz.JestWarzywo(pokarm3) && Gracz.Warzywo(pokarm3).Ilosc >= 2;
-        else if (zboza.Contains(pokarm3))
-            return Gracz.JestZboze(pokarm3) && Gracz.Zboze(pokarm3).Ilosc >= 2;
         else
-            return Gracz.JestOwoc(pokarm3) && Gracz.Owoc(pokarm3).Ilosc >= 2;
+            return Gracz.JestZboze(pokarm3) && Gracz.Zboze(pokarm3).Ilosc >= 2;
     }
     private string KategoriaPokarmu1()
     {
         if (warzywa.Contains(pokarm1))
             return "warzywa/";
-        else if (zboza.Contains(pokarm1))
-            return "zboza/";
-        else if (owoce.Contains(pokarm1))
-            return "owoce/";
         else
             return "";
     }
@@ -112,8 +108,6 @@
     {
         if (warzywa.Contains(pokarm2))
             return "warzywa/";
-        else if (zboza.Contains(pokarm2))
-            return "zboza/";
         else
             return "owoce/";
     }
@@ -121,10 +115,8 @@
     {
         if (warzywa.Contains(pokarm3))
             return "warzywa/";
-        else if (zboza.Contains(pokarm3))
-            return "zboza/";
         else
-            return "owoce/";
+            return "zboza/";
     }
     private string SciezkaDoPokarmu1() =>$"img/przedmioty/{KategoriaPokarmu1()}{pokarm1}.png";
     private string SciezkaDoPokarmu2() => $"img/przedmioty/{KategoriaPokarmu2()}{pokarm2}.png";
