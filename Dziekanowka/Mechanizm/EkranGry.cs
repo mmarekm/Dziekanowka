@@ -72,6 +72,8 @@
         SeryLesne,
         DomMleka,
         KuchniaMorska,
+        GorskiePlatki,
+        OwceGorskie,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
