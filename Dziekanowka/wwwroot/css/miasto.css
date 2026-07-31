@@ -42,6 +42,12 @@
 .kuchniaMorskaWidok {
     background-image: url('../img/miasto/kuchniaMorskaWidok.png');
 }
+.owceGorskieWidok {
+    background-image: url('../img/miasto/miastoGorskie/pastwiskoGorskieWidok.png');
+}
+.gorskiePlatkiWidok {
+    background-image: url('../img/miasto/miastoGorskie/domPlatkowWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1015,4 +1021,32 @@
     height: 200px;
     left: 1150px;
     top: 540px;
+}
+.gorskieDoOwiec {
+    width: 324px;
+    height: 212px;
+    top: 177px;
+    right: 165px;
+    z-index: 2;
+}
+.gorskieDoDomuPlatkow {
+    width: 323px;
+    height: 261px;
+    bottom: 347px;
+    left: 1039px;
+    z-index: 2;
+}
+.pastwiskoDoGorskiego {
+    width: 453px;
+    height: 249px;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+}
+.domPlatkowDoGorskiego {
+    width: 267px;
+    height: 883px;
+    left: 0;
+    top: 0;
+    z-index: 2;
 }

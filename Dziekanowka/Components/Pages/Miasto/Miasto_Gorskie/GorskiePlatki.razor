@@ -1,7 +1,7 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 <div class="gorskiePlatkiWidok widok rel">
-    
+    <div class="abs domPlatkowDoGorskiego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoGorskie)"><img src="img/miasto/miastoGorskie/domPlatkowDoMiasta.png" /></button></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
