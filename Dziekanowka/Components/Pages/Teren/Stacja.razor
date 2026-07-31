@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
-<div class="stacja@(stacja)Widok widok rel @(wyswietlonyRozklad ? "blokadaKlikniec" : "")">
+<div class="stacja@(stacja)Widok widok rel ovhidden @(wyswietlonyRozklad ? "blokadaKlikniec" : "")">
     <div class="abs wyjscieStacja@(stacja)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/stacje/confirmStacja@(stacja).png" /></button></div>
     <div class="abs kupBiletStacja@(stacja) @(Gracz.Monety < cenaBiletu ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacja@(stacja).png" /></div>
     <div class="abs ileBiletowLKazdeMiasto ileBiletowL@(stacja)">@Gracz.Przedmiot("biletPociag").Ilosc</div>
@@ -60,6 +60,10 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
         </div>
+        <div class="abs pociagKazdyAnimacja pociag12@(stacja)Animacja @pociagi[12].klasa" @onclick="() => WsiadzDoPociagu(12)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoGorskieLabel.png" /></div>
+        </div>
     }
     @if (stacja == "miastoMorskie")
     {
@@ -74,7 +78,19 @@
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
         </div>
     }
-    </div>
+    @if (stacja == "miastoGorskie")
+    {
+        <div class="abs zaslonaPociagumiastoGorskie"><img src="img/miasto/stacje/daszekMiastoGorskie.png" /></div>
+        <div class="abs pociagKazdyAnimacja pociag13@(stacja)Animacja @pociagi[13].klasa" @onclick="() => WsiadzDoPociagu(13)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacja pociag14@(stacja)Animacja @pociagi[14].klasa" @onclick="() => WsiadzDoPociagu(14)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
+        </div>
+    }
+</div>
 @if (wyswietlonyRozklad)
 {
     <div class="abs overlayRoklady">
@@ -150,6 +166,13 @@
                         <div>@odjazdyMiastoBialeDoMiastoMorskie[i]</div>
                     }
                 </div>
+                <div class="rozkladPociagu1">
+                    <div><img src="img/miasto/stacje/miastoGorskieLabel.png" /></div>
+                    @for (int i = 0; i < odjazdyMiastoBialeDoMiastoGorskie.Length; i++)
+                    {
+                        <div>@odjazdyMiastoBialeDoMiastoGorskie[i]</div>
+                    }
+                </div>
             }
             @if (stacja == "miastoMorskie")
             {
@@ -165,6 +188,23 @@
                     @for (int i = 0; i < odjazdyMiastoMorskieDoMiastoBiale.Length; i++)
                     {
                         <div>@odjazdyMiastoMorskieDoMiastoBiale[i]</div>
+                    }
+                </div>
+            }
+            @if (stacja == "miastoGorskie")
+            {
+                <div class="rozkladPociagu1">
+                    <div><img src="img/miasto/stacje/miasto3Label.png" /></div>
+                    @for (int i = 0; i < odjazdyMiastoGorskieDoMiasta3.Length; i++)
+                    {
+                        <div>@odjazdyMiastoGorskieDoMiasta3[i]</div>
+                    }
+                </div>
+                <div class="rozkladPociagu1">
+                    <div><img src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
+                    @for (int i = 0; i < odjazdyMiastoGorskieDoMiastoMorskie.Length; i++)
+                    {
+                        <div>@odjazdyMiastoGorskieDoMiastoMorskie[i]</div>
                     }
                 </div>
             }
@@ -185,14 +225,18 @@
     private int[] odjazdyMiastoLesneDoMiasta3 = [10, 25, 55, 85];
     private int[] odjazdyMiastoLesneDoMiastoBiale = [50];
     private int[] odjazdyMiastoLesneDoMiastoMorskie = [15, 40, 75];
-    private int[] odjazdyMiastoBialeDoMiasta3 = [10, 20, 30, 80];
+    private int[] odjazdyMiastoBialeDoMiasta3 = [10, 20, 40, 80];
     private int[] odjazdyMiastoBialeDoMiastoLesne = [50];
     private int[] odjazdyMiastoBialeDoMiastoMorskie = [15, 40, 75];
+    private int[] odjazdyMiastoBialeDoMiastoGorskie = [30, 70];
     private int[] odjazdyMiastoMorskieDoMiastoLesne = [10, 43, 76];
     private int[] odjazdyMiastoMorskieDoMiastoBiale = [23, 56, 90];
+    private int[] odjazdyMiastoGorskieDoMiasta3 = [18, 38, 58, 88];
+    private int[] odjazdyMiastoGorskieDoMiastoMorskie = [48];
     private Dictionary<int, (string klasa, bool moznaWsiasc)> pociagi = new()
     {
-        {1, ("", false)}, {2, ("", false)}, {3, ("", false)}, {4, ("", false)}, {5, ("", false)}, {6, ("", false)}, {7, ("", false)}, {8, ("", false)}, {9, ("", false)}, {10, ("", false)}, {11, ("", false)}
+        {1, ("", false)}, {2, ("", false)}, {3, ("", false)}, {4, ("", false)}, {5, ("", false)}, {6, ("", false)}, {7, ("", false)}, {8, ("", false)}, {9, ("", false)}, {10, ("", false)},
+        {11, ("", false)}, {12, ("", false)}, {13, ("", false)}, {14, ("", false)}
     };
     protected override void OnParametersSet()
     {
@@ -236,15 +280,21 @@
             pociagi[4] = StanPociagu("pociag4", odjazdyMiastoBialeDoMiasta3);
             pociagi[6] = StanPociagu("pociag6", odjazdyMiastoBialeDoMiastoLesne);
             pociagi[9] = StanPociagu("pociag9", odjazdyMiastoBialeDoMiastoMorskie);
+            pociagi[12] = StanPociagu("pociag12", odjazdyMiastoBialeDoMiastoGorskie);
         }
         if (stacja == "miastoMorskie")
         {
             pociagi[10] = StanPociagu("pociag10", odjazdyMiastoMorskieDoMiastoLesne);
             pociagi[11] = StanPociagu("pociag11", odjazdyMiastoMorskieDoMiastoBiale);
         }
+        if (stacja == "miastoGorskie")
+        {
+            pociagi[13] = StanPociagu("pociag13", odjazdyMiastoGorskieDoMiasta3);
+            pociagi[14] = StanPociagu("pociag14", odjazdyMiastoGorskieDoMiastoMorskie);
+        }
     }
-    private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, "miastoBiale" => EkranGry.MiastoBiale, "miastoMorskie" => EkranGry.MiastoMorskie, _ => throw new ArgumentOutOfRangeException() };
-    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 or 10 => "miastoLesne", 2 or 4 => "miasto3", 3 or 5 or 11 => "miastoBiale", 7 or 8 or 9 => "miastoMorskie",_ => throw new ArgumentOutOfRangeException() };
+    private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, "miastoBiale" => EkranGry.MiastoBiale, "miastoMorskie" => EkranGry.MiastoMorskie, "miastoGorskie" => EkranGry.MiastoGorskie, _ => throw new ArgumentOutOfRangeException() };
+    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 or 10 => "miastoLesne", 2 or 4 or 13 => "miasto3", 3 or 5 or 11 => "miastoBiale", 7 or 8 or 9 or 14 => "miastoMorskie", 12 => "miastoGorskie", _ => throw new ArgumentOutOfRangeException() };
     private int cenaBiletu => stacja is "miasto3" or "miastoMorskie" ? 7 : 10;
     private async Task KupBilet()
     {

@@ -1,17 +1,19 @@
 ﻿.stacjamiasto3Widok {
     background-image: url('../img/miasto/stacjaMiasto3Widok.jpg');
-    overflow: hidden;
 }
 .stacjamiastoLesneWidok {
     background-image: url('../img/miasto/stacjaMiastoLesneWidok.jpg');
-    overflow: hidden;
 }
 .stacjamiastoBialeWidok {
     background-image: url('../img/miasto/stacjaMiastoBialeWidok.jpg');
-    overflow: hidden;
 }
 .stacjamiastoMorskieWidok {
     background-image: url('../img/miasto/stacjaMiastoMorskieWidok.jpg');
+}
+.stacjamiastoGorskieWidok {
+    background-image: url('../img/miasto/stacjaMiastoGorskieWidok.jpg');
+}
+.ovhidden {
     overflow: hidden;
 }
 .wyjscieStacjamiasto3 {
@@ -40,6 +42,13 @@
     left: 667px;
     width: 428px;
     height: 109px;
+    z-index: 2;
+}
+.wyjscieStacjamiastoGorskie {
+    bottom: 0;
+    left: 730px;
+    width: 396px;
+    height: 102px;
     z-index: 2;
 }
 .ileBiletowKazdeMiasto {
@@ -72,6 +81,9 @@
 .ileBiletowLmiastoMorskie {
     color: aqua;
 }
+.ileBiletowLmiastoGorskie {
+    color: tan;
+}
 .kupBiletStacjamiasto3 {
     width: 104px;
     height: 102px;
@@ -96,6 +108,12 @@
     bottom: 260px;
     left: 1335px;
 }
+.kupBiletStacjamiastoGorskie {
+    width: 102px;
+    height: 173px;
+    bottom: 223px;
+    left: 1337px;
+}
 .stacjaCzas {
     top: 10px;
     right: 10px;
@@ -119,6 +137,9 @@
 }
 .stacjaCzasmiastoMorskie {
     color: aqua;
+}
+.stacjaCzasmiastoGorskie {
+    color: tan;
 }
 .zobaczRozkladStacjimiasto3 {
     bottom: 0;
@@ -146,6 +167,13 @@
     left: 0;
     width: 477px;
     height: 370px;
+    z-index: 2;
+}
+.zobaczRozkladStacjimiastoGorskie {
+    bottom: 0;
+    left: 0;
+    width: 480px;
+    height: 408px;
     z-index: 2;
 }
 .overlayRoklady {
@@ -240,6 +268,13 @@
     width: 525px;
     height: 222px;
 }
+.zaslonaPociagumiastoGorskie {
+    z-index: 6;
+    left: 1315px;
+    top: 343px;
+    width: 509px;
+    height: 288px;
+}
 .pociagKazdyAnimacja {
     width: 920px;
     height: 370px;
@@ -319,15 +354,15 @@
 .pociag5miastoLesneOdjedzie, .pociag8miastoLesneOdjedzie {
     left: -1500px;
 }
-.pociag4miastoBialeAnimacja {
+.pociag4miastoBialeAnimacja, .pociag12miastoBialeAnimacja {
     left: 100px;
     top: 258px;
     z-index: 3;
 }
-.pociag4miastoBialeUkryty {
+.pociag4miastoBialeUkryty, .pociag12miastoBialeUkryty {
     left: 2050px;
 }
-.pociag4miastoBialeOdjedzie {
+.pociag4miastoBialeOdjedzie, .pociag12miastoBialeOdjedzie {
     left: -1500px;
 }
 .pociag6miastoBialeAnimacja, .pociag9miastoBialeAnimacja {
@@ -358,6 +393,21 @@
     left: -1500px;
 }
 .pociag10miastoMorskieOdjedzie, .pociag11miastoMorskieOdjedzie {
+    left: 2050px;
+}
+.pociag13miastoGorskieAnimacja, .pociag14miastoGorskieAnimacja {
+    left: 700px;
+    top: 223px;
+    z-index: 3;
+    transform: scaleX(-1);
+}
+    .pociag13miastoGorskieAnimacja .celPociagu, .pociag14miastoGorskieAnimacja .celPociagu {
+        transform: scaleX(-1);
+    }
+.pociag13miastoGorskieUkryty, .pociag14miastoGorskieUkryty {
+    left: -1500px;
+}
+.pociag13miastoGorskieOdjedzie, .pociag14miastoGorskieOdjedzie {
     left: 2050px;
 }
 .celPociagu {

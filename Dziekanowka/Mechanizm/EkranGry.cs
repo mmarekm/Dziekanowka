@@ -49,6 +49,7 @@
         MiastoLesne,
         MiastoBiale,
         MiastoMorskie,
+        MiastoGorskie,
         SklepMiasto3,
         Kiosk,
         Stacja,
