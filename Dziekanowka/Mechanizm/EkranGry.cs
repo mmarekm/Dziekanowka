@@ -110,6 +110,8 @@
         KuchniaPracuje,
         WinoMorskieDlaPlebana,
         WniesionoBuleczke,
-        LesneMyszyZjedza
+        LesneMyszyZjedza,
+        BonusZaOwce,
+        ZjedzaPlatki
     }
 }
