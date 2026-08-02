@@ -1,9 +1,42 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
 <div class="owceGorskieWidok widok rel">
+    <div class="abs sprzedajKaweGoralowi @(Gracz.JestZywnoscP("kawa") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="SprzedajKawe"></div>
+    <div class="abs lPastwiskoGorskie lKawyPastwiskoGorskie @(efektZloty ? "efektZaswiecenia" : "")">@Gracz.ZywnoscP("kawa").Ilosc</div>
+    <div class="abs lPastwiskoGorskie lMonetPastwiskoGorskie @(efektZloty ? "efektZaswiecenia" : "")">@Gracz.Monety</div>
+    <div class="abs lOwiecPastwiskoGorskie">@Gracz.Zwierze("owca").Ilosc</div>
+    <div class="abs karmienieOwiecNaPastwiskuGorskim @((!jestRzodkiewka || !Gracz.Statystyki.Bonusy.Contains("owceGorskie")) ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="MonetyZaOwce"></div>
     <div class="abs pastwiskoDoGorskiego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoGorskie)"><img src="img/miasto/miastoGorskie/pastwiskoGorskieDoMiasta.png" /></button></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool efektZloty = false;
+    private bool jestRzodkiewka => Gracz.JestWarzywo("rzodkiewka") && Gracz.Warzywo("rzodkiewka").Ilosc > 1;
+    private int owce => Gracz.Zwierze("owca").Ilosc;
+    private int mozliwyZysk => owce * 8;
+    private async Task MonetyZaOwce()
+    {
+        if (!jestRzodkiewka) return;
+        if (!Gracz.Statystyki.Bonusy.Contains("owceGorskie")) return;
+        Gracz.Warzywo("rzodkiewka").Ilosc -= 2;
+        Gracz.Monety += mozliwyZysk;
+        Gracz.Statystyki.Bonusy.Remove("owceGorskie");
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.BonusZaOwce);
+        await Task.Delay(9000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.OwceGorskie);
+    }
+    private async Task SprzedajKawe()
+    {
+        if (!Gracz.JestZywnoscP("kawa")) return;
+        Gracz.ZywnoscP("kawa").Ilosc--;
+        Gracz.Monety += 25;
+        efektZloty = true;
+        StateHasChanged();
+        await Task.Delay(400);
+        efektZloty = false;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
 }

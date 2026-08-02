@@ -50,5 +50,6 @@ namespace Dziekanowka.Mechanizm
         public static List<string> Restauracja = ["karkowka", "gulasz", "pieczenWolowa", "indykDuszony", "krolikWWinie", "ratatouille", "leczo", "fasolkaPoBretonsku", "knedle", "lososGotowany", "rybaPoGrecku", "sledzWOleju", "jajecznica", "jajkoSadzone", "omlet", "shakshuka", "kotletSchabowy", "kotletMielony", "stek", "piersZKurczaka", "bitki", "indykSmazony", "krolikSmazony", "golabki", "pstragSmazony", "lososSmazony", "halibutSmazony", "okonSmazony", "sledzSmazony", "plackiZiemniaczane", "frytki", "pierogiRuskie", "pierogiZMiesem", "pierogiZKapustaIGrzybami", "pierogiZOwocami"];
         public static List<string> SlodkieBuleczki = ["brzoskwiniaBuleczka", "śliwkaBuleczka", "wiśniaBuleczka", "jabłkoBuleczka", "gruszkaBuleczka", "malinaBuleczka", "twarogBuleczka"];
         public static List<string> Sery = ["krowaSer", "kozaSer", "owcaSer"];
+        public static List<string> Platki = ["zytoPlatki", "jeczmienPlatki", "pszenicaPlatki", "ryzPlatki", "owiesPlatki", "grykaPlatki", "orkiszPlatki", "kukurydzaPlatki"];
     }
 }

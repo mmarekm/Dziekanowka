@@ -23,6 +23,7 @@
         Koziarnia,
         Obora,
         Stajnia,
+        Stajenny,
         ZaBrama,
         LasIntro,
         LasKarczowisko,
