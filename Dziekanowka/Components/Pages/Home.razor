@@ -39,7 +39,7 @@ else
         EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21, EkranGry.AutobusJedzie22, EkranGry.AutobusJedzie3, EkranGry.PociagJedzie,
         EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
         EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc,
-        EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana, EkranGry.WniesionoBuleczke, EkranGry.LesneMyszyZjedza, EkranGry.BonusZaOwce, EkranGry.ZjedzaPlatki ];
+        EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana, EkranGry.WniesionoBuleczke, EkranGry.LesneMyszyZjedza, EkranGry.BonusZaOwce, EkranGry.ZjedzaPlatki, EkranGry.CiastoDlaStajennego ];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
@@ -91,6 +91,7 @@ else
         EkranGry.LesneMyszyZjedza => EkranGry.SeryLesne,
         EkranGry.BonusZaOwce => EkranGry.OwceGorskie,
         EkranGry.ZjedzaPlatki => EkranGry.GorskiePlatki,
+        EkranGry.CiastoDlaStajennego => EkranGry.Stajenny,
         _ => ekran
     };
     private async void OnWideoPowitalneZakonczone()
@@ -137,7 +138,7 @@ else
             EkranGry.DomMleka => "mp3/Tla/miastobiale.mp3",
             EkranGry.KuchniaMorska => "mp3/Tla/miastomorskie.mp3",
             EkranGry.GorskiePlatki or EkranGry.OwceGorskie => "mp3/Tla/miastogorskie.mp3",
-            EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke or EkranGry.LesneMyszyZjedza or EkranGry.ZjedzaPlatki => "mp3/Dzwieki/fanfara.mp3",
+            EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke or EkranGry.LesneMyszyZjedza or EkranGry.ZjedzaPlatki or EkranGry.CiastoDlaStajennego=> "mp3/Dzwieki/fanfara.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
             _ => $"mp3/Tla/{ekran.ToString().ToLower()}.mp3"
         };

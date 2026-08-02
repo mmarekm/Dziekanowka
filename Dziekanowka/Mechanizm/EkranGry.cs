@@ -113,6 +113,7 @@
         WniesionoBuleczke,
         LesneMyszyZjedza,
         BonusZaOwce,
-        ZjedzaPlatki
+        ZjedzaPlatki,
+        CiastoDlaStajennego
     }
 }
