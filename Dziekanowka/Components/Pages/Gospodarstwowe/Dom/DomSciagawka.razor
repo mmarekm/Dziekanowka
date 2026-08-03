@@ -1,0 +1,15 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+<div class="domSciagawkaWidok widok rel">
+    <div class="abs sciagawkaMisja">
+        <div class="@(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+        <div><img src="img/misje/galeria/@(Gracz.Statystyki.AktualnaMisja).png" /></div>
+    </div>
+    <div class="abs confirmSciagawka"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSalon)" class="wyroznionyGuzik"><img src="img/dom/potwierdzenie.png" /></button></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+}

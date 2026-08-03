@@ -6,6 +6,7 @@
         Gospodarstwo,
         DomWiatrolap,
         DomSalon,
+        DomSciagawka,
         GryPlanszowe,
         DomKuchnia,
         Garaz,

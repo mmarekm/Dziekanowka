@@ -198,7 +198,11 @@
 		"7a": "W moim ucisku wołałem do Pana,",
 		"7b": "mego Boga błagałem o pomoc,",
 		"7c": "a On mnie usłyszał w swojej świątyni,",
-		"7d": "moje błaganie dotarło do Jego uszu."
+		"7d": "moje błaganie dotarło do Jego uszu.",
+		"47a": "Niech żyje Pan, niech będzie błogosławiona moja skała!",
+		"47b": "Niech będzie wywyższony Bóg, który mnie zbawia!",
+		"51a": "Ty dajesz swojemu królowi wielkie zwycięstwa,",
+		"51b": "okazujesz łaskę swemu pomazańcowi, Dawidowi"
 	},
 	"19": {
 		"2a": "Niebo ogłasza chwałę Boga,",
@@ -1699,6 +1703,8 @@
 		"3b": "gdzie wszyscy się jednoczą.",
 		"4a": "Bo tam wstępują plemiona, plemiona Pana,",
 		"4b": "by zgodnie z prawem Izraela sławić imię Pana.",
+		"5a": "Tam bowiem ustawiono trony sędziowskie,",
+		"5b": "trony domu Dawida.",
 		"8a": "Ze względu na moich braci i bliźnich",
 		"8b": "będę głosił: Pokój tobie!",
 		"9a": "Ze względu na dom Pana, naszego Boga,",
@@ -1852,13 +1858,20 @@
 	},
 	"144": {
 		"1a": "Błogosławiony Pan, moja skała!",
+		"1b": "On zaprawia me ręce do walki,",
+		"1c": "pięści moje do bitwy.",
 		"2a": "On moim sprzymierzeńcem i schronieniem,",
 		"2b": "twierdzą moją i wybawieniem,",
 		"2c": "tarczą moją, za którą się chronię!",
+		"2d": "On mi poddaje narody.",
 		"3a": "Panie, kim jest człowiek, że Ty zważasz na niego?",
 		"3b": "Kim syn człowieczy, że Ty o nim myślisz?",
 		"4a": "Człowiek jest podobny do tchnienia,",
-		"4b": "jego dni jak cień przemijają."
+		"4b": "jego dni jak cień przemijają.",
+		"9a": "Boże, będę Ci śpiewał pieśń nową,",
+		"9b": "zagram Tobie na dziesięciostrunnej lirze!",
+		"10a": "Ty dajesz królom zwycięstwo,",
+		"10b": "Ty ocaliłeś swego sługę, Dawida, od okrutnego miecza."
 	},
 	"145": {
 		"1a": "Będę Cię wielbił, Boże mój i Królu!",

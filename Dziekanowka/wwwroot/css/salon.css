@@ -1,6 +1,9 @@
 ﻿.domSalonWidok {
     background-image: url('../img/dom/salon/domSalonWidok.png');
 }
+.domSciagawkaWidok {
+    background-image: url('../img/dom/salon/domSciagawkaWidok.jpg');
+}
 .gryPlanszoweWidok {
     background-image: url('../img/dom/salon/gryPlanszoweWidok.png');
 }
@@ -15,6 +18,30 @@
     bottom: 93px;
     width: 56px;
     height: 39px;
+}
+.salonDoSciagawki {
+    right: 330px;
+    top: 360px;
+    width: 99px;
+    height: 163px;
+    z-index: 2;
+}
+.sciagawkaMisja {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    top: 50px;
+    left: 50px;
+    height: 200px;
+    width: 500px;
+}
+.confirmSciagawka {
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    height: 200px;
+    z-index: 2;
 }
 .salonDoGier {
     right: 485px;

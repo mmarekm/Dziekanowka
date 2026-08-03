@@ -180,9 +180,6 @@ namespace Dziekanowka.Mechanizm
 
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260731"] = ["pt17zwII", "IgnacegoZLoyoli"],
-            ["20260801"] = ["sb17zwII", "AlfonsaMariiLiguoriegoBiskupaDoktoraKosciola"],
-            ["20260802"] = ["Ndz18zwA"],
             ["20260803"] = ["pn18zwIIA"],
             ["20260804"] = ["wt18zwIIA", "JanaMariiVianneya"],
             ["20260805"] = ["sr18zwII"],
@@ -262,7 +259,18 @@ namespace Dziekanowka.Mechanizm
             ["20261018"] = ["Ndz29zwA"],
             ["20261019"] = ["pn29zwII", "JerzegoPopieluszki"],
             ["20261020"] = ["wt29zwII", "JanaKantego"],
-            ["20261021"] = ["sr29zwII"]
+            ["20261021"] = ["sr29zwII"],
+            ["20261022"] = ["cz29zwII", "JanaPawlaII"],
+            ["20261023"] = ["pt29zwII"],
+            ["20261024"] = ["sb29zwII"],
+            ["20261025"] = ["Ndz30zwA", "RocznicaPoswieceniaKosciolaWlasnego"],
+            ["20261026"] = ["pn30zwII"],
+            ["20261027"] = ["wt30zwII"],
+            ["20261028"] = ["ApostolowSzymonaIJudyTadeusza"],
+            ["20261029"] = ["cz30zwII"],
+            ["20261030"] = ["pt30zwII"],
+            ["20261031"] = ["sb30zwII"],
+            ["20261101"] = ["WszystkichSwietych"]
         };
     }
 }
