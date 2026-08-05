@@ -13,6 +13,9 @@
 .stacjamiastoGorskieWidok {
     background-image: url('../img/miasto/stacjaMiastoGorskieWidok.jpg');
 }
+.stacjametropolia1Widok {
+    background-image: url('../img/miasto/stacjaMetropolia1Widok.png');
+}
 .ovhidden {
     overflow: hidden;
 }
@@ -114,6 +117,12 @@
     bottom: 223px;
     left: 1337px;
 }
+.kupBiletStacjametropolia1 {
+    width: 67px;
+    height: 41px;
+    bottom: 309px;
+    left: 196px;
+}
 .stacjaCzas {
     top: 10px;
     right: 10px;
@@ -176,6 +185,12 @@
     height: 408px;
     z-index: 2;
 }
+.zobaczRozkladStacjimetropolia1 {
+    width: 244px;
+    height: 225px;
+    right: 70px;
+    bottom: 222px;
+}
 .overlayRoklady {
     left: 100px;
     top: 50px;
@@ -197,6 +212,18 @@
     color: black;
     font-family: 'Times New Roman';
     gap: 20px;
+}
+.mniejszyLabelPociagu {
+    width: 60px;
+    height: 60px;
+}
+.rozkladPociagu2 {
+    display: flex;
+    font-size: 40px;
+    font-style: italic;
+    color: black;
+    font-family: 'Times New Roman';
+    gap: 16px;
 }
 .zamknijRozklady {
     bottom: 10px;
@@ -302,16 +329,10 @@
     transition: left 2.4s ease;
     opacity: 1;
 }
-.pociag1miasto3Animacja {
+.pociag1miasto3Animacja, .pociag15miasto3Animacja {
     left: 100px;
     top: 87px;
     z-index: 2;
-}
-.pociag1miasto3Ukryty {
-    left: 2050px;
-}
-.pociag1miasto3Odjedzie {
-    left: -1500px;
 }
 .pociag3miasto3Animacja, .pociag7miasto3Animacja {
     left: 600px;
@@ -322,12 +343,6 @@
     .pociag3miasto3Animacja .celPociagu, .pociag7miasto3Animacja .celPociagu {
         transform: scaleX(-1);
     }
-.pociag3miasto3Ukryty, .pociag7miasto3Ukryty {
-    left: -1500px;
-}
-.pociag3miasto3Odjedzie, .pociag7miasto3Odjedzie {
-    left: 2050px;
-}
 .pociag2miastoLesneAnimacja {
     left: 750px;
     top: 335px;
@@ -337,33 +352,15 @@
     .pociag2miastoLesneAnimacja .celPociagu {
         transform: scaleX(-1);
     }
-.pociag2miastoLesneUkryty {
-    left: -1500px;
-}
-.pociag2miastoLesneOdjedzie {
-    left: 2050px;
-}
 .pociag5miastoLesneAnimacja, .pociag8miastoLesneAnimacja {
     left: 50px;
     top: 259px;
     z-index: 3;
 }
-.pociag5miastoLesneUkryty, .pociag8miastoLesneUkryty {
-    left: 2050px;
-}
-.pociag5miastoLesneOdjedzie, .pociag8miastoLesneOdjedzie {
-    left: -1500px;
-}
 .pociag4miastoBialeAnimacja, .pociag12miastoBialeAnimacja {
     left: 100px;
     top: 258px;
     z-index: 3;
-}
-.pociag4miastoBialeUkryty, .pociag12miastoBialeUkryty {
-    left: 2050px;
-}
-.pociag4miastoBialeOdjedzie, .pociag12miastoBialeOdjedzie {
-    left: -1500px;
 }
 .pociag6miastoBialeAnimacja, .pociag9miastoBialeAnimacja {
     left: 800px;
@@ -374,12 +371,6 @@
     .pociag6miastoBialeAnimacja .celPociagu, .pociag9miastoBialeAnimacja .celPociagu {
         transform: scaleX(-1);
     }
-.pociag6miastoBialeUkryty, .pociag9miastoBialeUkryty {
-    left: -1500px;
-}
-.pociag6miastoBialeOdjedzie, .pociag9miastoBialeOdjedzie {
-    left: 2050px;
-}
 .pociag10miastoMorskieAnimacja, .pociag11miastoMorskieAnimacja {
     left: 700px;
     top: 193px;
@@ -389,12 +380,6 @@
     .pociag10miastoMorskieAnimacja .celPociagu, .pociag11miastoMorskieAnimacja .celPociagu {
         transform: scaleX(-1);
     }
-.pociag10miastoMorskieUkryty, .pociag11miastoMorskieUkryty {
-    left: -1500px;
-}
-.pociag10miastoMorskieOdjedzie, .pociag11miastoMorskieOdjedzie {
-    left: 2050px;
-}
 .pociag13miastoGorskieAnimacja, .pociag14miastoGorskieAnimacja {
     left: 700px;
     top: 223px;
@@ -404,11 +389,20 @@
     .pociag13miastoGorskieAnimacja .celPociagu, .pociag14miastoGorskieAnimacja .celPociagu {
         transform: scaleX(-1);
     }
-.pociag13miastoGorskieUkryty, .pociag14miastoGorskieUkryty {
-    left: -1500px;
+.pociag16metropolia1Animacja {
+    z-index: 6;
+    bottom: 70px;
+    left: 550px;
+    transform: scaleX(-1);
 }
-.pociag13miastoGorskieOdjedzie, .pociag14miastoGorskieOdjedzie {
+    .pociag16metropolia1Animacja .celPociagu {
+        transform: scaleX(-1);
+    }
+.pociagNaPrawo {
     left: 2050px;
+}
+.pociagNaLewo {
+    left: -1500px;
 }
 .celPociagu {
     bottom: 85px;
