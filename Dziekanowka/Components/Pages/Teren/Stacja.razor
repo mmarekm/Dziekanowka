@@ -50,6 +50,10 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
         </div>
+        <div class="abs pociagKazdyAnimacja pociag17@(stacja)Animacja @pociagi[17].klasa" @onclick="() => WsiadzDoPociagu(17)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
+        </div>
     }
     @if (stacja == "miastoBiale")
     {
@@ -71,6 +75,10 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoGorskieLabel.png" /></div>
         </div>
+        <div class="abs pociagKazdyAnimacja pociag19@(stacja)Animacja @pociagi[19].klasa" @onclick="() => WsiadzDoPociagu(19)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
+        </div>
     }
     @if (stacja == "miastoMorskie")
     {
@@ -84,6 +92,10 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
         </div>
+        <div class="abs pociagKazdyAnimacja pociag21@(stacja)Animacja @pociagi[21].klasa" @onclick="() => WsiadzDoPociagu(21)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
+        </div>
     }
     @if (stacja == "miastoGorskie")
     {
@@ -96,12 +108,32 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
         </div>
+        <div class="abs pociagKazdyAnimacja pociag23@(stacja)Animacja @pociagi[23].klasa" @onclick="() => WsiadzDoPociagu(23)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
+        </div>
     }
     @if (stacja == "metropolia1")
     {
         <div class="abs pociagKazdyAnimacja pociag16@(stacja)Animacja @pociagi[16].klasa" @onclick="() => WsiadzDoPociagu(16)">
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacjaTor2Metropolia1 pociag18metropolia1Tor2Animacja @pociagi[18].klasa" @onclick="() => WsiadzDoPociagu(18)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociaguTor2"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacjaTor2Metropolia1 pociag20metropolia1Tor2Animacja @pociagi[20].klasa" @onclick="() => WsiadzDoPociagu(20)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociaguTor2"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacjaTor2Metropolia1 pociag22metropolia1Tor3Animacja @pociagi[22].klasa" @onclick="() => WsiadzDoPociagu(22)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociaguTor2"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacjaTor2Metropolia1 pociag24metropolia1Tor3Animacja @pociagi[24].klasa" @onclick="() => WsiadzDoPociagu(24)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociaguTor2"><img class="obrazekContain" src="img/miasto/stacje/miastoGorskieLabel.png" /></div>
         </div>
     }
 </div>
@@ -134,22 +166,31 @@
     private int[] odjazdyMiasto3DoMiastoBiale = [15, 45, 75];
     private int[] odjazdyMiasto3DoMiastaMorskiego = [35];
     private int[] odjazdyMiasto3DoMetropolii1 = [20, 50, 70, 80];
-    private int[] odjazdyMiastoLesneDoMiasta3 = [10, 25, 55, 85];
+    private int[] odjazdyMiastoLesneDoMiasta3 = [10, 30, 55, 85];
     private int[] odjazdyMiastoLesneDoMiastoBiale = [50];
     private int[] odjazdyMiastoLesneDoMiastoMorskie = [15, 40, 75];
+    private int[] odjazdyMiastoLesneDoMetropolii1 = [20, 40, 65, 75];
     private int[] odjazdyMiastoBialeDoMiasta3 = [10, 20, 40, 80];
-    private int[] odjazdyMiastoBialeDoMiastoLesne = [50];
-    private int[] odjazdyMiastoBialeDoMiastoMorskie = [15, 40, 75];
+    private int[] odjazdyMiastoBialeDoMiastoLesne = [45];
+    private int[] odjazdyMiastoBialeDoMiastoMorskie = [15, 35, 75];
     private int[] odjazdyMiastoBialeDoMiastoGorskie = [30, 70];
+    private int[] odjazdyMiastoBialeDoMetropolii1 = [5, 25, 55, 85];
     private int[] odjazdyMiastoMorskieDoMiastoLesne = [10, 43, 76];
-    private int[] odjazdyMiastoMorskieDoMiastoBiale = [23, 56, 90];
+    private int[] odjazdyMiastoMorskieDoMiastoBiale = [28, 56, 90];
+    private int[] odjazdyMiastoMorskieDoMetropolii1 = [19, 65, 85];
     private int[] odjazdyMiastoGorskieDoMiasta3 = [18, 38, 58, 88];
     private int[] odjazdyMiastoGorskieDoMiastoMorskie = [48];
+    private int[] odjazdyMiastoGorskieDoMetropolii1 = [8, 28, 68];
     private int[] odjazdyMetropolia1DoMiasta3 = [8, 26, 44, 62, 80];
+    private int[] odjazdyMetropolia1DoMiastoLesne = [12, 37, 62, 87];
+    private int[] odjazdyMetropolia1DoMiastoBiale = [25, 50, 75, 95];
+    private int[] odjazdyMetropolia1DoMiastoMorskie = [16, 49, 83];
+    private int[] odjazdyMetropolia1DoMiastoGorskie = [33, 64, 92];
     private Dictionary<int, (string klasa, bool moznaWsiasc)> pociagi = new()
     {
         {1, ("", false)}, {2, ("", false)}, {3, ("", false)}, {4, ("", false)}, {5, ("", false)}, {6, ("", false)}, {7, ("", false)}, {8, ("", false)}, {9, ("", false)}, {10, ("", false)},
-        {11, ("", false)}, {12, ("", false)}, {13, ("", false)}, {14, ("", false)}, {15, ("", false)}, {16, ("", false)}
+        {11, ("", false)}, {12, ("", false)}, {13, ("", false)}, {14, ("", false)}, {15, ("", false)}, {16, ("", false)}, {17, ("", false)}, {18, ("", false)}, {19, ("", false)}, {20, ("", false)},
+        {21, ("", false)}, {22, ("", false)}, {23, ("", false)}, {24, ("", false)}
     };
     private bool CzyMetropolia => stacja == "metropolia1";
     private IEnumerable<(string obrazek, int[] godziny)> AktualnyRozklad()
@@ -157,11 +198,11 @@
         return stacja switch
         {
             "miasto3" => [("miastoLesneLabel.png", odjazdyMiasto3DoMiastaLesnego), ("miastoBialeLabel.png", odjazdyMiasto3DoMiastoBiale), ("miastoMorskieLabel.png", odjazdyMiasto3DoMiastaMorskiego), ("metropolia1Label.png", odjazdyMiasto3DoMetropolii1)],
-            "miastoLesne" => [("miasto3Label.png", odjazdyMiastoLesneDoMiasta3), ("miastoBialeLabel.png", odjazdyMiastoLesneDoMiastoBiale), ("miastoMorskieLabel.png", odjazdyMiastoLesneDoMiastoMorskie)],
-            "miastoBiale" => [("miasto3Label.png", odjazdyMiastoBialeDoMiasta3), ("miastoLesneLabel.png", odjazdyMiastoBialeDoMiastoLesne), ("miastoMorskieLabel.png", odjazdyMiastoBialeDoMiastoMorskie), ("miastoGorskieLabel.png", odjazdyMiastoBialeDoMiastoGorskie)],
-            "miastoMorskie" => [("miastoLesneLabel.png", odjazdyMiastoMorskieDoMiastoLesne), ("miastoBialeLabel.png", odjazdyMiastoMorskieDoMiastoBiale)],
-            "miastoGorskie" => [("miasto3Label.png", odjazdyMiastoGorskieDoMiasta3), ("miastoMorskieLabel.png", odjazdyMiastoGorskieDoMiastoMorskie)],
-            "metropolia1" => [("miasto3Label.png", odjazdyMetropolia1DoMiasta3)],
+            "miastoLesne" => [("miasto3Label.png", odjazdyMiastoLesneDoMiasta3), ("miastoBialeLabel.png", odjazdyMiastoLesneDoMiastoBiale), ("miastoMorskieLabel.png", odjazdyMiastoLesneDoMiastoMorskie), ("metropolia1Label.png", odjazdyMiastoLesneDoMetropolii1)],
+            "miastoBiale" => [("miasto3Label.png", odjazdyMiastoBialeDoMiasta3), ("miastoLesneLabel.png", odjazdyMiastoBialeDoMiastoLesne), ("miastoMorskieLabel.png", odjazdyMiastoBialeDoMiastoMorskie), ("miastoGorskieLabel.png", odjazdyMiastoBialeDoMiastoGorskie), ("metropolia1Label.png", odjazdyMiastoBialeDoMetropolii1)],
+            "miastoMorskie" => [("miastoLesneLabel.png", odjazdyMiastoMorskieDoMiastoLesne), ("miastoBialeLabel.png", odjazdyMiastoMorskieDoMiastoBiale), ("metropolia1Label.png", odjazdyMiastoMorskieDoMetropolii1)],
+            "miastoGorskie" => [("miasto3Label.png", odjazdyMiastoGorskieDoMiasta3), ("miastoMorskieLabel.png", odjazdyMiastoGorskieDoMiastoMorskie), ("metropolia1Label.png", odjazdyMiastoGorskieDoMetropolii1)],
+            "metropolia1" => [("miasto3Label.png", odjazdyMetropolia1DoMiasta3), ("miastoLesneLabel.png", odjazdyMetropolia1DoMiastoLesne), ("miastoBialeLabel.png", odjazdyMetropolia1DoMiastoBiale), ("miastoMorskieLabel.png", odjazdyMetropolia1DoMiastoMorskie), ("miastoGorskieLabel.png", odjazdyMetropolia1DoMiastoGorskie)],
             _ => []
         };
     }
@@ -202,6 +243,7 @@
             pociagi[2] = StanPociagu("pociag2", odjazdyMiastoLesneDoMiasta3);
             pociagi[5] = StanPociagu("pociag5", odjazdyMiastoLesneDoMiastoBiale);
             pociagi[8] = StanPociagu("pociag8", odjazdyMiastoLesneDoMiastoMorskie);
+            pociagi[17] = StanPociagu("pociag17", odjazdyMiastoLesneDoMetropolii1);
         }
         if (stacja == "miastoBiale")
         {
@@ -209,24 +251,31 @@
             pociagi[6] = StanPociagu("pociag6", odjazdyMiastoBialeDoMiastoLesne);
             pociagi[9] = StanPociagu("pociag9", odjazdyMiastoBialeDoMiastoMorskie);
             pociagi[12] = StanPociagu("pociag12", odjazdyMiastoBialeDoMiastoGorskie);
+            pociagi[19] = StanPociagu("pociag19", odjazdyMiastoBialeDoMetropolii1);
         }
         if (stacja == "miastoMorskie")
         {
             pociagi[10] = StanPociagu("pociag10", odjazdyMiastoMorskieDoMiastoLesne);
             pociagi[11] = StanPociagu("pociag11", odjazdyMiastoMorskieDoMiastoBiale);
+            pociagi[21] = StanPociagu("pociag21", odjazdyMiastoMorskieDoMetropolii1);
         }
         if (stacja == "miastoGorskie")
         {
             pociagi[13] = StanPociagu("pociag13", odjazdyMiastoGorskieDoMiasta3);
             pociagi[14] = StanPociagu("pociag14", odjazdyMiastoGorskieDoMiastoMorskie);
+            pociagi[23] = StanPociagu("pociag23", odjazdyMiastoGorskieDoMetropolii1);
         }
         if (stacja == "metropolia1")
         {
             pociagi[16] = StanPociagu("pociag16", odjazdyMetropolia1DoMiasta3);
+            pociagi[18] = StanPociagu("pociag18", odjazdyMetropolia1DoMiastoLesne);
+            pociagi[20] = StanPociagu("pociag20", odjazdyMetropolia1DoMiastoBiale);
+            pociagi[22] = StanPociagu("pociag22", odjazdyMetropolia1DoMiastoMorskie);
+            pociagi[24] = StanPociagu("pociag24", odjazdyMetropolia1DoMiastoGorskie);
         }
     }
     private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, "miastoBiale" => EkranGry.MiastoBiale, "miastoMorskie" => EkranGry.MiastoMorskie, "miastoGorskie" => EkranGry.MiastoGorskie, _ => throw new ArgumentOutOfRangeException() };
-    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 or 10 => "miastoLesne", 2 or 4 or 13 or 16 => "miasto3", 3 or 5 or 11 => "miastoBiale", 7 or 8 or 9 or 14 => "miastoMorskie", 12 => "miastoGorskie", 15 => "metropolia1",  _ => throw new ArgumentOutOfRangeException() };
+    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 or 10 or 18 => "miastoLesne", 2 or 4 or 13 or 16 => "miasto3", 3 or 5 or 11 or 20 => "miastoBiale", 7 or 8 or 9 or 14 or 22 => "miastoMorskie", 12 or 24 => "miastoGorskie", 15 or 17 or 19 or 21 or 23 => "metropolia1",  _ => throw new ArgumentOutOfRangeException() };
     private int cenaBiletu => stacja is "miasto3" or "miastoMorskie" ? 7 : stacja is "metropolia1" ? 6 : 10;
     private async Task KupBilet()
     {
@@ -258,6 +307,8 @@
             ("pociag8", "miastoLesne") => true,
             ("pociag4", "miastoBiale") => true,
             ("pociag12", "miastoBiale") => true,
+            ("pociag22", "metropolia1") => true,
+            ("pociag24", "metropolia1") => true,
             _ => false
         };
     }
