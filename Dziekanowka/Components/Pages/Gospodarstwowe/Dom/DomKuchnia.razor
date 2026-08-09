@@ -1579,7 +1579,6 @@
         if (!Gracz.JestPrzedmiot("drewno")) return;
         if (piecPieczywo && (!saSkladnikiNaPieczywo || Gracz.Zboza.First(z => z.Nazwa == makaPieczywo).PoziomZakwasu < 3 || pieczeniePieczywa == 0)) return;
         if (piecWedlina && !saSkladnikiNaWedline) return;
-
         if (piecPieczywo)
         {
             Gracz.Przedmiot("pelnaButelka").Ilosc--;
@@ -1600,19 +1599,16 @@
                 Gracz.ProduktP($"{makaPieczywo}Bulka").Ilosc += 2;
             else if (pieczeniePieczywa == 1)
                 Gracz.ProduktP($"{makaPieczywo}Chleb").Ilosc++;
-
             Gracz.Przedmiot("drewno").Ilosc--;
             makaPieczywo = "";
             pieczeniePieczywa = 0;
             await ladowanieGracza.ZapiszAktualnegoGracza();
-
             await NaZmianeEkranu.InvokeAsync(EkranGry.PieczenieChleba);
             await Task.Delay(7300);
             Gracz.Statystyki.OtwarteOkno = "piecChleb";
             await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
             return;
         }
-
         if (piecPizza && saSkladnikiNaPizze)
         {
             if (Gracz.ProduktP("pizza").Ilosc > 0)
@@ -1623,11 +1619,11 @@
             UpiecPizze();
             Gracz.Przedmiot("drewno").Ilosc--;
             await ladowanieGracza.ZapiszAktualnegoGracza();
-            return; // brak animacji tutaj
+            return;
         }
-
         if (piecCiasto && saSkladnikiNaCiasto)
         {
+            string ciastoDoZrobienia = gotoweCiasto;
             Gracz.ProduktP($"{makaCiasto}Maka").Ilosc--;
             Gracz.ProduktP("maslo").Ilosc--;
             Gracz.ProduktZ($"{jajoCiasto}Jajo").Ilosc--;
@@ -1640,8 +1636,7 @@
                 Gracz.ProduktP("smietana").Ilosc--;
             if (owocCiasto != "")
                 Gracz.Owoc(owocCiasto).Ilosc--;
-            Gracz.ProduktP(gotoweCiasto).Ilosc++;
-
+            Gracz.ProduktP(ciastoDoZrobienia).Ilosc++;
             Gracz.Przedmiot("drewno").Ilosc--;
             makaCiasto = "";
             jajoCiasto = "";
@@ -1656,7 +1651,6 @@
             await NaZmianeEkranu.InvokeAsync(EkranGry.DomKuchnia);
             return;
         }
-
         if (piecWedlina)
         {
             Gracz.ZywnoscP("sol").Ilosc--;
