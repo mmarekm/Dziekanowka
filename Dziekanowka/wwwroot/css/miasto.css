@@ -851,8 +851,8 @@
 .miastoWiejskieNaStacje {
     bottom: 0;
     right: 0;
-    width: 516px;
-    height: 499px;
+    width: 476px;
+    height: 276px;
     z-index: 2;
 }
 @keyframes poblysk {

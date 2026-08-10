@@ -57,6 +57,13 @@
     height: 102px;
     z-index: 2;
 }
+.wyjscieStacjamiastoWiejskie {
+    bottom: 0;
+    left: 571px;
+    width: 428px;
+    height: 68px;
+    z-index: 2;
+}
 .ileBiletowKazdeMiasto {
     top: 10px;
     left: 100px;
@@ -90,6 +97,9 @@
 .ileBiletowLmiastoGorskie {
     color: tan;
 }
+.ileBiletowLmiastoWiejskie {
+    color: yellow;
+}
 .kupBiletStacjamiasto3 {
     width: 104px;
     height: 102px;
@@ -119,6 +129,12 @@
     height: 173px;
     bottom: 223px;
     left: 1337px;
+}
+.kupBiletStacjamiastoWiejskie {
+    width: 112px;
+    height: 97px;
+    bottom: 273px;
+    right: 425px;
 }
 .kupBiletStacjametropolia1 {
     width: 67px;
@@ -152,6 +168,9 @@
 }
 .stacjaCzasmiastoGorskie {
     color: tan;
+}
+.stacjaCzasmiastoWiejskie {
+    color: yellow;
 }
 .zobaczRozkladStacjimiasto3 {
     bottom: 0;
@@ -187,6 +206,13 @@
     width: 480px;
     height: 408px;
     z-index: 2;
+}
+.zobaczRozkladStacjimiastoWiejskie {
+    top: 420px;
+    left: 132px;
+    width: 100px;
+    height: 134px;
+    z-index: 6;
 }
 .zobaczRozkladStacjimetropolia1 {
     width: 244px;
@@ -304,6 +330,13 @@
     top: 343px;
     width: 509px;
     height: 288px;
+}
+.zaslonaPociaguMiastoWiejskie {
+    z-index: 6;
+    width: 541px;
+    height: 514px;
+    right: 47px;
+    top: 145px;
 }
 .pociagKazdyAnimacja {
     width: 920px;
