@@ -52,6 +52,7 @@
         MiastoBiale,
         MiastoMorskie,
         MiastoGorskie,
+        MiastoWiejskie,
         SklepMiasto3,
         Kiosk,
         Stacja,

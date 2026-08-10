@@ -13,6 +13,9 @@
 .stacjamiastoGorskieWidok {
     background-image: url('../img/miasto/stacjaMiastoGorskieWidok.jpg');
 }
+.stacjamiastoWiejskieWidok {
+    background-image: url('../img/miasto/stacjaMiastoWiejskieWidok.png');
+}
 .stacjametropolia1Widok {
     background-image: url('../img/miasto/stacjaMetropolia1Widok.png');
 }
@@ -314,6 +317,12 @@
     cursor: default;
     pointer-events: none;
 }
+.pociagKazdyAnimacjaTor4Metropolia1 {
+    width: 552px;
+    height: 222px;
+    cursor: default;
+    pointer-events: none;
+}
 .kazdyPociagUkryty {
     pointer-events: none;
     transition: none;
@@ -395,6 +404,15 @@
     .pociag13miastoGorskieAnimacja .celPociagu, .pociag14miastoGorskieAnimacja .celPociagu, .pociag23miastoGorskieAnimacja .celPociagu {
         transform: scaleX(-1);
     }
+.pociag26miastoWiejskieAnimacja {
+    left: 500px;
+    top: 223px;
+    z-index: 3;
+    transform: scaleX(-1);
+}
+    .pociag26miastoWiejskieAnimacja .celPociagu {
+        transform: scaleX(-1);
+    }
 .pociag16metropolia1Animacja {
     z-index: 6;
     bottom: 70px;
@@ -404,7 +422,7 @@
 .pociag18metropolia1Tor2Animacja, .pociag20metropolia1Tor2Animacja {
     z-index: 5;
     bottom: 450px;
-    left: 1100px;
+    left: 1250px;
     transform: scaleX(-1);
 }
     .pociag16metropolia1Animacja .celPociagu, .pociag18metropolia1Tor2Animacja .celPociaguTor2, .pociag20metropolia1Tor2Animacja .celPociaguTor2 {
@@ -413,7 +431,12 @@
 .pociag22metropolia1Tor3Animacja, .pociag24metropolia1Tor3Animacja {
     z-index: 4;
     bottom: 503px;
-    left: 50px;
+    left: 0;
+}
+.pociag25metropolia1Tor4Animacja {
+    z-index: 3;
+    bottom: 620px;
+    left: 630px;
 }
 .pociagNaPrawo {
     left: 2050px;
@@ -432,4 +455,10 @@
     right: 170px;
     width: 55px;
     height: 55px;
+}
+.celPociaguTor3 {
+    bottom: 50px;
+    right: 130px;
+    width: 45px;
+    height: 45px;
 }
