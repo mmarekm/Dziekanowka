@@ -45,9 +45,7 @@
         Gracz.ProduktZ("krowaMleko").Ilosc++;
         Gracz.ProduktZ("kozaMleko").Ilosc++;
         Gracz.ProduktZ("owcaMleko").Ilosc++;
-        Gracz.Statystyki.MoznaOdebracObraz = true;
-        Gracz.Statystyki.DaneMisji = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
-        Gracz.Statystyki.AktualnaMisja = Misje.Chlopiec;
+        Gracz.LosujNowaMisje();
         Gracz.Statystyki.OtwarteOkno = "mlekoOdStajennego";
         await NaZmianeEkranu.InvokeAsync(EkranGry.CiastoDlaStajennego);
         await Task.Delay(7700);

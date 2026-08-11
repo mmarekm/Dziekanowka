@@ -41,6 +41,35 @@ namespace Dziekanowka.Mechanizm
         public static string[] Sklepiczek = ["kosc", ""];
         public static string[] SklepiczekWymagane = ["zielonaKuleczka", ""];
         public static List<string> ZwierzetaNaDrodze = ["krowa", "owca", "koza", "koń", "słoń", "żyrafa"];
+        public static readonly List<string> WszystkieMisje = [Misje.Chlopiec, Misje.Kot, Misje.FanZdrowia, Misje.DomMleka, Misje.KuchniaMorska, Misje.SlodkaBuleczka, Misje.SeryLesne, Misje.PlatkiGorskie, Misje.Stajenny];
+        private static readonly Dictionary<string, Func<string[]>> GeneratoryDanychMisji = new()
+        {
+            [Misje.Chlopiec] = () => [ZbiorChlopiecMiska![Random.Shared.Next(ZbiorChlopiecMiska.Count)], "", ""],
+            [Misje.Kot] = () => [Ryby![Random.Shared.Next(Ryby.Count)], "", ""],
+            [Misje.FanZdrowia] = () => [Warzywa![Random.Shared.Next(Warzywa.Count)], Owoce![Random.Shared.Next(Owoce.Count)], Soki![Random.Shared.Next(Soki.Count)]],
+            [Misje.DomMleka] = () => [Mleka![Random.Shared.Next(Mleka.Count)], "", ""],
+            [Misje.KuchniaMorska] = () => [Restauracja![Random.Shared.Next(Restauracja.Count)], "", ""],
+            [Misje.SlodkaBuleczka] = () => [SlodkieBuleczki![Random.Shared.Next(SlodkieBuleczki.Count)], "", ""],
+            [Misje.SeryLesne] = () => [Sery![Random.Shared.Next(Sery.Count)], "", ""],
+            [Misje.PlatkiGorskie] = () => [Mleka![Random.Shared.Next(Mleka.Count)], Platki![Random.Shared.Next(Platki.Count)], ""],
+            [Misje.Stajenny] = () => [Ciasta![Random.Shared.Next(Ciasta.Count)], "", ""],
+        };
+        public static string[] WylosujDaneMisji(string misja) => GeneratoryDanychMisji[misja]();
+        public static string WylosujNastepnaMisje(List<string> worekMisji)
+        {
+            if (worekMisji.Count == 0)
+                worekMisji.AddRange(WszystkieMisje);
+            var indeks = Random.Shared.Next(worekMisji.Count);
+            var wybranaMisja = worekMisji[indeks];
+            worekMisji.RemoveAt(indeks);
+            return wybranaMisja;
+        }
+        public static void LosujNowaMisje(this Gracz g)
+        {
+            g.Statystyki.MoznaOdebracObraz = true;
+            g.Statystyki.AktualnaMisja = WylosujNastepnaMisje(g.Statystyki.BiezacyWorekMisji);
+            g.Statystyki.DaneMisji = WylosujDaneMisji(g.Statystyki.AktualnaMisja);
+        }
         public static List<string> ZbiorChlopiecMiska = ["rosol", "barszczCzerwony", "zurek", "krupnik", "zupaPomidorowa", "zupaOgorkowa", "zupaGrzybowa", "kapusniak", "grochowka", "zupaFasolowa", "zupaCebulowa", "chlodnik", "kremZBrokulow", "kremZDyni", "kremZKalafiora"];
         public static List<string> Ryby = ["losos", "pstrag", "halibut", "okon", "sledz"];
         public static List<string> Warzywa = ["kukurydza", "groch", "jarmuż", "pasternak", "pietruszka", "burak", "brukselka", "sorgo", "rzepaPastewna", "koniczyna", "sałata", "marchew", "ziemniak", "cebula", "szczypiorek", "pomidor", "papryka", "ogórek", "czosnek", "rzodkiewka", "szpinak", "rukola", "batat", "szczaw", "seler", "boćwina", "por", "fasola", "bób", "ciecierzyca", "bakłażan", "cukinia", "dynia", "brokuł", "kalafior", "kapustaWłoska", "kapustaPekińska", "szparagi", "selerNaciowy", "soczewica"];

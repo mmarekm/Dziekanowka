@@ -19,9 +19,7 @@
     {
         if (!jestSer) return;
         Gracz.ProduktP(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
-        Gracz.Statystyki.MoznaOdebracObraz = true;
-        Gracz.Statystyki.DaneMisji = [Gra.Mleka[Random.Shared.Next(Gra.Mleka.Count)], Gra.Platki[Random.Shared.Next(Gra.Platki.Count)], ""];
-        Gracz.Statystyki.AktualnaMisja = Misje.PlatkiGorskie;
+        Gracz.LosujNowaMisje();
         await NaZmianeEkranu.InvokeAsync(EkranGry.LesneMyszyZjedza);
         await Task.Delay(6500);
         await NaZmianeEkranu.InvokeAsync(EkranGry.SeryLesne);

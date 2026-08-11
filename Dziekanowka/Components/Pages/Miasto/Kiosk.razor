@@ -42,12 +42,10 @@
     {
         if (kiosk == 1 && !moznaKarmic) return;
         if (kiosk == 2 && !moznaKarmicKota) return;
-        Gracz.Statystyki.MoznaOdebracObraz = true;
         if (kiosk == 1)
         {
             Gracz.Obiad(pokarm).Ilosc--;
-            Gracz.Statystyki.DaneMisji = [Gra.Ryby[Random.Shared.Next(Gra.Ryby.Count)], "", ""];
-            Gracz.Statystyki.AktualnaMisja = Misje.Kot;
+            Gracz.LosujNowaMisje();
             await NaZmianeEkranu.InvokeAsync(EkranGry.ChlopiecZje);
             await Task.Delay(9000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);
@@ -55,8 +53,7 @@
         if (kiosk == 2)
         {
             Gracz.Ryba(pokarm).Ilosc--;
-            Gracz.Statystyki.DaneMisji = [Gra.Warzywa[Random.Shared.Next(Gra.Warzywa.Count)], Gra.Owoce[Random.Shared.Next(Gra.Owoce.Count)], Gra.Soki[Random.Shared.Next(Gra.Soki.Count)]];
-            Gracz.Statystyki.AktualnaMisja = Misje.FanZdrowia;
+            Gracz.LosujNowaMisje();
             await NaZmianeEkranu.InvokeAsync(EkranGry.KotZje);
             await Task.Delay(8000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Kiosk);

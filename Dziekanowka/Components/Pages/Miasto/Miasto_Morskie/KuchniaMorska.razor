@@ -46,10 +46,8 @@
     {
         if (!moznaDacKucharzowi) return;
         Gracz.Obiad(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
-        Gracz.Statystyki.MoznaOdebracObraz = true;
+        Gracz.LosujNowaMisje();
         Gracz.Monety += 100;
-        Gracz.Statystyki.DaneMisji = [Gra.SlodkieBuleczki[Random.Shared.Next(Gra.SlodkieBuleczki.Count)], "", ""];
-        Gracz.Statystyki.AktualnaMisja = Misje.SlodkaBuleczka;
         Gracz.Statystyki.OtwarteOkno = "bonusOdMorskiejKuchni";
         await NaZmianeEkranu.InvokeAsync(EkranGry.KuchniaPracuje);
         await Task.Delay(5980);

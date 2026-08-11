@@ -21,9 +21,7 @@
         if (!saPlatki) return;
         Gracz.ProduktZ(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
         Gracz.ProduktP(Gracz.Statystyki.DaneMisji[1]).Ilosc -= 3;
-        Gracz.Statystyki.MoznaOdebracObraz = true;
-        Gracz.Statystyki.DaneMisji = [Gra.Ciasta[Random.Shared.Next(Gra.Ciasta.Count)], "", ""];
-        Gracz.Statystyki.AktualnaMisja = Misje.Stajenny;
+        Gracz.LosujNowaMisje();
         await NaZmianeEkranu.InvokeAsync(EkranGry.ZjedzaPlatki);
         await Task.Delay(9000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.GorskiePlatki);

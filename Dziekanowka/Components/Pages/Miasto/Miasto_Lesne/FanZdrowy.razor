@@ -50,10 +50,8 @@
         Gracz.Warzywo(Gracz.Statystyki.DaneMisji[0]).Ilosc--;
         Gracz.Owoc(Gracz.Statystyki.DaneMisji[1]).Ilosc--;
         Gracz.ProduktP(Gracz.Statystyki.DaneMisji[2]).Ilosc--;
-        Gracz.Statystyki.MoznaOdebracObraz = true;
         Gracz.Monety += 100;
-        Gracz.Statystyki.DaneMisji = [Gra.Mleka[Random.Shared.Next(Gra.Mleka.Count)], "", ""];
-        Gracz.Statystyki.AktualnaMisja = Misje.DomMleka;
+        Gracz.LosujNowaMisje();
         Gracz.Statystyki.OtwarteOkno = "bonusOdFanaZdrowia";
         await NaZmianeEkranu.InvokeAsync(EkranGry.FanZdrowyRadosc);
         await Task.Delay(10000);

@@ -89,6 +89,8 @@ namespace Dziekanowka.Mechanizm
             if (!File.Exists(_sciezkaDoPliku))
             {
                 var startowiGracze = new Dictionary<string, Gracz> { ["mama"] = new Gracz("Mama"), ["tata"] = new Gracz("Tata"), ["ula"] = new Gracz("Ula"), ["basia"] = new Gracz("Basia"), ["ania"] = new Gracz("Ania") };
+                foreach (var gracz in startowiGracze.Values)
+                    gracz.LosujNowaMisje();
                 await ZapiszWszystkichGraczy(startowiGracze);
                 return startowiGracze;
             }

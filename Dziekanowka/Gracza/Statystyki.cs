@@ -19,8 +19,9 @@ namespace Dziekanowka.Gracza
         public int DzienLogowania { get; set; } = 0;
         public int MiesiacLogowania { get; set; } = 0;
         public bool MoznaOdebracObraz { get; set; } = false;
-        public string AktualnaMisja { get; set; } = Misje.Chlopiec;
-        public string[] DaneMisji { get; set; } = [Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)], "", ""];
+        public List<string> BiezacyWorekMisji { get; set; } = new(Gra.WszystkieMisje);
+        public string AktualnaMisja { get; set; } = "";
+        public string[] DaneMisji { get; set; } = ["", "", ""];
         public int Kolekcje { get; set; } = 18;
         public int BonusDzienny { get; set; } = 33;
         public HashSet<string> Bonusy { get; set; } = ["miodUl", "kawaSalon", "karczowiskoSiano", "winoMorskie", "owceGorskie"];
