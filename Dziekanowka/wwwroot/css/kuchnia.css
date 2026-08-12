@@ -1030,6 +1030,9 @@
     opacity: 0.5;
     border: 3px solid orange;
 }
+.majonezNaSurowke.klikalneDivZieloneRel {
+    position: absolute;
+}
 .zbozeDoMakiCiasto {
     cursor: pointer;
     width: 40px;

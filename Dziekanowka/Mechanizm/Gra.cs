@@ -81,5 +81,8 @@ namespace Dziekanowka.Mechanizm
         public static List<string> Sery = ["krowaSer", "kozaSer", "owcaSer"];
         public static List<string> Platki = ["zytoPlatki", "jeczmienPlatki", "pszenicaPlatki", "ryzPlatki", "owiesPlatki", "grykaPlatki", "orkiszPlatki", "kukurydzaPlatki"];
         public static List<string> Ciasta = ["sernik", "babkaPiaskowa", "jabłkoCiasto", "brzoskwiniaCiasto", "nektarynkaCiasto", "morelaCiasto", "śliwkaCiasto", "wiśniaCiasto", "gruszkaCiasto", "borówkaCiasto", "porzeczkaCzerwonaCiasto", "porzeczkaCzarnaCiasto", "truskawkaCiasto", "malinaCiasto", "pomarańczaCiasto", "ananasCiasto"];
+        public static List<string> startSurowki = ["majonez", "kuraJajo", "gesJajo", "kaczkaJajo", "indykJajo"];
+        public static List<string> skladnikiSurowki = ["marchew", "burak", "sałata", "pomidor", "papryka", "ogórek", "rzodkiewka", "szpinak", "rukola", "szczaw", "kapustaWłoska", "kapustaPekińska", "brokuł", "kukurydza", "groch", "fasola", "szparagi", "brukselka", "cebula", "szczypiorek", "czosnek", "ogorekKiszony", "kapustaKiszona", "burakKiszony"];
+        
     }
 }
