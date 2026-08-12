@@ -52,6 +52,9 @@
 .gorskiePlatkiWidok {
     background-image: url('../img/miasto/miastoGorskie/domPlatkowWidok.png');
 }
+.dzieciCiekaweWidok {
+    background-image: url('../img/miasto/miastoWiejskie/dzieciCiekaweWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1119,4 +1122,24 @@
     align-items: center;
     font-size: 80px;
     color: floralwhite;
+}
+.miastoWiejskieDoDzieciCiekawe {
+    width: 357px;
+    height: 339px;
+    bottom: 238px;
+    left: 251px;
+    z-index: 2;
+}
+.dzieciCiekaweWyjscie {
+    width: 471px;
+    height: 852px;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.dacObrazkiDzieciomCiekawym {
+    left: 855px;
+    top: 200px;
+    width: 550px;
+    height: 122px;
 }

@@ -77,6 +77,7 @@
         KuchniaMorska,
         GorskiePlatki,
         OwceGorskie,
+        DzieciCiekawe,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
@@ -116,6 +117,7 @@
         LesneMyszyZjedza,
         BonusZaOwce,
         ZjedzaPlatki,
-        CiastoDlaStajennego
+        CiastoDlaStajennego,
+        DzieciCiekaweCiesza
     }
 }

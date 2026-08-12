@@ -1,0 +1,24 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="dzieciCiekaweWidok widok rel">
+    <div class="abs dzieciCiekaweWyjscie"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoWiejskie)"><img class="obrazekContain" src="img/miasto/miastoWiejskie/dzieciCiekaweWyjscie.png" /></button></div>
+    <div class="abs dacObrazkiDzieciomCiekawym @((Gracz.Statystyki.Kolekcje < 2 || !Gracz.Statystyki.Bonusy.Contains("dzieciCiekawe")) ? "nieMoznaKliknac" : "klikalneDivZolte")" @onclick="DzieciUciesza"></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private async Task DzieciUciesza()
+    {
+        if (Gracz.Statystyki.Kolekcje < 2) return;
+        if (!Gracz.Statystyki.Bonusy.Contains("dzieciCiekawe")) return;
+        Gracz.Statystyki.Kolekcje -= 2;
+        Gracz.Monety += 555;
+        Gracz.Statystyki.Bonusy.Remove("dzieciCiekawe");
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.DzieciCiekaweCiesza);
+        await Task.Delay(6000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.DzieciCiekawe);
+    }
+}

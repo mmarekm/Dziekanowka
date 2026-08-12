@@ -21,7 +21,7 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz!.Statystyki.DzienLogowania = DateTime.Now.Day;
                 AktualnyGracz.Statystyki.MiesiacLogowania = DateTime.Now.Month;
                 AktualnyGracz.Monety += AktualnyGracz.Statystyki.BonusDzienny + AktualnyGracz.Przedmiot("siano").Ilosc;
-                AktualnyGracz.Statystyki.Bonusy = ["miodUl", "kawaSalon", "karczowiskoSiano", "winoMorskie", "owceGorskie"];
+                AktualnyGracz.Statystyki.Bonusy = ["miodUl", "kawaSalon", "karczowiskoSiano", "winoMorskie", "owceGorskie", "dzieciCiekawe"];
                 AktualnyGracz.Statystyki.ZwierzeNaDrodze = Gra.ZwierzetaNaDrodze[Random.Shared.Next(Gra.ZwierzetaNaDrodze.Count)];
                 AktualnyGracz.Warzywa.ForEach(w => w.Ilosc = w.Ilosc > 0 ? w.Ilosc - (w.Ilosc / 5 + 1) : w.Ilosc);
                 AktualnyGracz.Owoce.ForEach(o => o.Ilosc = o.Ilosc > 0 ? o.Ilosc - (o.Ilosc / 5 + 1) : o.Ilosc);
@@ -34,37 +34,6 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz.Salatki = [];
                 AktualnyGracz.Surowki = [];
                 AktualnyGracz.Obiady = Obiad.StartoweObiady();
-                //START DEBUG
-                /*
-                AktualnyGracz.Monety += 1000;
-                AktualnyGracz.Statystyki.Kolekcje += 100;
-                foreach (var item in AktualnyGracz.Przedmioty)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.Owoce)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.Warzywa)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.Zboza)
-                {
-                    item.Ilosc += 100;
-                    item.PoziomZakwasu += 10;
-                }
-                foreach (var item in AktualnyGracz.ProduktyZwierzece)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.ProduktyPrzetworzone)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.Ryby)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.Grzyby)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.ZywnoscPozostala)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.Zwierzeta)
-                    item.Ilosc += 100;
-                foreach (var item in AktualnyGracz.Obiady)
-                    item.Ilosc += 100;
-                */
-                //KONIEC DEBUG
                 NowyDzienEvent?.Invoke();
                 await ZapiszAktualnegoGracza();
                 CzyPokazacWideo = true;
