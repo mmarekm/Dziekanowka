@@ -41,7 +41,7 @@ namespace Dziekanowka.Mechanizm
         public static string[] Sklepiczek = ["kosc", ""];
         public static string[] SklepiczekWymagane = ["zielonaKuleczka", ""];
         public static List<string> ZwierzetaNaDrodze = ["krowa", "owca", "koza", "koń", "słoń", "żyrafa"];
-        public static readonly List<string> WszystkieMisje = [Misje.Chlopiec, Misje.Kot, Misje.FanZdrowia, Misje.DomMleka, Misje.KuchniaMorska, Misje.SlodkaBuleczka, Misje.SeryLesne, Misje.PlatkiGorskie, Misje.Stajenny];
+        public static readonly List<string> WszystkieMisje = [Misje.Chlopiec, Misje.Kot, Misje.FanZdrowia, Misje.DomMleka, Misje.KuchniaMorska, Misje.SlodkaBuleczka, Misje.SeryLesne, Misje.PlatkiGorskie, Misje.Stajenny, Misje.WiesSurowkaWarzywna];
         private static readonly Dictionary<string, Func<string[]>> GeneratoryDanychMisji = new()
         {
             [Misje.Chlopiec] = () => [ZbiorChlopiecMiska![Random.Shared.Next(ZbiorChlopiecMiska.Count)], "", "", "", "", "", "", "", "", ""],
@@ -53,6 +53,18 @@ namespace Dziekanowka.Mechanizm
             [Misje.SeryLesne] = () => [Sery![Random.Shared.Next(Sery.Count)], "", "", "", "", "", "", "", "", ""],
             [Misje.PlatkiGorskie] = () => [Mleka![Random.Shared.Next(Mleka.Count)], Platki![Random.Shared.Next(Platki.Count)], "", "", "", "", "", "", "", ""],
             [Misje.Stajenny] = () => [Ciasta![Random.Shared.Next(Ciasta.Count)], "", "", "", "", "", "", "", "", ""],
+            [Misje.WiesSurowkaWarzywna] = () =>
+            {
+                var kopiaSkladnikow = new List<string>(skladnikiSurowki!);
+                var wybrane = new string[3];
+                for (int i = 0; i < 3; i++)
+                {
+                    int idx = Random.Shared.Next(kopiaSkladnikow.Count);
+                    wybrane[i] = kopiaSkladnikow[idx];
+                    kopiaSkladnikow.RemoveAt(idx);
+                }
+                return [startSurowki![Random.Shared.Next(startSurowki.Count)], wybrane[0], wybrane[1], wybrane[2], "", "", "", "", "", ""];
+            }
         };
         public static string[] WylosujDaneMisji(string misja) => GeneratoryDanychMisji[misja]();
         public static string WylosujNastepnaMisje(List<string> worekMisji)

@@ -13,6 +13,7 @@ namespace Dziekanowka.Gracza
         public const string SeryLesne = "SeryLesne";
         public const string PlatkiGorskie = "PlatkiGorskie";
         public const string Stajenny = "Stajenny";
+        public const string WiesSurowkaWarzywna = "WiesSurowkaWarzywna";
     }
     public class Statystyki
     {
