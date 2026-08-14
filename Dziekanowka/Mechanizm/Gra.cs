@@ -44,15 +44,15 @@ namespace Dziekanowka.Mechanizm
         public static readonly List<string> WszystkieMisje = [Misje.Chlopiec, Misje.Kot, Misje.FanZdrowia, Misje.DomMleka, Misje.KuchniaMorska, Misje.SlodkaBuleczka, Misje.SeryLesne, Misje.PlatkiGorskie, Misje.Stajenny];
         private static readonly Dictionary<string, Func<string[]>> GeneratoryDanychMisji = new()
         {
-            [Misje.Chlopiec] = () => [ZbiorChlopiecMiska![Random.Shared.Next(ZbiorChlopiecMiska.Count)], "", ""],
-            [Misje.Kot] = () => [Ryby![Random.Shared.Next(Ryby.Count)], "", ""],
-            [Misje.FanZdrowia] = () => [Warzywa![Random.Shared.Next(Warzywa.Count)], Owoce![Random.Shared.Next(Owoce.Count)], Soki![Random.Shared.Next(Soki.Count)]],
-            [Misje.DomMleka] = () => [Mleka![Random.Shared.Next(Mleka.Count)], "", ""],
-            [Misje.KuchniaMorska] = () => [Restauracja![Random.Shared.Next(Restauracja.Count)], "", ""],
-            [Misje.SlodkaBuleczka] = () => [SlodkieBuleczki![Random.Shared.Next(SlodkieBuleczki.Count)], "", ""],
-            [Misje.SeryLesne] = () => [Sery![Random.Shared.Next(Sery.Count)], "", ""],
-            [Misje.PlatkiGorskie] = () => [Mleka![Random.Shared.Next(Mleka.Count)], Platki![Random.Shared.Next(Platki.Count)], ""],
-            [Misje.Stajenny] = () => [Ciasta![Random.Shared.Next(Ciasta.Count)], "", ""],
+            [Misje.Chlopiec] = () => [ZbiorChlopiecMiska![Random.Shared.Next(ZbiorChlopiecMiska.Count)], "", "", "", "", "", "", "", "", ""],
+            [Misje.Kot] = () => [Ryby![Random.Shared.Next(Ryby.Count)], "", "", "", "", "", "", "", "", ""],
+            [Misje.FanZdrowia] = () => [Warzywa![Random.Shared.Next(Warzywa.Count)], Owoce![Random.Shared.Next(Owoce.Count)], Soki![Random.Shared.Next(Soki.Count)], "", "", "", "", "", "", ""],
+            [Misje.DomMleka] = () => [Mleka![Random.Shared.Next(Mleka.Count)], "", "", "", "", "", "", "", "", ""],
+            [Misje.KuchniaMorska] = () => [Restauracja![Random.Shared.Next(Restauracja.Count)], "", "", "", "", "", "", "", "", ""],
+            [Misje.SlodkaBuleczka] = () => [SlodkieBuleczki![Random.Shared.Next(SlodkieBuleczki.Count)], "", "", "", "", "", "", "", "", ""],
+            [Misje.SeryLesne] = () => [Sery![Random.Shared.Next(Sery.Count)], "", "", "", "", "", "", "", "", ""],
+            [Misje.PlatkiGorskie] = () => [Mleka![Random.Shared.Next(Mleka.Count)], Platki![Random.Shared.Next(Platki.Count)], "", "", "", "", "", "", "", ""],
+            [Misje.Stajenny] = () => [Ciasta![Random.Shared.Next(Ciasta.Count)], "", "", "", "", "", "", "", "", ""],
         };
         public static string[] WylosujDaneMisji(string misja) => GeneratoryDanychMisji[misja]();
         public static string WylosujNastepnaMisje(List<string> worekMisji)
