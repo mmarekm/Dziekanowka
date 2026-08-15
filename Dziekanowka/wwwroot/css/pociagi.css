@@ -428,13 +428,13 @@
     .pociag10miastoMorskieAnimacja .celPociagu, .pociag11miastoMorskieAnimacja .celPociagu, .pociag21miastoMorskieAnimacja .celPociagu {
         transform: scaleX(-1);
     }
-.pociag13miastoGorskieAnimacja, .pociag14miastoGorskieAnimacja, .pociag23miastoGorskieAnimacja {
+.pociag13miastoGorskieAnimacja, .pociag14miastoGorskieAnimacja, .pociag23miastoGorskieAnimacja, .pociag27miastoGorskieAnimacja {
     left: 700px;
     top: 223px;
     z-index: 3;
     transform: scaleX(-1);
 }
-    .pociag13miastoGorskieAnimacja .celPociagu, .pociag14miastoGorskieAnimacja .celPociagu, .pociag23miastoGorskieAnimacja .celPociagu {
+    .pociag13miastoGorskieAnimacja .celPociagu, .pociag14miastoGorskieAnimacja .celPociagu, .pociag23miastoGorskieAnimacja .celPociagu, .pociag27miastoGorskieAnimacja .celPociagu {
         transform: scaleX(-1);
     }
 .pociag26miastoWiejskieAnimacja {

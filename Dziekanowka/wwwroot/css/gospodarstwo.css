@@ -81,6 +81,13 @@
     height: 365px;
     z-index: 2;
 }
+.doOgrodekGuzik {
+    top: 80px;
+    left: 38px;
+    width: 152px;
+    height: 80px;
+    z-index: 3;
+}
 @keyframes krecenieKosiarka {
     to {
         transform: rotate(-7200deg);

@@ -4,6 +4,7 @@
     {
         Start,
         Gospodarstwo,
+        Ogrodek,
         DomWiatrolap,
         DomSalon,
         DomSciagawka,
@@ -77,7 +78,9 @@
         KuchniaMorska,
         GorskiePlatki,
         OwceGorskie,
+        StacjaJaskinia,
         DzieciCiekawe,
+        WiesSurowkaKwiaty,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
@@ -118,6 +121,7 @@
         BonusZaOwce,
         ZjedzaPlatki,
         CiastoDlaStajennego,
-        DzieciCiekaweCiesza
+        DzieciCiekaweCiesza,
+        BabciaDajeKwiaty
     }
 }

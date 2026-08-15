@@ -1,0 +1,42 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="wiesSurowkaKwiatyWidok widok rel">
+    <div class="abs wiesSurowkaKwiatyWyjscie"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoWiejskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    @if (Gracz.Statystyki.AktualnaMisja == Misje.WiesSurowkaWarzywna)
+    {
+        <div class="abs dawanieSurowkiNaWsi @(jestSurowka ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajSurowke">
+            <div class="abs startPotrzebnejSurowkiNaWsi"><img class="obrazekContain" src="img/dom/kuchnia/@(DaneMisji[0]).png" /></div>
+            <div class="abs skladnik1PotrzebnejSurowkiNaWsi"><img class="obrazekContain" src="img/przedmioty/warzywa/@(DaneMisji[1]).png" /></div>
+            <div class="abs skladnik2PotrzebnejSurowkiNaWsi"><img class="obrazekContain" src="img/przedmioty/warzywa/@(DaneMisji[2]).png" /></div>
+            <div class="abs skladnik3PotrzebnejSurowkiNaWsi"><img class="obrazekContain" src="img/przedmioty/warzywa/@(DaneMisji[3]).png" /></div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private string[] DaneMisji => Gracz.Statystyki.DaneMisji;
+    private HashSet<string> WymaganeWarzywa => [DaneMisji[1], DaneMisji[2], DaneMisji[3]];
+    private bool PasujeDoMisji(SurowkaGracza s)
+    {
+        if (!s.Warzywa.SetEquals(WymaganeWarzywa)) return false;
+        return DaneMisji[0] == "majonez" ? s.JestMajonez : s.Jajo == DaneMisji[0];
+    }
+    private bool jestSurowka => Gracz.Statystyki.AktualnaMisja == Misje.WiesSurowkaWarzywna && Gracz.Surowki.Any(PasujeDoMisji);
+    private async Task DajSurowke()
+    {
+        if (!jestSurowka) return;
+        var surowka = Gracz.Surowki.First(PasujeDoMisji);
+        Gracz.Surowki.Remove(surowka);
+        Gracz.Statystyki.Ogrodek++;
+        Gracz.LosujNowaMisje();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.BabciaDajeKwiaty);
+        await Task.Delay(6000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.WiesSurowkaKwiaty);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

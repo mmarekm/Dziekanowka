@@ -13,11 +13,16 @@
     <div class="abs doPrzetworniGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Przetwornia)" class="wyroznionyGuzik"><img src="img/budynki/przetwornia.png" /></button></div>
     <div class="abs doRzezniGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Rzeznia)" class="wyroznionyGuzik"><img src="img/teren/doRzezni.png" /></button></div>
     <div class="abs doZwierzyncaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Zwierzyniec)" class="wyroznionyGuzik"><img src="img/teren/doZwierzyncaKlik.png"/></button></div>
+    @if (poziomOgrodka > 0)
+    {
+        <div class="abs doOgrodekGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Ogrodek)" class="wyroznionyGuzik"><img class="obrazekContain" src="img/dom/ogrod/ogrod@(poziomOgrodka).png" /></button></div>
+    }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int poziomOgrodka => Gracz.Statystyki.Ogrodek;
     private bool Powitaj { get; set; } = false;
     private bool Znikanie { get; set; } = false;
     private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";

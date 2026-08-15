@@ -21,7 +21,7 @@ namespace Dziekanowka.Mechanizm
                 AktualnyGracz!.Statystyki.DzienLogowania = DateTime.Now.Day;
                 AktualnyGracz.Statystyki.MiesiacLogowania = DateTime.Now.Month;
                 AktualnyGracz.Monety += AktualnyGracz.Statystyki.BonusDzienny + AktualnyGracz.Przedmiot("siano").Ilosc;
-                AktualnyGracz.Statystyki.Bonusy = ["miodUl", "kawaSalon", "karczowiskoSiano", "winoMorskie", "owceGorskie", "dzieciCiekawe"];
+                AktualnyGracz.Statystyki.Bonusy = ["miodUl", "kawaSalon", "karczowiskoSiano", "winoMorskie", "owceGorskie", "dzieciCiekawe", "pociagZGor"];
                 AktualnyGracz.Statystyki.ZwierzeNaDrodze = Gra.ZwierzetaNaDrodze[Random.Shared.Next(Gra.ZwierzetaNaDrodze.Count)];
                 AktualnyGracz.Warzywa.ForEach(w => w.Ilosc = w.Ilosc > 0 ? w.Ilosc - (w.Ilosc / 5 + 1) : w.Ilosc);
                 AktualnyGracz.Owoce.ForEach(o => o.Ilosc = o.Ilosc > 0 ? o.Ilosc - (o.Ilosc / 5 + 1) : o.Ilosc);

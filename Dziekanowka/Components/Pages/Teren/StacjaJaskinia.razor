@@ -1,0 +1,17 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="stacjaJaskiniaWidok widok rel">
+
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private async Task WezZwierze(string zwierze)
+    {
+        Gracz.Zwierze(zwierze).Ilosc++;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoGorskie);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

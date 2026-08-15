@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using HtmlAgilityPack;
-
 namespace Dziekanowka.Mechanizm
 {
     public static class WyswietlanieSlowa
@@ -154,7 +153,6 @@ namespace Dziekanowka.Mechanizm
             }
             return sb.ToString();
         }
-
         public static async Task<string> PobierzFragment(string nazwaPliku)
         {
             var sciezka = Path.Combine(_bazowa, "Slowo", $"{nazwaPliku}.html");
@@ -177,21 +175,8 @@ namespace Dziekanowka.Mechanizm
             return wyniki;
         }
         public static string[] PobierzDzis() => Klucz.TryGetValue(DateTime.Now.ToString("yyyyMMdd"), out var pliki) ? pliki : [];
-
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260803"] = ["pn18zwIIA"],
-            ["20260804"] = ["wt18zwIIA", "JanaMariiVianneya"],
-            ["20260805"] = ["sr18zwII"],
-            ["20260806"] = ["PrzemienieniePanskieA"],
-            ["20260807"] = ["pt18zwII"],
-            ["20260808"] = ["sb18zwII", "Dominika"],
-            ["20260809"] = ["Ndz19zwA"],
-            ["20260810"] = ["Wawrzynca"],
-            ["20260811"] = ["wt19zwII", "Klary"],
-            ["20260812"] = ["sr19zwII"],
-            ["20260813"] = ["cz19zwII"],
-            ["20260814"] = ["pt19zwII", "MaksymilianaMariiKolbego", "WigiliaWniebowzieciaNMP"],
             ["20260815"] = ["WniebowziecieNMP"],
             ["20260816"] = ["Ndz20zwA"],
             ["20260817"] = ["pn20zwII", "Jacka"],
@@ -270,7 +255,15 @@ namespace Dziekanowka.Mechanizm
             ["20261029"] = ["cz30zwII"],
             ["20261030"] = ["pt30zwII"],
             ["20261031"] = ["sb30zwII"],
-            ["20261101"] = ["WszystkichSwietych"]
+            ["20261101"] = ["WszystkichSwietych"],
+            ["20261102"] = ["WszystkichWiernychZmarlych"],
+            ["20261103"] = ["wt31zwII"],
+            ["20261104"] = ["sr31zwII", "KarolaBoromeusza"],
+            ["20261105"] = ["cz31zwII"],
+            ["20261106"] = ["pt31zwII"],
+            ["20261107"] = ["sb31zwII"],
+            ["20261108"] = ["Ndz32zwA"],
+            ["20261109"] = ["RocznicaPoswieceniaBazylikiLateranskiej"]
         };
-    }
+    };
 }

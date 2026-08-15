@@ -79,6 +79,13 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
         </div>
+        <!--@if (Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
+        {
+            <div class="abs pociagKazdyAnimacja pociag25@(stacja)Animacja @pociagi[25].klasa" @onclick="() => WsiadzDoPociagu(25)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/pociagZGorLabel.png" /></div>
+            </div>
+        }-->
     }
     @if (stacja == "miastoMorskie")
     {
@@ -108,10 +115,12 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
         </div>
-        <div class="abs pociagKazdyAnimacja pociag23@(stacja)Animacja @pociagi[23].klasa" @onclick="() => WsiadzDoPociagu(23)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
+        @if (!Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
+        {
+        <div class="abs pociagKazdyAnimacja pociag27@(stacja)Animacja @pociagi[27].klasa" @onclick="() => WsiadzDoPociagu(27)">
+            <img class="obrazekWypelnia" src="img/miasto/pociagCzarny.png" />
         </div>
+        }
     }
     @if (stacja == "miastoWiejskie")
     {
@@ -163,6 +172,10 @@
                     }
                 </div>
             }
+            <!--@if (stacja == "miastoGorskie" && !Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
+            {
+                <div><img class="mniejszyLabelPociagu" src="img/miasto/pociagCzarny.png" /></div><div>78</div>
+            }-->
         </div>
         <div class="abs zamknijRozklady"><button class="wyroznionyGuzik" @onclick="() => wyswietlonyRozklad = false"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     </div>
@@ -193,6 +206,7 @@
     private int[] odjazdyMiastoGorskieDoMiasta3 = [18, 38, 58, 88];
     private int[] odjazdyMiastoGorskieDoMiastoMorskie = [48];
     private int[] odjazdyMiastoGorskieDoMetropolii1 = [8, 28, 68];
+    private int[] odjazdyMiastoGorskiePociagCzarny = [78];
     private int[] odjazdyMetropolia1DoMiasta3 = [8, 26, 44, 62, 80];
     private int[] odjazdyMetropolia1DoMiastoLesne = [12, 37, 62, 87];
     private int[] odjazdyMetropolia1DoMiastoBiale = [25, 50, 75, 95];
@@ -204,7 +218,7 @@
     {
         {1, ("", false)}, {2, ("", false)}, {3, ("", false)}, {4, ("", false)}, {5, ("", false)}, {6, ("", false)}, {7, ("", false)}, {8, ("", false)}, {9, ("", false)}, {10, ("", false)},
         {11, ("", false)}, {12, ("", false)}, {13, ("", false)}, {14, ("", false)}, {15, ("", false)}, {16, ("", false)}, {17, ("", false)}, {18, ("", false)}, {19, ("", false)}, {20, ("", false)},
-        {21, ("", false)}, {22, ("", false)}, {23, ("", false)}, {24, ("", false)}, {25, ("", false)}, {26, ("", false)}
+        {21, ("", false)}, {22, ("", false)}, {23, ("", false)}, {24, ("", false)}, {25, ("", false)}, {26, ("", false)}, {27, ("", false)}
     };
     private bool CzyMetropolia => stacja == "metropolia1";
     private IEnumerable<(string obrazek, int[] godziny)> AktualnyRozklad()
@@ -279,6 +293,7 @@
             pociagi[13] = StanPociagu("pociag13", odjazdyMiastoGorskieDoMiasta3);
             pociagi[14] = StanPociagu("pociag14", odjazdyMiastoGorskieDoMiastoMorskie);
             pociagi[23] = StanPociagu("pociag23", odjazdyMiastoGorskieDoMetropolii1);
+            pociagi[27] = StanPociagu("pociag27", odjazdyMiastoGorskiePociagCzarny);
         }
         if (stacja == "miastoWiejskie")
         {
@@ -295,7 +310,7 @@
         }
     }
     private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, "miastoBiale" => EkranGry.MiastoBiale, "miastoMorskie" => EkranGry.MiastoMorskie, "miastoGorskie" => EkranGry.MiastoGorskie, "miastoWiejskie" => EkranGry.MiastoWiejskie, _ => throw new ArgumentOutOfRangeException() };
-    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 or 10 or 18 => "miastoLesne", 2 or 4 or 13 or 16 => "miasto3", 3 or 5 or 11 or 20 => "miastoBiale", 7 or 8 or 9 or 14 or 22 => "miastoMorskie", 12 or 24 => "miastoGorskie", 25 => "miastoWiejskie", 15 or 17 or 19 or 21 or 23 or 26 => "metropolia1",  _ => throw new ArgumentOutOfRangeException() };
+    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 or 10 or 18 => "miastoLesne", 2 or 4 or 13 or 16 => "miasto3", 3 or 5 or 11 or 20 => "miastoBiale", 7 or 8 or 9 or 14 or 22 => "miastoMorskie", 12 or 24 or 27 => "miastoGorskie", 25 => "miastoWiejskie", 15 or 17 or 19 or 21 or 23 or 26 => "metropolia1",  _ => throw new ArgumentOutOfRangeException() };
     private int cenaBiletu => stacja is "miasto3" or "miastoMorskie" ? 7 : stacja is "metropolia1" ? 6 : 10;
     private async Task KupBilet()
     {
@@ -310,10 +325,17 @@
         Gracz.Przedmiot("biletPociag").Ilosc--;
         czas = 0;
         Gracz.Statystyki.Stacja = CelPociagu(nrPociagu);
-        await NaZmianeEkranu.InvokeAsync(EkranGry.PociagJedzie);
-        await Task.Delay(7000);
-        await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
-        await ladowanieGracza.ZapiszAktualnegoGracza();
+        if (nrPociagu == 27)
+        {
+            await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaJaskinia);
+        }
+        else
+        {
+            await NaZmianeEkranu.InvokeAsync(EkranGry.PociagJedzie);
+            await Task.Delay(7000);
+            await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+        }
     }
     private string StronaPrzyjazdu(string nazwa) => PrawyTor(nazwa) ? "pociagNaPrawo" : "pociagNaLewo";
     private string StronaOdjazdu(string nazwa) => PrawyTor(nazwa) ? "pociagNaLewo" : "pociagNaPrawo";

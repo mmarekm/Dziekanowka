@@ -55,6 +55,12 @@
 .dzieciCiekaweWidok {
     background-image: url('../img/miasto/miastoWiejskie/dzieciCiekaweWidok.png');
 }
+.wiesSurowkaKwiatyWidok {
+    background-image: url('../img/miasto/miastoWiejskie/wiesSurowkaKwiatyWidok.png');
+}
+.stacjaJaskiniaWidok {
+    background-image: url('../img/miasto/stacjaJaskiniaWidok.jpg');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1130,6 +1136,13 @@
     left: 251px;
     z-index: 2;
 }
+.miastoWiejskieDoSurowkaKwiaty {
+    width: 189px;
+    height: 135px;
+    top: 162px;
+    left: 444px;
+    z-index: 2;
+}
 .dzieciCiekaweWyjscie {
     width: 471px;
     height: 852px;
@@ -1142,4 +1155,41 @@
     top: 200px;
     width: 550px;
     height: 122px;
+}
+.wiesSurowkaKwiatyWyjscie {
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    z-index: 2;
+}
+.dawanieSurowkiNaWsi {
+    left: 5px;
+    top: 200px;
+    width: 500px;
+    height: 300px;
+}
+.startPotrzebnejSurowkiNaWsi {
+    left: 200px;
+    top: 0;
+    width: 100px;
+    height: 100px;
+}
+.skladnik1PotrzebnejSurowkiNaWsi {
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+}
+.skladnik2PotrzebnejSurowkiNaWsi {
+    left: 200px;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+}
+.skladnik3PotrzebnejSurowkiNaWsi {
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
 }
