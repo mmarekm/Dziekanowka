@@ -2,16 +2,22 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="stacjaJaskiniaWidok widok rel">
-
+    @foreach (var zwierze in zwierzeta)
+    {
+        <div class="abs @(zwierze)StacjaJaskinia"><button class="wyroznionyGuzik" @onclick="async () => await WezZwierze(zwierze)"><img class="obrazekSieMiesci" src="img/zwierzyniec/@(zwierze).png"/></button></div>
+    }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string[] zwierzeta = ["kura", "kaczka", "ges", "indyk"];
     private async Task WezZwierze(string zwierze)
     {
         Gracz.Zwierze(zwierze).Ilosc++;
-        await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoGorskie);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PociagCzarnyZTunelu);
+        await Task.Delay(5500);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }
