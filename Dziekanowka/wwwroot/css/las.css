@@ -16,6 +16,21 @@
 .domSlodkichBulekWidok {
     background-image: url('../img/teren/las/domSlodkichBulekWidok.png');
 }
+.las2Widok {
+    background-image: url('../img/teren/las/las2Widok.png');
+}
+.las3Widok {
+    background-image: url('../img/teren/las/las3Widok.png');
+}
+.las4Widok {
+    background-image: url('../img/teren/las/las4Widok.png');
+}
+.las5Widok {
+    background-image: url('../img/teren/las/las5Widok.png');
+}
+.las6Widok {
+    background-image: url('../img/teren/las/las6Widok.png');
+}
 .lMonetLasIntro {
     bottom: 13px;
     left: 410px;
@@ -356,15 +371,87 @@
     left: 40px;
     bottom: 165px;
 }
+.las1DoLas2 {
+    width: 281px;
+    height: 200px;
+    top: 215px;
+    right: 270px;
+    z-index: 2;
+}
+.las2DoLas1 {
+    top: 208px;
+    right: 0;
+    width: 273px;
+    height: 232px;
+    z-index: 2;
+}
+.las1DoLas3 {
+    left: 225px;
+    top: 267px;
+    width: 335px;
+    height: 220px;
+    z-index: 2;
+}
+.las3DoLas1 {
+    bottom: 0;
+    right: 120px;
+    width: 551px;
+    height: 163px;
+    z-index: 2;
+}
+.las2DoLas4 {
+    width: 375px;
+    height: 207px;
+    top: 280px;
+    left: 191px;
+    z-index: 2;
+}
+.las4DoLas2 {
+    top: 380px;
+    right: 315px;
+    width: 180px;
+    height: 189px;
+    z-index: 0;
+}
+.las2DoLas5 {
+    width: 494px;
+    height: 112px;
+    bottom: 0;
+    left: 690px;
+    z-index: 2;
+}
+.las5DoLas2 {
+    bottom: 0;
+    right: 0;
+    width: 386px;
+    height: 245px;
+    z-index: 2;
+}
+.las3DoLas6 {
+    width: 354px;
+    height: 99px;
+    bottom: 0;
+    left: 530px;
+    z-index: 2;
+}
+.las6DoLas3 {
+    width: 326px;
+    height: 148px;
+    top: 314px;
+    right: 164px;
+    z-index: 2;
+}
 @keyframes zaswiecenieMonet {
     0% {
         color: gray;
         text-shadow: none;
     }
+
     30% {
         color: gold;
         text-shadow: 0 0 8px gold;
     }
+
     100% {
         color: gray;
         text-shadow: none;

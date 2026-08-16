@@ -1,10 +1,11 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
+
 <div class="stacjaJaskiniaWidok widok rel">
     @foreach (var zwierze in zwierzeta)
     {
-        <div class="abs @(zwierze)StacjaJaskinia"><button class="wyroznionyGuzik" @onclick="async () => await WezZwierze(zwierze)"><img class="obrazekSieMiesci" src="img/zwierzyniec/@(zwierze).png"/></button></div>
+        <div class="abs @(zwierze)StacjaJaskinia"><button class="wyroznionyGuzik" @onclick="async () => await WezZwierze(zwierze)"><img class="obrazekSieMiesci" src="img/miasto/@(zwierze)StacjaJaskinia.png"/></button></div>
     }
 </div>
 

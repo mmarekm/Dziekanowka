@@ -1193,3 +1193,31 @@
     width: 100px;
     height: 100px;
 }
+.kuraStacjaJaskinia {
+    left: 1200px;
+    bottom: 146px;
+    width: 82px;
+    height: 102px;
+    z-index: 2;
+}
+.kaczkaStacjaJaskinia {
+    left: 1320px;
+    bottom: 138px;
+    width: 103px;
+    height: 121px;
+    z-index: 2;
+}
+.indykStacjaJaskinia {
+    left: 1440px;
+    bottom: 141px;
+    width: 147px;
+    height: 178px;
+    z-index: 2;
+}
+.gesStacjaJaskinia {
+    left: 1593px;
+    bottom: 115px;
+    width: 108px;
+    height: 163px;
+    z-index: 2;
+}

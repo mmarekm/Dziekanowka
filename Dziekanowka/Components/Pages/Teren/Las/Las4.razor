@@ -1,0 +1,10 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+<div class="las4Widok widok rel">
+    <div class="abs las4DoLas2"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Las2)" class="wyroznionyGuzik"><img src='img/teren/las/las4DoLas2.png' /></button></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+}

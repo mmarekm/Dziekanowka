@@ -246,6 +246,11 @@
     width: 60px;
     height: 60px;
 }
+.labelCzarnegoPociagu {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
 .rozkladPociagu2 {
     display: flex;
     font-size: 40px;

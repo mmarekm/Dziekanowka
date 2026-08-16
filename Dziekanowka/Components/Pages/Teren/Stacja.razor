@@ -79,13 +79,6 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
         </div>
-        <!--@if (Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
-        {
-            <div class="abs pociagKazdyAnimacja pociag25@(stacja)Animacja @pociagi[25].klasa" @onclick="() => WsiadzDoPociagu(25)">
-                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/pociagZGorLabel.png" /></div>
-            </div>
-        }-->
     }
     @if (stacja == "miastoMorskie")
     {
@@ -115,7 +108,11 @@
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
         </div>
-        @if (!Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
+        <div class="abs pociagKazdyAnimacja pociag23@(stacja)Animacja @pociagi[23].klasa" @onclick="() => WsiadzDoPociagu(23)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
+        </div>
+        @if (Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
         {
         <div class="abs pociagKazdyAnimacja pociag27@(stacja)Animacja @pociagi[27].klasa" @onclick="() => WsiadzDoPociagu(27)">
             <img class="obrazekWypelnia" src="img/miasto/pociagCzarny.png" />
@@ -172,10 +169,10 @@
                     }
                 </div>
             }
-            <!--@if (stacja == "miastoGorskie" && !Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
+            @if (stacja == "miastoGorskie" && Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
             {
-                <div><img class="mniejszyLabelPociagu" src="img/miasto/pociagCzarny.png" /></div><div>78</div>
-            }-->
+                <div class="rozkladPociagu1"><div><img class="labelCzarnegoPociagu" src="img/miasto/pociagCzarny.png" /></div><div>78</div></div>
+            }
         </div>
         <div class="abs zamknijRozklady"><button class="wyroznionyGuzik" @onclick="() => wyswietlonyRozklad = false"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     </div>
@@ -327,6 +324,7 @@
         Gracz.Statystyki.Stacja = CelPociagu(nrPociagu);
         if (nrPociagu == 27)
         {
+            Gracz.Statystyki.Bonusy.Remove("pociagZGor");
             await NaZmianeEkranu.InvokeAsync(EkranGry.PociagCzarnyDoTunelu);
             await Task.Delay(8000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaJaskinia);
@@ -336,8 +334,8 @@
             await NaZmianeEkranu.InvokeAsync(EkranGry.PociagJedzie);
             await Task.Delay(7000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
-            await ladowanieGracza.ZapiszAktualnegoGracza();
         }
+        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private string StronaPrzyjazdu(string nazwa) => PrawyTor(nazwa) ? "pociagNaPrawo" : "pociagNaLewo";
     private string StronaOdjazdu(string nazwa) => PrawyTor(nazwa) ? "pociagNaLewo" : "pociagNaPrawo";
