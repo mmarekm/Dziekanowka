@@ -122,6 +122,8 @@
         ZjedzaPlatki,
         CiastoDlaStajennego,
         DzieciCiekaweCiesza,
-        BabciaDajeKwiaty
+        BabciaDajeKwiaty,
+        PociagCzarnyDoTunelu,
+        PociagCzarnyZTunelu
     }
 }

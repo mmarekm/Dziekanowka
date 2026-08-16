@@ -2,6 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="wiesSurowkaKwiatyWidok widok rel">
+    <div class="abs @KlasaPowitania">3 <img class="obrazekSieMiesci" src="img/przedmioty/drewno.png" /></div>
     <div class="abs wiesSurowkaKwiatyWyjscie"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoWiejskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (Gracz.Statystyki.AktualnaMisja == Misje.WiesSurowkaWarzywna)
@@ -18,6 +19,26 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (Gracz.Statystyki.OtwarteOkno == "drewnoZeWsi")
+        {
+            Gracz.Statystyki.OtwarteOkno = "";
+            Powitaj = true;
+            Znikanie = false;
+            StateHasChanged();
+            await Task.Delay(100);
+            Znikanie = true;
+            StateHasChanged();
+            await Task.Delay(7000);
+            Powitaj = false;
+            Znikanie = false;
+            StateHasChanged();
+        }
+    }
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
     private string[] DaneMisji => Gracz.Statystyki.DaneMisji;
     private HashSet<string> WymaganeWarzywa => [DaneMisji[1], DaneMisji[2], DaneMisji[3]];
@@ -32,7 +53,13 @@
         if (!jestSurowka) return;
         var surowka = Gracz.Surowki.First(PasujeDoMisji);
         Gracz.Surowki.Remove(surowka);
-        Gracz.Statystyki.Ogrodek++;
+        if (Gracz.Statystyki.Ogrodek < 10)
+            Gracz.Statystyki.Ogrodek++;
+        else
+        {
+            Gracz.Przedmiot("drewno").Ilosc += 3;
+            Gracz.Statystyki.OtwarteOkno = "drewnoZeWsi";
+        }
         Gracz.LosujNowaMisje();
         await NaZmianeEkranu.InvokeAsync(EkranGry.BabciaDajeKwiaty);
         await Task.Delay(6000);

@@ -327,6 +327,8 @@
         Gracz.Statystyki.Stacja = CelPociagu(nrPociagu);
         if (nrPociagu == 27)
         {
+            await NaZmianeEkranu.InvokeAsync(EkranGry.PociagCzarnyDoTunelu);
+            await Task.Delay(8000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaJaskinia);
         }
         else
