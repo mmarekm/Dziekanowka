@@ -59,6 +59,7 @@
         MiastoMorskie,
         MiastoGorskie,
         MiastoWiejskie,
+        MiastoKawy,
         SklepMiasto3,
         Kiosk,
         Stacja,
@@ -86,6 +87,8 @@
         StacjaJaskinia,
         DzieciCiekawe,
         WiesSurowkaKwiaty,
+        PotrzebaKawy,
+        HodowcaKawy,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
@@ -128,6 +131,7 @@
         CiastoDlaStajennego,
         DzieciCiekaweCiesza,
         BabciaDajeKwiaty,
+        KlaunNalewaKawe,
         PociagCzarnyDoTunelu,
         PociagCzarnyZTunelu
     }

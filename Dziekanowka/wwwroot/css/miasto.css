@@ -24,6 +24,10 @@
     background-image: url('../img/miasto/miastoWiejskieWidok.png');
     overflow: hidden;
 }
+.miastoWiejskieWidok {
+    background-image: url('../img/miasto/miastoKawyWidok.jpg');
+    overflow: hidden;
+}
 .miasto3Widok {
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;

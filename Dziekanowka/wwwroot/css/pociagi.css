@@ -16,6 +16,9 @@
 .stacjamiastoWiejskieWidok {
     background-image: url('../img/miasto/stacjaMiastoWiejskieWidok.png');
 }
+.stacjamiastoKawyWidok {
+    background-image: url('../img/miasto/stacjaMiastoKawyWidok.png');
+}
 .stacjametropolia1Widok {
     background-image: url('../img/miasto/stacjaMetropolia1Widok.png');
 }
@@ -64,6 +67,13 @@
     height: 68px;
     z-index: 2;
 }
+.wyjscieStacjamiastoKawy {
+    bottom: 0;
+    left: 585px;
+    width: 558px;
+    height: 103px;
+    z-index: 2;
+}
 .ileBiletowKazdeMiasto {
     top: 10px;
     left: 100px;
@@ -99,6 +109,9 @@
 }
 .ileBiletowLmiastoWiejskie {
     color: yellow;
+}
+.ileBiletowLmiastoKawy {
+    color: saddlebrown;
 }
 .kupBiletStacjamiasto3 {
     width: 104px;
@@ -136,6 +149,12 @@
     bottom: 273px;
     right: 425px;
 }
+.kupBiletStacjamiastoKawy {
+    width: 167px;
+    height: 71px;
+    bottom: 187px;
+    left: 363px;
+}
 .kupBiletStacjametropolia1 {
     width: 67px;
     height: 41px;
@@ -171,6 +190,9 @@
 }
 .stacjaCzasmiastoWiejskie {
     color: yellow;
+}
+.stacjaCzasmiastoKawy {
+    color: saddlebrown;
 }
 .zobaczRozkladStacjimiasto3 {
     bottom: 0;
@@ -343,6 +365,13 @@
     right: 47px;
     top: 145px;
 }
+.zaslonaPociaguMiastoKawy {
+    z-index: 6;
+    width: 513px;
+    height: 393px;
+    left: 76px;
+    bottom: 249px;
+}
 .pociagKazdyAnimacja {
     width: 920px;
     height: 370px;
@@ -451,6 +480,15 @@
     .pociag26miastoWiejskieAnimacja .celPociagu {
         transform: scaleX(-1);
     }
+.pociag29miastoKawyAnimacja {
+    left: 800px;
+    top: 336px;
+    z-index: 3;
+    transform: scaleX(-1);
+}
+    .pociag29miastoKawyAnimacja .celPociagu {
+        transform: scaleX(-1);
+    }
 .pociag16metropolia1Animacja {
     z-index: 6;
     bottom: 70px;
@@ -471,7 +509,7 @@
     bottom: 503px;
     left: 0;
 }
-.pociag25metropolia1Tor4Animacja {
+.pociag25metropolia1Tor4Animacja, .pociag28metropolia1Tor4Animacja {
     z-index: 3;
     bottom: 620px;
     left: 630px;
