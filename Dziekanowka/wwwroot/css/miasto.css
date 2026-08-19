@@ -65,6 +65,9 @@
 .stacjaJaskiniaWidok {
     background-image: url('../img/miasto/stacjaJaskiniaWidok.png');
 }
+.hodowcaKawyWidok {
+    background-image: url('../img/miasto/miastoKawy/hodowcaKawyWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -875,10 +878,36 @@
     height: 285px;
     z-index: 2;
 }
+.miastoKawyDoHodowcy {
+    bottom: 105px;
+    left: 220px;
+    width: 299px;
+    height: 328px;
+    z-index: 2;
+}
+.hodowcaDoMiastaKawy {
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    z-index: 2;
+}
+.kupowanieZiarenKawyOdHodowcy {
+    width: 700px;
+    height: 200px;
+    right: 100px;
+    top: 400px;
+    border: 1px solid white;
+    display: flex;
+    font-size: 100px;
+    align-items: center;
+    justify-content: center;
+}
 @keyframes poblysk {
     0%, 100% {
         filter: brightness(1);
     }
+
     20% {
         filter: brightness(1.4) drop-shadow(0 0 8px gold);
     }
