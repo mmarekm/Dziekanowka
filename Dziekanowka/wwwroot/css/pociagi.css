@@ -69,7 +69,7 @@
 }
 .wyjscieStacjamiastoKawy {
     bottom: 0;
-    left: 585px;
+    left: 685px;
     width: 558px;
     height: 103px;
     z-index: 2;
@@ -234,6 +234,13 @@
     left: 132px;
     width: 100px;
     height: 134px;
+    z-index: 6;
+}
+.zobaczRozkladStacjimiastoKawy {
+    bottom: 25px;
+    right: 72px;
+    width: 398px;
+    height: 331px;
     z-index: 6;
 }
 .zobaczRozkladStacjimetropolia1 {

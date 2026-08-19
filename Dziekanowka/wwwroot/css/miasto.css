@@ -24,7 +24,7 @@
     background-image: url('../img/miasto/miastoWiejskieWidok.png');
     overflow: hidden;
 }
-.miastoWiejskieWidok {
+.miastoKawyWidok {
     background-image: url('../img/miasto/miastoKawyWidok.jpg');
     overflow: hidden;
 }
@@ -866,6 +866,13 @@
     right: 0;
     width: 476px;
     height: 276px;
+    z-index: 2;
+}
+.miastoKawyNaStacje {
+    top: 158px;
+    left: 165px;
+    width: 434px;
+    height: 285px;
     z-index: 2;
 }
 @keyframes poblysk {
