@@ -26,6 +26,7 @@ namespace Dziekanowka
         public List<SalatkaGracza> Salatki { get; set; } = [];
         public List<SurowkaGracza> Surowki { get; set; } = [];
         public List<PrzedmiotGracza> Przedmioty { get; set; } = PrzedmiotGracza.StartowePrzedmioty();
+        public List<DzieloZPiorIFutra> DzielaZPiorIFutra { get; set; } = DzieloZPiorIFutra.StartoweDziela();
         public Paliwo Paliwo { get; set; } = new Paliwo();
         public int PoziomBudynku(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom;
         public void UlepszBudynek(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom++;

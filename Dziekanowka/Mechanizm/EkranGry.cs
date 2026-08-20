@@ -81,6 +81,7 @@
         PrzystanekDoSerowLesnych,
         SeryLesne,
         DomMleka,
+        ManufakturaPiorIFuter,
         KuchniaMorska,
         GorskiePlatki,
         OwceGorskie,
