@@ -111,7 +111,7 @@
     color: yellow;
 }
 .ileBiletowLmiastoKawy {
-    color: saddlebrown;
+    color: brown;
 }
 .kupBiletStacjamiasto3 {
     width: 104px;
@@ -192,7 +192,7 @@
     color: yellow;
 }
 .stacjaCzasmiastoKawy {
-    color: saddlebrown;
+    color: brown;
 }
 .zobaczRozkladStacjimiasto3 {
     bottom: 0;
@@ -496,6 +496,11 @@
     .pociag29miastoKawyAnimacja .celPociagu {
         transform: scaleX(-1);
     }
+.pociag30miastoKawyAnimacja, .pociag31miastoKawyAnimacja {
+    left: 300px;
+    top: 257px;
+    z-index: 2;
+}
 .pociag16metropolia1Animacja {
     z-index: 6;
     bottom: 70px;

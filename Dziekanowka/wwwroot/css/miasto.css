@@ -68,6 +68,12 @@
 .hodowcaKawyWidok {
     background-image: url('../img/miasto/miastoKawy/hodowcaKawyWidok.png');
 }
+.potrzebaKawyWidok {
+    background-image: url('../img/miasto/miastoKawy/potrzebaKawyWidok.png');
+}
+.potrzebaKawySmutniWidok {
+    background-image: url('../img/miasto/miastoKawy/potrzebaKawySmutniWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -895,13 +901,56 @@
 .kupowanieZiarenKawyOdHodowcy {
     width: 700px;
     height: 200px;
-    right: 100px;
-    top: 400px;
-    border: 1px solid white;
+    right: 50px;
+    top: 200px;
+    color: antiquewhite;
+    box-sizing: border-box;
     display: flex;
-    font-size: 100px;
     align-items: center;
     justify-content: center;
+    gap: 15px;
+    overflow: hidden;
+}
+    .kupowanieZiarenKawyOdHodowcy > div {
+        font-size: 60px;
+        flex-shrink: 0;
+    }
+    .kupowanieZiarenKawyOdHodowcy img.obrazekContain {
+        width: 130px;
+        height: auto;
+        max-height: 180px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+.ilustracjaZiarenKawyUHodowcy {
+    width: 150px;
+    height: 150px;
+    top: 20px;
+    left: 20px;
+}
+.lZiarenKawyUHodowcy {
+    width: 100px;
+    height: 50px;
+    font-size: 49px;
+    color: antiquewhite;
+    text-align: center;
+    top: 70px;
+    left: 200px;
+}
+.lMonetUHodowcy {
+    width: 100px;
+    height: 50px;
+    font-size: 49px;
+    color: gold;
+    text-align: center;
+    top: 700px;
+    right: 200px;
+}
+.ilustracjaMonetyUHodowcy {
+    width: 55px;
+    height: 55px;
+    top: 700px;
+    right: 330px;
 }
 @keyframes poblysk {
     0%, 100% {
@@ -1261,3 +1310,34 @@
     height: 163px;
     z-index: 2;
 }
+.miastoKawyDoPotrzebaKawy {
+    left: 686px;
+    bottom: 319px;
+    width: 226px;
+    height: 252px;
+    z-index: 2;
+}
+.dajKaweSmutnym {
+    width: 400px;
+    height: 200px;
+    right: 200px;
+    bottom: 50px;
+    color: antiquewhite;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    overflow: hidden;
+}
+    .dajKaweSmutnym > div {
+        font-size: 60px;
+        flex-shrink: 0;
+    }
+    .dajKaweSmutnym img.obrazekContain {
+        width: 130px;
+        height: auto;
+        max-height: 180px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }

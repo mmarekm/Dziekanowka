@@ -1,6 +1,31 @@
 ﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="potrzebaKawy@(klasaWidok)Widok widok rel">
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoKawy)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    @if (Gracz.Statystyki.AktualnaMisja == Misje.PotrzebaKawy)
+    {
+        <div class="abs dajKaweSmutnym @(Gracz.ZywnoscP("kawa").Ilosc > 2 ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajKawe">
+            <div>3</div>
+            <img class="obrazekContain" src="img/dom/kuchnia/kawa.png"/>
+        </div>
+    }
+</div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string klasaWidok => Gracz.Statystyki.AktualnaMisja == Misje.PotrzebaKawy ? "Smutni" : "";
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private async Task DajKawe()
+    {
+        if (Gracz.ZywnoscP("kawa").Ilosc < 3) return;
+        Gracz.ZywnoscP("kawa").Ilosc -= 3;
+        Gracz.LosujNowaMisje();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KlaunNalewaKawe);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PotrzebaKawy);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
 }
