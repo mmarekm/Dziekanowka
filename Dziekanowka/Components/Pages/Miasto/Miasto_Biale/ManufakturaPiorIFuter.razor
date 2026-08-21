@@ -3,14 +3,102 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="manufakturaPiorIFuterWidok widok rel">
     <div class="abs hodowcaPrawyDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoBiale)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
-
+    <div class="abs dzielaPiorIFuter">
+    @foreach (var dzielo in dziela)
+    {
+            <div class="dzieloPiorIFuter rel @(StacNaDzielo(dzielo) ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="async () => await OtworzLubKup(dzielo)">
+            <div class="abs ilustracjaDzielaPiorIFuter"><img class="obrazekSieMiesci" src="img/przedmioty/dziela/@(dzielo).png"/></div>
+            <div class="abs lDzielaPiorIFuter">@Gracz.Dzielo(dzielo).Ilosc</div>
+                @if (dzieloWWyborze == dzielo)
+                {
+                    <div class="abs wyborProporcjiPior">
+                        <input type="number" min="0" max="@Gracz.ProduktZ("kaczkaPioro").Ilosc" @bind="wyborKaczka" @bind:event="oninput" />
+                        <input type="number" min="0" max="@Gracz.ProduktZ("gesPioro").Ilosc" @bind="wyborGes" @bind:event="oninput" />
+                        <span>@SumaWyboru / @przepisy[dzielo].PioraMix</span>
+                        <button @onclick="ZatwierdzMix">Zatwierdź</button>
+                        <button @onclick="AnulujMix">Anuluj</button>
+                    </div>
+                }
+        </div>
+    }
+    </div>
+    @foreach (var waluta in waluty)
+    {
+        <div class="abs lManufakturaPior l@(waluta)Manufaktura">@Gracz.ProduktZ(waluta).Ilosc</div>
+        <div class="abs ilustracjaManufaktura ilustracjaManufaktura@(waluta)"><img class="obrazekSieMiesci" src="img/przedmioty/rzeznia/@(waluta).png"/></div>
+    }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string[] waluty = ["kaczkaPioro", "gesPioro", "futroKrolik"];
     private string[] dziela = [ "ozdobaDoKapelusza", "zakladkaDoKsiazki", "pedzelDoMalowania", "pioroDoPisania", "maskotkaMala", "strzalaDoLuku",
     "poduszeczkaNaIgly", "wachlarzOzdobny", "czapkaZimowa", "kapeluszMixPior", "poduszkaMala", "mufkaNaRece", 
     "wypchaneZwierzatko", "pomPomZestaw", "koldraPuchowa", "kamizelkaFutrzana", "kapturFutrzany", "poduszkaPremium",
     "kolnierzOcieplacz", "kocFutrzany", "kurtkaZimowa", "strojZimowyKomplet", "plaszczReprezentacyjny", "dywanikFutrzany" ];
+    private record PrzepisDzielo(int Kaczka = 0, int Ges = 0, int PioraMix = 0, int Futro = 0)
+    {
+        public bool WymagaWyboruPior => PioraMix > 0;
+    }
+    private readonly Dictionary<string, PrzepisDzielo> przepisy = new()
+    {
+        ["ozdobaDoKapelusza"] = new(Kaczka: 3), ["zakladkaDoKsiazki"] = new(Ges: 3), ["pedzelDoMalowania"] = new(Kaczka: 4), ["pioroDoPisania"] = new(Ges: 4),
+        ["maskotkaMala"] = new(Futro: 2), ["strzalaDoLuku"] = new(Kaczka: 5), ["poduszeczkaNaIgly"] = new(Futro: 3), ["wachlarzOzdobny"] = new(PioraMix: 6),
+        ["czapkaZimowa"] = new(Futro: 5), ["kapeluszMixPior"] = new(PioraMix: 6), ["poduszkaMala"] = new(Kaczka: 7), ["mufkaNaRece"] = new(Futro: 4),
+        ["wypchaneZwierzatko"] = new(Ges: 8), ["pomPomZestaw"] = new(Futro: 6), ["koldraPuchowa"] = new(PioraMix: 10), ["kamizelkaFutrzana"] = new(Futro: 8),
+        ["kapturFutrzany"] = new(PioraMix: 6, Futro: 4), ["poduszkaPremium"] = new(Ges: 12), ["kolnierzOcieplacz"] = new(PioraMix: 5, Futro: 5), ["kocFutrzany"] = new(Futro: 10),
+        ["kurtkaZimowa"] = new(PioraMix: 10, Futro: 6), ["strojZimowyKomplet"] = new(PioraMix: 12, Futro: 8), ["plaszczReprezentacyjny"] = new(Ges: 15, Futro: 6), ["dywanikFutrzany"] = new(Futro: 10),
+    };
+    private string? dzieloWWyborze;
+    private int wyborKaczka;
+    private int wyborGes;
+    private int SumaWyboru => wyborKaczka + wyborGes;
+    private bool StacNaDzielo(string dzielo)
+    {
+        var p = przepisy[dzielo];
+        if (p.WymagaWyboruPior)
+        {
+            int razemPior = Gracz.ProduktZ("kaczkaPioro").Ilosc + Gracz.ProduktZ("gesPioro").Ilosc;
+            if (razemPior < p.PioraMix) return false;
+        }
+        else
+        {
+            if (p.Kaczka > 0 && Gracz.ProduktZ("kaczkaPioro").Ilosc < p.Kaczka) return false;
+            if (p.Ges > 0 && Gracz.ProduktZ("gesPioro").Ilosc < p.Ges) return false;
+        }
+        if (p.Futro > 0 && Gracz.ProduktZ("futroKrolik").Ilosc < p.Futro) return false;
+        return true;
+    }
+    private async Task OtworzLubKup(string dzielo)
+    {
+        if (dzieloWWyborze == dzielo) return;
+        if (!StacNaDzielo(dzielo)) return;
+        var przepis = przepisy[dzielo];
+        if (przepis.WymagaWyboruPior)
+        {
+            dzieloWWyborze = dzielo;
+            wyborKaczka = 0;
+            wyborGes = 0;
+            return;
+        }
+        if (przepis.Kaczka > 0) Gracz.ProduktZ("kaczkaPioro").Ilosc -= przepis.Kaczka;
+        if (przepis.Ges > 0) Gracz.ProduktZ("gesPioro").Ilosc -= przepis.Ges;
+        if (przepis.Futro > 0) Gracz.ProduktZ("futroKrolik").Ilosc -= przepis.Futro;
+        Gracz.Dzielo(dzielo).Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task ZatwierdzMix()
+    {
+        var przepis = przepisy[dzieloWWyborze!];
+        if (SumaWyboru != przepis.PioraMix) return;
+        if (wyborKaczka > Gracz.ProduktZ("kaczkaPioro").Ilosc || wyborGes > Gracz.ProduktZ("gesPioro").Ilosc) return;
+        Gracz.ProduktZ("kaczkaPioro").Ilosc -= wyborKaczka;
+        Gracz.ProduktZ("gesPioro").Ilosc -= wyborGes;
+        if (przepis.Futro > 0) Gracz.ProduktZ("futroKrolik").Ilosc -= przepis.Futro;
+        Gracz.Dzielo(dzieloWWyborze!).Ilosc++;
+        dzieloWWyborze = null;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private void AnulujMix() => dzieloWWyborze = null;
 }
