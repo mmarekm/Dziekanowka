@@ -3,9 +3,14 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="manufakturaPiorIFuterWidok widok rel">
     <div class="abs hodowcaPrawyDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoBiale)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
-    <div class="abs dzielaPiorIFuter">
-    @foreach (var dzielo in dziela)
+    @foreach (var waluta in waluty)
     {
+        <div class="abs lManufakturaPior l@(waluta)Manufaktura">@Gracz.ProduktZ(waluta).Ilosc</div>
+        <div class="abs ilustracjaManufaktura ilustracjaManufaktura@(waluta)"><img class="obrazekSieMiesci" src="img/przedmioty/rzeznia/@(waluta).png" /></div>
+    }
+    <div class="abs dzielaPiorIFuter">
+        @foreach (var dzielo in dziela)
+        {
             <div class="dzieloPiorIFuter rel @(StacNaDzielo(dzielo) ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="async () => await OtworzLubKup(dzielo)">
             <div class="abs ilustracjaDzielaPiorIFuter"><img class="obrazekSieMiesci" src="img/przedmioty/dziela/@(dzielo).png"/></div>
             <div class="abs lDzielaPiorIFuter">@Gracz.Dzielo(dzielo).Ilosc</div>
@@ -19,14 +24,9 @@
                         <button @onclick="AnulujMix">Anuluj</button>
                     </div>
                 }
-        </div>
-    }
+            </div>
+        }
     </div>
-    @foreach (var waluta in waluty)
-    {
-        <div class="abs lManufakturaPior l@(waluta)Manufaktura">@Gracz.ProduktZ(waluta).Ilosc</div>
-        <div class="abs ilustracjaManufaktura ilustracjaManufaktura@(waluta)"><img class="obrazekSieMiesci" src="img/przedmioty/rzeznia/@(waluta).png"/></div>
-    }
 </div>
 
 @code {

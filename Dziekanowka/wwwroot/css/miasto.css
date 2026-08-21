@@ -1357,3 +1357,38 @@
         object-fit: contain;
         flex-shrink: 0;
     }
+.lManufakturaPior {
+    width: 130px;
+    height: 80px;
+    font-size: 49px;
+    text-align: center;
+    bottom: 20px;
+    z-index: 2;
+}
+.lkaczkaPioroManufaktura {
+    left: 200px;
+    color: white;
+}
+.lgesPioroManufaktura {
+    left: 700px;
+    color: white;
+}
+.lfutroKrolikManufaktura {
+    left: 1280px;
+    color: lightgray;
+}
+.ilustracjaManufaktura {
+    width: 80px;
+    height: 80px;
+    bottom: 20px;
+    z-index: 2;
+}
+.ilustracjaManufakturakaczkaPioro {
+    left: 340px;
+}
+.ilustracjaManufakturagesPioro {
+    left: 840px;
+}
+.ilustracjaManufakturafutroKrolik {
+    left: 1420px;
+}
