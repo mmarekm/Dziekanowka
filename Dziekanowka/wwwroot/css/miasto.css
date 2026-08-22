@@ -1392,3 +1392,142 @@
 .ilustracjaManufakturafutroKrolik {
     left: 1420px;
 }
+.dzielaPiorIFuter {
+    top: 100px;
+    left: 150px;
+    width: 850px;
+    height: 450px;
+    gap: 11px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 3px solid gold;
+    align-items: center;
+    justify-content: center;
+}
+.dzieloPiorIFuter {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+}
+.ilustracjaDzielaPiorIFuter {
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 80px;
+}
+.lDzielaPiorIFuter {
+    left: 35px;
+    top: 80px;
+    font-size: 15px;
+    text-align: center;
+    height: 15px;
+    width: 20px;
+    color: saddlebrown;
+}
+.wyborProporcjiPior {
+    top: 50px;
+    left: 100px;
+    width: 1700px;
+    height: 900px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 5px solid gold;
+}
+.wierszWyboruPior {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+.ikonaWyboruPior {
+    width: 90px;
+    height: 90px;
+}
+.wierszWyboruPior input {
+    width: 120px;
+    height: 70px;
+    font-size: 36px;
+    text-align: center;
+    border-radius: 12px;
+    border: 3px solid gold;
+}
+.guzikZatwierdz, .guzikAnuluj {
+    width: 260px;
+    height: 80px;
+    font-size: 28px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+.guzikZatwierdz {
+    background-color: mediumseagreen;
+    color: white;
+}
+.guzikAnuluj {
+    background-color: indianred;
+    color: white;
+}
+.cennikOverlay {
+    top: 50px;
+    left: 100px;
+    width: 1700px;
+    height: 900px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 5px solid gold;
+}
+
+.cennikSiatka {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 20px 30px;
+    width: 1550px;
+    height: 750px;
+}
+
+.cennikPozycja {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ilustracjaCennik {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 90px;
+}
+
+.cenaCennik {
+    top: 95px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    color: saddlebrown;
+}
+
+.guzikZamknijCennik {
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+}

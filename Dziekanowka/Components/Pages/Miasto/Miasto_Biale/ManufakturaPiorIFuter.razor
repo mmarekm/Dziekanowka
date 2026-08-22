@@ -2,6 +2,39 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="manufakturaPiorIFuterWidok widok rel">
+    <div class="abs guzikOtworzCennik"><button class="wyroznionyGuzik" @onclick="() => pokazCennik = true"><img class="obrazekContain" src="img/dom/cennik.png" /></button></div>
+    @if (pokazCennik)
+    {
+        <div class="abs cennikOverlay">
+            <div class="cennikSiatka">
+                @foreach (var dzielo in dziela)
+                {
+                    <div class="cennikPozycja rel">
+                        <img class="abs ilustracjaCennik obrazekSieMiesci" src="img/przedmioty/dziela/@(dzielo).png" />
+                        <div class="abs cenaCennik">@OpisPrzepisu(dzielo)</div>
+                    </div>
+                }
+            </div>
+            <button class="guzikAnuluj abs guzikZamknijCennik" @onclick="() => pokazCennik = false"><img class="obrazekSieMiesci" src="img/dom/rezygnacja.png" /></button>
+        </div>
+    }
+    @if (dzieloWWyborze != null)
+    {
+        <img class="abs ilustracjaWybranegoDzielaZMixem obrazekSieMiesci" src="img/przedmioty/dziela/@(dzieloWWyborze).png"/>
+        <div class="abs wyborProporcjiPior">
+            <div class="wierszWyboruPior">
+                <img class="obrazekSieMiesci ikonaWyboruPior" src="img/przedmioty/rzeznia/kaczkaPioro.png" />
+                <input type="number" min="0" max="@Gracz.ProduktZ("kaczkaPioro").Ilosc" @bind="wyborKaczka" @bind:event="oninput" />
+            </div>
+            <div class="wierszWyboruPior">
+                <img class="obrazekSieMiesci ikonaWyboruPior" src="img/przedmioty/rzeznia/gesPioro.png" />
+                <input type="number" min="0" max="@Gracz.ProduktZ("gesPioro").Ilosc" @bind="wyborGes" @bind:event="oninput" />
+            </div>
+            <span>@SumaWyboru / @przepisy[dzieloWWyborze].PioraMix</span>
+            <button class="guzikZatwierdz" @onclick="ZatwierdzMix"><img class="obrazekSieMiesci" src="img/dom/potwierdzenie.png"/></button>
+            <button class="guzikAnuluj" @onclick="AnulujMix"><img class="obrazekSieMiesci" src="img/dom/rezygnacja.png" /></button>
+        </div>
+    }
     <div class="abs hodowcaPrawyDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoBiale)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     @foreach (var waluta in waluty)
     {
@@ -11,19 +44,9 @@
     <div class="abs dzielaPiorIFuter">
         @foreach (var dzielo in dziela)
         {
-            <div class="dzieloPiorIFuter rel @(StacNaDzielo(dzielo) ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="async () => await OtworzLubKup(dzielo)">
-            <div class="abs ilustracjaDzielaPiorIFuter"><img class="obrazekSieMiesci" src="img/przedmioty/dziela/@(dzielo).png"/></div>
-            <div class="abs lDzielaPiorIFuter">@Gracz.Dzielo(dzielo).Ilosc</div>
-                @if (dzieloWWyborze == dzielo)
-                {
-                    <div class="abs wyborProporcjiPior">
-                        <input type="number" min="0" max="@Gracz.ProduktZ("kaczkaPioro").Ilosc" @bind="wyborKaczka" @bind:event="oninput" />
-                        <input type="number" min="0" max="@Gracz.ProduktZ("gesPioro").Ilosc" @bind="wyborGes" @bind:event="oninput" />
-                        <span>@SumaWyboru / @przepisy[dzielo].PioraMix</span>
-                        <button @onclick="ZatwierdzMix">Zatwierdź</button>
-                        <button @onclick="AnulujMix">Anuluj</button>
-                    </div>
-                }
+            <div class="dzieloPiorIFuter rel @(StacNaDzielo(dzielo) ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="async () => await OtworzLubKup(dzielo)">
+                <div class="abs ilustracjaDzielaPiorIFuter"><img class="obrazekSieMiesci" src="img/przedmioty/dziela/@(dzielo).png"/></div>
+                <div class="abs lDzielaPiorIFuter">@Gracz.Dzielo(dzielo).Ilosc</div>
             </div>
         }
     </div>
@@ -32,6 +55,7 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool pokazCennik = false;
     private string[] waluty = ["kaczkaPioro", "gesPioro", "futroKrolik"];
     private string[] dziela = [ "ozdobaDoKapelusza", "zakladkaDoKsiazki", "pedzelDoMalowania", "pioroDoPisania", "maskotkaMala", "strzalaDoLuku",
     "poduszeczkaNaIgly", "wachlarzOzdobny", "czapkaZimowa", "kapeluszMixPior", "poduszkaMala", "mufkaNaRece", 
@@ -101,4 +125,14 @@
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private void AnulujMix() => dzieloWWyborze = null;
+    private string OpisPrzepisu(string dzielo)
+    {
+        var p = przepisy[dzielo];
+        var czesci = new List<string>();
+        if (p.Kaczka > 0) czesci.Add($"{p.Kaczka} kacze");
+        if (p.Ges > 0) czesci.Add($"{p.Ges} gęsie");
+        if (p.PioraMix > 0) czesci.Add($"{p.PioraMix} piór (mix)");
+        if (p.Futro > 0) czesci.Add($"{p.Futro} futro");
+        return string.Join(" + ", czesci);
+    }
 }

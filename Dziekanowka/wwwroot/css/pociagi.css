@@ -441,7 +441,7 @@
     .pociag2miastoLesneAnimacja .celPociagu, .pociag17miastoLesneAnimacja .celPociagu {
         transform: scaleX(-1);
     }
-.pociag5miastoLesneAnimacja, .pociag8miastoLesneAnimacja {
+.pociag5miastoLesneAnimacja, .pociag8miastoLesneAnimacja, .pociag32miastoLesneAnimacja {
     left: 50px;
     top: 259px;
     z-index: 3;
