@@ -1,0 +1,7 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+}

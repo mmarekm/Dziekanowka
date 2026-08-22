@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="manufakturaPiorIFuterWidok widok rel">
-    <div class="abs guzikOtworzCennik"><button class="wyroznionyGuzik" @onclick="() => pokazCennik = true"><img class="obrazekContain" src="img/dom/cennik.png" /></button></div>
+    <div class="abs guzikOtworzCennik"><button class="wyroznionyGuzik" @onclick="() => pokazCennik = true"><img class="obrazekContain" src="img/przedmioty/cennik.png" /></button></div>
     @if (pokazCennik)
     {
         <div class="abs cennikOverlay">
@@ -11,11 +11,16 @@
                 {
                     <div class="cennikPozycja rel">
                         <img class="abs ilustracjaCennik obrazekSieMiesci" src="img/przedmioty/dziela/@(dzielo).png" />
-                        <div class="abs cenaCennik">@OpisPrzepisu(dzielo)</div>
+                        <div class="abs cenaCennik">
+                            @foreach (var skladnik in SkladnikiCeny(dzielo))
+                            {
+                                <span class="skladnikCenyCennik"><img class="obrazekSieMiesci ikonaSkladnikaCennik" src="img/przedmioty/rzeznia/@(skladnik.Ikona).png" /> @skladnik.Ilosc</span>
+                            }
+                        </div>
                     </div>
                 }
             </div>
-            <button class="guzikAnuluj abs guzikZamknijCennik" @onclick="() => pokazCennik = false"><img class="obrazekSieMiesci" src="img/dom/rezygnacja.png" /></button>
+            <button class="wyroznionyGuzik abs guzikZamknijCennik" @onclick="() => pokazCennik = false"><img class="obrazekSieMiesci" src="img/dom/potwierdzenie.png" /></button>
         </div>
     }
     @if (dzieloWWyborze != null)
@@ -35,7 +40,7 @@
             <button class="guzikAnuluj" @onclick="AnulujMix"><img class="obrazekSieMiesci" src="img/dom/rezygnacja.png" /></button>
         </div>
     }
-    <div class="abs hodowcaPrawyDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoBiale)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs hodowcaPrawyDoMiastaKawy"><button disabled="@(pokazCennik || dzieloWWyborze != null)" class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoBiale)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     @foreach (var waluta in waluty)
     {
         <div class="abs lManufakturaPior l@(waluta)Manufaktura">@Gracz.ProduktZ(waluta).Ilosc</div>
@@ -125,14 +130,15 @@
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private void AnulujMix() => dzieloWWyborze = null;
-    private string OpisPrzepisu(string dzielo)
+    private record SkladnikCeny(string Ikona, int Ilosc);
+    private List<SkladnikCeny> SkladnikiCeny(string dzielo)
     {
         var p = przepisy[dzielo];
-        var czesci = new List<string>();
-        if (p.Kaczka > 0) czesci.Add($"{p.Kaczka} kacze");
-        if (p.Ges > 0) czesci.Add($"{p.Ges} gęsie");
-        if (p.PioraMix > 0) czesci.Add($"{p.PioraMix} piór (mix)");
-        if (p.Futro > 0) czesci.Add($"{p.Futro} futro");
-        return string.Join(" + ", czesci);
+        var lista = new List<SkladnikCeny>();
+        if (p.Kaczka > 0) lista.Add(new("kaczkaPioro", p.Kaczka));
+        if (p.Ges > 0) lista.Add(new("gesPioro", p.Ges));
+        if (p.PioraMix > 0) lista.Add(new("pioro", p.PioraMix));
+        if (p.Futro > 0) lista.Add(new("futroKrolik", p.Futro));
+        return lista;
     }
 }

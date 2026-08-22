@@ -1438,7 +1438,7 @@
     justify-content: center;
     gap: 40px;
     border-radius: 30px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-image: url('../img/miasto/tloEkstraManufakturaPiorIFutra.png');
     border: 5px solid gold;
 }
 .wierszWyboruPior {
@@ -1486,19 +1486,17 @@
     justify-content: center;
     gap: 30px;
     border-radius: 30px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-image: url('../img/miasto/tloEkstraManufakturaPiorIFutra.png');
     border: 5px solid gold;
 }
-
 .cennikSiatka {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     gap: 20px 30px;
     width: 1550px;
     height: 750px;
 }
-
 .cennikPozycja {
     width: 100%;
     height: 100%;
@@ -1506,28 +1504,48 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 15px;
+    border: 2px solid rgba(218, 165, 32, 0.6);
+    background-color: rgba(189, 183, 107, 0.6);
 }
-
 .ilustracjaCennik {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
 }
-
 .cenaCennik {
-    top: 95px;
+    top: 115px;
     left: 0;
     width: 100%;
-    text-align: center;
-    font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px 10px;
+}
+.skladnikCenyCennik {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 16px;
     color: saddlebrown;
 }
-
+.ikonaSkladnikaCennik {
+    width: 50px;
+    height: 50px;
+}
 .guzikZamknijCennik {
     bottom: 20px;
     right: 20px;
     width: 70px;
     height: 70px;
+}
+.guzikOtworzCennik {
+    width: 150px;
+    height: 200px;
+    right: 350px;
+    top: 550px;
+    z-index: 2;
 }
