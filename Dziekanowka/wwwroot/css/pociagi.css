@@ -267,8 +267,8 @@
 }
 .zobaczRozkladStacjimiastoSnow {
     bottom: 45px;
-    right: 55px;
-    width: 420px;
+    right: 60px;
+    width: 415px;
     height: 370px;
     z-index: 6;
 }
@@ -408,6 +408,13 @@
     left: 76px;
     bottom: 249px;
 }
+.zaslonaPociaguMiastoSnow {
+    z-index: 6;
+    width: 501px;
+    height: 454px;
+    left: 81px;
+    bottom: 260px;
+}
 .pociagKazdyAnimacja {
     width: 920px;
     height: 370px;
@@ -475,7 +482,7 @@
     top: 259px;
     z-index: 3;
 }
-.pociag4miastoBialeAnimacja, .pociag12miastoBialeAnimacja {
+.pociag4miastoBialeAnimacja, .pociag12miastoBialeAnimacja, .pociag36miastoBialeAnimacja {
     left: 100px;
     top: 258px;
     z-index: 3;
@@ -528,6 +535,20 @@
 .pociag30miastoKawyAnimacja, .pociag31miastoKawyAnimacja {
     left: 300px;
     top: 257px;
+    z-index: 2;
+}
+.pociag34miastoSnowAnimacja, .pociag35miastoSnowAnimacja {
+    left: 800px;
+    top: 336px;
+    z-index: 3;
+    transform: scaleX(-1);
+}
+    .pociag34miastoSnowAnimacja .celPociagu, .pociag35miastoSnowAnimacja .celPociagu {
+        transform: scaleX(-1);
+    }
+.pociag37miastoSnowAnimacja {
+    left: 400px;
+    top: 250px;
     z-index: 2;
 }
 .pociag16metropolia1Animacja {

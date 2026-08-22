@@ -28,6 +28,10 @@
     background-image: url('../img/miasto/miastoKawyWidok.jpg');
     overflow: hidden;
 }
+.miastoSnowWidok {
+    background-image: url('../img/miasto/miastoSnowWidok.png');
+    overflow: hidden;
+}
 .miasto3Widok {
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
@@ -76,6 +80,12 @@
 }
 .potrzebaKawySmutniWidok {
     background-image: url('../img/miasto/miastoKawy/potrzebaKawySmutniWidok.png');
+}
+.oczekujacyPiorIFuterWidok {
+    background-image: url('../img/miasto/miastoSnow/oczekujacyPiorIFuterWidok.png');
+}
+.oczekujacyPiorIFuterWstalWidok {
+    background-image: url('../img/miasto/miastoSnow/oczekujacyPiorIFuterWstalWidok.png');
 }
 .lBiletowMiasto1 {
     left: 75px;
@@ -1547,5 +1557,26 @@
     height: 200px;
     right: 350px;
     top: 550px;
+    z-index: 2;
+}
+.miastoSnowNaStacje {
+    width: 718px;
+    height: 286px;
+    top: 49px;
+    left: 889px;
+    z-index: 2;
+}
+.miastoSnowDoOczekujacyPiorIFuter {
+    width: 461px;
+    height: 361px;
+    left: 0;
+    bottom: 185px;
+    z-index: 2;
+}
+.dajDzieloSpiochowi {
+    top: 70px;
+    left: 1000px;
+    width: 150px;
+    height: 150px;
     z-index: 2;
 }

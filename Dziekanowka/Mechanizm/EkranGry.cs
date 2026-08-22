@@ -136,6 +136,7 @@
         DzieciCiekaweCiesza,
         BabciaDajeKwiaty,
         KlaunNalewaKawe,
+        DoczekalPiorIFuter,
         PociagCzarnyDoTunelu,
         PociagCzarnyZTunelu
     }

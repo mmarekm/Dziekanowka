@@ -2,8 +2,8 @@
 @using Dziekanowka.Gracza
 <div class="miastoSnowWidok widok rel">
     <div class="abs miastoSnowNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoSnowNaStacje.png" /></button></div>
-    <div class="abs miastoSnowDoOczekujacyPiorIFuter"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomMleka)"><img src="img/miasto/miastoDoDomMleka.png" /></button></div>
-    <div class="abs miastoSnowDoInfoMisja"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ManufakturaPiorIFuter)"><img src="img/miasto/miastoBialeDoManufaktury.png" /></button></div>
+    <div class="abs miastoSnowDoOczekujacyPiorIFuter"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.OczekujacyPiorIFuter)"><img src="img/miasto/miastoSnow/miastoDoOczekujacego.png" /></button></div>
+    <!--<div class="abs miastoSnowDoInfoMisja"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.InfoMisjaSny)"><img src="img/miasto/miastoSnow/miastoDoInfoMisja.png" /></button></div>-->
 </div>
 
 @code {
