@@ -1,5 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
+<div class="infoMisjaSnyWidok widok rel">
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoSnow)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs infoMisjaSny"><img class="obrazekInfoMisjaSny" src="img/misje/galeria/@(Gracz.Statystyki.AktualnaMisja).png" /></div>
+</div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;

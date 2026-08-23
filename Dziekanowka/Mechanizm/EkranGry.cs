@@ -39,6 +39,10 @@
         Las4,
         Las5,
         Las6,
+        Las7,
+        Las8,
+        Las9,
+        Las10,
         DomSlodkichBulek,
         GarazGospodarczy,
         Studnia,
@@ -138,6 +142,7 @@
         KlaunNalewaKawe,
         DoczekalPiorIFuter,
         PociagCzarnyDoTunelu,
-        PociagCzarnyZTunelu
+        PociagCzarnyZTunelu,
+        SzyjeZPiorIFutra
     }
 }

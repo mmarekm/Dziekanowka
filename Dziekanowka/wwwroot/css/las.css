@@ -31,6 +31,18 @@
 .las6Widok {
     background-image: url('../img/teren/las/las6Widok.png');
 }
+.las7Widok {
+    background-image: url('../img/teren/las/las7Widok.png');
+}
+.las8Widok {
+    background-image: url('../img/teren/las/las8Widok.png');
+}
+.las9Widok {
+    background-image: url('../img/teren/las/las9Widok.png');
+}
+.las10Widok {
+    background-image: url('../img/teren/las/las10Widok.png');
+}
 .lMonetLasIntro {
     bottom: 13px;
     left: 410px;
@@ -402,7 +414,7 @@
 .las2DoLas4 {
     width: 375px;
     height: 207px;
-    top: 280px;
+    top: 270px;
     left: 191px;
     z-index: 2;
 }
@@ -412,6 +424,13 @@
     width: 180px;
     height: 189px;
     z-index: 0;
+}
+.las4DoLas10 {
+    top: 397px;
+    left: 881px;
+    width: 305px;
+    height: 159px;
+    z-index: 2;
 }
 .las2DoLas5 {
     width: 494px;
@@ -434,11 +453,60 @@
     left: 530px;
     z-index: 2;
 }
+.las3DoLas7 {
+    width: 253px;
+    height: 168px;
+    top: 223px;
+    right: 242px;
+    z-index: 2;
+}
+.las3DoLas8 {
+    width: 324px;
+    height: 163px;
+    top: 143px;
+    right: 706px;
+    z-index: 2;
+}
+.las3DoLas9 {
+    width: 311px;
+    height: 142px;
+    left: 169px;
+    top: 280px;
+    z-index: 2;
+}
 .las6DoLas3 {
     width: 326px;
     height: 148px;
     top: 314px;
     right: 164px;
+    z-index: 2;
+}
+.las7DoLas3 {
+    width: 536px;
+    height: 154px;
+    bottom: 0;
+    left: 577px;
+    z-index: 2;
+}
+.las8DoLas3 {
+    width: 572px;
+    height: 122px;
+    bottom: 0;
+    left: 600px;
+    z-index: 2;
+}
+.las9DoLas3 {
+    width: 394px;
+    height: 173px;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+}
+.las10DoLas4 {
+    bottom: 0;
+    left: 335px;
+    width: 814px;
+    height: 102px;
     z-index: 2;
 }
 @keyframes zaswiecenieMonet {

@@ -115,6 +115,9 @@
         if (przepis.Ges > 0) Gracz.ProduktZ("gesPioro").Ilosc -= przepis.Ges;
         if (przepis.Futro > 0) Gracz.ProduktZ("futroKrolik").Ilosc -= przepis.Futro;
         Gracz.Dzielo(dzielo).Ilosc++;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.SzyjeZPiorIFutra);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.ManufakturaPiorIFuter);
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private async Task ZatwierdzMix()
@@ -127,6 +130,9 @@
         if (przepis.Futro > 0) Gracz.ProduktZ("futroKrolik").Ilosc -= przepis.Futro;
         Gracz.Dzielo(dzieloWWyborze!).Ilosc++;
         dzieloWWyborze = null;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.SzyjeZPiorIFutra);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.ManufakturaPiorIFuter);
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
     private void AnulujMix() => dzieloWWyborze = null;
