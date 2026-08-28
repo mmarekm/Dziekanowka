@@ -22,6 +22,9 @@
 .stacjamiastoSnowWidok {
     background-image: url('../img/miasto/stacjaMiastoSnowWidok.png');
 }
+.stacjamiastoHandluWidok {
+    background-image: url('../img/miasto/stacjaMiastoHandluWidok.png');
+}
 .stacjametropolia1Widok {
     background-image: url('../img/miasto/stacjaMetropolia1Widok.png');
 }
@@ -84,6 +87,13 @@
     height: 39px;
     z-index: 2;
 }
+.wyjscieStacjamiastoHandlu {
+    bottom: 0;
+    left: 850px;
+    width: 455px;
+    height: 98px;
+    z-index: 2;
+}
 .ileBiletowKazdeMiasto {
     top: 10px;
     left: 100px;
@@ -125,6 +135,9 @@
 }
 .ileBiletowLmiastoSnow {
     color: lightsteelblue;
+}
+.ileBiletowLmiastoHandlu {
+    color: gold;
 }
 .kupBiletStacjamiasto3 {
     width: 104px;
@@ -216,6 +229,9 @@
 .stacjaCzasmiastoSnow {
     color: lightsteelblue;
 }
+.stacjaCzasmiastoHandlu {
+    color: gold;
+}
 .zobaczRozkladStacjimiasto3 {
     bottom: 0;
     left: 0;
@@ -270,6 +286,13 @@
     right: 60px;
     width: 415px;
     height: 370px;
+    z-index: 6;
+}
+.zobaczRozkladStacjimiastoHandlu {
+    bottom: 0;
+    left: 0;
+    width: 386px;
+    height: 448px;
     z-index: 6;
 }
 .zobaczRozkladStacjimetropolia1 {
@@ -459,13 +482,13 @@
     top: 87px;
     z-index: 2;
 }
-.pociag3miasto3Animacja, .pociag7miasto3Animacja {
+.pociag3miasto3Animacja, .pociag7miasto3Animacja, .pociag38miasto3Animacja {
     left: 600px;
     top: 198px;
     z-index: 3;
     transform: scaleX(-1);
 }
-    .pociag3miasto3Animacja .celPociagu, .pociag7miasto3Animacja .celPociagu {
+    .pociag3miasto3Animacja .celPociagu, .pociag7miasto3Animacja .celPociagu, .pociag38miasto3Animacja .celPociagu {
         transform: scaleX(-1);
     }
 .pociag2miastoLesneAnimacja, .pociag17miastoLesneAnimacja {
@@ -514,13 +537,13 @@
     .pociag13miastoGorskieAnimacja .celPociagu, .pociag14miastoGorskieAnimacja .celPociagu, .pociag23miastoGorskieAnimacja .celPociagu, .pociag27miastoGorskieAnimacja .celPociagu {
         transform: scaleX(-1);
     }
-.pociag26miastoWiejskieAnimacja {
+.pociag26miastoWiejskieAnimacja, .pociag42miastoWiejskieAnimacja {
     left: 500px;
     top: 223px;
     z-index: 3;
     transform: scaleX(-1);
 }
-    .pociag26miastoWiejskieAnimacja .celPociagu {
+    .pociag26miastoWiejskieAnimacja .celPociagu, .pociag42miastoWiejskieAnimacja .celPociagu {
         transform: scaleX(-1);
     }
 .pociag29miastoKawyAnimacja {
@@ -551,19 +574,28 @@
     top: 250px;
     z-index: 2;
 }
-.pociag16metropolia1Animacja {
-    z-index: 6;
-    bottom: 70px;
-    left: 550px;
+.pociag39miastoHandluAnimacja, .pociag41miastoHandluAnimacja, .pociag43miastoHandluAnimacja, .pociag44miastoHandluAnimacja {
+    left: 400px;
+    top: 150px;
+    z-index: 2;
     transform: scaleX(-1);
 }
-.pociag18metropolia1Tor2Animacja, .pociag20metropolia1Tor2Animacja {
+    .pociag39miastoHandluAnimacja .celPociagu, .pociag41miastoHandluAnimacja .celPociagu, .pociag43miastoHandluAnimacja .celPociagu, .pociag44miastoHandluAnimacja .celPociagu {
+        transform: scaleX(-1);
+    }
+.pociag16metropolia1Animacja {
+        z-index: 6;
+        bottom: 70px;
+        left: 550px;
+        transform: scaleX(-1);
+    }
+.pociag18metropolia1Tor2Animacja, .pociag20metropolia1Tor2Animacja, .pociag40metropolia1Tor2Animacja {
     z-index: 5;
     bottom: 450px;
     left: 1250px;
     transform: scaleX(-1);
 }
-    .pociag16metropolia1Animacja .celPociagu, .pociag18metropolia1Tor2Animacja .celPociaguTor2, .pociag20metropolia1Tor2Animacja .celPociaguTor2 {
+    .pociag16metropolia1Animacja .celPociagu, .pociag18metropolia1Tor2Animacja .celPociaguTor2, .pociag20metropolia1Tor2Animacja .celPociaguTor2, .pociag40metropolia1Tor2Animacja .celPociaguTor2 {
         transform: scaleX(-1);
     }
 .pociag22metropolia1Tor3Animacja, .pociag24metropolia1Tor3Animacja, .pociag33metropolia1Tor3Animacja {
