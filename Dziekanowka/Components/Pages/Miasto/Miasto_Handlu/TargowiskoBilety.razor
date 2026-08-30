@@ -1,9 +1,28 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
 <div class="targowiskoBiletyWidok widok rel">
-    <div class="abs targowiskoBiletyDoMiasta"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoHandlu)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoHandlu)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs targowiskoBiletyPozycja targowiskoBiletyLMonet"><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> @Gracz.Monety</div>  
+    @foreach (var bilet in bilety)
+    {
+        <div class="abs targowiskoBiletyPozycja targowiskoBiletyKupBilet targowiskoBiletyKup@(bilet) @(StacNaBilet(bilet) ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="() => KupBilet(bilet)">
+            <div class="pierwszyRzadTargowiskoBilety">@CenaBiletu(bilet) <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> <img class="obrazekSieMiesci" src="img/przedmioty/@(bilet).png" /></div>
+            <div class="drugiRzadTargowiskoBilety">@Gracz.Przedmiot(bilet).Ilosc</div>
+        </div>
+    }
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string[] bilety = ["biletPociag", "biletAutobus"];
+    private int CenaBiletu(string bilet) => bilet == "biletPociag" ? 12 : bilet == "biletAutobus" ? 4 : 0;
+    private bool StacNaBilet(string bilet) => Gracz.Monety >= CenaBiletu(bilet);
+    private async Task KupBilet(string bilet)
+    {
+        if (!StacNaBilet(bilet)) return;
+        Gracz.Monety -= CenaBiletu(bilet);
+        Gracz.Przedmiot(bilet).Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
 }

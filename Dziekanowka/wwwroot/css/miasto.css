@@ -94,6 +94,9 @@
 .infoMisjaSnyWidok {
     background-image: url('../img/miasto/miastoSnow/infoMisjaSnyWidok.png');
 }
+.targowiskoBiletyWidok {
+    background-image: url('../img/miasto/miastoHandlu/targowiskoBiletyWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1613,4 +1616,57 @@
     width: 516px;
     height: 346px;
     z-index: 2;
+}
+.miastoHandluDoTargowiskoBilety {
+    width: 166px;
+    height: 107px;
+    right: 291px;
+    top: 649px;
+    z-index: 2;
+}
+.targowiskoBiletyPozycja {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;  
+    color: gold;
+    gap: 20px;
+    z-index: 2;
+    border: 3px solid brown;
+    background-color: rgba(189, 183, 107, 0.8);
+}
+.targowiskoBiletyLMonet {
+    bottom: 100px;
+    right: 200px;
+    width: 180px;
+    font-size: 33px;
+    height: 35px;
+}
+.targowiskoBiletyKupBilet {
+    left: 100px;
+    height: 160px;
+    width: 330px;
+    flex-direction: column;
+}
+.targowiskoBiletyKupbiletPociag {
+    top: 250px;  
+}
+.targowiskoBiletyKupbiletAutobus {
+    top: 450px;
+}
+.pierwszyRzadTargowiskoBilety {
+    height: 70%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 70px;
+}
+.drugiRzadTargowiskoBilety {
+    height: 30%;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    color: black;
 }
