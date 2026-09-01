@@ -64,7 +64,16 @@ namespace Dziekanowka.Mechanizm
                 return startowiGracze;
             }
             var json = await File.ReadAllTextAsync(_sciezkaDoPliku);
-            return JsonSerializer.Deserialize<Dictionary<string, Gracz>>(json) ?? new Dictionary<string, Gracz>();
+            var gracze = JsonSerializer.Deserialize<Dictionary<string, Gracz>>(json) ?? new Dictionary<string, Gracz>();
+            bool cokolwiekUzupelniono = false;
+            foreach (var gracz in gracze.Values)
+            {
+                if (gracz.UzupelnijBrakujacePrzedmioty())
+                    cokolwiekUzupelniono = true;
+            }
+            if (cokolwiekUzupelniono)
+                await ZapiszWszystkichGraczy(gracze);
+            return gracze;
         }
         private async Task ZapiszWszystkichGraczy(Dictionary<string, Gracz> gracze)
         {

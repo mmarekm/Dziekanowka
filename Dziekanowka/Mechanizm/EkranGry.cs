@@ -69,6 +69,7 @@
         SklepMiasto3,
         Kiosk,
         Stacja,
+        StacjaKopalnie,
         SzkolaIntro,
         SzkolaReligia,
         SzkolaInformatyka,

@@ -1686,7 +1686,6 @@
     box-sizing: border-box;
     border-radius: 20px;
     z-index: 2;
-    border: 3px solid brown;
     background-color: rgba(189, 183, 107, 0.8);
     right: 15px;
     top: 30px;
@@ -1702,3 +1701,50 @@
     align-items: center;
     justify-content: center;
 }
+.walizkaGlinaTargowisko {
+    width: 500px;
+    height: 500px;
+    left: 40px;
+    top: 100px;
+    z-index: 2;
+}
+.zawartoscWalizkiGlinaTargowisko {
+    top: 290px;
+    left: 184px;
+    width: 110px;
+    height: 110px;
+    z-index: 3;
+}
+.lWalutyTargowiskoGlina {
+    display: flex;
+    top: 10px;
+    left: 400px;
+    width: 350px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    color: firebrick;
+    gap: 40px;
+}
+.cenaTargowiskoGlina {
+    display: flex;
+    flex-direction: column;
+    top: 50px;
+    left: 1140px;
+    width: 60px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: red;
+    gap: 10px;
+    padding: 10px;
+    border: 3px solid firebrick;
+    background-color: rgba(189, 183, 107, 0.8);
+    border-radius: 10px;
+}
+    .cenaTargowiskoGlina img {
+        max-width: 100%;
+        max-height: 40px;
+    }

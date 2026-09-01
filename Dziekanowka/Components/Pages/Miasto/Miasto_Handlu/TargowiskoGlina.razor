@@ -7,11 +7,28 @@
         @for (int i = 1; i <= 49; i++)
         {
             int toI = i;
-            <div class="wyrobZGlinyTargowiskoGlina"><img class="obrazekSieMiesci" src="img/miasto/miastoHandlu/targowiskoGlina/@(toI).png"/></div>
+            <div class="wyrobZGlinyTargowiskoGlina @(moznaKupic ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="async () => await Kup((toI).ToString())"><img class="obrazekSieMiesci" src="img/miasto/miastoHandlu/targowiskoGlina/@(toI).png" /></div>
         }
     </div>
+    <div class="abs walizkaGlinaTargowisko"><img class="obrazekSieMiesci" src="img/przedmioty/walizkaGlina.png"/></div>
+    @if (Gracz.Statystyki.DzieloZGlinyWWalizce != "")
+    {
+        <div class="abs zawartoscWalizkiGlinaTargowisko"><img class="obrazekSieMiesci" src="img/miasto/miastoHandlu/targowiskoGlina/@(Gracz.Statystyki.DzieloZGlinyWWalizce).png" /></div>
+    }
+    <div class="abs lWalutyTargowiskoGlina">@Gracz.Przedmiot("walutaGlina").Ilosc <img class="obrazekSieMiesci" src="img/przedmioty/walutaGlina.png" /></div>
+    <div class="abs cenaTargowiskoGlina">2 <img class="obrazekSieMiesci" src="img/przedmioty/walutaGlina.png" /></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool moznaKupic => Gracz.Przedmiot("walutaGlina").Ilosc >= 2;
+    private async Task Kup(string dzielo)
+    {
+        if (moznaKupic)
+        {
+            Gracz.Przedmiot("walutaGlina").Ilosc -= 2;
+            Gracz.Statystyki.DzieloZGlinyWWalizce = dzielo;
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+        }
+    }
 }

@@ -28,6 +28,9 @@
 .stacjametropolia1Widok {
     background-image: url('../img/miasto/stacjaMetropolia1Widok.png');
 }
+.stacjaKopalnieWidok {
+    background-image: url('../img/miasto/stacje/stacjaKopalnieWidok.png');
+}
 .ovhidden {
     overflow: hidden;
 }

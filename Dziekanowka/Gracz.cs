@@ -32,5 +32,19 @@ namespace Dziekanowka
         public void UlepszBudynek(string nazwaBudynku) => Budynki.First(b => b.Nazwa == nazwaBudynku).Poziom++;
         public int KosztUlepszeniaBudynku(string nazwaBudynku) => nazwaBudynku switch { "studnia" => (int)Math.Pow(PoziomBudynku("studnia"), 2) * 200, _ => 0 };
         public int IloscPrzedmiotow(string nazwaPrzedmiotu) => Przedmioty.First(p => p.Nazwa == nazwaPrzedmiotu).Ilosc;
+        public bool UzupelnijBrakujacePrzedmioty()
+        {
+            var nazwyPosiadane = Przedmioty.Select(p => p.Nazwa).ToHashSet();
+            bool dodanoCokolwiek = false;
+            foreach (var startowy in PrzedmiotGracza.StartowePrzedmioty())
+            {
+                if (!nazwyPosiadane.Contains(startowy.Nazwa))
+                {
+                    Przedmioty.Add(startowy);
+                    dodanoCokolwiek = true;
+                }
+            }
+            return dodanoCokolwiek;
+        }
     }
 }
