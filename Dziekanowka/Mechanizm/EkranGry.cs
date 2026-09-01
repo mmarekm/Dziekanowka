@@ -99,6 +99,7 @@
         OczekujacyPiorIFuter,
         InfoMisjaSny,
         TargowiskoBilety,
+        TargowiskoGlina,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,

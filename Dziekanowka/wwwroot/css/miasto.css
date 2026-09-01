@@ -97,6 +97,9 @@
 .targowiskoBiletyWidok {
     background-image: url('../img/miasto/miastoHandlu/targowiskoBiletyWidok.png');
 }
+.targowiskoGlinaWidok {
+    background-image: url('../img/miasto/miastoHandlu/targowiskoGlinaWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1624,11 +1627,18 @@
     top: 649px;
     z-index: 2;
 }
+.miastoHandluDoTargowiskoGlina {
+    width: 179px;
+    height: 160px;
+    top: 301px;
+    left: 518px;
+    z-index: 2;
+}
 .targowiskoBiletyPozycja {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;  
+    border-radius: 20px;
     color: gold;
     gap: 20px;
     z-index: 2;
@@ -1669,4 +1679,26 @@
     font-size: 20px;
     text-align: center;
     color: black;
+}
+.wyrobyZGlinyTargowiskoGlina {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    border-radius: 20px;
+    z-index: 2;
+    border: 3px solid brown;
+    background-color: rgba(189, 183, 107, 0.8);
+    right: 15px;
+    top: 30px;
+    width: 650px;
+    height: 650px;
+    gap: 10px;
+}
+.wyrobZGlinyTargowiskoGlina {
+    width: calc((100% - 60px) / 7);
+    height: calc((100% - 60px) / 7);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

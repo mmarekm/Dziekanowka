@@ -20,6 +20,7 @@ namespace Dziekanowka.Gracza
         public int Kiosk { get; set; } = 0;
         public string Stacja { get; set; } = "";
         public int Sklepiczek { get; set; } = 0;
+        public string DzieloZGlinyWWalizce { get; set; } = "";
         private List<string> skladnikiPizza = ["papryka", "cebula", "kukurydza", "ogórek", "ananas", "oliwki", "pieczarka", "rydz", "podgrzybek", "borowik", "kurka", "kielbasaWedlina", "salamiWedlina", "lopatkaWedlina", "poledwicaWedlina", "boczekWedlina", "szynkaWedlina", "schabWedlina", "kurczakWedlina", "indykWedlina", "krolikPasztet", "drobPasztet", "swiniaPasztet"];
         private string Losuj(List<string> zbior) => zbior[Random.Shared.Next(zbior.Count)];
         private List<string> LosujPizza(int ile)
