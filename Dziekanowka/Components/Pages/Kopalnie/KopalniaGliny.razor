@@ -1,0 +1,138 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+@implements IDisposable
+<div class="kopalniaGlinyWidok widok rel">
+    @if (powitanie)
+    {
+        <div class="abs powitanieKopalniaGliny">
+            <img class="obrazekJakTrzeba" src="img/kopalnie/czolowkaKopalniaGliny.png" />
+            <div class="abs startKopalniaGlina"><button class="wyroznionyGuzik" @onclick="Startujemy"><img class="obrazekJakTrzeba" src="img/kopalnie/startKopalniaGlina.png" /></button></div>
+        </div>
+    }
+    else
+    {
+        <div class="abs rozgrywkaKopalniaGliny">
+            <div class="liczbaKopalniaGliny">
+                @if (aktualnaLiczba != null)
+                {
+                    @if (pierwszaLiczba)
+                    {
+                        <span @key="rundaId">@aktualnaLiczba</span>
+                    }
+                    else
+                    {
+                        <span @key="rundaId">+ @aktualnaLiczba</span>
+                    }
+                }
+            </div>
+            <div class="warunekKopalniaGliny"><img class="obrazekJakTrzeba" src="img/kopalnie/warunekKopalniaGliny.png" /></div>
+            <div class="guzikiKopalniaGliny">
+                <button class="guzikOdpowiedz @(blyskTak ? "kliknieto" : "")" @onclick="() => Odpowiedz(true)"><img class="obrazekJakTrzeba" src="img/dom/potwierdzenie.png" /></button>
+                <button class="guzikOdpowiedz @(blyskNie ? "kliknieto" : "")" @onclick="() => Odpowiedz(false)"><img class="obrazekJakTrzeba" src="img/dom/rezygnacja.png" /></button>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool blyskTak = false;
+    private bool blyskNie = false;
+    private bool powitanie = true;
+    private int rundaId = 0;
+    private int licznik = 13;              // suma wewnętrzna - NIGDY nie pokazywana graczowi
+    private int? aktualnaLiczba = null;    // to, co faktycznie wyświetlamy (baza albo dodawana wartość)
+    private bool pierwszaLiczba = true;    // czy aktualnie pokazywana liczba to baza (13) czy "+X"
+    private CancellationTokenSource? timerCts;
+
+    private async Task Startujemy()
+    {
+        powitanie = false;
+        NowaRunda();
+        await Task.CompletedTask;
+    }
+
+    private void NowaRunda()
+    {
+        rundaId++;
+
+        if (pierwszaLiczba)
+        {
+            aktualnaLiczba = licznik;
+        }
+        else
+        {
+            int dodatek = Random.Shared.Next(5, 10);
+            licznik += dodatek;
+            aktualnaLiczba = dodatek;
+        }
+
+        StateHasChanged();
+
+        timerCts = new CancellationTokenSource();
+        _ = UruchomTimerOdpowiedzi(timerCts.Token);
+    }
+
+    private async Task UruchomTimerOdpowiedzi(CancellationToken token)
+    {
+        try
+        {
+            await Task.Delay(5000, token);
+            await Przegrana();
+        }
+        catch (TaskCanceledException) { }
+    }
+    private async Task ResetBlysk(bool tak)
+    {
+        await Task.Delay(300);
+        if (tak) blyskTak = false; else blyskNie = false;
+        StateHasChanged();
+    }
+    private async Task Odpowiedz(bool graczUwazaZeWystarczy)
+    {
+        // natychmiastowy feedback wizualny, niezaleznie od logiki
+        if (graczUwazaZeWystarczy) blyskTak = true; else blyskNie = true;
+        StateHasChanged();
+        _ = ResetBlysk(graczUwazaZeWystarczy);
+
+        timerCts?.Cancel();
+
+        bool faktycznieWystarczy = licznik >= 77;
+
+        if (graczUwazaZeWystarczy == faktycznieWystarczy)
+        {
+            if (faktycznieWystarczy)
+            {
+                await Wygrana();
+            }
+            else
+            {
+                pierwszaLiczba = false;
+                NowaRunda();
+            }
+        }
+        else
+        {
+            await Przegrana();
+        }
+    }
+
+    private async Task Wygrana()
+    {
+        Gracz.Przedmiot("walutaGlina").Ilosc += 3;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaKopalnie);
+    }
+
+    private async Task Przegrana()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaKopalnie);
+    }
+
+    public void Dispose()
+    {
+        timerCts?.Cancel();
+    }
+}

@@ -28,6 +28,9 @@
         {
             Gracz.Przedmiot("walutaGlina").Ilosc -= 2;
             Gracz.Statystyki.DzieloZGlinyWWalizce = dzielo;
+            await NaZmianeEkranu.InvokeAsync(EkranGry.SprzedajeTowarZGliny);
+            await Task.Delay(10000);
+            await NaZmianeEkranu.InvokeAsync(EkranGry.TargowiskoGlina);
             await ladowanieGracza.ZapiszAktualnegoGracza();
         }
     }

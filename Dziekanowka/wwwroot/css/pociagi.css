@@ -142,6 +142,9 @@
 .ileBiletowLmiastoHandlu {
     color: gold;
 }
+.ileBiletowLStacjaKopalnie {
+    color: gray;
+}
 .kupBiletStacjamiasto3 {
     width: 104px;
     height: 102px;
@@ -189,6 +192,12 @@
     height: 82px;
     bottom: 178px;
     left: 359px;
+}
+.kupBiletStacjaKopalnie {
+    width: 88px;
+    height: 38px;
+    bottom: 309px;
+    left: 203px;
 }
 .kupBiletStacjametropolia1 {
     width: 67px;
@@ -606,7 +615,7 @@
     bottom: 503px;
     left: 0;
 }
-.pociag25metropolia1Tor4Animacja, .pociag28metropolia1Tor4Animacja {
+.pociag25metropolia1Tor4Animacja, .pociag28metropolia1Tor4Animacja, .pociag45metropolia1Tor4Animacja {
     z-index: 3;
     bottom: 620px;
     left: 630px;
@@ -634,4 +643,48 @@
     right: 130px;
     width: 45px;
     height: 45px;
+}
+.pociagStacjaKopalnieAnimacja {
+    left: -500px;
+    bottom: 72px;
+    width: 920px;
+    height: 370px;
+    cursor: default;
+    pointer-events: none;
+    z-index: 10;
+    transform: scaleX(-1);
+}
+.pociagStacjaKopalnieUkryty {
+    opacity: 0;
+    left: -2500px;
+    pointer-events: none;
+    transition: none;
+}
+.pociagStacjaKopalnieJedzie {
+    opacity: 1;
+    left: 800px;
+    pointer-events: none;
+    transition: left 4s ease;
+}
+.pociagStacjaKopalnieStoi {
+    opacity: 1;
+    left: 800px;
+    pointer-events: all;
+    cursor: pointer;
+    transition: none;
+}
+.pociagStacjaKopalnieOdjedzie {
+    opacity: 1;
+    left: 2500px;
+    pointer-events: none;   
+    transition: left 4s ease;
+}
+.pociagGlinaStacja {
+    width: 730px;
+    height: 294px;
+    bottom: 427px;
+    right: 0;
+    z-index: 9;
+    transform: scaleX(-1);
+    cursor: pointer;
 }

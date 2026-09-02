@@ -1659,10 +1659,13 @@
     flex-direction: column;
 }
 .targowiskoBiletyKupbiletPociag {
-    top: 250px;  
+    top: 280px;  
 }
 .targowiskoBiletyKupbiletAutobus {
-    top: 450px;
+    top: 480px;
+}
+.targowiskoBiletyKupbiletPociagGlina {
+    top: 80px;
 }
 .pierwszyRzadTargowiskoBilety {
     height: 70%;

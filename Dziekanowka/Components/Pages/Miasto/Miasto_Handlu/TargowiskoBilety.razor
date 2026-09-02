@@ -11,18 +11,27 @@
             <div class="drugiRzadTargowiskoBilety">@Gracz.Przedmiot(bilet).Ilosc</div>
         </div>
     }
+    @if (!Gracz.Statystyki.Bonusy.Contains("biletPociagGlina"))
+    {
+        <div class="abs targowiskoBiletyPozycja targowiskoBiletyKupBilet targowiskoBiletyKupbiletPociagGlina @(StacNaBilet("biletPociagGlina") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => KupBilet("biletPociagGlina")'>
+            <div class="pierwszyRzadTargowiskoBilety">@CenaBiletu("biletPociagGlina") <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> <img class="obrazekSieMiesci" src="img/przedmioty/biletPociagGlina.png" /></div>
+        </div>
+    }
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private string[] bilety = ["biletPociag", "biletAutobus"];
-    private int CenaBiletu(string bilet) => bilet == "biletPociag" ? 12 : bilet == "biletAutobus" ? 4 : 0;
+    private int CenaBiletu(string bilet) => bilet == "biletPociag" ? 12 : bilet == "biletAutobus" ? 4 : bilet == "biletPociagGlina" ? 20 : 0;
     private bool StacNaBilet(string bilet) => Gracz.Monety >= CenaBiletu(bilet);
     private async Task KupBilet(string bilet)
     {
         if (!StacNaBilet(bilet)) return;
         Gracz.Monety -= CenaBiletu(bilet);
-        Gracz.Przedmiot(bilet).Ilosc++;
+        if (bilet != "biletPociagGlina")
+            Gracz.Przedmiot(bilet).Ilosc++;
+        else
+            Gracz.Statystyki.Bonusy.Add("biletPociagGlina");
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }

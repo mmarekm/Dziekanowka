@@ -40,7 +40,7 @@ else
         EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
         EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc, EkranGry.BabciaDajeKwiaty,
         EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana, EkranGry.WniesionoBuleczke, EkranGry.LesneMyszyZjedza, EkranGry.BonusZaOwce, EkranGry.DzieciCiekaweCiesza, EkranGry.ZjedzaPlatki, EkranGry.CiastoDlaStajennego,
-        EkranGry.PociagCzarnyDoTunelu, EkranGry.PociagCzarnyZTunelu, EkranGry.KlaunNalewaKawe, EkranGry.DoczekalPiorIFuter, EkranGry.SzyjeZPiorIFutra ];
+        EkranGry.PociagCzarnyDoTunelu, EkranGry.PociagCzarnyZTunelu, EkranGry.KlaunNalewaKawe, EkranGry.DoczekalPiorIFuter, EkranGry.SzyjeZPiorIFutra, EkranGry.SprzedajeTowarZGliny, EkranGry.BiletWStodole, EkranGry.WjazdStacjaKopalnie, EkranGry.WyjazdStacjaKopalnie];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
@@ -78,7 +78,7 @@ else
         EkranGry.LasGrzyby or EkranGry.GrzybyZnalezione => EkranGry.LasIntro,
         EkranGry.AutobusJedzie or EkranGry.AutobusJedzie21 => EkranGry.Miasto1,
         EkranGry.AutobusJedzie22 or EkranGry.AutobusJedzie3 => EkranGry.Miasto2,
-        EkranGry.PociagJedzie => EkranGry.Stacja,
+        EkranGry.PociagJedzie or EkranGry.PociagCzarnyDoTunelu or EkranGry.PociagCzarnyZTunelu or EkranGry.WyjazdStacjaKopalnie => EkranGry.Stacja,
         EkranGry.RybaZlowiona => EkranGry.LasJezioro,
         EkranGry.WejscieDoGalerii => EkranGry.BibliotekaIntro,
         EkranGry.UzyskanieObrazu => EkranGry.BibliotekaPani,
@@ -98,7 +98,9 @@ else
         EkranGry.KlaunNalewaKawe => EkranGry.PotrzebaKawy,
         EkranGry.SzyjeZPiorIFutra => EkranGry.ManufakturaPiorIFuter,
         EkranGry.DoczekalPiorIFuter => EkranGry.OczekujacyPiorIFuter,
-        EkranGry.PociagCzarnyDoTunelu or EkranGry.PociagCzarnyZTunelu => EkranGry.Stacja,
+        EkranGry.SprzedajeTowarZGliny => EkranGry.TargowiskoGlina,
+        EkranGry.BiletWStodole => EkranGry.Stodola,
+        EkranGry.WjazdStacjaKopalnie or EkranGry.KopalniaGliny => EkranGry.StacjaKopalnie,
         _ => ekran
     };
     private async void OnWideoPowitalneZakonczone()
@@ -144,9 +146,9 @@ else
             EkranGry.DomSlodkichBulek => "mp3/Tla/miejsceLas.mp3",
             EkranGry.SzkolaIntro => "mp3/Tla/szkola.mp3",
             EkranGry.BibliotekaIntro or EkranGry.BibliotekaCzytelnia or EkranGry.BibliotekaGaleria or EkranGry.WejscieDoGalerii or EkranGry.BibliotekaPani => "mp3/Tla/biblioteka.mp3",
-            EkranGry.Stacja or EkranGry.PociagJedzie or EkranGry.PociagCzarnyDoTunelu or EkranGry.PociagCzarnyZTunelu => "mp3/Tla/kolej.mp3",
-            EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona or EkranGry.UzyskanieObrazu or EkranGry.BonusZaOwce or EkranGry.DzieciCiekaweCiesza or EkranGry.BabciaDajeKwiaty => "mp3/Dzwieki/fanfaraKrotka.mp3",
-            EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca or EkranGry.WyciskarkaPraca or EkranGry.WinoMorskieDlaPlebana or EkranGry.SzyjeZPiorIFutra => "mp3/Tla/akcjaSprawna.mp3",
+            EkranGry.Stacja or EkranGry.PociagJedzie or EkranGry.PociagCzarnyDoTunelu or EkranGry.PociagCzarnyZTunelu or EkranGry.WjazdStacjaKopalnie => "mp3/Tla/kolej.mp3",
+            EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona or EkranGry.UzyskanieObrazu or EkranGry.BonusZaOwce or EkranGry.DzieciCiekaweCiesza or EkranGry.BabciaDajeKwiaty or EkranGry.BiletWStodole => "mp3/Dzwieki/fanfaraKrotka.mp3",
+            EkranGry.GarnekGotowanie or EkranGry.PatelniaSmazenie or EkranGry.PieczenieChleba or EkranGry.PieczenieCiasta or EkranGry.PieczenieWedliny or EkranGry.MaselnicaPraca or EkranGry.SerowarniaPraca or EkranGry.ZarnaPraca or EkranGry.PlatkarkaPraca or EkranGry.BeczkaPraca or EkranGry.MlynekPraca or EkranGry.WyciskarkaPraca or EkranGry.WinoMorskieDlaPlebana or EkranGry.SzyjeZPiorIFutra or EkranGry.SprzedajeTowarZGliny=> "mp3/Tla/akcjaSprawna.mp3",
             EkranGry.FanZdrowy or EkranGry.AutostopDoSerowLesnych or EkranGry.PrzystanekDoSerowLesnych or EkranGry.ZwierzPuszczaDoSerowLesnych or EkranGry.SeryLesne => "mp3/Tla/miastolesne.mp3",
             EkranGry.DomMleka or EkranGry.ManufakturaPiorIFuter => "mp3/Tla/miastobiale.mp3",
             EkranGry.KuchniaMorska => "mp3/Tla/miastomorskie.mp3",
@@ -155,6 +157,7 @@ else
             EkranGry.PotrzebaKawy or EkranGry.HodowcaKawy => "mp3/Tla/miastokawy.mp3",
             EkranGry.OczekujacyPiorIFuter or EkranGry.InfoMisjaSny => "mp3/Tla/miastosnow.mp3",
             EkranGry.TargowiskoBilety or EkranGry.TargowiskoGlina => "mp3/Tla/miastohandlu.mp3",
+            EkranGry.WyjazdStacjaKopalnie => "mp3/Tla/stacjakopalnie.mp3",
             EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke or EkranGry.LesneMyszyZjedza or EkranGry.ZjedzaPlatki or EkranGry.CiastoDlaStajennego or EkranGry.KlaunNalewaKawe or EkranGry.DoczekalPiorIFuter => "mp3/Dzwieki/fanfara.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
             _ => $"mp3/Tla/{ekran.ToString().ToLower()}.mp3"

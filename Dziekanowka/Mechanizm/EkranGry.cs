@@ -13,6 +13,7 @@
         Garaz,
         Przetwornia,
         Rzeznia,
+        Stodola,
         Zwierzyniec,
         Kurnik,
         Gesiarnia,
@@ -101,6 +102,7 @@
         InfoMisjaSny,
         TargowiskoBilety,
         TargowiskoGlina,
+        KopalniaGliny,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
@@ -147,6 +149,10 @@
         DoczekalPiorIFuter,
         PociagCzarnyDoTunelu,
         PociagCzarnyZTunelu,
-        SzyjeZPiorIFutra
+        SzyjeZPiorIFutra,
+        SprzedajeTowarZGliny,
+        BiletWStodole,
+        WjazdStacjaKopalnie,
+        WyjazdStacjaKopalnie
     }
 }

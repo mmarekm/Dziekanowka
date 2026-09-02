@@ -1,11 +1,85 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="stacjaKopalnieWidok widok rel">
-
+@implements IDisposable
+<div class="stacjaKopalnieWidok ovhidden widok rel">
+    <div class="abs ileBiletowLKazdeMiasto ileBiletowLStacjaKopalnie">@Gracz.Przedmiot("biletPociag").Ilosc</div>
+    <div class="abs ileBiletowKazdeMiasto"><img class="obrazekContain" src="img/przedmioty/biletPociag.png" /></div>
+    <div class="abs kupBiletStacjaKopalnie @(Gracz.Monety < 10 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacjaKopalnie.png" /></div>
+    <div class="abs pociagStacjaKopalnieAnimacja @klasaPociagu" @onclick="DoMetropolia1">
+        <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+        <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
+    </div>
+    @if (Gracz.Statystyki.Bonusy.Contains("biletPociagGlina"))
+    {
+        <div class="abs pociagGlinaStacja" @onclick="DoKopalniGliny"><img class="obrazekContain" src="img/miasto/pociagGlina.png" /></div>
+    }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string klasaPociagu = "pociagStacjaKopalnieUkryty";
+    private bool moznaWsiasc = false;
+    private CancellationTokenSource? _cts;
+    protected override void OnInitialized()
+    {
+        _ = PociagJezdzi();
+    }
+    private async Task PociagJezdzi()
+    {
+        _cts = new CancellationTokenSource();
+        var token = _cts.Token;
+        try
+        {
+            while (!token.IsCancellationRequested)
+            {
+                await Task.Delay(4000, token);
+                klasaPociagu = "pociagStacjaKopalnieJedzie";
+                moznaWsiasc = false;
+                StateHasChanged();
+                await Task.Delay(4000, token);
+                klasaPociagu = "pociagStacjaKopalnieStoi";
+                moznaWsiasc = true;
+                StateHasChanged();
+                await Task.Delay(4000, token);
+                moznaWsiasc = false;
+                klasaPociagu = "pociagStacjaKopalnieOdjedzie";
+                StateHasChanged();
+                await Task.Delay(4000, token);
+                klasaPociagu = "pociagStacjaKopalnieUkryty";
+                StateHasChanged();
+            }
+        }
+        catch (TaskCanceledException) { }
+    }
+    private async Task KupBilet()
+    {
+        if (Gracz.Monety < 10) return;
+        Gracz.Monety -= 10;
+        Gracz.Przedmiot("biletPociag").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    public async Task DoMetropolia1()
+    {
+        if (!Gracz.JestPrzedmiot("biletPociag") || !moznaWsiasc) return;
+        Gracz.Przedmiot("biletPociag").Ilosc--;
+        Gracz.Statystyki.Stacja = "metropolia1";
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.WyjazdStacjaKopalnie);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Stacja);
+    }
+    public async Task DoKopalniGliny()
+    {
+        Gracz.Statystyki.Bonusy.Remove("biletPociagGlina");
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        //await NaZmianeEkranu.InvokeAsync(EkranGry.WyjazdStacjaKopalnie);
+        //await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaGliny);
+    }
+    public void Dispose()
+    {
+        _cts?.Cancel();
+    }
 }
