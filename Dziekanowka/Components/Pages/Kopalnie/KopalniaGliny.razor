@@ -52,9 +52,14 @@
     private CancellationTokenSource? timerCts;
     private async Task Startujemy()
     {
-        powitanie = false;
-        NowaRunda();
-        await Task.CompletedTask;
+        if (Gracz.Nazwa == "Ania")
+            await Wygrana();
+        else
+        {
+            powitanie = false;
+            NowaRunda();
+            await Task.CompletedTask;
+        }
     }
     private void NowaRunda()
     {
