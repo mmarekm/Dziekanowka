@@ -81,7 +81,7 @@
         try
         {
             await Task.Delay(5000, token);
-            await Przegrana();
+            await Odpowiedz(false);
         }
         catch (TaskCanceledException) { }
     }
