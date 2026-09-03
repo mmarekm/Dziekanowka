@@ -3,6 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
 <div class="kopalniaGlinyWidok widok rel">
+    <div class="abs moznaZyskacKopalniaGliny">3 <img class="obrazekJakTrzeba" src="img/przedmioty/walutaGlina.png" /></div>
     @if (powitanie)
     {
         <div class="abs powitanieKopalniaGliny">
@@ -13,6 +14,9 @@
     else
     {
         <div class="abs rozgrywkaKopalniaGliny">
+            <div class="miernikCzasuKopalniaGliny" @key="rundaId">
+                <div class="paskCzasuKopalniaGliny"></div>
+            </div>
             <div class="liczbaKopalniaGliny">
                 @if (aktualnaLiczba != null)
                 {
@@ -42,39 +46,31 @@
     private bool blyskNie = false;
     private bool powitanie = true;
     private int rundaId = 0;
-    private int licznik = 13;              // suma wewnętrzna - NIGDY nie pokazywana graczowi
-    private int? aktualnaLiczba = null;    // to, co faktycznie wyświetlamy (baza albo dodawana wartość)
-    private bool pierwszaLiczba = true;    // czy aktualnie pokazywana liczba to baza (13) czy "+X"
+    private int licznik = 13;
+    private int? aktualnaLiczba = null;
+    private bool pierwszaLiczba = true;
     private CancellationTokenSource? timerCts;
-
     private async Task Startujemy()
     {
         powitanie = false;
         NowaRunda();
         await Task.CompletedTask;
     }
-
     private void NowaRunda()
     {
         rundaId++;
-
         if (pierwszaLiczba)
-        {
             aktualnaLiczba = licznik;
-        }
         else
         {
             int dodatek = Random.Shared.Next(5, 10);
             licznik += dodatek;
             aktualnaLiczba = dodatek;
         }
-
         StateHasChanged();
-
         timerCts = new CancellationTokenSource();
         _ = UruchomTimerOdpowiedzi(timerCts.Token);
     }
-
     private async Task UruchomTimerOdpowiedzi(CancellationToken token)
     {
         try
@@ -92,21 +88,15 @@
     }
     private async Task Odpowiedz(bool graczUwazaZeWystarczy)
     {
-        // natychmiastowy feedback wizualny, niezaleznie od logiki
         if (graczUwazaZeWystarczy) blyskTak = true; else blyskNie = true;
         StateHasChanged();
         _ = ResetBlysk(graczUwazaZeWystarczy);
-
         timerCts?.Cancel();
-
         bool faktycznieWystarczy = licznik >= 77;
-
         if (graczUwazaZeWystarczy == faktycznieWystarczy)
         {
             if (faktycznieWystarczy)
-            {
                 await Wygrana();
-            }
             else
             {
                 pierwszaLiczba = false;
@@ -114,23 +104,19 @@
             }
         }
         else
-        {
             await Przegrana();
-        }
     }
-
     private async Task Wygrana()
     {
         Gracz.Przedmiot("walutaGlina").Ilosc += 3;
         await ladowanieGracza.ZapiszAktualnegoGracza();
+        Gracz.Statystyki.OtwarteOkno = "wygranaGlina";
         await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaKopalnie);
     }
-
     private async Task Przegrana()
     {
         await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaKopalnie);
     }
-
     public void Dispose()
     {
         timerCts?.Cancel();

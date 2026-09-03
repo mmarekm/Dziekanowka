@@ -3,6 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
 <div class="stacjaKopalnieWidok ovhidden widok rel">
+    <div class="abs @KlasaPowitania"><img class="obrazekJakTrzeba" src="img/przedmioty/walutaGlina.png" /> 3 <img class="obrazekSieMiesci" src="img/przedmioty/walutaGlina.png" /></div>
     <div class="abs ileBiletowLKazdeMiasto ileBiletowLStacjaKopalnie">@Gracz.Przedmiot("biletPociag").Ilosc</div>
     <div class="abs ileBiletowKazdeMiasto"><img class="obrazekContain" src="img/przedmioty/biletPociag.png" /></div>
     <div class="abs kupBiletStacjaKopalnie @(Gracz.Monety < 10 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacjaKopalnie.png" /></div>
@@ -19,6 +20,27 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (Gracz.Statystyki.OtwarteOkno == "wygranaGlina")
+        {
+            Gracz.Statystyki.OtwarteOkno = "";
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+            Powitaj = true;
+            Znikanie = false;
+            StateHasChanged();
+            await Task.Delay(100);
+            Znikanie = true;
+            StateHasChanged();
+            await Task.Delay(7000);
+            Powitaj = false;
+            Znikanie = false;
+            StateHasChanged();
+        }
+    }
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
     private string klasaPociagu = "pociagStacjaKopalnieUkryty";
     private bool moznaWsiasc = false;
     private CancellationTokenSource? _cts;
