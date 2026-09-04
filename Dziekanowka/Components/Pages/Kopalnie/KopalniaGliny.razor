@@ -116,10 +116,14 @@
         Gracz.Przedmiot("walutaGlina").Ilosc += 3;
         await ladowanieGracza.ZapiszAktualnegoGracza();
         Gracz.Statystyki.OtwarteOkno = "wygranaGlina";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaGlinyWygrana);
+        await Task.Delay(6100);
         await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaKopalnie);
     }
     private async Task Przegrana()
     {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaGlinyPrzegrana);
+        await Task.Delay(8000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaKopalnie);
     }
     public void Dispose()

@@ -153,6 +153,10 @@
         SprzedajeTowarZGliny,
         BiletWStodole,
         WjazdStacjaKopalnie,
-        WyjazdStacjaKopalnie
+        WyjazdStacjaKopalnie,
+        WjazdKopalniaGliny,
+        ChlopiecStodolaOtrzymal,
+        KopalniaGlinyWygrana,
+        KopalniaGlinyPrzegrana
     }
 }

@@ -32,7 +32,7 @@
             await Task.Delay(100);
             Znikanie = true;
             StateHasChanged();
-            await Task.Delay(7000);
+            await Task.Delay(4000);
             Powitaj = false;
             Znikanie = false;
             StateHasChanged();
@@ -96,8 +96,8 @@
     {
         Gracz.Statystyki.Bonusy.Remove("biletPociagGlina");
         await ladowanieGracza.ZapiszAktualnegoGracza();
-        //await NaZmianeEkranu.InvokeAsync(EkranGry.WyjazdStacjaKopalnie);
-        //await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.WjazdKopalniaGliny);
+        await Task.Delay(8000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaGliny);
     }
     public void Dispose()

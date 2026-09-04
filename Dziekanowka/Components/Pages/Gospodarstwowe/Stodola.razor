@@ -3,6 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="stodolaWidok widok rel">
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gospodarstwo)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (!Gracz.Statystyki.Bonusy.Contains("biletPociagGlina"))
     {
         <div class="abs biletWStodole @(stacNaBilet ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="WezBilet">
@@ -10,21 +11,37 @@
             <div class="drugiRzadStodola">1 <img class="obrazekSieMiesci" src="img/przedmioty/biletPociagGlina.png" /></div>
         </div>
     }
+    @if (Gracz.Statystyki.AktualnaMisja == Misje.ChlopiecStodola)
+    {
+        <div class="abs dajDzieloChlopiecStodola @(jestDzielo ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajDzielo"><img class="obrazekWypelnia" src="img/miasto/miastoHandlu/targowiskoGlina/@(Gracz.Statystyki.DaneMisji[0]).png" /></div>
+    }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
     private bool stacNaBilet => Gracz.JestPrzedmiot("siano") && Gracz.JestPrzedmiot("pustaButelka");
+    private bool jestDzielo => Gracz.Statystyki.DzieloZGlinyWWalizce == Gracz.Statystyki.DaneMisji[0];
+    private async Task DajDzielo()
+    {
+        if (!jestDzielo) return;
+        Gracz.Statystyki.DzieloZGlinyWWalizce = "";
+        Gracz.LosujNowaMisje();
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.ChlopiecStodolaOtrzymal);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Stodola);
+    }
     private async Task WezBilet()
     {
         if (!stacNaBilet) return;
         Gracz.Przedmiot("siano").Ilosc --;
         Gracz.Przedmiot("pustaButelka").Ilosc--;
         Gracz.Statystyki.Bonusy.Add("biletPociagGlina");
+        await ladowanieGracza.ZapiszAktualnegoGracza();
         await NaZmianeEkranu.InvokeAsync(EkranGry.BiletWStodole);
         await Task.Delay(8000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.Stodola);
-        await ladowanieGracza.ZapiszAktualnegoGracza();
     }
 }

@@ -40,7 +40,8 @@ else
         EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
         EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc, EkranGry.BabciaDajeKwiaty,
         EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana, EkranGry.WniesionoBuleczke, EkranGry.LesneMyszyZjedza, EkranGry.BonusZaOwce, EkranGry.DzieciCiekaweCiesza, EkranGry.ZjedzaPlatki, EkranGry.CiastoDlaStajennego,
-        EkranGry.PociagCzarnyDoTunelu, EkranGry.PociagCzarnyZTunelu, EkranGry.KlaunNalewaKawe, EkranGry.DoczekalPiorIFuter, EkranGry.SzyjeZPiorIFutra, EkranGry.SprzedajeTowarZGliny, EkranGry.BiletWStodole, EkranGry.WjazdStacjaKopalnie, EkranGry.WyjazdStacjaKopalnie];
+        EkranGry.PociagCzarnyDoTunelu, EkranGry.PociagCzarnyZTunelu, EkranGry.KlaunNalewaKawe, EkranGry.DoczekalPiorIFuter, EkranGry.SzyjeZPiorIFutra, EkranGry.SprzedajeTowarZGliny, EkranGry.BiletWStodole, EkranGry.WjazdStacjaKopalnie, EkranGry.WyjazdStacjaKopalnie,
+        EkranGry.WjazdKopalniaGliny, EkranGry.ChlopiecStodolaOtrzymal, EkranGry.KopalniaGlinyWygrana, EkranGry.KopalniaGlinyPrzegrana];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
@@ -99,8 +100,8 @@ else
         EkranGry.SzyjeZPiorIFutra => EkranGry.ManufakturaPiorIFuter,
         EkranGry.DoczekalPiorIFuter => EkranGry.OczekujacyPiorIFuter,
         EkranGry.SprzedajeTowarZGliny => EkranGry.TargowiskoGlina,
-        EkranGry.BiletWStodole => EkranGry.Stodola,
-        EkranGry.WjazdStacjaKopalnie or EkranGry.KopalniaGliny => EkranGry.StacjaKopalnie,
+        EkranGry.BiletWStodole or EkranGry.ChlopiecStodolaOtrzymal => EkranGry.Stodola,
+        EkranGry.WjazdStacjaKopalnie or EkranGry.KopalniaGliny or EkranGry.WjazdKopalniaGliny or EkranGry.KopalniaGlinyWygrana or EkranGry.KopalniaGlinyPrzegrana => EkranGry.StacjaKopalnie,
         _ => ekran
     };
     private async void OnWideoPowitalneZakonczone()
@@ -157,8 +158,9 @@ else
             EkranGry.PotrzebaKawy or EkranGry.HodowcaKawy => "mp3/Tla/miastokawy.mp3",
             EkranGry.OczekujacyPiorIFuter or EkranGry.InfoMisjaSny => "mp3/Tla/miastosnow.mp3",
             EkranGry.TargowiskoBilety or EkranGry.TargowiskoGlina => "mp3/Tla/miastohandlu.mp3",
-            EkranGry.WyjazdStacjaKopalnie => "mp3/Tla/stacjakopalnie.mp3",
-            EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke or EkranGry.LesneMyszyZjedza or EkranGry.ZjedzaPlatki or EkranGry.CiastoDlaStajennego or EkranGry.KlaunNalewaKawe or EkranGry.DoczekalPiorIFuter => "mp3/Dzwieki/fanfara.mp3",
+            EkranGry.WyjazdStacjaKopalnie or EkranGry.WjazdKopalniaGliny or EkranGry.KopalniaGlinyWygrana => "mp3/Tla/stacjakopalnie.mp3",
+            EkranGry.KopalniaGlinyPrzegrana => "mp3/Tla/kopalniagliny.mp3",
+            EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke or EkranGry.LesneMyszyZjedza or EkranGry.ZjedzaPlatki or EkranGry.CiastoDlaStajennego or EkranGry.KlaunNalewaKawe or EkranGry.DoczekalPiorIFuter or EkranGry.ChlopiecStodolaOtrzymal => "mp3/Dzwieki/fanfara.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
             _ => $"mp3/Tla/{ekran.ToString().ToLower()}.mp3"
         };

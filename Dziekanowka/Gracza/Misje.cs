@@ -14,5 +14,6 @@
         public const string WiesSurowkaWarzywna = "WiesSurowkaWarzywna";
         public const string PotrzebaKawy = "PotrzebaKawy";
         public const string OczekujacyPiorIFuter = "OczekujacyPiorIFuter";
+        public const string ChlopiecStodola = "ChlopiecStodola";
     }
 }
