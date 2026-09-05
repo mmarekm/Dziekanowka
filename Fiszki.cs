@@ -65,7 +65,7 @@ namespace fiszkiklasy
         public static string[,] clothes = { {"kurtka","skarpetka","pasek","okulary","szalik","rękawiczka","but","spodnie","parasol","koszulka","sukienka","czapka","kapelusz","spódnica",
     "koszula","płaszcz","przymierzać","rozmiar"},
     {"jacket","sock","belt","glasses","scarf","glove","shoe","trousers","umbrella","T-shirt","dress","cap","hat","skirt","shirt","coat","try on","size"} };
-        public static string[,] countries = { {"Wielka Brytania (Zjednoczone Królestwo","Japończyk, japoński","Japonia","Rosjanin, rosyjski","Rosja","Kanadyjczyk, kanadyjski","Kanada",
+        public static string[,] countries = { {"Wielka Brytania (Zjednoczone Królestwo)","Japończyk, japoński","Japonia","Rosjanin, rosyjski","Rosja","Kanadyjczyk, kanadyjski","Kanada",
     "Amerykanin, amerykański","Stany Zjednoczone Ameryki","Australijczyk, australijski","Australia","Grek, grecki","narodowość","kraj"}, {"United Kingdom","Japanese","Japan","Russian",
     "Russia","Canadian","Canada","American","United States of America","Australian","Australia","Greek","nationality","country"} };
         public static string[,] toilet = { {"spóźniać się","ścielić łóżko","czesać się","ścierać kurz","myć","budzić się","spać","śpieszyć się"},{"be late","make the bed","comb","dust",
