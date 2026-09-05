@@ -1542,6 +1542,7 @@
         if (mlynek && uzyskanaKawa > 0)
         {
             Gracz.ZywnoscP("kawa").Ilosc += uzyskanaKawa;
+            Gracz.Przedmiot("pustaButelka").Ilosc += uzyskanaKawa;
             await NaZmianeEkranu.InvokeAsync(EkranGry.KawaPraca);
             await Task.Delay(8000);
             Gracz.Statystyki.OtwarteOkno = "kawaPraca";
