@@ -97,6 +97,9 @@
 .targowiskoBiletyWidok {
     background-image: url('../img/miasto/miastoHandlu/targowiskoBiletyWidok.png');
 }
+.targowiskoTrzcinaWidok {
+    background-image: url('../img/miasto/miastoHandlu/targowiskoTrzcinaWidok.png');
+}
 .targowiskoGlinaWidok {
     background-image: url('../img/miasto/miastoHandlu/targowiskoGlinaWidok.png');
 }
@@ -1632,6 +1635,13 @@
     height: 160px;
     top: 301px;
     left: 518px;
+    z-index: 2;
+}
+.miastoHandluDoTargowiskoTrzcina {
+    width: 281px;
+    height: 162px;
+    top: 612px;
+    left: 217px;
     z-index: 2;
 }
 .targowiskoBiletyPozycja {

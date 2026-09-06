@@ -126,7 +126,7 @@
     height: 100%;
     background: #6b9c4a;
     transform-origin: left;
-    animation: oproznianieCzasu 5s linear forwards;
+    animation: oproznianieCzasu 7s linear forwards;
 }
 @keyframes oproznianieCzasu {
     from {

@@ -102,6 +102,7 @@
         InfoMisjaSny,
         TargowiskoBilety,
         TargowiskoGlina,
+        TargowiskoTrzcina,
         KopalniaGliny,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
