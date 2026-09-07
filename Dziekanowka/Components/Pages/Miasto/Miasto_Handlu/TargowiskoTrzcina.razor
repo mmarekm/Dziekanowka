@@ -3,20 +3,20 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="targowiskoTrzcinaWidok widok rel">
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoHandlu)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
-    <div class="abs wyrobyZGlinyTargowiskoTrzcina">
+    <div class="abs wyrobyZTrzcinyTargowiskoTrzcina">
         @for (int i = 1; i <= 36; i++)
         {
             int toI = i;
             <div class="wyrobZTrzcinyTargowiskoTrzcina @(moznaKupic ? "klikalneDivZieloneRel" : "nieMoznaKliknac")" @onclick="async () => await Kup((toI).ToString())"><img class="obrazekSieMiesci" src="img/miasto/miastoHandlu/targowiskoTrzcina/@(toI).png" /></div>
         }
     </div>
-    <div class="abs walizaTrzcinaTargowisko"><img class="obrazekSieMiesci" src="img/przedmioty/walizaTrzcina.png"/></div>
+    <div class="abs walizaTrzcinaTargowisko"><img class="obrazekSieMiesci" src="img/przedmioty/walizaTrzcina.png" /></div>
     @if (Gracz.Statystyki.DzieloZTrzcinyWWalizie != "")
     {
         <div class="abs zawartoscWalizyTrzcinaTargowisko"><img class="obrazekSieMiesci" src="img/miasto/miastoHandlu/targowiskoTrzcina/@(Gracz.Statystyki.DzieloZTrzcinyWWalizie).png" /></div>
     }
-    <div class="abs lWalutyTargowiskoTrzcina">@Gracz.Przedmiot("walutaTrzcina").Ilosc <img class="obrazekSieMiesci" src="img/przedmioty/walutaTrzcina.png" /></div>
-    <div class="abs cenaTargowiskoTrzcina">2 <img class="obrazekSieMiesci" src="img/przedmioty/walutaTrzcina.png" /></div>
+    <div class="abs lWalutyTargowisko lWalutyTargowiskoTrzcina">@Gracz.Przedmiot("walutaTrzcina").Ilosc <img class="obrazekSieMiesci" src="img/przedmioty/walutaTrzcina.png" /></div>
+    <div class="abs cenaTargowisko cenaTargowiskoTrzcina">2 <img class="obrazekSieMiesci" src="img/przedmioty/walutaTrzcina.png" /></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
@@ -29,8 +29,8 @@
             Gracz.Przedmiot("walutaTrzcina").Ilosc -= 2;
             Gracz.Statystyki.DzieloZTrzcinyWWalizie = dzielo;
             await ladowanieGracza.ZapiszAktualnegoGracza();
-            //await NaZmianeEkranu.InvokeAsync(EkranGry.SprzedajeTowarZGliny);
-            //await Task.Delay(10000);
+            await NaZmianeEkranu.InvokeAsync(EkranGry.SprzedajeTowarZTrzciny);
+            await Task.Delay(8000);
             await NaZmianeEkranu.InvokeAsync(EkranGry.TargowiskoTrzcina);
         }
     }

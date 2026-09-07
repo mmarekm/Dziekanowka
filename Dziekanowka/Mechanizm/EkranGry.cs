@@ -152,6 +152,7 @@
         PociagCzarnyZTunelu,
         SzyjeZPiorIFutra,
         SprzedajeTowarZGliny,
+        SprzedajeTowarZTrzciny,
         BiletWStodole,
         WjazdStacjaKopalnie,
         WyjazdStacjaKopalnie,
