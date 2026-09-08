@@ -1,0 +1,41 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="rodzinaRybakow@(nakarmieniRybacy ? "Je": "Czeka")Widok widok rel">
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasJezioro)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    @if (nakarmieniRybacy)
+    {
+        <div class="abs rybakZawiezieNaWyspeTrzcin" @onclick="Plyn"></div>
+    }
+    else
+    {
+        <div class="abs daniaDlaRybakow @(moznaKarmic ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="NakarmRybakow">
+            <div class="danie1DlaRybakow"><img class="obrazekJakTrzeba" src="img/dom/kuchnia/garnek/@(Gracz.Statystyki.Danie1Rybakow).png" /></div>
+            <div class="danie2DlaRybakow"><img class="obrazekJakTrzeba" src="img/miasto/kuchniaMorska/@(Gracz.Statystyki.Danie2Rybakow).png" /></div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool nakarmieniRybacy => Gracz.Statystyki.Bonusy.Contains("biletLasLodka");
+    private bool moznaKarmic => Gracz.JestObiad(Gracz.Statystyki.Danie1Rybakow) && Gracz.JestObiad(Gracz.Statystyki.Danie2Rybakow);
+    private async Task Plyn()
+    {
+        Gracz.Statystyki.Bonusy.Remove("biletLasLodka");
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.PlynieNaWyspeTrzcin);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzciny);
+    }
+    private async Task NakarmRybakow()
+    {
+        if (!moznaKarmic) return;
+        Gracz.Obiad(Gracz.Statystyki.Danie1Rybakow).Ilosc--;
+        Gracz.Obiad(Gracz.Statystyki.Danie2Rybakow).Ilosc--;
+        Gracz.Statystyki.Bonusy.Add("biletLasLodka");
+        Gracz.Statystyki.Danie1Rybakow = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
+        Gracz.Statystyki.Danie2Rybakow = Gra.Restauracja[Random.Shared.Next(Gra.Restauracja.Count)];
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+}

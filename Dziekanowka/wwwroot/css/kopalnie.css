@@ -1,6 +1,9 @@
 ﻿.kopalniaGlinyWidok {
     background-image: url('../img/kopalnie/kopalniaGlinyWidok.png');
 }
+.kopalniaTrzcinyWidok {
+    background-image: url('../img/kopalnie/kopalniaTrzcinyWidok.png');
+}
 .powitanieKopalniaGliny {
     top: 200px;
     left: 200px;

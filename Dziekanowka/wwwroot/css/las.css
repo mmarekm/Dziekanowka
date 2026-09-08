@@ -10,6 +10,12 @@
 .lasJezioroWidok {
     background-image: url('../img/teren/las/lasJezioroWidok.png');
 }
+.rodzinaRybakowJeWidok {
+    background-image: url('../img/teren/las/rodzinaRybakowJeWidok.png');
+}
+.rodzinaRybakowCzekaWidok {
+    background-image: url('../img/teren/las/rodzinaRybakowCzekaWidok.png');
+}
 .las1Widok {
     background-image: url('../img/teren/las/las1Widok.png');
 }
@@ -304,9 +310,34 @@
     transition: transform 0.15s ease;
     backface-visibility: hidden;
 }
-
 .losowanaRyba.odwracana img {
     transform: rotateY(90deg);
+}
+.jezioroDoRodzinaRybakow {
+    width: 592px;
+    height: 282px;
+    right: 210px;
+    top: 203px;
+    z-index: 2;
+}
+.rybakZawiezieNaWyspeTrzcin {
+    width: 470px;
+    height: 300px;
+    left: 300px;
+    top: 400px;
+    transition: all 0.3s ease;
+}
+    .rybakZawiezieNaWyspeTrzcin:hover {
+        cursor: pointer;
+        background-color: lightblue;
+        opacity: 0.5;
+    }
+.daniaDlaRybakow {
+    width: 450px;
+    height: 200px;
+    right: 50px;
+    top: 200px;
+    display: flex;
 }
 @keyframes migniecieAnim {
     0% {

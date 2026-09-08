@@ -2,14 +2,28 @@
 {
     public class Fiszki
     {
-        private static string[,] numbersBasic = {{"zero","jeden","dwa","trzy","cztery","pięć","sześć","siedem","osiem","dziewięć","dziesięć","jedenaście","dwanaście","trzynaście","czternaście","piętnaście","szesnaście","siedemnaście","osiemnaście","dziewiętnaście","dwadzieścia"},
-                                                  {"zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"},
-                                                  {"cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez","once","doce","trece","catorce","quince","dieciséis","diecisiete","dieciocho","diecinueve","veinte"} };
-
-        private static string[,] numbersAdvanced = {{"trzydzieści","czterdzieści","pięćdziesiąt","sześćdziesiąt","siedemdziesiąt","osiemdziesiąt","dziewięćdziesiąt","sto","tysiąc","milion","pierwszy","drugi","trzeci","czwarty","piąty","ostatni"},
-                                                     {"thirty","forty","fifty","sixty","seventy","eighty","ninety","hundred","thousand","million","first","second","third","fourth","fifth","last"},
-                                                     {"treinta","cuarenta","cincuenta","sesenta","setenta","ochenta","noventa","cien","mil","millón","primero","segundo","tercero","cuarto","quinto","último"} };
-
+        private static string[,] numbers = {{"zero","jeden","dwa","trzy","cztery","pięć","sześć","siedem","osiem","dziewięć","dziesięć","jedenaście","dwanaście","trzynaście","czternaście","piętnaście","szesnaście","siedemnaście","osiemnaście","dziewiętnaście","dwadzieścia","trzydzieści","czterdzieści","pięćdziesiąt","sześćdziesiąt","siedemdziesiąt","osiemdziesiąt","dziewięćdziesiąt","sto","tysiąc","milion","pierwszy","drugi","trzeci","czwarty","piąty","ostatni"},
+                                    {"zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety","hundred","thousand","million","first","second","third","fourth","fifth","last"},
+                                    {"cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez","once","doce","trece","catorce","quince","dieciséis","diecisiete","dieciocho","diecinueve","veinte","treinta","cuarenta","cincuenta","sesenta","setenta","ochenta","noventa","cien","mil","millón","primero","segundo","tercero","cuarto","quinto","último"},
+                                    {"nulla","unus","duo","tres","quattuor","quinque","sex","septem","octo","novem","decem","undecim","duodecim","tredecim","quattuordecim","quindecim","sedecim","septendecim","duodeviginti","undeviginti","viginti","triginta","quadraginta","quinquaginta","sexaginta","septuaginta","octoginta","nonaginta","centum","mille","decies centena milia","primus","secundus","tertius","quartus","quintus","ultimus"} };
+        private static string[,] wordsMath = {{"numer","liczba","połowa","ćwiartka","całość","więcej","mniej","tyle samo","kilka","wiele","mało","liczyć","obliczać","podwoić","parzysty","nieparzysty","suma","różnica","iloczyn","iloraz","cyfra","dodawać","odejmować","mnożyć","dzielić","równać się","procent","wynik","ułamek"},
+                                      {"number","number","half","quarter","whole","more","less","the same amount","a few","a lot","little","count","calculate","double","even","odd","sum","difference","product","quotient","digit","add","subtract","multiply","divide","equal","percent","result","fraction"},
+                                      {"el número","el número","la mitad","el cuarto","el todo","más","menos","la misma cantidad","unos pocos","mucho","poco","contar","calcular","duplicar","par","impar","la suma","la diferencia","el producto","el cociente","la cifra","sumar","restar","multiplicar","dividir","ser igual a","el porcentaje","el resultado","la fracción"},
+                                      {"numerus","numerus","dimidium","quadrans","totum","plus","minus","tantundem","aliquot","multum","paucum","numerare","computare","duplicare","par","impar","summa","differentia","productus","-","digitus","addere","subtrahere","multiplicare","dividere","aequare","-","eventus","-"} };
+        private static string[,] kitchenRoom = {{"lodówka","zlew","kuchnia","zmywać naczynia","kroić","smażyć","gotować się (wrzeć)","mieszać","obierać","piec","dodawać","ważyć","siekać","podgrzewać","talerz","widelec","nóż","łyżka","łyżeczka","szklanka","kubek","filiżanka","serwetka","obrus"},
+                                        {"fridge","sink","kitchen","wash the dishes","cut","fry","boil","mix","peel","bake","add","weigh","chop","heat up","plate","fork","knife","spoon","teaspoon","glass","mug","cup","napkin","tablecloth"},
+                                        {"la nevera","el fregadero","la cocina","fregar los platos","cortar","freír","hervir","mezclar","pelar","hornear","añadir","pesar","picar","calentar","el plato","el tenedor","el cuchillo","la cuchara","la cucharilla","el vaso","la taza","la taza","la servilleta","el mantel"} };
+        private static string[,] bathroomRoom = {{"prysznic","wanna","lustro","łazienka","czesać się","myć","pralka","wieszać pranie","toaleta"},
+                                          {"shower","bathtub","mirror","bathroom","comb","wash","washing machine","hang out the laundry","toilet"},
+                                          {"la ducha","la bañera","el espejo","el baño","peinarse","lavar","la lavadora","tender la ropa","el aseo"} };
+        private static string[,] livingBedroom = {{"szafa","książka","regał","stół","krzesło","łóżko","kanapa","dywan","salon","sypialnia","zasłony","ścielić łóżko","ścierać kurz","budzić się","spać","sprzątać","odkurzać","prasować","zamiatać","lampa"},
+                                           {"wardrobe","book","bookshelf","table","chair","bed","sofa","carpet","living room","bedroom","curtains","make the bed","dust","wake up","sleep","clean/tidy up","vacuum","iron","sweep","lamp"},
+                                           {"el armario","el libro","la estantería","la mesa","la silla","la cama","el sofá","la alfombra","el salón","el dormitorio","las cortinas","hacer la cama","quitar el polvo","despertarse","dormir","limpiar","pasar la aspiradora","planchar","barrer","la lámpara"} };
+        private static string[,] buildingGeneral = {{"klucz","pokój","okno","ściana","podłoga","parter","drzwi","sufit","otwierać","zamykać","garaż","piwnica","adres","dom","mieszkanie","mieszkać","spóźniać się","śpieszyć się","wynosić śmieci","piętro","balkon","taras","schody","winda","strych","żarówka","grzejnik"},
+                                            {"key","room","window","wall","floor","ground floor","door","ceiling","open","close","garage","cellar","address","house","flat","live","be late","hurry","take out the rubbish","storey","balcony","terrace","stairs","lift","attic","lightbulb","radiator"},
+                                            {"la llave","la habitación","la ventana","la pared","el suelo","la planta baja","la puerta","el techo","abrir","cerrar","el garaje","el sótano","la dirección","la casa","el piso","vivir","llegar tarde","darse prisa","sacar la basura","la planta","el balcón","la terraza","las escaleras","el ascensor","el desván","la bombilla","el radiador"} };
+        
+        
         private static string[,] descriptiveAdjectives = {{"łatwy","trudny","ważny","różny","taki sam","wolny (dostępny)","zajęty","pełny","pusty","blisko","daleko","możliwy","niemożliwy","duży","mały","długi","okrągły","kwadratowy","kształt","numer","metr","połowa"},
                                                            {"easy","difficult","important","different","same","free (available)","busy","full","empty","near","far","possible","impossible","big","small","long","round","square","shape","number","metre","half"},
                                                            {"fácil","difícil","importante","diferente","mismo","libre","ocupado","lleno","vacío","cerca","lejos","posible","imposible","grande","pequeño","largo","redondo","cuadrado","la forma","el número","el metro","la mitad"} };
@@ -178,10 +192,6 @@
                                                   {"need","look for","find","help","start","finish","continue","stop","remember","forget","try","explain","ask","answer","choose","decide","promise","hope"},
                                                   {"necesitar","buscar","encontrar","ayudar","empezar","terminar","continuar","parar","recordar","olvidar","intentar","explicar","preguntar","responder","elegir","decidir","prometer","esperar"} };
 
-        private static string[][,] kategorie = { numbersBasic, numbersAdvanced, descriptiveAdjectives, viewsComparisons, colors, animalsDomestic, animalsWild,
-            timeUnits, timeAdverbsPrepositions, timeCalendar, familyCore, familyRelationships, kitchen, dailyRoutineChores, homeFurniture, homeStructure,
-            travel, directionsTravel, foodProduce, foodMeals, speakBasics, pronounsBasics, questionsVerbs, city, school, appearance, nature,
-            bodyBasic, bodyDetailed, clothesMaterials, countries, leisureHolidays, sportsMusic, technologyMedia, feelings, shopping, moneyDining,
-            professions, officeComputer, character, health, emergencies, celebrations, verbsActions };
+        private static string[][,] kategorie = { numbers, wordsMath };
     }
 }

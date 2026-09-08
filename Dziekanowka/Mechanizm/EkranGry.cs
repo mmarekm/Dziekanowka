@@ -34,6 +34,7 @@
         GrzybyZnalezione,
         LasJezioro,
         RybaZlowiona,
+        LasRodzinaRybakow,
         Las1,
         Las2,
         Las3,
@@ -104,6 +105,7 @@
         TargowiskoGlina,
         TargowiskoTrzcina,
         KopalniaGliny,
+        KopalniaTrzciny,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
@@ -159,6 +161,7 @@
         WjazdKopalniaGliny,
         ChlopiecStodolaOtrzymal,
         KopalniaGlinyWygrana,
-        KopalniaGlinyPrzegrana
+        KopalniaGlinyPrzegrana,
+        PlynieNaWyspeTrzcin
     }
 }
