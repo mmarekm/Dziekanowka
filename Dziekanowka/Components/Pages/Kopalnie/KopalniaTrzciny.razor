@@ -21,4 +21,28 @@
         powitanie = false;
 
     }
+    private async Task Wygrana()
+    {
+        Gracz.Przedmiot("walutaTrzcina").Ilosc += 3;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Gracz.Statystyki.OtwarteOkno = "wygrana3Trzciny";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzcinyWygrana);
+        //await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);
+    }
+    private async Task Remis()
+    {
+        Gracz.Przedmiot("walutaTrzcina").Ilosc ++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Gracz.Statystyki.OtwarteOkno = "wygrana1Trzcina";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzcinyRemis);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);
+    }
+    private async Task Przegrana()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzcinyPrzegrana);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);
+    }
 }

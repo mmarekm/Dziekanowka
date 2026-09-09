@@ -163,6 +163,9 @@
         KopalniaGlinyWygrana,
         KopalniaGlinyPrzegrana,
         RybacyKarmieni,
-        PlynieNaWyspeTrzcin
+        PlynieNaWyspeTrzcin,
+        KopalniaTrzcinyWygrana,
+        KopalniaTrzcinyRemis,
+        KopalniaTrzcinyPrzegrana,
     }
 }
