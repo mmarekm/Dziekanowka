@@ -1,10 +1,24 @@
 ﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Mechanizm.JezykiObce
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="kopalniaTrzcinyWidok widok rel">
-
+    @if (powitanie)
+    {
+        <div class="abs startKopalniaTrzciny" @onclick="StartPoszukiwan"></div>
+    }
+    else
+    {
+        
+    }
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool powitanie = true;
+    private void StartPoszukiwan()
+    {
+        powitanie = false;
+
+    }
 }

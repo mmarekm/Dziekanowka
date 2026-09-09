@@ -162,6 +162,7 @@
         ChlopiecStodolaOtrzymal,
         KopalniaGlinyWygrana,
         KopalniaGlinyPrzegrana,
+        RybacyKarmieni,
         PlynieNaWyspeTrzcin
     }
 }

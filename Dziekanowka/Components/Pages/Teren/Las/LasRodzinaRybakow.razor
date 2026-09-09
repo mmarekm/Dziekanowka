@@ -37,5 +37,8 @@
         Gracz.Statystyki.Danie1Rybakow = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
         Gracz.Statystyki.Danie2Rybakow = Gra.Restauracja[Random.Shared.Next(Gra.Restauracja.Count)];
         await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.RybacyKarmieni);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);
     }
 }

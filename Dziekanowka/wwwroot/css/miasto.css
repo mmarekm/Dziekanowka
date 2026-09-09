@@ -1663,19 +1663,25 @@
     height: 35px;
 }
 .targowiskoBiletyKupBilet {
-    left: 100px;
     height: 160px;
     width: 330px;
     flex-direction: column;
 }
 .targowiskoBiletyKupbiletPociag {
-    top: 280px;  
+    top: 280px;
+    left: 100px;
 }
 .targowiskoBiletyKupbiletAutobus {
     top: 480px;
+    left: 100px;
 }
 .targowiskoBiletyKupbiletPociagGlina {
     top: 80px;
+    left: 100px;
+}
+.targowiskoBiletyKupbiletLasLodka {
+    top: 80px;
+    left: 500px;
 }
 .pierwszyRzadTargowiskoBilety {
     height: 70%;
