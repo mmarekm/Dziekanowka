@@ -5,7 +5,7 @@
 <div class="kopalniaTrzcinyWidok widok rel">
     @if (powitanie)
     {
-        <div class="abs startKopalniaTrzciny" @onclick="StartPoszukiwan"></div>
+        <div class="abs startKopalniaTrzciny" @onclick="StartPoszukiwan"><button class="wyroznionyGuzik"><img class="obrazekJakTrzeba" src="img/kopalnie/startKopalniaTrzcina.png"/></button></div>
     }
     else
     {
@@ -25,7 +25,7 @@
     {
         Gracz.Przedmiot("walutaTrzcina").Ilosc += 3;
         await ladowanieGracza.ZapiszAktualnegoGracza();
-        Gracz.Statystyki.OtwarteOkno = "wygrana3Trzciny";
+        Gracz.Statystyki.OtwarteOkno = "wygranaTrzcina_3";
         await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzcinyWygrana);
         //await Task.Delay(8000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);
@@ -34,7 +34,7 @@
     {
         Gracz.Przedmiot("walutaTrzcina").Ilosc ++;
         await ladowanieGracza.ZapiszAktualnegoGracza();
-        Gracz.Statystyki.OtwarteOkno = "wygrana1Trzcina";
+        Gracz.Statystyki.OtwarteOkno = "wygranaTrzcina_1";
         await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzcinyRemis);
         await Task.Delay(10000);
         await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);

@@ -3,7 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="rodzinaRybakow@(nakarmieniRybacy ? "Je": "Czeka")Widok widok rel">
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasJezioro)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
-    <div class="abs @KlasaPowitania"><img class="obrazekJakTrzeba" src="img/przedmioty/walutaTrzcina.png" /> 3 <img class="obrazekSieMiesci" src="img/przedmioty/walutaTrzcina.png" /></div>
+    <div class="abs @KlasaPowitania"><img class="obrazekJakTrzeba" src="img/przedmioty/walutaTrzcina.png" /> @liczbaWygranychTrzcin <img class="obrazekSieMiesci" src="img/przedmioty/walutaTrzcina.png" /></div>
     @if (nakarmieniRybacy)
     {
         <div class="abs rybakZawiezieNaWyspeTrzcin" @onclick="Plyn"></div>
@@ -21,8 +21,9 @@
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     protected override async Task OnInitializedAsync()
     {
-        if (Gracz.Statystyki.OtwarteOkno == "wygranaTrzcina")
+        if (Gracz.Statystyki.OtwarteOkno.StartsWith("wygranaTrzcina_"))
         {
+            liczbaWygranychTrzcin = Gracz.Statystyki.OtwarteOkno.Replace("wygranaTrzcina_", "");
             Gracz.Statystyki.OtwarteOkno = "";
             await ladowanieGracza.ZapiszAktualnegoGracza();
             Powitaj = true;
@@ -42,6 +43,7 @@
     private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
     private bool nakarmieniRybacy => Gracz.Statystyki.Bonusy.Contains("biletLasLodka");
     private bool moznaKarmic => Gracz.JestObiad(Gracz.Statystyki.Danie1Rybakow) && Gracz.JestObiad(Gracz.Statystyki.Danie2Rybakow);
+    private string liczbaWygranychTrzcin = "";
     private async Task Plyn()
     {
         Gracz.Statystyki.Bonusy.Remove("biletLasLodka");
