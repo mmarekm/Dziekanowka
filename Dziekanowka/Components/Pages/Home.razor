@@ -41,7 +41,8 @@ else
         EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc, EkranGry.BabciaDajeKwiaty,
         EkranGry.MlekoLeciWDomMleka, EkranGry.KuchniaPracuje, EkranGry.WinoMorskieDlaPlebana, EkranGry.WniesionoBuleczke, EkranGry.LesneMyszyZjedza, EkranGry.BonusZaOwce, EkranGry.DzieciCiekaweCiesza, EkranGry.ZjedzaPlatki, EkranGry.CiastoDlaStajennego,
         EkranGry.PociagCzarnyDoTunelu, EkranGry.PociagCzarnyZTunelu, EkranGry.KlaunNalewaKawe, EkranGry.DoczekalPiorIFuter, EkranGry.SzyjeZPiorIFutra, EkranGry.SprzedajeTowarZGliny, EkranGry.SprzedajeTowarZTrzciny, EkranGry.BiletWStodole, EkranGry.WjazdStacjaKopalnie, EkranGry.WyjazdStacjaKopalnie,
-        EkranGry.WjazdKopalniaGliny, EkranGry.ChlopiecStodolaOtrzymal, EkranGry.KopalniaGlinyWygrana, EkranGry.KopalniaGlinyPrzegrana, EkranGry.PlynieNaWyspeTrzcin, EkranGry.RybacyKarmieni, EkranGry.KopalniaTrzcinyWygrana, EkranGry.KopalniaTrzcinyRemis, EkranGry.KopalniaTrzcinyPrzegrana];
+        EkranGry.WjazdKopalniaGliny, EkranGry.ChlopiecStodolaOtrzymal, EkranGry.KopalniaGlinyWygrana, EkranGry.KopalniaGlinyPrzegrana, EkranGry.PlynieNaWyspeTrzcin, EkranGry.RybacyKarmieni, EkranGry.KopalniaTrzcinyWygrana, EkranGry.KopalniaTrzcinyRemis, EkranGry.KopalniaTrzcinyPrzegrana,
+        EkranGry.ZielarzDostal, EkranGry.LingwistaDostal];
     private Type GetComponentType() => Type.GetType(aktualnyEkran.ToString()) ?? GetType().Assembly.GetTypes().FirstOrDefault(t => t.Name == aktualnyEkran.ToString())!;
     private Dictionary<string, object>? GetParameters() => ekranyBezParametrow.Contains(aktualnyEkran) ? null : aktualnyEkran == EkranGry.Start ? new() { ["NaStartGry"] = EventCallback.Factory.Create<string>(this, WywolajStartGry) } : new() { ["Gracz"] = gracz!, ["NaZmianeEkranu"] = EventCallback.Factory.Create<EkranGry>(this, ZmienEkran) };
     private bool Powitaj { get; set; } = false;
@@ -102,7 +103,9 @@ else
         EkranGry.SprzedajeTowarZGliny => EkranGry.TargowiskoGlina,
         EkranGry.SprzedajeTowarZTrzciny => EkranGry.TargowiskoTrzcina,
         EkranGry.BiletWStodole or EkranGry.ChlopiecStodolaOtrzymal => EkranGry.Stodola,
-        EkranGry.PlynieNaWyspeTrzcin or EkranGry.RybacyKarmieni or EkranGry.KopalniaTrzcinyWygrana or EkranGry.KopalniaTrzcinyRemis or EkranGry.KopalniaTrzcinyPrzegrana => EkranGry.LasRodzinaRybakow,
+        EkranGry.ZielarzDostal => EkranGry.Apteka,
+        EkranGry.LingwistaDostal => EkranGry.SzkolaJezykiPortier,
+        EkranGry.PlynieNaWyspeTrzcin or EkranGry.RybacyKarmieni or EkranGry.KopalniaTrzcinyWygrana or EkranGry.KopalniaTrzcinyRemis or EkranGry.KopalniaTrzcinyPrzegrana or EkranGry.KopalniaTrzciny=> EkranGry.LasRodzinaRybakow,
         EkranGry.WjazdStacjaKopalnie or EkranGry.KopalniaGliny or EkranGry.WjazdKopalniaGliny or EkranGry.KopalniaGlinyWygrana or EkranGry.KopalniaGlinyPrzegrana => EkranGry.StacjaKopalnie,
         _ => ekran
     };
@@ -148,6 +151,7 @@ else
             var e when JestLasem(e) => "mp3/Tla/las.mp3",
             EkranGry.DomSlodkichBulek => "mp3/Tla/miejsceLas.mp3",
             EkranGry.SzkolaIntro => "mp3/Tla/szkola.mp3",
+            EkranGry.SzkolaJezykiIntro or EkranGry.SzkolaJezykiPortier => "mp3/Tla/szkolajezyki.mp3",
             EkranGry.BibliotekaIntro or EkranGry.BibliotekaCzytelnia or EkranGry.BibliotekaGaleria or EkranGry.WejscieDoGalerii or EkranGry.BibliotekaPani => "mp3/Tla/biblioteka.mp3",
             EkranGry.Stacja or EkranGry.PociagJedzie or EkranGry.PociagCzarnyDoTunelu or EkranGry.PociagCzarnyZTunelu or EkranGry.WjazdStacjaKopalnie => "mp3/Tla/kolej.mp3",
             EkranGry.GrzybyZnalezione or EkranGry.RybaZlowiona or EkranGry.UzyskanieObrazu or EkranGry.BonusZaOwce or EkranGry.DzieciCiekaweCiesza or EkranGry.BabciaDajeKwiaty or EkranGry.BiletWStodole => "mp3/Dzwieki/fanfaraKrotka.mp3",
@@ -166,7 +170,8 @@ else
             EkranGry.KopalniaGlinyPrzegrana => "mp3/Tla/kopalniagliny.mp3",
             EkranGry.LasRodzinaRybakow or EkranGry.PlynieNaWyspeTrzcin or EkranGry.KopalniaTrzcinyWygrana or EkranGry.KopalniaTrzcinyRemis => "mp3/Tla/lasjezioro.mp3",
             EkranGry.KopalniaTrzcinyPrzegrana => "mp3/Tla/kopalniatrzciny.mp3",
-            EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke or EkranGry.LesneMyszyZjedza or EkranGry.ZjedzaPlatki or EkranGry.CiastoDlaStajennego or EkranGry.KlaunNalewaKawe or EkranGry.DoczekalPiorIFuter or EkranGry.ChlopiecStodolaOtrzymal => "mp3/Dzwieki/fanfara.mp3",
+            EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke or EkranGry.LesneMyszyZjedza or EkranGry.ZjedzaPlatki or EkranGry.CiastoDlaStajennego
+            or EkranGry.KlaunNalewaKawe or EkranGry.DoczekalPiorIFuter or EkranGry.ChlopiecStodolaOtrzymal or EkranGry.ZielarzDostal or EkranGry.LingwistaDostal => "mp3/Dzwieki/fanfara.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
             _ => $"mp3/Tla/{ekran.ToString().ToLower()}.mp3"
         };

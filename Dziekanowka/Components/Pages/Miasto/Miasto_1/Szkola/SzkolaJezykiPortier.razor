@@ -1,0 +1,28 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="szkolaJezykiPortierWidok widok rel">
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaJezykiIntro)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    @if (Gracz.Statystyki.AktualnaMisja == Misje.Lingwista)
+    {
+        <div class="abs dajDzieloChlopiecStodola @(jestDzielo ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajDzielo"><img class="obrazekWypelnia" src="img/miasto/miastoHandlu/targowiskoTrzcina/@(Gracz.Statystyki.DaneMisji[0]).png" /></div>
+    }
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private bool jestDzielo => Gracz.Statystyki.DzieloZTrzcinyWWalizie == Gracz.Statystyki.DaneMisji[0];
+    private async Task DajDzielo()
+    {
+        if (!jestDzielo) return;
+        Gracz.Statystyki.DzieloZGlinyWWalizce = "";
+        Gracz.LosujNowaMisje();
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LingwistaDostal);
+        await Task.Delay(5000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaJezykiPortier);
+    }
+}

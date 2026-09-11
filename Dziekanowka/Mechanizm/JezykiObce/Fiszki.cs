@@ -198,7 +198,7 @@
                                                   {"need","look for","find","help","start","finish","continue","stop","remember","forget","try","explain","ask","answer","choose","decide","promise","hope"},
                                                   {"necesitar","buscar","encontrar","ayudar","empezar","terminar","continuar","parar","recordar","olvidar","intentar","explicar","preguntar","responder","elegir","decidir","prometer","esperar"} };
 
-        private static string[][,] kategorie = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
+        public static string[][,] Kategorie = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
 												vegetables, fruits, farmCrops, soups };
     }
 }

@@ -17,14 +17,12 @@
             <div class="pierwszyRzadTargowiskoBilety">@CenaBiletu("biletPociagGlina") <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> <img class="obrazekSieMiesci" src="img/przedmioty/biletPociagGlina.png" /></div>
         </div>
     }
-    <!--
     @if (!Gracz.Statystyki.Bonusy.Contains("biletLasLodka"))
     {
         <div class="abs targowiskoBiletyPozycja targowiskoBiletyKupBilet targowiskoBiletyKupbiletLasLodka @(StacNaBilet("biletLasLodka") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => KupBilet("biletLasLodka")'>
             <div class="pierwszyRzadTargowiskoBilety">@CenaBiletu("biletLasLodka") <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> <img class="obrazekSieMiesci" src="img/przedmioty/biletLasLodka.png" /></div>
         </div>
     }
-    -->
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;

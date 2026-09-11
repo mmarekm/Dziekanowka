@@ -69,33 +69,18 @@
     .guzikOdpowiedz.kliknieto {
         animation: blyskOdpowiedz 0.35s ease-out;
     }
-@keyframes blyskOdpowiedz {
-    0% {
-        transform: scale(1);
-        filter: brightness(1) drop-shadow(0 0 0 rgba(255,255,255,0));
-    }
-    35% {
-        transform: scale(1.3);
-        filter: brightness(1.7) drop-shadow(0 0 25px rgba(255,255,255,0.9));
-    }
-    100% {
-        transform: scale(1);
-        filter: brightness(1) drop-shadow(0 0 0 rgba(255,255,255,0));
-    }
+@keyframes blyskOdpowiedz { 
+    0% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 0 rgba(255,255,255,0)); }
+    35% { transform: scale(1.3); filter: brightness(1.7) drop-shadow(0 0 25px rgba(255,255,255,0.9)); }
+    100% { transform: scale(1); filter: brightness(1) drop-shadow(0 0 0 rgba(255,255,255,0)); }
 }
 .liczbaKopalniaGliny span {
     display: inline-block;
     animation: pojawienieLiczby 0.3s ease-out;
 }
 @keyframes pojawienieLiczby {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 .moznaZyskacKopalniaGliny {
     width: 500px;
@@ -137,15 +122,118 @@
     z-index: 2;
 }
 @keyframes oproznianieCzasu {
-    from {
-        transform: scaleX(1);
-        background: #6b9c4a;
+    from { transform: scaleX(1); background: #6b9c4a; }
+    60% { background: #c9a227; }
+    to { transform: scaleX(0); background: #b33c2e; }
+}
+.konkurencjaKopalniaTrzciny {
+    width: 1700px;
+    height: 900px;
+    top: 50px;
+    left: 100px;
+}
+.pytanieKopalniaTrzciny {
+    top: 200px;
+    left: 750px;
+    width: 800px;
+    height: 100px;
+}
+.stanKopalniaTrzciny {
+    top: 150px;
+    left: 100px;
+    width: 500px;
+    height: 70px;
+    display: flex;
+}
+.segmentKopalniaTrzciny {
+    width: calc(500px / 13);
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+    .segmentKopalniaTrzciny:nth-child(11) {
+        border-left: 3px solid black;
     }
-    60% {
-        background: #c9a227;
+.segmentDobrzeKopalniaTrzciny {
+    background-color: #4caf50;
+}
+.segmentZleKopalniaTrzciny {
+    background-color: #d9453d;
+}
+.segmentPustyKopalniaTrzciny {
+    background-color: transparent;
+}
+.slowaKopalniaTrzciny {
+    position: absolute;
+    top: 400px;
+    left: 0;
+    width: 100%;
+    height: 250px;
+}
+.slowoKopalniaTrzciny {
+    width: 260px;
+    height: 110px;
+    box-sizing: border-box;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 28px;
+    line-height: 1.15;
+    overflow-wrap: break-word;
+    font-weight: bold;
+    color: #3a2a17;
+    background: rgba(255, 253, 240, 0.9);
+    border: 4px solid #6b5637;
+    border-radius: 18px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.25);
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+    .slowoKopalniaTrzciny:hover {
+        transform: translate(-50%, -50%) scale(1.08);
+        box-shadow: 6px 6px 14px rgba(0,0,0,0.3);
     }
-    to {
-        transform: scaleX(0);
-        background: #b33c2e;
+    .slowoKopalniaTrzciny:nth-child(1) {
+        top: 170px;
+        left: 170px;
     }
+    .slowoKopalniaTrzciny:nth-child(2) {
+        top: 90px;
+        left: 510px;
+    }
+    .slowoKopalniaTrzciny:nth-child(3) {
+        top: 50px;
+        left: 850px;
+    }
+    .slowoKopalniaTrzciny:nth-child(4) {
+        top: 90px;
+        left: 1190px;
+    }
+    .slowoKopalniaTrzciny:nth-child(5) {
+        top: 170px;
+        left: 1530px;
+    }
+.dobrzeKopalniaTrzciny {
+    background: rgba(150, 220, 120, 0.95);
+    border-color: #3a7d2c;
+    animation: blyskDobrze 0.4s ease-out;
+}
+.zleKopalniaTrzciny {
+    background: rgba(230, 120, 110, 0.95);
+    border-color: #8c2c22;
+    animation: blyskZle 0.4s ease-out;
+}
+@keyframes blyskDobrze {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    40% { transform: translate(-50%, -50%) scale(1.2); filter: brightness(1.3); }
+    100% { transform: translate(-50%, -50%) scale(1.06); }
+}
+@keyframes blyskZle {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    30% { transform: translate(calc(-50% - 10px), -50%); }
+    60% { transform: translate(calc(-50% + 10px), -50%); } 
+    100% { transform: translate(-50%, -50%); }
 }

@@ -3,7 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="lasJezioroWidok widok rel">
     <div class="abs jezioroDoLas"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)" class="wyroznionyGuzik" disabled="@(lowienie)"><img src='img/teren/las/jezioroDoLas.png' /></button></div>
-    <!--<div class="abs jezioroDoRodzinaRybakow"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow)" class="wyroznionyGuzik" disabled="@(lowienie)"><img src='img/teren/las/jezioroDoRodzinaRybakow.png' /></button></div>-->
+    <div class="abs jezioroDoRodzinaRybakow"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow)" class="wyroznionyGuzik" disabled="@(lowienie)"><img src='img/teren/las/jezioroDoRodzinaRybakow.png' /></button></div>
     <div class="abs jezioroNaRyby @(Gracz.Monety > 1 && !lowienie ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="NaRyby"></div>
     @foreach (var ryba in ryby)
     {
