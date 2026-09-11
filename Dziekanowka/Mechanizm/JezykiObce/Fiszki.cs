@@ -58,7 +58,51 @@
                                    {"chicken/meat broth","beetroot soup","sour rye soup","barley soup","tomato soup","cucumber soup","mushroom soup","cabbage soup","pea soup","bean soup","onion soup","cold beetroot soup","broccoli cream soup","pumpkin cream soup","cauliflower cream soup","vegetable soup","milk soup","tripe soup","sorrel soup","fish soup"},
                                    {"el caldo de pollo","la sopa de remolacha","el żurek","la sopa de cebada","la sopa de tomate","la sopa de pepino","la sopa de champiñones","la sopa de col","la sopa de guisantes","la sopa de judías","la sopa de cebolla","la sopa fría de remolacha","la crema de brócoli","la crema de calabaza","la crema de coliflor","la sopa de verduras","la sopa de leche","los callos","la sopa de acedera","la sopa de pescado"},
                                    {"ius","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
-        
+        private static string[,] mainDishes = {{"kotlet schabowy","kotlet mielony","stek","bitki","gołąbki","karkówka","gulasz","pieczeń wołowa","indyk duszony","ratatouille","leczo","fasolka po bretońsku","bigos","placek po węgiersku","risotto","lasagne"},
+                                        {"breaded pork cutlet","meat patty/burger","steak","beef roulade","cabbage rolls","pork neck","goulash","roast beef","stewed turkey","ratatouille","lecho","Breton-style beans","bigos (hunter's stew)","Hungarian-style pancake","risotto","lasagne"},
+                                        {"la chuleta empanada","la hamburguesa","el filete","los rollitos de carne","los rollitos de col","el cuello de cerdo","el gulash","el rosbif","el pavo estofado","el ratatouille","el lecho","las judías a la bretona","el bigos","la tortita húngara","el risotto","la lasaña"},
+                                        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
+        private static string[,] otherDishes = {{"jajecznica","jajko sadzone","omlet","shakshuka","naleśniki","racuchy","pierogi ruskie","pierogi z mięsem","pierogi z kapustą i grzybami","pierogi z owocami","knedle","pizza","placki ziemniaczane","frytki","kanapka","hot dog","hamburger","tosty"},
+                                        {"scrambled eggs","fried egg","omelette","shakshuka","pancakes","fritters","potato and cheese dumplings","meat dumplings","cabbage and mushroom dumplings","fruit dumplings","dumplings (bread/potato)","pizza","potato pancakes","chips/fries","sandwich","hot dog","hamburger","toast"},
+                                        {"los huevos revueltos","el huevo frito","la tortilla francesa","la shakshuka","los crepes","los buñuelos","los pierogi rusos","los pierogi de carne","los pierogi de col y setas","los pierogi de frutas","las albóndigas de pan","la pizza","las tortitas de patata","las patatas fritas","el sándwich","el perrito caliente","la hamburguesa","la tostada"},
+                                        {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
+        private static string[,] pantry = {{"śmietana","masło","ser","twaróg","jajko","miód","smalec","mięso mielone","wędlina","kiełbasa","salami","pasztet","mąka","makaron","płatki","chleb","bułka","ogórek kiszony","kapusta kiszona","burak kiszony","dżem","ketchup"},
+                                    {"cream","butter","cheese","cottage cheese","egg","honey","lard","minced meat","cold cuts","sausage","salami","pâté","flour","pasta","flakes","bread","bread roll","pickled cucumber","sauerkraut","pickled beetroot","jam","ketchup"},
+                                    {"la nata","la mantequilla","el queso","el requesón","el huevo","la miel","la manteca","la carne picada","los fiambres","la salchicha","el salami","el paté","la harina","la pasta","los copos","el pan","el panecillo","el pepinillo en vinagre","el chucrut","la remolacha encurtida","la mermelada","el kétchup"},
+                                    {"-","butyrum","caseus","-","ovum","mel","laridum","-","-","botulus","-","-","farina","-","-","panis","-","-","-","-","-","-"} };
+        private static string[,] drinks = {{"mleko","kompot","wino","sok","kawa","woda","herbata","piwo","napój gazowany","koktajl","kakao","napój"},
+                                    {"milk","fruit compote","wine","juice","coffee","water","tea","beer","fizzy drink/soda","cocktail/smoothie","hot chocolate/cocoa","drink (general)"},
+                                    {"la leche","el compota","el vino","el zumo","el café","el agua","el té","la cerveza","el refresco","el cóctel","el cacao","la bebida"},
+                                    {"lac","-","vinum","sucus","-","aqua","-","cervisia","-","-","-","potio"} };
+        private static string[,] spices = {{"oliwki","olej","sól","czarny pieprz","majeranek","oregano","bazylia","proszek do pieczenia","cynamon","tymianek","rozmaryn","liście laurowe","ziele angielskie","chili","kurkuma","gałka muszkatołowa","wanilia","cukier","ocet","musztarda","drożdże","curry"},
+                                   {"olives","oil","salt","black pepper","marjoram","oregano","basil","baking powder","cinnamon","thyme","rosemary","bay leaves","allspice","chili","turmeric","nutmeg","vanilla","sugar","vinegar","mustard","yeast","curry"},
+                                   {"las aceitunas","el aceite","la sal","la pimienta negra","la mejorana","el orégano","la albahaca","la levadura química","la canela","el tomillo","el romero","las hojas de laurel","la pimienta de Jamaica","el chile","la cúrcuma","la nuez moscada","la vainilla","el azúcar","el vinagre","la mostaza","la levadura","el curry"},
+                                   {"oliva","oleum","sal","piper","-","origanum","ocimum","-","cinnamomum","thymus","ros marinus","laurus","-","-","-","-","-","-","acetum","sinapi","fermentum","-"} };
+        private static string[,] bakedSweets = {{"sernik","babka piaskowa","ciasto owocowe","drożdżówka","czekolada","cukierki","lody","pączek","piernik","tort","guma do żucia","makowiec","budyń","galaretka","ciastko","lizak"},
+                                         {"cheesecake","sand cake/pound cake","fruit cake","sweet yeast bun","chocolate","sweets/candy","ice cream","donut","gingerbread","celebration cake","chewing gum","poppy seed cake","pudding","jelly","cookie/biscuit","lollipop"},
+                                         {"la tarta de queso","el bizcocho","el pastel de frutas","el bollo dulce","el chocolate","los caramelos","el helado","el donut","el pan de jengibre","la tarta","el chicle","el pastel de amapola","el pudín","la gelatina","la galleta","el chupachús"},
+                                         {"placenta","-","-","-","-","dulcia","-","-","-","-","-","-","-","-","crustulum","-"} };
+        private static string[,] fish = {{"łosoś","pstrąg","halibut","okoń","śledź","dorsz","karp","tuńczyk","szczupak","sum","makrela","flądra","sardynka","krewetka","ośmiornica"},
+                                  {"salmon","trout","halibut","perch","herring","cod","carp","tuna","pike","catfish","mackerel","flounder","sardine","shrimp/prawn","octopus"},
+                                  {"el salmón","la trucha","el halibut","la perca","el arenque","el bacalao","la carpa","el atún","el lucio","el siluro","la caballa","el lenguado","la sardina","la gamba","el pulpo"},
+                                  {"salmo","trutta","-","perca","-","-","carpio","thynnus","lucius","silurus","scomber","-","-","-","polypus"} };
+        private static string[,] mushrooms = {{"pieczarka","rydz","podgrzybek","borowik","kurka","maślak","koźlarz","gąska","muchomor","kania","grzyb","zbierać grzyby","jadalny","trujący"},
+                                       {"button mushroom","saffron milk cap","boletus (brown cap)","porcini/cep","chanterelle","slippery jack","leccinum","tricholoma","fly agaric","parasol mushroom","mushroom","to pick mushrooms","edible","poisonous"},
+                                       {"el champiñón","el níscalo","el boleto","el boleto comestible","el rebozuelo","el boleto anillado","el leccinum","la seta de San Jorge","la matamoscas","la matacandiles","la seta","recolectar setas","comestible","venenoso"},
+                                       {"-","-","-","-","-","-","-","-","-","-","fungus","-","edibilis","venenosus"} };
+        private static string[,] mealWordsObjects = {{"talerz","widelec","nóż","łyżka","łyżeczka","szklanka","kubek","filiżanka","serwetka","obrus","śniadanie","obiad","kolacja","przekąska","posiłek","przepis","składnik"},
+                                              {"plate","fork","knife","spoon","teaspoon","glass","mug","cup","napkin","tablecloth","breakfast","lunch/dinner","supper/dinner","snack/starter","meal","recipe","ingredient"},
+                                              {"el plato","el tenedor","el cuchillo","la cuchara","la cucharilla","el vaso","la taza","la taza","la servilleta","el mantel","el desayuno","el almuerzo","la cena","el aperitivo","la comida","la receta","el ingrediente"},
+                                              {"catinus","furca","culter","cochlear","-","poculum","-","-","mappa","mantele","ientaculum","prandium","cena","gustatio","cibus","-","-"} };
+        private static string[,] mealWordsActions = {{"gotować","smażyć","piec","kroić","mieszać","obierać","dodawać","ważyć","siekać","podgrzewać","jeść","pić","nakrywać do stołu","sprzątać ze stołu","smakować"},
+                                              {"cook","fry","bake","cut","mix","peel","add","weigh","chop","heat up","eat","drink","set the table","clear the table","taste"},
+                                              {"cocinar","freír","hornear","cortar","mezclar","pelar","añadir","pesar","picar","calentar","comer","beber","poner la mesa","recoger la mesa","probar"},
+                                              {"coquere","frigere","-","secare","miscere","-","addere","ponderare","concidere","calefacere","edere","bibere","-","-","gustare"} };
+        private static string[,] mealWordsDescriptions = {{"głodny","spragniony","smaczny","niesmaczny","świeży","nieświeży","słodki","słony","kwaśny","gorzki","pikantny"},
+                                                   {"hungry","thirsty","tasty","tasteless","fresh","stale","sweet","salty","sour","bitter","spicy"},
+                                                   {"hambriento","sediento","sabroso","insípido","fresco","pasado","dulce","salado","agrio","amargo","picante"},
+                                                   {"esuriens","sitiens","sapidus","insipidus","recens","-","dulcis","salsus","acidus","amarus","-"} };
+
         private static string[,] descriptiveAdjectives = {{"łatwy","trudny","ważny","różny","taki sam","wolny (dostępny)","zajęty","pełny","pusty","blisko","daleko","możliwy","niemożliwy","duży","mały","długi","okrągły","kwadratowy","kształt","numer","metr","połowa"},
                                                            {"easy","difficult","important","different","same","free (available)","busy","full","empty","near","far","possible","impossible","big","small","long","round","square","shape","number","metre","half"},
                                                            {"fácil","difícil","importante","diferente","mismo","libre","ocupado","lleno","vacío","cerca","lejos","posible","imposible","grande","pequeño","largo","redondo","cuadrado","la forma","el número","el metro","la mitad"} };
@@ -198,7 +242,8 @@
                                                   {"need","look for","find","help","start","finish","continue","stop","remember","forget","try","explain","ask","answer","choose","decide","promise","hope"},
                                                   {"necesitar","buscar","encontrar","ayudar","empezar","terminar","continuar","parar","recordar","olvidar","intentar","explicar","preguntar","responder","elegir","decidir","prometer","esperar"} };
 
-        public static string[][,] Kategorie = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
-												vegetables, fruits, farmCrops, soups };
+        public static string[][,] Kategorie = {numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
+											    vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
+                                                fish, mushrooms, mealWordsActions, mealWordsObjects, mealWordsDescriptions};
     }
 }
