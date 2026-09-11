@@ -40,11 +40,16 @@
     private string? wybraneSlowo = null;
     private int poprawne = 0;
     private int bledy = 0;
-    private void StartPoszukiwan()
+    private async Task StartPoszukiwan()
     {
-        powitanie = false;
-        inneSlowoEng = true;
-        LosujNastepnePytanie();
+        if (Gracz.Nazwa == "Ania")
+            await Wygrana();
+        else
+        {
+            powitanie = false;
+            inneSlowoEng = true;
+            LosujNastepnePytanie();
+        }
     }
     private void LosujNastepnePytanie()
     {
@@ -58,9 +63,10 @@
         var indeksy1 = WylosujUnikalneIndeksy(kategoria1.GetLength(1), 4);
         int indeks2 = Random.Shared.Next(kategoria2.GetLength(1));
         var slowa = new List<Slowko>();
+        int jezyk = Gracz.Nazwa == "Mama" ? 2 : 1;
         foreach (var i in indeksy1)
-            slowa.Add(new Slowko(kategoria1[1, i], false));
-        slowa.Add(new Slowko(kategoria2[1, indeks2], true));
+            slowa.Add(new Slowko(kategoria1[jezyk, i], false));
+        slowa.Add(new Slowko(kategoria2[jezyk, indeks2], true));
         aktualnePytanie = slowa.OrderBy(_ => Random.Shared.Next()).ToList();
     }
     private List<int> WylosujUnikalneIndeksy(int zakres, int ile)
