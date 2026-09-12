@@ -3,7 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
 <div class="stacja@(stacja)Widok widok rel ovhidden @(wyswietlonyRozklad ? "blokadaKlikniec" : "")">
-    @if (stacja != "metropolia1")
+    @if (!CzyMetropolia)
     {
         <div class="abs wyjscieStacja@(stacja)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/stacje/confirmStacja@(stacja).png" /></button></div>
     }
@@ -197,7 +197,7 @@
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoWiejskieLabel.png" /></div>
         </div>
     }
-    @if (stacja == "metropolia1")
+    @if (CzyMetropolia)
     {
         <div class="abs pociagKazdyAnimacja pociag16@(stacja)Animacja @pociagi[16].klasa" @onclick="() => WsiadzDoPociagu(16)">
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
@@ -315,15 +315,8 @@
     private int[] odjazdyMiastoHandluDoMetropolia1 = [18, 54, 81, 90];
     private int[] odjazdyMiastoHandluDoMiastoKawy = [27, 63];
     private int[] odjazdyMiastoHandluDoMiastoWiejskie = [36];
-    private Dictionary<int, (string klasa, bool moznaWsiasc)> pociagi = new()
-    {
-        {1, ("", false)}, {2, ("", false)}, {3, ("", false)}, {4, ("", false)}, {5, ("", false)}, {6, ("", false)}, {7, ("", false)}, {8, ("", false)}, {9, ("", false)}, {10, ("", false)},
-        {11, ("", false)}, {12, ("", false)}, {13, ("", false)}, {14, ("", false)}, {15, ("", false)}, {16, ("", false)}, {17, ("", false)}, {18, ("", false)}, {19, ("", false)}, {20, ("", false)},
-        {21, ("", false)}, {22, ("", false)}, {23, ("", false)}, {24, ("", false)}, {25, ("", false)}, {26, ("", false)}, {27, ("", false)}, {28, ("", false)}, {29, ("", false)}, {30, ("", false)},
-        {31, ("", false)}, {32, ("", false)}, {33, ("", false)}, {34, ("", false)}, {35, ("", false)}, {36, ("", false)}, {37, ("", false)}, {38, ("", false)}, {39, ("", false)}, {40, ("", false)},
-        {41, ("", false)}, {42, ("", false)}, {43, ("", false)}, {44, ("", false)}, {45, ("", false)}
-    };
-    private bool CzyMetropolia => stacja == "metropolia1";
+    private Dictionary<int, (string klasa, bool moznaWsiasc)> pociagi = Enumerable.Range(1, 45).ToDictionary(nr => nr, _ => ("", false));
+    private bool CzyMetropolia => BazaPociagow.CzyMetropolia(stacja);
     private IEnumerable<(string obrazek, int[] godziny)> AktualnyRozklad()
     {
         return stacja switch
@@ -428,7 +421,7 @@
             pociagi[43] = StanPociagu("pociag43", odjazdyMiastoHandluDoMiastoWiejskie);
             pociagi[44] = StanPociagu("pociag44", odjazdyMiastoHandluDoMiastoKawy);
         }
-        if (stacja == "metropolia1")
+        if (CzyMetropolia)
         {
             pociagi[16] = StanPociagu("pociag16", odjazdyMetropolia1DoMiasta3);
             pociagi[18] = StanPociagu("pociag18", odjazdyMetropolia1DoMiastoLesne);
@@ -442,9 +435,9 @@
             pociagi[45] = StanPociagu("pociag45", odjazdyMetropolia1DoStacjaKopalnie);
         }
     }
-    private EkranGry Wyjscie => stacja switch { "miasto3" => EkranGry.Miasto3, "miastoLesne" => EkranGry.MiastoLesne, "miastoBiale" => EkranGry.MiastoBiale, "miastoMorskie" => EkranGry.MiastoMorskie, "miastoGorskie" => EkranGry.MiastoGorskie, "miastoKawy" => EkranGry.MiastoKawy, "miastoSnow" => EkranGry.MiastoSnow, "miastoHandlu" => EkranGry.MiastoHandlu, "miastoWiejskie" => EkranGry.MiastoWiejskie, _ => throw new ArgumentOutOfRangeException() };
+    private EkranGry Wyjscie => BazaPociagow.Wyjscie(stacja);
     private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 or 10 or 18 or 30 => "miastoLesne", 2 or 4 or 13 or 16 or 35 or 39 => "miasto3", 3 or 5 or 11 or 20 or 37 => "miastoBiale", 7 or 8 or 9 or 14 or 22 or 31 => "miastoMorskie", 12 or 24 or 27 => "miastoGorskie", 25 or 43 => "miastoWiejskie", 28 or 32 or 44 => "miastoKawy", 33 or 36 => "miastoSnow", 38 or 40 or 42 => "miastoHandlu", 15 or 17 or 19 or 21 or 23 or 26 or 29 or 34 or 41 or 45 => "metropolia1",  _ => throw new ArgumentOutOfRangeException() };
-    private int cenaBiletu => stacja is "miasto3" or "miastoMorskie" ? 7 : stacja is "metropolia1" ? 6 : 10;
+    private int cenaBiletu => BazaPociagow.CenaBiletu(stacja);
     private async Task KupBilet()
     {
         if (Gracz.Monety < cenaBiletu) return;
