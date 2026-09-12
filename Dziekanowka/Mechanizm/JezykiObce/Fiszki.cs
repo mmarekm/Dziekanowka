@@ -102,6 +102,50 @@
                                                    {"hungry","thirsty","tasty","tasteless","fresh","stale","sweet","salty","sour","bitter","spicy"},
                                                    {"hambriento","sediento","sabroso","insípido","fresco","pasado","dulce","salado","agrio","amargo","picante"},
                                                    {"esuriens","sitiens","sapidus","insipidus","recens","-","dulcis","salsus","acidus","amarus","-"} };
+        private static string[,] familyCore = {{"rodzina","ojciec","matka","córka","syn","rodzic","mężczyzna","kobieta","mąż","żona","dziecko","brat","siostra","babcia","dziadek","wnuk","wnuczka","chłopiec","dziewczynka"},
+                                        {"family","father","mother","daughter","son","parent","man","woman","husband","wife","child","brother","sister","grandmother","grandfather","grandson","granddaughter","boy","girl"},
+                                        {"la familia","el padre","la madre","la hija","el hijo","el padre/la madre","el hombre","la mujer","el marido","la esposa","el niño","el hermano","la hermana","la abuela","el abuelo","el nieto","la nieta","el niño","la niña"},
+                                        {"familia","pater","mater","filia","filius","parens","vir","femina","maritus","uxor","infans","frater","soror","avia","avus","nepos","neptis","puer","puella"} };
+        private static string[,] familyExtended = {{"wujek","ciocia","kuzyn","teść","teściowa","zięć","synowa","szwagier","szwagierka","bratanek","bratanica","siostrzeniec","siostrzenica"},
+                                            {"uncle","aunt","cousin","father-in-law","mother-in-law","son-in-law","daughter-in-law","brother-in-law","sister-in-law","nephew","niece","nephew","niece"},
+                                            {"el tío","la tía","el primo","el suegro","la suegra","el yerno","la nuera","el cuñado","la cuñada","el sobrino","la sobrina","el sobrino","la sobrina"},
+                                            {"avunculus","amita","consobrinus","socer","socrus","gener","nurus","levir","glos","-","-","-","-"} };
+        private static string[,] familyStatus = {{"chłopak (sympatia)","dziewczyna (sympatia)","narzeczony","narzeczona","kawaler","panna","żonaty","mężatka","ślub","wdowa","przyjaciel","bliźniaki","sierota","dorosły"},
+                                          {"boyfriend","girlfriend","fiancé","fiancée","bachelor","single woman/maiden","married","married","wedding","widow","friend","twins","orphan","adult"},
+                                          {"el novio","la novia","el prometido","la prometida","el soltero","la soltera","casado","casada","la boda","la viuda","el amigo","los gemelos","el huérfano","el adulto"},
+                                          {"-","-","sponsus","sponsa","caelebs","virgo","-","-","nuptiae","vidua","amicus","gemini","orbus","adultus"} };
+        private static string[,] familyVerbs = {{"być razem","urodzić się","wychowywać","opiekować się","zaręczyć się","pobrać się","umrzeć","adoptować","odwiedzać (rodzinę)","przytulać","dorastać","rozpieszczać"},
+                                         {"be together","be born","raise/bring up","take care of","get engaged","get married","die","adopt","visit (family)","hug","grow up","spoil/pamper"},
+                                         {"estar juntos","nacer","criar","cuidar","prometerse","casarse","morir","adoptar","visitar","abrazar","crecer","mimar"},
+                                         {"-","nasci","educare","curare","spondere","nubere","mori","adoptare","visere","amplecti","crescere","-"} };
+        private static string[,] timeUnitsMeasure = {{"sekunda","minuta","kwadrans","godzina","dzień","tydzień","weekend","miesiąc","kwartał","rok","dekada","wiek"},
+                                              {"second","minute","quarter (of an hour)","hour","day","week","weekend","month","quarter (of a year)","year","decade","century"},
+                                              {"el segundo","el minuto","el cuarto de hora","la hora","el día","la semana","el fin de semana","el mes","el trimestre","el año","la década","el siglo"},
+                                              {"-","minuta","-","hora","dies","hebdomas","-","mensis","-","annus","decas","saeculum"} };
+        private static string[,] timeDayParts = {{"czas","noc","rano","popołudnie","wieczór","pora roku","świt","zmierzch","północ","południe","brzask"},
+                                          {"time","night","morning","afternoon","evening","season","dawn","dusk/twilight","midnight","noon","daybreak"},
+                                          {"el tiempo","la noche","la mañana","la tarde","el atardecer","la estación","el amanecer","el crepúsculo","la medianoche","el mediodía","el alba"},
+                                          {"tempus","nox","mane","-","vesper","-","aurora","crepusculum","media nox","meridies","-"} };
+        private static string[,] timeCalendar = {{"poniedziałek","wtorek","środa","czwartek","piątek","sobota","niedziela","styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień","wiosna","lato","jesień","zima"},
+                                          {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday","January","February","March","April","May","June","July","August","September","October","November","December","spring","summer","autumn","winter"},
+                                          {"el lunes","el martes","el miércoles","el jueves","el viernes","el sábado","el domingo","enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre","la primavera","el verano","el otoño","el invierno"},
+                                          {"dies Lunae","dies Martis","dies Mercurii","dies Iovis","dies Veneris","dies Saturni","dies Solis","Ianuarius","Februarius","Martius","Aprilis","Maius","Iunius","Iulius","Augustus","September","October","November","December","ver","aestas","autumnus","hiems"} };
+        private static string[,] timeAdverbs = {{"dzisiaj","wczoraj","jutro","codziennie","nigdy","zawsze","zwykle","czasami","rzadko","ostatnio","teraz","wkrótce","później","wcześniej","już","jeszcze nie","podczas","od (czasu)","do (czasu)","temu","przed (czasem)","po (czasie)","chwila","natychmiast","wreszcie/w końcu","na razie","na zawsze","wtedy"},
+                                        {"today","yesterday","tomorrow","every day","never","always","usually","sometimes","rarely","recently","now","soon","later","earlier","already","not yet","during","since","until","ago","before (time)","after (time)","moment","immediately","finally/at last","for now","forever","then"},
+                                        {"hoy","ayer","mañana","todos los días","nunca","siempre","normalmente","a veces","raramente","recientemente","ahora","pronto","más tarde","antes","ya","todavía no","durante","desde","hasta","hace","antes de","después de","el momento","inmediatamente","por fin","por ahora","para siempre","entonces"},
+                                        {"hodie","heri","cras","cotidie","numquam","semper","plerumque","interdum","raro","nuper","nunc","mox","postea","antea","iam","nondum","-","-","-","abhinc","ante","post","momentum","statim","tandem","-","in aeternum","tum"} };
+        private static string[,] body = {{"głowa","włosy","ucho","oko","nos","ząb","usta","twarz","szyja","ramię","brzuch","plecy","ręka","noga","kolano","stopa","palec u nogi","palec u ręki","broda","czoło","brew","rzęsy","policzek","podbródek","łokieć","nadgarstek","biodro","udo","łydka","kostka","klatka piersiowa","skóra","paznokieć","język","serce","kość","mózg","krew","pięta","czaszka"},
+                                 {"head","hair","ear","eye","nose","tooth","lips","face","neck","arm","stomach","back","hand","leg","knee","foot","toe","finger","beard","forehead","eyebrow","eyelashes","cheek","chin","elbow","wrist","hip","thigh","calf","ankle","chest","skin","nail","tongue","heart","bone","brain","blood","heel","skull"},
+                                 {"la cabeza","el pelo","la oreja","el ojo","la nariz","el diente","los labios","la cara","el cuello","el brazo","el estómago","la espalda","la mano","la pierna","la rodilla","el pie","el dedo del pie","el dedo","la barba","la frente","la ceja","las pestañas","la mejilla","la barbilla","el codo","la muñeca","la cadera","el muslo","la pantorrilla","el tobillo","el pecho","la piel","la uña","la lengua","el corazón","el hueso","el cerebro","la sangre","el talón","el cráneo"},
+                                 {"caput","capillus","auris","oculus","nasus","dens","os","facies","collum","brachium","stomachus","tergum","manus","crus","genu","pes","digitus","digitus","barba","frons","supercilium","cilium","gena","mentum","cubitum","-","coxa","femur","-","talus","pectus","cutis","-","lingua","cor","os","cerebrum","cruor","calx","cranium"} };
+        private static string[,] clothes = {{"kurtka","skarpetka","pasek","okulary","szalik","rękawiczka","but","spodnie","parasol","koszulka","sukienka","czapka","kapelusz","spódnica","koszula","płaszcz","przymierzać","rozmiar","krawat","bielizna","majtki","biustonosz","piżama","sweter","bluza","garnitur","rajstopy","klapki","sandały","strój","ubranie","nosić (ubranie)","ubierać się","rozbierać się","dres","strój kąpielowy","fartuch"},
+                                    {"jacket","sock","belt","glasses","scarf","glove","shoe","trousers","umbrella","T-shirt","dress","cap","hat","skirt","shirt","coat","try on","size","tie","underwear","panties","bra","pyjamas","sweater","hoodie/sweatshirt","suit","tights","flip-flops","sandals","outfit","clothes/garment","to wear","to get dressed","to get undressed","tracksuit","swimsuit","apron"},
+                                    {"la chaqueta","el calcetín","el cinturón","las gafas","la bufanda","el guante","el zapato","los pantalones","el paraguas","la camiseta","el vestido","la gorra","el sombrero","la falda","la camisa","el abrigo","probarse","la talla","la corbata","la ropa interior","las bragas","el sujetador","el pijama","el jersey","la sudadera","el traje","las medias","las chanclas","las sandalias","el conjunto","la ropa","llevar","vestirse","desvestirse","el chándal","el bañador","el delantal"},
+                                    {"-","tibiale","cingulum","-","-","-","calceus","bracae","-","tunicula","stola","pilleus","petasus","-","tunica","paenula","-","-","-","subligaculum","-","-","-","-","-","-","-","solea","solea","-","vestimentum","gerere","-","-","-","-","-"} };
+        private static string[,] materials = {{"drewno","metal","plastik","szkło","bawełna","wełna","skóra","jedwab","len","guma","papier","kamień","beton","cegła","stal","ceramika","piasek","żelazo","glina"},
+                                       {"wood","metal","plastic","glass","cotton","wool","leather","silk","linen","rubber","paper","stone","concrete","brick","steel","ceramics","sand","iron","clay"},
+                                       {"la madera","el metal","el plástico","el vidrio","el algodón","la lana","el cuero","la seda","el lino","la goma","el papel","la piedra","el hormigón","el ladrillo","el acero","la cerámica","la arena","el hierro","la arcilla"},
+                                       {"lignum","metallum","-","vitrum","-","lana","corium","-","linum","-","-","lapis","-","-","-","-","arena","ferrum","argilla"} };
 
         private static string[,] descriptiveAdjectives = {{"łatwy","trudny","ważny","różny","taki sam","wolny (dostępny)","zajęty","pełny","pusty","blisko","daleko","możliwy","niemożliwy","duży","mały","długi","okrągły","kwadratowy","kształt","numer","metr","połowa"},
                                                            {"easy","difficult","important","different","same","free (available)","busy","full","empty","near","far","possible","impossible","big","small","long","round","square","shape","number","metre","half"},
@@ -110,27 +154,6 @@
         private static string[,] viewsComparisons = {{"zgadzać się","nie zgadzać się","moim zdaniem","myślę, że","mieć rację","mylić się","według mnie","zgoda!","masz rację","to zależy","więcej","mniej","najwięcej","najlepszy","najgorszy","tyle samo","kilka","wiele","mało"},
                                                       {"agree","disagree","in my opinion","I think that","be right","be wrong","in my view","agreed!","you're right","it depends","more","less","most","best","worst","the same amount","a few","a lot","little"},
                                                       {"estar de acuerdo","no estar de acuerdo","en mi opinión","creo que","tener razón","equivocarse","desde mi punto de vista","¡de acuerdo!","tienes razón","depende","más","menos","lo más","el mejor","el peor","la misma cantidad","unos pocos","mucho","poco"} };
-
-        
-        private static string[,] timeUnits = {{"czas","noc","rano","popołudnie","wieczór","pora roku","rok","miesiąc","tydzień","dzień","godzina","minuta","sekunda"},
-                                               {"time","night","morning","afternoon","evening","season","year","month","week","day","hour","minute","second"},
-                                               {"el tiempo","la noche","la mañana","la tarde","el atardecer","la estación","el año","el mes","la semana","el día","la hora","el minuto","el segundo"} };
-
-        private static string[,] timeAdverbsPrepositions = {{"dzisiaj","wczoraj","jutro","następny","codziennie","nigdy","zawsze","zwykle","czasami","rzadko","ostatnio","podczas","od (czasu)","do (czasu)","temu","przed (czasem)","po (czasie)"},
-                                                             {"today","yesterday","tomorrow","next","every day","never","always","usually","sometimes","rarely","recently","during","since","until","ago","before (time)","after (time)"},
-                                                             {"hoy","ayer","mañana","siguiente","todos los días","nunca","siempre","normalmente","a veces","raramente","recientemente","durante","desde","hasta","hace","antes de","después de"} };
-
-        private static string[,] timeCalendar = {{"poniedziałek","wtorek","środa","czwartek","piątek","sobota","niedziela","styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień","wiosna","lato","jesień","zima"},
-                                                  {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday","January","February","March","April","May","June","July","August","September","October","November","December","spring","summer","autumn","winter"},
-                                                  {"el lunes","el martes","el miércoles","el jueves","el viernes","el sábado","el domingo","enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre","la primavera","el verano","el otoño","el invierno"} };
-
-        private static string[,] familyCore = {{"rodzina","ojciec","matka","córka","syn","rodzic","mężczyzna","kobieta","mąż","żona","dziecko","brat","siostra","babcia","dziadek"},
-                                                {"family","father","mother","daughter","son","parent","man","woman","husband","wife","child","brother","sister","grandmother","grandfather"},
-                                                {"la familia","el padre","la madre","la hija","el hijo","el padre/la madre","el hombre","la mujer","el marido","la esposa","el niño","el hermano","la hermana","la abuela","el abuelo"} };
-
-        private static string[,] familyRelationships = {{"wujek","ciocia","chłopiec","dziewczynka","kuzyn","chłopak (sympatia)","dziewczyna (sympatia)","rozwiedziony","żonaty/mężatka","ślub","być razem","wdowa","przyjaciel","urodzić się"},
-                                                         {"uncle","aunt","boy","girl","cousin","boyfriend","girlfriend","divorced","married","wedding","be together","widow","friend","be born"},
-                                                         {"el tío","la tía","el niño","la niña","el primo","el novio","la novia","divorciado","casado/casada","la boda","estar juntos","la viuda","el amigo","nacer"} };
 
         
         private static string[,] dailyRoutineChores = {{"spóźniać się","ścielić łóżko","czesać się","ścierać kurz","myć","budzić się","spać","śpieszyć się","sprzątać","zmywać naczynia","odkurzać","prasować","wieszać pranie","zamiatać","wynosić śmieci"},
@@ -173,18 +196,6 @@
         private static string[,] nature = {{"przyroda","niebo","chmura","słońce","księżyc","jezioro","rzeka","morze","drzewo","liść","kwiat","roślina","trawa","las","góra","gorąco","ciepło","zimno","wiatr","pogoda","deszcz","śnieg","burza"},
                                             {"nature","sky","cloud","sun","moon","lake","river","sea","tree","leaf","flower","plant","grass","forest","mountain","hot","warm","cold","wind","weather","rain","snow","storm"},
                                             {"la naturaleza","el cielo","la nube","el sol","la luna","el lago","el río","el mar","el árbol","la hoja","la flor","la planta","la hierba","el bosque","la montaña","caliente","cálido","frío","el viento","el tiempo","la lluvia","la nieve","la tormenta"} };
-
-        private static string[,] bodyBasic = {{"głowa","włosy","ucho","oko","nos","ząb","usta","twarz","szyja","ramię","brzuch","plecy","ręka","noga","kolano","stopa","palec u nogi","palec u ręki","broda"},
-                                               {"head","hair","ear","eye","nose","tooth","lips","face","neck","arm","stomach","back","hand","leg","knee","foot","toe","finger","beard"},
-                                               {"la cabeza","el pelo","la oreja","el ojo","la nariz","el diente","los labios","la cara","el cuello","el brazo","el estómago","la espalda","la mano","la pierna","la rodilla","el pie","el dedo del pie","el dedo","la barba"} };
-
-        private static string[,] bodyDetailed = {{"czoło","brew","rzęsy","policzek","podbródek","łokieć","nadgarstek","ramię (bark)","biodro","udo","łydka","kostka","klatka piersiowa","skóra","paznokieć","język","gardło","serce","płuca","mięsień","kość"},
-                                                  {"forehead","eyebrow","eyelashes","cheek","chin","elbow","wrist","shoulder","hip","thigh","calf","ankle","chest","skin","nail","tongue","throat","heart","lungs","muscle","bone"},
-                                                  {"la frente","la ceja","las pestañas","la mejilla","la barbilla","el codo","la muñeca","el hombro","la cadera","el muslo","la pantorrilla","el tobillo","el pecho","la piel","la uña","la lengua","la garganta","el corazón","los pulmones","el músculo","el hueso"} };
-
-        private static string[,] clothesMaterials = {{"kurtka","skarpetka","pasek","okulary","szalik","rękawiczka","but","spodnie","parasol","koszulka","sukienka","czapka","kapelusz","spódnica","koszula","płaszcz","przymierzać","rozmiar","drewno","metal","plastik","szkło","bawełna","wełna","skóra"},
-                                                      {"jacket","sock","belt","glasses","scarf","glove","shoe","trousers","umbrella","T-shirt","dress","cap","hat","skirt","shirt","coat","try on","size","wood","metal","plastic","glass","cotton","wool","leather"},
-                                                      {"la chaqueta","el calcetín","el cinturón","las gafas","la bufanda","el guante","el zapato","los pantalones","el paraguas","la camiseta","el vestido","la gorra","el sombrero","la falda","la camisa","el abrigo","probarse","la talla","la madera","el metal","el plástico","el vidrio","el algodón","la lana","el cuero"} };
 
         private static string[,] countries = {{"Wielka Brytania (Zjednoczone Królestwo)","Japończyk, japoński","Japonia","Rosjanin, rosyjski","Rosja","Kanadyjczyk, kanadyjski","Kanada","Amerykanin, amerykański","Stany Zjednoczone Ameryki","Australijczyk, australijski","Australia","Grek, grecki","Niemiec, niemiecki","Niemcy","Francuz, francuski","Francja","Hiszpan, hiszpański","Hiszpania","Włoch, włoski","Włochy","Polak, polski","Polska","Europa","Azja","narodowość","kraj"},
                                               {"United Kingdom","Japanese","Japan","Russian","Russia","Canadian","Canada","American","United States of America","Australian","Australia","Greek","German","Germany","French","France","Spanish","Spain","Italian","Italy","Polish","Poland","Europe","Asia","nationality","country"},
@@ -244,6 +255,7 @@
 
         public static string[][,] Kategorie = {numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
 											    vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
-                                                fish, mushrooms, mealWordsActions, mealWordsObjects, mealWordsDescriptions};
+                                                fish, mushrooms, mealWordsActions, mealWordsObjects, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure,
+                                                timeDayParts, timeCalendar, timeAdverbs, body, clothes, materials};
     }
 }

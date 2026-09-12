@@ -177,17 +177,6 @@ namespace Dziekanowka.Mechanizm
         public static string[] PobierzDzis() => Klucz.TryGetValue(DateTime.Now.ToString("yyyyMMdd"), out var pliki) ? pliki : [];
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260901"] = ["wt22zwII"],
-            ["20260902"] = ["sr22zwII"],
-            ["20260903"] = ["cz22zwII", "GrzegorzaWielkiegoPapiezaDoktoraKosciola"],
-            ["20260904"] = ["pt22zwII"],
-            ["20260905"] = ["sb22zwII"],
-            ["20260906"] = ["Ndz23zwA"],
-            ["20260907"] = ["pn23zwII"],
-            ["20260908"] = ["NarodzenieNMP"],
-            ["20260909"] = ["sr23zwII"],
-            ["20260910"] = ["cz23zwII"],
-            ["20260911"] = ["pt23zwII"],
             ["20260912"] = ["sb23zwII"],
             ["20260913"] = ["Ndz24zwA"],
             ["20260914"] = ["PodwyzszenieKrzyzaSwietego"],
@@ -268,7 +257,29 @@ namespace Dziekanowka.Mechanizm
             ["20261128"] = ["sb34zwII"],
             ["20261129"] = ["Ndz1AdwB"],
             ["20261130"] = ["AndrzejaApostola"],
-            ["20261201"] = ["wt1Adw"]
+            ["20261201"] = ["wt1Adw"],
+            ["20261202"] = ["sr1Adw"],
+            ["20261203"] = ["cz1Adw", "FranciszkaKsawerego"],
+            ["20261204"] = ["pt1Adw", "Barbary"],
+            ["20261205"] = ["sb1Adw"],
+            ["20261206"] = ["Ndz2AdwB"],
+            ["20261207"] = ["pn2Adw", "AmbrozegoBiskupaDoktoraKosciola"],
+            ["20261208"] = ["NiepokalanePoczecieNMP"],
+            ["20261209"] = ["sr2Adw"],
+            ["20261210"] = ["cz2Adw"],
+            ["20261211"] = ["pt2Adw"],
+            ["20261212"] = ["sb2Adw", "NMPZGuadalupe"],
+            ["20261213"] = ["Ndz3AdwB"],
+            ["20261214"] = ["pn3Adw", "JanaOdKrzyzaPrezbiteraIDoktoraKosciola"],
+            ["20261215"] = ["wt3Adw"],
+            ["20261216"] = ["sr3Adw"],
+            ["20261217"] = ["grudzien17"],
+            ["20261218"] = ["grudzien18"],
+            ["20261219"] = ["grudzien19"],
+            ["20261220"] = ["Ndz4AdwB"],
+            ["20261221"] = ["grudzien21"],
+            ["20261222"] = ["grudzien22"],
+            ["20261223"] = ["grudzien23"]
         };
     };
 }
