@@ -108,6 +108,7 @@
         TargowiskoTrzcina,
         KopalniaGliny,
         KopalniaTrzciny,
+        MiastoPieniedzy,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,

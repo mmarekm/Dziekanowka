@@ -5,13 +5,13 @@
 <div class="stacja@(stacja)Widok widok rel ovhidden @(wyswietlonyRozklad ? "blokadaKlikniec" : "")">
     @if (!CzyMetropolia)
     {
-        <div class="abs wyjscieStacja@(stacja)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/stacje/confirmStacja@(stacja).png" /></button></div>
+        <div class="abs wyjscieStacja@(stacja)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(BazaPociagow.Wyjscie(stacja))"><img src="img/miasto/stacje/confirmStacja@(stacja).png" /></button></div>
     }
     @if (stacja != "miastoHandlu")
     {
-        <div class="abs kupBiletStacja@(stacja) @(Gracz.Monety < cenaBiletu ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacja@(stacja).png" /></div>
+        <div class="abs kupBiletStacja@(stacja) @(Gracz.Monety < BazaPociagow.CenaBiletu(stacja) ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacja@(stacja).png" /></div>
     }
-    <div class="abs ileBiletowLKazdeMiasto ileBiletowL@(stacja)">@Gracz.Przedmiot("biletPociag").Ilosc</div>
+    <div class="abs ileBiletowLKazdeMiasto stacjaCzas@(stacja)">@Gracz.Przedmiot("biletPociag").Ilosc</div>
     <div class="abs ileBiletowKazdeMiasto"><img class="obrazekContain" src="img/przedmioty/biletPociag.png" /></div>
     <div class="abs stacjaCzas stacjaCzas@(stacja)">@czas</div>
     <div class="abs zobaczRozkladStacji@(stacja)"><button class="wyroznionyGuzik" @onclick="() => wyswietlonyRozklad = true"><img src="img/miasto/stacje/zobaczRozkladStacja@(stacja).png" /></button></div>
@@ -20,188 +20,130 @@
         <div class="abs zaslonaPociagu1miasto3"><img src="img/miasto/stacje/latarnia1Miasto3.png" /></div>
         <div class="abs zaslonaPociagu2miasto3"><img src="img/miasto/stacje/latarnia2Miasto3.png" /></div>
         <div class="abs zaslonaPociagu3miasto3"><img src="img/miasto/stacje/daszekMiasto3.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag1@(stacja)Animacja @pociagi[1].klasa" @onclick="() => WsiadzDoPociagu(1)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag3@(stacja)Animacja @pociagi[3].klasa" @onclick="() => WsiadzDoPociagu(3)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag7@(stacja)Animacja @pociagi[7].klasa" @onclick="() => WsiadzDoPociagu(7)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag15@(stacja)Animacja @pociagi[15].klasa" @onclick="() => WsiadzDoPociagu(15)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag38@(stacja)Animacja @pociagi[38].klasa" @onclick="() => WsiadzDoPociagu(38)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoHandluLabel.png" /></div>
-        </div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miasto3"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
     }
     @if (stacja == "miastoLesne")
     {
         <div class="abs zaslonaPociagu1miastoLesne"><img src="img/miasto/stacje/latarniaMiastoLesne.png" /></div>
         <div class="abs zaslonaPociagu2miastoLesne"><img src="img/miasto/stacje/daszekMiastoLesne.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag2@(stacja)Animacja @pociagi[2].klasa" @onclick="() => WsiadzDoPociagu(2)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag5@(stacja)Animacja @pociagi[5].klasa" @onclick="() => WsiadzDoPociagu(5)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag8@(stacja)Animacja @pociagi[8].klasa" @onclick="() => WsiadzDoPociagu(8)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag17@(stacja)Animacja @pociagi[17].klasa" @onclick="() => WsiadzDoPociagu(17)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag32@(stacja)Animacja @pociagi[32].klasa" @onclick="() => WsiadzDoPociagu(32)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoKawyLabel.png" /></div>
-        </div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miastoLesne"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
     }
     @if (stacja == "miastoBiale")
     {
         <div class="abs zaslonaPociagu1miastoBiale"><img class="obrazekContain" src="img/miasto/stacje/rozkladZaslaniaMiastoBiale.png" /></div>
         <div class="abs zaslonaPociagu2miastoBiale"><img class="obrazekContain" src="img/miasto/stacje/daszekMiastoBiale.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag4@(stacja)Animacja @pociagi[4].klasa" @onclick="() => WsiadzDoPociagu(4)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag6@(stacja)Animacja @pociagi[6].klasa" @onclick="() => WsiadzDoPociagu(6)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag9@(stacja)Animacja @pociagi[9].klasa" @onclick="() => WsiadzDoPociagu(9)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag12@(stacja)Animacja @pociagi[12].klasa" @onclick="() => WsiadzDoPociagu(12)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoGorskieLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag19@(stacja)Animacja @pociagi[19].klasa" @onclick="() => WsiadzDoPociagu(19)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag36@(stacja)Animacja @pociagi[36].klasa" @onclick="() => WsiadzDoPociagu(36)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoSnowLabel.png" /></div>
-        </div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miastoBiale"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
     }
     @if (stacja == "miastoMorskie")
     {
         <div class="abs zaslonaPociagu1miastoMorskie"><img src="img/miasto/stacje/latarniaMiastoMorskie.png" /></div>
         <div class="abs zaslonaPociagu2miastoMorskie"><img src="img/miasto/stacje/daszekMiastoMorskie.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag10@(stacja)Animacja @pociagi[10].klasa" @onclick="() => WsiadzDoPociagu(10)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag11@(stacja)Animacja @pociagi[11].klasa" @onclick="() => WsiadzDoPociagu(11)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag21@(stacja)Animacja @pociagi[21].klasa" @onclick="() => WsiadzDoPociagu(21)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miastoMorskie"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
     }
     @if (stacja == "miastoGorskie")
     {
         <div class="abs zaslonaPociagumiastoGorskie"><img src="img/miasto/stacje/daszekMiastoGorskie.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag13@(stacja)Animacja @pociagi[13].klasa" @onclick="() => WsiadzDoPociagu(13)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag14@(stacja)Animacja @pociagi[14].klasa" @onclick="() => WsiadzDoPociagu(14)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag23@(stacja)Animacja @pociagi[23].klasa" @onclick="() => WsiadzDoPociagu(23)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
+        @foreach (var nr in new[] { 13, 14, 23 })
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
         @if (Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
         {
-        <div class="abs pociagKazdyAnimacja pociag27@(stacja)Animacja @pociagi[27].klasa" @onclick="() => WsiadzDoPociagu(27)">
-            <img class="obrazekWypelnia" src="img/miasto/pociagCzarny.png" />
-        </div>
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(27) @pociagi[27].klasa" @onclick="() => WsiadzDoPociagu(27)">
+                <img class="obrazekWypelnia" src="img/miasto/pociagCzarny.png" />
+            </div>
         }
     }
     @if (stacja == "miastoWiejskie")
     {
         <div class="abs zaslonaPociaguMiastoWiejskie"><img class="obrazekSieMiesci" src="img/miasto/stacje/budkaMiastoWiejskie.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag26@(stacja)Animacja @pociagi[26].klasa" @onclick="() => WsiadzDoPociagu(26)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag42@(stacja)Animacja @pociagi[42].klasa" @onclick="() => WsiadzDoPociagu(42)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoHandluLabel.png" /></div>
-        </div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miastoWiejskie"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
     }
     @if (stacja == "miastoKawy")
     {
         <div class="abs zaslonaPociaguMiastoKawy"><img class="obrazekContain" src="img/miasto/stacje/daszekMiastoKawy.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag29@(stacja)Animacja @pociagi[29].klasa" @onclick="() => WsiadzDoPociagu(29)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag30@(stacja)Animacja @pociagi[30].klasa" @onclick="() => WsiadzDoPociagu(30)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoLesneLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag31@(stacja)Animacja @pociagi[31].klasa" @onclick="() => WsiadzDoPociagu(31)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoMorskieLabel.png" /></div>
-        </div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miastoKawy"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
     }
     @if (stacja == "miastoSnow")
     {
         <div class="abs zaslonaPociaguMiastoSnow"><img class="obrazekContain" src="img/miasto/stacje/daszekMiastoSnow.png" /></div>
-        <div class="abs pociagKazdyAnimacja pociag34@(stacja)Animacja @pociagi[34].klasa" @onclick="() => WsiadzDoPociagu(34)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag35@(stacja)Animacja @pociagi[35].klasa" @onclick="() => WsiadzDoPociagu(35)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag37@(stacja)Animacja @pociagi[37].klasa" @onclick="() => WsiadzDoPociagu(37)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoBialeLabel.png" /></div>
-        </div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miastoSnow"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
     }
     @if (stacja == "miastoHandlu")
     {
-        <div class="abs pociagKazdyAnimacja pociag39@(stacja)Animacja @pociagi[39].klasa" @onclick="() => WsiadzDoPociagu(39)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag41@(stacja)Animacja @pociagi[41].klasa" @onclick="() => WsiadzDoPociagu(41)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag44@(stacja)Animacja @pociagi[44].klasa" @onclick="() => WsiadzDoPociagu(44)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoKawyLabel.png" /></div>
-        </div>
-        <div class="abs pociagKazdyAnimacja pociag43@(stacja)Animacja @pociagi[43].klasa" @onclick="() => WsiadzDoPociagu(43)">
-            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
-            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miastoWiejskieLabel.png" /></div>
-        </div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miastoHandlu"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
     }
-    @if (CzyMetropolia)
+    @if (stacja == "miastoPieniedzy")
+    {
+        <div class="abs zaslonaPociaguMiastoPieniedzy"><img class="obrazekJakTrzeba" src="img/miasto/stacje/daszekMiastoPieniedzy.png" /></div>
+        @foreach (var nr in BazaPociagow.PociagiZeStacji["miastoPieniedzy"])
+        {
+            <div class="abs pociagKazdyAnimacja @KlasaAnimacji(nr) @pociagi[nr].klasa" @onclick="() => WsiadzDoPociagu(nr)">
+                <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+                <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/@(BazaPociagow.CelPociagu(nr))Label.png" /></div>
+            </div>
+        }
+    }
+    @if (stacja == "metropolia1")
     {
         <div class="abs pociagKazdyAnimacja pociag16@(stacja)Animacja @pociagi[16].klasa" @onclick="() => WsiadzDoPociagu(16)">
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
             <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/miasto3Label.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacja pociag46@(stacja)Animacja @pociagi[46].klasa" @onclick="() => WsiadzDoPociagu(46)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia2Label.png" /></div>
         </div>
         <div class="abs pociagKazdyAnimacjaTor2Metropolia1 pociag18metropolia1Tor2Animacja @pociagi[18].klasa" @onclick="() => WsiadzDoPociagu(18)">
             <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
@@ -240,24 +182,67 @@
             <div class="abs celPociaguTor3"><img class="obrazekContain" src="img/miasto/stacje/stacjaKopalnieLabel.png" /></div>
         </div>
     }
+    @if (stacja == "metropolia2")
+    {
+        <div class="abs pociagKazdyAnimacja pociag47@(stacja)Animacja @pociagi[47].klasa" @onclick="() => WsiadzDoPociagu(47)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>
+        </div>
+        <div class="abs pociagKazdyAnimacjaTor2Metropolia1 pociag48metropolia2Tor2Animacja @pociagi[48].klasa" @onclick="() => WsiadzDoPociagu(48)">
+            <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
+            <div class="abs celPociaguTor2"><img class="obrazekContain" src="img/miasto/stacje/miastoPieniedzyLabel.png" /></div>
+        </div>
+    }
 </div>
 @if (wyswietlonyRozklad)
 {
     <div class="abs overlayRoklady">
         <div class="abs wypisaneRozklady">
-            @foreach (var rozklad in AktualnyRozklad())
+            @if (CzyMetropolia)
             {
-                <div class="@(CzyMetropolia ? "rozkladPociagu2" : "rozkladPociagu1")">
-                    <div><img class="@(CzyMetropolia ? "obrazekContain mniejszyLabelPociagu" : "")" src="img/miasto/stacje/@rozklad.obrazek" /></div>
-                    @for (int i = 0; i < rozklad.godziny.Length; i++)
+                var listaRozkladu = AktualnyRozklad().ToList();
+                var polowa = (listaRozkladu.Count + 1) / 2;
+                <div class="abs kolumnaRozkladu kolumnaRozkladu1">
+                    @foreach (var rozklad in listaRozkladu.Take(polowa))
                     {
-                        <div>@rozklad.godziny[i]</div>
+                        <div class="rozkladPociagu2">
+                            <div><img class="obrazekContain wiekszyLabelPociagu" src="img/miasto/stacje/@rozklad.obrazek" /></div>
+                            @for (int i = 0; i < rozklad.godziny.Length; i++)
+                            {
+                                <div>@rozklad.godziny[i]</div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div class="abs kolumnaRozkladu kolumnaRozkladu2">
+                    @foreach (var rozklad in listaRozkladu.Skip(polowa))
+                    {
+                        <div class="rozkladPociagu2">
+                            <div><img class="obrazekContain wiekszyLabelPociagu" src="img/miasto/stacje/@rozklad.obrazek" /></div>
+                            @for (int i = 0; i < rozklad.godziny.Length; i++)
+                            {
+                                <div>@rozklad.godziny[i]</div>
+                            }
+                        </div>
                     }
                 </div>
             }
-            @if (stacja == "miastoGorskie" && Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
+            else
             {
-                <div class="rozkladPociagu1"><div><img class="labelCzarnegoPociagu" src="img/miasto/pociagCzarny.png" /></div><div>78</div></div>
+                @foreach (var rozklad in AktualnyRozklad())
+                {
+                    <div class="rozkladPociagu1">
+                        <div><img src="img/miasto/stacje/@rozklad.obrazek" /></div>
+                        @for (int i = 0; i < rozklad.godziny.Length; i++)
+                        {
+                            <div>@rozklad.godziny[i]</div>
+                        }
+                    </div>
+                }
+                @if (stacja == "miastoGorskie" && Gracz.Statystyki.Bonusy.Contains("pociagZGor"))
+                {
+                    <div class="rozkladPociagu1"><div><img class="labelCzarnegoPociagu" src="img/miasto/pociagCzarny.png" /></div><div>78</div></div>
+                }
             }
         </div>
         <div class="abs zamknijRozklady"><button class="wyroznionyGuzik" @onclick="() => wyswietlonyRozklad = false"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
@@ -270,70 +255,10 @@
     private string stacja => Gracz.Statystyki.Stacja;
     private int czas = 0;
     private bool wyswietlonyRozklad = false;
-    private int[] odjazdyMiasto3DoMiastaLesnego = [10, 30, 40, 60, 90];
-    private int[] odjazdyMiasto3DoMiastoBiale = [15, 45, 75];
-    private int[] odjazdyMiasto3DoMiastaMorskiego = [35];
-    private int[] odjazdyMiasto3DoMetropolii1 = [20, 50, 70, 80];
-    private int[] odjazdyMiasto3DoMiastoHandlu = [25, 55, 65, 95];
-    private int[] odjazdyMiastoLesneDoMiasta3 = [10, 30, 55, 85];
-    private int[] odjazdyMiastoLesneDoMiastoBiale = [50];
-    private int[] odjazdyMiastoLesneDoMiastoMorskie = [15, 40, 75];
-    private int[] odjazdyMiastoLesneDoMetropolii1 = [20, 40, 65, 75];
-    private int[] odjazdyMiastoLesneDoMiastoKawy = [5, 80];
-    private int[] odjazdyMiastoBialeDoMiasta3 = [10, 20, 40, 80];
-    private int[] odjazdyMiastoBialeDoMiastoLesne = [45];
-    private int[] odjazdyMiastoBialeDoMiastoMorskie = [15, 35, 75];
-    private int[] odjazdyMiastoBialeDoMiastoGorskie = [30, 70];
-    private int[] odjazdyMiastoBialeDoMetropolii1 = [5, 25, 55, 85];
-    private int[] odjazdyMiastoBialeDoMiastoSnow = [50, 60, 90];
-    private int[] odjazdyMiastoMorskieDoMiastoLesne = [10, 43, 76];
-    private int[] odjazdyMiastoMorskieDoMiastoBiale = [28, 56, 90];
-    private int[] odjazdyMiastoMorskieDoMetropolii1 = [19, 65, 85];
-    private int[] odjazdyMiastoGorskieDoMiasta3 = [18, 38, 58, 88];
-    private int[] odjazdyMiastoGorskieDoMiastoMorskie = [48];
-    private int[] odjazdyMiastoGorskieDoMetropolii1 = [8, 28, 68];
-    private int[] odjazdyMiastoGorskiePociagCzarny = [78];
-    private int[] odjazdyMetropolia1DoMiasta3 = [8, 26, 44, 62, 80];
-    private int[] odjazdyMetropolia1DoMiastoLesne = [10, 40, 70];
-    private int[] odjazdyMetropolia1DoMiastoBiale = [20, 50, 80];
-    private int[] odjazdyMetropolia1DoMiastoHandlu = [30, 60, 90];
-    private int[] odjazdyMetropolia1DoMiastoMorskie = [16, 46, 76];
-    private int[] odjazdyMetropolia1DoMiastoGorskie = [26, 56, 86];
-    private int[] odjazdyMetropolia1DoMiastoSnow = [36, 66, 96];
-    private int[] odjazdyMetropolia1DoMiastoWiejskie = [30, 82];
-    private int[] odjazdyMetropolia1DoMiastoKawy = [9, 41, 61, 93];
-    private int[] odjazdyMetropolia1DoStacjaKopalnie = [19, 51, 72];
-    private int[] odjazdyMiastoWiejskieDoMetropolii1 = [40, 77];
-    private int[] odjazdyMiastoWiejskieDoMiastoHandlu = [49];
-    private int[] odjazdyMiastoKawyDoMetropolia1 = [5, 25, 45, 75];
-    private int[] odjazdyMiastoKawyDoMiastoLesne = [10, 30, 60];
-    private int[] odjazdyMiastoKawyDoMiastoMorskie = [20, 50, 90];
-    private int[] odjazdyMiastoSnowDoMetropolia1 = [20, 60, 80];
-    private int[] odjazdyMiastoSnowDoMiasto3 = [10, 30, 50, 89];
-    private int[] odjazdyMiastoSnowDoMiastoBiale = [15, 35, 55, 75, 98];
-    private int[] odjazdyMiastoHandluDoMiasto3 = [9, 45, 72, 99];
-    private int[] odjazdyMiastoHandluDoMetropolia1 = [18, 54, 81, 90];
-    private int[] odjazdyMiastoHandluDoMiastoKawy = [27, 63];
-    private int[] odjazdyMiastoHandluDoMiastoWiejskie = [36];
-    private Dictionary<int, (string klasa, bool moznaWsiasc)> pociagi = Enumerable.Range(1, 45).ToDictionary(nr => nr, _ => ("", false));
+    private Dictionary<int, (string klasa, bool moznaWsiasc)> pociagi = Enumerable.Range(1, 49).ToDictionary(nr => nr, _ => ("", false));
     private bool CzyMetropolia => BazaPociagow.CzyMetropolia(stacja);
-    private IEnumerable<(string obrazek, int[] godziny)> AktualnyRozklad()
-    {
-        return stacja switch
-        {
-            "miasto3" => [("miastoLesneLabel.png", odjazdyMiasto3DoMiastaLesnego), ("miastoBialeLabel.png", odjazdyMiasto3DoMiastoBiale), ("miastoMorskieLabel.png", odjazdyMiasto3DoMiastaMorskiego), ("miastoHandluLabel.png", odjazdyMiasto3DoMiastoHandlu), ("metropolia1Label.png", odjazdyMiasto3DoMetropolii1)],
-            "miastoLesne" => [("miasto3Label.png", odjazdyMiastoLesneDoMiasta3), ("miastoBialeLabel.png", odjazdyMiastoLesneDoMiastoBiale), ("miastoMorskieLabel.png", odjazdyMiastoLesneDoMiastoMorskie), ("metropolia1Label.png", odjazdyMiastoLesneDoMetropolii1), ("miastoKawyLabel.png", odjazdyMiastoLesneDoMiastoKawy)],
-            "miastoBiale" => [("miasto3Label.png", odjazdyMiastoBialeDoMiasta3), ("miastoLesneLabel.png", odjazdyMiastoBialeDoMiastoLesne), ("miastoMorskieLabel.png", odjazdyMiastoBialeDoMiastoMorskie), ("miastoGorskieLabel.png", odjazdyMiastoBialeDoMiastoGorskie), ("miastoSnowLabel.png", odjazdyMiastoBialeDoMiastoSnow), ("metropolia1Label.png", odjazdyMiastoBialeDoMetropolii1)],
-            "miastoMorskie" => [("miastoLesneLabel.png", odjazdyMiastoMorskieDoMiastoLesne), ("miastoBialeLabel.png", odjazdyMiastoMorskieDoMiastoBiale), ("metropolia1Label.png", odjazdyMiastoMorskieDoMetropolii1)],
-            "miastoGorskie" => [("miasto3Label.png", odjazdyMiastoGorskieDoMiasta3), ("miastoMorskieLabel.png", odjazdyMiastoGorskieDoMiastoMorskie), ("metropolia1Label.png", odjazdyMiastoGorskieDoMetropolii1)],
-            "miastoWiejskie" => [("metropolia1Label.png", odjazdyMiastoWiejskieDoMetropolii1), ("miastoHandluLabel.png", odjazdyMiastoWiejskieDoMiastoHandlu)],
-            "miastoKawy" => [("metropolia1Label.png", odjazdyMiastoKawyDoMetropolia1), ("miastoLesneLabel.png", odjazdyMiastoKawyDoMiastoLesne), ("miastoMorskieLabel.png", odjazdyMiastoKawyDoMiastoMorskie)],
-            "miastoSnow" => [("metropolia1Label.png", odjazdyMiastoSnowDoMetropolia1), ("miasto3Label.png", odjazdyMiastoSnowDoMiasto3), ("miastoBialeLabel.png", odjazdyMiastoSnowDoMiastoBiale)],
-            "miastoHandlu" => [("miasto3Label.png", odjazdyMiastoHandluDoMiasto3), ("metropolia1Label.png", odjazdyMiastoHandluDoMetropolia1), ("miastoKawyLabel.png", odjazdyMiastoHandluDoMiastoKawy), ("miastoWiejskieLabel.png", odjazdyMiastoHandluDoMiastoWiejskie)],
-            "metropolia1" => [("miasto3Label.png", odjazdyMetropolia1DoMiasta3), ("miastoLesneLabel.png", odjazdyMetropolia1DoMiastoLesne), ("miastoBialeLabel.png", odjazdyMetropolia1DoMiastoBiale), ("miastoMorskieLabel.png", odjazdyMetropolia1DoMiastoMorskie), ("miastoGorskieLabel.png", odjazdyMetropolia1DoMiastoGorskie), ("miastoKawyLabel.png", odjazdyMetropolia1DoMiastoKawy), ("miastoSnowLabel.png", odjazdyMetropolia1DoMiastoSnow), ("miastoWiejskieLabel.png", odjazdyMetropolia1DoMiastoWiejskie), ("miastoHandluLabel.png", odjazdyMetropolia1DoMiastoHandlu), ("stacjaKopalnieLabel.png", odjazdyMetropolia1DoStacjaKopalnie)],
-            _ => []
-        };
-    }
+    private IEnumerable<(string obrazek, int[] godziny)> AktualnyRozklad() => BazaPociagow.AktualnyRozklad(stacja);
+    private string KlasaAnimacji(int nr) => $"pociag{nr}{stacja}Animacja";
     protected override void OnParametersSet()
     {
         AktualizujPociagi();
@@ -359,89 +284,14 @@
     }
     private void AktualizujPociagi()
     {
-        if (stacja == "miasto3")
-        {
-            pociagi[1] = StanPociagu("pociag1", odjazdyMiasto3DoMiastaLesnego);
-            pociagi[3] = StanPociagu("pociag3", odjazdyMiasto3DoMiastoBiale);
-            pociagi[7] = StanPociagu("pociag7", odjazdyMiasto3DoMiastaMorskiego);
-            pociagi[15] = StanPociagu("pociag15", odjazdyMiasto3DoMetropolii1);
-            pociagi[38] = StanPociagu("pociag38", odjazdyMiasto3DoMiastoHandlu);
-        }
-        if (stacja == "miastoLesne")
-        {
-            pociagi[2] = StanPociagu("pociag2", odjazdyMiastoLesneDoMiasta3);
-            pociagi[5] = StanPociagu("pociag5", odjazdyMiastoLesneDoMiastoBiale);
-            pociagi[8] = StanPociagu("pociag8", odjazdyMiastoLesneDoMiastoMorskie);
-            pociagi[17] = StanPociagu("pociag17", odjazdyMiastoLesneDoMetropolii1);
-            pociagi[32] = StanPociagu("pociag32", odjazdyMiastoLesneDoMiastoKawy);
-        }
-        if (stacja == "miastoBiale")
-        {
-            pociagi[4] = StanPociagu("pociag4", odjazdyMiastoBialeDoMiasta3);
-            pociagi[6] = StanPociagu("pociag6", odjazdyMiastoBialeDoMiastoLesne);
-            pociagi[9] = StanPociagu("pociag9", odjazdyMiastoBialeDoMiastoMorskie);
-            pociagi[12] = StanPociagu("pociag12", odjazdyMiastoBialeDoMiastoGorskie);
-            pociagi[19] = StanPociagu("pociag19", odjazdyMiastoBialeDoMetropolii1);
-            pociagi[36] = StanPociagu("pociag36", odjazdyMiastoBialeDoMiastoSnow);
-        }
-        if (stacja == "miastoMorskie")
-        {
-            pociagi[10] = StanPociagu("pociag10", odjazdyMiastoMorskieDoMiastoLesne);
-            pociagi[11] = StanPociagu("pociag11", odjazdyMiastoMorskieDoMiastoBiale);
-            pociagi[21] = StanPociagu("pociag21", odjazdyMiastoMorskieDoMetropolii1);
-        }
-        if (stacja == "miastoGorskie")
-        {
-            pociagi[13] = StanPociagu("pociag13", odjazdyMiastoGorskieDoMiasta3);
-            pociagi[14] = StanPociagu("pociag14", odjazdyMiastoGorskieDoMiastoMorskie);
-            pociagi[23] = StanPociagu("pociag23", odjazdyMiastoGorskieDoMetropolii1);
-            pociagi[27] = StanPociagu("pociag27", odjazdyMiastoGorskiePociagCzarny);
-        }
-        if (stacja == "miastoWiejskie")
-        {
-            pociagi[26] = StanPociagu("pociag26", odjazdyMiastoWiejskieDoMetropolii1);
-            pociagi[42] = StanPociagu("pociag42", odjazdyMiastoWiejskieDoMiastoHandlu);
-        }
-        if (stacja == "miastoKawy")
-        {
-            pociagi[29] = StanPociagu("pociag29", odjazdyMiastoKawyDoMetropolia1);
-            pociagi[30] = StanPociagu("pociag30", odjazdyMiastoKawyDoMiastoLesne);
-            pociagi[31] = StanPociagu("pociag31", odjazdyMiastoKawyDoMiastoMorskie);
-        }
-        if (stacja == "miastoSnow")
-        {
-            pociagi[34] = StanPociagu("pociag34", odjazdyMiastoSnowDoMetropolia1);
-            pociagi[35] = StanPociagu("pociag35", odjazdyMiastoSnowDoMiasto3);
-            pociagi[37] = StanPociagu("pociag37", odjazdyMiastoSnowDoMiastoBiale);
-        }
-        if (stacja == "miastoHandlu")
-        {
-            pociagi[39] = StanPociagu("pociag39", odjazdyMiastoHandluDoMiasto3);
-            pociagi[41] = StanPociagu("pociag41", odjazdyMiastoHandluDoMetropolia1);
-            pociagi[43] = StanPociagu("pociag43", odjazdyMiastoHandluDoMiastoWiejskie);
-            pociagi[44] = StanPociagu("pociag44", odjazdyMiastoHandluDoMiastoKawy);
-        }
-        if (CzyMetropolia)
-        {
-            pociagi[16] = StanPociagu("pociag16", odjazdyMetropolia1DoMiasta3);
-            pociagi[18] = StanPociagu("pociag18", odjazdyMetropolia1DoMiastoLesne);
-            pociagi[20] = StanPociagu("pociag20", odjazdyMetropolia1DoMiastoBiale);
-            pociagi[22] = StanPociagu("pociag22", odjazdyMetropolia1DoMiastoMorskie);
-            pociagi[24] = StanPociagu("pociag24", odjazdyMetropolia1DoMiastoGorskie);
-            pociagi[25] = StanPociagu("pociag25", odjazdyMetropolia1DoMiastoWiejskie);
-            pociagi[28] = StanPociagu("pociag28", odjazdyMetropolia1DoMiastoKawy);
-            pociagi[33] = StanPociagu("pociag33", odjazdyMetropolia1DoMiastoSnow);
-            pociagi[40] = StanPociagu("pociag40", odjazdyMetropolia1DoMiastoHandlu);
-            pociagi[45] = StanPociagu("pociag45", odjazdyMetropolia1DoStacjaKopalnie);
-        }
+        if (!BazaPociagow.PociagiZeStacji.TryGetValue(stacja, out var numery)) return;
+        foreach (var nr in numery)
+            pociagi[nr] = StanPociagu($"pociag{nr}", BazaPociagow.OdjazdyPociagu[nr]);
     }
-    private EkranGry Wyjscie => BazaPociagow.Wyjscie(stacja);
-    private string CelPociagu(int nrPociagu) => nrPociagu switch { 1 or 6 or 10 or 18 or 30 => "miastoLesne", 2 or 4 or 13 or 16 or 35 or 39 => "miasto3", 3 or 5 or 11 or 20 or 37 => "miastoBiale", 7 or 8 or 9 or 14 or 22 or 31 => "miastoMorskie", 12 or 24 or 27 => "miastoGorskie", 25 or 43 => "miastoWiejskie", 28 or 32 or 44 => "miastoKawy", 33 or 36 => "miastoSnow", 38 or 40 or 42 => "miastoHandlu", 15 or 17 or 19 or 21 or 23 or 26 or 29 or 34 or 41 or 45 => "metropolia1",  _ => throw new ArgumentOutOfRangeException() };
-    private int cenaBiletu => BazaPociagow.CenaBiletu(stacja);
     private async Task KupBilet()
     {
-        if (Gracz.Monety < cenaBiletu) return;
-        Gracz.Monety -= cenaBiletu;
+        if (Gracz.Monety < BazaPociagow.CenaBiletu(stacja)) return;
+        Gracz.Monety -= BazaPociagow.CenaBiletu(stacja);
         Gracz.Przedmiot("biletPociag").Ilosc++;
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
@@ -450,7 +300,7 @@
         if (Gracz.Przedmiot("biletPociag").Ilosc < 1 || !pociagi[nrPociagu].moznaWsiasc) return;
         Gracz.Przedmiot("biletPociag").Ilosc--;
         czas = 0;
-        Gracz.Statystyki.Stacja = CelPociagu(nrPociagu);
+        Gracz.Statystyki.Stacja = BazaPociagow.CelPociagu(nrPociagu);
         if (nrPociagu == 27)
         {
             Gracz.Statystyki.Bonusy.Remove("pociagZGor");
@@ -472,32 +322,6 @@
         }
         await ladowanieGracza.ZapiszAktualnegoGracza();
     }
-    private string StronaPrzyjazdu(string nazwa) => PrawyTor(nazwa) ? "pociagNaPrawo" : "pociagNaLewo";
-    private string StronaOdjazdu(string nazwa) => PrawyTor(nazwa) ? "pociagNaLewo" : "pociagNaPrawo";
-    private bool PrawyTor(string nazwa)
-    {
-        return (nazwa, stacja) switch
-        {
-            ("pociag1", "miasto3") => true,
-            ("pociag15", "miasto3") => true,
-            ("pociag5", "miastoLesne") => true,
-            ("pociag8", "miastoLesne") => true,
-            ("pociag32", "miastoLesne") => true,
-            ("pociag4", "miastoBiale") => true,
-            ("pociag12", "miastoBiale") => true,
-            ("pociag36", "miastoBiale") => true,
-            ("pociag22", "metropolia1") => true,
-            ("pociag24", "metropolia1") => true,
-            ("pociag33", "metropolia1") => true,
-            ("pociag25", "metropolia1") => true,
-            ("pociag28", "metropolia1") => true,
-            ("pociag45", "metropolia1") => true,
-            ("pociag30", "miastoKawy") => true,
-            ("pociag31", "miastoKawy") => true,
-            ("pociag37", "miastoSnow") => true,
-            _ => false
-        };
-    }
     private (string, bool) StanPociagu(string nazwa, int[] rozklad)
     {
         foreach (var odjazd in rozklad)
@@ -508,9 +332,9 @@
             if (offset is 0 or 1 or 2)
                 return ("kazdyPociagStoi", true);
             if (offset is 3 or 4 or 5)
-                return ($"kazdyPociagOdjedzie {StronaOdjazdu(nazwa)}", false);
+                return ($"kazdyPociagOdjedzie {BazaPociagow.StronaOdjazdu(nazwa, stacja)}", false);
         }
-        return ($"kazdyPociagUkryty {StronaPrzyjazdu(nazwa)}", false);
+        return ($"kazdyPociagUkryty {BazaPociagow.StronaPrzyjazdu(nazwa, stacja)}", false);
     }
     public void Dispose()
     {
