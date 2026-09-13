@@ -107,6 +107,9 @@
 .targowiskoGlinaWidok {
     background-image: url('../img/miasto/miastoHandlu/targowiskoGlinaWidok.png');
 }
+.bankWidok {
+    background-image: url('../img/miasto/miastoPieniedzy/bankWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1827,4 +1830,21 @@
     .cenaTargowiskoTrzcina img {
         max-width: 100%;
         max-height: 40px;
+    }
+.miastoDoBanku {
+    top: 0;
+    left: 57px;
+    width: 824px;
+    height: 436px;
+    z-index: 2;
+}
+.misjaBankier {
+    top: 300px;
+    right: 50px;
+    width: 400px;
+    height: 400px;
+    z-index: 2;
+}
+    .misjaBankier:hover {
+        cursor: pointer;
     }

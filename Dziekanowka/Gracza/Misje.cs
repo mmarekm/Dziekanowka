@@ -17,5 +17,6 @@
         public const string ChlopiecStodola = "ChlopiecStodola";
         public const string Zielarz = "Zielarz";
         public const string Lingwista = "Lingwista";
+        public const string Bankier = "Bankier";
     }
 }

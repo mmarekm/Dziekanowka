@@ -1,0 +1,26 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="bankWidok widok rel">
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoPieniedzy)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    @if (Gracz.Statystyki.AktualnaMisja == Misje.Bankier)
+    {
+        <div class="abs misjaBankier" @onclick="Zaplaty"><img class="obrazekWypelnia" src="img/miasto/miastoPieniedzy/misjaBankier.jpg" /></div>
+    }
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private async Task Zaplaty()
+    {
+        Gracz.Monety = 500;
+        Gracz.Przedmiot("siano").Ilosc = 50;
+        Gracz.LosujNowaMisje();
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.BankierDziala);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.Bank);
+    }
+}

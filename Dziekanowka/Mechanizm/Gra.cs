@@ -44,7 +44,7 @@ namespace Dziekanowka.Mechanizm
         public static string[] SklepiczekWymagane = ["zielonaKuleczka", ""];
         public static List<string> ZwierzetaNaDrodze = ["krowa", "owca", "koza", "koń", "słoń", "żyrafa"];
         public static readonly List<string> WszystkieMisje = [Misje.Chlopiec, Misje.Kot, Misje.FanZdrowia, Misje.DomMleka, Misje.KuchniaMorska,
-            Misje.SlodkaBuleczka, Misje.SeryLesne, Misje.PlatkiGorskie, Misje.Stajenny, Misje.WiesSurowkaWarzywna,
+            Misje.SlodkaBuleczka, Misje.SeryLesne, Misje.PlatkiGorskie, Misje.Stajenny, Misje.WiesSurowkaWarzywna, Misje.Bankier,
             Misje.PotrzebaKawy, Misje.OczekujacyPiorIFuter, Misje.ChlopiecStodola, Misje.ChlopiecStodola, Misje.Zielarz, Misje.Lingwista];
         private static readonly Dictionary<string, Func<string[]>> GeneratoryDanychMisji = new()
         {
@@ -58,6 +58,7 @@ namespace Dziekanowka.Mechanizm
             [Misje.PlatkiGorskie] = () => [Mleka![Random.Shared.Next(Mleka.Count)], Platki![Random.Shared.Next(Platki.Count)], "", "", "", "", "", "", "", ""],
             [Misje.Stajenny] = () => [Ciasta![Random.Shared.Next(Ciasta.Count)], "", "", "", "", "", "", "", "", ""],
             [Misje.PotrzebaKawy] = () => ["", "", "", "", "", "", "", "", "", ""],
+            [Misje.Bankier] = () => ["", "", "", "", "", "", "", "", "", ""],
             [Misje.OczekujacyPiorIFuter] = () => [OczekujacyPiorIFuter![Random.Shared.Next(OczekujacyPiorIFuter.Count)], "", "", "", "", "", "", "", "", ""],
             [Misje.ChlopiecStodola] = () => [Random.Shared.Next(1, 50).ToString(), "", "", "", "", "", "", "", "", ""],
             [Misje.Zielarz] = () => [Random.Shared.Next(1, 37).ToString(), "", "", "", "", "", "", "", "", ""],

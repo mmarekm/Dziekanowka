@@ -109,6 +109,7 @@
         KopalniaGliny,
         KopalniaTrzciny,
         MiastoPieniedzy,
+        Bank,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
@@ -172,5 +173,6 @@
         KopalniaTrzcinyWygrana,
         KopalniaTrzcinyRemis,
         KopalniaTrzcinyPrzegrana,
+        BankierDziala
     }
 }
