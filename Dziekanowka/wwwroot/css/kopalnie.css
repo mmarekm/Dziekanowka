@@ -237,3 +237,13 @@
     60% { transform: translate(calc(-50% + 10px), -50%); } 
     100% { transform: translate(-50%, -50%); }
 }
+.podpowiedzKopalniaTrzciny {
+    background: rgba(255, 196, 70, 0.95);
+    border-color: #b8791a;
+    animation: blyskPodpowiedz 0.5s ease-out;
+}
+@keyframes blyskPodpowiedz {
+    0% { transform: translate(-50%, -50%) scale(1); filter: brightness(1); }
+    40% { transform: translate(-50%, -50%) scale(1.15); filter: brightness(1.3); }
+    100% { transform: translate(-50%, -50%) scale(1.06); filter: brightness(1.1); }
+}
