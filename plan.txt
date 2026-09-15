@@ -1,0 +1,87 @@
+1. Sterowanie agentami AI - zlecasz, weryfikujesz, dowozisz
+przestajesz pisać każdą linijkę - zaczynasz zarządzać
+
+- To nie umiejętność używania coPilota do podpowiadania składni. To ma być opisanie zadania przez Ciebie, a agent, coPilot claudeCode czy inny pisze kod a Ty decydujesz co z tym dalej. Rożnica między programistą który dowozi 3x więcej a takim, który wrzuca bugi na produkcję to umiejętność zlecania i weryfikowania a nie model AI
+- TRZEBA UMIEĆ
+	rozbijanie zadań - na kawałki, które da się zlecić agentowi (zrobi świetnie małe dobrze opisane rzeczy, a zgubi się w poleceniach typu "zrób mi moduł płatności")
+	specyfikacje - kontekst + kryteria akceptacji + przykłady we/wy (trochę jak praca analityka)
+	bezlitosny code review - halucynacje, Edge case'y, ślepa pewność AI (kod od AI wygląda jak pewny siebie nawet gdy jest błędny, musisz wyłapywać halucynacje i pominięte Edge case'y)
+	testy jako siatka - AI pisze kod, testy pilnują jakości (skoro AI pisze kod, to testy są moją siatką bezpieczeństwa)
+- PIERWSZY KROK
+	przez 7 dni każde zadanie rób z agentem i czytaj każdą linijkę
+	załóż plik ai-fails.md i zapisuj każdy złapany błąd AI
+	po tygodniu będziesz wiedział, gdzie AI możesz ufać, a gdzie nie. tego nie da się przeczytać, to trzeba wyrobić.
+
+
+2. AI w Twoich aplikacjach - RAG, agenci, Microsoft.Extensions.AI
+każdy produkt dostaje funkcje AI - ktoś musi je napisać w .NET
+
+- jedno to używać AI do pisania kodu a drugie to wbudować AI w aplikację, którą tworzysz. chatbot po dokumentach firmy, inteligentne wyszukiwanie, automatyczne przetwarzanie zgłoszeń - każda firma tego chce, a programistów .NET, którzy potrafią to dowieść porządnie (czyli z kontrolą kosztów i jakości) jest garstka, to luka, w którą możesz wejść.
+- TRZEBA UMIEĆ
+	Microsoft.Extensions.AI - standard pracy z modelami (ILogger dla AI) (dobra wiadomość: ekosystem .NET jest naprawdę mocny, Microsoft.Extensions.AI to standardowe abstrakcje do pracyz modelami, myśl o tym jak o ILoggerze, tylko że dla AI, piszesz raz, a dostawcę modelu podmieniasz bez przepisywania aplikacji)
+	Semantic Kernel / Agent Framework - (do budowania agentów, function callingu, orkiestracji)
+	RAG - embeddingi + baza wektorowa = czat z Twoimi danymi (absolutna podstawa, wzorzec do czatu z własnymi danymi i szczerze 80% biznesowych zastosowań AI to właśnie to)
+	Koszty i jakość - licz tokeny, mierz jakość odpowiedzi (wszyscy o tym zapominają, umiejętność policzenia, ile tokenowo kosztuje dana funkcja i zmierzenia, czy odpowiedzi w ogóle są dobre - to odróżnia zabawkę od produktu)
+- PIERWSZY KROK
+	zbuduj mini-RAG: konsolówka .NET odpowiadająca na pytanie z Twoich PDF-ów
+	jeden weekend roboczy - ogromny efekt na rekrutacji (robi więcej niż 3 certyfikaty)
+
+
+3. Architektura systemów - granice, kontrakty, trade-offy
+AI pisze kod coraz szybciej - bałagan powstaje jeszcze szybciej
+
+- ktoś musi decydować o granicach, przepływie danych, o tym co jest modułem, a co osobnym serwisem, AI Ci pomoże, ale decyzji nie podejmie, bo nie zna Twojego biznesu, budżetu i zespołu. dlatego to jest najepiej płacąca i najtrudniejsza do zautomatyzowania umiejętność na tej liście (nie zaczynamy od wykuwania na pamięć wzorców projektowych)
+- TRZEBA UMIEĆ
+	Modular monolith - domyślny wybór; mikroserwisy tylko z twardego powodu (a nie dlatego, że netflix tak ma)
+	Granice i kontrakty - który moduł co wystawia i kto z kim gada
+	Diagramy C4 + ADRy - decyzje zapisane, nie "w głowie Marka" (dwie proste techniki, które robią z Ciebie innego programistę, diagramy C4 żeby narysować system na kilku poziomach szczegółowości i ADRy - krótkie notatki, dlaczego podjęliśmy taką decyzję, bo za 2 lata nikt nie będzie pamiętał czemu coś zrobiono tak, a nie inaczej)
+	Trade-offy - koszt vs złożoność vs czas - umiesz o tym rozmawiać (na rozmowach na Mida i Seniora pytania projektowe już dziś wypierają pytania o składnię)
+- PIERWSZY KROK
+	Narysuj swój projekt jako diagram C4 (poziom 1-2) (godzina roboty, gwarantuję, że znajdziesz przynajmniej 1 miejsce, gdzie granice modułów przeciekają i masz gotowy temat na refactoring i na historię do CV.
+
+
+4. Cloud-native i observability - Aspire, OpenTelemetry, Docker
+"u mnie działa" umarło - teraz odpowiadasz za produkcję (skończył się czas, gdy programista kończył pracę po "zmerdżowaniu pudri-questa"<możliwe ze zle uslyszalem> w 2028 r. baseline będzie taki: Twoja aplikacja żyje w kontenenrze w chmurze, a Ty umiesz odpowiedzieć na pytanie, dlaczego produkcja zwolniła o g.13 bez wołania DEVopsa na ratunek)
+- TRZEBA UMIEĆ
+	Docker bez magii - co to obraz, co to rejestr, compose - lokalnie i w CI (jak to odpalić lokalnie)
+	Aspire - orkiestracja, dashboard, service discovery (bardzo .NETowy lokalna orkiestracja całego systemu, dashboard z logami i traceami, service discovery - Microsoft bardzo w to inwestuje i to widać
+	Open Telemetry - logi, metryki i trace'y w każdej aplikacji (to jako standard w każdej Twojej aplikacji, konfigurujesz raz, a potem przez lata wiesz co się dzieje na produkcji zamiast zgadywać)
+	Jedna chmura ale porządnie - dla .NET najczęściej Azure (+ rachunek!) (deploy, sekrety i bardzo niedoceniane rozumienie rachunku na chmurę) 
+
+-PIERWSZY KROK
+	Dodaj Aspire do istniejącego projektu i pierwszy raz w życiu zobacz swoje trace'y na dashboardzie - serio, moment, w którym widzisz jak request przechodzi przez Twój system, zmienia sposób myślenia o kodzie
+
+5. <Faworyt prowadzącego, bo twierdzi, że mówi się o tym najmniej> Wydajność i bezpieczeństwo - mierz, nie zgaduj
+kod z AI jest "średni z definicji" - Ty masz widzieć, gdzie jest zły. (pomyśl, modele AI uczą się na przeciętnym kodzie z internetu, więc generują kod przeciętny, zwykle działa, ale często jest wolny, a czasem dziurawy. Programista, który umie zmierzyć, wskazać palcem: "to jest wolne, bo..." i naprawić, będzie na wagę złota. Zwłaszcza, że wolny kod w chmurze, to nie problem estetyczny, tylko konkretna pozycja na fakturze)
+- TRZEBA UMIEĆ
+	Mierz, nie zgaduj - BenchmarkDotNet, dotnet-trace, dotnet-counters (wydajność BenchmarkDotNet do mierzenia, dptnet-trace i dotnet-counters do zaglądania w aplikację)
+	Pamięć - alokacje, Span<T>, podstawy GC - bez doktoratu (jak zgrubsza działa Garbage Collector) bez doktoratu, ale tak, żeby rozumieć, czemu coś mieli pamięć.
+	Native AOT - szybki start, mniejsze kontenery - gdzie ma sens
+	Bezpieczeństwo - OWASP Top 10, sekrety poza repo, audyt paczek (OWASP Top 10 jako absolutne minimum, audyt paczek, bo Twoja aplikacja to też setki cudzych bibliotek)
+
+- PIERWSZY KROK
+	Zbenchmarkuj 1 endpoint w swoim projekcie; znajdź 1 problem (np. zbędne N + 1 albo alokacje)
+	odpal dotnet list package --vulnerable - 10 sekund, a potrafi uratować projekt i Twoją reputację
+
+Czego NIE musisz gonić
+1. każdy nowy model AI - modele zmieniają się co kwartał. Abstrakcje i wzorce zostają. Ucz się wzorców nie nazw modeli.
+2. każdy framework JS - chyba, że świadomie idziesz we frontend.
+3. kolekcjonowanie certyfikatów - 1 porządny projekt w portfolio bije 5 PDFów na LinkedInie
+4. panika "c# umiera" - umiera od 20 lat i z każdym rokiem ma się lepiej. Nowa wersja co rok, LTS co 2 lata, i ogromny rynek enterprise, który nigdzie się nie wybiera
+
+Plan na pierwsze 30 dni
+tydzień 1 AI Workflow - każde zadanie z agentem, każda linijka przeczytana + dziennik ai-fails.md
+tydzień 2 budujesz Mini-RAG w .NET na Microsoft.Extensions.AI + pytania do własnych PDFów
+tydzień 3 dodajesz Aspire + OTel do swojego projektu - dashboard, logi i trace'y w Twoim projekcie
+tydzień 4 benchmark + audyt - 1 endpoint pod lupą + dotnet list package --vulnerable
+efekt po 30 dniach: konkretne rzeczy na portfolio do CV i na rozmowę rekrutacyjną
+architektura rośnie przy okazji każdego z tych kroków
+
+zapamiętaj
+1.sterowanie agentami AI - zlecasz i weryfikujesz
+2.ai w aplikacjach - rag+agenci w .net
+3.architektura - granice i trade-offy
+4.cloud-native - kontenery+telemetria
+5.fundamenty- wydajność i bezpiecznestwo
+
+nie wszystko od razu!
