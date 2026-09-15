@@ -13,6 +13,9 @@
 .szkolaJezykiPortierWidok {
     background-image: url('../img/miasto/szkola/szkolaJezykiPortierWidok.png');
 }
+.szkolaJezykiSlownikWidok {
+    background-image: url('../img/miasto/szkola/szkolaJezykiSlownikWidok.jpg');
+}
 .szkolaDoMiasta {
     bottom: 0;
     left: 809px;
@@ -60,6 +63,13 @@
     left: 0;
     width: 413px;
     height: 421px;
+    z-index: 2;
+}
+.szkolaJezykiIntroDoSlownik {
+    top: 402px;
+    left: 767px;
+    width: 125px;
+    height: 92px;
     z-index: 2;
 }
 .doSlowa {
