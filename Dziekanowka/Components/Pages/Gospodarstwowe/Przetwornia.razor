@@ -501,7 +501,7 @@
     private int UzyskanySer(string mleko) => serowarniaModSer ? tacaSerowarnia.First(t => t.Nazwa == mleko).Ilosc / 2 : 0;
     private int uzyskanyTwarog => !serowarniaModSer ? tacaSerowarnia.Sum(t => t.Ilosc) : 0;
     private int UzyskanaMaka(string zboze) => tacaZarna.First(t => t.Nazwa == zboze).Ilosc / 3;
-    private int uzyskanyMakaron => Math.Min(tacaZarna.Where(t => t.Nazwa.EndsWith("Maka")).Sum(t => t.Ilosc) / 2, tacaZarna.First(t => t.Nazwa.EndsWith("Jajo")).Ilosc) * 3;
+    private int uzyskanyMakaron => Math.Min(tacaZarna.Where(t => t.Nazwa.EndsWith("Maka")).Sum(t => t.Ilosc) / 2, tacaZarna.Where(t => t.Nazwa.EndsWith("Jajo")).Sum(t => t.Ilosc)) * 3;
     private int UzyskanePlatki(string zboze) => tacaPlatkarka.First(t => t.Nazwa == zboze).Ilosc / 2;
     private int uzyskaneWino => tacaBeczka.Where(t => t.Nazwa.StartsWith("winogrono")).Sum(t => t.Ilosc) / 3;
     private int UzyskanaKiszonka(string warzywo) => tacaBeczka.Where(t => new[] { "kapustaWłoska", "ogórek", "burak" }.Contains(t.Nazwa)).Sum(t => t.Ilosc) > tacaBeczka.First(t => t.Nazwa == "sol").Ilosc ? 0 : tacaBeczka.First(t => t.Nazwa == warzywo).Ilosc;
