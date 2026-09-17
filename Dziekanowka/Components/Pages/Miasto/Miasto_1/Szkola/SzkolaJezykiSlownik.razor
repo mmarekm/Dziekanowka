@@ -2,9 +2,14 @@
 @using Dziekanowka.Gracza
 <div class="szkolaJezykiSlownikWidok widok rel">
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaJezykiIntro)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+@if (wyswietlonaKategoria)
+{
+
+}
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+private bool wyswietlonaKategoria = false;
 }
