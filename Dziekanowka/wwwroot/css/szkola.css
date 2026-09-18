@@ -72,6 +72,48 @@
     height: 92px;
     z-index: 2;
 }
+.kategorieSlownik {
+    top: 50px;
+    left: 50px;
+    width: 1800px;
+    height: 900px;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 200px));
+    grid-auto-rows: minmax(170px, 200px);
+    gap: 50px;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.kategoriaSlownik {
+    aspect-ratio: 1;
+    width: 100%;
+    cursor: pointer;
+}
+    .kategoriaSlownik:hover {
+        transform: scale(1.1);
+        border: 3px solid gold;
+        transition: all 0.3s ease;
+    }
+.wyswietlonaKategoriaSlownik {
+    top: 50px;
+    left: 50px;
+    width: 1800px;
+    height: 900px;
+    z-index: 4;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 200px));
+    grid-auto-rows: minmax(170px, 200px);
+    gap: 50px;
+    justify-content: center;
+    align-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    background: tan;
+    opacity: 0.8;
+}
 .doSlowa {
     left: 659px;
     top: 344px;
@@ -92,7 +134,6 @@
     padding: 15px;
     box-sizing: border-box;
 }
-
     .slowoDzis .grupa {
         width: 770px;
         height: 270px;

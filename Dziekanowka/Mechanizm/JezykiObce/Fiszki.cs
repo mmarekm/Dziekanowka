@@ -1,4 +1,6 @@
-﻿namespace Dziekanowka.Mechanizm.JezykiObce
+﻿using System.Reflection;
+
+namespace Dziekanowka.Mechanizm.JezykiObce
 {
     public class Fiszki
     {
@@ -242,9 +244,16 @@
                                                   {"need","look for","find","help","start","finish","continue","stop","remember","forget","try","explain","ask","answer","choose","decide","promise","hope"},
                                                   {"necesitar","buscar","encontrar","ayudar","empezar","terminar","continuar","parar","recordar","olvidar","intentar","explicar","preguntar","responder","elegir","decidir","prometer","esperar"} };
 
+        public static string[,] GetFiszki(string nazwa)
+        {
+            return (string[,])typeof(Fiszki)
+                .GetField(nazwa, BindingFlags.Static | BindingFlags.NonPublic)!
+                .GetValue(null)!;
+        }
         public static string[][,] Kategorie = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
                                          vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
+        public static string[][,] KategorieRobocze = { numbers };
     }
 }
