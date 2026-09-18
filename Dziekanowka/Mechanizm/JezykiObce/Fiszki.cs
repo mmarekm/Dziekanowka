@@ -4,7 +4,7 @@ namespace Dziekanowka.Mechanizm.JezykiObce
 {
     public class Fiszki
     {
-        private static string[,] numbers = {{"zero","jeden","dwa","trzy","cztery","pięć","sześć","siedem","osiem","dziewięć","dziesięć","jedenaście","dwanaście","trzynaście","czternaście","piętnaście","szesnaście","siedemnaście","osiemnaście","dziewiętnaście","dwadzieścia","trzydzieści","czterdzieści","pięćdziesiąt","sześćdziesiąt","siedemdziesiąt","osiemdziesiąt","dziewięćdziesiąt","sto","tysiąc","milion","pierwszy","drugi","trzeci","czwarty","piąty","ostatni"},
+        public static string[,] numbers = {{"zero","jeden","dwa","trzy","cztery","pięć","sześć","siedem","osiem","dziewięć","dziesięć","jedenaście","dwanaście","trzynaście","czternaście","piętnaście","szesnaście","siedemnaście","osiemnaście","dziewiętnaście","dwadzieścia","trzydzieści","czterdzieści","pięćdziesiąt","sześćdziesiąt","siedemdziesiąt","osiemdziesiąt","dziewięćdziesiąt","sto","tysiąc","milion","pierwszy","drugi","trzeci","czwarty","piąty","ostatni"},
                                     {"zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety","hundred","thousand","million","first","second","third","fourth","fifth","last"},
                                     {"cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez","once","doce","trece","catorce","quince","dieciséis","diecisiete","dieciocho","diecinueve","veinte","treinta","cuarenta","cincuenta","sesenta","setenta","ochenta","noventa","cien","mil","millón","primero","segundo","tercero","cuarto","quinto","último"},
                                     {"nulla","unus","duo","tres","quattuor","quinque","sex","septem","octo","novem","decem","undecim","duodecim","tredecim","quattuordecim","quindecim","sedecim","septendecim","duodeviginti","undeviginti","viginti","triginta","quadraginta","quinquaginta","sexaginta","septuaginta","octoginta","nonaginta","centum","mille","decies centena milia","primus","secundus","tertius","quartus","quintus","ultimus"} };
@@ -244,12 +244,7 @@ namespace Dziekanowka.Mechanizm.JezykiObce
                                                   {"need","look for","find","help","start","finish","continue","stop","remember","forget","try","explain","ask","answer","choose","decide","promise","hope"},
                                                   {"necesitar","buscar","encontrar","ayudar","empezar","terminar","continuar","parar","recordar","olvidar","intentar","explicar","preguntar","responder","elegir","decidir","prometer","esperar"} };
 
-        public static string[,] GetFiszki(string nazwa)
-        {
-            return (string[,])typeof(Fiszki)
-                .GetField(nazwa, BindingFlags.Static | BindingFlags.NonPublic)!
-                .GetValue(null)!;
-        }
+        public static string[,] GetFiszki(string nazwa) => (string[,])typeof(Fiszki).GetField(nazwa)!.GetValue(null)!;
         public static string[][,] Kategorie = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
                                          vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
