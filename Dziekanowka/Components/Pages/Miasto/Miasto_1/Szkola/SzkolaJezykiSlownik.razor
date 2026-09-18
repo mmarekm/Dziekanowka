@@ -5,30 +5,26 @@
 <div class="szkolaJezykiSlownikWidok widok rel">
     <div class="abs hodowcaDoMiastaKawy" style="z-index: 3;"><button class="wyroznionyGuzik" disabled="@wyswietlonaKategoria" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaJezykiIntro)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs kategorieSlownik">
-        @{
-    var fiszki = Fiszki.GetFiszki(wybranaKategoria);
-}
-
-@for (int i = 0; i < fiszki.GetLength(1); i++)
-{
-    <div>
-        <div>🇵🇱 @fiszki[0, i]</div>
-        <div>🇬🇧 @fiszki[1, i]</div>
-        <div>🇪🇸 @fiszki[2, i]</div>
-        <div>🏛️ @fiszki[3, i]</div>
-    </div>
-}
+        @foreach (var kategoria in kategorie)
+        {
+            <div class="kategoriaSlownik" @onclick="() => PokazSlowka(kategoria)"><img class="obrazekJakTrzeba" src=@($"img/miasto/szkola/slownik/{kategoria}.png") /></div>
+        }
     </div>
     @if (wyswietlonaKategoria)
     {
         <div class="abs wyswietlonaKategoriaSlownik">
             <div class="abs hodowcaDoMiastaKawy" style="z-index: 5;"><button class="wyroznionyGuzik" @onclick="() => wyswietlonaKategoria = false"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
-            <!--
-            @foreach (var slowo in Fiszki.GetFiszki(wybranaKategoria))
+            @{ var fiszki = Fiszki.GetFiszki(wybranaKategoria); }
+            @for (int i = 0; i < fiszki.GetLength(1); i++)
             {
-                <div>@slowo</div>
+                <div class="slowkoSlownik">
+                    <div class="obrazekSlowkoSlownik"><img class="obrazekJakTrzeba" src=@($"img/miasto/szkola/slownik/{wybranaKategoria}/{fiszki[0, i]}.png") /></div>
+                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaPolski.png" /> @fiszki[0, i]</div>
+                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaGB.png" /> @fiszki[1, i]</div>
+                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaHiszpania.png" /> @fiszki[2, i]</div>
+                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaLaciny.png" /> @fiszki[3, i]</div>
+                </div>
             }
-            -->
         </div>
     }
 </div>
