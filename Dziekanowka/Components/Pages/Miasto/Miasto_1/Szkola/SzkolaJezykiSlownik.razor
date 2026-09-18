@@ -28,7 +28,7 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool wyswietlonaKategoria = false;
-    private string[] kategorie = Fiszki.KategorieRobocze.Select(x => typeof(Fiszki).GetFields(BindingFlags.Static | BindingFlags.NonPublic).First(f => f.GetValue(null) == x).Name).ToArray();
+    private string[] kategorie = Fiszki.KategorieRobocze.Select(x => typeof(Fiszki).GetFields().First(f => f.GetValue(null) == x).Name).ToArray();
     private string wybranaKategoria = "";
     private void PokazSlowka(string kategoria)
     {
