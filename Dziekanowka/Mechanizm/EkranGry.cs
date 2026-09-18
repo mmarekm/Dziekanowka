@@ -78,6 +78,7 @@
         SzkolaJezykiIntro,
         SzkolaJezykiPortier,
         SzkolaJezykiSlownik,
+        SzkolaJezykiGry,
         BibliotekaIntro,
         BibliotekaCzytelnia,
         BibliotekaPani,
