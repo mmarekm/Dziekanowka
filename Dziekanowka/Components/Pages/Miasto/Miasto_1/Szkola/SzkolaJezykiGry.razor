@@ -1,1 +1,132 @@
-
+@using Dziekanowka.Mechanizm
+@using Dziekanowka.Mechanizm.JezykiObce
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="szkolaJezykiGryWidok widok rel">
+    @if (powitanie)
+    {
+        <div class="abs startKopalniaTrzciny" @onclick="StartPoszukiwan"><button class="wyroznionyGuzik"><img class="obrazekJakTrzeba" src="img/kopalnie/startKopalniaTrzcina.png" /></button></div>
+    }
+    else
+    {
+        <div class="abs konkurencjaKopalniaTrzciny">
+            <div class="abs stanKopalniaTrzciny">
+                @for (int i = 0; i < 13; i++)
+                {
+                    int ii = i;
+                    string klasa = ii < poprawne ? "segmentDobrzeKopalniaTrzciny" : ii >= 13 - bledy ? "segmentZleKopalniaTrzciny" : "segmentPustyKopalniaTrzciny";
+                    <div class="segmentKopalniaTrzciny @klasa"></div>
+                }
+            </div>
+            <div class="abs pytanieKopalniaTrzciny"><img class="obrazekJakTrzeba" src="img/kopalnie/pytanieKopalniaTrzciny.png" /></div>
+            <div class="abs slowaKopalniaTrzciny">
+                @for (int i = 0; i < aktualnePytanie.Count; i++)
+                {
+                    var slowko = aktualnePytanie[i];
+                    <div class="abs slowoKopalniaTrzciny @KlasaSlowa(slowko)" @onclick="() => Odpowiedz(slowko)">@slowko.Tekst</div>
+                }
+            </div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool powitanie = true;
+    private bool inneSlowoEng = false;
+    private record Slowko(string Tekst, bool Poprawne);
+    private List<Slowko> aktualnePytanie = new();
+    private bool poCzekaniu = false;
+    private string? wybraneSlowo = null;
+    private int poprawne = 0;
+    private int bledy = 0;
+    private bool wybraneBylyPoprawne = false;
+    private async Task StartPoszukiwan()
+    {
+            powitanie = false;
+            inneSlowoEng = true;
+            LosujNastepnePytanie();
+    }
+    private void LosujNastepnePytanie()
+    {
+        wybraneSlowo = null;
+        poCzekaniu = false;
+        int idx1 = Random.Shared.Next(Fiszki.Kategorie.Length);
+        int idx2;
+        do { idx2 = Random.Shared.Next(Fiszki.Kategorie.Length); } while (idx2 == idx1);
+        var kategoria1 = Fiszki.Kategorie[idx1];
+        var kategoria2 = Fiszki.Kategorie[idx2];
+        var indeksy1 = WylosujUnikalneIndeksy(kategoria1.GetLength(1), 4);
+        int indeks2 = Random.Shared.Next(kategoria2.GetLength(1));
+        var slowa = new List<Slowko>();
+        int jezyk = Gracz.Nazwa == "Mama" ? 2 : 1;
+        foreach (var i in indeksy1)
+            slowa.Add(new Slowko(kategoria1[jezyk, i], false));
+        slowa.Add(new Slowko(kategoria2[jezyk, indeks2], true));
+        aktualnePytanie = slowa.OrderBy(_ => Random.Shared.Next()).ToList();
+    }
+    private List<int> WylosujUnikalneIndeksy(int zakres, int ile)
+    {
+        var wynik = new HashSet<int>();
+        while (wynik.Count < ile)
+            wynik.Add(Random.Shared.Next(zakres));
+        return wynik.ToList();
+    }
+    private string KlasaSlowa(Slowko s)
+    {
+        if (!poCzekaniu) return "";
+        if (s.Tekst == wybraneSlowo)
+            return s.Poprawne ? "dobrzeKopalniaTrzciny" : "zleKopalniaTrzciny";
+        if (!wybraneBylyPoprawne && s.Poprawne)
+            return "podpowiedzKopalniaTrzciny";
+        return "";
+    }
+    private async Task Odpowiedz(Slowko slowko)
+    {
+        if (poCzekaniu) return;
+        poCzekaniu = true;
+        wybraneSlowo = slowko.Tekst;
+        wybraneBylyPoprawne = slowko.Poprawne;
+        if (slowko.Poprawne)
+            poprawne++;
+        else
+            bledy++;
+        StateHasChanged();
+        await Task.Delay(1200);
+        if (bledy == 4)
+            await Przegrana();
+        else if (poprawne == 13)
+            await Wygrana();
+        else if (bledy >= 1 && poprawne >= 10)
+            await Remis();
+        else
+        {
+            LosujNastepnePytanie();
+            StateHasChanged();
+        }
+    }
+    private async Task Wygrana()
+    {
+        Gracz.Przedmiot("walutaTrzcina").Ilosc += 3;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Gracz.Statystyki.OtwarteOkno = "wygranaTrzcina_3";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzcinyWygrana);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);
+    }
+    private async Task Remis()
+    {
+        Gracz.Przedmiot("walutaTrzcina").Ilosc++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Gracz.Statystyki.OtwarteOkno = "wygranaTrzcina_1";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzcinyRemis);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);
+    }
+    private async Task Przegrana()
+    {
+        await NaZmianeEkranu.InvokeAsync(EkranGry.KopalniaTrzcinyPrzegrana);
+        await Task.Delay(8000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.LasRodzinaRybakow);
+    }
+}
