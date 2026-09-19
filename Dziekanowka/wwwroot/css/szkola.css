@@ -16,6 +16,9 @@
 .szkolaJezykiSlownikWidok {
     background-image: url('../img/miasto/szkola/szkolaJezykiSlownikWidok.jpg');
 }
+.szkolaJezykiGryWidok {
+    background-image: url('../img/miasto/szkola/szkolaJezykiGryWidok.jpg');
+}
 .szkolaDoMiasta {
     bottom: 0;
     left: 809px;
@@ -72,6 +75,13 @@
     height: 92px;
     z-index: 2;
 }
+.szkolaJezykiIntroDoGry {
+    bottom: 0;
+    right: 0;
+    width: 248px;
+    height: 276px;
+    z-index: 2;
+}
 .kategorieSlownik {
     top: 50px;
     left: 50px;
@@ -104,39 +114,73 @@
     height: 900px;
     z-index: 4;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 25px;
+    padding: 25px;
     box-sizing: border-box;
     background: tan;
     opacity: 0.8;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.slowkoSlownik {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 0;
 }
 .obrazekSlowkoSlownik {
     width: 100%;
-    height: 80px;
+    height: 110px;
     display: flex;
     justify-content: center;
+    margin-bottom: 8px;
 }
     .obrazekSlowkoSlownik img {
-        width: 80px;
-        height: 80px;
+        width: 110px;
+        height: 110px;
         object-fit: contain;
     }
 .rzadSlowkoSlownik {
     display: flex;
     align-items: center;
-    height: 24px;
-    font-size: 18px;
+    height: 28px;
+    font-size: 20px;
 }
     .rzadSlowkoSlownik img {
-        width: 24px;
-        height: 18px;
+        width: 28px;
+        height: 20px;
         object-fit: contain;
-        margin-right: 6px;
+        margin-right: 8px;
         flex-shrink: 0;
     }
+.tekstSlowko {
+    font-size: 20px;
+    white-space: nowrap;
+}
+    .tekstSlowko.dlugie {
+        font-size: 17px;
+    }
+    .tekstSlowko.bardzoDlugie {
+        font-size: 15px;
+    }
+.wyjscieSlownik {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 150px;
+    height: 150px;
+    z-index: 2;
+}
+.startCwiczeniaEngSzkola {
+    left: 600px;
+    top: 200px;
+}
+.startCwiczeniaEspSzkola {
+    right: 600px;
+    top: 200px;
+}
 .doSlowa {
     left: 659px;
     top: 344px;

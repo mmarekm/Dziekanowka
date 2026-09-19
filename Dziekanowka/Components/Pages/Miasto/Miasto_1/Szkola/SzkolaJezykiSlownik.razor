@@ -13,16 +13,16 @@
     @if (wyswietlonaKategoria)
     {
         <div class="abs wyswietlonaKategoriaSlownik">
-            <div class="abs hodowcaDoMiastaKawy" style="z-index: 5;"><button class="wyroznionyGuzik" @onclick="() => wyswietlonaKategoria = false"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+            <div class="abs wyjscieSlownik" style="z-index: 5;"><button class="wyroznionyGuzik" @onclick="() => wyswietlonaKategoria = false"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
             @{ var fiszki = Fiszki.GetFiszki(wybranaKategoria); }
             @for (int i = 0; i < fiszki.GetLength(1); i++)
             {
                 <div class="slowkoSlownik">
                     <div class="obrazekSlowkoSlownik"><img class="obrazekJakTrzeba" src=@($"img/miasto/szkola/slownik/{wybranaKategoria}/{fiszki[0, i]}.png") /></div>
                     <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaPolski.png" /> @fiszki[0, i].ToUpper()</div>
-                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaGB.png" /> @fiszki[1, i].ToUpper()</div>
-                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaHiszpania.png" /> @fiszki[2, i].ToUpper()</div>
-                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaLaciny.png" /> @fiszki[3, i].ToUpper()</div>
+                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaGB.png" /><span class="tekstSlowko @KlasaDlugosci(fiszki[1, i])">@fiszki[1, i].ToUpper()</span></div>
+                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaHiszpania.png" /><span class="tekstSlowko @KlasaDlugosci(fiszki[2, i])">@fiszki[2, i].ToUpper()</span></div>
+                    <div class="rzadSlowkoSlownik"><img class="obrazekJakTrzeba" src="img/przedmioty/malaFlagaLaciny.png" /><span class="tekstSlowko @KlasaDlugosci(fiszki[3, i])">@fiszki[3, i].ToUpper()</span></div>
                 </div>
             }
         </div>
@@ -35,6 +35,7 @@
     private bool wyswietlonaKategoria = false;
     private string[] kategorie = Fiszki.KategorieRobocze.Select(x => typeof(Fiszki).GetFields().First(f => f.GetValue(null) == x).Name).ToArray();
     private string wybranaKategoria = "";
+    private string KlasaDlugosci(string slowo) => slowo.Length > 18 ? "bardzoDlugie" : slowo.Length > 13 ? "dlugie" : "";
     private void PokazSlowka(string kategoria)
     {
         wybranaKategoria = kategoria;
