@@ -19,6 +19,12 @@
 .szkolaJezykiGryWidok {
     background-image: url('../img/miasto/szkola/szkolaJezykiGryWidok.jpg');
 }
+.szkolaMatematykaIntroWidok {
+    background-image: url('../img/miasto/szkola/szkolaMatematykaIntroWidok.png');
+}
+.szkolaMatematykaGryWidok {
+    background-image: url('../img/miasto/szkola/szkolaMatematykaGryWidok.jpg');
+}
 .szkolaDoMiasta {
     bottom: 0;
     left: 809px;
@@ -45,6 +51,13 @@
     height: 222px;
     top: 0;
     left: 807px;
+    z-index: 2;
+}
+.szkolaIntroDoMatematyka {
+    width: 331px;
+    height: 258px;
+    top: 280px;
+    left: 43px;
     z-index: 2;
 }
 .szkolaReligiaDoIntro {
@@ -317,4 +330,35 @@ panelAdminWprowadz {
     top: 300px;
     left: 1000px;
     background-color: green;
+}
+.szkolaMatematykaIntroDoIntro {
+    right: 125px;
+    top: 122px;
+    width: 221px;
+    height: 412px;
+    z-index: 2;
+}
+.szkolaMatematykaIntroDoGry {
+    top: 335px;
+    left: 1168px;
+    width: 172px;
+    height: 172px;
+    z-index: 2;
+}
+.liczbaSzkolaMatematykaGlina {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: sandybrown;
+    font-size: 140px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+.komunikatWygranaSzkolaMatematyka {
+    top: 400px;
+    left: 900px;
+    width: 200px;
+    height: 200px;
+    z-index: 4;
 }

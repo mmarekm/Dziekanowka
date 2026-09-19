@@ -1,0 +1,110 @@
+1-5.5 graczy
+6.kot śpiący w wiatrołapie
+7.pszczoly w ulu
+8.roze w ogrodku
+9.rybki w akwarium w salonie
+10.kura szachistka
+11.swinia szachistka
+12.baran szachista 
+13.indyk szachista
+14.krowa szachistka
+15.kon szachista 
+16.ges szachistka
+17.krolik szachista
+18.alpaka szachistka 
+19.koziol szachista
+20.myszki w kuchni
+21.myszki w Przetwórnia
+22.chlopiec w stodole
+23.kura z kurnika
+24.ges z gesiarni 
+25.indyk z indyczarni
+26.kaczka z kacznika
+27.krolik z królikarni
+28.swinia z chlewu 
+29.owca z owczarni 
+30.alpaka z alpakarium
+31.koza z koziarni
+32.krowa z obory
+33.kon 
+34.stajenny
+35.lasKarczowiskowy
+36.lasGrzybiarz
+37.zwierzetaZeZnalezionegoGrzyba
+38.rybak i
+39.jego zona 
+40.zlowionaRyba
+41.przewoznikNaWyspe
+42.lesnaWiewiorka
+43.lesnyBorsuk
+44.lesnyLis
+45.lesnyPtak
+46.lesnaSowa
+47.chlopiecSlodkaBulka i
+48.jego kelner 
+49.ratujacy 1 drogim paliwem
+50.studniarz
+51.1kierowca autobusu w mieście i
+52.jego brat, 2kierowca
+53.ogolnie mieszkańcy miasta
+54.sprzedawcaWKiosk1
+55.sprzedawcaWKiosk2
+56.chlopiecWKiosk1
+57.kotWKiosk2
+58.bileterMiasto3
+59.bileterMiastoLesne
+60.bileterMiastoBiale 
+61.bileterMiastoMorskie
+62.bileterMiastoGorskie
+63.bileterMiastoWiejskie
+64.bileterMiastoKawy
+65.bileterMiastoSnow
+66.sprzedawcaProduktowGlinianych
+67.bileterMiastoPieniedzy
+68.bileterMetropolia1 i jej maz
+69.bileterMetropolia2
+70.bileterStacjaKopalnie
+71.maszynista1
+72.maszynista2
+73.maszynista3DoJaskin
+74.portierSzkolaJezyki
+75.pani z biblioteki
+76.sprzedawca drobiu
+77.sprzedawca dzikich
+78.sprzedawca bydla
+79.aptekarz
+80.fanZdrowy
+81.kierowcaDoSerowLesnych
+82.przystanekZyrafa
+83.przystanekSlon
+84.przystanekOwca
+85.przystanekKoza
+86.przystanekKrowa
+87.przystanekKon 
+88.myszySeryLesne
+89.panDomMleka
+90.kotyDomMleka
+91.manufakturaPiorIFuter
+92.kucharzMorski
+93.ekipaKuchcikowMorskich
+94.goralPlatki
+95.goralJuhas 
+96.kuraJaskinia
+97.indykJaskinia
+98.gesJaskinia
+99.kaczkaJaskinia
+100.dzieciCiekaweWies
+101.bogatyPanDzieciomCiekawym
+102.babciaWies i jej maz
+103.dziadekWies
+104.mlodziezPijacaKawe
+105.klaunMlodziezy
+106.hodowcaKawy
+107.oczekujacyPiorIFuterSny
+108.sniacyOMisji
+109.sprzedawcaBiletowTargowisko
+110.sprzedawcaProduktowTrzciny
+111.bankier
+112.psySasiada
+113.ptaszkiPizza
+114.plebanMorski
