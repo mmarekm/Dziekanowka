@@ -18,6 +18,30 @@ namespace Dziekanowka.Mechanizm
             _sciezkaDoPliku = Path.Combine(AppContext.BaseDirectory, "gracze.json");
             _sciezkaDoDanych = Path.Combine(AppContext.BaseDirectory, "dziekanowka.json");
         }
+        private async Task WczytajDaneGry()
+{
+    if (!File.Exists(_sciezkaDoDanych))
+    {
+        DaneGry = new DaneGry();
+
+        var opcje = new JsonSerializerOptions { WriteIndented = true };
+        var json = JsonSerializer.Serialize(DaneGry, opcje);
+
+        await File.WriteAllTextAsync(_sciezkaDoDanych, json);
+        return;
+    }
+
+    var zapisaneDane = await File.ReadAllTextAsync(_sciezkaDoDanych);
+
+    DaneGry = JsonSerializer.Deserialize<DaneGry>(zapisaneDane) ?? new DaneGry();
+        }
+        private async Task ZapiszDaneGry()
+{
+    var opcje = new JsonSerializerOptions { WriteIndented = true };
+    var json = JsonSerializer.Serialize(DaneGry, opcje);
+
+    await File.WriteAllTextAsync(_sciezkaDoDanych, json);
+        }
         private async Task SprawdzenieCzyPierwszyRazWDniu()
         {
             if (CzyNowyDzien())
