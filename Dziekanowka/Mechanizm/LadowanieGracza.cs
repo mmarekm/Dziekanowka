@@ -5,6 +5,7 @@ namespace Dziekanowka.Mechanizm
     public class LadowanieGracza
     {
         private readonly string _sciezkaDoPliku;
+        private readonly string _sciezkaDoDanych;
         public Gracz? AktualnyGracz { get; private set; }
         public event Action? NowyDzienEvent;
         public Dzwieki? Dzwieki;
@@ -13,6 +14,7 @@ namespace Dziekanowka.Mechanizm
         public LadowanieGracza()
         {
             _sciezkaDoPliku = Path.Combine(AppContext.BaseDirectory, "gracze.json");
+            _sciezkaDoDanych = Path.Combine(AppContext.BaseDirectory, "dziekanowka.json");
         }
         private async Task SprawdzenieCzyPierwszyRazWDniu()
         {
