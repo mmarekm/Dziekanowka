@@ -7,6 +7,7 @@ namespace Dziekanowka.Mechanizm
         private readonly string _sciezkaDoPliku;
         private readonly string _sciezkaDoDanych;
         public Gracz? AktualnyGracz { get; private set; }
+        public DaneGry? DaneGry { get; private set; }
         public event Action? NowyDzienEvent;
         public Dzwieki? Dzwieki;
         public bool CzyPokazacWideo { get; private set; } = false;
