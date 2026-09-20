@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Dziekanowka.Mechanizm.JezykiObce
+﻿namespace Dziekanowka.Mechanizm.JezykiObce
 {
     public class Fiszki
     {
@@ -12,19 +10,19 @@ namespace Dziekanowka.Mechanizm.JezykiObce
                                       {"number","number","half","quarter","whole","more","less","the same amount","a few","a lot","little","count","calculate","double","even","odd","sum","difference","product","quotient","digit","add","subtract","multiply","divide","equal","percent","result","fraction"},
                                       {"el número","el número","la mitad","el cuarto","el todo","más","menos","la misma cantidad","unos pocos","mucho","poco","contar","calcular","duplicar","par","impar","la suma","la diferencia","el producto","el cociente","la cifra","sumar","restar","multiplicar","dividir","ser igual a","el porcentaje","el resultado","la fracción"},
                                       {"numerus","numerus","dimidium","quadrans","totum","plus","minus","tantundem","aliquot","multum","paucum","numerare","computare","duplicare","par","impar","summa","differentia","productus","-","digitus","addere","subtrahere","multiplicare","dividere","aequare","-","eventus","-"} };
-        public static string[,] colors = {{"czarny","biały","czerwony","żółty","zielony","niebieski","szary","różowy","pomarańczowy","brązowy","fioletowy","kolor","złoty","srebrny"},
-                                    {"black","white","red","yellow","green","blue","grey","pink","orange","brown","purple","colour","gold","silver"},
-                                    {"negro","blanco","rojo","amarillo","verde","azul","gris","rosa","naranja","marrón","morado","el color","dorado","plateado"},
-                                    {"niger","albus","ruber","flavus","viridis","caeruleus","canus","roseus","-","fulvus","purpureus","color","aureus","argenteus"} };
-        public static string[,] animalsHome = {{"kot","pies","ryba","chomik","papuga","krowa","koń","kaczka","osioł","kura","świnia","owca","kogut","indyk","koza","gęś","żółw","ptak","ślimak","motyl","mucha","mysz","pszczoła","królik","komar"},
-                                         {"cat","dog","fish","hamster","parrot","cow","horse","duck","donkey","hen","pig","sheep","rooster","turkey","goat","goose","turtle","bird","snail","butterfly","fly","mouse","bee","rabbit","mosquito"},
-                                         {"el gato","el perro","el pez","el hámster","el loro","la vaca","el caballo","el pato","el burro","la gallina","el cerdo","la oveja","el gallo","el pavo","la cabra","el ganso","la tortuga","el pájaro","el caracol","la mariposa","la mosca","el ratón","la abeja","el conejo","el mosquito"},
-                                         {"felis","canis","piscis","-","psittacus","bos","equus","anas","asinus","gallina","porcus","ovis","gallus","-","capra","anser","testudo","avis","cochlea","papilio","musca","mus","apis","cuniculus","culex"} };
-        public static string[,] animalsWild = {{"lew","słoń","wilk","lis","żaba","tygrys","niedźwiedź","wąż","żyrafa","zebra","kangur","delfin","wieloryb","rekin","orzeł","sowa","jeleń","sarna","hipopotam","nosorożec"},
-                                         {"lion","elephant","wolf","fox","frog","tiger","bear","snake","giraffe","zebra","kangaroo","dolphin","whale","shark","eagle","owl","deer","roe deer","hippopotamus","rhinoceros"},
-                                         {"el león","el elefante","el lobo","el zorro","la rana","el tigre","el oso","la serpiente","la jirafa","la cebra","el canguro","el delfín","la ballena","el tiburón","el águila","el búho","el ciervo","el corzo","el hipopótamo","el rinoceronte"},
-                                         {"leo","elephantus","lupus","vulpes","rana","tigris","ursus","serpens","-","-","-","delphinus","balaena","-","aquila","-","cervus","-","hippopotamus","rhinoceros"} };
-        public static string[,] animalWords = {{"zwierzę","zwierzak domowy","szczekać","miauczeć","głaskać","dziki","oswojony","futro","sierść","pióra","łapa","ogon","skrzydło","rżeć","muczeć","beczeć","kwakać","ryczeć","róg","kieł","pazur","grzywa","polować","wysiadywać (jaja)","znosić jajka","stado","gniazdo","nora"},
+        public static string[,] colors = {{"czarny","biały","czerwony","żółty","zielony","niebieski","szary","różowy","pomarańczowy","brązowy","fioletowy","złoty","srebrny","kolor"},
+                                    {"black","white","red","yellow","green","blue","grey","pink","orange","brown","purple","gold","silver","colour"},
+                                    {"negro","blanco","rojo","amarillo","verde","azul","gris","rosa","naranja","marrón","morado","dorado","plateado","el color"},
+                                    {"niger","albus","ruber","flavus","viridis","caeruleus","canus","roseus","-","fulvus","purpureus","aureus","argenteus","color"} };
+        public static string[,] animalsHome = {{"kot","pies","ryba","chomik","papuga","krowa","koń","kaczka","osioł","kura","świnia","owca","kogut","indyk","koza","gęś","ptak","ślimak","motyl","mucha","mysz","pszczoła","królik","komar"},
+                                         {"cat","dog","fish","hamster","parrot","cow","horse","duck","donkey","hen","pig","sheep","rooster","turkey","goat","goose","bird","snail","butterfly","fly","mouse","bee","rabbit","mosquito"},
+                                         {"el gato","el perro","el pez","el hámster","el loro","la vaca","el caballo","el pato","el burro","la gallina","el cerdo","la oveja","el gallo","el pavo","la cabra","el ganso","el pájaro","el caracol","la mariposa","la mosca","el ratón","la abeja","el conejo","el mosquito"},
+                                         {"felis","canis","piscis","-","psittacus","bos","equus","anas","asinus","gallina","porcus","ovis","gallus","-","capra","anser","avis","cochlea","papilio","musca","mus","apis","cuniculus","culex"} };
+        public static string[,] animalsWild = {{"lew","słoń","wilk","lis","żaba","tygrys","niedźwiedź","wąż","żyrafa","zebra","kangur","delfin","wieloryb","rekin","orzeł","sowa","jeleń","sarna","hipopotam","nosorożec","żółw","jeż"},
+                                         {"lion","elephant","wolf","fox","frog","tiger","bear","snake","giraffe","zebra","kangaroo","dolphin","whale","shark","eagle","owl","deer","roe deer","hippopotamus","rhinoceros","turtle","hedgehog"},
+                                         {"el león","el elefante","el lobo","el zorro","la rana","el tigre","el oso","la serpiente","la jirafa","la cebra","el canguro","el delfín","la ballena","el tiburón","el águila","el búho","el ciervo","el corzo","el hipopótamo","el rinoceronte","la tortuga","el erizo"},
+                                         {"leo","elephantus","lupus","vulpes","rana","tigris","ursus","serpens","-","-","-","delphinus","balaena","-","aquila","-","cervus","-","hippopotamus","rhinoceros","testudo","ericius"} };
+        public static string[,] animalWords = {{"zwierzę","zwierzak_domowy","szczekać","miauczeć","głaskać","dziki","oswojony","futro","sierść","pióra","łapa","ogon","skrzydło","rżeć","muczeć","beczeć","kwakać","ryczeć","róg","kieł","pazur","grzywa","polować","wysiadywać jaja","znosić jaja","stado","gniazdo","nora"},
                                         {"animal","pet","bark","meow","stroke/pet","wild","tame","fur","coat (animal hair)","feathers","paw","tail","wing","neigh","moo","bleat","quack","roar","horn","fang/tusk","claw","mane","hunt","hatch/incubate","lay eggs","herd/flock","nest","burrow/den"},
                                         {"el animal","la mascota","ladrar","maullar","acariciar","salvaje","domesticado","el pelaje","el pelo","las plumas","la pata","la cola","el ala","relinchar","mugir","balar","graznar","rugir","el cuerno","el colmillo","la garra","la melena","cazar","incubar","poner huevos","la manada","el nido","la madriguera"},
                                         {"animal","-","latrare","-","-","ferus","domesticus","pellis","-","pluma","-","cauda","ala","hinnire","mugire","balare","-","rugire","cornu","dens","unguis","iuba","venari","-","-","grex","nidus","-"} };
@@ -249,6 +247,6 @@ namespace Dziekanowka.Mechanizm.JezykiObce
                                          vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
-        public static string[][,] KategorieRobocze = { numbers, wordsMath };
+        public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords };
     }
 }

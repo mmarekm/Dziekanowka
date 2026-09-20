@@ -33,7 +33,6 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private bool powitanie = true;
-    private bool inneSlowoEng = false;
     private record Slowko(string Tekst, bool Poprawne);
     private List<Slowko> aktualnePytanie = new();
     private bool poCzekaniu = false;
@@ -48,7 +47,6 @@
         else
         {
             powitanie = false;
-            inneSlowoEng = true;
             LosujNastepnePytanie();
         }
     }
