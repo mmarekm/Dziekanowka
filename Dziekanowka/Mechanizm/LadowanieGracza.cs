@@ -69,6 +69,7 @@ namespace Dziekanowka.Mechanizm
         }
         public async Task<Gracz> ZaladujGracza(string nazwa)
         {
+            await WczytajDaneGry();
             var gracze = await WczytajWszystkichGraczy();
             AktualnyGracz = gracze[nazwa.ToLower()];
             CzyPokazacWideo = false;
