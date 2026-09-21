@@ -42,9 +42,56 @@ namespace Dziekanowka.Mechanizm
     await File.WriteAllTextAsync(_sciezkaDoDanych, json);
         }
         private void GieldaPracuje()
-        {
-            
-        }
+{
+    var historia = DaneGry!.HistoriaNotowanGieldyGlownej;
+
+    var ostatnieNotowania = historia.TakeLast(10).ToList();
+
+    int plusy = ostatnieNotowania.Count(n => n.CzyPlus);
+    int minusy = ostatnieNotowania.Count(n => !n.CzyPlus);
+
+    int roznica = Math.Abs(plusy - minusy);
+
+    double prawdopodobienstwoRzadszego =
+        (roznica + 1.0) / (roznica + 2.0);
+
+    bool plusJestRzadszy = plusy < minusy;
+    bool minusJestRzadszy = minusy < plusy;
+
+    double losowanie = Random.Shared.NextDouble();
+
+    bool czyPlus;
+
+    if (plusy == minusy)
+    {
+        czyPlus = losowanie < 0.5;
+    }
+    else if (plusJestRzadszy)
+    {
+        czyPlus = losowanie < prawdopodobienstwoRzadszego;
+    }
+    else
+    {
+        czyPlus = losowanie >= prawdopodobienstwoRzadszego;
+    }
+
+    int wartoscZmiany = Random.Shared.Next(0, 11);
+
+    if (czyPlus)
+    {
+        DaneGry.Gielda += wartoscZmiany;
+    }
+    else
+    {
+        DaneGry.Gielda -= wartoscZmiany;
+    }
+
+    DaneGry.HistoriaNotowanGieldyGlownej.Add(new NotowanieGieldy
+    {
+        CzyPlus = czyPlus,
+        WartoscZmiany = wartoscZmiany
+    });
+}
         private async Task SprawdzenieCzyPierwszyRazWDniuDanych()
 {
     if (CzyNowyDzienDanych())
@@ -52,7 +99,6 @@ namespace Dziekanowka.Mechanizm
         GieldaPracuje();
         DaneGry!.DzienLogowania = DateTime.Now.Day;
         DaneGry.MiesiacLogowania = DateTime.Now.Month;
-        DaneGry.HistoriaNotowanGieldy.Add(DaneGry.Gielda);
         await ZapiszDaneGry();
     }
         }
