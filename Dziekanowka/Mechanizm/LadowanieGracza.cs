@@ -39,8 +39,22 @@ namespace Dziekanowka.Mechanizm
 {
     var opcje = new JsonSerializerOptions { WriteIndented = true };
     var json = JsonSerializer.Serialize(DaneGry, opcje);
-
     await File.WriteAllTextAsync(_sciezkaDoDanych, json);
+        }
+        private void GieldaPracuje()
+        {
+            
+        }
+        private async Task SprawdzenieCzyPierwszyRazWDniuDanych()
+{
+    if (CzyNowyDzienDanych())
+    {
+        GieldaPracuje();
+        DaneGry.DzienLogowania = DateTime.Now.Day;
+        DaneGry.MiesiacLogowania = DateTime.Now.Month;
+        DaneGry.HistoriaNotowanGieldy.Add(DaneGry.Gielda);
+        await ZapiszDaneGry();
+    }
         }
         private async Task SprawdzenieCzyPierwszyRazWDniu()
         {
@@ -74,6 +88,7 @@ namespace Dziekanowka.Mechanizm
             AktualnyGracz = gracze[nazwa.ToLower()];
             CzyPokazacWideo = false;
             await SprawdzenieCzyPierwszyRazWDniu();
+            await SprawdzenieCzyPierwszyRazWDniuDanych();
             return AktualnyGracz;
         }
         public async Task ZapiszAktualnegoGracza()
