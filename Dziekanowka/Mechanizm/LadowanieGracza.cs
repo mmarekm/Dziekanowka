@@ -12,85 +12,55 @@ namespace Dziekanowka.Mechanizm
         public Dzwieki? Dzwieki;
         public bool CzyPokazacWideo { get; private set; } = false;
         private bool CzyNowyDzien() => AktualnyGracz!.Statystyki.DzienLogowania != DateTime.Now.Day || AktualnyGracz.Statystyki.MiesiacLogowania != DateTime.Now.Month;
-        private bool CzyNowaGodzinaDanych() =>
-    DaneGry!.DzienLogowania != DateTime.Now.Day ||
-    DaneGry.MiesiacLogowania != DateTime.Now.Month ||
-    DaneGry.GodzinaLogowania != DateTime.Now.Hour;
-        private bool CzyNowyDzienDanych() => DaneGry!.DzienLogowania != DateTime.Now.Day || DaneGry.MiesiacLogowania != DateTime.Now.Month;
+        private bool CzyNowyDzienDanych() => DaneGry!.DzienLogowania != DateTime.Now.Day || DaneGry.MiesiacLogowania != DateTime.Now.Month || DaneGry.GodzinaLogowania != DateTime.Now.Hour;
         public LadowanieGracza()
         {
             _sciezkaDoPliku = Path.Combine(AppContext.BaseDirectory, "gracze.json");
             _sciezkaDoDanych = Path.Combine(AppContext.BaseDirectory, "dziekanowka.json");
         }
         private async Task WczytajDaneGry()
-{
-    if (!File.Exists(_sciezkaDoDanych))
-    {
-        DaneGry = new DaneGry();
-
-        var opcje = new JsonSerializerOptions { WriteIndented = true };
-        var json = JsonSerializer.Serialize(DaneGry, opcje);
-
-        await File.WriteAllTextAsync(_sciezkaDoDanych, json);
-        return;
-    }
-
-    var zapisaneDane = await File.ReadAllTextAsync(_sciezkaDoDanych);
-
-    DaneGry = JsonSerializer.Deserialize<DaneGry>(zapisaneDane) ?? new DaneGry();
+        {
+            if (!File.Exists(_sciezkaDoDanych))
+            {
+                DaneGry = new DaneGry();
+                var opcje = new JsonSerializerOptions { WriteIndented = true };
+                var json = JsonSerializer.Serialize(DaneGry, opcje);
+                await File.WriteAllTextAsync(_sciezkaDoDanych, json);
+                return;
+            }
+            var zapisaneDane = await File.ReadAllTextAsync(_sciezkaDoDanych);
+            DaneGry = JsonSerializer.Deserialize<DaneGry>(zapisaneDane) ?? new DaneGry();
         }
         private async Task ZapiszDaneGry()
-{
-    var opcje = new JsonSerializerOptions { WriteIndented = true };
-    var json = JsonSerializer.Serialize(DaneGry, opcje);
-    await File.WriteAllTextAsync(_sciezkaDoDanych, json);
+        {
+            var opcje = new JsonSerializerOptions { WriteIndented = true };
+            var json = JsonSerializer.Serialize(DaneGry, opcje);
+            await File.WriteAllTextAsync(_sciezkaDoDanych, json);
         }
         private void GieldaPracuje()
-{
-    var historia = DaneGry!.HistoriaNotowanGieldyGlownej;
-
-    var ostatnieNotowania = historia.TakeLast(10).ToList();
-
-    int plusy = ostatnieNotowania.Count(n => n.CzyPlus);
-    int minusy = ostatnieNotowania.Count(n => !n.CzyPlus);
-
-    int roznica = Math.Abs(plusy - minusy);
-
-    double prawdopodobienstwoRzadszego =
-        (roznica + 1.0) / (roznica + 2.0);
-
-    bool plusJestRzadszy = plusy < minusy;
-    bool minusJestRzadszy = minusy < plusy;
-
-    double losowanie = Random.Shared.NextDouble();
-
-    bool czyPlus;
-
-    if (plusy == minusy)
-    {
-        czyPlus = losowanie < 0.5;
-    }
-    else if (plusJestRzadszy)
-    {
-        czyPlus = losowanie < prawdopodobienstwoRzadszego;
-    }
-    else
-    {
-        czyPlus = losowanie >= prawdopodobienstwoRzadszego;
-    }
-
-    int wartoscZmiany = Random.Shared.Next(0, 11);
-
-    if (czyPlus)
-    {
-        DaneGry.Gielda += wartoscZmiany;
-    }
-    else
-    {
-        DaneGry.Gielda -= wartoscZmiany;
-    }
-
-    DaneGry.HistoriaNotowanGieldyGlownej.Add(new NotowanieGieldy
+        {
+            var historia = DaneGry!.HistoriaNotowanGieldyGlownej;
+            var ostatnieNotowania = historia.TakeLast(10).ToList();
+            int plusy = ostatnieNotowania.Count(n => n.CzyPlus);
+            int minusy = ostatnieNotowania.Count(n => !n.CzyPlus);
+            int roznica = Math.Abs(plusy - minusy);
+            double prawdopodobienstwoRzadszego = (roznica + 1.0) / (roznica + 2.0);
+            bool plusJestRzadszy = plusy < minusy;
+            bool minusJestRzadszy = minusy < plusy;
+            double losowanie = Random.Shared.NextDouble();
+            bool czyPlus;
+            if (plusy == minusy)
+                czyPlus = losowanie < 0.5;
+            else if (plusJestRzadszy)
+                czyPlus = losowanie < prawdopodobienstwoRzadszego;
+            else
+                czyPlus = losowanie >= prawdopodobienstwoRzadszego;
+            int wartoscZmiany = Random.Shared.Next(0, 11);
+            if (czyPlus)
+                DaneGry.Gielda += wartoscZmiany;
+            else
+                DaneGry.Gielda -= wartoscZmiany;
+            DaneGry.HistoriaNotowanGieldyGlownej.Add(new NotowanieGieldy
 {
     CzyPlus = czyPlus,
     WartoscZmiany = wartoscZmiany,
@@ -104,6 +74,7 @@ namespace Dziekanowka.Mechanizm
         GieldaPracuje();
         DaneGry!.DzienLogowania = DateTime.Now.Day;
         DaneGry.MiesiacLogowania = DateTime.Now.Month;
+        DaneGry.GodzinaLogowania = DateTime.Now.Hour;
         await ZapiszDaneGry();
     }
         }
