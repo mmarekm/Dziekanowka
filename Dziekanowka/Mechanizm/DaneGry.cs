@@ -4,6 +4,7 @@ namespace Dziekanowka.Mechanizm
     {
         public bool CzyPlus { get; set; }
         public int WartoscZmiany { get; set; }
+        public int Gielda { get; set; }
     }
     public class DaneGry
     {
