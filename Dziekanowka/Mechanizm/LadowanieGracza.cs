@@ -87,10 +87,11 @@ namespace Dziekanowka.Mechanizm
     }
 
     DaneGry.HistoriaNotowanGieldyGlownej.Add(new NotowanieGieldy
-    {
-        CzyPlus = czyPlus,
-        WartoscZmiany = wartoscZmiany
-    });
+{
+    CzyPlus = czyPlus,
+    WartoscZmiany = wartoscZmiany,
+    Gielda = DaneGry.Gielda
+});
 }
         private async Task SprawdzenieCzyPierwszyRazWDniuDanych()
 {
