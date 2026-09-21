@@ -1,5 +1,10 @@
 namespace Dziekanowka.Mechanizm
 {
+    public class NotowanieGieldy
+    {
+        public bool CzyPlus { get; set; }
+        public int WartoscZmiany { get; set; }
+    }
     public class DaneGry
     {
         public int Gielda { get; set; } = 100;
