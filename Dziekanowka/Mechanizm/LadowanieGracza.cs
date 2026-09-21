@@ -12,6 +12,10 @@ namespace Dziekanowka.Mechanizm
         public Dzwieki? Dzwieki;
         public bool CzyPokazacWideo { get; private set; } = false;
         private bool CzyNowyDzien() => AktualnyGracz!.Statystyki.DzienLogowania != DateTime.Now.Day || AktualnyGracz.Statystyki.MiesiacLogowania != DateTime.Now.Month;
+        private bool CzyNowaGodzinaDanych() =>
+    DaneGry!.DzienLogowania != DateTime.Now.Day ||
+    DaneGry.MiesiacLogowania != DateTime.Now.Month ||
+    DaneGry.GodzinaLogowania != DateTime.Now.Hour;
         private bool CzyNowyDzienDanych() => DaneGry!.DzienLogowania != DateTime.Now.Day || DaneGry.MiesiacLogowania != DateTime.Now.Month;
         public LadowanieGracza()
         {
