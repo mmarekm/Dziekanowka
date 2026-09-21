@@ -10,6 +10,6 @@ namespace Dziekanowka.Mechanizm
         public int Gielda { get; set; } = 100;
         public int DzienLogowania { get; set; } = 0;
         public int MiesiacLogowania { get; set; } = 0;
-        public List<int> HistoriaNotowanGieldy { get; set; } = [];
+        public List<NotowanieGieldy> HistoriaNotowanGieldyGlownej { get; set; } = [];
     }
 }
