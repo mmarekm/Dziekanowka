@@ -12,7 +12,7 @@ namespace Dziekanowka.Mechanizm
         public Dzwieki? Dzwieki;
         public bool CzyPokazacWideo { get; private set; } = false;
         private bool CzyNowyDzien() => AktualnyGracz!.Statystyki.DzienLogowania != DateTime.Now.Day || AktualnyGracz.Statystyki.MiesiacLogowania != DateTime.Now.Month;
-        private bool CzyNowyDzienDanych() => DaneGry.DzienLogowania != DateTime.Now.Day || DaneGry.MiesiacLogowania != DateTime.Now.Month;
+        private bool CzyNowyDzienDanych() => DaneGry!.DzienLogowania != DateTime.Now.Day || DaneGry.MiesiacLogowania != DateTime.Now.Month;
         public LadowanieGracza()
         {
             _sciezkaDoPliku = Path.Combine(AppContext.BaseDirectory, "gracze.json");
@@ -50,7 +50,7 @@ namespace Dziekanowka.Mechanizm
     if (CzyNowyDzienDanych())
     {
         GieldaPracuje();
-        DaneGry.DzienLogowania = DateTime.Now.Day;
+        DaneGry!.DzienLogowania = DateTime.Now.Day;
         DaneGry.MiesiacLogowania = DateTime.Now.Month;
         DaneGry.HistoriaNotowanGieldy.Add(DaneGry.Gielda);
         await ZapiszDaneGry();
