@@ -114,6 +114,7 @@
         KopalniaTrzciny,
         MiastoPieniedzy,
         Bank,
+        Gielda,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,

@@ -110,6 +110,9 @@
 .bankWidok {
     background-image: url('../img/miasto/miastoPieniedzy/bankWidok.png');
 }
+.gieldaWidok {
+    background-image: url('../img/miasto/miastoPieniedzy/gieldaWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1848,3 +1851,31 @@
     .misjaBankier:hover {
         cursor: pointer;
     }
+.miastoNaGielde {
+    width: 715px;
+    height: 495px;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+}
+.notowaniaGieldy {
+    width: 765px;
+    height: 585px;
+    left: 1035px;
+    top: 85px;
+}
+.notowaniaKazdejGieldy {
+    width: 750px;
+    height: 170px;
+    left: 7px;
+    border: 1px solid red;
+}
+.notowaniaGieldyGlownej {
+    top: 50px;
+}
+.notowaniaGieldyDuzej {
+    top: 270px;
+}
+.notowaniaGieldyMalej {
+    top: 490px;
+}

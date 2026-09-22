@@ -1,0 +1,19 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="gieldaWidok widok rel">
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoPieniedzy)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs notowaniaGieldy">
+        @foreach (var gielda in gieldy)
+        {
+            <div class="abs notowaniaKazdejGieldy notowaniaGieldy@(gielda)">
+
+            </div>
+        }
+    </div>
+</div>
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private string[] gieldy = ["Glownej", "Duzej", "Malej"];
+}

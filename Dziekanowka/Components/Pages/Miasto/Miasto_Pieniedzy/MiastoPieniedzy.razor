@@ -3,6 +3,7 @@
 <div class="miastoPieniedzyWidok widok rel">
     <div class="abs miastoPieniedzyNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoPieniedzyNaStacje.png" /></button></div>
     <div class="abs miastoDoBanku"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Bank)"><img src="img/miasto/miastoPieniedzy/miastoDoBanku.png" /></button></div>
+    <div class="abs miastoNaGielde"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gielda)"><img src="img/miasto/miastoPieniedzy/miastoNaGielde.png" /></button></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;

@@ -12,7 +12,7 @@ namespace Dziekanowka.Gracza
         public string AktualnaMisja { get; set; } = "";
         public string[] DaneMisji { get; set; } = ["", "", "", "", "", "", "", "", "", ""];
         public int Kolekcje { get; set; } = 18;
-        public int Gielda { get; set; } = 0;
+        public int[] NotowaniaGieldy { get; set; } = [0,0,0];
         public string Danie1Rybakow { get; set; } = Gra.ZbiorChlopiecMiska[Random.Shared.Next(Gra.ZbiorChlopiecMiska.Count)];
         public string Danie2Rybakow { get; set; } = Gra.Restauracja[Random.Shared.Next(Gra.Restauracja.Count)];
         public int BonusDzienny { get; set; } = 33;
