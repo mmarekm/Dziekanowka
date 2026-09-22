@@ -155,6 +155,8 @@ namespace Dziekanowka.Mechanizm
                 czyPlus = losowanie >= prawdopodobienstwoRzadszego;
             int wartoscZmiany = Random.Shared.Next(0, maxZmiana + 1);
             int nowaWartosc = Math.Max(0, czyPlus ? aktualnaWartosc + wartoscZmiany : aktualnaWartosc - wartoscZmiany);
+            if (historia.Count > 99)
+                historia.RemoveAt(0);
             historia.Add(new NotowanieGieldy
             {
                 CzyPlus = czyPlus,
