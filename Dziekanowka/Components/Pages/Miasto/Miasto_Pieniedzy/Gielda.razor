@@ -1,13 +1,28 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
+@using System.Globalization
 @inject LadowanieGracza ladowanieGracza
 <div class="gieldaWidok widok rel">
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoPieniedzy)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs lMonetGielda"><img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" />@Gracz.Monety</div>
     <div class="abs notowaniaGieldy">
         @foreach (var gielda in gieldy)
         {
             <div class="abs notowaniaKazdejGieldy notowaniaGieldy@(gielda)">
-
+                <div class="abs infoGieldy">
+                    <div class="abs infoLiczbaGielda lAkcjiGracza">@Gracz.Statystyki.NotowaniaGieldy[IndeksAkcjiGracza(gielda)]</div>
+                    <div class="symbolGieldy"><img /></div>
+                </div>
+                <div class="abs kupnoSprzedazAkcji">
+                    <div class="abs akcjaZAkcjami kupnoAkcji @(Gracz.Monety < CenaAkcji(gielda) ? "nieMoznaKliknac" : "")" @onclick="() => KupAkcje(gielda)"><img class="obrazekJakTrzeba" src="img/miasto/miastoPieniedzy/kupAkcje.png" /></div>
+                    <div class="abs akcjaZAkcjami sprzedazAkcji @(Gracz.Statystyki.NotowaniaGieldy[IndeksAkcjiGracza(gielda)] < 1 ? "nieMoznaKliknac" : "")" @onclick="() => SprzedajAkcje(gielda)"><img class="obrazekJakTrzeba" src="img/miasto/miastoPieniedzy/sprzedajAkcje.png" /></div>
+                </div>
+                <div class="abs wykresKazdejAkcji gieldawykres@(gielda)">
+                    <svg class="wykresSvg" viewBox="0 0 450 130" preserveAspectRatio="none">
+                        <polyline points="@PunktyWykresu(gielda)" fill="none" stroke="#3c3489" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+                    </svg>
+                    <div class="abs infoLiczbaGielda wartoscAkcji">@CenaAkcji(gielda)</div>
+                </div>
             </div>
         }
     </div>
@@ -15,5 +30,58 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int wartoscGlownej => ladowanieGracza.DaneGry!.GieldaGlowna;
+    private int wartoscDuzej => ladowanieGracza.DaneGry!.GieldaDuza;
+    private int wartoscMalej => ladowanieGracza.DaneGry!.GieldaMala;
     private string[] gieldy = ["Glownej", "Duzej", "Malej"];
+    private int CenaAkcji(string akcja) => akcja == "Glownej" ? wartoscGlownej : akcja == "Duzej" ? wartoscDuzej : wartoscMalej;
+    private int IndeksAkcjiGracza(string akcja) => akcja == "Glownej" ? 0 : akcja == "Duzej" ? 1 : 2;
+    private async Task KupAkcje(string akcja)
+    {
+        if (Gracz.Monety < CenaAkcji(akcja))
+            return;
+        Gracz.Monety -= CenaAkcji(akcja);
+        Gracz.Statystyki.NotowaniaGieldy[IndeksAkcjiGracza(akcja)]++;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private async Task SprzedajAkcje(string akcja)
+    {
+        if (Gracz.Statystyki.NotowaniaGieldy[IndeksAkcjiGracza(akcja)] < 1)
+            return;
+        Gracz.Monety += CenaAkcji(akcja);
+        Gracz.Statystyki.NotowaniaGieldy[IndeksAkcjiGracza(akcja)]--;
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+    }
+    private List<NotowanieGieldy> PobierzHistorie(string akcja) => akcja switch
+    {
+        "Glownej" => ladowanieGracza.DaneGry!.HistoriaNotowanGieldyGlownej,
+        "Duzej" => ladowanieGracza.DaneGry!.HistoriaNotowanGieldyDuzej,
+        "Malej" => ladowanieGracza.DaneGry!.HistoriaNotowanGieldyMalej,
+        _ => []
+    };
+    private string PunktyWykresu(string akcja)
+    {
+        var dane = PobierzHistorie(akcja).TakeLast(100).ToList();
+        if (dane.Count == 0) return "";
+        if (dane.Count == 1) return "0,65 450,65";
+
+        var wartosci = dane.Select(d => d.Gielda).ToList();
+        int min = wartosci.Min();
+        int max = wartosci.Max();
+        int rozpietosc = max - min;
+
+        double szerokoscKroku = 450.0 / (dane.Count - 1);
+        double margines = 6;
+        double dostepnaWysokosc = 130 - (margines * 2);
+
+        var punkty = new List<string>(dane.Count);
+        for (int i = 0; i < dane.Count; i++)
+        {
+            double x = i * szerokoscKroku;
+            double proporcja = rozpietosc == 0 ? 0.5 : (double)(wartosci[i] - min) / rozpietosc;
+            double y = margines + (1 - proporcja) * dostepnaWysokosc;
+            punkty.Add($"{x.ToString("0.##", CultureInfo.InvariantCulture)},{y.ToString("0.##", CultureInfo.InvariantCulture)}");
+        }
+        return string.Join(" ", punkty);
+    }
 }

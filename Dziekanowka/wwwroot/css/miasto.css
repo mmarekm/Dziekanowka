@@ -1859,23 +1859,84 @@
     z-index: 2;
 }
 .notowaniaGieldy {
-    width: 765px;
+    width: 965px;
     height: 585px;
-    left: 1035px;
+    left: 835px;
     top: 85px;
 }
 .notowaniaKazdejGieldy {
-    width: 750px;
-    height: 170px;
+    width: 950px;
+    height: 150px;
     left: 7px;
-    border: 1px solid red;
 }
 .notowaniaGieldyGlownej {
-    top: 50px;
+    top: 25px;
 }
 .notowaniaGieldyDuzej {
-    top: 270px;
+    top: 217px;
 }
 .notowaniaGieldyMalej {
-    top: 490px;
+    top: 410px;
+}
+.kupnoSprzedazAkcji {
+    width: 200px;
+    height: 150px;
+    top: 0;
+    left: 200px;
+}
+.infoGieldy {
+    width: 200px;
+    height: 150px;
+    top: 0;
+    left: 0;
+}
+.akcjaZAkcjami {
+    width: 200px;
+    height: 70px;
+    left: 0;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+}
+    .akcjaZAkcjami:hover {
+        filter: brightness(1.1);
+    }
+.kupnoAkcji {
+    top: 0;
+}
+.sprzedazAkcji {
+    bottom: 0;
+}
+.wykresKazdejAkcji {
+    width: 500px;
+    height: 130px;
+    left: 425px;
+    top: 10px;
+}
+.infoLiczbaGielda {
+    top: 0;
+    width: 50px;
+    height: 130px;
+    font-size: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: navy;
+}
+.lAkcjiGracza {
+    left: 0;
+}
+.wartoscAkcji {
+    right: 0;
+}
+.lMonetGielda {
+    width: 400px;
+    height: 60px;
+    font-size: 59px;
+    color: gold;
+    bottom: 50px;
+    gap: 30px;
+    left: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
