@@ -11,16 +11,14 @@
             <div class="abs notowaniaKazdejGieldy notowaniaGieldy@(gielda)">
                 <div class="abs infoGieldy">
                     <div class="abs infoLiczbaGielda lAkcjiGracza">@Gracz.Statystyki.NotowaniaGieldy[IndeksAkcjiGracza(gielda)]</div>
-                    <div class="symbolGieldy"><img /></div>
+                    <div class="abs symbolGieldy"><img class="obrazekJakTrzeba" src="img/miasto/miastoPieniedzy/akcje@(gielda).png"/></div>
                 </div>
                 <div class="abs kupnoSprzedazAkcji">
                     <div class="abs akcjaZAkcjami kupnoAkcji @(Gracz.Monety < CenaAkcji(gielda) ? "nieMoznaKliknac" : "")" @onclick="() => KupAkcje(gielda)"><img class="obrazekJakTrzeba" src="img/miasto/miastoPieniedzy/kupAkcje.png" /></div>
                     <div class="abs akcjaZAkcjami sprzedazAkcji @(Gracz.Statystyki.NotowaniaGieldy[IndeksAkcjiGracza(gielda)] < 1 ? "nieMoznaKliknac" : "")" @onclick="() => SprzedajAkcje(gielda)"><img class="obrazekJakTrzeba" src="img/miasto/miastoPieniedzy/sprzedajAkcje.png" /></div>
                 </div>
                 <div class="abs wykresKazdejAkcji gieldawykres@(gielda)">
-                    <svg class="wykresSvg" viewBox="0 0 450 130" preserveAspectRatio="none">
-                        <polyline points="@PunktyWykresu(gielda)" fill="none" stroke="#3c3489" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
-                    </svg>
+                    <div class="abs wykresRysunkowyGielda"><svg class="wykresSvg" viewBox="0 0 450 130" preserveAspectRatio="none"><polyline points="@PunktyWykresu(gielda)" fill="none" stroke="#3c3489" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" /></svg></div>
                     <div class="abs infoLiczbaGielda wartoscAkcji">@CenaAkcji(gielda)</div>
                 </div>
             </div>

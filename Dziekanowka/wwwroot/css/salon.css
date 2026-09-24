@@ -34,7 +34,34 @@
     top: 50px;
     left: 50px;
     height: 200px;
-    width: 500px;
+    width: 600px;
+}
+.sciagawkaKazdaGielda {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    left: 50px;
+    height: 100px;
+    width: 600px;
+}
+.sciagawkaGieldaGlownej {
+    top: 250px;
+}
+.sciagawkaGieldaDuzej {
+    top: 380px;
+}
+.sciagawkaGieldaMalej {
+    top: 510px;
+}
+.lAkcjiSciagawka {
+    font-size: 50px;
+    color: navy;
+}
+.wartoscAkcjiSciagawka {
+    font-size: 60px;
+    color: yellow;
+    letter-spacing: 1px;
 }
 .confirmSciagawka {
     right: 0;

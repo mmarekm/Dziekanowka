@@ -1890,6 +1890,12 @@
     top: 0;
     left: 0;
 }
+.symbolGieldy {
+    width: 100px;
+    height: 130px;
+    right: 30px;
+    top: 25px;
+}
 .akcjaZAkcjami {
     width: 200px;
     height: 70px;
@@ -1910,6 +1916,12 @@
     width: 500px;
     height: 130px;
     left: 425px;
+    top: 10px;
+}
+.wykresRysunkowyGielda {
+    width: 420px;
+    height: 130px;
+    left: 0;
     top: 10px;
 }
 .infoLiczbaGielda {

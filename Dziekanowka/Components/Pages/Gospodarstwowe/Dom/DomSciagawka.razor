@@ -1,10 +1,19 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
 <div class="domSciagawkaWidok widok rel">
     <div class="abs sciagawkaMisja">
         <div class="@(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
         <div><img src="img/misje/galeria/@(Gracz.Statystyki.AktualnaMisja).png" /></div>
     </div>
+    @foreach (var gielda in gieldy)
+    {
+        <div class="abs sciagawkaKazdaGielda sciagawkaGielda@(gielda)">
+            <div class="lAkcjiSciagawka">@Gracz.Statystyki.NotowaniaGieldy[IndeksAkcjiGracza(gielda)]</div>
+            <img class="obrazekJakTrzeba" src="img/miasto/miastoPieniedzy/akcje@(gielda).png" />
+            <div class="wartoscAkcjiSciagawka">@CenaAkcji(gielda)</div>
+        </div>
+    }
     <div class="abs confirmSciagawka"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSalon)" class="wyroznionyGuzik"><img src="img/dom/potwierdzenie.png" /></button></div>
 </div>
 
@@ -12,4 +21,10 @@
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private int wartoscGlownej => ladowanieGracza.DaneGry!.GieldaGlowna;
+    private int wartoscDuzej => ladowanieGracza.DaneGry!.GieldaDuza;
+    private int wartoscMalej => ladowanieGracza.DaneGry!.GieldaMala;
+    private string[] gieldy = ["Glownej", "Duzej", "Malej"];
+    private int CenaAkcji(string akcja) => akcja == "Glownej" ? wartoscGlownej : akcja == "Duzej" ? wartoscDuzej : wartoscMalej;
+    private int IndeksAkcjiGracza(string akcja) => akcja == "Glownej" ? 0 : akcja == "Duzej" ? 1 : 2;
 }
