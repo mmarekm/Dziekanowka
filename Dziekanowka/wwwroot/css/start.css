@@ -1,5 +1,16 @@
 ﻿.powitanie {
-    background-image: url('../img/powitanie.png');
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+.tlo-wideo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
 }
 .btnStart img {
     display: block;

@@ -2,6 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/powitanie.mp4" type="video/mp4" /></video>
     <div class="guzikStartMama abs"><button class="btnStart wyroznionyGuzik" disabled="@pokazHaslo" @onclick='() => StartGry("Mama")'><img src="img/Mama.png" /></button></div>
     <div class="guzikStartTata abs"><button class="btnStart wyroznionyGuzik" disabled="@pokazHaslo" @onclick='() => StartGry("Tata")'><img src="img/Tata.png" /></button></div>
     <div class="guzikStartUla abs"><button class="btnStart wyroznionyGuzik" disabled="@pokazHaslo" @onclick='() => StartGry("Ula")'><img src="img/Ula.png" /></button></div>
