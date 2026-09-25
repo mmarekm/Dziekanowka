@@ -18,5 +18,6 @@
         public const string Zielarz = "Zielarz";
         public const string Lingwista = "Lingwista";
         public const string Bankier = "Bankier";
+        public const string AltruistaJaskiniowy = "AltruistaJaskiniowy";
     }
 }

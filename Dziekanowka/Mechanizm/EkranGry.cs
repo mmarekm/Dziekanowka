@@ -101,6 +101,7 @@
         GorskiePlatki,
         OwceGorskie,
         StacjaJaskinia,
+        AltruistaJaskiniowy,
         DzieciCiekawe,
         WiesSurowkaKwiaty,
         PotrzebaKawy,

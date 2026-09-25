@@ -59,6 +59,7 @@ namespace Dziekanowka.Mechanizm
             [Misje.Stajenny] = () => [Ciasta![Random.Shared.Next(Ciasta.Count)], "", "", "", "", "", "", "", "", ""],
             [Misje.PotrzebaKawy] = () => ["", "", "", "", "", "", "", "", "", ""],
             [Misje.Bankier] = () => ["", "", "", "", "", "", "", "", "", ""],
+            [Misje.AltruistaJaskiniowy] = () => ["", "", "", "", "", "", "", "", "", ""],
             [Misje.OczekujacyPiorIFuter] = () => [OczekujacyPiorIFuter![Random.Shared.Next(OczekujacyPiorIFuter.Count)], "", "", "", "", "", "", "", "", ""],
             [Misje.ChlopiecStodola] = () => [Random.Shared.Next(1, 50).ToString(), "", "", "", "", "", "", "", "", ""],
             [Misje.Zielarz] = () => [Random.Shared.Next(1, 37).ToString(), "", "", "", "", "", "", "", "", ""],
