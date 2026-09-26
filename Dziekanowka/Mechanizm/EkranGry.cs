@@ -118,6 +118,7 @@
         Gielda,
         Ratusz,
         RatuszSentymentalny,
+        RatuszSentymentalnyDostal,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,

@@ -1,11 +1,54 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="bankWidok widok rel">
+<div class="ratuszSentyMentalny@(tuMisja ? "Czeka" : "Ma") widok rel">
+    <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Ratusz)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs @KlasaPowitania">1 <img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" /> 1 <img class="obrazekSieMiesci" src="img/przedmioty/drewno.png" /> 1 <img class="obrazekSieMiesci" src="img/przedmioty/walutaGlina.png" /> 1 <img class="obrazekSieMiesci" src="img/przedmioty/walutaTrzcina.png" /></div>
+    @if (tuMisja)
+    {
+        <div class="abs dajObrazekSentymentalnemu" @onclick="Daj">-1 <img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    }
 </div>
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (Gracz.Statystyki.OtwarteOkno == "ratuszSentymentalny")
+        {
+            Gracz.Statystyki.OtwarteOkno = "";
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+            Powitaj = true;
+            Znikanie = false;
+            StateHasChanged();
+            await Task.Delay(100);
+            Znikanie = true;
+            StateHasChanged();
+            await Task.Delay(4000);
+            Powitaj = false;
+            Znikanie = false;
+            StateHasChanged();
+        }
+    }
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
+    private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";
+    private bool tuMisja => Gracz.Statystyki.AktualnaMisja == Misje.RatuszSentymentalny;
+    private async Task Daj()
+    {
+        Gracz.Statystyki.Kolekcje--;
+        Gracz.Monety++;
+        Gracz.Przedmiot("drewno").Ilosc++;
+        Gracz.Przedmiot("walutaGlina").Ilosc++;
+        Gracz.Przedmiot("walutaTrzcina").Ilosc++;
+        Gracz.LosujNowaMisje();
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Gracz.Statystyki.OtwarteOkno = "ratuszSentymentalny";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.RatuszSentymentalnyDostal);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.RatuszSentymentalny);
+    }
 }

@@ -43,7 +43,7 @@ namespace Dziekanowka.Mechanizm
         public static string[] Sklepiczek = ["kosc", ""];
         public static string[] SklepiczekWymagane = ["zielonaKuleczka", ""];
         public static List<string> ZwierzetaNaDrodze = ["krowa", "owca", "koza", "koń", "słoń", "żyrafa"];
-        public static readonly List<string> WszystkieMisje = [Misje.Chlopiec, Misje.Kot, Misje.FanZdrowia, Misje.DomMleka, Misje.KuchniaMorska,
+        public static readonly List<string> WszystkieMisje = [Misje.Chlopiec, Misje.Kot, Misje.FanZdrowia, Misje.DomMleka, Misje.KuchniaMorska, Misje.RatuszSentymentalny,
             Misje.SlodkaBuleczka, Misje.SeryLesne, Misje.PlatkiGorskie, Misje.Stajenny, Misje.WiesSurowkaWarzywna, Misje.Bankier, Misje.AltruistaJaskiniowy,
             Misje.PotrzebaKawy, Misje.PotrzebaKawy, Misje.OczekujacyPiorIFuter, Misje.ChlopiecStodola, Misje.ChlopiecStodola, Misje.Zielarz, Misje.Lingwista];
         private static readonly Dictionary<string, Func<string[]>> GeneratoryDanychMisji = new()

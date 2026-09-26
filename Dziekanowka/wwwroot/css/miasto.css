@@ -119,6 +119,12 @@
 .ratuszWidok {
     background-image: url('../img/miasto/miastoPieniedzy/ratuszWidok.png');
 }
+.ratuszSentyMentalnyCzeka {
+    background-image: url('../img/miasto/miastoPieniedzy/ratuszSentymentalnyCzeka.png');
+}
+.ratuszSentyMentalnyMa {
+    background-image: url('../img/miasto/miastoPieniedzy/ratuszSentymentalnyMa.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -1979,3 +1985,30 @@
     height: 435px;
     z-index: 2;
 }
+.ratuszDoSentymentalnego {
+    width: 282px;
+    height: 258px;
+    right: 85px;
+    bottom: 237px;
+    z-index: 2;
+}
+.dajObrazekSentymentalnemu {
+    width: 400px;
+    height: 200px;
+    top: 250px;
+    left: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    color: red;
+    font-weight: bold;
+    font-size: 100px;
+    background-color: rgba(212, 175, 55, 0.6);
+    transition: all ease-in-out 0.3s;
+}
+    .dajObrazekSentymentalnemu:hover {
+        cursor: pointer;
+        filter: brightness(1.1);
+        filter: blur(3px);
+    }
