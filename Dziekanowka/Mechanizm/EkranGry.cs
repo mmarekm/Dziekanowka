@@ -116,6 +116,8 @@
         MiastoPieniedzy,
         Bank,
         Gielda,
+        Ratusz,
+        RatuszSentymentalny,
         AnimacjaTraktora,
         AnimacjaTraktoraPowrot,
         AutobusJedzie,
@@ -179,6 +181,7 @@
         KopalniaTrzcinyWygrana,
         KopalniaTrzcinyRemis,
         KopalniaTrzcinyPrzegrana,
-        BankierDziala
+        BankierDziala,
+        AltruistaJaskiniowyDaje
     }
 }

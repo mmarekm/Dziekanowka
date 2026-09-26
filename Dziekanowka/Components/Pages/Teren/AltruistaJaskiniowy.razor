@@ -1,0 +1,21 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="altruistaJaskiniowyWidok widok rel">
+    <div class="abs dostanOdAltruistyJaskiniowego"><button class="wyroznionyGuzik" @onclick="Prezent"><img class="obrazekJakTrzeba" src="img/miasto/altruistaJaskiniowyKlik.png" /></button></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private async Task Prezent()
+    {
+        Gracz.Monety += 55;
+        Gracz.LosujNowaMisje();
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        Gracz.Statystyki.OtwarteOkno = "prezent55";
+        await NaZmianeEkranu.InvokeAsync(EkranGry.AltruistaJaskiniowyDaje);
+        await Task.Delay(7000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.StacjaJaskinia);
+    }
+}

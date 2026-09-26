@@ -80,6 +80,9 @@
 .stacjaJaskiniaWidok {
     background-image: url('../img/miasto/stacjaJaskiniaWidok.png');
 }
+.altruistaJaskiniowyWidok {
+    background-image: url('../img/miasto/altruistaJaskiniowyWidok.jpg');
+}
 .hodowcaKawyWidok {
     background-image: url('../img/miasto/miastoKawy/hodowcaKawyWidok.png');
 }
@@ -112,6 +115,9 @@
 }
 .gieldaWidok {
     background-image: url('../img/miasto/miastoPieniedzy/gieldaWidok.png');
+}
+.ratuszWidok {
+    background-image: url('../img/miasto/miastoPieniedzy/ratuszWidok.png');
 }
 .lBiletowMiasto1 {
     left: 75px;
@@ -1951,4 +1957,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.stacjaJaskiniaDoAltruisty {
+    width: 231px;
+    height: 191px;
+    top: 509px;
+    left: 1020px;
+    z-index: 2;
+}
+.dostanOdAltruistyJaskiniowego {
+    top: 0;
+    left: 0;
+    width: 1037px;
+    height: 1000px;
+    z-index: 2
+}
+.miastoPieniedzyDoRatusza {
+    top: 0;
+    left: 1078px;
+    width: 413px;
+    height: 435px;
+    z-index: 2;
 }

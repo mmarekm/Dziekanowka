@@ -109,3 +109,5 @@
 113.ptaszkiPizza
 114.plebanMorski
 115.makler
+116.krasnoludAltruista
+117.ratuszSentymentalny

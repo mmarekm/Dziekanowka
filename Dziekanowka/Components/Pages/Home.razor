@@ -35,7 +35,7 @@ else
     private EkranGry nastepnyEkran;
     private Gracz? gracz => ladowanieGracza.AktualnyGracz;
     private bool pokazWideo = false;
-    private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa, EkranGry.GrzybyZnalezione, EkranGry.RybaZlowiona,
+    private readonly HashSet<EkranGry> ekranyBezParametrow = [ EkranGry.AnimacjaTraktora, EkranGry.AnimacjaTraktoraPowrot, EkranGry.CzyszczeniePola, EkranGry.CzyszczenieDrzewa, EkranGry.GrzybyZnalezione, EkranGry.RybaZlowiona, EkranGry.AltruistaJaskiniowyDaje,
         EkranGry.PsySasiadaSzczekaja, EkranGry.KoszenieTrawy, EkranGry.SamochodDoMiasta, EkranGry.SamochodDoDomu, EkranGry.PtaszkiZjedza, EkranGry.AutobusJedzie, EkranGry.AutobusJedzie21, EkranGry.AutobusJedzie22, EkranGry.AutobusJedzie3, EkranGry.PociagJedzie,
         EkranGry.GarnekGotowanie, EkranGry.PatelniaSmazenie, EkranGry.PieczenieChleba, EkranGry.PieczenieCiasta, EkranGry.PieczenieWedliny, EkranGry.MaselnicaPraca, EkranGry.SerowarniaPraca, EkranGry.ZarnaPraca, EkranGry.PlatkarkaPraca,
         EkranGry.BeczkaPraca, EkranGry.MlynekPraca, EkranGry.WyciskarkaPraca, EkranGry.KawaPraca, EkranGry.WejscieDoGalerii, EkranGry.UzyskanieObrazu, EkranGry.ChlopiecZje, EkranGry.KotZje, EkranGry.FanZdrowyRadosc, EkranGry.BabciaDajeKwiaty,
@@ -106,6 +106,7 @@ else
         EkranGry.ZielarzDostal => EkranGry.Apteka,
         EkranGry.LingwistaDostal => EkranGry.SzkolaJezykiPortier,
         EkranGry.BankierDziala => EkranGry.Bank,
+        EkranGry.AltruistaJaskiniowyDaje => EkranGry.StacjaJaskinia,
         EkranGry.PlynieNaWyspeTrzcin or EkranGry.RybacyKarmieni or EkranGry.KopalniaTrzcinyWygrana or EkranGry.KopalniaTrzcinyRemis or EkranGry.KopalniaTrzcinyPrzegrana or EkranGry.KopalniaTrzciny=> EkranGry.LasRodzinaRybakow,
         EkranGry.WjazdStacjaKopalnie or EkranGry.KopalniaGliny or EkranGry.WjazdKopalniaGliny or EkranGry.KopalniaGlinyWygrana or EkranGry.KopalniaGlinyPrzegrana => EkranGry.StacjaKopalnie,
         _ => ekran
@@ -168,14 +169,14 @@ else
             EkranGry.PotrzebaKawy or EkranGry.HodowcaKawy => "mp3/Tla/miastokawy.mp3",
             EkranGry.OczekujacyPiorIFuter or EkranGry.InfoMisjaSny => "mp3/Tla/miastosnow.mp3",
             EkranGry.TargowiskoBilety or EkranGry.TargowiskoGlina or EkranGry.TargowiskoTrzcina=> "mp3/Tla/miastohandlu.mp3",
-            EkranGry.Bank or EkranGry.Gielda => "mp3/Tla/miastopieniedzy.mp3",
+            EkranGry.Bank or EkranGry.Gielda or EkranGry.Ratusz or EkranGry.RatuszSentymentalny => "mp3/Tla/miastopieniedzy.mp3",
             EkranGry.AltruistaJaskiniowy => "mp3/Tla/stacjajaskinia.mp3",
             EkranGry.WyjazdStacjaKopalnie or EkranGry.WjazdKopalniaGliny or EkranGry.KopalniaGlinyWygrana => "mp3/Tla/stacjakopalnie.mp3",
             EkranGry.KopalniaGlinyPrzegrana => "mp3/Tla/kopalniagliny.mp3",
             EkranGry.LasRodzinaRybakow or EkranGry.PlynieNaWyspeTrzcin or EkranGry.KopalniaTrzcinyWygrana or EkranGry.KopalniaTrzcinyRemis => "mp3/Tla/lasjezioro.mp3",
             EkranGry.KopalniaTrzcinyPrzegrana => "mp3/Tla/kopalniatrzciny.mp3",
             EkranGry.ChlopiecZje or EkranGry.KotZje or EkranGry.FanZdrowyRadosc or EkranGry.MlekoLeciWDomMleka or EkranGry.KuchniaPracuje or EkranGry.WniesionoBuleczke or EkranGry.LesneMyszyZjedza or EkranGry.ZjedzaPlatki or EkranGry.CiastoDlaStajennego
-            or EkranGry.KlaunNalewaKawe or EkranGry.DoczekalPiorIFuter or EkranGry.ChlopiecStodolaOtrzymal or EkranGry.ZielarzDostal or EkranGry.LingwistaDostal => "mp3/Dzwieki/fanfara.mp3",
+            or EkranGry.KlaunNalewaKawe or EkranGry.DoczekalPiorIFuter or EkranGry.ChlopiecStodolaOtrzymal or EkranGry.ZielarzDostal or EkranGry.LingwistaDostal or EkranGry.AltruistaJaskiniowyDaje => "mp3/Dzwieki/fanfara.mp3",
             EkranGry.CzyszczeniePola or EkranGry.CzyszczenieDrzewa or EkranGry.PtaszkiZjedza => null,
             _ => $"mp3/Tla/{ekran.ToString().ToLower()}.mp3"
         };

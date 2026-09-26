@@ -1,17 +1,42 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-
 <div class="stacjaJaskiniaWidok widok rel">
+    <div class="abs @KlasaPowitania" style="color: white;"><img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" /> 55 <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
     @foreach (var zwierze in zwierzeta)
     {
         <div class="abs @(zwierze)StacjaJaskinia"><button class="wyroznionyGuzik" @onclick="async () => await WezZwierze(zwierze)"><img class="obrazekSieMiesci" src="img/miasto/@(zwierze)StacjaJaskinia.png"/></button></div>
     }
 </div>
+@if (Gracz.Statystyki.AktualnaMisja == Misje.AltruistaJaskiniowy)
+{
+    <div class="abs stacjaJaskiniaDoAltruisty"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.AltruistaJaskiniowy)"><img src="img/miasto/stacjaJaskiniaDoAltruistaJaskiniowy.png" /></button></div>
+}
 
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (Gracz.Statystyki.OtwarteOkno == "prezent55")
+        {
+            Gracz.Statystyki.OtwarteOkno = "";
+            await ladowanieGracza.ZapiszAktualnegoGracza();
+            Powitaj = true;
+            Znikanie = false;
+            StateHasChanged();
+            await Task.Delay(100);
+            Znikanie = true;
+            StateHasChanged();
+            await Task.Delay(4000);
+            Powitaj = false;
+            Znikanie = false;
+            StateHasChanged();
+        }
+    }
+    private bool Powitaj { get; set; } = false;
+    private bool Znikanie { get; set; } = false;
+    private string KlasaPowitania => Powitaj ? (Znikanie ? "powitanieDzienne zanikaj" : "powitanieDzienne") : "ukryty";
     private string[] zwierzeta = ["kura", "kaczka", "ges", "indyk"];
     private async Task WezZwierze(string zwierze)
     {
