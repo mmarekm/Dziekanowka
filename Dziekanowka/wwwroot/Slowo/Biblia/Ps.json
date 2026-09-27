@@ -373,6 +373,7 @@
 		"6b": "Ty mnie wykupiłeś, Panie, wierny Boże.",
 		"7b": "Ja pokładam ufność w Panu.",
 		"8a": "Będę się cieszył i radował Twą łaską,",
+		"8b": "bo wejrzałeś na moją nędzę.",
 		"12a": "Jestem pośmiewiskiem dla mych wrogów,",
 		"12b": "jeszcze bardziej dla moich sąsiadów,",
 		"13a": "Zapomniano o mnie jak o zmarłym,",
@@ -1281,6 +1282,8 @@
 		"4b": "On wzbudza lęk większy niż wszyscy bogowie.",
 		"5a": "Bo wszyscy bogowie pogan są nicością,",
 		"5b": "Pan zaś stworzył niebiosa.",
+		"6a": "Majestat i piękno przed Jego obliczem,",
+		"6b": "potęga i wspaniałość w Jego świątyni.",
 		"7a": "Oddajcie Panu, rodziny narodów,",
 		"7b": "oddajcie Panu chwałę i potęgę.",
 		"8a": "Oddajcie Panu chwałę należną Jego imieniu.",
@@ -1317,7 +1320,11 @@
 		"7b": "którzy się chlubią swymi bożkami.",
 		"7c": "Oddajcie Mu hołd wszyscy bogowie.",
 		"9a": "Bo Ty, Panie, jesteś Najwyższy na całej ziemi",
-		"9b": "i górujesz nad wszystkimi bogami."
+		"9b": "i górujesz nad wszystkimi bogami.",
+		"11a": "Światło wschodzi dla sprawiedliwego",
+		"11b": "i radość dla tych, których serce jest prawe.",
+		"12a": "Sprawiedliwi, radujcie się Panem,",
+		"12b": "i miejcie w pamięci świętość Jego!"
 	},
 	"98": {
 		"1a": "Śpiewajcie Panu pieśń nową,",

@@ -6,6 +6,8 @@
         Gospodarstwo,
         Ogrodek,
         DomWiatrolap,
+        DomSkrytka,
+        DomSkrytkaFigurki,
         DomSalon,
         DomSciagawka,
         GryPlanszowe,
@@ -68,6 +70,8 @@
         MiastoKawy,
         MiastoSnow,
         MiastoHandlu,
+        DrewnianaOaza,
+        RzezbiarzDrewno,
         SklepMiasto3,
         Kiosk,
         Stacja,
@@ -183,6 +187,8 @@
         KopalniaTrzcinyRemis,
         KopalniaTrzcinyPrzegrana,
         BankierDziala,
-        AltruistaJaskiniowyDaje
+        AltruistaJaskiniowyDaje,
+        AutobusTargowisko,
+        RzezbiarzWrecza
     }
 }

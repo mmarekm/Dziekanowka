@@ -4,6 +4,12 @@
 .garazWidok {
     background-image: url('../img/budynki/garazWidok.png');
 }
+.domSkrytkaWidok {
+    background-image: url('../img/dom/domSkrytkaWidok.png');
+}
+.domSkrytkaFigurkiWidok {
+    background-image: url('../img/dom/domSkrytkaFigurkiWidok.png');
+}
 .domDoGospodarstwo {
     top: 196px;
     right: 39px;
@@ -30,6 +36,13 @@
     left: 0;
     width: 455px;
     height: 915px;
+    z-index: 2;
+}
+.domDoSkrytka {
+    top: 243px;
+    left: 543px;
+    width: 241px;
+    height: 498px;
     z-index: 2;
 }
 .garazDoDom {
@@ -68,4 +81,26 @@
     z-index: 2;
     display: flex;
     gap: 15px;
+}
+.skrytkaDoSkrytkaFigurki {
+    bottom: 0;
+    right: 300px;
+    width: 674px;
+    height: 378px;
+    z-index: 2;
+}
+.figurkiGracza {
+    top: 50px;
+    left: 150px;
+    width: 1730px;
+    height: 920px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.figurkaGracza {
+    width: 190px;
+    height: 190px;
 }

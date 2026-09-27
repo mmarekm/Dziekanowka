@@ -23,12 +23,18 @@
             <div class="pierwszyRzadTargowiskoBilety">@CenaBiletu("biletLasLodka") <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> <img class="obrazekSieMiesci" src="img/przedmioty/biletLasLodka.png" /></div>
         </div>
     }
+    @if (!Gracz.Statystyki.Bonusy.Contains("biletAutobusTargowisko"))
+    {
+        <div class="abs targowiskoBiletyPozycja targowiskoBiletyKupBilet targowiskoBiletyKupbiletAutobusTargowisko @(StacNaBilet("biletAutobusTargowisko") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='() => KupBilet("biletAutobusTargowisko")'>
+            <div class="pierwszyRzadTargowiskoBilety">@CenaBiletu("biletAutobusTargowisko") <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> <img class="obrazekSieMiesci" src="img/przedmioty/biletAutobusTargowiskoNie.png" /></div>
+        </div>
+    }
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
     private string[] bilety = ["biletPociag", "biletAutobus"];
-    private int CenaBiletu(string bilet) => bilet == "biletPociag" ? 12 : bilet == "biletAutobus" ? 4 : bilet == "biletPociagGlina" ? 20 : bilet == "biletLasLodka" ? 100 : 0;
+    private int CenaBiletu(string bilet) => bilet == "biletPociag" ? 12 : bilet == "biletAutobus" ? 4 : bilet == "biletPociagGlina" ? 20 : bilet == "biletLasLodka" ? 100 : bilet == "biletAutobusTargowisko" ? 7 : 0;
     private bool StacNaBilet(string bilet) => Gracz.Monety >= CenaBiletu(bilet);
     private async Task KupBilet(string bilet)
     {

@@ -1,0 +1,17 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+<div class="domSkrytkaFigurkiWidok widok rel">
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSkrytka)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs figurkiGracza">
+    @foreach (var figurka in lista)
+    {
+        <div class="figurkaGracza"><img class="obrazekJakTrzeba" src="img/misje/figurki/@(figurka).png"/></div>
+    }
+    </div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private HashSet<int> lista => Gracz.Statystyki.Figurki;
+}

@@ -1,0 +1,34 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+@inject LadowanieGracza ladowanieGracza
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoHandlu/drewnianaOaza/rzezbiarz@(nrFilmu).mp4" type="video/mp4" /></video>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DrewnianaOaza)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs kupujeFigurke" @onclick="KupFigurke">@cena <img class="obrazekJakTrzeba" src="img/przedmioty/drewno.png"/></div>
+    <div class="abs lDrewnaGraczaURzezbiarza">@drewnoGracza <img class="obrazekJakTrzeba" src="img/przedmioty/drewno.png" /></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int nrFilmu = Random.Shared.Next(1, 3);
+    private int pula = 27;
+    private int drewnoGracza => Gracz.Przedmiot("drewno").Ilosc;
+    private int lFigurekGracza => Gracz.Statystyki.Figurki.Count;
+    private int cena => lFigurekGracza + 1;
+    private Random losowanie = new();
+    private async Task KupFigurke()
+    {
+        if (drewnoGracza < cena || lFigurekGracza >= pula) return;
+        Gracz.Przedmiot("drewno").Ilosc -= cena;
+        int numer;
+        do
+            numer = losowanie.Next(1, pula + 1);
+        while (Gracz.Statystyki.Figurki.Contains(numer));
+        Gracz.Statystyki.Figurki.Add(numer);
+        await ladowanieGracza.ZapiszAktualnegoGracza();
+        await NaZmianeEkranu.InvokeAsync(EkranGry.RzezbiarzWrecza);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.RzezbiarzDrewno);
+    }
+}

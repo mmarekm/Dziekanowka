@@ -177,21 +177,6 @@ namespace Dziekanowka.Mechanizm
         public static string[] PobierzDzis() => Klucz.TryGetValue(DateTime.Now.ToString("yyyyMMdd"), out var pliki) ? pliki : [];
         public static readonly Dictionary<string, string[]> Klucz = new()
         {
-            ["20260912"] = ["sb23zwII"],
-            ["20260913"] = ["Ndz24zwA"],
-            ["20260914"] = ["PodwyzszenieKrzyzaSwietego"],
-            ["20260915"] = ["wt24zwII", "NMPBolesnej"],
-            ["20260916"] = ["sr24zwII", "KorneliuszaPapiezaCyprianaBiskupaMeczennikow"],
-            ["20260917"] = ["cz24zwII"],
-            ["20260918"] = ["StanislawaKostki"],
-            ["20260919"] = ["sb24zwII"],
-            ["20260920"] = ["Ndz25zwA"],
-            ["20260921"] = ["MateuszaApostolaIEwangelisty"],
-            ["20260922"] = ["wt25zwII"],
-            ["20260923"] = ["sr25zwII", "PioZPietrelciny"],
-            ["20260924"] = ["cz25zwII"],
-            ["20260925"] = ["pt25zwII"],
-            ["20260926"] = ["sb25zwII"],
             ["20260927"] = ["Ndz26zwA"],
             ["20260928"] = ["pn26zwII", "WaclawaMeczennika"],
             ["20260929"] = ["ArchaniolowMichalaGabrielaIRafala"],
@@ -279,7 +264,20 @@ namespace Dziekanowka.Mechanizm
             ["20261220"] = ["Ndz4AdwB"],
             ["20261221"] = ["grudzien21"],
             ["20261222"] = ["grudzien22"],
-            ["20261223"] = ["grudzien23"]
+            ["20261223"] = ["grudzien23"],
+            ["20261224"] = ["grudzien24", "WigiliaNarodzeniaPanskiego"],
+            ["20261225"] = ["NocNarodzeniaPanskiego", "SwitNarodzeniaPanskiego", "DzienNarodzeniaPanskiego"],
+            ["20261226"] = ["SzczepanaPierwszegoMeczennika"],
+            ["20261227"] = ["NdzSwietejRodzinyB"],
+            ["20261228"] = ["MlodziankowMeczennikow"],
+            ["20261229"] = ["grudzien29"],
+            ["20261230"] = ["grudzien30"],
+            ["20261231"] = ["grudzien31"],
+            ["20270101"] = ["SwietejBozejRodzicielkiMaryi"],
+            ["20270102"] = ["styczen2", "BazylegoWielkiegoIGrzegorzaZNazjanzuBiskupowDoktorowKosciola"],
+            ["20270103"] = ["Ndz2PoNarodzeniuPanskim"],
+            ["20270104"] = ["styczen4"],
+            ["20270105"] = ["styczen5"]
         };
     };
 }

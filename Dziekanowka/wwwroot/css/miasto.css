@@ -125,6 +125,9 @@
 .ratuszSentyMentalnyMa {
     background-image: url('../img/miasto/miastoPieniedzy/ratuszSentymentalnyMa.png');
 }
+.rzebiarzDrewnoWidok {
+    background-image: url('../img/miasto/miastoHandlu/rzezbiarzDrewnoWidok.png');
+}
 .lBiletowMiasto1 {
     left: 75px;
     top: 75px;
@@ -868,12 +871,73 @@
     height: 270px;
     pointer-events: none;
 }
-.autobusUkrytyM21, .autobusUkrytyM22 {
+.autobusAnimacjaOaza {
+    left: 200px;
+    bottom: 50px;
+    width: 500px;
+    height: 430px;
+    pointer-events: none;
+}
+
+.autobusAnimacjaTargowisko {
+    left: -150px;
+    top: 300px;
+    width: 100px;
+    height: 70px;
+    cursor: default;
+    pointer-events: none;
+}
+.autobusUkrytyTargowisko {
+    opacity: 0;
+    left: -150px;
+    top: 300px;
+    pointer-events: none;
+    transition: none;
+}
+.autobusJedzieEtap1Targowisko {
+    opacity: 1;
+    left: 50px;
+    top: 350px;
+    transform: scaleX(-1);
+    pointer-events: none;
+    transition: left 2.42s ease-in, top 2.42s ease-in;
+}
+.autobusJedzieEtap2Targowisko {
+    opacity: 1;
+    left: 300px;
+    top: 270px;
+    transform: scaleX(-1);
+    pointer-events: none;
+    transition: left 3.08s ease-out, top 3.08s ease-out;
+}
+.autobusStoiTargowisko {
+    opacity: 1;
+    left: 300px;
+    top: 270px;
+    pointer-events: all;
+    cursor: pointer;
+    transition: none;
+}
+.autobusOdjedzieEtap1Targowisko {
+    opacity: 1;
+    left: 50px;
+    top: 350px;
+    pointer-events: none;
+    transition: left 3.08s ease-in, top 3.08s ease-in;
+}
+.autobusOdjedzieEtap2Targowisko {
+    opacity: 1;
+    left: -150px;
+    top: 300px;
+    pointer-events: none;
+    transition: left 2.42s ease-out, top 2.42s ease-out;
+}
+.autobusUkrytyM21, .autobusUkrytyM22, .autobusUkrytyOaza {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
-.autobusStoiM21, .autobusStoiM22 {
+.autobusStoiM21, .autobusStoiM22, .autobusStoiOaza {
     opacity: 1;
     pointer-events: all;
     cursor: pointer;
@@ -1673,6 +1737,13 @@
     left: 217px;
     z-index: 2;
 }
+.stanBiletuMiastoHandlu {
+    width: 100px;
+    height: 100px;
+    top: 40px;
+    left: 100px;
+    z-index: 2;
+}
 .targowiskoBiletyPozycja {
     display: flex;
     align-items: center;
@@ -1711,6 +1782,10 @@
 .targowiskoBiletyKupbiletLasLodka {
     top: 80px;
     left: 500px;
+}
+.targowiskoBiletyKupbiletAutobusTargowisko {
+    top: 80px;
+    left: 900px;
 }
 .pierwszyRzadTargowiskoBilety {
     height: 70%;
@@ -2012,3 +2087,39 @@
         filter: brightness(1.1);
         filter: blur(3px);
     }
+.oazaDoRzezbiarza {
+    width: 150px;
+    height: 150px;
+    top: 690px;
+    left: 760px;
+    z-index: 2;
+}
+.kupujeFigurke {
+    width: 450px;
+    height: 300px;
+    left: 5px;
+    top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    font-size: 90px;
+    background-color: rgba(212, 175, 55, 0.3);
+    transition: all ease-in-out 0.3s;
+}
+    .kupujeFigurke:hover {
+        cursor: pointer;
+        filter: brightness(1.2);
+    }
+.lDrewnaGraczaURzezbiarza {
+    width: 200px;
+    height: 50px;
+    left: 700px;
+    bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    font-size: 40px;
+    background-color: rgba(212, 175, 55, 0.9);
+}

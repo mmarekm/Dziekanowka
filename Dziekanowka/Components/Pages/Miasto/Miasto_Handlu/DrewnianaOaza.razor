@@ -1,0 +1,49 @@
+﻿@using Dziekanowka.Mechanizm
+@implements IDisposable
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoHandlu/drewnianaOaza/tlo.mp4" type="video/mp4" /></video>
+    <div class="abs oazaDoRzezbiarza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.RzezbiarzDrewno)"><img class="obrazekJakTrzeba" src="img/miasto/miastoHandlu/drewnianaOaza/wejscie.png" /></button></div>
+    <div class="abs autobusAnimacjaOaza @klasaAutobusu" @onclick="WsiadzDoAutobusu"><img class="obrazekWypelnia" src="img/miasto/miastoHandlu/drewnianyAutobus.png" /></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private bool moznaWsiasc = false;
+    private string klasaAutobusu = "autobusUkrytyOaza";
+    private CancellationTokenSource? _cts;
+    protected override void OnInitialized()
+    {
+        _cts = new CancellationTokenSource();
+        _ = PetlaAutobusu(_cts.Token);
+    }
+    private async Task PetlaAutobusu(CancellationToken token)
+    {
+        try
+        {
+            while (!token.IsCancellationRequested)
+            {
+                await Task.Delay(7000, token);
+                klasaAutobusu = "autobusStoiOaza";
+                moznaWsiasc = true;
+                StateHasChanged();
+                await Task.Delay(3000, token);
+                moznaWsiasc = false;
+                klasaAutobusu = "autobusUkrytyOaza";
+                StateHasChanged();
+            }
+        }
+        catch (TaskCanceledException) { }
+    }
+    public async Task WsiadzDoAutobusu()
+    {
+        if (!moznaWsiasc) return;
+        await NaZmianeEkranu.InvokeAsync(EkranGry.AutobusTargowisko);
+        await Task.Delay(10000);
+        await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoHandlu);
+    }
+    public void Dispose()
+    {
+        _cts?.Cancel();
+    }
+}

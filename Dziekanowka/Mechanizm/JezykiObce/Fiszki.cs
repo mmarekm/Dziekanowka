@@ -247,6 +247,6 @@
                                          vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
-        public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom };
+        public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom };
     }
 }

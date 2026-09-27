@@ -1,0 +1,11 @@
+﻿@using Dziekanowka.Mechanizm
+@using Dziekanowka.Gracza
+<div class="domSkrytkaWidok widok rel">
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomWiatrolap)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs skrytkaDoSkrytkaFigurki"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomSkrytkaFigurki)"><img class="obrazekContain" src="img/dom/skrytkaDoSkrytkaFigurki.png" /></button></div>
+</div>
+
+@code {
+    [Parameter] public Gracz Gracz { get; set; } = null!;
+    [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+}
