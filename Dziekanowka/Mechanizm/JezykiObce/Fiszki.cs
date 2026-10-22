@@ -38,7 +38,7 @@
                                            {"wardrobe","book","bookshelf","table","chair","TV","armchair","bed","sofa","carpet","curtains","make the bed","dust","wake up","sleep","clean/tidy up","vacuum","iron","sweep","lamp","pillow","duvet","bedding","alarm clock"},
                                            {"el armario","el libro","la estantería","la mesa","la silla","el televisor","el sillón","la cama","el sofá","la alfombra","las cortinas","hacer la cama","quitar el polvo","despertarse","dormir","limpiar","pasar la aspiradora","planchar","barrer","la lámpara","la almohada","el edredón","la ropa de cama","el despertador"},
                                            {"armarium","liber","pluteus","mensa","sella","-","-","lectus","-","tapete","vela","-","-","expergisci","dormire","-","-","-","verrere","lucerna","pulvinus","-","-","-"} };
-        public static string[,] buildingGeneral = {{"klucz","pokój","okno","ściana","podłoga","parter","drzwi","sufit","garaż","piwnica","adres","dom","mieszkanie","mieszkać","piętro","balkon","taras","schody","winda","strych","żarówka","grzejnik","wynosić śmieci","skrzynka pocztowa","dzwonek","remontować","ogród"},
+        public static string[,] buildingGeneral = {{"klucz","pokój","okno","ściana","podłoga","parter","drzwi","sufit","garaż","piwnica","adres","dom","mieszkanie","mieszkać","piętro","balkon","taras","schody","winda","strych","żarówka","grzejnik","wynosić śmieci","skrzynka_pocztowa","dzwonek","remontować","ogród"},
                                             {"key","room","window","wall","floor","ground floor","door","ceiling","garage","cellar","address","house","flat","live","storey","balcony","terrace","stairs","lift","attic","lightbulb","radiator","take out the rubbish","mailbox","doorbell","renovate","garden"},
                                             {"la llave","la habitación","la ventana","la pared","el suelo","la planta baja","la puerta","el techo","el garaje","el sótano","la dirección","la casa","el piso","vivir","la planta","el balcón","la terraza","las escaleras","el ascensor","el desván","la bombilla","el radiador","sacar la basura","el buzón","el timbre","reformar","el jardín"},
                                             {"clavis","conclave","fenestra","paries","solum","-","ianua","lacunar","-","cella","-","domus","-","habitare","-","-","solarium","scalae","-","-","-","-","-","-","-","renovare","hortus"} };
@@ -247,6 +247,6 @@
                                          vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
-        public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom };
+        public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral };
     }
 }
