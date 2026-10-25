@@ -1,8 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="stajennyWidok widok rel">
-    <div class="abs stajennyDoStajnia"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Stajnia)" class="wyroznionyGuzik"><img src="img/zwierzyniec/stajennyDoStajnia.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/zwierzyniec/stajennyWidok.mp4" type="video/mp4" /></video>
+    <div class="abs hodowcaDoMiastaKawy"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Stajnia)" class="wyroznionyGuzik"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (Gracz.Statystyki.AktualnaMisja == Misje.Stajenny)
     {

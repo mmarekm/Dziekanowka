@@ -34,9 +34,6 @@
 .stajniaWidok {
     background-image: url('../img/zwierzyniec/stajniaWidok.png');
 }
-.stajennyWidok {
-    background-image: url('../img/zwierzyniec/stajennyWidok.png');
-}
 .doGospodarstwaGuzik {
     bottom: 0;
     left: 737px;
@@ -1002,13 +999,6 @@
     right: 739px;
     width: 470px;
     height: 399px;
-    z-index: 2;
-}
-.stajennyDoStajnia {
-    left: 0;
-    top: 0;
-    width: 152px;
-    height: 1000px;
     z-index: 2;
 }
 .potrzebneStajennemu {

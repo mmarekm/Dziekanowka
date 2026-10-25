@@ -50,7 +50,7 @@
                                     {"peach","nectarine","apricot","plum","sour cherry","sweet cherry","apple","pear","strawberry","raspberry","blackberry","blueberry","redcurrant","blackcurrant","cranberry","orange","tangerine/mandarin","lemon","grapefruit","banana","pineapple","mango","papaya","passion fruit","coconut","avocado","watermelon","melon","light grapes","pink grapes","dark grapes","kiwi","fig","pomegranate","gooseberry","date"},
                                     {"el melocotón","la nectarina","el albaricoque","la ciruela","la guinda","la cereza","la manzana","la pera","la fresa","la frambuesa","la mora","el arándano","la grosella roja","la grosella negra","el arándano rojo","la naranja","la mandarina","el limón","el pomelo","el plátano","la piña","el mango","la papaya","la maracuyá","el coco","el aguacate","la sandía","el melón","la uva blanca","la uva rosada","la uva negra","el kiwi","el higo","la granada","la grosella espinosa","el dátil"},
                                     {"malum persicum","-","malum armeniacum","prunum","cerasum","cerasum","malum","pirum","fragum","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","melopepo","uva","uva","uva","-","ficus","malum punicum","-","dactylus"} };
-        public static string[,] farmCrops = {{"żyto","jęczmień","pszenica","ryż","owies","gryka","orkisz","koniczyna","rzepa pastewna","sorgo","kukurydza","proso","rzepak","słonecznik","chmiel","konopia","mak","soja","trzcina cukrowa","komosa ryżowa"},
+        public static string[,] farmCrops = {{"żyto","jęczmień","pszenica","ryż","owies","gryka","orkisz","koniczyna","rzepa_pastewna","sorgo","kukurydza","proso","rzepak","słonecznik","chmiel","konopia","mak","soja","trzcina_cukrowa","komosa ryżowa"},
                                               {"rye","barley","wheat","rice","oats","buckwheat","spelt","clover","fodder turnip","sorghum","corn/maize","millet","rapeseed","sunflower","hops","hemp","poppy","soybean","sugar cane","quinoa"},
                                               {"el centeno","la cebada","el trigo","el arroz","la avena","el trigo sarraceno","la escanda","el trébol","el nabo forrajero","el sorgo","el maíz","el mijo","la colza","el girasol","el lúpulo","el cáñamo","la amapola","la soja","la caña de azúcar","la quinoa"},
                                               {"secale","hordeum","triticum","oryza","avena","-","far","trifolium","napus","-","-","panicum","-","-","-","cannabis","papaver","-","-","-"} };
@@ -248,6 +248,6 @@
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
-                                        vegetables, fruits};
+                                        vegetables, fruits, farmCrops};
     }
 }
