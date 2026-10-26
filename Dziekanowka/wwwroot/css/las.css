@@ -16,9 +16,6 @@
 .rodzinaRybakowCzekaWidok {
     background-image: url('../img/teren/las/rodzinaRybakowCzekaWidok.png');
 }
-.las1Widok {
-    background-image: url('../img/teren/las/las1Widok.png');
-}
 .domSlodkichBulekWidok {
     background-image: url('../img/teren/las/domSlodkichBulekWidok.png');
 }
@@ -48,6 +45,10 @@
 }
 .las10Widok {
     background-image: url('../img/teren/las/las10Widok.png');
+}
+.lasCel {
+    width: 150px;
+    height: 50px;
 }
 .lMonetLasIntro {
     bottom: 13px;
@@ -360,18 +361,16 @@
     z-index: 2;
 }
 .las1DoLasIntro {
-    width: 727px;
-    height: 175px;
-    bottom: 0;
-    left: 568px;
+    bottom: 50px;
+    left: 768px;
     z-index: 2;
+    transform: rotate(110deg);
 }
 .las1DoDomSlodkichBulek {
-    width: 475px;
-    height: 303px;
-    top: 200px;
+    top: 600px;
     left: 731px;
     z-index: 2;
+    transform: rotate(-70deg);
 }
 .domSlodkichBulekDoLas1 {
     top: 0;
