@@ -1,9 +1,6 @@
 ﻿.gospodarstwoWidok {
     background-image: url('../img/teren/gospodarstwo.png');
 }
-.stodolaWidok {
-    background-image: url('../img/budynki/stodolaWidok.png');
-}
 .gospodarstwoUl {
     top: 100px;
     left: 200px;
