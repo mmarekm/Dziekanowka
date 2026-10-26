@@ -58,7 +58,7 @@
                                    {"chicken/meat broth","beetroot soup","sour rye soup","barley soup","tomato soup","cucumber soup","mushroom soup","cabbage soup","pea soup","bean soup","onion soup","cold beetroot soup","broccoli cream soup","pumpkin cream soup","cauliflower cream soup","vegetable soup","milk soup","tripe soup","sorrel soup","fish soup"},
                                    {"el caldo de pollo","la sopa de remolacha","el żurek","la sopa de cebada","la sopa de tomate","la sopa de pepino","la sopa de champiñones","la sopa de col","la sopa de guisantes","la sopa de judías","la sopa de cebolla","la sopa fría de remolacha","la crema de brócoli","la crema de calabaza","la crema de coliflor","la sopa de verduras","la sopa de leche","los callos","la sopa de acedera","la sopa de pescado"},
                                    {"ius","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
-        public static string[,] mainDishes = {{"kotlet schabowy","kotlet mielony","stek","bitki","gołąbki","karkówka","gulasz","pieczeń wołowa","indyk duszony","ratatouille","leczo","fasolka po bretońsku","bigos","placek po węgiersku","risotto","lasagne"},
+        public static string[,] mainDishes = {{"kotlet_schabowy","kotlet_mielony","stek","bitki","gołąbki","karkówka","gulasz","pieczeń wołowa","indyk_duszony","ratatouille","leczo","fasolka po bretońsku","bigos","placek po węgiersku","risotto","lasagne"},
                                         {"breaded pork cutlet","meat patty/burger","steak","beef roulade","cabbage rolls","pork neck","goulash","roast beef","stewed turkey","ratatouille","lecho","Breton-style beans","bigos (hunter's stew)","Hungarian-style pancake","risotto","lasagne"},
                                         {"la chuleta empanada","la hamburguesa","el filete","los rollitos de carne","los rollitos de col","el cuello de cerdo","el gulash","el rosbif","el pavo estofado","el ratatouille","el lecho","las judías a la bretona","el bigos","la tortita húngara","el risotto","la lasaña"},
                                         {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
@@ -248,6 +248,6 @@
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
-                                        vegetables, fruits, farmCrops, soups};
+                                        vegetables, fruits, farmCrops, soups, mainDishes};
     }
 }
