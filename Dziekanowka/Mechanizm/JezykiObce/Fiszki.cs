@@ -54,7 +54,7 @@
                                               {"rye","barley","wheat","rice","oats","buckwheat","spelt","clover","fodder turnip","sorghum","corn/maize","millet","rapeseed","sunflower","hops","hemp","poppy","soybean","sugar cane","quinoa"},
                                               {"el centeno","la cebada","el trigo","el arroz","la avena","el trigo sarraceno","la escanda","el trébol","el nabo forrajero","el sorgo","el maíz","el mijo","la colza","el girasol","el lúpulo","el cáñamo","la amapola","la soja","la caña de azúcar","la quinoa"},
                                               {"secale","hordeum","triticum","oryza","avena","-","far","trifolium","napus","-","-","panicum","-","-","-","cannabis","papaver","-","-","-"} };
-        public static string[,] soups = {{"rosół","barszcz czerwony","żurek","krupnik","zupa pomidorowa","zupa ogórkowa","zupa grzybowa","kapuśniak","grochówka","zupa fasolowa","zupa cebulowa","chłodnik","krem z brokułów","krem z dyni","krem z kalafiora","zupa jarzynowa","zupa mleczna","flaki","zupa szczawiowa","zupa rybna"},
+        public static string[,] soups = {{"rosół","barszcz_czerwony","żurek","krupnik","zupa_pomidorowa","zupa ogórkowa","zupa_grzybowa","kapuśniak","grochówka","zupa_fasolowa","zupa_cebulowa","chłodnik","krem z brokułów","krem_z_dyni","krem_z_kalafiora","zupa_jarzynowa","zupa_mleczna","flaki","zupa_szczawiowa","zupa_rybna"},
                                    {"chicken/meat broth","beetroot soup","sour rye soup","barley soup","tomato soup","cucumber soup","mushroom soup","cabbage soup","pea soup","bean soup","onion soup","cold beetroot soup","broccoli cream soup","pumpkin cream soup","cauliflower cream soup","vegetable soup","milk soup","tripe soup","sorrel soup","fish soup"},
                                    {"el caldo de pollo","la sopa de remolacha","el żurek","la sopa de cebada","la sopa de tomate","la sopa de pepino","la sopa de champiñones","la sopa de col","la sopa de guisantes","la sopa de judías","la sopa de cebolla","la sopa fría de remolacha","la crema de brócoli","la crema de calabaza","la crema de coliflor","la sopa de verduras","la sopa de leche","los callos","la sopa de acedera","la sopa de pescado"},
                                    {"ius","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
@@ -248,6 +248,6 @@
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
-                                        vegetables, fruits, farmCrops};
+                                        vegetables, fruits, farmCrops, soups};
     }
 }
