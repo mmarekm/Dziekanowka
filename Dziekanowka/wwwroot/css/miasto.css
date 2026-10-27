@@ -8,10 +8,6 @@
     background-image: url('../img/miasto/miastoLesneWidok.jpg');
     overflow: hidden;
 }
-.miastoBialeWidok {
-    background-image: url('../img/miasto/miastoBialeWidok.png');
-    overflow: hidden;
-}
 .miastoMorskieWidok {
     background-image: url('../img/miasto/miastoMorskieWidok.png');
     overflow: hidden;
@@ -48,15 +44,6 @@
 }
 .seryLesneWidokGlodny {
     background-image: url('../img/miasto/miastoLesneDoSery/lesneSeryWidokGlodny.png');
-}
-.domMlekaWidokPusty {
-    background-image: url('../img/miasto/domMlekaPusty.png');
-}
-.domMlekaWidokPelny {
-    background-image: url('../img/miasto/domMlekaPelny.png');
-}
-.manufakturaPiorIFuterWidok {
-    background-image: url('../img/miasto/manufakturaPiorFuterWidok.png');
 }
 .kuchniaMorskaWidok {
     background-image: url('../img/miasto/kuchniaMorskaWidok.png');
@@ -952,11 +939,10 @@
     z-index: 2;
 }
 .miastoBialeNaStacje {
-    top: 0;
-    left: 502px;
-    width: 440px;
-    height: 306px;
-    z-index: 2;
+    top: 300px;
+    left: 650px;
+    transform: rotate(-90deg) perspective(300px) rotateY(40deg);
+    filter: drop-shadow(0px 10px 4px rgba(0, 0, 0, 0.4));
 }
 .miastoMorskieNaStacje {
     top: 0;
@@ -1173,25 +1159,20 @@
     top: 300px;
     left: 1000px;
 }
-.miastoDoDomuMleka {
-    top: 322px;
-    left: 596px;
-    width: 460px;
-    height: 508px;
+.miastoBialeCel {
+    width: 113px;
+    height: 47px;
     z-index: 2;
+}
+.miastoDoDomuMleka {
+    bottom: 155px;
+    left: 620px;
+    transform: rotate(-60deg);
 }
 .miastoBialeDoManufaktury {
-    bottom: 0;
-    left: 0;
-    width: 395px;
-    height: 722px;
-}
-.domMlekaDoMiasta {
-    top: 0;
-    left: 0;
-    width: 392px;
-    height: 802px;
-    z-index: 2;
+    bottom: 190px;
+    left: 350px;
+    transform: rotate(-160deg);
 }
 .dajMlekoWDomuMleka {
     top: 430px;
@@ -1658,23 +1639,21 @@
 .miastoSnowCel {
     width: 119px;
     height: 35px;
+    z-index: 2;
 }
 .miastoSnowNaStacje {    
     top: 480px;
     left: 1040px;
-    z-index: 2;
     transform: rotate(-60deg);
 }
 .miastoSnowDoOczekujacyPiorIFuter {
     left: 430px;
     bottom: 140px;
-    z-index: 2;
     transform: rotate(180deg) scaleY(-1);
 }
 .miastoSnowDoInfoMisja {
     right: 450px;
     bottom: 110px;
-    z-index: 2;
     transform: rotate(-80deg) scaleY(-1);
 }
 .dajDzieloSpiochowi {

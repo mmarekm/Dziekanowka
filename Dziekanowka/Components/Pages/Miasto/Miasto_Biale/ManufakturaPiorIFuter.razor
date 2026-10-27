@@ -1,7 +1,8 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="manufakturaPiorIFuterWidok widok rel">
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/manufakturaPiorFuterWidok.mp4" type="video/mp4" /></video>
     <div class="abs guzikOtworzCennik"><button class="wyroznionyGuzik" @onclick="() => pokazCennik = true"><img class="obrazekContain" src="img/przedmioty/cennik.png" /></button></div>
     @if (pokazCennik)
     {

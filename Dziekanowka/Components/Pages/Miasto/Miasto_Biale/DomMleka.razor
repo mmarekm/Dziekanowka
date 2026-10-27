@@ -1,8 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="domMlekaWidok@(poszukiwaneMleko ? "Pusty" : "Pelny") widok rel">
-    <div class="abs domMlekaDoMiasta"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoBiale)"><img src="img/miasto/domMlekaDrzwi.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/domMleka@(poszukiwaneMleko ? $"Pusty{filmPoszukiwania}" : "Pelny").mp4" type="video/mp4" /></video>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoBiale)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (poszukiwaneMleko)
     {
@@ -12,6 +13,7 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int filmPoszukiwania = Random.Shared.Next(1, 3);
     private bool poszukiwaneMleko => Gracz.Statystyki.AktualnaMisja == Misje.DomMleka;
     private bool moznaDacMleko => poszukiwaneMleko && Gracz.ProduktyZwierzece.Any(m => m.Nazwa == Gracz.Statystyki.DaneMisji[0] && m.Ilosc > 1);
     private string sciezkaPucharu => Gracz.Statystyki.MoznaOdebracObraz ? "" : "Nie";

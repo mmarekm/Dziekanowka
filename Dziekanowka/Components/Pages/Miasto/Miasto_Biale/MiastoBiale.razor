@@ -1,9 +1,10 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
-<div class="miastoBialeWidok widok rel">
-    <div class="abs miastoBialeNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoBialeNaStacje.png" /></button></div>
-    <div class="abs miastoDoDomuMleka"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomMleka)"><img src="img/miasto/miastoDoDomMleka.png" /></button></div>
-    <div class="abs miastoBialeDoManufaktury"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ManufakturaPiorIFuter)"><img src="img/miasto/miastoBialeDoManufaktury.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoBialeWidok.mp4" type="video/mp4" /></video>
+    <div class="abs miastoBialeCel miastoBialeNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaBiala.png" /></button></div>
+    <div class="abs miastoBialeCel miastoDoDomuMleka"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.DomMleka)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaBiala.png" /></button></div>
+    <div class="abs miastoBialeCel miastoBialeDoManufaktury"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ManufakturaPiorIFuter)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaBiala.png" /></button></div>
 </div>
 
 @code {
