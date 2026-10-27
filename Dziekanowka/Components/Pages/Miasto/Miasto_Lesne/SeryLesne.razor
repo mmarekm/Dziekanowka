@@ -1,8 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="seryLesneWidok@(Gracz.Statystyki.AktualnaMisja == Misje.SeryLesne ? "Glodny" : "") widok rel">
-    <div class="abs seryLesneDoMiastoLesne"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoLesne)"><img src="img/miasto/miastoLesneDoSery/seryLesneDoMiastoLesne.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoLesneDoSery/lesneSeryWidok@(Gracz.Statystyki.AktualnaMisja == Misje.SeryLesne ? "Glodny" : "").mp4" type="video/mp4" /></video>
+    <div class="abs seryLesneDoMiastoLesne"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoLesne)"><img class="obrazekJakTrzeba" src="img/miasto/miastoLesneDoSery/strzalkaSerowLesnych.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (Gracz.Statystyki.AktualnaMisja == Misje.SeryLesne)
     {

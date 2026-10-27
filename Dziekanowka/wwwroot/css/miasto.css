@@ -32,12 +32,6 @@
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
 }
-.seryLesneWidok {
-    background-image: url('../img/miasto/miastoLesneDoSery/lesneSeryWidok.png');
-}
-.seryLesneWidokGlodny {
-    background-image: url('../img/miasto/miastoLesneDoSery/lesneSeryWidokGlodny.png');
-}
 .kuchniaMorskaWidok {
     background-image: url('../img/miasto/kuchniaMorskaWidok.png');
 }
@@ -1127,17 +1121,18 @@
     cursor: not-allowed;
 }
 .seryLesneDoMiastoLesne {
-    left: 0;
-    top: 270px;
-    width: 581px;
-    height: 422px;
+    left: 400px;
+    top: 670px;
+    width: 150px;
+    height: 86px;
+    transform: rotate(30deg);
     z-index: 2;
 }
 .potrzebnySerLesnymMyszkom {
     width: 200px;
     height: 200px;
-    top: 300px;
-    left: 1000px;
+    top: 200px;
+    left: 700px;
 }
 .miastoBialeCel {
     width: 113px;
