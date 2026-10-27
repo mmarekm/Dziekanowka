@@ -4,10 +4,6 @@
 .miasto2Widok {
     background-image: url('../img/teren/miasto2.png');
 }
-.miastoLesneWidok {
-    background-image: url('../img/miasto/miastoLesneWidok.jpg');
-    overflow: hidden;
-}
 .miastoMorskieWidok {
     background-image: url('../img/miasto/miastoMorskieWidok.png');
     overflow: hidden;
@@ -35,9 +31,6 @@
 .miasto3Widok {
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
-}
-.fanZdrowyWidok {
-    background-image: url('../img/miasto/fanZdrowiaWidok.png');
 }
 .seryLesneWidok {
     background-image: url('../img/miasto/miastoLesneDoSery/lesneSeryWidok.png');
@@ -925,18 +918,14 @@
     z-index: 2;
 }
 .miastoLesneNaStacje {
-    top: 0;
-    left: 526px;
-    width: 566px;
-    height: 286px;
-    z-index: 2;
+    top: 420px;
+    left: 495px;
+    transform: rotate(-70deg);
 }
 .miastoLesneDoSerow {
-    bottom: 0;
-    right: 398px;
-    width: 399px;
-    height: 315px;
-    z-index: 2;
+    bottom: 100px;
+    right: 760px;
+    transform: rotate(5deg);
 }
 .miastoBialeNaStacje {
     top: 300px;
@@ -1055,30 +1044,21 @@
     right: 330px;
 }
 @keyframes poblysk {
-    0%, 100% {
-        filter: brightness(1);
-    }
-
-    20% {
-        filter: brightness(1.4) drop-shadow(0 0 8px gold);
-    }
+    0%, 100% { filter: brightness(1); }
+    20% { filter: brightness(1.4) drop-shadow(0 0 8px gold); }
 }
 .poblyskuje {
     animation: poblysk 2s ease-in-out infinite;
 }
-.lesneDoFanaZdrowia {
-    width: 528px;
-    height: 580px;
-    bottom: 174px;
-    left: 0;
+.miastoLesneCel {
+    width: 100px;
+    height: 16px;
     z-index: 2;
 }
-.fanZdrowyDoLesnego {
-    bottom: 0;
-    left: 0;
-    width: 296px;
-    height: 161px;
-    z-index: 2;
+.lesneDoFanaZdrowia {
+    bottom: 140px;
+    left: 385px;
+    transform: rotate(-165deg);
 }
 .misjaFanZdrowy {
     top: 40px;
