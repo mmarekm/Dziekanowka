@@ -16,10 +16,6 @@
     background-image: url('../img/miasto/miastoKawyWidok.jpg');
     overflow: hidden;
 }
-.miastoHandluWidok {
-    background-image: url('../img/miasto/miastoHandluWidok.png');
-    overflow: hidden;
-}
 .miastoPieniedzyWidok {
     background-image: url('../img/miasto/miastoPieniedzyWidok.png');
     overflow: hidden;
@@ -27,9 +23,6 @@
 .miasto3Widok {
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
-}
-.kuchniaMorskaWidok {
-    background-image: url('../img/miasto/kuchniaMorskaWidok.png');
 }
 .owceGorskieWidok {
     background-image: url('../img/miasto/miastoGorskie/pastwiskoGorskieWidok.png');
@@ -1640,33 +1633,30 @@
     object-fit: cover;
     display: block;
 }
-.miastoHandluNaStacje {
-    top: 0;
-    right: 0;
-    width: 516px;
-    height: 346px;
+.miastoHandluCel {
+    width: 100px;
+    height: 75px;
     z-index: 2;
+}
+.miastoHandluNaStacje {
+    top: 50px;
+    right: 550px;
+    transform: rotate(70deg);
 }
 .miastoHandluDoTargowiskoBilety {
-    width: 166px;
-    height: 107px;
-    right: 291px;
-    top: 649px;
-    z-index: 2;
+    right: 130px;
+    top: 680px;
+    transform: rotate(-40deg) scaleX(-1);
 }
 .miastoHandluDoTargowiskoGlina {
-    width: 179px;
-    height: 160px;
-    top: 301px;
-    left: 518px;
-    z-index: 2;
+    top: 480px;
+    left: 530px;
+    transform: rotate(-50deg);
 }
 .miastoHandluDoTargowiskoTrzcina {
-    width: 281px;
-    height: 162px;
-    top: 612px;
-    left: 217px;
-    z-index: 2;
+    top: 622px;
+    left: 207px;
+    transform: rotate(-30deg);
 }
 .stanBiletuMiastoHandlu {
     width: 100px;

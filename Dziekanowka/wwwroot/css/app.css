@@ -345,3 +345,6 @@ h1:focus {
 .inputHaslo::-ms-reveal, .inputHaslo::-ms-clear {
     display: none;
 }
+.ovHidden {
+    overflow: hidden;
+}
