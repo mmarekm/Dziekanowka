@@ -3,7 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="kuchniaMorskaWidok widok rel">
     <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /> 100 <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
-    <div class="abs kuchaniaMorskaDoMiasta"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoMorskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoMorskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs misjaKuchniaMorska @(moznaDacKucharzowi ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="DajDanie">
         @if (Gracz.Statystyki.AktualnaMisja == Misje.KuchniaMorska)
         {

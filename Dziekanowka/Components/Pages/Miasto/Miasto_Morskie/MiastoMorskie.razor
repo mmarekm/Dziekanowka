@@ -1,13 +1,15 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="miastoMorskieWidok widok rel">
-    <div class="abs miastoMorskieNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje" disabled="@okienko"><img src="img/miasto/miastoMorskieNaStacje.png" /></button></div>
-    <div class="abs morskieDoKuchni"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.KuchniaMorska)" disabled="@okienko"><img src="img/miasto/morskieDoRestauracji.png" /></button></div>
-    <div class="abs morskieDoPlebana"><button class="wyroznionyGuzik" @onclick='() => { okienko = true; rodzajOkienka = "plebanMorze"; }' disabled="@okienko"><img src="img/miasto/morskieDoPlebana.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoMorskieWidok.mp4" type="video/mp4" /></video>
+    <div class="abs miastoMorskieCel miastoMorskieNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje" disabled="@okienko"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMorska.png" /></button></div>
+    <div class="abs miastoMorskieCel morskieDoKuchni"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.KuchniaMorska)" disabled="@okienko"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMorska.png" /></button></div>
+    <div class="abs miastoMorskieCel morskieDoPlebana"><button class="wyroznionyGuzik" @onclick='() => { okienko = true; rodzajOkienka = "plebanMorze"; }' disabled="@okienko"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMorska.png" /></button></div>
     @if (okienko)
     {
-        <div class="abs okienkoMiastoMorskie @(rodzajOkienka)Widok">
+        <div class="abs okienkoMiastoMorskie powitanie">
+            <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/plebanMorzeWidok.mp4" type="video/mp4" /></video>
             <div class="abs confirmMorski @(rodzajOkienka)Confirm"><button class="wyroznionyGuzik" @onclick='() => { okienko = false; rodzajOkienka = ""; }'><img src="img/miasto/confirm@(rodzajOkienka).png"/></button></div>
             @if (rodzajOkienka == "plebanMorze")
             {

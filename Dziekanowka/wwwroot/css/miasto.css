@@ -4,10 +4,6 @@
 .miasto2Widok {
     background-image: url('../img/teren/miasto2.png');
 }
-.miastoMorskieWidok {
-    background-image: url('../img/miasto/miastoMorskieWidok.png');
-    overflow: hidden;
-}
 .miastoGorskieWidok {
     background-image: url('../img/miasto/miastoGorskieWidok.png');
     overflow: hidden;
@@ -928,11 +924,9 @@
     filter: drop-shadow(0px 10px 4px rgba(0, 0, 0, 0.4));
 }
 .miastoMorskieNaStacje {
-    top: 0;
-    left: 789px;
-    width: 320px;
-    height: 224px;
-    z-index: 2;
+    top: 233px;
+    left: 1050px;
+    transform: rotate(-135deg);
 }
 .miastoGorskieNaStacje {
     top: 237px;
@@ -1159,19 +1153,15 @@
     font-weight: bold;
     gap: 30px;
 }
-.morskieDoKuchni {
-    top: 122px;
-    right: 333px;
-    width: 453px;
-    height: 295px;
+.miastoMorskieCel {
+    width: 90px;
+    height: 45px;
     z-index: 2;
 }
-.kuchaniaMorskaDoMiasta {
-    bottom: 0;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    z-index: 2;
+.morskieDoKuchni {
+    top: 500px;
+    right: 375px;
+    transform: rotate(-60deg);
 }
 .misjaKuchniaMorska {
     bottom: 60px;
@@ -1180,10 +1170,9 @@
     height: 200px;
 }
 .morskieDoPlebana {
-    left: 0;
-    bottom: 159px;
-    width: 292px;
-    height: 279px;
+    left: 220px;
+    bottom: 70px;
+    transform: rotate(-135deg);
 }
 .okienkoMiastoMorskie {
     top: 50px;
