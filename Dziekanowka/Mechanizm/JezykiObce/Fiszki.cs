@@ -62,7 +62,7 @@
                                         {"breaded pork cutlet","meat patty/burger","steak","beef roulade","cabbage rolls","pork neck","goulash","roast beef","stewed turkey","ratatouille","lecho","Breton-style beans","bigos (hunter's stew)","Hungarian-style pancake","risotto","lasagne"},
                                         {"la chuleta empanada","la hamburguesa","el filete","los rollitos de carne","los rollitos de col","el cuello de cerdo","el gulash","el rosbif","el pavo estofado","el ratatouille","el lecho","las judías a la bretona","el bigos","la tortita húngara","el risotto","la lasaña"},
                                         {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
-        public static string[,] otherDishes = {{"jajecznica","jajko sadzone","omlet","shakshuka","naleśniki","racuchy","pierogi ruskie","pierogi z mięsem","pierogi z kapustą i grzybami","pierogi z owocami","knedle","pizza","placki ziemniaczane","frytki","kanapka","hot dog","hamburger","tosty"},
+        public static string[,] otherDishes = {{"jajecznica","jajko_sadzone","omlet","shakshuka","naleśniki","racuchy","pierogi_ruskie","pierogi z mięsem","pierogi z kapustą i grzybami","pierogi_z_owocami","knedle","pizza","placki_ziemniaczane","frytki","kanapka","hot_dog","hamburger","tosty"},
                                         {"scrambled eggs","fried egg","omelette","shakshuka","pancakes","fritters","potato and cheese dumplings","meat dumplings","cabbage and mushroom dumplings","fruit dumplings","dumplings (bread/potato)","pizza","potato pancakes","chips/fries","sandwich","hot dog","hamburger","toast"},
                                         {"los huevos revueltos","el huevo frito","la tortilla francesa","la shakshuka","los crepes","los buñuelos","los pierogi rusos","los pierogi de carne","los pierogi de col y setas","los pierogi de frutas","las albóndigas de pan","la pizza","las tortitas de patata","las patatas fritas","el sándwich","el perrito caliente","la hamburguesa","la tostada"},
                                         {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
@@ -248,6 +248,6 @@
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
-                                        vegetables, fruits, farmCrops, soups, mainDishes};
+                                        vegetables, fruits, farmCrops, soups, mainDishes, otherDishes};
     }
 }
