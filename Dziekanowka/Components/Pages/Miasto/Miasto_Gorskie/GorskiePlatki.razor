@@ -1,7 +1,8 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="gorskiePlatkiWidok widok rel">
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoGorskie/domPlatkowWidok.mp4" type="video/mp4" /></video>
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoGorskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (Gracz.Statystyki.AktualnaMisja == Misje.PlatkiGorskie)
