@@ -4,10 +4,6 @@
 .miasto2Widok {
     background-image: url('../img/teren/miasto2.png');
 }
-.miastoGorskieWidok {
-    background-image: url('../img/miasto/miastoGorskieWidok.png');
-    overflow: hidden;
-}
 .miastoWiejskieWidok {
     background-image: url('../img/miasto/miastoWiejskieWidok.png');
     overflow: hidden;
@@ -913,11 +909,9 @@
     transform: rotate(-135deg);
 }
 .miastoGorskieNaStacje {
-    top: 237px;
-    left: 133px;
-    width: 364px;
-    height: 265px;
-    z-index: 2;
+    top: 570px;
+    left: 360px;
+    transform: rotate(-100deg);
 }
 .miastoWiejskieNaStacje {
     bottom: 0;
@@ -1182,19 +1176,19 @@
     left: 1150px;
     top: 540px;
 }
-.gorskieDoOwiec {
-    width: 324px;
-    height: 212px;
-    top: 177px;
-    right: 165px;
+.miastoGorskieCel {
+    width: 102px;
+    height: 54px;
     z-index: 2;
 }
+.gorskieDoOwiec {
+    top: 490px;
+    right: 330px;
+    transform: rotate(-50deg);
+}
 .gorskieDoDomuPlatkow {
-    width: 323px;
-    height: 261px;
     bottom: 347px;
     left: 1039px;
-    z-index: 2;
 }
 .pastwiskoDoGorskiego {
     width: 453px;

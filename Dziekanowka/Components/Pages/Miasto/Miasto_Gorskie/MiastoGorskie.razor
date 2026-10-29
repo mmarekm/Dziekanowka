@@ -1,9 +1,10 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
-<div class="miastoGorskieWidok widok rel">
-    <div class="abs miastoGorskieNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoGorskieNaStacje.png" /></button></div>
-    <div class="abs gorskieDoOwiec"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.OwceGorskie)"><img src="img/miasto/miastoGorskie/miastoGorskieNaPastwisko.png" /></button></div>
-    <div class="abs gorskieDoDomuPlatkow"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.GorskiePlatki)"><img src="img/miasto/miastoGorskie/miastoGorskieDoDomuPlatkow.png" /></button></div>
+<div class="widok powitanie rel ovHidden">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoGorskieWidok.mp4" type="video/mp4" /></video>
+    <div class="abs miastoGorskieCel miastoGorskieNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaGorska.png" /></button></div>
+    <div class="abs miastoGorskieCel gorskieDoOwiec"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.OwceGorskie)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaGorska.png" /></button></div>
+    <div class="abs miastoGorskieCel gorskieDoDomuPlatkow"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.GorskiePlatki)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaGorska.png" /></button></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;

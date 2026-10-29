@@ -2,7 +2,7 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="gorskiePlatkiWidok widok rel">
-    <div class="abs domPlatkowDoGorskiego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoGorskie)"><img src="img/miasto/miastoGorskie/domPlatkowDoMiasta.png" /></button></div>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoGorskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (Gracz.Statystyki.AktualnaMisja == Misje.PlatkiGorskie)
     {
