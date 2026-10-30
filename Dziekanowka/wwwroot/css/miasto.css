@@ -8,10 +8,6 @@
     background-image: url('../img/miasto/miastoWiejskieWidok.png');
     overflow: hidden;
 }
-.miastoKawyWidok {
-    background-image: url('../img/miasto/miastoKawyWidok.jpg');
-    overflow: hidden;
-}
 .miastoPieniedzyWidok {
     background-image: url('../img/miasto/miastoPieniedzyWidok.png');
     overflow: hidden;
@@ -19,9 +15,6 @@
 .miasto3Widok {
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
-}
-.owceGorskieWidok {
-    background-image: url('../img/miasto/miastoGorskie/pastwiskoGorskieWidok.png');
 }
 .dzieciCiekaweWidok {
     background-image: url('../img/miasto/miastoWiejskie/dzieciCiekaweWidok.png');
@@ -34,9 +27,6 @@
 }
 .altruistaJaskiniowyWidok {
     background-image: url('../img/miasto/altruistaJaskiniowyWidok.jpg');
-}
-.hodowcaKawyWidok {
-    background-image: url('../img/miasto/miastoKawy/hodowcaKawyWidok.png');
 }
 .potrzebaKawyWidok {
     background-image: url('../img/miasto/miastoKawy/potrzebaKawyWidok.png');
@@ -917,12 +907,15 @@
     height: 276px;
     z-index: 2;
 }
-.miastoKawyNaStacje {
-    top: 158px;
-    left: 165px;
-    width: 434px;
-    height: 285px;
+.miastoKawyCel {
+    width: 100px;
+    height: 60px;
     z-index: 2;
+}
+.miastoKawyNaStacje {
+    top: 420px;
+    left: 400px;
+    transform: rotate(-15deg);
 }
 .miastoPieniedzyNaStacje {
     top: 0;
@@ -932,11 +925,9 @@
     z-index: 2;
 }
 .miastoKawyDoHodowcy {
-    bottom: 105px;
-    left: 220px;
-    width: 299px;
-    height: 328px;
-    z-index: 2;
+    bottom: 70px;
+    left: 200px;
+    transform: rotate(-90deg) scaleY(-1);
 }
 .hodowcaDoMiastaKawy {
     bottom: 0;
@@ -1187,20 +1178,6 @@
     bottom: 347px;
     left: 1039px;
 }
-.pastwiskoDoGorskiego {
-    width: 453px;
-    height: 249px;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
-}
-.domPlatkowDoGorskiego {
-    width: 267px;
-    height: 883px;
-    left: 0;
-    top: 0;
-    z-index: 2;
-}
 .lOwiecPastwiskoGorskie {
     left: 85px;
     top: 80px;
@@ -1353,11 +1330,9 @@
     z-index: 2;
 }
 .miastoKawyDoPotrzebaKawy {
-    left: 686px;
-    bottom: 319px;
-    width: 226px;
-    height: 252px;
-    z-index: 2;
+    left: 850px;
+    bottom: 250px;
+    transform: rotate(-90deg);
 }
 .dajKaweSmutnym {
     width: 400px;

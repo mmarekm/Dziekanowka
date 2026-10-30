@@ -1,9 +1,10 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
-<div class="miastoKawyWidok widok rel">
-    <div class="abs miastoKawyNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoKawyNaStacje.png" /></button></div>    
-    <div class="abs miastoKawyDoHodowcy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.HodowcaKawy)"><img src="img/miasto/miastoKawy/miastoKawyDoHodowcaKawy.png" /></button></div>
-    <div class="abs miastoKawyDoPotrzebaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.PotrzebaKawy)"><img src="img/miasto/miastoKawy/miastoKawyDoPotrzebaKawy.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoKawyWidok.mp4" type="video/mp4" /></video>
+    <div class="abs miastoKawyCel miastoKawyNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaKawy.png" /></button></div>    
+    <div class="abs miastoKawyCel miastoKawyDoHodowcy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.HodowcaKawy)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaKawy.png" /></button></div>
+    <div class="abs miastoKawyCel miastoKawyDoPotrzebaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.PotrzebaKawy)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaKawy.png" /></button></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
