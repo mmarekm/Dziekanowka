@@ -3,7 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 <div class="wiesSurowkaKwiatyWidok widok rel">
     <div class="abs @KlasaPowitania">3 <img class="obrazekSieMiesci" src="img/przedmioty/drewno.png" /></div>
-    <div class="abs wiesSurowkaKwiatyWyjscie"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoWiejskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoWiejskie)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     @if (Gracz.Statystyki.AktualnaMisja == Misje.WiesSurowkaWarzywna)
     {

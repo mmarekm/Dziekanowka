@@ -4,10 +4,6 @@
 .miasto2Widok {
     background-image: url('../img/teren/miasto2.png');
 }
-.miastoWiejskieWidok {
-    background-image: url('../img/miasto/miastoWiejskieWidok.png');
-    overflow: hidden;
-}
 .miastoPieniedzyWidok {
     background-image: url('../img/miasto/miastoPieniedzyWidok.png');
     overflow: hidden;
@@ -895,11 +891,9 @@
     transform: rotate(-100deg);
 }
 .miastoWiejskieNaStacje {
-    bottom: 0;
-    right: 0;
-    width: 476px;
-    height: 276px;
-    z-index: 2;
+    top: 630px;
+    right: 150px;
+    transform: rotate(65deg);
 }
 .miastoKawyCel {
     width: 100px;
@@ -1231,39 +1225,26 @@
     font-size: 80px;
     color: floralwhite;
 }
-.miastoWiejskieDoDzieciCiekawe {
-    width: 357px;
-    height: 339px;
-    bottom: 238px;
-    left: 251px;
+.miastoWiejskieCel {
+    width: 100px;
+    height: 55px;
     z-index: 2;
+}
+.miastoWiejskieDoDzieciCiekawe {
+    bottom: 115px;
+    left: 560px;
+    transform: rotate(-130deg);
 }
 .miastoWiejskieDoSurowkaKwiaty {
-    width: 189px;
-    height: 135px;
-    top: 162px;
-    left: 444px;
-    z-index: 2;
-}
-.dzieciCiekaweWyjscie {
-    width: 471px;
-    height: 852px;
-    top: 0;
-    left: 0;
-    z-index: 2;
+    bottom: 130px;
+    right: 400px;
+    transform: rotate(-110deg);
 }
 .dacObrazkiDzieciomCiekawym {
     left: 855px;
     top: 200px;
     width: 550px;
     height: 122px;
-}
-.wiesSurowkaKwiatyWyjscie {
-    left: 0;
-    bottom: 0;
-    width: 100px;
-    height: 100px;
-    z-index: 2;
 }
 .dawanieSurowkiNaWsi {
     left: 5px;
