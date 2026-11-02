@@ -12,9 +12,6 @@
     background-image: url('../img/teren/miasto3.png');
     overflow: hidden;
 }
-.wiesSurowkaKwiatyWidok {
-    background-image: url('../img/miasto/miastoWiejskie/wiesSurowkaKwiatyWidok.png');
-}
 .stacjaJaskiniaWidok {
     background-image: url('../img/miasto/stacjaJaskiniaWidok.png');
 }
