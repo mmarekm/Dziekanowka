@@ -14,9 +14,6 @@
 .altruistaJaskiniowyWidok {
     background-image: url('../img/miasto/altruistaJaskiniowyWidok.jpg');
 }
-.ratuszWidok {
-    background-image: url('../img/miasto/miastoPieniedzy/ratuszWidok.png');
-}
 .ratuszSentyMentalnyCzeka {
     background-image: url('../img/miasto/miastoPieniedzy/ratuszSentymentalnyCzeka.png');
 }
@@ -1895,11 +1892,8 @@
     transform: rotate(-60deg) scaleY(-1);
 }
 .ratuszDoSentymentalnego {
-    width: 282px;
-    height: 258px;
-    right: 85px;
-    bottom: 237px;
-    z-index: 2;
+    right: 330px;
+    bottom: 280px;
 }
 .dajObrazekSentymentalnemu {
     width: 400px;

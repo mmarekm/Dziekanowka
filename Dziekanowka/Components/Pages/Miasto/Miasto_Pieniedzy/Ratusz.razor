@@ -1,8 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
-<div class="ratuszWidok widok rel">
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoPieniedzy/ratuszWidok.mp4" type="video/mp4" /></video>
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoPieniedzy)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
-    <div class="abs ratuszDoSentymentalnego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.RatuszSentymentalny)"><img src="img/miasto/miastoPieniedzy/ratuszDoSentymentalnego.png" /></button></div>
+    <div class="abs miastoPieniedzyCel ratuszDoSentymentalnego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.RatuszSentymentalny)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaPieniedzy.png" /></button></div>
 </div>
 
 @code {
