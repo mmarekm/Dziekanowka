@@ -348,3 +348,8 @@ h1:focus {
 .ovHidden {
     overflow: hidden;
 }
+.dCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,7 +1,8 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="ratuszSentyMentalny@(tuMisja ? "Czeka" : "Ma") widok rel">
+<div class="widok powitanie rel">
+        <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoPieniedzy/ratuszSentymentalny@(tuMisja ? $"Czeka{nrFilmuNieMa.ToString()}" : "Ma").mp4" type="video/mp4" /></video>
     <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Ratusz)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs @KlasaPowitania">1 <img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" /> 1 <img class="obrazekSieMiesci" src="img/przedmioty/drewno.png" /> 1 <img class="obrazekSieMiesci" src="img/przedmioty/walutaGlina.png" /> 1 <img class="obrazekSieMiesci" src="img/przedmioty/walutaTrzcina.png" /></div>
@@ -14,6 +15,7 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int nrFilmuNieMa = Random.Shared.Next(1, 3);
     protected override async Task OnInitializedAsync()
     {
         if (Gracz.Statystyki.OtwarteOkno == "ratuszSentymentalny")
