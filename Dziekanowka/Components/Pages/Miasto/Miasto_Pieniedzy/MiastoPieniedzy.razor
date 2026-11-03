@@ -1,10 +1,11 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
-<div class="miastoPieniedzyWidok widok rel">
-    <div class="abs miastoPieniedzyNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miastoPieniedzyNaStacje.png" /></button></div>
-    <div class="abs miastoDoBanku"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Bank)"><img src="img/miasto/miastoPieniedzy/miastoDoBanku.png" /></button></div>
-    <div class="abs miastoNaGielde"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gielda)"><img src="img/miasto/miastoPieniedzy/miastoNaGielde.png" /></button></div>
-    <div class="abs miastoPieniedzyDoRatusza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Ratusz)"><img src="img/miasto/miastoPieniedzy/miastoPieniedzyDoRatusza.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoPieniedzyWidok.mp4" type="video/mp4" /></video>
+    <div class="abs miastoPieniedzyCel miastoPieniedzyNaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaPieniedzy.png" /></button></div>
+    <div class="abs miastoPieniedzyCel miastoDoBanku"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Bank)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaPieniedzy.png" /></button></div>
+    <div class="abs miastoPieniedzyCel miastoNaGielde"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Gielda)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaPieniedzy.png" /></div>
+    <div class="abs miastoPieniedzyCel miastoPieniedzyDoRatusza"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Ratusz)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaPieniedzy.png" /></button></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;

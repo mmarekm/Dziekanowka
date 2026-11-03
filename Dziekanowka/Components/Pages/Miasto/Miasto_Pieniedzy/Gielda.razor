@@ -2,7 +2,8 @@
 @using Dziekanowka.Gracza
 @using System.Globalization
 @inject LadowanieGracza ladowanieGracza
-<div class="gieldaWidok widok rel">
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miastoPieniedzy/gieldaWidok.mp4" type="video/mp4" /></video>
     <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.MiastoPieniedzy)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs lMonetGielda"><img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" />@Gracz.Monety</div>
     <div class="abs notowaniaGieldy">
