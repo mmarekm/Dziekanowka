@@ -66,7 +66,7 @@
                                         {"scrambled eggs","fried egg","omelette","shakshuka","pancakes","fritters","potato and cheese dumplings","meat dumplings","cabbage and mushroom dumplings","fruit dumplings","dumplings (bread/potato)","pizza","potato pancakes","chips/fries","sandwich","hot dog","hamburger","toast"},
                                         {"los huevos revueltos","el huevo frito","la tortilla francesa","la shakshuka","los crepes","los buñuelos","los pierogi rusos","los pierogi de carne","los pierogi de col y setas","los pierogi de frutas","las albóndigas de pan","la pizza","las tortitas de patata","las patatas fritas","el sándwich","el perrito caliente","la hamburguesa","la tostada"},
                                         {"-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-","-"} };
-        public static string[,] pantry = {{"śmietana","masło","ser","twaróg","jajko","miód","smalec","mięso mielone","wędlina","kiełbasa","salami","pasztet","mąka","makaron","płatki","chleb","bułka","ogórek kiszony","kapusta kiszona","burak kiszony","dżem","ketchup"},
+        public static string[,] pantry = {{"śmietana","masło","ser","twaróg","jajko","miód","smalec","mięso mielone","wędlina","kiełbasa","salami","pasztet","mąka","makaron","płatki","chleb","bułka","ogórek kiszony","kapusta_kiszona","burak_kiszony","dżem","ketchup"},
                                     {"cream","butter","cheese","cottage cheese","egg","honey","lard","minced meat","cold cuts","sausage","salami","pâté","flour","pasta","flakes","bread","bread roll","pickled cucumber","sauerkraut","pickled beetroot","jam","ketchup"},
                                     {"la nata","la mantequilla","el queso","el requesón","el huevo","la miel","la manteca","la carne picada","los fiambres","la salchicha","el salami","el paté","la harina","la pasta","los copos","el pan","el panecillo","el pepinillo en vinagre","el chucrut","la remolacha encurtida","la mermelada","el kétchup"},
                                     {"-","butyrum","caseus","-","ovum","mel","laridum","-","-","botulus","-","-","farina","-","-","panis","-","-","-","-","-","-"} };
@@ -248,6 +248,6 @@
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
-                                        vegetables, fruits, farmCrops, soups, mainDishes, otherDishes};
+                                        vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry};
     }
 }
