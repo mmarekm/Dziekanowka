@@ -78,7 +78,7 @@
                                    {"olives","oil","salt","black pepper","marjoram","oregano","basil","baking powder","cinnamon","thyme","rosemary","bay leaves","allspice","chili","turmeric","nutmeg","vanilla","sugar","vinegar","mustard","yeast","curry"},
                                    {"las aceitunas","el aceite","la sal","la pimienta negra","la mejorana","el orégano","la albahaca","la levadura química","la canela","el tomillo","el romero","las hojas de laurel","la pimienta de Jamaica","el chile","la cúrcuma","la nuez moscada","la vainilla","el azúcar","el vinagre","la mostaza","la levadura","el curry"},
                                    {"oliva","oleum","sal","piper","-","origanum","ocimum","-","cinnamomum","thymus","ros marinus","laurus","-","-","-","-","-","-","acetum","sinapi","fermentum","-"} };
-        public static string[,] bakedSweets = {{"sernik","babka piaskowa","ciasto owocowe","drożdżówka","czekolada","cukierki","lody","pączek","piernik","tort","guma do żucia","makowiec","budyń","galaretka","ciastko","lizak"},
+        public static string[,] bakedSweets = {{"sernik","babka_piaskowa","ciasto_owocowe","drożdżówka","czekolada","cukierki","lody","pączek","piernik","tort","guma do żucia","makowiec","budyń","galaretka","ciastko","lizak"},
                                          {"cheesecake","sand cake/pound cake","fruit cake","sweet yeast bun","chocolate","sweets/candy","ice cream","donut","gingerbread","celebration cake","chewing gum","poppy seed cake","pudding","jelly","cookie/biscuit","lollipop"},
                                          {"la tarta de queso","el bizcocho","el pastel de frutas","el bollo dulce","el chocolate","los caramelos","el helado","el donut","el pan de jengibre","la tarta","el chicle","el pastel de amapola","el pudín","la gelatina","la galleta","el chupachús"},
                                          {"placenta","-","-","-","-","dulcia","-","-","-","-","-","-","-","-","crustulum","-"} };
@@ -248,6 +248,6 @@
                                          fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar,
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
-                                        vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices};
+                                        vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets};
     }
 }
