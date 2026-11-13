@@ -249,6 +249,6 @@
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
                                         vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
-                                        fish };
+                                        fish, mushrooms };
     }
 }
