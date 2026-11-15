@@ -4,10 +4,6 @@
 .miasto2Widok {
     background-image: url('../img/teren/miasto2.png');
 }
-.miasto3Widok {
-    background-image: url('../img/teren/miasto3.png');
-    overflow: hidden;
-}
 .stacjaJaskiniaWidok {
     background-image: url('../img/miasto/stacjaJaskiniaWidok.png');
 }
@@ -30,10 +26,14 @@
     left: 110px;
     bottom: 20px;
     color: yellow;
-    font-size: 46px;
-    width: 70px;
-    height: 47px;
-    text-align: center;
+    font-size: 79px;
+    width: 200px;
+    height: 80px;
+}
+.miastoCel {
+    width: 132px;
+    height: 150px;
+    z-index: 2;
 }
 .miasto1Powrot {
     top: 223px;
@@ -85,18 +85,13 @@
     z-index: 2;
 }
 .miasto3doSklepBydlo {
-    top: 288px;
-    left: 0;
-    width: 657px;
-    height: 334px;
-    z-index: 2;
+    top: 600px;
+    left: 300px;
+    transform: scaleX(-1) rotate(-90deg);
 }
 .miasto3DoSklep {
-    top: 419px;
-    left: 841px;
-    width: 514px;
-    height: 347px;
-    z-index: 2;
+    bottom: 190px;
+    left: 865px;
 }
 .sklepDrobiuWidok {
     background-image: url('../img/miasto/sklepDrobiuWidok.png');
@@ -131,25 +126,19 @@
     font-size: 69px;
 }
 .lMonetSklepBydlo {
-    bottom: 25px;
+    top: 25px;
     left: 970px;
     width: 210px;
     height: 70px;
-    text-align: center;
     font-size: 69px;
+    gap: 30px;
+    color: white;
 }
 .sklepDrobiuDoMiasto1 {
     bottom: 0;
     right: 0;
     width: 305px;
     height: 169px;
-    z-index: 2;
-}
-.sklepBydloDoMiasto3 {
-    bottom: 0;
-    left: 0;
-    width: 165px;
-    height: 108px;
     z-index: 2;
 }
 .sklepDzikieDoMiasto2 {
@@ -252,11 +241,9 @@
     z-index: 2;
 }
 .miasto3DoApteka {
-    top: 337px;
-    right: 81px;
-    width: 380px;
-    height: 218px;
-    z-index: 2;
+    top: 540px;
+    right: 150px;
+    transform: rotate(-120deg);
 }
 .aptekalSmalcu {
     width: 100px;
@@ -524,97 +511,41 @@
     z-index: 2;
 }
 .miasto3DoKiosk {
-    top: 0px;
-    right: 678px;
-    width: 326px;
-    height: 164px;
-    z-index: 2;
+    top: 100px;
+    left: 1100px;
+    transform: rotate(-120deg);
 }
-.kiosk1Widok {
-    background-image: url('../img/miasto/kiosk1Widok.png');
-}
-.kiosk2Widok {
-    background-image: url('../img/miasto/kiosk2Widok.png');
-}
-.kiosk3Widok {
-    background-image: url('../img/miasto/kiosk3Widok.png');
-}
-.kioskDoMiasto {
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-}
-.kioskDoMiasto1 {  
-    width: 334px;
-    height: 206px;
-}
-.kioskDoMiasto2 {
-    width: 327px;
-    height: 211px;
-}
-.kioskDoMiasto3 {
-    width: 290px;
-    height: 179px;
+.cenaBiletuKiosk {
+    top: 35px;
+    left: 160px;
+    width: 30px;
+    height: 40px;
+    font-size: 39px;
 }
 .lMonetKiosk {
+    left: 70px;
+    top: 300px;
     width: 190px;
     height: 80px;
-    font-size: 79px;
-    text-align: center;
-}
-.lMonetKiosk1 {
-    left: 1390px;
-    top: 40px;
-    color: tan;
-}
-.lMonetKiosk2 {
-    left: 1530px;
-    top: 40px;
+    font-size: 50px;
     color: gold;
-}
-.lMonetKiosk3 {
-    left: 930px;
-    bottom: 26px;
-    color: black;
+    gap: 30px;
 }
 .lBiletowKiosk {
     width: 130px;
     height: 80px;
-    font-size: 79px;
-    text-align: center;
+    font-size: 50px;
+    color: cyan;
+    left: 70px;
+    top: 450px;
+    gap: 30px;
 }
-.lBiletowKiosk1 {
-    left: 500px;
-    top: 40px; 
-    color: gold;
-}
-.lBiletowKiosk2 {
-    left: 210px;
-    top: 40px;
-    color: antiquewhite;
-}
-.lBiletowKiosk3 {
-    left: 570px;
-    top: 22px;
-    color: antiquewhite;
-}
-.kupBiletKiosk1 {
-    top: 552px;
-    left: 703px;
-    width: 178px;
-    height: 160px;
-}
-.kupBiletKiosk2 {
-    top: 430px;
-    left: 1043px;
-    width: 99px;
-    height: 91px;
-}
-.kupBiletKiosk3 {
-    top: 546px;
-    left: 619px;
-    width: 307px;
-    height: 122px;
+.kupBiletKiosk {
+    top: 130px;
+    left: 20px;
+    width: 300px;
+    height: 120px;
+    z-index: 2;
 }
 .chlopiecMiska {
     bottom: 70px;
@@ -634,12 +565,6 @@
     width: 200px;
     height: 200px;
 }
-.kiosk2Puchar {
-    top: 150px;
-    right: 100px;
-    width: 200px;
-    height: 200px;
-}
 .chlopiecZje {
     top: 328px;
     right: 183px;
@@ -648,7 +573,7 @@
     z-index: 2;
 }
 .kotZje {
-    bottom: 78px;
+    bottom: 10px;
     left: 1127px;
     width: 254px;
     height: 136px;
@@ -817,11 +742,9 @@
     transition: opacity 0.3s ease;
 }
 .miasto3NaStacje {
-    left: 0;
-    top: 0;
-    width: 542px;
-    height: 259px;
-    z-index: 2;
+    left: 500px;
+    top: 130px;
+    transform: scaleX(-1);
 }
 .miastoLesneNaStacje {
     top: 420px;

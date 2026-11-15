@@ -2,14 +2,15 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
-<div class="miasto3Widok widok rel">
-    <div class="abs lBiletowMiasto3">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
+<div class="widok powitanie rel ovHidden">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miasto3.mp4" type="video/mp4" /></video>
+    <div class="abs lBiletowMiasto3 dCenter">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
     <div class="abs autobusAnimacjaM3 @klasaAutobusu" @onclick="WsiadzDoAutobusu"><img class="obrazekWypelnia" src="img/miasto/autobus.png" /></div>
-    <div class="abs miasto3doSklepBydlo"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepBydlo)"><img src="img/miasto/miastoDoSklepBydlo.png" /></button></div>
-    <div class="abs miasto3DoKiosk"><button class="wyroznionyGuzik" @onclick="DoKiosku"><img src="img/miasto/miasto3DoKiosk.png" /></button></div>
-    <div class="abs miasto3DoSklep"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepMiasto3)"><img src="img/miasto/miasto3DoSklepu.png" /></button></div>
-    <div class="abs miasto3DoApteka"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Apteka)"><img src="img/miasto/miastoDoApteka.png" /></button></div>
-    <div class="abs miasto3NaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img src="img/miasto/miasto3NaStacje.png" /></button></div>
+    <div class="abs miastoCel miasto3doSklepBydlo"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepBydlo)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto3DoKiosk"><button class="wyroznionyGuzik" @onclick="DoKiosku"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto3DoSklep"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepMiasto3)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto3DoApteka"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Apteka)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto3NaStacje"><button class="wyroznionyGuzik" @onclick="NaStacje"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
 </div>
 
 @code {

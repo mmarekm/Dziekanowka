@@ -4,8 +4,8 @@
 @inject Dzwieki dzwieki
 @implements IDisposable
 <div class="sklepBydloWidok widok rel">
-    <div class="abs lMonetSklepBydlo">@Gracz.Monety</div>
-    <div class="abs sklepBydloDoMiasto3"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto3)" class="wyroznionyGuzik"><img src="img/miasto/confirmSklepBydlo.png" /></button></div>
+    <div class="abs dCenter lMonetSklepBydlo">@Gracz.Monety<img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" /></div>
+    <div class="abs hodowcaDoMiastaKawy"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto3)" class="wyroznionyGuzik"><img class="obrazekJakTrzeba" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs zwierzeSklepDrobiu owcaSklepBydlo @(Gracz.Zwierze("owca").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("owca")'>
         <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoOwczarnia.png" /><div>@Gracz.Zwierze("owca").Ilosc</div></div>
         <div class="abs mlekoOwcySklepBydlo"><img class="obrazekSieMiesci" src="img/zwierzyniec/owczeMlekoBanka.png" /></div>

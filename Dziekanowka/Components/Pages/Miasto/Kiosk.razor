@@ -1,22 +1,28 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="kiosk@(kiosk)Widok widok rel">
-    <div class="abs lMonetKiosk lMonetKiosk@(kiosk)">@Gracz.Monety</div>
-    <div class="abs lBiletowKiosk lBiletowKiosk@(kiosk)">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
-    <div class="abs kupBiletKiosk@(kiosk) @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet"><img src="img/miasto/kupWKiosk@(kiosk).png" /></div>
-    <div class="abs kioskDoMiasto kioskDoMiasto@(kiosk)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img src="img/miasto/confirmKiosk@(kiosk).png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/kiosk@(kiosk)Widok.mp4" type="video/mp4" /></video>
+    <div class="abs dCenter lMonetKiosk">@Gracz.Monety<img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" /></div>
+    <div class="abs lBiletowKiosk dCenter">@Gracz.Przedmiot("biletAutobus").Ilosc<img class="obrazekJakTrzeba" src="img/przedmioty/biletAutobus.png" /></div>
+    <div class="abs kupBiletKiosk @(Gracz.Monety >= cenaBiletu ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="KupBilet">
+        <img class="obrazekJakTrzeba" src="img/miasto/zakupBiletuKiosk.png" />
+        <div class="abs cenaBiletuKiosk">@cenaBiletu</div>
+    </div>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(Wyjscie)"><img class="obrazekJakTrzeba" src="img/dom/potwierdzenie.png" /></button></div>
+    @if (kiosk != 3)
+    {
+        <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
+    }
     @if (kiosk == 1)
     {
         <div class="abs chlopiecMiska"><img src="img/dom/kuchnia/garnek/@(sciezkaMiski).png"/></div>
-        <div class="abs kiosk1Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
-        <div class="abs chlopiecZje @(moznaKarmic ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Nakarm"><img src="img/miasto/chlopiecZje.png" /></div>
+        <div class="abs chlopiecZje @(moznaKarmic ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Nakarm"></div>
     }
     @if (kiosk == 2)
     {
         <div class="abs kotMiska"><img src="img/przedmioty/ryby/@(sciezkaMiski).png" /></div>
-        <div class="abs kiosk2Puchar @(Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "")"><img src="img/przedmioty/medalRestauracyjny@(sciezkaPucharu)Zdobyty.png" /></div>
-        <div class="abs kotZje @(moznaKarmicKota ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Nakarm"><img src="img/miasto/kotZje.png" /></div>
+        <div class="abs kotZje @(moznaKarmicKota ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Nakarm"></div>
     }
 </div>
 
