@@ -1,7 +1,4 @@
-﻿.miasto1Widok {
-    background-image: url('../img/teren/miasto1.png');
-}
-.stacjaJaskiniaWidok {
+﻿.stacjaJaskiniaWidok {
     background-image: url('../img/miasto/stacjaJaskiniaWidok.png');
 }
 .altruistaJaskiniowyWidok {
@@ -30,11 +27,9 @@
     z-index: 2;
 }
 .miasto1Powrot {
-    top: 223px;
-    right: 0;
-    width: 247px;
-    height: 188px;
-    z-index: 2;
+    top: 400px;
+    right: 10px;
+    transform: rotate(-90deg);
 }
 .stanPaliwaMiasto {
     top: 80px;
@@ -63,18 +58,14 @@
     width: 80px;
 }
 .miasto1doSklepDrobiu {
-    top: 554px;
+    bottom: 10px;
     left: 661px;
-    width: 324px;
-    height: 259px;
-    z-index: 2;
+    transform: scaleX(-1) rotate(-90deg);
 }
 .miasto1doSzkoly {
-    top: 0;
-    left: 232px;
-    width: 325px;
-    height: 322px;
-    z-index: 2;
+    top: 250px;
+    left: 450px;
+    transform: scaleY(-1) rotate(135deg);
 }
 .miasto3doSklepBydlo {
     top: 600px;
@@ -84,9 +75,6 @@
 .miasto3DoSklep {
     bottom: 190px;
     left: 865px;
-}
-.sklepDrobiuWidok {
-    background-image: url('../img/miasto/sklepDrobiuWidok.png');
 }
 .sklepiczekWidok {
     background-image: url('../img/miasto/sklepiczekWidok.png');
@@ -119,13 +107,6 @@
     font-size: 69px;
     gap: 30px;
     color: white;
-}
-.sklepDrobiuDoMiasto1 {
-    bottom: 0;
-    right: 0;
-    width: 305px;
-    height: 169px;
-    z-index: 2;
 }
 .zwierzeSklepDrobiu {
     width: 188px;
@@ -458,11 +439,9 @@
     font-size: 16px;
 }
 .miasto1DoKiosk {
-    bottom: 63px;
-    left: 50px;
-    width: 266px;
-    height: 179px;
-    z-index: 2;
+    bottom: 30px;
+    left: 170px;
+    transform: scaleX(-1);
 }
 .miasto2DoKiosk {
     bottom: 20px;

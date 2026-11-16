@@ -2,7 +2,8 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
-<div class="miasto1Widok widok rel">
+<div class="widok powitanie rel ovHidden">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miasto1@(nrFilmu).mp4" type="video/mp4" /></video>
     <div class="abs stanPaliwaMiasto">
         <div class="kanisterGarazGospodarczy"><img class="obrazekWypelnia" src="img/przedmioty/kanister.png" /></div>
         <progress class="pasekPaliwa" value="@Gracz.Paliwo.IloscPaliwa" max="@Gracz.Paliwo.MaksymalnaIloscPaliwa" style="--procent: @((int)((double)Gracz.Paliwo.IloscPaliwa / Gracz.Paliwo.MaksymalnaIloscPaliwa * 100) / 10) "></progress>
@@ -15,15 +16,16 @@
         </div>
     </div>
     <div class="abs lBiletowMiasto1 dCenter">@Gracz.Przedmiot("biletAutobus").Ilosc<img class="obrazekJakTrzeba" src="img/przedmioty/biletAutobus.png" /></div>
-    <div class="abs miasto1Powrot"><button class="wyroznionyGuzik" @onclick="DoDomu"><img src="img/miasto/miasto1Powrot.png" /></button></div>
-    <div class="abs miasto1doSklepDrobiu"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepDrobiu)"><img src="img/miasto/miastoDoSklepDrobiu.png" /></button></div>
-    <div class="abs miasto1doSzkoly"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img src="img/miasto/miastoDoSzkoly.png" /></button></div>
-    <div class="abs miasto1DoKiosk"><button class="wyroznionyGuzik" @onclick="DoKiosku"><img src="img/miasto/miasto1DoKiosk.png" /></button></div>
+    <div class="abs miastoCel miasto1Powrot"><button class="wyroznionyGuzik" @onclick="DoDomu"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto1doSklepDrobiu"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepDrobiu)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto1doSzkoly"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto1DoKiosk"><button class="wyroznionyGuzik" @onclick="DoKiosku"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
     <div class="abs autobusAnimacjaM1 @klasaAutobusu" @onclick="WsiadzDoAutobusu"><img class="obrazekWypelnia" src="img/miasto/autobus.png" /></div>
 </div>
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int nrFilmu = Random.Shared.Next(1, 3);
     private string klasaAutobusu = "autobusUkryty";
     private bool moznaWsiasc = false;
     private CancellationTokenSource? _cts;
