@@ -1,7 +1,4 @@
-﻿.szkolaIntro {
-    background-image: url('../img/miasto/szkola/szkolaIntroWidok.png');
-}
-.szkolaReligiaWidok {
+﻿.szkolaReligiaWidok {
     background-image: url('../img/miasto/szkola/szkolaReligiaWidok.png');
 }
 .szkolaInformatykaWidok {
@@ -25,40 +22,35 @@
 .szkolaMatematykaGryWidok {
     background-image: url('../img/miasto/szkola/szkolaMatematykaGryWidok.jpg');
 }
-.szkolaDoMiasta {
-    bottom: 0;
-    left: 809px;
-    width: 263px;
-    height: 219px;
+.szkolaCel {
+    width: 200px;
+    height: 100px;
     z-index: 2;
+}
+.szkolaDoMiasta {
+    bottom: 250px;
+    left: 830px;
+    transform: rotate(90deg);
 }
 .szkolaIntroDoInformatyki {
-    left: 1225px;
-    top: 377px;
-    width: 136px;
-    height: 129px;
-    z-index: 2;
+    left: 1080px;
+    top: 520px;
+    transform: rotate(-45deg);
 }
 .szkolaIntroDoReligia {
-    left: 360px;
-    bottom: 166px;
-    width: 305px;
-    height: 251px;
-    z-index: 2;
+    left: 600px;
+    bottom: 400px;
+    transform: rotate(135deg);
 }
 .szkolaIntroDoJezyki {
-    width: 244px;
-    height: 222px;
-    top: 0;
-    left: 807px;
-    z-index: 2;
+    left: 830px;
+    top: 300px;
+    transform: rotate(-90deg);
 }
 .szkolaIntroDoMatematyka {
-    width: 331px;
-    height: 258px;
-    top: 280px;
-    left: 43px;
-    z-index: 2;
+    top: 450px;
+    left: 350px;
+    transform: rotate(180deg);
 }
 .szkolaReligiaDoIntro {
     bottom: 0;

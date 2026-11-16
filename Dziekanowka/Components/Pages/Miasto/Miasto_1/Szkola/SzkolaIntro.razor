@@ -1,14 +1,16 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
-<div class="szkolaIntro widok rel">
-    <div class="abs szkolaDoMiasta"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1)"><img src="img/miasto/szkola/szkolaDoMiasto.png" /></button></div>
-    <div class="abs szkolaIntroDoReligia"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaReligia)"><img src="img/miasto/szkola/szkolaIntroDoReligia.png" /></button></div>
-    <div class="abs szkolaIntroDoInformatyki"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaInformatyka)"><img src="img/miasto/szkola/szkolaIntroDoInformatyka.png" /></button></div>
-    <div class="abs szkolaIntroDoJezyki"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaJezykiIntro)"><img src="img/miasto/szkola/szkolaIntroDoJezyki.png" /></button></div>
-    <div class="abs szkolaIntroDoMatematyka"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaMatematykaIntro)"><img src="img/miasto/szkola/szkolaIntroDoMatematyka.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/szkola/szkolaIntroWidok@(nrFilmu).mp4" type="video/mp4" /></video>
+    <div class="abs szkolaCel szkolaDoMiasta"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto1)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
+    <div class="abs szkolaCel szkolaIntroDoReligia"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaReligia)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
+    <div class="abs szkolaCel szkolaIntroDoInformatyki"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaInformatyka)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
+    <div class="abs szkolaCel szkolaIntroDoJezyki"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaJezykiIntro)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
+    <div class="abs szkolaCel szkolaIntroDoMatematyka"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaMatematykaIntro)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
 </div>
 
 @code {
+    private int nrFilmu = Random.Shared.Next(1, 3);
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
 }
