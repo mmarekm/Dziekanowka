@@ -3,9 +3,10 @@
 @inject LadowanieGracza ladowanieGracza
 @inject Dzwieki dzwieki
 @implements IDisposable
-<div class="sklepDzikieWidok widok rel">
-    <div class="abs lMonetSklepDzikie">@Gracz.Monety</div>
-    <div class="abs sklepDzikieDoMiasto2"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)" class="wyroznionyGuzik"><img src="img/miasto/confirmSklepDzikie.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/sklepDzikieWidok@(nrFilmu).mp4" type="video/mp4" /></video>
+    <div class="abs lMonetSklepDzikie dCenter">@Gracz.Monety<img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" /></div>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs zwierzeSklepDrobiu krolikSklepDzikie @(Gracz.Zwierze("krolik").Cena <= Gracz.Monety ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick='async () => await Kup("krolik")'>
         <div class="abs infoZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/zwierzyniecDoKrolikarnia.png" /><div>@Gracz.Zwierze("krolik").Ilosc</div></div>
         <div class="abs rysunekZwierzaSklepDrobiu"><img class="obrazekSieMiesci" src="img/zwierzyniec/krolik.png" /></div>
@@ -21,6 +22,7 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int nrFilmu = Random.Shared.Next(1, 3);
     private System.Threading.Timer? timerSwini;
     private Random random = new Random();
     protected override void OnInitialized()

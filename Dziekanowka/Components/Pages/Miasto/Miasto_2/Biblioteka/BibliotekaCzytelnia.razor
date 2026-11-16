@@ -1,10 +1,6 @@
 ﻿@using Dziekanowka.Mechanizm
 <div class="bibliotekaCzytelniaWidok widok rel">
-    <div class="abs czytelniaDoIntro">
-        <button disabled="@czytanie" class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)">
-            <img src="img/miasto/biblioteka/confirmCzytelnia.png" />
-        </button>
-    </div>
+    <div class="abs hodowcaDoMiastaKawy"><button disabled="@czytanie" class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs czytelniaKsiazki">
         @foreach (var lektura in lektury)
         {

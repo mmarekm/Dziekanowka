@@ -1,9 +1,10 @@
 ﻿@using Dziekanowka.Mechanizm
-<div class="bibliotekaIntroWidok widok rel">
-    <div class="abs bibliotekaDoMiasto"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)"><img src="img/miasto/biblioteka/bibliotekaDoMiasto.png" /></button></div>
-    <div class="abs bibliotekaDoCzytelnia"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaCzytelnia)"><img src="img/miasto/biblioteka/introDoCzytelni.png" /></button></div>
-    <div class="abs bibliotekaDoGalerii"><button class="wyroznionyGuzik" @onclick="DoGalerii"><img src="img/miasto/biblioteka/introDoGalerii.png" /></button></div>
-    <div class="abs bibliotekaDoPani"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaPani)"><img src="img/miasto/biblioteka/bibliotekaDoPani.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/biblioteka/bibliotekaIntroWidok.mp4" type="video/mp4" /></video>
+    <div class="abs celBiblioteka bibliotekaDoMiasto"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)"><img class="obrazekJakTrzeba" src="img/miasto/biblioteka/strzalkaBiblioteka.png" /></button></div>
+    <div class="abs celBiblioteka bibliotekaDoCzytelnia"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaCzytelnia)"><img class="obrazekJakTrzeba" src="img/miasto/biblioteka/strzalkaBiblioteka.png" /></button></div>
+    <div class="abs celBiblioteka bibliotekaDoGalerii"><button class="wyroznionyGuzik" @onclick="DoGalerii"><img class="obrazekJakTrzeba" src="img/miasto/biblioteka/strzalkaBiblioteka.png" /></button></div>
+    <div class="abs celBiblioteka bibliotekaDoPani"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaPani)"><img class="obrazekJakTrzeba" src="img/miasto/biblioteka/strzalkaBiblioteka.png" /></button></div>
 </div>
 
 @code {

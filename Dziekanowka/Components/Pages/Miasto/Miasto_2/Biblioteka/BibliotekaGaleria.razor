@@ -1,6 +1,7 @@
 ﻿@using Dziekanowka.Mechanizm
-<div class="bibliotekaGaleriaWidok widok rel">
-    <div class="abs galeriaDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img src="img/miasto/biblioteka/confirmGaleria.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/biblioteka/bibliotekaGaleriaWidok@(nrFilmu).mp4" type="video/mp4" /></video>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img class="obrazekContain" src="img/dom/potwierdzenie.png" /></button></div>
     <div class="abs galeriaKolekcje">
         @foreach (var (nazwa, inf) in kolekcje)
         {
@@ -31,6 +32,7 @@
 @code {
     [Parameter] public Gracz Gracz { get; set; } = null!;
     [Parameter] public EventCallback<EkranGry> NaZmianeEkranu { get; set; }
+    private int nrFilmu = Random.Shared.Next(1, 3);
     private int poziom => Gracz.Statystyki.Kolekcje;
     private string? pokazElement = null;
     private string? otwartaKolekcja = null;
