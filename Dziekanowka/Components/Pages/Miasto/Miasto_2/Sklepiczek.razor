@@ -3,7 +3,7 @@
 @inject LadowanieGracza ladowanieGracza
 
 <div class="sklepiczekWidok widok rel">
-    <div class="abs wyjscieSklepiczekGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)" class="wyroznionyGuzik"><img src='img/dom/potwierdzenie.png' /></button></div>
+    <div class="abs hodowcaDoMiastaKawy"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)" class="wyroznionyGuzik"><img src='img/dom/potwierdzenie.png' /></button></div>
     <div class="abs lMonetSklepiczek">@Gracz.Monety</div>
     @foreach (var towar in towary)
     {

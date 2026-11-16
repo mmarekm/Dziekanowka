@@ -3,14 +3,15 @@
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
 
-<div class="miasto2Widok widok rel">
-    <div class="abs lBiletowMiasto1">@Gracz.Przedmiot("biletAutobus").Ilosc</div>
+<div class="widok powitanie rel ovHidden">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/miasto2.mp4" type="video/mp4" /></video>
+    <div class="abs lBiletowMiasto1 dCenter">@Gracz.Przedmiot("biletAutobus").Ilosc<img class="obrazekJakTrzeba" src="img/przedmioty/biletAutobus.png" /></div>
     <div class="abs autobusAnimacjaM21 @klasaAutobusu1" @onclick="WsiadzDoAutobusu1"><img class="obrazekWypelnia" src="img/miasto/autobus.png" /></div>
     <div class="abs autobusAnimacjaM22 @klasaAutobusu2" @onclick="WsiadzDoAutobusu2"><img class="obrazekWypelnia" src="img/miasto/autobus.png" /></div>
-    <div class="abs miasto2doSklepDzikich"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepDzikie)"><img src="img/miasto/miastoDoSklepDzikich.png" /></button></div>
-    <div class="abs miasto2doSklepiczek"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepiczek)"><img src="img/miasto/miastoDoSklepiczku.png" /></button></div>
-    <div class="abs miastoDoBiblioteki"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img src="img/miasto/miastoDoBiblioteki.png" /></button></div>
-    <div class="abs miasto2DoKiosk"><button class="wyroznionyGuzik" @onclick="DoKiosku"><img src="img/miasto/miasto2DoKiosk.png" /></button></div>
+    <div class="abs miastoCel miasto2doSklepDzikich"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SklepDzikie)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto2doSklepiczek"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepiczek)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miastoDoBiblioteki"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
+    <div class="abs miastoCel miasto2DoKiosk"><button class="wyroznionyGuzik" @onclick="DoKiosku"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaMiasto.png" /></button></div>
 </div>
 
 @code {

@@ -1,9 +1,10 @@
 ﻿@using Dziekanowka.Mechanizm
 @inject LadowanieGracza ladowanieGracza
-<div class="bibliotekaPaniWidok widok rel">
-    <div class="abs paniDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img src="img/miasto/biblioteka/paniDoIntro.png" /></button></div>
-    <div class="abs paniDoGaleria"><button class="wyroznionyGuzik" @onclick="DoGalerii"><img src="img/miasto/biblioteka/paniDoGaleria.png" /></button></div>
-    <div class="abs paniDoMiasto"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)"><img src="img/miasto/biblioteka/paniDoMiasto.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/biblioteka/bibliotekaPaniWidok.mp4" type="video/mp4" /></video>
+    <div class="abs celBiblioteka paniDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.BibliotekaIntro)"><img class="obrazekJakTrzeba" src="img/miasto/biblioteka/strzalkaBiblioteka.png" /></button></div>
+    <div class="abs celBiblioteka paniDoGaleria"><button class="wyroznionyGuzik" @onclick="DoGalerii"><img class="obrazekJakTrzeba" src="img/miasto/biblioteka/strzalkaBiblioteka.png" /></button></div>
+    <div class="abs celBiblioteka paniDoMiasto"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Miasto2)"><img class="obrazekJakTrzeba" src="img/miasto/biblioteka/strzalkaBiblioteka.png" /></button></div>
     <div class="abs uPaniLezyMedal @(!Gracz.Statystyki.MoznaOdebracObraz ? "poblyskuje" : "klikalneDivZielone")" @onclick="ZyskajObraz">
     @if (!Gracz.Statystyki.MoznaOdebracObraz)
     {

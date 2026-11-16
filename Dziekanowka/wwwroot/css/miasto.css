@@ -1,26 +1,20 @@
 ﻿.miasto1Widok {
     background-image: url('../img/teren/miasto1.png');
 }
-.miasto2Widok {
-    background-image: url('../img/teren/miasto2.png');
-}
 .stacjaJaskiniaWidok {
     background-image: url('../img/miasto/stacjaJaskiniaWidok.png');
 }
 .altruistaJaskiniowyWidok {
     background-image: url('../img/miasto/altruistaJaskiniowyWidok.jpg');
 }
-.rzebiarzDrewnoWidok {
-    background-image: url('../img/miasto/miastoHandlu/rzezbiarzDrewnoWidok.png');
-}
 .lBiletowMiasto1 {
-    left: 75px;
-    top: 75px;
+    left: 15px;
+    top: 15px;
     color: yellow;
-    font-size: 46px;
-    width: 70px;
-    height: 47px;
-    text-align: center;
+    font-size: 50px;
+    width: 300px;
+    height: 51px;
+    gap: 20px;
 }
 .lBiletowMiasto3 {
     left: 110px;
@@ -61,11 +55,9 @@
     height: 100px;
 }
 .miastoDoBiblioteki {
-    width: 367px;
-    height: 715px;
-    top: 20px;
-    left: 983px;
-    z-index: 2;
+    bottom: 70px;
+    left: 1200px;
+    transform: rotate(90deg) scaleX(-1);
 }
 .sprzedawcaMiasto1 {
     width: 80px;
@@ -221,11 +213,8 @@
     top: 200px;
 }
 .miasto2doSklepDzikich {
-    top: 279px;
-    left: 251px;
-    width: 656px;
-    height: 401px;
-    z-index: 2;
+    top: 550px;
+    left: 200px;
 }
 .miasto3DoApteka {
     top: 540px;
@@ -284,18 +273,9 @@
         height: 40px;
     }
 .miasto2doSklepiczek {
-    top: 66px;
-    left: 524px;
-    width: 214px;
-    height: 154px;
-    z-index: 2;
-}
-.wyjscieSklepiczekGuzik {
     top: 50px;
-    left: 90px;
-    width: 200px;
-    height: 200px;
-    z-index: 2;
+    left: 700px;
+    transform: rotate(-180deg);
 }
 .lMonetSklepiczek {
     width: 400px;
@@ -433,12 +413,6 @@
     opacity: 1;
     visibility: visible;
 }
-.confirmSklepMiasto3 {
-    left: 0;
-    bottom: 0;
-    width: 214px;
-    height: 124px;
-}
 .lMonetSklepMiasto3 {
     left: 1300px;
     bottom: 30px;
@@ -491,11 +465,9 @@
     z-index: 2;
 }
 .miasto2DoKiosk {
-    bottom: 77px;
-    left: 270px;
-    width: 199px;
-    height: 211px;
-    z-index: 2;
+    bottom: 20px;
+    left: 450px;
+    transform: scaleX(-1);
 }
 .miasto3DoKiosk {
     top: 100px;
