@@ -16,9 +16,6 @@
 .szkolaJezykiGryWidok {
     background-image: url('../img/miasto/szkola/szkolaJezykiGryWidok.jpg');
 }
-.szkolaMatematykaIntroWidok {
-    background-image: url('../img/miasto/szkola/szkolaMatematykaIntroWidok.png');
-}
 .szkolaMatematykaGryWidok {
     background-image: url('../img/miasto/szkola/szkolaMatematykaGryWidok.jpg');
 }
@@ -324,17 +321,12 @@ panelAdminWprowadz {
 }
 .szkolaMatematykaIntroDoIntro {
     right: 125px;
-    top: 122px;
-    width: 221px;
-    height: 412px;
-    z-index: 2;
+    top: 400px;
+    transform: rotate(-90deg);
 }
 .szkolaMatematykaIntroDoGry {
     top: 335px;
-    left: 1168px;
-    width: 172px;
-    height: 172px;
-    z-index: 2;
+    left: 950px;
 }
 .liczbaSzkolaMatematykaGlina {
     height: 180px;
