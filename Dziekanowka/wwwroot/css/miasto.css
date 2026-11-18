@@ -77,10 +77,10 @@
     left: 865px;
 }
 .sklepiczekWidok {
-    background-image: url('../img/miasto/sklepiczekWidok.png');
+    background-image: url('../img/miasto/sklepiczekWidok.webp');
 }
 .sklepMiasto3Widok {
-    background-image: url('../img/miasto/sklepMiasto3Widok.png');
+    background-image: url('../img/miasto/sklepMiasto3Widok.webp');
 }
 .lMonetSklepDrobiu {
     bottom: 40px;
@@ -958,9 +958,6 @@
     height: 900px;
     z-index: 10;
 }
-.plebanMorzeWidok {
-    background-image: url('../img/miasto/plebanMorzeWidok.png');
-}
 .confirmMorski {
     bottom: 0;
     left: 0;
@@ -1237,7 +1234,7 @@
     justify-content: center;
     gap: 40px;
     border-radius: 30px;
-    background-image: url('../img/miasto/tloEkstraManufakturaPiorIFutra.png');
+    background-image: url('../img/miasto/tloEkstraManufakturaPiorIFutra.webp');
     border: 5px solid gold;
 }
 .wierszWyboruPior {

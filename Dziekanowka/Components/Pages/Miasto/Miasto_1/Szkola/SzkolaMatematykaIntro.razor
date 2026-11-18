@@ -2,8 +2,8 @@
 @using Dziekanowka.Gracza
 <div class="widok powitanie rel">
     <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/szkola/szkolaMatematykaIntroWidok.mp4" type="video/mp4" /></video>
-    <div class="abs szkolaMatematykaIntroDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
-    <div class="abs szkolaMatematykaIntroDoGry"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaMatematykaGry)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
+    <div class="abs szkolaCel szkolaMatematykaIntroDoIntro"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
+    <div class="abs szkolaCel szkolaMatematykaIntroDoGry"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaMatematykaGry)"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
 </div>
 
 @code {

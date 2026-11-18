@@ -1,8 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
-<div class="szkolaReligiaWidok widok rel">
-    <div class="abs szkolaReligiaDoIntro"><button class="wyroznionyGuzik" disabled="@(otwarteSlowo)" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img src="img/miasto/szkola/confirmReligia.png" /></button></div>
-    <div class="abs doSlowa"><button class="wyroznionyGuzik" @onclick="OtworzKsiege"><img src="img/miasto/szkola/religiaSlowo.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/szkola/szkolaReligiaWidok.mp4" type="video/mp4" /></video>
+    <div class="abs hodowcaDoMiastaKawy"><button class="wyroznionyGuzik" disabled="@(otwarteSlowo)" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.SzkolaIntro)"><img class="obrazekJakTrzeba" src="img/dom/potwierdzenie.png" /></button></div>
+    <div class="abs szkolaCel doSlowa"><button class="wyroznionyGuzik" @onclick="OtworzKsiege"><img class="obrazekJakTrzeba" src="img/miasto/szkola/strzalkaSzkola.png" /></button></div>
 </div>
 <div class="abs narzedziePrzetwornia @(widok ? "" : "aktywne")">
     <div class="abs slowoDzis">

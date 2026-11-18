@@ -1,14 +1,5 @@
-﻿.szkolaReligiaWidok {
-    background-image: url('../img/miasto/szkola/szkolaReligiaWidok.png');
-}
-.szkolaInformatykaWidok {
+﻿.szkolaInformatykaWidok {
     background-image: url('../img/miasto/szkola/szkolaInformatykaWidok.webp');
-}
-.szkolaJezykiIntroWidok {
-    background-image: url('../img/miasto/szkola/szkolaJezykiIntroWidok.png');
-}
-.szkolaJezykiPortierWidok {
-    background-image: url('../img/miasto/szkola/szkolaJezykiPortierWidok.png');
 }
 .szkolaJezykiSlownikWidok {
     background-image: url('../img/miasto/szkola/szkolaJezykiSlownikWidok.jpg');
@@ -49,40 +40,29 @@
     left: 350px;
     transform: rotate(180deg);
 }
-.szkolaReligiaDoIntro {
-    bottom: 0;
-    left: 0;
-    width: 205px;
-    height: 109px;
-    z-index: 2;
-}
 .szkolaJezykiIntroDoIntro {
-    top: 0;
-    left: 314px;
-    width: 322px;
-    height: 563px;
-    z-index: 2;
+    top: 400px;
+    left: 300px;
+    transform: rotate(-120deg);
 }
 .szkolaJezykiIntroDoPortier {
-    bottom: 0;
-    left: 0;
-    width: 413px;
-    height: 421px;
-    z-index: 2;
+    bottom: 10px;
+    left: 250px;
+    transform: rotate(180deg);
 }
 .szkolaJezykiIntroDoSlownik {
-    top: 402px;
-    left: 767px;
-    width: 125px;
-    height: 92px;
-    z-index: 2;
+    top: 370px;
+    left: 920px;
+    transform: rotate(180deg);
+    animation: strzalkaDoSlownika 10.1s linear infinite;
+}
+@keyframes strzalkaDoSlownika {
+    from { left: 920px; } to { left: 750px; }
 }
 .szkolaJezykiIntroDoGry {
-    bottom: 0;
-    right: 0;
-    width: 248px;
-    height: 276px;
-    z-index: 2;
+    bottom: 350px;
+    right: 90px;
+    transform: rotate(90deg);
 }
 .kategorieSlownik {
     top: 50px;
@@ -183,11 +163,9 @@
     top: 200px;
 }
 .doSlowa {
-    left: 659px;
-    top: 344px;
-    width: 616px;
-    height: 406px;
-    z-index: 2;
+    left: 1100px;
+    top: 200px;
+    transform: rotate(150deg);
 }
 .slowoDzis {
     left: 80px;
