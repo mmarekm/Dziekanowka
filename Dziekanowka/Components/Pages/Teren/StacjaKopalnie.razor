@@ -2,11 +2,12 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
-<div class="stacjaKopalnieWidok ovhidden widok rel">
+<div class="widok powitanie rel ovHidden">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/stacje/stacjaKopalnieWidok.mp4" type="video/mp4" /></video>
     <div class="abs @KlasaPowitania"><img class="obrazekJakTrzeba" src="img/przedmioty/walutaGlina.png" /> 3 <img class="obrazekSieMiesci" src="img/przedmioty/walutaGlina.png" /></div>
     <div class="abs ileBiletowLKazdeMiasto ileBiletowLStacjaKopalnie">@Gracz.Przedmiot("biletPociag").Ilosc</div>
     <div class="abs ileBiletowKazdeMiasto"><img class="obrazekContain" src="img/przedmioty/biletPociag.png" /></div>
-    <div class="abs kupBiletStacjaKopalnie @(Gracz.Monety < 10 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupBilet"><img src="img/miasto/stacje/kupBiletStacjaKopalnie.png" /></div>
+    <div class="abs kupBiletNaStacji @(Gracz.Monety < 10 ? "nieMoznaKliknac" : "klikalneDivZielone")" @onclick="KupBilet"><div class="abs cenaBiletuStacja">10</div><img class="obrazekJakTrzeba" src="img/miasto/stacje/kupBilet.png" /></div>
     <div class="abs pociagStacjaKopalnieAnimacja @klasaPociagu" @onclick="DoMetropolia1">
         <img class="obrazekWypelnia" src="img/miasto/pociag.png" />
         <div class="abs celPociagu"><img class="obrazekContain" src="img/miasto/stacje/metropolia1Label.png" /></div>

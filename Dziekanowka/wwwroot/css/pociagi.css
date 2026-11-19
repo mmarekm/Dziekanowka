@@ -34,9 +34,6 @@
 .stacjametropolia2Widok {
     background-image: url('../img/miasto/stacjaMetropolia2Widok.png');
 }
-.stacjaKopalnieWidok {
-    background-image: url('../img/miasto/stacje/stacjaKopalnieWidok.png');
-}
 .ovhidden {
     overflow: hidden;
 }
@@ -128,6 +125,19 @@
     font-size: 80px;
     z-index: 2;
 }
+.kupBiletNaStacji {
+    width: 200px;
+    height: 80px;
+    top: 200px;
+    left: 50px;
+}
+.cenaBiletuStacja {
+    bottom: 23px;
+    left: 95px;
+    width: 40px;
+    height: 30px;
+    font-size: 29px;
+}
 .kupBiletStacjamiasto3 {
     width: 104px;
     height: 102px;
@@ -171,16 +181,8 @@
     left: 363px;
 }
 .kupBiletStacjamiastoSnow {
-    width: 160px;
-    height: 82px;
     bottom: 178px;
     left: 359px;
-}
-.kupBiletStacjaKopalnie {
-    width: 88px;
-    height: 38px;
-    bottom: 309px;
-    left: 203px;
 }
 .kupBiletStacjamiastoPieniedzy {
     width: 156px;
