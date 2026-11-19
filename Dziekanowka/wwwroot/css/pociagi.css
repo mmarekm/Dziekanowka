@@ -130,6 +130,7 @@
     height: 80px;
     top: 200px;
     left: 50px;
+    z-index: 2;
 }
 .cenaBiletuStacja {
     bottom: 23px;
@@ -137,70 +138,6 @@
     width: 40px;
     height: 30px;
     font-size: 29px;
-}
-.kupBiletStacjamiasto3 {
-    width: 104px;
-    height: 102px;
-    bottom: 220px;
-    left: 1371px;
-}
-.kupBiletStacjamiastoLesne {
-    width: 69px;
-    height: 46px;
-    bottom: 124px;
-    left: 1552px;
-}
-.kupBiletStacjamiastoBiale {
-    width: 101px;
-    height: 37px;
-    bottom: 190px;
-    left: 391px;
-}
-.kupBiletStacjamiastoMorskie {
-    width: 104px;
-    height: 134px;
-    bottom: 260px;
-    left: 1335px;
-}
-.kupBiletStacjamiastoGorskie {
-    width: 102px;
-    height: 173px;
-    bottom: 223px;
-    left: 1337px;
-}
-.kupBiletStacjamiastoWiejskie {
-    width: 112px;
-    height: 97px;
-    bottom: 273px;
-    right: 425px;
-}
-.kupBiletStacjamiastoKawy {
-    width: 167px;
-    height: 71px;
-    bottom: 187px;
-    left: 363px;
-}
-.kupBiletStacjamiastoSnow {
-    bottom: 178px;
-    left: 359px;
-}
-.kupBiletStacjamiastoPieniedzy {
-    width: 156px;
-    height: 53px;
-    bottom: 187px;
-    right: 231px;
-}
-.kupBiletStacjametropolia1 {
-    width: 67px;
-    height: 41px;
-    bottom: 309px;
-    left: 196px;
-}
-.kupBiletStacjametropolia2 {
-    width: 67px;
-    height: 30px;
-    bottom: 307px;
-    left: 209px;
 }
 .stacjaCzas {
     top: 10px;
@@ -244,87 +181,12 @@
 .stacjaCzasmiastoPieniedzy {
     color: saddlebrown;
 }
-.zobaczRozkladStacjimiasto3 {
-    bottom: 0;
-    left: 0;
-    width: 464px;
-    height: 376px;
+.zobaczRozkladJazdy {
+    top: 10px;
+    right: 130px;
+    width: 300px;
+    height: 210px;
     z-index: 2;
-}
-.zobaczRozkladStacjimiastoLesne {
-    bottom: 0;
-    left: 0;
-    width: 455px;
-    height: 260px;
-    z-index: 2;
-}
-.zobaczRozkladStacjimiastoBiale {
-    bottom: 0;
-    right: 0;
-    width: 481px;
-    height: 267px;
-    z-index: 2;
-}
-.zobaczRozkladStacjimiastoMorskie {
-    bottom: 0;
-    left: 0;
-    width: 477px;
-    height: 370px;
-    z-index: 2;
-}
-.zobaczRozkladStacjimiastoGorskie {
-    bottom: 0;
-    left: 0;
-    width: 480px;
-    height: 408px;
-    z-index: 2;
-}
-.zobaczRozkladStacjimiastoWiejskie {
-    top: 420px;
-    left: 132px;
-    width: 100px;
-    height: 134px;
-    z-index: 6;
-}
-.zobaczRozkladStacjimiastoKawy {
-    bottom: 25px;
-    right: 72px;
-    width: 398px;
-    height: 331px;
-    z-index: 6;
-}
-.zobaczRozkladStacjimiastoSnow {
-    bottom: 45px;
-    right: 60px;
-    width: 415px;
-    height: 370px;
-    z-index: 6;
-}
-.zobaczRozkladStacjimiastoHandlu {
-    bottom: 0;
-    left: 0;
-    width: 386px;
-    height: 448px;
-    z-index: 6;
-}
-.zobaczRozkladStacjimiastoPieniedzy {
-    bottom: 0;
-    left: 50px;
-    width: 436px;
-    height: 347px;
-    z-index: 6;
-}
-.zobaczRozkladStacjimetropolia1 {
-    width: 244px;
-    height: 225px;
-    right: 70px;
-    bottom: 222px;
-}
-.zobaczRozkladStacjimetropolia2 {
-    width: 264px;
-    height: 205px;
-    right: 48px;
-    bottom: 233px;
 }
 .overlayRoklady {
     left: 100px;
@@ -711,7 +573,7 @@
 }
 .pociagStacjaKopalnieAnimacja {
     left: -500px;
-    bottom: 72px;
+    bottom: 52px;
     width: 920px;
     height: 370px;
     cursor: default;
