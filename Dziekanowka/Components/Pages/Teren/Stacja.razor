@@ -5,7 +5,7 @@
 <div class="stacja@(stacja)Widok widok rel ovhidden @(wyswietlonyRozklad ? "blokadaKlikniec" : "")">
     @if (!CzyMetropolia)
     {
-        <div class="abs wyjscieStacja@(stacja)"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(BazaPociagow.Wyjscie(stacja))"><img src="img/miasto/stacje/confirmStacja@(stacja).png" /></button></div>
+        <div class="abs stacjaWyjscie"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(BazaPociagow.Wyjscie(stacja))"><img src="img/miasto/stacje/stacjaWyjscie.webp" /></button></div>
     }
     @if (stacja != "miastoHandlu")
     {
@@ -14,7 +14,6 @@
     <div class="abs ileBiletowLKazdeMiasto stacjaCzas@(stacja)">@Gracz.Przedmiot("biletPociag").Ilosc</div>
     <div class="abs ileBiletowKazdeMiasto"><img class="obrazekContain" src="img/przedmioty/biletPociag.png" /></div>
     <div class="abs stacjaCzas stacjaCzas@(stacja)">@czas</div>
-    <!--<div class="abs zobaczRozkladStacji@(stacja)"><button class="wyroznionyGuzik" @onclick="() => wyswietlonyRozklad = true"><img src="img/miasto/stacje/zobaczRozkladStacja@(stacja).png" /></button></div>-->
     <div class="abs zobaczRozkladJazdy"><button class="wyroznionyGuzik" @onclick="() => wyswietlonyRozklad = true"><img src="img/miasto/stacje/zobaczRozkladJazdy.png" /></button></div>
     @if (stacja == "miasto3")
     {

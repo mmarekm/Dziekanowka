@@ -37,75 +37,12 @@
 .ovhidden {
     overflow: hidden;
 }
-.wyjscieStacjamiasto3 {
+.stacjaWyjscie {
     z-index: 2;
-    bottom: 0;
-    left: 662px;
-    width: 385px;
-    height: 206px;
-}
-.wyjscieStacjamiastoLesne {
-    left: 701px;
-    bottom: 0;
-    width: 440px;
-    height: 123px;
-    z-index: 2;
-}
-.wyjscieStacjamiastoBiale {
-    bottom: 0;
-    left: 563px;
-    width: 630px;
-    height: 124px;
-    z-index: 2;
-}
-.wyjscieStacjamiastoMorskie {
-    bottom: 0;
-    left: 667px;
-    width: 428px;
-    height: 109px;
-    z-index: 2;
-}
-.wyjscieStacjamiastoGorskie {
-    bottom: 0;
-    left: 730px;
-    width: 396px;
-    height: 102px;
-    z-index: 2;
-}
-.wyjscieStacjamiastoWiejskie {
-    bottom: 0;
-    left: 571px;
-    width: 428px;
-    height: 68px;
-    z-index: 2;
-}
-.wyjscieStacjamiastoKawy {
-    bottom: 0;
-    left: 685px;
-    width: 558px;
-    height: 103px;
-    z-index: 2;
-}
-.wyjscieStacjamiastoSnow {
-    bottom: 0;
-    left: 615px;
-    width: 647px;
-    height: 39px;
-    z-index: 2;
-}
-.wyjscieStacjamiastoHandlu {
-    bottom: 0;
-    left: 850px;
-    width: 455px;
-    height: 98px;
-    z-index: 2;
-}
-.wyjscieStacjamiastoPieniedzy {
-    bottom: 0;
-    left: 691px;
-    width: 533px;
-    height: 103px;
-    z-index: 2;
+    bottom: 20px;
+    left: 200px;
+    width: 1500px;
+    height: 200px;
 }
 .ileBiletowKazdeMiasto {
     top: 10px;
