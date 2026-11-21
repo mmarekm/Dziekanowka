@@ -1,40 +1,4 @@
-﻿.stacjamiasto3Widok {
-    background-image: url('../img/miasto/stacjaMiasto3Widok.jpg');
-}
-.stacjamiastoLesneWidok {
-    background-image: url('../img/miasto/stacjaMiastoLesneWidok.jpg');
-}
-.stacjamiastoBialeWidok {
-    background-image: url('../img/miasto/stacjaMiastoBialeWidok.jpg');
-}
-.stacjamiastoMorskieWidok {
-    background-image: url('../img/miasto/stacjaMiastoMorskieWidok.jpg');
-}
-.stacjamiastoGorskieWidok {
-    background-image: url('../img/miasto/stacjaMiastoGorskieWidok.jpg');
-}
-.stacjamiastoWiejskieWidok {
-    background-image: url('../img/miasto/stacjaMiastoWiejskieWidok.png');
-}
-.stacjamiastoKawyWidok {
-    background-image: url('../img/miasto/stacjaMiastoKawyWidok.png');
-}
-.stacjamiastoSnowWidok {
-    background-image: url('../img/miasto/stacjaMiastoSnowWidok.png');
-}
-.stacjamiastoHandluWidok {
-    background-image: url('../img/miasto/stacjaMiastoHandluWidok.png');
-}
-.stacjamiastoPieniedzyWidok {
-    background-image: url('../img/miasto/stacjaMiastoPieniedzyWidok.jpg');
-}
-.stacjametropolia1Widok {
-    background-image: url('../img/miasto/stacjaMetropolia1Widok.png');
-}
-.stacjametropolia2Widok {
-    background-image: url('../img/miasto/stacjaMetropolia2Widok.png');
-}
-.ovhidden {
+﻿.ovhidden {
     overflow: hidden;
 }
 .stacjaWyjscie {
@@ -120,7 +84,7 @@
 }
 .zobaczRozkladJazdy {
     top: 10px;
-    right: 130px;
+    right: 150px;
     width: 300px;
     height: 210px;
     z-index: 2;
@@ -188,104 +152,6 @@
     width: 150px;
     height: 150px;
     z-index: 2;
-}
-.zaslonaPociagu1miasto3 {
-    z-index: 6;
-    top: 346px;
-    left: 400px;
-    width: 162px;
-    height: 300px;
-}
-.zaslonaPociagu2miasto3 {
-    z-index: 6;
-    top: 338px;
-    left: 1250px;
-    width: 162px;
-    height: 300px;
-}
-.zaslonaPociagu3miasto3 {
-    z-index: 6;
-    top: 358px;
-    right: 80px;
-    width: 517px;
-    height: 275px;
-}
-.zaslonaPociagu1miastoLesne {
-    z-index: 6;
-    left: 412px;
-    top: 550px;
-    width: 124px;
-    height: 198px;
-}
-.zaslonaPociagu2miastoLesne {
-    z-index: 6;
-    left: 1277px;
-    top: 532px;
-    width: 569px;
-    height: 198px;
-}
-.zaslonaPociagu1miastoBiale {
-    z-index: 6;
-    width: 385px;
-    height: 135px;
-    right: 85px;
-    bottom: 264px;
-}
-.zaslonaPociagu2miastoBiale {
-    z-index: 6;
-    left: 78px;
-    top: 355px;
-    width: 510px;
-    height: 403px;
-}
-.zaslonaPociagu1miastoMorskie {
-    z-index: 6;
-    left: 450px;
-    top: 360px;
-    width: 62px;
-    height: 178px;
-}
-.zaslonaPociagu2miastoMorskie {
-    z-index: 6;
-    left: 1310px;
-    top: 353px;
-    width: 525px;
-    height: 222px;
-}
-.zaslonaPociagumiastoGorskie {
-    z-index: 6;
-    left: 1315px;
-    top: 343px;
-    width: 509px;
-    height: 288px;
-}
-.zaslonaPociaguMiastoWiejskie {
-    z-index: 6;
-    width: 541px;
-    height: 514px;
-    right: 47px;
-    top: 145px;
-}
-.zaslonaPociaguMiastoKawy {
-    z-index: 6;
-    width: 513px;
-    height: 393px;
-    left: 76px;
-    bottom: 249px;
-}
-.zaslonaPociaguMiastoSnow {
-    z-index: 6;
-    width: 501px;
-    height: 454px;
-    left: 81px;
-    bottom: 260px;
-}
-.zaslonaPociaguMiastoPieniedzy {
-    z-index: 6;
-    width: 493px;
-    height: 290px;
-    right: 17px;
-    bottom: 310px;
 }
 .pociagKazdyAnimacja {
     width: 920px;

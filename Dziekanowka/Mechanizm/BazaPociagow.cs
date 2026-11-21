@@ -87,12 +87,8 @@
             { "metropolia1", [16, 18, 20, 22, 24, 25, 28, 33, 40, 45, 46] },
             { "metropolia2", [47, 48] }
         };
-        public static IEnumerable<(string obrazek, int[] godziny)> AktualnyRozklad(string stacja)
-        {
-            if (!PociagiZeStacji.TryGetValue(stacja, out var numery))
-                return [];
-            return numery.Where(nr => nr != 27).Select(nr => ($"{EtykietaRozkladu(nr)}Label.png", OdjazdyPociagu[nr]));
-        }
+        public static IEnumerable<(string obrazek, int[] godziny)> AktualnyRozklad(string stacja) => PociagiDoWsiadania(stacja).Select(nr => ($"{EtykietaRozkladu(nr)}Label.png", OdjazdyPociagu[nr]));
+        public static IEnumerable<int> PociagiDoWsiadania(string stacja) => PociagiZeStacji.TryGetValue(stacja, out var numery) ? numery.Where(nr => nr != 27) : [];
         private static string EtykietaRozkladu(int nrPociagu) => nrPociagu switch
         {
             45 => "stacjaKopalnie",
