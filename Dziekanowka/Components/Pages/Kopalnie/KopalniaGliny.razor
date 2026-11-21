@@ -2,7 +2,8 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 @implements IDisposable
-<div class="kopalniaGlinyWidok widok rel">
+<div class="widok powitanie rel ovHidden">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/kopalnie/kopalniaGlinyWidok.mp4" type="video/mp4" /></video>
     <div class="abs moznaZyskacKopalniaGliny">3 <img class="obrazekJakTrzeba" src="img/przedmioty/walutaGlina.png" /></div>
     @if (powitanie)
     {

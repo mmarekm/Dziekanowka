@@ -194,12 +194,12 @@
 }
 .pociag1miasto3Animacja, .pociag15miasto3Animacja {
     left: 100px;
-    top: 87px;
+    top: 300px;
     z-index: 2;
 }
 .pociag3miasto3Animacja, .pociag7miasto3Animacja, .pociag38miasto3Animacja {
-    left: 600px;
-    top: 198px;
+    left: 800px;
+    top: 390px;
     z-index: 3;
     transform: scaleX(-1);
 }
@@ -207,8 +207,8 @@
         transform: scaleX(-1);
     }
 .pociag2miastoLesneAnimacja, .pociag17miastoLesneAnimacja {
-    left: 750px;
-    top: 335px;
+    left: 800px;
+    top: 347px;
     z-index: 4;
     transform: scaleX(-1);
 }
@@ -217,7 +217,7 @@
     }
 .pociag5miastoLesneAnimacja, .pociag8miastoLesneAnimacja, .pociag32miastoLesneAnimacja {
     left: 50px;
-    top: 259px;
+    top: 263px;
     z-index: 3;
 }
 .pociag4miastoBialeAnimacja, .pociag12miastoBialeAnimacja, .pociag36miastoBialeAnimacja {
@@ -236,7 +236,7 @@
     }
 .pociag10miastoMorskieAnimacja, .pociag11miastoMorskieAnimacja, .pociag21miastoMorskieAnimacja {
     left: 700px;
-    top: 193px;
+    top: 270px;
     z-index: 3;
     transform: scaleX(-1);
 }
@@ -245,7 +245,7 @@
     }
 .pociag13miastoGorskieAnimacja, .pociag14miastoGorskieAnimacja, .pociag23miastoGorskieAnimacja, .pociag27miastoGorskieAnimacja {
     left: 700px;
-    top: 223px;
+    top: 280px;
     z-index: 3;
     transform: scaleX(-1);
 }
@@ -254,7 +254,7 @@
     }
 .pociag26miastoWiejskieAnimacja, .pociag42miastoWiejskieAnimacja {
     left: 500px;
-    top: 223px;
+    top: 315px;
     z-index: 3;
     transform: scaleX(-1);
 }
@@ -263,7 +263,7 @@
     }
 .pociag29miastoKawyAnimacja {
     left: 800px;
-    top: 336px;
+    top: 340px;
     z-index: 3;
     transform: scaleX(-1);
 }
@@ -272,12 +272,12 @@
     }
 .pociag30miastoKawyAnimacja, .pociag31miastoKawyAnimacja {
     left: 300px;
-    top: 257px;
+    top: 260px;
     z-index: 2;
 }
 .pociag34miastoSnowAnimacja, .pociag35miastoSnowAnimacja {
     left: 800px;
-    top: 336px;
+    top: 338px;
     z-index: 3;
     transform: scaleX(-1);
 }
@@ -285,13 +285,13 @@
         transform: scaleX(-1);
     }
 .pociag37miastoSnowAnimacja {
-    left: 400px;
-    top: 250px;
+    left: 200px;
+    top: 252px;
     z-index: 2;
 }
 .pociag39miastoHandluAnimacja, .pociag41miastoHandluAnimacja, .pociag43miastoHandluAnimacja, .pociag44miastoHandluAnimacja {
     left: 400px;
-    top: 150px;
+    top: 148px;
     z-index: 2;
     transform: scaleX(-1);
 }
@@ -299,8 +299,8 @@
         transform: scaleX(-1);
     }
 .pociag49miastoPieniedzyAnimacja {
-    left: 500px;
-    top: 308px;
+    left: 700px;
+    top: 335px;
     z-index: 3;
     transform: scaleX(-1);
 }
