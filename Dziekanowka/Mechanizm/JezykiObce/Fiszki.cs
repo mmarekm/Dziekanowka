@@ -102,11 +102,11 @@
                                             {"uncle","aunt","cousin","father-in-law","mother-in-law","son-in-law","daughter-in-law","brother-in-law","sister-in-law","nephew","niece","nephew","niece"},
                                             {"el tío","la tía","el primo","el suegro","la suegra","el yerno","la nuera","el cuñado","la cuñada","el sobrino","la sobrina","el sobrino","la sobrina"},
                                             {"avunculus","amita","consobrinus","socer","socrus","gener","nurus","levir","glos","-","-","-","-"} };
-        public static string[,] familyStatus = {{"chłopak (sympatia)","dziewczyna (sympatia)","narzeczony","narzeczona","kawaler","panna","żonaty","mężatka","ślub","wdowa","przyjaciel","bliźniaki","sierota","dorosły"},
+        public static string[,] familyStatus = {{"chłopak-sympatia","dziewczyna-sympatia","narzeczony","narzeczona","kawaler","panna","żonaty","mężatka","ślub","wdowa","przyjaciel","bliźniaki","sierota","dorosły"},
                                           {"boyfriend","girlfriend","fiancé","fiancée","bachelor","single woman/maiden","married","married","wedding","widow","friend","twins","orphan","adult"},
                                           {"el novio","la novia","el prometido","la prometida","el soltero","la soltera","casado","casada","la boda","la viuda","el amigo","los gemelos","el huérfano","el adulto"},
                                           {"-","-","sponsus","sponsa","caelebs","virgo","-","-","nuptiae","vidua","amicus","gemini","orbus","adultus"} };
-        public static string[,] familyVerbs = {{"być razem","urodzić się","wychowywać","opiekować się","zaręczyć się","pobrać się","umrzeć","adoptować","odwiedzać (rodzinę)","przytulać","dorastać","rozpieszczać"},
+        public static string[,] familyVerbs = {{"być razem","urodzić się","wychowywać","opiekować się","zaręczyć się","pobrać się","umrzeć","adoptować","odwiedzać-rodzinę","przytulać","dorastać","rozpieszczać"},
                                          {"be together","be born","raise/bring up","take care of","get engaged","get married","die","adopt","visit (family)","hug","grow up","spoil/pamper"},
                                          {"estar juntos","nacer","criar","cuidar","prometerse","casarse","morir","adoptar","visitar","abrazar","crecer","mimar"},
                                          {"-","nasci","educare","curare","spondere","nubere","mori","adoptare","visere","amplecti","crescere","-"} };
@@ -249,6 +249,6 @@
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
                                         vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
-                                        fish, mushrooms, mealWordsDescriptions, familyCore };
+                                        fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus };
     }
 }
