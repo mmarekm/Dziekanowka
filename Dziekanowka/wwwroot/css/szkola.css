@@ -75,9 +75,11 @@
     grid-auto-rows: minmax(170px, 200px);
     gap: 50px;
     justify-content: center;
-    align-content: center;
+    align-content: start;
     padding: 20px;
     box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .kategoriaSlownik {
     aspect-ratio: 1;

@@ -114,11 +114,11 @@
                                               {"second","minute","quarter (of an hour)","hour","day","week","weekend","month","quarter (of a year)","year","decade","century"},
                                               {"el segundo","el minuto","el cuarto de hora","la hora","el día","la semana","el fin de semana","el mes","el trimestre","el año","la década","el siglo"},
                                               {"-","minuta","-","hora","dies","hebdomas","-","mensis","-","annus","decas","saeculum"} };
-        public static string[,] timeDayParts = {{"czas","noc","rano","popołudnie","wieczór","pora roku","świt","zmierzch","północ","południe","brzask","wschód słońca","zachód słońca"},
+        public static string[,] timeDayParts = {{"czas","noc","rano","popołudnie","wieczór","pora_roku","świt","zmierzch","północ","południe","brzask","wschód słońca","zachód słońca"},
                                           {"time","night","morning","afternoon","evening","season","dawn","dusk/twilight","midnight","noon","daybreak","sunrise","sunset"},
                                           {"el tiempo","la noche","la mañana","la tarde","el atardecer","la estación","el amanecer","el crepúsculo","la medianoche","el mediodía","el alba","la salida del sol","la puesta de sol"},
                                           {"tempus","nox","mane","-","vesper","-","aurora","crepusculum","media nox","meridies","-","ortus solis","occasus solis"} };
-        public static string[,] timeCalendar = {{"poniedziałek","wtorek","środa","czwartek","piątek","sobota","niedziela","styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień","wiosna","lato","jesień","zima"},
+        public static string[,] timeCalendar = {{"poniedziałek","wtorek","środa","czwartek","piątek","sobota","Niedziela","styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień","wiosna","lato","jesień","zima"},
                                           {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday","January","February","March","April","May","June","July","August","September","October","November","December","spring","summer","autumn","winter"},
                                           {"el lunes","el martes","el miércoles","el jueves","el viernes","el sábado","el domingo","enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre","la primavera","el verano","el otoño","el invierno"},
                                           {"dies Lunae","dies Martis","dies Mercurii","dies Iovis","dies Veneris","dies Saturni","dies Solis","Ianuarius","Februarius","Martius","Aprilis","Maius","Iunius","Iulius","Augustus","September","October","November","December","ver","aestas","autumnus","hiems"} };
@@ -249,6 +249,6 @@
                                          timeAdverbs, body, clothes, materials, school, nature, city, countries };
         public static string[][,] KategorieRobocze = { numbers, wordsMath, colors, animalsHome, animalsWild, animalWords, kitchen, bathroom, livingBedroom, buildingGeneral,
                                         vegetables, fruits, farmCrops, soups, mainDishes, otherDishes, pantry, drinks, spices, bakedSweets,
-                                        fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus };
+                                        fish, mushrooms, mealWordsDescriptions, familyCore, familyExtended, familyStatus, familyVerbs, timeUnitsMeasure, timeDayParts, timeCalendar };
     }
 }
