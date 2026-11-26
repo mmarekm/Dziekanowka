@@ -1,8 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="altruistaJaskiniowyWidok widok rel">
-    <div class="abs dostanOdAltruistyJaskiniowego"><button class="wyroznionyGuzik" @onclick="Prezent"><img class="obrazekJakTrzeba" src="img/miasto/altruistaJaskiniowyKlik.png" /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/altruistaJaskiniowyWidok.mp4" type="video/mp4" /></video>
+    <div class="abs dostanOdAltruistyJaskiniowego" @onclick="Prezent"><button class="wyroznionyGuzik niewidzialnyPrzycisk"></button></div>
 </div>
 
 @code {

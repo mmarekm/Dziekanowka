@@ -2,8 +2,8 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 <div class="sklepikWarzywaWidok widok rel">
-    <div class="abs wyjscieSklepikWarzywaGuzik"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama)" class="wyroznionyGuzik"><img src='img/budynki/confirmSklepikWarzywa.png' /></button></div>
-    <div class="abs guzikSklepikWarzywaDoGlownego"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepik)"><img src="img/budynki/sklepikWarzywaDoGlownego.png" /></button></div>
+    <div class="abs hodowcaDoMiastaKawy"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.ZaBrama)" class="wyroznionyGuzik"><img class="obrazekJakTrzeba" src='img/dom/potwierdzenie.png' /></button></div>
+    <div class="abs guzikSklepikWarzywaDoGlownego" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Sklepik)"><button class="wyroznionyGuzik niewidzialnyPrzycisk"></button></div>
     <div class="abs sklepikMonetyGracza">@Gracz.Monety <img src="img/przedmioty/monetaStanSklepik.png" /></div>
     <div class="abs warzywaGrid">
         @foreach (var pole in Gracz.PolaUprawne)

@@ -1,16 +1,17 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="stacjaJaskiniaWidok widok rel">
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/miasto/stacjaJaskiniaWidok.mp4" type="video/mp4" /></video>
     <div class="abs @KlasaPowitania" style="color: white;"><img class="obrazekJakTrzeba" src="img/przedmioty/moneta.png" /> 55 <img class="obrazekSieMiesci" src="img/przedmioty/moneta.png" /></div>
     @foreach (var zwierze in zwierzeta)
     {
-        <div class="abs @(zwierze)StacjaJaskinia"><button class="wyroznionyGuzik" @onclick="async () => await WezZwierze(zwierze)"><img class="obrazekSieMiesci" src="img/miasto/@(zwierze)StacjaJaskinia.png"/></button></div>
+        <div class="abs @(zwierze)StacjaJaskinia"><button class="wyroznionyGuzik niewidzialnyPrzycisk" @onclick="async () => await WezZwierze(zwierze)"></button></div>
     }
 </div>
 @if (Gracz.Statystyki.AktualnaMisja == Misje.AltruistaJaskiniowy)
 {
-    <div class="abs stacjaJaskiniaDoAltruisty"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.AltruistaJaskiniowy)"><img src="img/miasto/stacjaJaskiniaDoAltruistaJaskiniowy.png" /></button></div>
+    <div class="abs stacjaJaskiniaDoAltruisty"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.AltruistaJaskiniowy)"><img class="obrazekJakTrzeba" src="img/miasto/strzalkaJaskinia.png" /></button></div>
 }
 
 @code {

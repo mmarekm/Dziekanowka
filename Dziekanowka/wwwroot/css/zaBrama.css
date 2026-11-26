@@ -1,7 +1,4 @@
-﻿.zaBramaWidok {
-    background-image: url('../img/teren/zaBrama.png');
-}
-.podworkoSasiadaWidok {
+﻿.podworkoSasiadaWidok {
     background-image: url('../img/teren/podworkoSasiada.png');
     pointer-events: none;
 }

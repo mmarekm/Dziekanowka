@@ -1,10 +1,4 @@
-﻿.stacjaJaskiniaWidok {
-    background-image: url('../img/miasto/stacjaJaskiniaWidok.png');
-}
-.altruistaJaskiniowyWidok {
-    background-image: url('../img/miasto/altruistaJaskiniowyWidok.jpg');
-}
-.lBiletowMiasto1 {
+﻿.lBiletowMiasto1 {
     left: 15px;
     top: 15px;
     color: yellow;
@@ -1097,29 +1091,29 @@
     height: 100px;
 }
 .kuraStacjaJaskinia {
-    left: 1200px;
-    bottom: 146px;
+    left: 1210px;
+    bottom: 136px;
     width: 82px;
     height: 102px;
     z-index: 2;
 }
 .kaczkaStacjaJaskinia {
-    left: 1320px;
-    bottom: 138px;
+    left: 1340px;
+    bottom: 128px;
     width: 103px;
     height: 121px;
     z-index: 2;
 }
 .indykStacjaJaskinia {
-    left: 1440px;
-    bottom: 141px;
+    left: 1470px;
+    bottom: 131px;
     width: 147px;
     height: 178px;
     z-index: 2;
 }
 .gesStacjaJaskinia {
-    left: 1593px;
-    bottom: 115px;
+    left: 1630px;
+    bottom: 105px;
     width: 108px;
     height: 163px;
     z-index: 2;
@@ -1709,17 +1703,18 @@
     justify-content: center;
 }
 .stacjaJaskiniaDoAltruisty {
-    width: 231px;
-    height: 191px;
-    top: 509px;
-    left: 1020px;
+    width: 300px;
+    height: 200px;
+    top: 450px;
+    left: 1280px;
+    transform: rotate(180deg);
     z-index: 2;
 }
 .dostanOdAltruistyJaskiniowego {
-    top: 0;
-    left: 0;
-    width: 1037px;
-    height: 1000px;
+    top: 100px;
+    left: 265px;
+    width: 500px;
+    height: 700px;
     z-index: 2
 }
 .miastoPieniedzyDoRatusza {
