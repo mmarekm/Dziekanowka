@@ -2,9 +2,10 @@
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
 @inject Dzwieki dzwieki
-<div class="karczowiskoWidok widok rel">
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/teren/las/lasKarczowiskoWidok.mp4" type="video/mp4" /></video>
     <div class="abs hodowcaDoMiastaKawy"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)" class="wyroznionyGuzik"><img class="obrazekJakTrzeba" src='img/dom/potwierdzenie.png' /></button></div>
-    <div class="abs karczowiskoDziupla @(Gracz.Statystyki.Bonusy.Contains("karczowiskoSiano") ? "klikalneDivZielone" : "nieMoznaKliknac")" @onclick="Siano"><img class="obrazekSieMiesci" src="img/teren/las/dziupla.png" /></div>
+    <div class="abs karczowiskoDziupla niewidzialnyPrzycisk @(Gracz.Statystyki.Bonusy.Contains("karczowiskoSiano") ? "klikalneDivZielone" : "")" @onclick="Siano"></div>
     <div class="abs @KlasaPowitania"><img class="obrazekSieMiesci" src="img/przedmioty/siano.png" /></div>
     <div class="abs lKarczowisko lSiekierKarczowisko">@Gracz.Przedmiot("siekiera").Ilosc</div>
     <div class="abs lKarczowisko lDrewnaKarczowisko">@Gracz.Przedmiot("drewno").Ilosc</div>
