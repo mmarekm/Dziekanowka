@@ -1,7 +1,4 @@
-﻿.lasGrzybyWidok {
-    background-image: url('../img/teren/las/lasGrzybyWidok.png');
-}
-.lasJezioroWidok {
+﻿.lasJezioroWidok {
     background-image: url('../img/teren/las/lasJezioroWidok.png');
 }
 .rodzinaRybakowJeWidok {
@@ -191,8 +188,8 @@
     width: 100px;
     height: 60px;
     font-size: 59px;
-    text-align: center;
     color: yellow;
+    gap: 20px;
 }
 .lpieczarkaLas {
     top: 20px;
