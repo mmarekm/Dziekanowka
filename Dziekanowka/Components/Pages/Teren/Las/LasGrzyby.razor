@@ -11,7 +11,13 @@
     <div class="abs mapaGrzybow" @onclick="() => widocznaMapa = true" disabled="@(widocznaMapa || widoczneZgadywanie)"><button class="wyroznionyGuzik niewidzialnyPrzycisk"></button></div>
     <div class="abs zgadywanieGrzybow" @onclick="() => widoczneZgadywanie = true" disabled="@(widocznaMapa || widoczneZgadywanie)"><button class="wyroznionyGuzik niewidzialnyPrzycisk"></button></div>
 </div>
-<div class="abs grzybyDzialanie @(widocznaMapa || widoczneZgadywanie ? "aktywne" : "") @(widocznaMapa ? "cPoint" : "") @(widocznaMapa ? "cPoint" : "") @(pokazMigniecie ? "migniecie" : "")" style="background-image: url('img/teren/las/tlo@(widocznaMapa ? "Mapy" : "Zgadywania").png');" @onclick="@(widoczneZgadywanie ? null! : ZamknijMape)">
+<div class="abs grzybyDzialanie @(widocznaMapa || widoczneZgadywanie ? "aktywne" : "") @(widocznaMapa ? "cPoint" : "") @(widocznaMapa ? "cPoint" : "") @(pokazMigniecie ? "migniecie" : "")" @onclick="@(widoczneZgadywanie ? null! : ZamknijMape)">
+    @if (widocznaMapa || widoczneZgadywanie)
+    {
+        <video @key="widocznaMapa" class="tlo-wideo" autoplay muted loop playsinline preload="auto">
+            <source src="img/teren/las/@(widocznaMapa ? "tloMapy" : "tloZgadywania").mp4" type="video/mp4" />
+        </video>
+    }
     @if (pokazMigniecie)
     {
         <div class="overlayMigniecie"></div>
@@ -98,11 +104,11 @@
     }
     @if (widoczneZgadywanie)
     {
-        <div class="abs grzybyZgadywanieAnuluj"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)"><img src="img/teren/las/anulujZgadywanie.png" /></button></div>
+        <div class="abs grzybyZgadywanieAnuluj"><button class="wyroznionyGuzik" @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.LasIntro)"><img class="obrazekJakTrzeba" src="img/dom/rezygnacja.png" /></button></div>
         @for (int i = 1; i < 8; i++)
         {
             int toI = i;
-            <div class="abs zgadywanieGrzybow@(toI)"><button class="wyroznionyGuzik" @onclick="async () => await WybranaDroga(toI)"><img src="img/teren/las/wybrana@(toI)droga.png"/></button></div>
+            <div class="abs zgadywanieGrzybow@(toI)" @onclick="async () => await WybranaDroga(toI)"><button class="wyroznionyGuzik niewidzialnyPrzycisk"></button></div>
         }
     }
 </div>
