@@ -13,9 +13,6 @@
 .rodzinaRybakowCzekaWidok {
     background-image: url('../img/teren/las/rodzinaRybakowCzekaWidok.png');
 }
-.domSlodkichBulekWidok {
-    background-image: url('../img/teren/las/domSlodkichBulekWidok.png');
-}
 .las2Widok {
     background-image: url('../img/teren/las/las2Widok.png');
 }
@@ -67,13 +64,6 @@
     bottom: 0;
     width: 541px;
     height: 460px;
-    z-index: 2;
-}
-.karczowiskoDoLas {
-    bottom: 0;
-    left: 0;
-    width: 272px;
-    height: 147px;
     z-index: 2;
 }
 .lKarczowisko {
@@ -338,17 +328,9 @@
     display: flex;
 }
 @keyframes migniecieAnim {
-    0% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
-
-    100% {
-        opacity: 0;
-    }
+    0% { opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0; }
 }
 .lasIntroDoLas1 {
     width: 574px;
@@ -369,13 +351,6 @@
     z-index: 2;
     transform: rotate(-70deg);
 }
-.domSlodkichBulekDoLas1 {
-    top: 0;
-    left: 0;
-    width: 174px;
-    height: 87px;
-    z-index: 2;
-}
 .misjaDomSlodkichBuleczek {
     top: 170px;
     left: 500px;
@@ -390,10 +365,11 @@
     height: 100px;
 }
 .sprzedajMiod {
-    bottom: 200px;
+    top: 200px;
     left: 200px;
     width: 200px;
-    height: 200px;
+    height: 250px;
+    z-index: 2;
 }
 .lDomSlodkichBulek {
     width: 60px;
@@ -401,14 +377,13 @@
     font-size: 20px;
     text-align: center;
     color: gray;
+    left: 335px;
 }
 .lMioduDomSlodkichBulek {
-    left: 25px;
-    bottom: 390px;   
+    top: 270px;   
 }
-.lMonetDomSlodkichBulek {   
-    left: 40px;
-    bottom: 165px;
+.lMonetDomSlodkichBulek {
+    top: 370px;
 }
 .las1DoLas2 {
     width: 281px;

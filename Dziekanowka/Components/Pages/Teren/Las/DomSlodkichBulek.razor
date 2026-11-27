@@ -1,8 +1,9 @@
 ﻿@using Dziekanowka.Mechanizm
 @using Dziekanowka.Gracza
 @inject LadowanieGracza ladowanieGracza
-<div class="domSlodkichBulekWidok widok rel">
-    <div class="abs domSlodkichBulekDoLas1"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Las1)" class="wyroznionyGuzik"><img src='img/teren/las/confirmDomSlodkichBulek.png' /></button></div>
+<div class="widok powitanie rel">
+    <video class="tlo-wideo" autoplay muted loop playsinline preload="auto"><source src="img/teren/las/domSlodkichBulekWidok.mp4" type="video/mp4" /></video>
+    <div class="abs hodowcaDoMiastaKawy"><button @onclick="async () => await NaZmianeEkranu.InvokeAsync(EkranGry.Las1)" class="wyroznionyGuzik"><img class="obrazekJakTrzeba" src='img/dom/potwierdzenie.png' /></button></div>
     <div class="abs misjaDomSlodkichBuleczek">
         @if (Gracz.Statystyki.AktualnaMisja == Misje.SlodkaBuleczka)
         {
