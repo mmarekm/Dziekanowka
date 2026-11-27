@@ -7,7 +7,7 @@
             var lokalnaLektura = lektura;
             <div class="ksiazka" @onclick='() => Czytaj(lokalnaLektura)'>
                 <div class="abs miejscePowiekszeniaOkladki" @onmouseenter='() => pokazOkladke = lokalnaLektura' @onmouseleave='() => pokazOkladke = null'></div>
-                <img class="obrazekContain" src="img/miasto/biblioteka/lektury/@(lektura).png" />
+                <img class="obrazekContain" src="img/miasto/biblioteka/lektury/@(lektura).webp" />
             </div>
         }
     </div>
@@ -15,7 +15,7 @@
     @if (pokazOkladke != null)
     {
         <div class="abs powiekszonaOkladka">
-            <img src="img/miasto/biblioteka/lektury/@(pokazOkladke).png" />
+            <img src="img/miasto/biblioteka/lektury/@(pokazOkladke).webp" />
         </div>
     }
 </div>
